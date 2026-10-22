@@ -491,6 +491,17 @@ function renderRecetas(){
 }
 
 /* ---------- Perfil ---------- */
+let calMonth=null;
+// Calendario del mes con los días que cada hijo está contigo (tocar un día lo cambia)
+function kidCalendar(k){
+  const m=calMonth||month, [y,mm]=m.split("-").map(Number);
+  const first=iso(new Date(y,mm-1,1)), n=new Date(y,mm,0).getDate();
+  let days=0,h=`<div class="row" style="margin-top:12px"><b>Calendario de ${esc(personName(k))}</b><span class="spacer"></span><button class="btn ghost small" data-cal="-1" aria-label="Mes anterior">‹</button><span class="small" style="text-transform:capitalize">${monthName(m)}</span><button class="btn ghost small" data-cal="1" aria-label="Mes siguiente">›</button></div>
+  <div class="cal">${DSHORT.map(d=>`<span class="cal-h">${d.slice(0,1)}</span>`).join("")}${"<span></span>".repeat(dow(first))}`;
+  for(let i=0;i<n;i++){const d=addDays(first,i),on=kidsAt(d).includes(k),ov=((S.days[d]||{}).kids||{})[k.id]!=null;if(on)days++;
+    h+=`<button class="cal-d ${on?"on":""} ${isHoliday(d)?"hol":""} ${ov?"ov":""}" data-kcal="${k.id}|${d}" title="${esc(longDate(d))}${isHoliday(d)?" · "+esc(holidayName(d)):""}">${i+1}</button>`}
+  return h+`</div><div class="small muted">${days} días este mes · toca un día para cambiarlo${Object.keys(S.days).some(d=>d.startsWith(m)&&((S.days[d].kids||{})[k.id]!=null))?" · los días con borde los has cambiado tú":""}</div>`;
+}
 function knowHTML(p){
   const ings=Object.entries(p.tastes.ing).filter(([pid])=>P[pid]);
   const by=v=>ings.filter(([,x])=>Number(x)===v||(v===1&&Number(x)===2));
@@ -515,7 +526,7 @@ function renderPerfil(){
   let h=`<section class="view">`;
   const RV={2:"❤️",1:"👍",rare:"🙂","-1":"👎"};
   for(const p of S.people){const hist=historyOf(p,20);
-    h+=`<div class="person"><h2>Lo que sé de ${p.kind==="adulto"?"ti":esc(personName(p))}</h2>${p.kind==="nino"?`<div class="small muted">${p.age?p.age+" años · ":""}ración ${String(p.factor).replace(".",",")}</div>`:""}${knowHTML(p)}
+    h+=`<div class="person"><h2>${p.kind==="adulto"?"Lo que sé de ti":esc(personName(p))}</h2>${p.kind==="nino"?`<div class="small muted">${p.age?p.age+" años · ":""}ración ${String(p.factor).replace(".",",")}</div>${kidCalendar(p)}<h3 style="margin-top:14px">Lo que sé de ${esc(personName(p))}</h3>`:""}${knowHTML(p)}
     <details style="margin-top:10px"><summary><b>Historial</b> <span class="small muted">(${hist.length} ${hist.length===1?"comida reciente":"comidas recientes"})</span></summary>
     ${hist.length?`<table class="wtable">${hist.map(x=>`<tr><td>${DSHORT[dow(x.date)]} ${shortDate(x.date)} · ${x.meal}</td><td style="text-align:left;padding-left:8px">${esc(x.name)}${x.note?` <span class="small muted">${esc(x.note)}</span>`:""}</td><td>${x.v!=null?RV[x.v]:""}</td></tr>`).join("")}</table>`:`<p class="small muted">Aún no hay comidas pasadas.</p>`}</details></div>`}
   const items=[["aparatos","Aparatos",Object.entries(APP).filter(([k])=>S.home.apps.includes(k)).map(([,v])=>v).join(", ")],["zona","Código postal y municipio",[S.home.cp,S.home.municipio].filter(Boolean).join(" · ")||"Sin indicar"],["hijos","Quién come contigo",kids().map(personName).join(", ")||"Solo tú"],
@@ -535,6 +546,11 @@ function renderPerfil(){
   main.innerHTML=h;
   const q=s=>main.querySelectorAll(s), find=id=>S.people.find(p=>p.id===id);
   q("[data-edit]").forEach(b=>b.onclick=()=>{openWizard(b.dataset.edit);scrollTo(0,0)});
+  q("[data-cal]").forEach(b=>b.onclick=()=>{const [y,m]=(calMonth||month).split("-").map(Number);calMonth=iso(new Date(y,m-1+Number(b.dataset.cal),1)).slice(0,7);render()});
+  q("[data-kcal]").forEach(b=>b.onclick=()=>{const [id,d]=b.dataset.kcal.split("|"),k=find(id);const o=S.days[d]=S.days[d]||{};o.kids=o.kids||{};
+    const ruleOn=kidPresentByRule(k,d), nowOn=kidsAt(d).includes(k);
+    if(!nowOn===ruleOn)delete o.kids[id];else o.kids[id]=!nowOn;
+    save();if(S.plans[weekStartFor(d)])ensureWeek(weekStartFor(d));save();render()});
   q("[data-unI]").forEach(b=>b.onclick=e=>{e.preventDefault();const [pp,pid]=b.dataset.uni.split("|");setIng(find(pp),pid,0);render()});
   q("[data-unD]").forEach(b=>b.onclick=()=>{const [pp,rid]=b.dataset.und.split("|");setDish(find(pp),rid,null);render()});
   q("[data-lok]").forEach(b=>b.onclick=()=>{const [pp,pid,v]=b.dataset.lok.split("|");setIng(find(pp),pid,Number(v),"Aprendido de tus valoraciones");render()});

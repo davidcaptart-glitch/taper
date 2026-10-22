@@ -243,3 +243,9 @@ dialog.full{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;border-r
 .vtabs{display:flex;gap:6px;margin:8px 0}
 .nutr{font-size:.82rem;color:var(--muted);margin-top:2px}
 .daybar b{color:var(--ink)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:8px 0 4px}
+.cal-h{text-align:center;font-size:.75rem;color:var(--muted);font-weight:700}
+.cal-d{aspect-ratio:1;border:0;border-radius:8px;background:var(--bg);font-weight:700;font-size:.85rem;padding:0}
+.cal-d.on{background:var(--kid-bg);color:var(--kid)}
+.cal-d.hol{text-decoration:underline;text-decoration-color:var(--carga);text-decoration-thickness:3px}
+.cal-d.ov{outline:2px solid var(--kid);outline-offset:-2px}
