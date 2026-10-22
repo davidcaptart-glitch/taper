@@ -117,6 +117,30 @@ export default {
         if (!uidOk(uid)) return json(req, {}, 400);
         return json(req, (await env.TAPER.get("st:" + uid, "json")) || nuevaFicha());
       }
+      // Precios de tickets que no cuadran con los de la app (se revisan a mano desde /admin)
+      if (req.method === "POST" && url.pathname === "/ticket-precios") {
+        const txt = await req.text();
+        if (txt.length > 20000) return json(req, { error: "demasiado grande" }, 413);
+        const b = JSON.parse(txt);
+        if (!uidOk(b.uid) || !Array.isArray(b.items)) return json(req, { error: "datos no válidos" }, 400);
+        const clave = "tp:" + new Date().toISOString().slice(0, 10) + ":" + b.uid + ":" + Math.random().toString(36).slice(2, 7);
+        const limpio = { at: Date.now(), cp: String(b.cp || "").slice(0, 5), super: String(b.super || "").slice(0, 20), tienda: String(b.tienda || "").slice(0, 60), fecha: String(b.fecha || "").slice(0, 10),
+          items: b.items.slice(0, 40).map((x) => ({ pid: String(x.pid).slice(0, 30), desc: String(x.desc || "").slice(0, 60), pagado: Number(x.pagado) || 0, app: Number(x.app) || 0, dif: Number(x.dif) || 0 })) };
+        await env.TAPER.put(clave, JSON.stringify(limpio), { expirationTtl: 60 * 60 * 24 * 120 });
+        return json(req, { ok: true });
+      }
+      if (req.method === "GET" && url.pathname === "/admin/precios") {
+        if (!env.ADMIN_KEY || url.searchParams.get("clave") !== env.ADMIN_KEY) return json(req, { error: "clave no válida" }, 403);
+        const out = []; let cursor;
+        do { const l = await env.TAPER.list({ prefix: "tp:", cursor }); cursor = l.list_complete ? null : l.cursor;
+          for (const k of l.keys) { const v = await env.TAPER.get(k.name, "json"); if (v) out.push(v); } } while (cursor && out.length < 500);
+        // Por producto: cuántas veces y la diferencia media
+        const por = {};
+        for (const t of out) for (const x of t.items) { const p = (por[t.super + "|" + x.pid] = por[t.super + "|" + x.pid] || { super: t.super, pid: x.pid, veces: 0, difMedia: 0, ejemplos: [] });
+          p.veces++; p.difMedia += x.dif; if (p.ejemplos.length < 3) p.ejemplos.push({ fecha: t.fecha, tienda: t.tienda, desc: x.desc, pagado: x.pagado, app: x.app }); }
+        const lista = Object.values(por).map((p) => ({ ...p, difMedia: Math.round(p.difMedia / p.veces) })).sort((a, b) => b.veces - a.veces);
+        return json(req, { tickets: out.length, productos: lista });
+      }
       if (req.method === "GET" && url.pathname === "/admin") {
         if (!env.ADMIN_KEY || url.searchParams.get("clave") !== env.ADMIN_KEY) return json(req, { error: "clave no válida" }, 403);
         return json(req, await resumenAdmin(env));

@@ -1,5 +1,5 @@
 {
-  "nota": "Supermercados con los que puede trabajar Táper. 'activo': precios, lista con enlaces y tickets. 'proximamente': tienen tienda online de alimentación con catálogo y precios por zona, así que se podrían añadir igual que Mercadona (hay que comprobar cada uno). 'dificil': sin tienda online de alimentación en España; como mucho, tickets. 'entrega': tarifas de cada forma de compra (online, compra en tienda con entrega a domicilio, en tienda): envío y pedido mínimo en euros. 'sin_reparto': códigos postales donde no reparte a domicilio (solo se puede comprar en tienda). 'gratis_desde': envío gratis a partir de ese importe. Los precios de los demás supermercados están en precios_supers.json; un súper aparece para elegir cuando tiene precios.",
+  "nota": "Supermercados con los que puede trabajar Táper. 'activo': precios, lista con enlaces y tickets. 'proximamente': tienen tienda online de alimentación con catálogo y precios por zona, así que se podrían añadir igual que Mercadona (hay que comprobar cada uno). 'dificil': sin tienda online de alimentación en España; como mucho, tickets. 'entrega': tarifas de cada forma de compra (online, compra en tienda con entrega a domicilio, en tienda): envío y pedido mínimo en euros. 'sin_reparto': códigos postales donde no reparte a domicilio (solo se puede comprar en tienda). 'gratis_desde': envío gratis a partir de ese importe. Los precios de los demás supermercados están en precios_supers.json; un súper aparece para elegir cuando tiene precios. 'logo': logotipo de la marca (de Wikimedia Commons), solo para identificar el supermercado.",
   "supermercados": [
     {
       "id": "mercadona",
@@ -24,7 +24,13 @@
         "comprobadas": "2026-10-22",
         "fuente": "https://ayuda.tienda.mercadona.es/hc/en-us/articles/360000841092-Minimum-order"
       },
-      "color": "#00843D"
+      "color": "#00843D",
+      "logo": "images/supers/mercadona.png",
+      "logo_credito": {
+        "licencia": "Public domain",
+        "autor": "Mercadona",
+        "fuente": "https://commons.wikimedia.org/wiki/File:Logo_Mercadona_(color-300-alpha).png"
+      }
     },
     {
       "id": "carrefour",
@@ -70,7 +76,13 @@
         "comprobadas": "2026-10-22",
         "fuente": "https://www.dia.es/"
       },
-      "color": "#E30613"
+      "color": "#E30613",
+      "logo": "images/supers/dia.png",
+      "logo_credito": {
+        "licencia": "Public domain",
+        "autor": "dia.es",
+        "fuente": "https://commons.wikimedia.org/wiki/File:Dia_2019.svg"
+      }
     },
     {
       "id": "alcampo",
@@ -94,7 +106,13 @@
         "comprobadas": "2026-10-22",
         "fuente": "https://www.compraonline.alcampo.es/content/servicios-entrega-recogida"
       },
-      "color": "#D2232A"
+      "color": "#D2232A",
+      "logo": "images/supers/alcampo.png",
+      "logo_credito": {
+        "licencia": "Public domain",
+        "autor": "Alcampo, S. A.",
+        "fuente": "https://commons.wikimedia.org/wiki/File:Alcampo.png"
+      }
     },
     {
       "id": "eroski",
@@ -118,7 +136,13 @@
         "comprobadas": "2026-10-22",
         "fuente": "https://supermercado.eroski.es/es/supermercado/envio/"
       },
-      "color": "#E2001A"
+      "color": "#E2001A",
+      "logo": "images/supers/eroski.png",
+      "logo_credito": {
+        "licencia": "Public domain",
+        "autor": "EROSKI, S. COOP.",
+        "fuente": "https://commons.wikimedia.org/wiki/File:Eroski_logo.svg"
+      }
     },
     {
       "id": "consum",
@@ -142,7 +166,13 @@
         "comprobadas": "2026-10-22",
         "fuente": "https://tienda.consum.es/site/es/nota-legal"
       },
-      "color": "#F18A00"
+      "color": "#F18A00",
+      "logo": "images/supers/consum.png",
+      "logo_credito": {
+        "licencia": "CC BY-SA 4.0",
+        "autor": "Fjgarcia G21",
+        "fuente": "https://commons.wikimedia.org/wiki/File:Consum_Cooperativa2025.png"
+      }
     },
     {
       "id": "bonpreu",
@@ -164,14 +194,26 @@
         "comprobadas": "2026-10-22",
         "fuente": "https://www.compraonline.bonpreuesclat.cat/content/preguntes-frequents"
       },
-      "color": "#E8A317"
+      "color": "#E8A317",
+      "logo": "images/supers/bonpreu.png",
+      "logo_credito": {
+        "licencia": "Public domain",
+        "autor": "Bon Preu SAU",
+        "fuente": "https://commons.wikimedia.org/wiki/File:BonpreuEsclat_logo.svg"
+      }
     },
     {
       "id": "caprabo",
       "nombre": "Caprabo",
       "estado": "proximamente",
       "web": "https://www.capraboacasa.com",
-      "color": "#D7141A"
+      "color": "#D7141A",
+      "logo": "images/supers/caprabo.png",
+      "logo_credito": {
+        "licencia": "Public domain",
+        "autor": "Caprabo",
+        "fuente": "https://commons.wikimedia.org/wiki/File:Caprabo_logo.svg"
+      }
     },
     {
       "id": "condis",
@@ -203,28 +245,52 @@
       "nombre": "El Corte Inglés / Hipercor",
       "estado": "proximamente",
       "web": "https://www.elcorteingles.es/supermercado",
-      "color": "#008B40"
+      "color": "#008B40",
+      "logo": "images/supers/elcorteingles.png",
+      "logo_credito": {
+        "licencia": "Public domain",
+        "autor": "Unknown authorUnknown author",
+        "fuente": "https://commons.wikimedia.org/wiki/File:Logo_Corte_Ingl%C3%A9s.svg"
+      }
     },
     {
       "id": "ahorramas",
       "nombre": "Ahorramas",
       "estado": "proximamente",
       "web": "https://www.ahorramas.com",
-      "color": "#E2231A"
+      "color": "#E2231A",
+      "logo": "images/supers/ahorramas.png",
+      "logo_credito": {
+        "licencia": "Public domain",
+        "autor": "Ahorramás",
+        "fuente": "https://commons.wikimedia.org/wiki/File:Ahorram%C3%A1s_logo.png"
+      }
     },
     {
       "id": "lidl",
       "nombre": "Lidl",
       "estado": "dificil",
       "web": "https://www.lidl.es",
-      "color": "#0050AA"
+      "color": "#0050AA",
+      "logo": "images/supers/lidl.png",
+      "logo_credito": {
+        "licencia": "Public domain",
+        "autor": "Lidl Stiftung &amp; Co. KG",
+        "fuente": "https://commons.wikimedia.org/wiki/File:Lidl-Logo.svg"
+      }
     },
     {
       "id": "aldi",
       "nombre": "Aldi",
       "estado": "dificil",
       "web": "https://www.aldi.es",
-      "color": "#00005F"
+      "color": "#00005F",
+      "logo": "images/supers/aldi.png",
+      "logo_credito": {
+        "licencia": "Public domain",
+        "autor": "Unknown authorUnknown author",
+        "fuente": "https://commons.wikimedia.org/wiki/File:Aldi_S%C3%BCd_2017_logo.svg"
+      }
     }
   ]
 }

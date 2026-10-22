@@ -61,7 +61,7 @@ function superFor(pid){
   if(cheapestMode())for(const s of chosenSupers()){const v=superPrice(s,pid);if(v!=null&&(bp==null||v<bp-0.005)){best=s;bp=v}}
   return best||main;
 }
-const price=pid=>{if(S.prices[pid]!=null)return S.prices[pid];const v=superPrice(superFor(pid),pid);if(v!=null)return v;return mprice(pid)?mprice(pid).precio:(P[pid]?P[pid].est:0)};
+const price=pid=>{const v=superPrice(superFor(pid),pid);if(v!=null)return v;return mprice(pid)?mprice(pid).precio:(P[pid]?P[pid].est:0)};
 function rise(pid){const x=mprice(pid);return x&&typeof x.anterior==="number"&&x.precio>x.anterior+0.004?x.precio-x.anterior:0}
 const upTag=pid=>{const d=rise(pid);return d?` <span class="up" title="Ha subido respecto a la semana anterior">▲ +${eur(d)}</span>`:""};
 const packsFor=(pid,q)=>Math.max(1,Math.ceil(q/P[pid].env-0.03));

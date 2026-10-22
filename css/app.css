@@ -683,3 +683,63 @@ body{padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom,0px) + 34px)}
 .acc summary .ico{border-radius:14px}
 .acc>summary .ico{border-radius:14px;background:var(--accent-soft)}
 .acc{border-radius:22px}
+
+/* ---------- Cocina dibujada (aparatos) ---------- */
+.kit{margin:6px -4px 0;border-radius:28px;overflow:hidden;box-shadow:0 18px 40px -24px rgba(20,23,28,.35)}
+.kit svg{display:block;width:100%;height:auto}
+.kwall{fill:var(--silver-1)}
+.ktiles line{stroke:var(--silver-2);stroke-width:1}
+.kfloor{fill:var(--surface-3)}
+.kshelf{fill:#D9B98C}.kjar{fill:#E8E2D6;stroke:var(--silver-3);stroke-width:1}.kjar.b{fill:#F2D9C8}
+.kplant rect{fill:#E2C9A6}.kplant path{fill:#7FAE7A}
+.kcab{fill:var(--surface)}.kdoor{fill:none;stroke:var(--silver-2);stroke-width:1.5}.khandle{fill:var(--silver-3)}
+.ktop{fill:#fff;stroke:var(--silver-2);stroke-width:1}
+.kbody{fill:#F4F5F7;stroke:#B9C0C8;stroke-width:1.5}.kbody.dark{fill:#2A2E35;stroke:none}
+.kpanel{fill:#2A2E35}.kknob{fill:#9AA3AD}.kdisp{fill:#3B4049}.kwin{fill:#1F2329}.khandle2{fill:#D7DCE2}
+.kburn{fill:none;stroke:#5A616B;stroke-width:1.6}
+.kg{fill:var(--accent);opacity:0;transition:opacity .3s var(--ease)}
+.kapp{cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent}
+.kapp .kbody,.kapp .kwin{transition:fill .25s,stroke .25s}
+.kapp.on .kg{opacity:.55}
+.kapp.on .kbody{stroke:var(--accent);stroke-width:2.4}
+.kapp.on .kbody.dark{fill:#3a1513}
+.kapp.on .kburn{stroke:#FF6B62}
+.kapp:focus-visible .kbody{stroke:var(--ink);stroke-width:2.6}
+.kapp:active{opacity:.85}
+.ktag rect{fill:var(--surface);stroke:var(--silver-3);stroke-width:1.2;transition:fill .2s}
+.ktag text{font:600 12.5px Geist,system-ui,sans-serif;fill:var(--ink-2)}
+.kapp.on .ktag rect{fill:var(--accent);stroke:none}
+.kapp.on .ktag text{fill:#fff}
+.kitcount{text-align:center;color:var(--muted);font-weight:550;margin:14px 0 0}
+.suptile .slogo{max-width:78%;max-height:48px;object-fit:contain;display:block}
+.suptile[disabled] .slogo{filter:grayscale(1)}
+
+/* ---------- Semana: modo de cocinar y semana normal ---------- */
+.cookmodes{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cmode{border:0;background:var(--surface);border-radius:22px;padding:18px 14px;text-align:left;display:flex;flex-direction:column;gap:4px;box-shadow:inset 0 0 0 1.5px var(--line);transition:transform .12s var(--ease)}
+.cmode .ce{font-size:1.9rem;margin-bottom:4px}
+.cmode b{font-size:1.05rem}
+.cmode small{color:var(--muted);font-size:.8rem;line-height:1.35}
+.cmode[aria-pressed="true"]{background:var(--accent-soft);box-shadow:inset 0 0 0 2.5px var(--accent)}
+.cmode:active{transform:scale(.97)}
+.wgrid{display:grid;grid-template-columns:62px repeat(7,1fr);gap:6px;align-items:center}
+.wgrid>b{text-align:center;font-size:.8rem;color:var(--muted);font-weight:650}
+.wl{font-size:.82rem;font-weight:650}
+.wc{border:0;aspect-ratio:1;border-radius:14px;display:grid;place-items:center;font-size:1.15rem;font-style:normal;transition:transform .12s var(--ease),background .15s}
+.wc:active{transform:scale(.88)}
+.wc.cocinar{background:var(--accent);box-shadow:0 6px 14px -8px var(--accent)}
+.wc.taper{background:#FDE1C9}
+.wc.fuera{background:var(--surface-3)}
+.wc.libre{background:var(--surface);box-shadow:inset 0 0 0 1.5px var(--line);color:var(--muted)}
+.wlegend{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:12px;font-size:.8rem;color:var(--ink-2)}
+.wlegend span{display:flex;align-items:center;gap:6px}
+.wlegend .wc{width:24px;height:24px;border-radius:8px;font-size:.8rem}
+details.more{background:var(--surface);border-radius:20px;padding:4px 16px;margin:12px 0;box-shadow:0 1px 2px rgba(20,23,28,.05)}
+details.more summary{padding:12px 0;color:var(--ink);font-weight:600}
+/* Gustos de ingredientes en el asistente: cada estado con su color y el texto siempre legible */
+.wiz .chip.t2{background:#FDE3E1;color:#8E1B16;box-shadow:inset 0 0 0 2px var(--accent)}
+.wiz .chip.t1{background:var(--ok-soft);color:var(--ok);box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--ok) 55%,transparent)}
+.wiz .chip.t-1{background:var(--warn-soft);color:var(--warn);box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--warn) 50%,transparent)}
+.wiz .chip.t-9{background:var(--ink);color:#fff;box-shadow:none}
+.wiz .chip.t-9::after{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.5);color:#fff}
+.wiz .chip[data-ing]:not(.t0)::after{content:none}

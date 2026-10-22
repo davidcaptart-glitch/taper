@@ -12,8 +12,7 @@ function wizSteps(){
     {id:"familia",eyebrow:"Tu casa",title:"¿Quién come *en casa?*"},
     ...adults().flatMap(a=>[{id:"objetivos:"+a.id,eyebrow:"Objetivos",title:a.id==="yo"?"¿Qué te *importa?*":"¿Qué le importa a *"+personName(a)+"?*"},
       {id:"entreno:"+a.id,eyebrow:"Deporte",title:a.id==="yo"?"¿*Entrenas?*":"¿"+personName(a)+" *entrena?*"}]),
-    {id:"semana",eyebrow:"Tu semana",title:"Tu semana *tipo*"},
-    {id:"cocina",eyebrow:"Días de cocina",title:"¿Cuándo *cocinas?*"},
+    {id:"cocina",eyebrow:"Tu semana",title:"¿Cuándo *cocinas?*"},
     {id:"plan",eyebrow:"Planificación",title:"¿Cuándo *planificas?*"},
     {id:"compra",eyebrow:"Presupuesto",title:"Fija tu *presupuesto*"},
     ...S.people.map(p=>({id:"gustos:"+p.id,eyebrow:"Dieta y gustos",title:p.id==="yo"?"¿Cómo *comes?*":"¿Cómo come *"+personName(p)+"?*"})),
@@ -28,7 +27,7 @@ const stepKind=id=>id.split(":")[0];
 
 function renderWizard(){
   const steps=wizSteps();
-  const single=wiz.single==="hijos"?"familia":wiz.single==="objetivos"||wiz.single==="entreno"?wiz.single+":yo":wiz.single;
+  const single=wiz.single==="hijos"?"familia":wiz.single==="semana"?"cocina":wiz.single==="objetivos"||wiz.single==="entreno"?wiz.single+":yo":wiz.single;
   const step=single?steps.find(s=>s.id===single):steps[Math.min(wiz.i,steps.length-1)];
   if(!step){wiz.single=null;tab="perfil";render();return}
   const n=steps.indexOf(step), N=steps.length;
@@ -68,6 +67,33 @@ function preparingScreen(work,done){
   setTimeout(()=>{try{work()}catch(e){console.error(e)}},60);
   setTimeout(()=>{clearInterval(t);ov.classList.add("out");done();setTimeout(()=>ov.remove(),350)},3100);
 }
+// Cocina dibujada: cada aparato se toca para elegirlo (se ilumina en rojo con su etiqueta)
+function kitchenSVG(apps){
+  const on=k=>apps.includes(k);
+  const tag=(k,x,y,w)=>`<g class="ktag" transform="translate(${x} ${y})"><rect x="${-w/2}" y="-13" width="${w}" height="26" rx="13"/><text y="5" text-anchor="middle">${on(k)?"✓ ":""}${esc(APP[k].replace("Vitro o fogones","Vitro / fuegos"))}</text></g>`;
+  const g=(k,body,glow,tg)=>`<g class="kapp ${on(k)?"on":""}" data-app="${k}" role="button" tabindex="0" aria-pressed="${on(k)}" aria-label="${esc(APP[k])}">${glow}${body}${tg}</g>`;
+  return `<div class="kit"><svg viewBox="0 0 360 300" xmlns="http://www.w3.org/2000/svg">
+  <defs><filter id="kglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter></defs>
+  <rect class="kwall" x="0" y="0" width="360" height="300" rx="28"/>
+  <g class="ktiles">${Array.from({length:5},(_,i)=>`<line x1="0" y1="${44+i*22}" x2="360" y2="${44+i*22}"/>`).join("")}${Array.from({length:11},(_,i)=>`<line x1="${16+i*33}" y1="44" x2="${16+i*33}" y2="154"/>`).join("")}</g>
+  <rect class="kshelf" x="196" y="40" width="130" height="7" rx="3"/>
+  <rect class="kjar" x="206" y="18" width="18" height="22" rx="5"/><rect class="kjar b" x="232" y="22" width="16" height="18" rx="5"/><rect class="kjar" x="256" y="16" width="20" height="24" rx="5"/>
+  <g class="kplant"><rect x="296" y="26" width="18" height="14" rx="3"/><path d="M305 26c-6-8-2-16 0-18 2 2 6 10 0 18zM305 26c4-6 10-7 13-6-1 3-5 7-13 6zM305 26c-4-6-10-7-13-6 1 3 5 7 13 6z"/></g>
+  <rect class="kfloor" x="0" y="268" width="360" height="32" rx="0"/>
+  <rect class="kcab" x="18" y="190" width="324" height="80" rx="6"/>
+  ${[150,206,262].map(x=>`<rect class="kdoor" x="${x}" y="198" width="50" height="64" rx="5"/><rect class="khandle" x="${x+20}" y="206" width="10" height="3" rx="1.5"/>`).join("")}
+  <rect class="ktop" x="12" y="178" width="336" height="14" rx="5"/>
+  ${g("horno",`<rect class="kbody" x="26" y="196" width="112" height="70" rx="7"/><rect class="kpanel" x="32" y="201" width="100" height="11" rx="3"/><circle class="kknob" cx="42" cy="206.5" r="3"/><circle class="kknob" cx="54" cy="206.5" r="3"/><rect class="kdisp" x="96" y="203" width="28" height="7" rx="2"/><rect class="kwin" x="36" y="218" width="92" height="40" rx="6"/><rect class="khandle2" x="42" y="214" width="80" height="3" rx="1.5"/>`,
+    `<ellipse class="kg" cx="82" cy="232" rx="66" ry="48" filter="url(#kglow)"/>`,tag("horno",82,284,78))}
+  ${g("vitro",`<path class="kbody dark" d="M24 170h116l8 10H16z"/><ellipse class="kburn" cx="50" cy="174.5" rx="13" ry="3.2"/><ellipse class="kburn" cx="82" cy="174.5" rx="11" ry="2.8"/><ellipse class="kburn" cx="114" cy="174.5" rx="13" ry="3.2"/>`,
+    `<ellipse class="kg" cx="82" cy="172" rx="70" ry="22" filter="url(#kglow)"/>`,tag("vitro",82,150,112))}
+  ${g("air",`<path class="kbody" d="M168 112c0-12 8-18 24-18h4c16 0 24 6 24 18v58c0 5-4 8-8 8h-36c-4 0-8-3-8-8z"/><rect class="kdisp" x="184" y="104" width="24" height="12" rx="4"/><circle class="kknob" cx="196" cy="124" r="5"/><path class="kwin" d="M174 134h46v32c0 4-3 6-6 6h-34c-3 0-6-2-6-6z"/><rect class="khandle2" x="188" y="146" width="18" height="6" rx="3"/>`,
+    `<ellipse class="kg" cx="194" cy="140" rx="44" ry="50" filter="url(#kglow)"/>`,tag("air",194,80,92))}
+  ${g("micro",`<rect class="kbody" x="236" y="116" width="106" height="62" rx="8"/><rect class="kwin" x="244" y="124" width="66" height="46" rx="5"/><rect class="kpanel" x="316" y="124" width="20" height="46" rx="4"/><circle class="kknob" cx="326" cy="134" r="3.4"/><circle class="kknob" cx="326" cy="146" r="3.4"/><rect class="kdisp" x="320" y="156" width="12" height="8" rx="2"/>`,
+    `<ellipse class="kg" cx="289" cy="148" rx="66" ry="44" filter="url(#kglow)"/>`,tag("micro",289,100,104))}
+  </svg></div>`;
+}
+
 // Días como pastillas verticales (L M X J V S D)
 const dayPills=(attr,sel)=>`<div class="daypills">${["L","M","X","J","V","S","D"].map((d,i)=>`<button type="button" class="dp" ${attr}="${i}" aria-pressed="${sel.includes(i)}" aria-label="${DAYS[i]}"><b>${d}</b><i></i></button>`).join("")}</div><p class="dpcount">${sel.length} ${sel.length===1?"día":"días"} a la semana</p>`;
 // Tras cambiar ajustes: rellena los huecos nuevos sin tocar los platos ya elegidos
@@ -82,11 +108,14 @@ function stepBody(fullId){
     <div class="field"><label for="wzName">¿Cómo te llamas?</label><input id="wzName" type="text" value="${esc(a.name)}" placeholder="Tu nombre"></div>
     ${isStandalone()&&servidorOn()?`<button type="button" class="btn ghost small" id="wzTr">¿Ya usabas Táper en Safari? Trae tus datos</button>`:""}
     ${snapshot()?`<div class="okbox small" style="margin-top:14px">Tienes tus datos guardados del ${esc(new Date(snapshot().at).toLocaleString("es-ES",{day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"}))}${snapshot().nombre?" ("+esc(snapshot().nombre)+")":""}.<br><button type="button" class="btn small" id="wzRestore" style="margin-top:8px">Recuperar mis datos</button></div>`:""}`;
-  if(id==="aparatos")return `<p class="lead">Solo te propondré recetas que puedas hacer.</p><div class="chips">${Object.entries(APP).filter(([k])=>k!=="ninguno").map(([k,v])=>chip("data-app",k,H.apps.includes(k),v)).join("")}</div>`;
+  if(id==="aparatos"){const n=H.apps.filter(k=>k!=="ninguno").length;
+    return `<p class="lead">Toca lo que tienes. Solo te propondré recetas que puedas hacer.</p>${kitchenSVG(H.apps)}
+    <p class="kitcount">${n?`${n} ${n===1?"aparato":"aparatos"}: ${H.apps.filter(k=>APP[k]&&k!=="ninguno").map(k=>APP[k].toLowerCase()).join(", ")}`:"Toca los aparatos de tu cocina"}</p>`}
   if(id==="zona"){const ch=H.supers&&H.supers.length?H.supers:[H.super||"mercadona"],ok=x=>superHasPrices(x.id);
     return `<p class="lead">¿Dónde te viene bien comprar? Marca todos los supermercados, aunque solo vayas a la tienda: comparo sus precios cada semana.</p>
     <div class="supgrid">${SUPERS.slice().sort((a,b)=>ok(b)-ok(a)).map(x=>{const on=ch.includes(x.id),sin=(x.sin_reparto||[]).includes(H.cp);
-      return `<button type="button" class="suptile" data-super="${x.id}" aria-pressed="${on}" ${ok(x)?"":"disabled"} style="--brand:${x.color||"var(--ink)"}"><span class="tick">✓</span><b class="wm">${esc(x.nombre)}</b><small>${ok(x)?(H.super===x.id&&ch.length>1?"Principal":sin?"Solo en tienda":x.id==="mercadona"?"Precios de tu zona":"Precios semanales"):"Próximamente"}</small></button>`}).join("")}</div>
+      return `<button type="button" class="suptile" data-super="${x.id}" aria-pressed="${on}" ${ok(x)?"":"disabled"} style="--brand:${x.color||"var(--ink)"}"><span class="tick">✓</span>${x.logo?`<img class="slogo" src="${esc(x.logo)}" alt="${esc(x.nombre)}">`:`<b class="wm">${esc(x.nombre)}</b>`}<small>${ok(x)?(H.super===x.id&&ch.length>1?"Principal":sin?"Solo en tienda":x.id==="mercadona"?"Precios de tu zona":"Precios semanales"):"Próximamente"}</small></button>`}).join("")}</div>
+    <p class="small muted" style="margin:-8px 0 14px">Los logotipos son de sus marcas y solo sirven para reconocer cada súper (imágenes de <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a>).</p>
     ${ch.length>1?`<div class="field"><label>Tu supermercado principal</label><div class="chips">${ch.map(s=>chip("data-mainsup",s,H.super===s,esc(superById(s).nombre))).join("")}</div></div>
     <div class="field"><label>¿Cómo hago la lista?</label><div class="chips">${chip("data-strat","barato",H.shop.strategy==="barato","Cada cosa donde sea más barata")}${chip("data-strat","principal",H.shop.strategy!=="barato","Todo en el principal")}</div>
       <div class="hint">Puedes cambiarlo cuando quieras desde la lista de la compra.</div></div>`:""}
@@ -138,19 +167,20 @@ function stepBody(fullId){
       <button class="btn ghost small" data-delsess="${d}:${i}" aria-label="Quitar sesión">✕</button></div>`).join("")}</div>`}
     return h+`</div>`;
   }
-  if(id==="semana"){
-    let h=`<p class="lead">Qué haces normalmente en cada comida. "Táper" es la otra ración de la cena de la víspera. Cada semana puedes cambiar cualquier día.</p>`;
-    for(let d=0;d<7;d++){const t=H.weekTpl[d];
-      h+=`<div class="daycard"><b>${DAYS[d]}</b><div class="row"><label class="small" style="min-width:4.5em">Comida</label><select data-tpl="${d}:comida">${["taper","cocinar","fuera","libre"].map(v=>`<option value="${v}" ${t.comida===v?"selected":""}>${MEALSTATE[v]}</option>`).join("")}</select></div>
-      <div class="row"><label class="small" style="min-width:4.5em">Cena</label><select data-tpl="${d}:cena">${["cocinar","fuera","libre"].map(v=>`<option value="${v}" ${t.cena===v?"selected":""}>${MEALSTATE[v]}</option>`).join("")}</select></div></div>`}
-    h+=`<div class="group"><h3>Horario</h3><div class="row"><label class="small" style="min-width:4.5em">Comida</label><input type="time" data-mt="comida" value="${esc(H.mealTimes.comida)}" style="width:auto"><label class="small">Cena</label><input type="time" data-mt="cena" value="${esc(H.mealTimes.cena)}" style="width:auto"></div>
+  if(id==="cocina"){
+    const modes=[["diario","🍳","Cada día","Cocinas la cena y haces doble para el táper de mañana"],["lote","🥡","Por lotes","Uno o varios días cocinas varios platos y los guardas en tápers"]];
+    let h=`<div class="cookmodes">${modes.map(([k,e,t,d])=>`<button type="button" class="cmode" data-cook="${k}" aria-pressed="${H.cookMode===k}"><span class="ce">${e}</span><b>${t}</b><small>${d}</small></button>`).join("")}</div>
+    ${H.cookMode==="lote"?`<div class="group"><h3>¿Qué días cocinas?</h3>${dayPills("data-cday",H.cookDays)}<div class="hint" style="color:var(--muted)">Elegiré platos que aguanten en la nevera hasta que te los comas; si no aguantan, te diré cuáles congelar.</div></div>`:""}
+    <div class="group"><h3>Tu semana normal</h3><p class="muted small" style="margin:0 0 10px">Toca cada comida para cambiarla. Cada semana podrás cambiar cualquier día.</p>
+    <div class="wgrid"><span></span>${DSHORT.map(d=>`<b>${d.slice(0,1)}</b>`).join("")}
+    ${["comida","cena"].map(m=>`<span class="wl">${m==="comida"?"Comida":"Cena"}</span>${[0,1,2,3,4,5,6].map(d=>{const v=H.weekTpl[d][m];return `<button type="button" class="wc ${v}" data-wt="${d}:${m}" aria-label="${DAYS[d]}, ${m}: ${MEALSTATE[v]}"><span>${WT_ICO[v]}</span></button>`}).join("")}`).join("")}</div>
+    <div class="wlegend">${Object.entries(MEALSTATE).map(([k,v])=>`<span><i class="wc ${k}">${WT_ICO[k]}</i>${k==="taper"?"Táper (de la cena de antes)":k==="cocinar"?"Cocino":k==="fuera"?"Como fuera":"Libre"}</span>`).join("")}</div></div>
+    <details class="more"><summary>⏰ Horario y otras comidas</summary><div class="group" style="margin-top:6px"><div class="row"><label class="small" style="min-width:4.5em">Comida</label><input type="time" data-mt="comida" value="${esc(H.mealTimes.comida)}" style="width:auto"><label class="small">Cena</label><input type="time" data-mt="cena" value="${esc(H.mealTimes.cena)}" style="width:auto"></div>
       <p class="muted small">¿Haces más comidas? Márcalas con su hora (de momento el menú planifica comida y cena).</p>
-      ${Object.entries(EXTRA_MEALS).map(([k,v])=>`<div class="row" style="margin:4px 0"><label class="row small" style="flex:1"><input type="checkbox" data-xm="${k}" ${H.extraMeals[k]?"checked":""} style="width:auto"> ${v}</label>${H.extraMeals[k]?`<input type="time" data-xmt="${k}" value="${esc(H.extraMeals[k])}" style="width:auto">`:""}</div>`).join("")}</div>`;
-    h+=`<div class="group"><h3>Platos fijos y caprichos</h3><p class="muted small" style="margin:0 0 8px">Por ejemplo, pizza el viernes por la noche. Los caprichos cuentan para la compra, pero no para tus objetivos.</p>`+fixedEditor()+`</div>`;
+      ${Object.entries(EXTRA_MEALS).map(([k,v])=>`<div class="row" style="margin:4px 0"><label class="row small" style="flex:1"><input type="checkbox" data-xm="${k}" ${H.extraMeals[k]?"checked":""} style="width:auto"> ${v}</label>${H.extraMeals[k]?`<input type="time" data-xmt="${k}" value="${esc(H.extraMeals[k])}" style="width:auto">`:""}</div>`).join("")}</div></details>`;
+    h+=`<details class="more" ${S.fixed.length?"open":""}><summary>🍕 Platos fijos y caprichos${S.fixed.length?` (${S.fixed.length})`:""}</summary><p class="muted small" style="margin:6px 0 8px">Por ejemplo, pizza el viernes por la noche. Los caprichos cuentan para la compra, pero no para tus objetivos.</p>`+fixedEditor()+`</details>`;
     return h;
   }
-  if(id==="cocina")return `<div>${[["diario","Cada día","Cocinas la cena y haces doble para el táper del día siguiente"],["lote","Uno o varios días por semana","Cocinas varios platos de una vez (batch cooking) y los guardas en tápers"]].map(([k,t,d])=>`<button type="button" class="alt" data-cook="${k}" style="${H.cookMode===k?"outline:2px solid var(--tomato)":""}"><b>${t}</b><small>${d}</small></button>`).join("")}</div>
-    ${H.cookMode==="lote"?`<div class="group"><h3>¿Qué días cocinas?</h3>${dayPills("data-cday",H.cookDays)}<div class="hint" style="color:var(--muted)">Elegiré platos que aguanten en la nevera hasta que te los comas; si no aguantan, te diré cuáles congelar.</div></div>`:""}`;
   if(id==="plan")return `<p class="lead">Te avisaré para preparar el menú y la compra.</p>
     <div class="field"><label for="wzStart">¿Desde cuándo empieza el plan?</label><input id="wzStart" type="date" value="${esc(H.start||todayISO())}">
       <div class="hint">Hasta ese día no hago compra: te ayudo a gastar lo que ya tienes en casa.</div></div>
@@ -222,7 +252,8 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
     H.supers=ch;if(!ch.includes(H.super))H.super=ch[0];rerender()});
   qa("[data-mainsup]").forEach(b=>b.onclick=()=>{H.super=b.dataset.mainsup;rerender()});
   qa("[data-strat]").forEach(b=>b.onclick=()=>{H.shop.strategy=b.dataset.strat;rerender()});
-  qa("[data-app]").forEach(b=>b.onclick=()=>{const k=b.dataset.app;H.apps=H.apps.includes(k)?H.apps.filter(x=>x!==k):[...H.apps,k];rerender()});
+  qa("[data-app]").forEach(b=>{const t=()=>{const k=b.dataset.app;H.apps=H.apps.includes(k)?H.apps.filter(x=>x!==k):[...H.apps,k];rerender()};
+    b.onclick=t;b.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();t()}}});
   q("#addKid")&&(q("#addKid").onclick=()=>{S.people.push({...defaultAdult(),id:uid("k"),kind:"nino",goals:["sano"],factor:0.6,presence:{type:"siempre"},away:{comida:[0,1,2,3,4,5,6],cena:[0,1,2,3,4,5,6]},mealsSet:false});rerender()});
   q("#addAdult")&&(q("#addAdult").onclick=()=>{S.people.push({...defaultAdult(),id:uid("a"),kind:"adulto",goals:["sano"],factor:1,tupper:false,presence:{type:"siempre"},away:{comida:[0,1,2,3,4,5,6],cena:[0,1,2,3,4,5,6]},mealsSet:false});rerender()});
   qa("[data-delkid]").forEach(b=>b.onclick=()=>{if(confirm("¿Quitar a esta persona y sus gustos?")){S.people=S.people.filter(p=>p.id!==b.dataset.delkid);rerender()}});
@@ -250,6 +281,8 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
   qa("[data-delsess]").forEach(b=>b.onclick=()=>{const [d,i]=b.dataset.delsess.split(":");a.train[d].splice(Number(i),1);if(!a.train[d].length)delete a.train[d];rerender()});
   qa("[data-sw]").forEach(s=>s.onchange=()=>{const [d,i]=s.dataset.sw.split(":");a.train[d][i].time=s.value;delete a.train[d][i].when;save()});
   qa("[data-st]").forEach(s=>s.onchange=()=>{const [d,i]=s.dataset.st.split(":");a.train[d][i].type=s.value;save()});
+  qa("[data-wt]").forEach(b=>b.onclick=()=>{const [d,m]=b.dataset.wt.split(":"),opts=m==="comida"?["cocinar","taper","fuera","libre"]:["cocinar","fuera","libre"];
+    const cur=H.weekTpl[d][m];H.weekTpl[d][m]=opts[(opts.indexOf(cur)+1)%opts.length];rerender()});
   qa("[data-tpl]").forEach(s=>s.onchange=()=>{const [d,m]=s.dataset.tpl.split(":");H.weekTpl[d][m]=s.value;save()});
   qa("[data-mt]").forEach(i=>i.onchange=()=>{H.mealTimes[i.dataset.mt]=i.value;save()});
   qa("[data-xm]").forEach(c=>c.onchange=()=>{const k=c.dataset.xm;if(c.checked)H.extraMeals[k]={desayuno:"08:00",mediamanana:"11:00",merienda:"17:30",pre:"18:00",post:"20:00",recena:"23:00"}[k];else delete H.extraMeals[k];rerender()});

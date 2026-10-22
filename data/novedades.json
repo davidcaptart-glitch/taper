@@ -286,6 +286,18 @@
         "Perfil con tu inicial y tus números; congelador con una barra que avisa de lo que lleva más tiempo.",
         "Barra inferior flotante y títulos con estilo en todas las pantallas."
       ]
+    },
+    {
+      "version": 30,
+      "fecha": "2026-10-22",
+      "titulo": "Más visual y más fácil",
+      "cambios": [
+        "«¿Qué hay en tu cocina?»: ahora es una cocina dibujada; toca cada aparato para elegirlo.",
+        "Los supermercados se eligen por su logo.",
+        "«¿Cuándo cocinas?» y la semana normal van juntos en una pantalla: toca cada comida de la semana para cambiarla (🍳 cocino, 🥡 táper, 🍴 fuera).",
+        "Arreglado: al marcar ❤️ o 🚫 en los ingredientes ya se ve el nombre.",
+        "Los precios ya no se editan a mano: los pone la app. Si escaneas un ticket y algún precio no cuadra, se revisa por dentro."
+      ]
     }
   ]
 }

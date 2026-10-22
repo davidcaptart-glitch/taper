@@ -823,8 +823,8 @@ function renderPerfil(){
   }
   if(fam)h+=acc("familia","👨‍👩‍👧","Tu familia",others().map(personName).join(", "),fam);
   const items=[["aparatos","Aparatos",Object.entries(APP).filter(([k])=>S.home.apps.includes(k)).map(([,v])=>v).join(", ")],["zona","Supermercados y zona",[chosenSupers().map(s=>superById(s).nombre).join(", ")+(cheapestMode()?" (lo más barato)":""),S.home.cp,S.home.municipio].filter(Boolean).join(" · ")||"Sin indicar"],["familia","Quién come en casa",others().map(personName).join(", ")||"Solo tú"],
-    ...adults().flatMap(a=>[["objetivos:"+a.id,a.id==="yo"?"Tus objetivos":"Objetivos de "+personName(a),a.goals.map(g=>GOALS[g][0]).join(", ")],["entreno:"+a.id,a.id==="yo"?"Tu entrenamiento":"Entrenamiento de "+personName(a),a.trains?a.sports.map(s=>SPORTS[s]).join(", "):"No entrena"]]),["semana","Semana tipo y caprichos",S.fixed.length+" platos fijos"],
-    ["cocina","Cuándo cocinas",S.home.cookMode==="lote"?"Por lotes: "+S.home.cookDays.map(d=>DAYS[d].toLowerCase()).join(" y "):"Cada día"],["plan","Planificación",(S.home.start&&S.home.start>todayISO()?"Empieza el "+shortDate(S.home.start)+" · ":"")+{diaria:"Cada día",semanal:"Cada semana",quincenal:"Cada dos semanas",mensual:"Cada mes"}[S.home.planFreq]+", "+DAYS[S.home.planDay].toLowerCase()+" a las "+S.home.planTime],
+    ...adults().flatMap(a=>[["objetivos:"+a.id,a.id==="yo"?"Tus objetivos":"Objetivos de "+personName(a),a.goals.map(g=>GOALS[g][0]).join(", ")],["entreno:"+a.id,a.id==="yo"?"Tu entrenamiento":"Entrenamiento de "+personName(a),a.trains?a.sports.map(s=>SPORTS[s]).join(", "):"No entrena"]]),["cocina","Tu semana, caprichos y horario",(S.home.cookMode==="lote"?"Por lotes":"Cada día")+" · "+S.fixed.length+" platos fijos"],
+    ["plan","Planificación",(S.home.start&&S.home.start>todayISO()?"Empieza el "+shortDate(S.home.start)+" · ":"")+{diaria:"Cada día",semanal:"Cada semana",quincenal:"Cada dos semanas",mensual:"Cada mes"}[S.home.planFreq]+", "+DAYS[S.home.planDay].toLowerCase()+" a las "+S.home.planTime],
     ["compra","Compra y presupuesto",eur(S.home.budget.month)+" al mes"]];
   h+=acc("ajustes","⚙️","Ajustes","Familia, objetivos, entrenos, compra…",`<div class="settingslist">${items.map(([id,t,d])=>`<button data-edit="${id}">${t}<small>${esc(d)}</small></button>`).join("")}</div>`);
   h+=acc("avisos","🔔","Avisos en el móvil",S.notif&&S.notif.on?"Activados":"Desactivados",avisosCard().replace('<div class="card"><h2>Avisos en el móvil</h2>','<div>'));
@@ -838,9 +838,6 @@ function renderPerfil(){
   h+=acc("festivos","📅","Festivos",`Cataluña${S.home.municipio?" y "+S.home.municipio:""}${S.home.festivosExtra.length?" · "+S.home.festivosExtra.length+" añadidos":""}`,`<p class="small muted">Se usan los de Cataluña${S.home.municipio&&FEST&&FEST.locales[S.home.municipio]?" y los locales de "+esc(S.home.municipio):""}. Añade los locales de tu municipio u otros días especiales.</p>
     ${S.home.festivosExtra.map(d=>`<div class="fixed"><span>${esc(longDate(d))}</span><button class="btn ghost small" data-delfest="${d}">Quitar</button></div>`).join("")}
     <div class="row"><input type="date" id="festIn" style="flex:1"><button class="btn small" id="festAdd">Añadir</button></div>`);
-  h+=acc("precios","💶","Precios",`${Object.keys(S.prices).length?Object.keys(S.prices).length+" corregidos a mano · ":""}se actualizan cada domingo`,`<div class="prices"><div class="hint" style="margin-bottom:8px">Si corriges uno, manda tu precio hasta que vuelvas al del supermercado.</div>
-    ${Object.values(P).sort((a,b)=>a.name.localeCompare(b.name)).map(p=>{const m=mprice(p.id),own=S.prices[p.id]!=null;
-      return `<div class="pr"><span>${esc(p.name)}${upTag(p.id)}<small>${fmtQty(p.env,p.unit)}${own?` · corregido a mano${m?` (Mercadona: ${eur(m.precio)})`:""} <button class="reset" data-reset="${p.id}">Usar el de Mercadona</button>`:m?" · Mercadona":" · estimado"}</small></span><input type="number" step="0.01" min="0" data-price="${p.id}" value="${price(p.id).toFixed(2)}" aria-label="Precio de ${esc(p.name)}"></div>`}).join("")}</div>`);
   h+=acc("app","📦","Copia de seguridad y novedades",`Versión ${APP_VERSION} · tu código ${S.uid}`,`<p class="small muted">Todo se guarda solo en este móvil. Descarga una copia de vez en cuando y antes de cambiar de móvil.</p>
     ${needsTransfer()?`<div class="okbox"><b>¿Vas a instalar Táper?</b> Tus datos pasarán solos a la app. Si no te los reconoce, usa este código de traspaso: <b style="letter-spacing:.15em">${esc(transferCode())}</b></div>`:""}
     ${isStandalone()&&servidorOn()?`<button class="btn ghost small" id="trBring" style="margin-bottom:8px">Traer mis datos de Safari</button>`:""}
@@ -868,8 +865,6 @@ function renderPerfil(){
   q("[data-lno]").forEach(b=>b.onclick=()=>{const [pp,pid]=b.dataset.lno.split("|");find(pp).tastes.ignore[pid]=true;save();render()});
   q("[data-delfest]").forEach(b=>b.onclick=()=>{S.home.festivosExtra=S.home.festivosExtra.filter(d=>d!==b.dataset.delfest);save();refreshPlans();render()});
   document.getElementById("festAdd").onclick=()=>{const v=document.getElementById("festIn").value;if(v&&!S.home.festivosExtra.includes(v)){S.home.festivosExtra.push(v);S.home.festivosExtra.sort();save();refreshPlans();render()}};
-  q("[data-price]").forEach(i=>i.onchange=()=>{const v=Number(i.value);if(v>=0){S.prices[i.dataset.price]=v;save();render()}});
-  q("[data-reset]").forEach(b=>b.onclick=()=>{delete S.prices[b.dataset.reset];save();render()});
   document.getElementById("fresh")?.addEventListener("click",()=>{
     showDialog(`<div class="mod">${closeBtn}<h2>¿Empezar de cero?</h2><p>Guardo una copia de todo en este móvil (familia, gustos, menús, compra…) y la app vuelve a la primera pantalla, como si la abrieras por primera vez.</p>
       <p class="small muted">Para volver a tus datos: botón «Recuperar mis datos» en la primera pantalla o aquí, en Perfil. Si ya había otra copia guardada, se sustituye por esta.</p>

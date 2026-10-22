@@ -149,11 +149,29 @@ function openTicketReview(tk,text){
   };
   draw();
 }
+// Revisión interna de precios: si lo pagado no cuadra con el precio que usa la app, se manda al servidor
+// para revisarlo. No cambia nada en la app de nadie.
+function reportTicketPrices(t){
+  if(typeof servidorOn!=="function"||!servidorOn())return;
+  const sid=(SUPERS||[]).some(x=>x.id===t.super)?t.super:null, items=[];
+  for(const l of t.lines){
+    if(!l.pid||!(l.amount>0))continue;const p=P[l.pid];
+    const ours=sid?superPrice(sid,l.pid):price(l.pid);if(!(ours>0))continue;
+    // Precio pagado por un envase como el de la app (al peso: el kilo pasado a su envase)
+    const paid=l.kg&&p.unit==="g"?l.amount/l.kg*(p.env/1000):l.amount/Math.max(1,l.qty||1);
+    const dif=(paid-ours)/ours;
+    if(Math.abs(dif)>=0.08)items.push({pid:l.pid,desc:String(l.desc).slice(0,60),pagado:Math.round(paid*100)/100,app:Math.round(ours*100)/100,dif:Math.round(dif*100)});
+  }
+  if(!items.length)return;
+  fetch(CFG.avisos.url.replace(/\/$/,"")+"/ticket-precios",{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({uid:S.uid,cp:S.home.cp||"",super:t.super,tienda:t.store||"",fecha:t.date,items:items.slice(0,40)})}).catch(()=>{});
+}
 function saveTicket(tk,date,dest){
   S.tickets=S.tickets||[];
   const lines=tk.lines.map(l=>({qty:l.qty,desc:l.desc,amount:l.amount,kg:l.kg||null,food:l.food,pid:l.pid||null,mid:l.match?l.match.mid:null,group:l.pid?P[l.pid].aisle:l.group}));
   const t={id:uid("t"),date,m:dest.m,list:dest.key,super:tk.super||"otro",store:tk.store||"",total:tk.total,food:Math.round(lines.filter(l=>l.food).reduce((s,l)=>s+l.amount,0)*100)/100,lines};
   S.tickets.push(t);
+  reportTicketPrices(t);
   // Lo pagado de esa lista = suma de sus tickets (solo comida)
   S.spent[dest.m+"|"+dest.key]=Math.round(S.tickets.filter(x=>x.m===dest.m&&x.list===dest.key).reduce((s,x)=>s+x.food,0)*100)/100;
   // Marca como comprado lo de la lista que aparece en el ticket
