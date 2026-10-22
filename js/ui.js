@@ -235,7 +235,7 @@ function renderMenu(){
       const sess=sessionsOn(d);
       const empty=["comida","cena"].every(m=>["fuera","libre"].includes(mealState(d,m)));
       h+=`<div class="slot ${empty?"extra":""}"><div class="day">${DSHORT[dow(d)]}<small>${shortDate(d)}</small></div><div>
-        <div class="tags">${hol?`<span class="pill carga">${esc(holidayName(d))}</span>`:""}${ks.map(k=>`<span class="pill kid">${esc(personName(k))}</span>`).join("")}${sess.map(s=>`<span class="pill ligera">${esc(SPORTS[s.type])} ${esc(sessTime(s))}</span>`).join("")}</div>
+        <div class="tags">${hol?`<span class="pill carga">${esc(holidayName(d))}</span>`:""}${ks.map(k=>{const c=peopleAt(d,"comida").includes(k),n=peopleAt(d,"cena").includes(k);return `<span class="pill kid">${esc(personName(k))}${c&&!n?" · solo comida":!c&&n?" · solo cena":""}</span>`}).join("")}${sess.map(s=>`<span class="pill ligera">${esc(SPORTS[s.type])} ${esc(sessTime(s))}</span>`).join("")}</div>
         ${mealLine(d,"comida",wk)}${mealLine(d,"cena",wk)}
         ${dayCounter(d,pt)}
         <div class="ops"><button class="btn ghost small" data-day="${d}">Cambiar este día</button></div></div></div>`;

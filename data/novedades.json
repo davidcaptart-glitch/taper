@@ -257,6 +257,15 @@
         "«Cómo comprar más barato» en la lista de la compra: compara todo online, despensa online con el fresco en tienda, o todo en tienda, con los envíos de todo el mes. Lo aplicas con un toque.",
         "Perfil › Copia y novedades › «Empezar de cero (guardando mis datos)»: pruebas el inicio de la app como nuevo y recuperas tus datos cuando quieras, desde la primera pantalla o desde Perfil."
       ]
+    },
+    {
+      "version": 27,
+      "fecha": "2026-10-22",
+      "titulo": "Arreglo: comidas de cada persona",
+      "cambios": [
+        "Si habías marcado a mano que alguien estaba contigo un día, ahora también se respeta qué comidas hace en casa (por ejemplo, solo la cena).",
+        "En el menú, la etiqueta de cada día dice «solo cena» o «solo comida» cuando toca."
+      ]
     }
   ]
 }

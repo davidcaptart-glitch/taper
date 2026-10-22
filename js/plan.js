@@ -76,7 +76,9 @@ const kidPresentByRule=presentByRule;
 // Quién está un día: lo que diga su horario, salvo que ese día lo hayas cambiado
 function peopleAt(d,meal){
   const o=(S.days[d]||{}).kids||{};
-  return S.people.filter(k=>k.id==="yo"||(o[k.id]!=null?o[k.id]:presentByRule(k,d,meal)));
+  // Marcar a mano que alguien está un día no cambia qué comidas hace en casa (salvo un cambio planificado)
+  return S.people.filter(k=>{if(k.id==="yo")return true;if(o[k.id]==null)return presentByRule(k,d,meal);
+    if(!o[k.id])return false;const ch=changeFor(k,d,meal);return ch&&ch.with?true:!eatsAway(k,d,meal)});
 }
 const kidsAt=(d,meal)=>peopleAt(d,meal).filter(p=>p.kind==="nino");
 const adultsAt=(d,meal)=>peopleAt(d,meal).filter(p=>p.kind==="adulto");
