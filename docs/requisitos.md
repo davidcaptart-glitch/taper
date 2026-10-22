@@ -1,0 +1,81 @@
+# Requisitos pendientes de Táper
+
+Lista viva de lo acordado para las próximas fases. La fase 1 (base, precios semanales, publicación) está hecha.
+
+**Principio general: cuanto más personalizada, mejor.** La app aprende continuamente de los gustos,
+preferencias, valoraciones e historial de cada persona y sugiere cosas hechas a su medida. Todo lo que
+aprende se ve y se corrige en una pantalla "Lo que sé de ti" (por persona: adulto y niños).
+
+## Fase 2: menú a tu medida
+
+### Asistente de bienvenida (cada usuario, editable luego en Ajustes)
+- **Aparatos**: horno, vitro o fogones, microondas, air fryer. Solo se proponen recetas que se puedan hacer;
+  las recetas tendrán variantes por aparato cuando tenga sentido.
+- **Código postal**: para usar los precios de su zona (ver "Precios por zona").
+- **Quién come en casa**: adultos y niños; semanas alternas, fines de semana, siempre…
+  Textos neutros ("con mis hijos", "con mi pareja"…), no "tu hijo".
+- **Objetivos**: de 1 a 3, ordenados por prioridad (el primero manda si chocan):
+  rendimiento deportivo, ganar músculo, adelgazar, comer sano y equilibrado, ahorrar, ir rápido.
+  Si chocan (ganar músculo + adelgazar) se avisa y se aplica un término medio.
+  Los niños siempre "comer sano", adaptado a su edad.
+- **Peso** (opcional) para el objetivo de proteína (1,6–2 g/kg al día).
+- **Entrenamiento**: si entrena; tipos (varios): fuerza/gimnasio, calistenia, correr, bici, natación,
+  deportes de equipo, yoga/pilates, otro; semana habitual (días, mañana/tarde, tipo; hasta 2 sesiones al día).
+  Es la plantilla que se propone cada vez que se planifica.
+- **Planificación**: frecuencia (diaria, semanal, quincenal, mensual), día y hora del aviso.
+  David: semanal, domingo por la tarde.
+- **Compra**: por lista, frecuencia, online o en tienda, día de entrega.
+- **Gustos**: cuestionario inicial de ingredientes y tipos de plato (me encanta / me gusta / no me gusta /
+  no lo como por alergia o intolerancia), uno por cada persona (adulto y niños).
+
+### Planificación
+- Asistente de planificación (por defecto domingo 17:00):
+  1. Entrenos de la semana (prerrellenado con la plantilla).
+  2. Con quién se come y cena cada día: semanas con el hijo, festivos (nacionales, Cataluña y locales de
+     Esparreguera; automáticos solo en semanas con él), días sueltos marcados a mano (comida, cena o ambas).
+  3. Platos propuestos con 3 alternativas cada uno.
+  4. Lista de la compra. 5. Confirmar.
+- Solo comida y cena. Cada cena se cocina doble: la otra ración es el táper de la comida del día siguiente.
+- Papel de cada comida según las sesiones de antes y después (energía, recuperación, ambas).
+  Antes de correr nada pesado (etiqueta "digestiva/pesada" en recetas). Días dobles: proteína alta.
+  Tentempié opcional como consejo en días dobles (no entra en el menú salvo que se pida).
+- Sobre la marcha: "hoy me apetece otra cosa" (con lo que hay en casa), intercambiar días, "hoy no cocino".
+- Las cenas anteriores a la entrega del pedido solo usan lo que ya hay en casa.
+
+### Gustos y aprendizaje
+- Valorar cada plato al día siguiente (👍 / 👎 / "bien, pero no a menudo"), por separado tú y el niño.
+- "No me gusta" con motivo: ingrediente concreto, preparación, pesado, sabor, mucho trabajo, texto libre.
+- Ingredientes vetados. El aprendizaje baja o sube recetas por ingrediente y tipo.
+- Historial: qué se cocinó, cuándo, para quién y cómo se valoró. "Más como esto".
+- Favoritas con variedad (no dos semanas seguidas).
+
+### Recetas
+- Unas 120 recetas: máx. 30 min en total y 15 de trabajo, máx. 6 ingredientes (sin contar aceite, sal y
+  especias), con calorías, proteína, hidratos y grasa estimados por ración. Antes, aprobar la lista de nombres.
+- Catálogo de productos a ~70, todos de Mercadona, con ingredientes compartidos entre recetas.
+
+### Compra y presupuesto
+- Presupuesto mensual y semanal (semanal propio o mensual / semanas). Gasto real apuntado tras cada compra,
+  comparado con lo previsto. Aviso si se pasa, con propuestas para abaratar.
+- Compra mensual (despensa, carne para congelar, congelados) + semanal (fresco).
+- Cada lista se marca "online" o "en tienda". Online: pedido mínimo (50 € según prensa de 2025) y envío
+  (8,20 €), editables; si no se llega al mínimo, propone completar adelantando despensa del mes.
+- La lista descuenta lo que ya hay en casa (congelador y despensa).
+
+## Fase 3: congelador y notificaciones
+- Fresco o congelado: compara precio por kg y aconseja; guía para repartir y etiquetar bolsas.
+- Inventario de congelador (fecha, raciones), aviso a los 3 meses, plan B si se olvida descongelar.
+- Notificaciones (Web Push con una tarea de GitHub como "despertador"; la app decide qué mostrar con los
+  datos del móvil). Hora y activación configurables:
+  descongelar (21:30), qué cocinar hoy (18:30), valorar el plato de ayer (14:00), planificar (según usuario),
+  subidas de precio (domingo), presupuesto, congelador. Varios usuarios: una suscripción por móvil.
+
+## Precios por zona
+- Variable `CODIGOS_POSTALES` (lista). El script consulta una vez por almacén y guarda
+  `data/precios/<almacén>.json` y un índice código postal -> almacén. `data/precios.json` sigue siendo la zona
+  de David (3850) para no perder historial.
+- Código postal sin zona todavía: precios de una zona cercana con aviso.
+
+## Fase 4: amigos
+- Que la app aprenda también de los gustos de amigos. Decidir entre compartir por archivo o enlace (privado,
+  manual) o una base de datos gratuita con envío anónimo y voluntario (automático).
