@@ -10,7 +10,8 @@
      "nombre": "Arroz Condis Extra 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/arroz-condis-extra-1-kg/p/103009/es_ES"
     },
     "pasta": {
      "precio": 0.8,
@@ -18,7 +19,8 @@
      "nombre": "Pasta Condis Macarrones 500 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/pasta-condis-macarrones-500-g/p/121147/es_ES"
     },
     "espaguetis": {
      "precio": 0.8,
@@ -26,7 +28,8 @@
      "nombre": "Pasta Condis Spagueti 500 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/pasta-condis-spagueti-500-g/p/121146/es_ES"
     },
     "cuscus": {
      "precio": 1.99,
@@ -34,7 +37,8 @@
      "nombre": "Cous Cous Gallo 500 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/cous-cous-gallo--500-g/p/123090/es_ES"
     },
     "lentejas": {
      "precio": 0.85,
@@ -42,7 +46,8 @@
      "nombre": "Lentejas Extra Condis Cocidas 400 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/lentejas-extra-condis-cocidas-400-g/p/511046/es_ES"
     },
     "garbanzos": {
      "precio": 0.75,
@@ -50,7 +55,8 @@
      "nombre": "Garbanzos Extra Condis Cocidos 400 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/garbanzos-extra-condis-cocidos-400-g/p/511045/es_ES"
     },
     "alubias": {
      "precio": 0.79,
@@ -58,7 +64,8 @@
      "nombre": "Alubias Extra Condis Cocidas Blanca 400 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/alubias-extra-condis-cocidas-blanca-400-g/p/511044/es_ES"
     },
     "tomate_tri": {
      "precio": 1.01,
@@ -66,7 +73,8 @@
      "nombre": "Tomate Condis Triturado 800 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/tomate-condis-triturado-800-g/p/524000/es_ES"
     },
     "atun": {
      "precio": 2.39,
@@ -74,7 +82,8 @@
      "nombre": "Atún Claro Condis En Aceite Girasol 3 X 52 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/atún-claro-condis-en-aceite-girasol--3-x-52-g/p/536029/es_ES"
     },
     "maiz": {
      "precio": 1.59,
@@ -82,7 +91,8 @@
      "nombre": "Maiz Condis Dulce 140Grs X 3 Unidades",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/maiz-condis-dulce-140grs-x-3-unidades/p/518012/es_ES"
     },
     "tortillas": {
      "precio": 1.0,
@@ -90,7 +100,8 @@
      "nombre": "Tortillas Dulcesol Trigo 6 Unidad",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/tortillas-dulcesol-trigo-6-unidad/p/116388/es_ES"
     },
     "cebolla": {
      "precio": 1.39,
@@ -98,7 +109,8 @@
      "nombre": "Cebolla Condis Bolsa 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/cebolla-condis-bolsa-1-kg/p/191095/es_ES"
     },
     "patata": {
      "precio": 4.65,
@@ -106,7 +118,8 @@
      "nombre": "Patata Condis Versátil Bolsa 3 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/patata-condis-versátil-bolsa-3-kg/p/191640/es_ES"
     },
     "boniato": {
      "precio": 1.23,
@@ -114,7 +127,8 @@
      "nombre": "Boniato 2 Unidades 700G Aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/boniato-2-unidades-700g-aprox./p/190060/es_ES"
     },
     "ajo": {
      "precio": 1.99,
@@ -122,7 +136,8 @@
      "nombre": "Ajos Condis Morados 220 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/ajos-condis-morados-220-g/p/191203/es_ES"
     },
     "pechuga": {
      "precio": 3.98,
@@ -130,7 +145,8 @@
      "nombre": "Pechuga De Pollo Fileteada 400 G Aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/pechuga-de-pollo-fileteada-400-g-aprox./p/15064/es_ES"
     },
     "muslos": {
      "precio": 3.7,
@@ -138,7 +154,8 @@
      "nombre": "Muslo De Pollo Deshuesado 400 G",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/muslo-de--pollo-deshuesado-400-g/p/15218/es_ES"
     },
     "picada": {
      "precio": 4.75,
@@ -146,7 +163,8 @@
      "nombre": "Preparado Cal Mallafré De Carne Picada Mixta 400 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/preparado-cal-mallafré-de-carne-picada-mixta-400-g/p/12155/es_ES"
     },
     "lomo": {
      "precio": 5.36,
@@ -154,7 +172,8 @@
      "nombre": "Lomo De Cerdo Duroc 50% Condis Fileteado 420 G Aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/lomo-de-cerdo-duroc-50%-condis-fileteado-420-g-aprox./p/12559/es_ES"
     },
     "burger": {
      "precio": 1.95,
@@ -162,7 +181,8 @@
      "nombre": "Burger De Pollo Tradicional 200 G",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/burger-de-pollo-tradicional-200-g/p/15532/es_ES"
     },
     "salmon": {
      "precio": 7.99,
@@ -170,7 +190,8 @@
      "nombre": "Lomos Condis Salmon Con Piel 250 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/lomos-condis-salmon-con-piel-250-g/p/182871/es_ES"
     },
     "merluza": {
      "precio": 5.69,
@@ -178,7 +199,8 @@
      "nombre": "Tronquito Condis Merluza 640 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/tronquito-condis-merluza-640-g/p/182759/es_ES"
     },
     "gambas": {
      "precio": 14.95,
@@ -186,7 +208,8 @@
      "nombre": "Gamba Pelada Gr Bolsa",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/gamba-pelada-gr-bolsa/p/492089/es_ES"
     },
     "calamar": {
      "precio": 5.49,
@@ -194,7 +217,8 @@
      "nombre": "Anilla Condis De Pota 360 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/anilla-condis-de-pota-360-g/p/182762/es_ES"
     },
     "brocoli": {
      "precio": 2.99,
@@ -202,7 +226,8 @@
      "nombre": "Brócoli Findus 360 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/brócoli-findus-360-g/p/180114/es_ES"
     },
     "espinacas": {
      "precio": 2.89,
@@ -210,7 +235,8 @@
      "nombre": "Espinacas Findus Hojas 400 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/espinacas-findus-hojas-400-g/p/180216/es_ES"
     },
     "judias": {
      "precio": 1.79,
@@ -218,7 +244,8 @@
      "nombre": "Judías Verdes Condis Redondas Troceadas 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/judías-verdes-condis-redondas-troceadas-1-kg/p/180091/es_ES"
     },
     "salteado": {
      "precio": 1.17,
@@ -226,7 +253,8 @@
      "nombre": "Salteado Condis Tradicional 450 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/salteado-condis-tradicional-450-g/p/180110/es_ES"
     },
     "guisantes": {
      "precio": 1.89,
@@ -234,7 +262,8 @@
      "nombre": "Guisantes Condis 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/guisantes-condis--1-kg/p/180072/es_ES"
     },
     "huevos": {
      "precio": 4.09,
@@ -242,7 +271,8 @@
      "nombre": "Huevos Condis Gallina Criada En Suelo L 12 Unidades",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/huevos-condis-gallina-criada-en-suelo-l-12-unidades/p/170606/es_ES"
     },
     "queso": {
      "precio": 1.99,
@@ -250,7 +280,8 @@
      "nombre": "Queso Rallado Condis Mozzarella 200 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/queso-rallado-condis-mozzarella-200-g/p/345019/es_ES"
     },
     "pimiento": {
      "precio": 3.24,
@@ -258,7 +289,8 @@
      "nombre": "Pimiento Rojo 2 Unidades 650G Aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/pimiento-rojo-2-unidades-650g-aprox./p/191688/es_ES"
     },
     "calabacin": {
      "precio": 1.37,
@@ -266,7 +298,8 @@
      "nombre": "Calabacín 2 Unidades 600G Aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/calabacín-2-unidades-600g-aprox./p/191089/es_ES"
     },
     "zanahoria": {
      "precio": 0.99,
@@ -274,7 +307,8 @@
      "nombre": "Zanahoria Condis Bolsa 500 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/zanahoria-condis-bolsa-500-g/p/191086/es_ES"
     },
     "tomate": {
      "precio": 2.77,
@@ -282,7 +316,8 @@
      "nombre": "Tomate De Pera 6 Unidades 700G Aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/tomate-de-pera-6-unidades-700g-aprox./p/191825/es_ES"
     },
     "ensalada": {
      "precio": 2.75,
@@ -290,7 +325,8 @@
      "nombre": "Ensalada Hc Maxi Gourmet 300 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/ensalada-hc-maxi-gourmet-300-g/p/194454/es_ES"
     },
     "champi": {
      "precio": 1.95,
@@ -298,7 +334,8 @@
      "nombre": "Champiñón Condis Laminado Bandeja 250 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/champiñón-condis-laminado-bandeja-250-g/p/191083/es_ES"
     },
     "limon": {
      "precio": 0.7,
@@ -306,7 +343,8 @@
      "nombre": "Limón 2 Unidades 250G Aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/limón-2-unidades-250g-aprox./p/190485/es_ES"
     },
     "yogur": {
      "precio": 0.88,
@@ -314,7 +352,8 @@
      "nombre": "Yogur Alteza Natural 4 X 125 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/yogur-alteza-natural-4-x-125-g/p/782162/es_ES"
     },
     "pan_rallado": {
      "precio": 0.59,
@@ -322,7 +361,8 @@
      "nombre": "Pan Condis Rallado 500 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/pan-condis-rallado-500-g/p/119007/es_ES"
     },
     "jamon": {
      "precio": 2.39,
@@ -330,7 +370,8 @@
      "nombre": "Jamon Cocido Condis 90% Carne 150 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/jamon-cocido-condis-90%-carne-150-g/p/355563/es_ES"
     },
     "fideos": {
      "precio": 0.8,
@@ -338,7 +379,8 @@
      "nombre": "Pasta Condis Fideo Cazuela N 4 500 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/pasta-condis-fideo-cazuela-n-4-500-g/p/121148/es_ES"
     },
     "caldo_pollo": {
      "precio": 0.8,
@@ -346,7 +388,8 @@
      "nombre": "Caldo Condis Pollo Brik 1 L",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/caldo-condis-pollo-brik-1-l/p/116056/es_ES"
     },
     "caldo_pescado": {
      "precio": 1.39,
@@ -354,7 +397,8 @@
      "nombre": "Caldo Condis Pescado 1 L",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/caldo-condis-pescado-1-l/p/116371/es_ES"
     },
     "pavo": {
      "precio": 5.48,
@@ -362,7 +406,8 @@
      "nombre": "Filete Extrafino Pechuga Pavo 500G Aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/filete-extrafino-pechuga-pavo-500g-aprox./p/15676/es_ES"
     },
     "burger_pavo": {
      "precio": 2.25,
@@ -370,7 +415,8 @@
      "nombre": "Burger Pavo Y Espinacas 240G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/burger-pavo-y-espinacas-240g/p/15549/es_ES"
     },
     "ternera": {
      "precio": 10.33,
@@ -378,7 +424,8 @@
      "nombre": "Bistec 1ªb Ternera Cortado 450 G",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/bistec-1ªb--ternera-cortado-450-g/p/11434/es_ES"
     },
     "lasana": {
      "precio": 1.75,
@@ -386,7 +433,8 @@
      "nombre": "Lasaña Gallo Placas Horno 224 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/lasaña-gallo-placas-horno-224-g/p/121985/es_ES"
     },
     "bacalao": {
      "precio": 8.69,
@@ -394,7 +442,8 @@
      "nombre": "Filetes Condis Bacalao 300 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/filetes-condis-bacalao-300-g/p/182869/es_ES"
     },
     "nata": {
      "precio": 1.8,
@@ -402,7 +451,8 @@
      "nombre": "Nata Cocina Condis 15% 200 Ml 3 Unidades",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/nata-cocina-condis-15%-200-ml-3-unidades/p/304018/es_ES"
     },
     "mostaza": {
      "precio": 3.65,
@@ -410,7 +460,8 @@
      "nombre": "Mostaza Maille Dijon Original 215 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/mostaza-maille-dijon-original-215-g/p/110015/es_ES"
     },
     "edamame": {
      "precio": 2.6,
@@ -418,7 +469,8 @@
      "nombre": "Edamame Sushi King Bolsa 400 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/edamame-sushi-king-bolsa-400-g/p/781951/es_ES"
     },
     "esparragos": {
      "precio": 4.49,
@@ -426,7 +478,8 @@
      "nombre": "Espárragos Trigueros 250 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/espárragos--trigueros-250-g/p/191149/es_ES"
     },
     "bonito": {
      "precio": 5.25,
@@ -434,7 +487,8 @@
      "nombre": "Bonito Condis Aceite Oliva 140 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/bonito-condis-aceite-oliva-140-g/p/536167/es_ES"
     },
     "caballa": {
      "precio": 1.65,
@@ -442,7 +496,8 @@
      "nombre": "Filete Caballa Alteza Aceite Oliva 65 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/filete-caballa-alteza-aceite-oliva-65-g/p/545087/es_ES"
     },
     "sardinas": {
      "precio": 1.59,
@@ -450,7 +505,8 @@
      "nombre": "Sardina Alteza Aceite Oliva 84 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/sardina-alteza-aceite-oliva-84-g/p/545088/es_ES"
     },
     "pan_integral": {
      "precio": 0.9,
@@ -458,7 +514,8 @@
      "nombre": "Pan Molde Condis Integral 460 G",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/pan-molde-condis-integral-460-g/p/213154/es_ES"
     },
     "langostinos": {
      "precio": 5.29,
@@ -466,7 +523,8 @@
      "nombre": "Colas Royal De Langostinos 280 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/colas-royal-de-langostinos-280-g/p/182552/es_ES"
     },
     "masa_empanadilla": {
      "precio": 1.25,
@@ -474,7 +532,8 @@
      "nombre": "Obleas Buitoni 16 Unidades 160 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/obleas-buitoni-16-unidades-160-g/p/181450/es_ES"
     },
     "hummus": {
      "precio": 1.35,
@@ -482,7 +541,8 @@
      "nombre": "Hummus Condis Receta Clásica 200 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/hummus-condis-receta-clásica-200-g/p/122218/es_ES"
     },
     "noquis": {
      "precio": 1.09,
@@ -490,7 +550,8 @@
      "nombre": "Gnocchi Condis Patata 500 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/gnocchi-condis-patata-500-g/p/121847/es_ES"
     },
     "berenjena": {
      "precio": 1.6,
@@ -498,7 +559,8 @@
      "nombre": "Berenjena 2 Unidades 700G Aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/berenjena-2-unidades-700g-aprox./p/191050/es_ES"
     },
     "quinoa": {
      "precio": 1.56,
@@ -506,7 +568,8 @@
      "nombre": "Quinoa Blanca Y Roja Brillante 250 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/quinoa-blanca-y-roja-brillante-250-g/p/103051/es_ES"
     },
     "copos_maiz": {
      "precio": 1.55,
@@ -514,7 +577,8 @@
      "nombre": "Cereales Condis Corn Flakes 500 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/cereales-condis-corn-flakes-500-g/p/121466/es_ES"
     },
     "pesto": {
      "precio": 2.53,
@@ -522,7 +586,8 @@
      "nombre": "Salsa Gallo Pesto 190 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/salsa-gallo-pesto-190-g/p/110265/es_ES"
     },
     "salchichas": {
      "precio": 0.79,
@@ -530,7 +595,8 @@
      "nombre": "Salchichas Campofrio Frankfurt 140 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/salchichas-campofrio-frankfurt-140-g/p/370075/es_ES"
     },
     "pina": {
      "precio": 2.59,
@@ -538,7 +604,8 @@
      "nombre": "Piña Condis En Su Jugo 3 Unidades",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/piña-condis-en-su-jugo-3-unidades/p/509076/es_ES"
     },
     "leche": {
      "precio": 0.87,
@@ -546,7 +613,8 @@
      "nombre": "Leche Condis Semidesnatada 1 L",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/leche-condis-semidesnatada-1-l/p/704048/es_ES"
     },
     "calabaza": {
      "precio": 2.99,
@@ -554,7 +622,8 @@
      "nombre": "Calabaza Pelada Trozos 600 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/calabaza-pelada-trozos-600-g/p/190292/es_ES"
     },
     "gazpacho": {
      "precio": 3.99,
@@ -562,7 +631,8 @@
      "nombre": "Alvalle Gazpacho Original 1L",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/alvalle-gazpacho-original-1l/p/117109/es_ES"
     },
     "anacardos": {
      "precio": 3.38,
@@ -570,7 +640,8 @@
      "nombre": "Anacardo Crudo 200G",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/anacardo-crudo-200g/p/190303/es_ES"
     },
     "feta": {
      "precio": 3.35,
@@ -578,7 +649,8 @@
      "nombre": "Queso Feta Patros Griego 150 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/queso-feta-patros-griego-150-g/p/320032/es_ES"
     },
     "manzana": {
      "precio": 1.8,
@@ -586,7 +658,8 @@
      "nombre": "Manzana Golden 4 Unidades 800G Aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/manzana-golden-4-unidades-800g-aprox./p/190530/es_ES"
     },
     "pan_burger": {
      "precio": 0.85,
@@ -594,7 +667,8 @@
      "nombre": "Bocatas Condis Burger 4 Unidades 300 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/bocatas-condis-burger-4-unidades-300-g/p/211096/es_ES"
     },
     "tomate_frito": {
      "precio": 0.99,
@@ -602,7 +676,8 @@
      "nombre": "Tomate Condis Frito Vidrio 560 G",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://compraonline.condis.es/tomate-condis-frito-vidrio-560-g/p/524086/es_ES"
     }
    },
    "fallos": []
@@ -617,7 +692,8 @@
      "nombre": "Arroz extra Dia Arrozona 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/arroz-pastas-y-legumbres/arroz/p/151"
     },
     "pasta": {
      "precio": 1.15,
@@ -625,7 +701,8 @@
      "nombre": "Macarrones Dia Al Diante 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/arroz-pastas-y-legumbres/macarrones-espaguetis-y-pastas-secas/p/50973"
     },
     "espaguetis": {
      "precio": 1.15,
@@ -633,7 +710,8 @@
      "nombre": "Espagueti Dia Al Diante 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/arroz-pastas-y-legumbres/macarrones-espaguetis-y-pastas-secas/p/52208"
     },
     "cuscus": {
      "precio": 1.19,
@@ -641,7 +719,8 @@
      "nombre": "Cous Cous Dia Al Diante 500 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/arroz-pastas-y-legumbres/quinoa-couscous-y-soja/p/310270"
     },
     "lentejas": {
      "precio": 0.68,
@@ -649,7 +728,8 @@
      "nombre": "Lentejas cocidas Dia Vegecampo 400 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/arroz-pastas-y-legumbres/lentejas/p/58809"
     },
     "garbanzos": {
      "precio": 0.6,
@@ -657,7 +737,8 @@
      "nombre": "Garbanzos cocidos Dia Vegecampo 400 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/arroz-pastas-y-legumbres/garbanzos-y-alubias/p/1232"
     },
     "alubias": {
      "precio": 0.75,
@@ -665,7 +746,8 @@
      "nombre": "Alubias blancas cocidas Dia Vegecampo 400 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/arroz-pastas-y-legumbres/garbanzos-y-alubias/p/1233"
     },
     "tomate_tri": {
      "precio": 1.0,
@@ -673,7 +755,8 @@
      "nombre": "Tomate triturado Dia Vegecampo 800 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/aceites-salsas-y-especias/salsas-de-tomate-y-pasta/p/13105"
     },
     "tomate_frito": {
      "precio": 0.89,
@@ -681,7 +764,8 @@
      "nombre": "Tomate frito Dia Vegecampo 550 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/aceites-salsas-y-especias/salsas-de-tomate-y-pasta/p/10677"
     },
     "atun": {
      "precio": 2.95,
@@ -689,7 +773,8 @@
      "nombre": "Atún claro en aceite de oliva Dia Mari Marinera 3 x 60 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/conservas-caldos-y-cremas/atun-y-bonito/p/262434"
     },
     "maiz": {
      "precio": 1.55,
@@ -697,7 +782,8 @@
      "nombre": "Maíz dulce Dia Vegecampo 3 x 140 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/conservas-caldos-y-cremas/conservas-de-verdura/p/47592"
     },
     "tortillas": {
      "precio": 1.02,
@@ -705,7 +791,8 @@
      "nombre": "Tortillas de trigo Dia Al Punto 320 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/panaderia/tortillas-de-trigo-y-pitas/p/13356"
     },
     "cebolla": {
      "precio": 1.5,
@@ -713,7 +800,8 @@
      "nombre": "Cebolla malla 1 kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/verduras/ajos-cebollas-y-puerros/p/11459"
     },
     "patata": {
      "precio": 1.89,
@@ -721,7 +809,8 @@
      "nombre": "Patatas para freir 2 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/verduras/patatas-y-zanahorias/p/248458"
     },
     "boniato": {
      "precio": 2.04,
@@ -729,7 +818,8 @@
      "nombre": "Batata unidad 800 g aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/verduras/patatas-y-zanahorias/p/60753"
     },
     "ajo": {
      "precio": 1.85,
@@ -737,7 +827,8 @@
      "nombre": "Ajos malla 250 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/verduras/ajos-cebollas-y-puerros/p/17653"
     },
     "pechuga": {
      "precio": 4.39,
@@ -745,7 +836,8 @@
      "nombre": "Filetes de pechuga de pollo amarillo Selección de Dia 550 g aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/carnes/pollo/p/43225"
     },
     "muslos": {
      "precio": 5.24,
@@ -753,7 +845,8 @@
      "nombre": "Filetes de contramuslo de pollo Selección de Dia 750 g aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/carnes/pollo/p/261364"
     },
     "picada": {
      "precio": 4.19,
@@ -761,7 +854,8 @@
      "nombre": "Carne picada de vacuno y cerdo Selección de Dia 500 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/carnes/hamburguesas-carne-picada-y-albondigas/p/261241"
     },
     "picada_pollo": {
      "precio": 2.99,
@@ -769,7 +863,8 @@
      "nombre": "Carne picada de pollo Selección de Dia 365 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/carnes/hamburguesas-carne-picada-y-albondigas/p/291140"
     },
     "lomo": {
      "precio": 3.6,
@@ -777,7 +872,8 @@
      "nombre": "Filete de cinta de lomo Selección de Dia 500 g aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/carnes/cerdo/p/290994"
     },
     "burger": {
      "precio": 3.99,
@@ -785,7 +881,8 @@
      "nombre": "Burger de pollo 6 unidades Gremlins Selección de Dia 540 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/carnes/hamburguesas-carne-picada-y-albondigas/p/313131"
     },
     "salmon": {
      "precio": 5.89,
@@ -793,7 +890,8 @@
      "nombre": "Lomos de salmón Dia Selección Mundial 250 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/pescados-y-mariscos/congelado/p/274390"
     },
     "merluza": {
      "precio": 5.6,
@@ -801,7 +899,8 @@
      "nombre": "Filetes de merluza del cabo sin piel MSC Dia Mari Marinera 600 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/congelados-y-helados/pescado-y-marisco/p/72170"
     },
     "gambas": {
      "precio": 4.76,
@@ -809,7 +908,8 @@
      "nombre": "Gambas peladas y crudas medianas Dia Mari Marinera 350 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/pescados-y-mariscos/marisco-gamba-y-calamar/p/269059"
     },
     "calamar": {
      "precio": 5.49,
@@ -817,7 +917,8 @@
      "nombre": "Calamar troceado Dia Mari Marinera 450 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/pescados-y-mariscos/marisco-gamba-y-calamar/p/286539"
     },
     "brocoli": {
      "precio": 1.79,
@@ -825,7 +926,8 @@
      "nombre": "Brócoli Dia Vegecampo 900 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/congelados-y-helados/verduras-y-patatas/p/264185"
     },
     "espinacas": {
      "precio": 0.95,
@@ -833,7 +935,8 @@
      "nombre": "Espinacas cortadas Dia Vegecampo 450 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/congelados-y-helados/verduras-y-patatas/p/263820"
     },
     "judias": {
      "precio": 1.3,
@@ -841,7 +944,8 @@
      "nombre": "Judías verdes redondas Dia Vegecampo 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/congelados-y-helados/verduras-y-patatas/p/264698"
     },
     "salteado": {
      "precio": 0.99,
@@ -849,7 +953,8 @@
      "nombre": "Salteado de verduras Dia Al Punto 400 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/congelados-y-helados/verduras-y-patatas/p/267132"
     },
     "guisantes": {
      "precio": 1.55,
@@ -857,7 +962,8 @@
      "nombre": "Guisantes finos Dia Vegecampo 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/congelados-y-helados/verduras-y-patatas/p/263266"
     },
     "huevos": {
      "precio": 3.05,
@@ -865,7 +971,8 @@
      "nombre": "Huevos grandes L de gallinas criadas en suelo Dia 12 unidades",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/huevos-leche-y-mantequilla/huevos/p/306230"
     },
     "queso": {
      "precio": 1.6,
@@ -873,7 +980,8 @@
      "nombre": "Queso mozzarella rallado Dia Láctea 200 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/quesos/rallado/p/13096"
     },
     "pimiento": {
      "precio": 1.33,
@@ -881,7 +989,8 @@
      "nombre": "Pimiento rojo unidad 350 g aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/verduras/tomates-pimientos-y-pepinos/p/74"
     },
     "calabacin": {
      "precio": 1.16,
@@ -889,7 +998,8 @@
      "nombre": "Calabacín unidad 650 g aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/verduras/calabacin-calabaza-y-berenjena/p/93"
     },
     "zanahoria": {
      "precio": 1.19,
@@ -897,7 +1007,8 @@
      "nombre": "Zanahoria 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/verduras/patatas-y-zanahorias/p/11421"
     },
     "tomate": {
      "precio": 2.96,
@@ -905,7 +1016,8 @@
      "nombre": "Tomate pera granel 900 g aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/verduras/tomates-pimientos-y-pepinos/p/45863"
     },
     "ensalada": {
      "precio": 0.99,
@@ -913,7 +1025,8 @@
      "nombre": "Ensalada 4 estaciones Dia Vegecampo 200 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/verduras/lechugas-y-hojas-verdes/p/105299"
     },
     "champi": {
      "precio": 1.69,
@@ -921,7 +1034,8 @@
      "nombre": "Champiñón laminado bandeja 250 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/verduras/setas-y-champinones/p/25857"
     },
     "limon": {
      "precio": 1.79,
@@ -929,7 +1043,8 @@
      "nombre": "Limones malla 750 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/frutas/naranjas-mandarinas-y-limones/p/11463"
     },
     "yogur": {
      "precio": 1.0,
@@ -937,7 +1052,8 @@
      "nombre": "Yogur natural Dia Láctea 6 x 125 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/yogures-y-postres/yogures-naturales-y-desnatados/p/310847"
     },
     "pan_rallado": {
      "precio": 0.85,
@@ -945,7 +1061,8 @@
      "nombre": "Pan rallado El Molino de Dia 750 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/panaderia/pan-rallado-tostado-y-picos/p/56050"
     },
     "jamon": {
      "precio": 2.5,
@@ -953,7 +1070,8 @@
      "nombre": "Jamón cocido extra Dia Nuestra Alacena 250 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/charcuteria/jamon-cocido/p/300419"
     },
     "fideos": {
      "precio": 0.8,
@@ -961,7 +1079,8 @@
      "nombre": "Fideo grueso Dia Al Diante 500 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/arroz-pastas-y-legumbres/fideos/p/290665"
     },
     "caldo_pollo": {
      "precio": 0.75,
@@ -969,7 +1088,8 @@
      "nombre": "Caldo de pollo Dia Al Punto 1 L",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/conservas-caldos-y-cremas/caldos-y-sopas/p/54127"
     },
     "caldo_pescado": {
      "precio": 0.95,
@@ -977,7 +1097,8 @@
      "nombre": "Caldo de pescado Dia Al Punto 1 L",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/conservas-caldos-y-cremas/caldos-y-sopas/p/27865"
     },
     "pavo": {
      "precio": 6.29,
@@ -985,7 +1106,8 @@
      "nombre": "Filetes de pechuga de pavo Selección de Dia 700 g aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/carnes/pavo-y-conejo/p/261349"
     },
     "fideos_arroz": {
      "precio": 1.45,
@@ -993,7 +1115,8 @@
      "nombre": "Noodles de arroz Dia Selección Mundial 200 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/arroz-pastas-y-legumbres/noodles/p/258837"
     },
     "solomillo": {
      "precio": 5.8,
@@ -1001,7 +1124,8 @@
      "nombre": "Solomillo de cerdo Selección de Dia 700 g aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/carnes/cerdo/p/11077"
     },
     "ternera": {
      "precio": 9.21,
@@ -1009,7 +1133,8 @@
      "nombre": "Filete 1º de vacuno Selección de Dia 480 g aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/carnes/vacuno/p/181288"
     },
     "alubias_rojas": {
      "precio": 0.96,
@@ -1017,7 +1142,8 @@
      "nombre": "Alubias rojas cocidas Dia Vegecampo 400 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/arroz-pastas-y-legumbres/garbanzos-y-alubias/p/210523"
     },
     "lasana": {
      "precio": 1.65,
@@ -1025,7 +1151,8 @@
      "nombre": "Placas para lasaña El pavo 200 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/arroz-pastas-y-legumbres/lasana-y-canelones/p/39200"
     },
     "bacalao": {
      "precio": 7.1,
@@ -1033,7 +1160,8 @@
      "nombre": "Filetes de bacalao MSC Dia Mari Marinera 360 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/pescados-y-mariscos/congelado/p/4542"
     },
     "teriyaki": {
      "precio": 2.0,
@@ -1041,7 +1169,8 @@
      "nombre": "Salsa teriyaki Maggi 355 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/aceites-salsas-y-especias/salsas-especiales-y-picantes/p/308326"
     },
     "nata": {
      "precio": 1.89,
@@ -1049,7 +1178,8 @@
      "nombre": "Nata para cocinar 15% M.G. Dia Láctea 3 x 200 ml",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/huevos-leche-y-mantequilla/nata/p/310686"
     },
     "mostaza": {
      "precio": 3.77,
@@ -1057,7 +1187,8 @@
      "nombre": "Mostaza Dijon original Maille 215 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/aceites-salsas-y-especias/ketchup-mayonesa-y-mostaza/p/139856"
     },
     "esparragos": {
      "precio": 3.49,
@@ -1065,7 +1196,8 @@
      "nombre": "Espárrago verde fino manojo aprox. 250 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/verduras/lechugas-y-hojas-verdes/p/181571"
     },
     "bonito": {
      "precio": 2.89,
@@ -1073,7 +1205,8 @@
      "nombre": "Bonito del norte en trozos Dia Mari Marinera 3 x 52 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/conservas-caldos-y-cremas/atun-y-bonito/p/296414"
     },
     "caballa": {
      "precio": 1.69,
@@ -1081,7 +1214,8 @@
      "nombre": "Filetes de caballa del sur en aceite de oliva Dia Mari Marinera 85 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/conservas-caldos-y-cremas/caballa-y-sardinas/p/284386"
     },
     "sardinas": {
      "precio": 2.15,
@@ -1089,7 +1223,8 @@
      "nombre": "Sardinillas en aceite de oliva Dia Mari Marinera 2 x 65 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/conservas-caldos-y-cremas/caballa-y-sardinas/p/182509"
     },
     "pan_integral": {
      "precio": 1.29,
@@ -1097,7 +1232,8 @@
      "nombre": "Pan de molde trigo integral El Molino de Dia 820 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/panaderia/pan-de-molde-y-especiales/p/266075"
     },
     "langostinos": {
      "precio": 4.92,
@@ -1105,7 +1241,8 @@
      "nombre": "Colas de gambón pelado crudo Dia Mari Marinera 200 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/pescados-y-mariscos/marisco-gamba-y-calamar/p/148888"
     },
     "masa_empanadilla": {
      "precio": 1.28,
@@ -1113,7 +1250,8 @@
      "nombre": "Masa para empanadillas y postres Buitoni 160 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/panaderia/masas-y-hojaldres/p/545"
     },
     "pasta_lentejas": {
      "precio": 1.65,
@@ -1121,7 +1259,8 @@
      "nombre": "Espirales 100% de lenteja roja Dia Al Diante 250 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/arroz-pastas-y-legumbres/macarrones-espaguetis-y-pastas-secas/p/305754"
     },
     "hummus": {
      "precio": 1.29,
@@ -1129,7 +1268,8 @@
      "nombre": "Hummus clásico Dia Al Punto 220 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/platos-preparados-y-pizzas/hummus-y-guacamoles/p/278849"
     },
     "noquis": {
      "precio": 1.0,
@@ -1137,7 +1277,8 @@
      "nombre": "Gnocchi de patata Dia Selección Mundial 500 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/arroz-pastas-y-legumbres/pastas-rellenas-y-en-salsa/p/304384"
     },
     "berenjena": {
      "precio": 0.5,
@@ -1145,7 +1286,8 @@
      "nombre": "Berenjena unidad",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/verduras/calabacin-calabaza-y-berenjena/p/190830"
     },
     "quinoa": {
      "precio": 1.67,
@@ -1153,7 +1295,8 @@
      "nombre": "Vasos de quinoa blanca y roja Brillante 2 x 125 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/arroz-pastas-y-legumbres/quinoa-couscous-y-soja/p/222177"
     },
     "dorada": {
      "precio": 7.12,
@@ -1161,7 +1304,8 @@
      "nombre": "Filetes de dorada Selección de Dia 300 g aprox.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/pescados-y-mariscos/fresco/p/298039"
     },
     "copos_maiz": {
      "precio": 1.49,
@@ -1169,7 +1313,8 @@
      "nombre": "Cereales copos de maíz corn flakes Gran Dia 500 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/galletas-cereales-y-mermeladas/cereales/p/66956"
     },
     "pesto": {
      "precio": 1.95,
@@ -1177,7 +1322,8 @@
      "nombre": "Pesto verde Dia Salseo 185 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/aceites-salsas-y-especias/salsas-de-tomate-y-pasta/p/285506"
     },
     "salchichas": {
      "precio": 1.95,
@@ -1185,7 +1331,8 @@
      "nombre": "Salchichas Frankfurt de pavo Dia Funky Frank 4 x 140 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/charcuteria/salchichas/p/312797"
     },
     "pina": {
      "precio": 2.49,
@@ -1193,7 +1340,8 @@
      "nombre": "Piña en su jugo en rodajas Dia Fruticampo 3 x 137 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/conservas-caldos-y-cremas/conservas-de-fruta/p/1807"
     },
     "leche": {
      "precio": 0.83,
@@ -1201,7 +1349,8 @@
      "nombre": "Leche semidesnatada Dia Láctea 1 L",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/huevos-leche-y-mantequilla/leche/p/504"
     },
     "calabaza": {
      "precio": 1.99,
@@ -1209,7 +1358,8 @@
      "nombre": "Calabaza cortada a trozos al vacío 500 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/verduras/calabacin-calabaza-y-berenjena/p/278899"
     },
     "gazpacho": {
      "precio": 1.59,
@@ -1217,7 +1367,8 @@
      "nombre": "Gazpacho Dia Al Punto 1 L",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/platos-preparados-y-pizzas/gazpachos-y-salmorejos/p/43231"
     },
     "anacardos": {
      "precio": 2.7,
@@ -1225,7 +1376,8 @@
      "nombre": "Anacardos al natural Dia Naturmundo 200 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/aperitivos-y-frutos-secos/frutos-secos/p/271641"
     },
     "feta": {
      "precio": 2.65,
@@ -1233,7 +1385,8 @@
      "nombre": "Queso feta D.O.P. en dados Dia Selección Mundial 150 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/quesos/fresco/p/309064"
     },
     "manzana": {
      "precio": 1.89,
@@ -1241,7 +1394,8 @@
      "nombre": "Manzana Golden 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/frutas/manzanas-y-peras/p/171233"
     },
     "pan_burger": {
      "precio": 0.99,
@@ -1249,7 +1403,8 @@
      "nombre": "Pan de hamburguesa maxi Gremlins El Molino de Dia 300 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.dia.es/panaderia/pan-para-hamburguesas-y-perritos/p/313069"
     }
    },
    "fallos": []
@@ -1264,7 +1419,8 @@
      "nombre": "Arroz Redondo Extra Origen España 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/arroz-redondo-extra-origen-espana/7022762"
     },
     "pasta": {
      "precio": 1.15,
@@ -1272,7 +1428,8 @@
      "nombre": "Macarrones Paquete 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/macarrones-paquete/7259104"
     },
     "espaguetis": {
      "precio": 1.15,
@@ -1280,7 +1437,8 @@
      "nombre": "Spaghetti Paquete 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/spaghetti-paquete/7262488"
     },
     "cuscus": {
      "precio": 1.99,
@@ -1288,7 +1446,8 @@
      "nombre": "Cous Cous 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/cous-cous/7427672"
     },
     "lentejas": {
      "precio": 0.89,
@@ -1296,7 +1455,8 @@
      "nombre": "Lenteja Pardina Cocida Frasco 400 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/lenteja-pardina-cocida-frasco/7043982"
     },
     "garbanzos": {
      "precio": 0.8,
@@ -1304,7 +1464,8 @@
      "nombre": "Garbanzo Cocido Frasco 400 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/garbanzo-cocido-frasco/7043987"
     },
     "alubias": {
      "precio": 0.75,
@@ -1312,7 +1473,8 @@
      "nombre": "Alubia Blanca Cocida Frasco 400 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/alubia-blanca-cocida-frasco/7043979"
     },
     "tomate_tri": {
      "precio": 1.0,
@@ -1320,7 +1482,8 @@
      "nombre": "Tomate Triturado Lata 800 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/tomate-triturado-lata/7029213"
     },
     "tomate_frito": {
      "precio": 0.9,
@@ -1328,7 +1491,8 @@
      "nombre": "Tomate Frito Frasco 550 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/tomate-frito-frasco/7029218"
     },
     "atun": {
      "precio": 2.7,
@@ -1336,7 +1500,8 @@
      "nombre": "Atún Claro Aceite Girasol Pack de 3 3 x 52 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/atun-claro-aceite-girasol-pack-de-3/7046092"
     },
     "coco": {
      "precio": 1.4,
@@ -1344,7 +1509,8 @@
      "nombre": "Jugo de Coco para Cocinar Lata 400 ml",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/jugo-de-coco-para-cocinar-lata/7311207"
     },
     "maiz": {
      "precio": 1.55,
@@ -1352,7 +1518,8 @@
      "nombre": "Maíz Dulce Lata Pack de 3 3 x 140 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/maiz-dulce-lata-pack-de-3/7301708"
     },
     "tortillas": {
      "precio": 1.5,
@@ -1360,7 +1527,8 @@
      "nombre": "Tortillas Wrap de Trigo 6 Unidades 360 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/tortillas-wrap-de-trigo-6-unidades/7392264"
     },
     "cebolla": {
      "precio": 1.8,
@@ -1368,7 +1536,8 @@
      "nombre": "Cebolla Seca Malla 1 kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/cebolla-seca-malla-1-kg/76018"
     },
     "patata": {
      "precio": 4.65,
@@ -1376,7 +1545,8 @@
      "nombre": "Patata España Aptas Todo Uso Culinario 3 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/patata-espana-aptas-todo-uso-culinario/303677"
     },
     "boniato": {
      "precio": 2.55,
@@ -1384,7 +1554,8 @@
      "nombre": "Boniato Rojo",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/boniato-rojo/179481"
     },
     "ajo": {
      "precio": 1.85,
@@ -1392,7 +1563,8 @@
      "nombre": "Ajos Secos Malla 250 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/ajos-secos-malla/2600815"
     },
     "pechuga": {
      "precio": 8.15,
@@ -1400,7 +1572,8 @@
      "nombre": "Filetes Pechuga de Pollo",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/filetes-pechuga-de-pollo/601609"
     },
     "muslos": {
      "precio": 7.39,
@@ -1408,7 +1581,8 @@
      "nombre": "Contramuslos de Pollo Deshuesados",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/contramuslos-de-pollo-deshuesados/5948997"
     },
     "picada": {
      "precio": 3.29,
@@ -1416,7 +1590,8 @@
      "nombre": "Preparado Picada Mixta 400 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/preparado-picada-mixta/925594"
     },
     "picada_pollo": {
      "precio": 3.35,
@@ -1424,7 +1599,8 @@
      "nombre": "Preparado Picada Pollo 400 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/preparado-picada-pollo/7234300"
     },
     "lomo": {
      "precio": 7.39,
@@ -1432,7 +1608,8 @@
      "nombre": "Filetes de Lomo Extrafinos",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/filetes-de-lomo-extrafinos/7450658"
     },
     "burger": {
      "precio": 2.65,
@@ -1440,7 +1617,8 @@
      "nombre": "Burger Meat Pollo 4 Unidades 360 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/burger-meat-pollo-4-unidades/7235617"
     },
     "salmon": {
      "precio": 21.9,
@@ -1448,7 +1626,8 @@
      "nombre": "Porciones de Salmón Rosado",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/porciones-de-salmon-rosado/7435563"
     },
     "merluza": {
      "precio": 5.39,
@@ -1456,7 +1635,8 @@
      "nombre": "Filete Merluza Cabo MSC Sin piel 400 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/filete-merluza-cabo-msc-sin-piel/7416498"
     },
     "gambas": {
      "precio": 5.99,
@@ -1464,7 +1644,8 @@
      "nombre": "Gambas Peladas Mediana 360 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/gambas-peladas-mediana/7424237"
     },
     "calamar": {
      "precio": 5.59,
@@ -1472,7 +1653,8 @@
      "nombre": "Calamar Troceado 450 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/calamar-troceado/7420177"
     },
     "brocoli": {
      "precio": 2.03,
@@ -1480,7 +1662,8 @@
      "nombre": "Brócoli 900 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/brocoli/7219483"
     },
     "espinacas": {
      "precio": 1.05,
@@ -1488,7 +1671,8 @@
      "nombre": "Espinacas Cortadas 400 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/espinacas-cortadas/7220650"
     },
     "judias": {
      "precio": 1.49,
@@ -1496,7 +1680,8 @@
      "nombre": "Judía Fina Troceada 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/judia-fina-troceada/7220648"
     },
     "salteado": {
      "precio": 1.19,
@@ -1504,7 +1689,8 @@
      "nombre": "Salteado Tradicional 450 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/salteado-tradicional/7221612"
     },
     "guisantes": {
      "precio": 1.78,
@@ -1512,7 +1698,8 @@
      "nombre": "Guisantes Finos 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/guisantes-finos/7219512"
     },
     "huevos": {
      "precio": 3.05,
@@ -1520,7 +1707,8 @@
      "nombre": "Huevos L Grandes Docena 1 Dc",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/huevos-l-grandes-docena/7098395"
     },
     "queso": {
      "precio": 1.6,
@@ -1528,7 +1716,8 @@
      "nombre": "Mozzarella Rallada Especial Pizza 200 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/mozzarella-rallada-especial-pizza/7036155"
     },
     "pimiento": {
      "precio": 2.99,
@@ -1536,7 +1725,8 @@
      "nombre": "Pimiento Rojo",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/pimiento-rojo/66290"
     },
     "calabacin": {
      "precio": 1.4,
@@ -1544,7 +1734,8 @@
      "nombre": "Calabacín Verde",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/calabacin-verde/5526694"
     },
     "zanahoria": {
      "precio": 1.0,
@@ -1552,7 +1743,8 @@
      "nombre": "Zanahoria de Mesa Bolsa 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/zanahoria-de-mesa-bolsa/4501508"
     },
     "tomate": {
      "precio": 2.4,
@@ -1560,7 +1752,8 @@
      "nombre": "Tomate Pera",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/tomate-pera/63016"
     },
     "ensalada": {
      "precio": 0.85,
@@ -1568,7 +1761,8 @@
      "nombre": "Ensalada 4 Estaciones Bolsa 250 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/ensalada-4-estaciones-bolsa/7054323"
     },
     "champi": {
      "precio": 6.6,
@@ -1576,7 +1770,8 @@
      "nombre": "Champiñón Laminado Peso Variable",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/champinon-laminado-peso-variable/7314896"
     },
     "limon": {
      "precio": 2.3,
@@ -1584,7 +1779,8 @@
      "nombre": "Limón Malla 1 Kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/limon-malla/2124360"
     },
     "yogur": {
      "precio": 0.75,
@@ -1592,7 +1788,8 @@
      "nombre": "Yogur Natural Pack de 4 Unidades 4 x 125 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/yogur-natural-pack-de-4-unidades/7340888"
     },
     "pan_rallado": {
      "precio": 0.6,
@@ -1600,7 +1797,8 @@
      "nombre": "Pan Rallado Clasico Paquete 500 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/pan-rallado-clasico-paquete/7050516"
     },
     "jamon": {
      "precio": 1.6,
@@ -1608,7 +1806,8 @@
      "nombre": "Jamón Cocido Extra Finas Lonchas 160 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/jamon-cocido-extra-finas-lonchas/7293749"
     },
     "fideos": {
      "precio": 1.2,
@@ -1616,7 +1815,8 @@
      "nombre": "Fideo 4 Paquete 450 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/fideo-4-paquete/7364979"
     },
     "caldo_pollo": {
      "precio": 0.75,
@@ -1624,7 +1824,8 @@
      "nombre": "Caldo Líquido Casero de Pollo  Brik 1 L",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/caldo-liquido-casero-de-pollo-brik/7069292"
     },
     "caldo_pescado": {
      "precio": 0.95,
@@ -1632,7 +1833,8 @@
      "nombre": "Caldo Líquido Pescado Brik 1 L",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/caldo-liquido-pescado-brik/7069297"
     },
     "pavo": {
      "precio": 8.99,
@@ -1640,7 +1842,8 @@
      "nombre": "Pechuga de Pavo Fileteada",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/pechuga-de-pavo-fileteada/5848916"
     },
     "burger_pavo": {
      "precio": 2.75,
@@ -1648,7 +1851,8 @@
      "nombre": "Burger Meat Pollo y Pavo 240 Gr",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/burger-meat-pollo-y-pavo/7440449"
     },
     "fideos_arroz": {
      "precio": 1.75,
@@ -1656,7 +1860,8 @@
      "nombre": "Tallarines de Arroz 250 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/tallarines-de-arroz/7250314"
     },
     "solomillo": {
      "precio": 8.19,
@@ -1664,7 +1869,8 @@
      "nombre": "Solomillo de Cerdo",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/solomillo-de-cerdo/3339975"
     },
     "ternera": {
      "precio": 18.5,
@@ -1672,7 +1878,8 @@
      "nombre": "Filete 1ª de Añojo Plancha- Freír",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/filete-1-de-anojo-plancha--freir/7307304"
     },
     "alubias_rojas": {
      "precio": 1.59,
@@ -1680,7 +1887,8 @@
      "nombre": "Alubia Roja Cocida Frasco 400 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/alubia-roja-cocida-frasco/7022473"
     },
     "lasana": {
      "precio": 1.65,
@@ -1688,7 +1896,8 @@
      "nombre": "Lasaña Fácil Precocida Caja 18 Placas 200 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/lasana-facil-precocida-caja-18-placas/7024578"
     },
     "bacalao": {
      "precio": 7.99,
@@ -1696,7 +1905,8 @@
      "nombre": "Porciones de Bacalao S/piel en su punto de sal 400 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/porciones-de-bacalao-s-piel-en-su-punto-de-sal/7423465"
     },
     "emperador": {
      "precio": 16.55,
@@ -1704,7 +1914,8 @@
      "nombre": "Rodaja Emperador",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/rodaja-emperador/7434256"
     },
     "teriyaki": {
      "precio": 2.79,
@@ -1712,7 +1923,8 @@
      "nombre": "Salsa Teriyaki Botella 300 ml",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/salsa-teriyaki-botella/7420656"
     },
     "nata": {
      "precio": 1.85,
@@ -1720,7 +1932,8 @@
      "nombre": "Nata para Cocinar Minibrik Pack de 3 3 x 200 ml",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/nata-para-cocinar-minibrik-pack-de-3/7264096"
     },
     "mostaza": {
      "precio": 3.69,
@@ -1728,7 +1941,8 @@
      "nombre": "Mostaza Dijón Originale Frasco 215 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/mostaza-dijon-originale-frasco/382226"
     },
     "edamame": {
      "precio": 1.72,
@@ -1736,7 +1950,8 @@
      "nombre": "Edamame en Grano 250 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/edamame-en-grano/7317956"
     },
     "esparragos": {
      "precio": 4.64,
@@ -1744,7 +1959,8 @@
      "nombre": "Espárrago Verde 300 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/esparrago-verde/7352438"
     },
     "bonito": {
      "precio": 1.85,
@@ -1752,7 +1968,8 @@
      "nombre": "Bonito del Norte en Aceite de Oliva 80 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/bonito-del-norte-en-aceite-de-oliva/7462906"
     },
     "caballa": {
      "precio": 1.6,
@@ -1760,7 +1977,8 @@
      "nombre": "Filetes de Caballa en Aceite de Oliva 84 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/filetes-de-caballa-en-aceite-de-oliva/7387595"
     },
     "sardinas": {
      "precio": 2.15,
@@ -1768,7 +1986,8 @@
      "nombre": "Sardinillas en Aceite de Oliva Pack 2 2 x 65 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/sardinillas-en-aceite-de-oliva-pack-2/7325793"
     },
     "pan_integral": {
      "precio": 0.9,
@@ -1776,7 +1995,8 @@
      "nombre": "Pan Molde 100% Integral 0% Azúcares Añadidos 460 Gr",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/pan-molde-100-integral-0-azucares-anadidos/7069800"
     },
     "langostinos": {
      "precio": 4.4,
@@ -1784,7 +2004,8 @@
      "nombre": "Cola de Langostino Pelada y Cruda 180 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/cola-de-langostino-pelada-y-cruda/7407500"
     },
     "masa_empanadilla": {
      "precio": 1.19,
@@ -1792,7 +2013,8 @@
      "nombre": "Masa Empanadillas 215 Gr",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/masa-empanadillas/7484483"
     },
     "pasta_lentejas": {
      "precio": 1.65,
@@ -1800,7 +2022,8 @@
      "nombre": "Pasta de Lenteja Roja 250 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/pasta-de-lenteja-roja/7417186"
     },
     "hummus": {
      "precio": 1.05,
@@ -1808,7 +2031,8 @@
      "nombre": "Hummus Clásico 220 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/hummus-clasico/7470284"
     },
     "noquis": {
      "precio": 1.0,
@@ -1816,7 +2040,8 @@
      "nombre": "Gnocchis Patatas 500 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/gnocchis-patatas/7437283"
     },
     "berenjena": {
      "precio": 2.3,
@@ -1824,7 +2049,8 @@
      "nombre": "Berenjena Negra",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/berenjena-negra/5526686"
     },
     "quinoa": {
      "precio": 1.55,
@@ -1832,7 +2058,8 @@
      "nombre": "Quinoa Roja y Blanca Vasitos 2 x 125 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/quinoa-roja-y-blanca-vasitos/7270044"
     },
     "dorada": {
      "precio": 24.75,
@@ -1840,7 +2067,8 @@
      "nombre": "Filete de Dorada Crianza de España",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/filete-de-dorada-crianza-de-espana/7269967"
     },
     "copos_maiz": {
      "precio": 2.15,
@@ -1848,7 +2076,8 @@
      "nombre": "Corn Flakes Classic sin Azúcar y sin Gluten 300 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/corn-flakes-classic-sin-azucar-y-sin-gluten/7256873"
     },
     "pesto": {
      "precio": 1.95,
@@ -1856,7 +2085,8 @@
      "nombre": "Salsa Pesto 185 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/salsa-pesto/7283869"
     },
     "salchichas": {
      "precio": 1.65,
@@ -1864,7 +2094,8 @@
      "nombre": "Salchichas de Pavo 7 Unidades 3 x 140 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/salchichas-de-pavo-7-unidades/7105380"
     },
     "pina": {
      "precio": 2.1,
@@ -1872,7 +2103,8 @@
      "nombre": "Piña en su Jugo Pack de 3 3 x 140 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/pina-en-su-jugo-pack-de-3/7059426"
     },
     "leche": {
      "precio": 0.83,
@@ -1880,7 +2112,8 @@
      "nombre": "Leche Semidesnatada Brik 1 L",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/leche-semidesnatada-brik/7080604"
     },
     "calabaza": {
      "precio": 1.82,
@@ -1888,7 +2121,8 @@
      "nombre": "Calabaza Troceada Bandeja 400 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/calabaza-troceada-bandeja/7234552"
     },
     "gazpacho": {
      "precio": 1.6,
@@ -1896,7 +2130,8 @@
      "nombre": "Gazpacho Tradicional 1 L",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/gazpacho-tradicional/7150308"
     },
     "tinta": {
      "precio": 2.15,
@@ -1904,7 +2139,8 @@
      "nombre": "Tinta de Sepia 8 bolsitas 32 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/tinta-de-sepia-8-bolsitas/7017684"
     },
     "anacardos": {
      "precio": 2.7,
@@ -1912,7 +2148,8 @@
      "nombre": "Anacardos Crudos 200 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/anacardos-crudos/7442135"
     },
     "feta": {
      "precio": 3.15,
@@ -1920,7 +2157,8 @@
      "nombre": "Queso Feta D.O.P 150 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/queso-feta-dop/7486850"
     },
     "manzana": {
      "precio": 2.69,
@@ -1928,7 +2166,8 @@
      "nombre": "Manzana Golden Bolsa 1,5 Kg",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/manzana-golden-bolsa/7487775"
     },
     "pan_burger": {
      "precio": 0.85,
@@ -1936,7 +2175,8 @@
      "nombre": "Pan Maxi Burger 4 Unidades 300 Gr",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://tienda.consum.es/es/p/pan-maxi-burger-4-unidades/7069821"
     }
    },
    "fallos": []
@@ -1951,7 +2191,8 @@
      "nombre": "Arroz extra EROSKI basic, paquete 1 kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/300434-arroz-extra-eroski-basic-paquete-1-kg/"
     },
     "pasta": {
      "precio": 1.15,
@@ -1959,7 +2200,8 @@
      "nombre": "Macarrones EROSKI basic, paquete 1 kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/349183-macarrones-eroski-basic-paquete-1-kg/"
     },
     "espaguetis": {
      "precio": 0.8,
@@ -1967,7 +2209,8 @@
      "nombre": "Spaghetti EROSKI basic, paquete 500 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/367391-spaghetti-eroski-basic-paquete-500-g/"
     },
     "cuscus": {
      "precio": 1.46,
@@ -1975,7 +2218,8 @@
      "nombre": "Cous cous bio EROSKI BIO/ECO, caja 500 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/24300741-cous-cous-bio-eroski-bioeco-caja-500-g/"
     },
     "lentejas": {
      "precio": 0.9,
@@ -1983,7 +2227,8 @@
      "nombre": "Lentejas cocidas EROSKI, frasco 400 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/25948431-lentejas-cocidas-eroski-frasco-400-g/"
     },
     "garbanzos": {
      "precio": 0.8,
@@ -1991,7 +2236,8 @@
      "nombre": "Garbanzo cocido EROSKI, frasco 400 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/25948423-garbanzo-cocido-eroski-frasco-400-g/"
     },
     "alubias": {
      "precio": 0.75,
@@ -1999,7 +2245,8 @@
      "nombre": "Alubia blanca cocida EROSKI, frasco 400 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/25948407-alubia-blanca-cocida-eroski-frasco-400-g/"
     },
     "tomate_tri": {
      "precio": 1.0,
@@ -2007,7 +2254,8 @@
      "nombre": "Tomate triturado EROSKI basic, lata 800 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/320267-tomate-triturado-eroski-basic-lata-800-g/"
     },
     "tomate_frito": {
      "precio": 0.9,
@@ -2015,7 +2263,8 @@
      "nombre": "Tomate frito EROSKI, frasco 550 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/316216-tomate-frito-eroski-frasco-550-g-/"
     },
     "atun": {
      "precio": 2.7,
@@ -2023,7 +2272,8 @@
      "nombre": "Atún claro en aceite de girasol EROSKI, pack 3x70 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/26994376-atun-claro-en-aceite-de-girasol-eroski-pack-3x70-g/"
     },
     "coco": {
      "precio": 2.75,
@@ -2031,7 +2281,8 @@
      "nombre": "Leche de coco baja en grasa TIGER KHAN, lata 400 ml",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/24313124-leche-de-coco-baja-en-grasa-tiger-khan-lata-400-ml/"
     },
     "maiz": {
      "precio": 1.55,
@@ -2039,7 +2290,8 @@
      "nombre": "Maíz dulce EROSKI, pack 3x140 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/22578157-maiz-dulce-eroski-pack-3x140-g/"
     },
     "tortillas": {
      "precio": 1.02,
@@ -2047,7 +2299,8 @@
      "nombre": "Tortillas de trigo EROSKI, paquete 320 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/24552002-tortillas-de-trigo-eroski-paquete-320-g/"
     },
     "cebolla": {
      "precio": 1.7,
@@ -2055,7 +2308,8 @@
      "nombre": "Cebolla blanca Buti EROSKI, malla 1 kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/1934785-cebolla-blanca-buti-eroski-malla-1-kg/"
     },
     "patata": {
      "precio": 4.99,
@@ -2063,7 +2317,8 @@
      "nombre": "Patata EUSKO LABEL EROSKI NATUR, malla 3 kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/19678283-patata-eusko-label-eroski-natur-malla-3-kg/"
     },
     "boniato": {
      "precio": 2.55,
@@ -2071,7 +2326,8 @@
      "nombre": "Boniato, al peso, compra mínima 1 kg",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/179481-boniato-al-peso-compra-minima-1-kg/"
     },
     "ajo": {
      "precio": 1.99,
@@ -2079,7 +2335,8 @@
      "nombre": "Ajo, malla 250 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/26201855-ajo-malla-250-g/"
     },
     "pechuga": {
      "precio": 4.31,
@@ -2087,7 +2344,8 @@
      "nombre": "Filetes de pechuga de pollo EROSKI, bandeja aprox. 560 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/601609-filetes-de-pechuga-de-pollo-eroski-bandeja-aprox-560-g/"
     },
     "muslos": {
      "precio": 5.0,
@@ -2095,7 +2353,8 @@
      "nombre": "Contramuslo deshuesado pollo s/piel EROSKI NATUR, bandeja aprox. 500 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/5151980-contramuslo-deshuesado-pollo-spiel-eroski-natur-bandeja-aprox-500-g/"
     },
     "picada": {
      "precio": 7.99,
@@ -2103,7 +2362,8 @@
      "nombre": "Picada mixta cerdo-vacuno burger meat XXL EROSKI, bandeja 1 kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/18960674-picada-mixta-cerdo-vacuno-burger-meat-xxl-eroski-bandeja-1-kg/"
     },
     "picada_pollo": {
      "precio": 3.95,
@@ -2111,7 +2371,8 @@
      "nombre": "Picada de pollo EROSKI, bandeja 500 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/26527705-picada-de-pollo-eroski-bandeja-500-g/"
     },
     "lomo": {
      "precio": 4.48,
@@ -2119,7 +2380,8 @@
      "nombre": "Filete de lomo de cerdo, al corte, compra mínima 500 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/10473783-filete-de-lomo-de-cerdo-al-corte-compra-minima-500-g/"
     },
     "burger": {
      "precio": 2.75,
@@ -2127,7 +2389,8 @@
      "nombre": "Hamburguesa de pollo EROSKI, bandeja 360 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/22396832-hamburguesa-de-pollo-eroski-bandeja-360-g/"
     },
     "salmon": {
      "precio": 6.75,
@@ -2135,7 +2398,8 @@
      "nombre": "Supremas de salmón ASC apto consumo crudo KOLD FIN, sobre 250 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/27501089-supremas-de-salmon-asc-apto-consumo-crudo-kold-fin-sobre-250-g/"
     },
     "merluza": {
      "precio": 8.99,
@@ -2143,7 +2407,8 @@
      "nombre": "Filete de merluza sin piel EROSKI BASIC, bolsa 900 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/13116058-filete-de-merluza-sin-piel-eroski-basic-bolsa-900-g/"
     },
     "gambas": {
      "precio": 4.36,
@@ -2151,7 +2416,8 @@
      "nombre": "Gamba pelada mediana EROSKI BASIC, bolsa 320 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/17816141-gamba-pelada-mediana-eroski-basic-bolsa-320-g/"
     },
     "calamar": {
      "precio": 5.58,
@@ -2159,7 +2425,8 @@
      "nombre": "Calamar troceado EROSKI, bolsa 450 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/26810887-calamar-troceado-eroski-bolsa-450-g/"
     },
     "espinacas": {
      "precio": 2.6,
@@ -2167,7 +2434,8 @@
      "nombre": "Espinacas cortadas EROSKI, bolsa 1 kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/25603077-espinacas-cortadas-eroski-bolsa-1-kg/"
     },
     "judias": {
      "precio": 1.3,
@@ -2175,7 +2443,8 @@
      "nombre": "Judías verdes redondas EROSKI, bolsa 1 kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/19519115-judias-verdes-redondas-eroski-bolsa-1-kg/"
     },
     "salteado": {
      "precio": 1.16,
@@ -2183,7 +2452,8 @@
      "nombre": "Salteado de judía-berenjena-zanahoria EROSKI, bolsa 450 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/8555559-salteado-de-judia-berenjena-zanahoria-eroski-bolsa-450-g/"
     },
     "guisantes": {
      "precio": 1.55,
@@ -2191,7 +2461,8 @@
      "nombre": "Guisante EROSKI, bolsa 1 kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/19519073-guisante-eroski-bolsa-1-kg/"
     },
     "huevos": {
      "precio": 3.23,
@@ -2199,7 +2470,8 @@
      "nombre": "Huevo fresco L suelo EROSKI, cartón 1 docena",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/19482108-huevo-fresco-l-suelo-eroski-carton-1-docena/"
     },
     "queso": {
      "precio": 1.6,
@@ -2207,7 +2479,8 @@
      "nombre": "Queso rallado Mozzarella para pizza EROSKI, bolsa 200 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/24928525-queso-rallado-mozzarella-para-pizza-eroski-bolsa-200-g/"
     },
     "pimiento": {
      "precio": 1.45,
@@ -2215,7 +2488,8 @@
      "nombre": "Pimiento rojo, al peso, compra mínima 500 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/24993636-pimiento-rojo-al-peso-compra-minima-500-g/"
     },
     "calabacin": {
      "precio": 0.95,
@@ -2223,7 +2497,8 @@
      "nombre": "Calabacín verde, al peso, compra mínima 500 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/26794016-calabacin-verde-al-peso-compra-minima-500-g/"
     },
     "zanahoria": {
      "precio": 1.0,
@@ -2231,7 +2506,8 @@
      "nombre": "Zanahoria EROSKI, bolsa 1 kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/4501508-zanahoria-eroski-bolsa-1-kg/"
     },
     "tomate": {
      "precio": 1.1,
@@ -2239,7 +2515,8 @@
      "nombre": "Tomate de Pera, al peso, compra mínima 500 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/63016-tomate-de-pera-al-peso-compra-minima-500-g/"
     },
     "ensalada": {
      "precio": 0.85,
@@ -2247,7 +2524,8 @@
      "nombre": "Ensalada 4 estaciones EROSKI, bolsa 250 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/18297986-ensalada-4-estaciones-eroski-bolsa-250-g/"
     },
     "champi": {
      "precio": 2.11,
@@ -2255,7 +2533,8 @@
      "nombre": "Champiñón laminado EROSKI, bandeja 250 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/1404-champinon-laminado-eroski-bandeja-250-g/"
     },
     "limon": {
      "precio": 2.3,
@@ -2263,7 +2542,8 @@
      "nombre": "Limón, malla 1 kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/10935534-limon-malla-1-kg/"
     },
     "yogur": {
      "precio": 1.33,
@@ -2271,7 +2551,8 @@
      "nombre": "Yogur natural EROSKI BASIC, pack 8x125 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/4810149-yogur-natural-eroski-basic-pack-8x125-g/"
     },
     "pan_rallado": {
      "precio": 0.85,
@@ -2279,7 +2560,8 @@
      "nombre": "Pan rallado EROSKI BASIC, paquete 750 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/11798063-pan-rallado-eroski-basic-paquete-750-g/"
     },
     "jamon": {
      "precio": 2.25,
@@ -2287,7 +2569,8 @@
      "nombre": "Jamón cocido extra EROSKI MAESTRO MAESTRO, sobre 200 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/16845380-jamon-cocido-extra-eroski-maestro-maestro-sobre-200-g/"
     },
     "fideos": {
      "precio": 0.8,
@@ -2295,7 +2578,8 @@
      "nombre": "Fideo grueso EROSKI, paquete 500 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/2685840-fideo-grueso-eroski-paquete-500-g/"
     },
     "caldo_pollo": {
      "precio": 0.75,
@@ -2303,7 +2587,8 @@
      "nombre": "Caldo de pollo EROSKI, brik 1 litro",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/27187707-caldo-de-pollo-eroski-brik-1-litro/"
     },
     "caldo_pescado": {
      "precio": 0.95,
@@ -2311,7 +2596,8 @@
      "nombre": "Caldo de pescado EROSKI, brik 1 litro",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/8581928-caldo-de-pescado-eroski-brik-1-litro/"
     },
     "pavo": {
      "precio": 5.93,
@@ -2319,7 +2605,8 @@
      "nombre": "Pechuga fileteada de pavo al vacío EROSKI, bandeja peso aprox. 600 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/14894596-pechuga-fileteada-de-pavo-al-vacio-eroski-bandeja-peso-aprox-600-g/"
     },
     "burger_pavo": {
      "precio": 3.39,
@@ -2327,7 +2614,8 @@
      "nombre": "Hamburguesa de pavo EROSKI, 4 uds., bandeja 360 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/13163159-hamburguesa-de-pavo-eroski-4-uds-bandeja-360-g/"
     },
     "fideos_arroz": {
      "precio": 2.95,
@@ -2335,7 +2623,8 @@
      "nombre": "Fideos de arroz GO-TAN, paquete 250 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/11323110-fideos-de-arroz-go-tan-paquete-250-g/"
     },
     "solomillo": {
      "precio": 4.25,
@@ -2343,7 +2632,8 @@
      "nombre": "Solomillo de cerdo al vacío, sobre aprox. 500 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/2946119-solomillo-de-cerdo-al-vacio-sobre-aprox-500-g/"
     },
     "ternera": {
      "precio": 8.0,
@@ -2351,7 +2641,8 @@
      "nombre": "Filete de ternera 1A al vacío, bandeja aprox. 390 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/15936404-filete-de-ternera-1a-al-vacio-bandeja-aprox-390-g/"
     },
     "alubias_rojas": {
      "precio": 1.69,
@@ -2359,7 +2650,8 @@
      "nombre": "Alubia roja cocida LUENGO, frasco 400 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/11851607-alubia-roja-cocida-luengo-frasco-400-g-/"
     },
     "lasana": {
      "precio": 1.09,
@@ -2367,7 +2659,8 @@
      "nombre": "Placas precocidas para lasaña EROSKI, caja 250 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/19640317-placas-precocidas-para-lasana-eroski-caja-250-g/"
     },
     "bacalao": {
      "precio": 7.29,
@@ -2375,7 +2668,8 @@
      "nombre": "Filete de bacalao congelado EROSKI, bandeja 360 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/26787630-filete-de-bacalao-congelado-eroski-bandeja-360-g/"
     },
     "emperador": {
      "precio": 4.3,
@@ -2383,7 +2677,8 @@
      "nombre": "Rodaja de emperador SAN MARCO, bandeja aprox. 200 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/26728220-rodaja-de-emperador-san-marco-bandeja-aprox-200-g/"
     },
     "teriyaki": {
      "precio": 2.5,
@@ -2391,7 +2686,8 @@
      "nombre": "Salsa teriyaki MAGGI, frasco 355 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/26903914-salsa-teriyaki-maggi-frasco-355-g/"
     },
     "nata": {
      "precio": 2.49,
@@ -2399,7 +2695,8 @@
      "nombre": "Nata ligera para cocinar ASTURIANA, brik 500 ml",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/16619108-nata-ligera-para-cocinar-asturiana-brik-500-ml/"
     },
     "mostaza": {
      "precio": 3.69,
@@ -2407,7 +2704,8 @@
      "nombre": "Mostaza de Dijon MAILLE, frasco 215 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/382226-mostaza-de-dijon-maille-frasco-215-g/"
     },
     "esparragos": {
      "precio": 2.95,
@@ -2415,7 +2713,8 @@
      "nombre": "Espárrago verde fino, manojo 250 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/8521759-esparrago-verde-fino-manojo-250-g/"
     },
     "bonito": {
      "precio": 8.45,
@@ -2423,7 +2722,8 @@
      "nombre": "Bonito del norte en aceite de oliva EROSKI, frasco 400 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/1391739-bonito-del-norte-en-aceite-de-oliva-eroski-frasco-400-g-/"
     },
     "caballa": {
      "precio": 4.49,
@@ -2431,7 +2731,8 @@
      "nombre": "Caballa en aceite de oliva ALBO, 3+1 ud, pack 260 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/27330885-caballa-en-aceite-de-oliva-albo-31-ud-pack-260-g/"
     },
     "sardinas": {
      "precio": 1.08,
@@ -2439,7 +2740,8 @@
      "nombre": "Sardina en aceite de oliva 3/5 piezas EROSKI, lata 115 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/2294171-sardina-en-aceite-de-oliva-35-piezas-eroski-lata-115-g/"
     },
     "pan_integral": {
      "precio": 0.9,
@@ -2447,7 +2749,8 @@
      "nombre": "Pan de molde integral con corteza EROSKI, paquete 460 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/22444046-pan-de-molde-integral-con-corteza-eroski-paquete-460-g/"
     },
     "langostinos": {
      "precio": 5.29,
@@ -2455,7 +2758,8 @@
      "nombre": "Langostino vannamei pelado crudo PESCANOVA, bandeja 180 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/25268434-langostino-vannamei-pelado-crudo-pescanova-bandeja-180-g/"
     },
     "masa_empanadilla": {
      "precio": 1.9,
@@ -2463,7 +2767,8 @@
      "nombre": "Oblea para empanadilla BUITONI, paquete 280 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/220913-oblea-para-empanadilla-buitoni-paquete-280-g/"
     },
     "pasta_lentejas": {
      "precio": 1.75,
@@ -2471,7 +2776,8 @@
      "nombre": "Pasta Strozzapreti de lentejas DALLA COSTA, paquete 250 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/25960139-pasta-strozzapreti-de-lentejas-dalla-costa-paquete-250-g/"
     },
     "hummus": {
      "precio": 1.05,
@@ -2479,7 +2785,8 @@
      "nombre": "Hummus EROSKI BASIC, tarrina 240 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/26460402-hummus-eroski-basic-tarrina-240-g/"
     },
     "noquis": {
      "precio": 1.99,
@@ -2487,7 +2794,8 @@
      "nombre": "Gnocchi di patate LA MOLISANA, paquete 500 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/23437312-gnocchi-di-patate-la-molisana-paquete-500-g/"
     },
     "berenjena": {
      "precio": 1.2,
@@ -2495,7 +2803,8 @@
      "nombre": "Berenjena negra, al peso, compra mínima 500 g",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/26793992-berenjena-negra-al-peso-compra-minima-500-g/"
     },
     "quinoa": {
      "precio": 1.56,
@@ -2503,7 +2812,8 @@
      "nombre": "Vasito de quinoa 100% BRILLANTE, pack 2x125 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/19100874-vasito-de-quinoa-100-brillante-pack-2x125-g/"
     },
     "dorada": {
      "precio": 5.95,
@@ -2511,7 +2821,8 @@
      "nombre": "Dorada en filete con piel y sin espinas EROSKI, sobre 180 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/26810861-dorada-en-filete-con-piel-y-sin-espinas-eroski-sobre-180-g/"
     },
     "copos_maiz": {
      "precio": 2.65,
@@ -2519,7 +2830,8 @@
      "nombre": "Corn Flakes classic sin azúcar ESGIR, paquete 300 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/18724377-corn-flakes-classic-sin-azucar-esgir-paquete-300-g/"
     },
     "pesto": {
      "precio": 1.95,
@@ -2527,7 +2839,8 @@
      "nombre": "Pesto genovese EROSKI, frasco 190 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/27268515-pesto-genovese-eroski-frasco-190-g/"
     },
     "salchichas": {
      "precio": 1.29,
@@ -2535,7 +2848,8 @@
      "nombre": "Salchichas de pollo y pavo WUDY, sobre 300 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/848036-salchichas-de-pollo-y-pavo-wudy-sobre-300-g/"
     },
     "pina": {
      "precio": 2.1,
@@ -2543,7 +2857,8 @@
      "nombre": "Piña en rodaja en su jugo EROSKI, pack 3x137 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/8544769-pina-en-rodaja-en-su-jugo-eroski-pack-3x137-g/"
     },
     "leche": {
      "precio": 0.83,
@@ -2551,7 +2866,8 @@
      "nombre": "Leche semidesnatada BOMILK, brik 1 litro",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/26084368-leche-semidesnatada-bomilk-brik-1-litro/"
     },
     "calabaza": {
      "precio": 3.15,
@@ -2559,7 +2875,8 @@
      "nombre": "Calabaza limpia en trozos EROSKI, bolsa 750 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/23689490-calabaza-limpia-en-trozos-eroski-bolsa-750-g/"
     },
     "gazpacho": {
      "precio": 2.19,
@@ -2567,7 +2884,8 @@
      "nombre": "Gazpacho tradicional EROSKI, brik 1 litro",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/5084348-gazpacho-tradicional-eroski-brik-1-litro/"
     },
     "tinta": {
      "precio": 1.15,
@@ -2575,7 +2893,8 @@
      "nombre": "Tinta de sepia MARNATURA, pack 4x4 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/9492117-tinta-de-sepia-marnatura-pack-4x4-g/"
     },
     "anacardos": {
      "precio": 2.49,
@@ -2583,7 +2902,8 @@
      "nombre": "Anacardo crudo EROSKI, bolsa 200 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/23245947-anacardo-crudo-eroski-bolsa-200-g/"
     },
     "feta": {
      "precio": 3.88,
@@ -2591,7 +2911,8 @@
      "nombre": "Queso feta D.O.P. ISLOS, tarrina 150 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/25459884-queso-feta-dop-islos-tarrina-150-g/"
     },
     "manzana": {
      "precio": 2.7,
@@ -2599,7 +2920,8 @@
      "nombre": "Manzana Golden, bolsa 1,5 kg",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/24918120-manzana-golden-bolsa-15-kg/"
     },
     "pan_burger": {
      "precio": 0.85,
@@ -2607,7 +2929,8 @@
      "nombre": "Pan hamburguesa Maxiburguers EROSKI, 4 unid., paquete 300 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://supermercado.eroski.es/es/productdetail/15700891-pan-hamburguesa-maxiburguers-eroski-4-unid-paquete-300-g/"
     }
    },
    "fallos": [
@@ -2630,7 +2953,8 @@
      "nombre": "BONPREU Arròs extra",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-arros-extra/84755"
     },
     "pasta": {
      "precio": 1.15,
@@ -2638,7 +2962,8 @@
      "nombre": "BONPREU Macarrons gruixuts",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-macarrons-gruixuts/79534"
     },
     "espaguetis": {
      "precio": 1.15,
@@ -2646,7 +2971,8 @@
      "nombre": "BONPREU Espaguetis",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-espaguetis/78267"
     },
     "cuscus": {
      "precio": 1.99,
@@ -2654,7 +2980,8 @@
      "nombre": "BACCHINI Cuscús precuit",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bacchini-cuscos-precuit/15810"
     },
     "lentejas": {
      "precio": 0.89,
@@ -2662,7 +2989,8 @@
      "nombre": "BONPREU Llenties cuites",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-llenties-cuites/17744"
     },
     "garbanzos": {
      "precio": 0.8,
@@ -2670,7 +2998,8 @@
      "nombre": "BONPREU Cigrons cuits extra",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-cigrons-cuits-extra/17785"
     },
     "alubias": {
      "precio": 0.75,
@@ -2678,7 +3007,8 @@
      "nombre": "BONPREU Mongetes cuites extra",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-mongetes-cuites-extra/17690"
     },
     "tomate_tri": {
      "precio": 0.99,
@@ -2686,7 +3016,8 @@
      "nombre": "BONPREU Tomàquet triturat extra",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-tomaquet-triturat-extra/59481"
     },
     "tomate_frito": {
      "precio": 0.89,
@@ -2694,7 +3025,8 @@
      "nombre": "BONPREU Tomàquet fregit",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-tomaquet-fregit/60771"
     },
     "atun": {
      "precio": 4.2,
@@ -2702,7 +3034,8 @@
      "nombre": "BONPREU Tonyina clara en oli de gira-sol",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-tonyina-clara-en-oli-de-gira-sol/58136"
     },
     "coco": {
      "precio": 1.95,
@@ -2710,7 +3043,8 @@
      "nombre": "KARA Llet de coco",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/kara-llet-de-coco/92262"
     },
     "maiz": {
      "precio": 1.55,
@@ -2718,7 +3052,8 @@
      "nombre": "BONPREU Blat de moro dolç",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-blat-de-moro-dolc/29864"
     },
     "tortillas": {
      "precio": 0.99,
@@ -2726,7 +3061,8 @@
      "nombre": "BONPREU Tortilles de blat",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-tortilles-de-blat/24241"
     },
     "cebolla": {
      "precio": 1.29,
@@ -2734,7 +3070,8 @@
      "nombre": "LA COLLITA Ceba seca Km0  en malla d'1 kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-ceba-seca-km0-en-malla-d-1-kg/07375"
     },
     "patata": {
      "precio": 5.49,
@@ -2742,7 +3079,8 @@
      "nombre": "LA COLLITA Patata blanca bossa 4 kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-patata-blanca-bossa-4-kg/04657"
     },
     "boniato": {
      "precio": 2.29,
@@ -2750,7 +3088,8 @@
      "nombre": " Moniato 1u.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/moniato-1u/08728"
     },
     "ajo": {
      "precio": 1.89,
@@ -2758,7 +3097,8 @@
      "nombre": "LA COLLITA Alls secs en malla de 250 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-alls-secs-en-malla-de-250-g/18002"
     },
     "pechuga": {
      "precio": 9.99,
@@ -2766,7 +3106,8 @@
      "nombre": "BONPREU Filet de pollastre",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-filet-de-pollastre/03763"
     },
     "muslos": {
      "precio": 8.95,
@@ -2774,7 +3115,8 @@
      "nombre": "BONPREU Cuixa de pollastre desossada",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-cuixa-de-pollastre-desossada/01734"
     },
     "picada": {
      "precio": 5.65,
@@ -2782,7 +3124,8 @@
      "nombre": "BONPREU Preparat de porc i vedella",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-preparat-de-porc-i-vedella/43192"
     },
     "picada_pollo": {
      "precio": 3.25,
@@ -2790,7 +3133,8 @@
      "nombre": "BONPREU Preparat de carn picada de pollastre",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-preparat-de-carn-picada-de-pollastre/31885"
     },
     "lomo": {
      "precio": 9.85,
@@ -2798,7 +3142,8 @@
      "nombre": "BONPREU Llom de porc extra fi",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-llom-de-porc-extra-fi/55251"
     },
     "burger": {
      "precio": 5.99,
@@ -2806,7 +3151,8 @@
      "nombre": "BONPREU Burger meat de pollastre",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-burger-meat-de-pollastre/54357"
     },
     "salmon": {
      "precio": 5.95,
@@ -2814,7 +3160,8 @@
      "nombre": "EXKIMO Salmó sense pell",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/exkimo-salmo-sense-pell/24826"
     },
     "merluza": {
      "precio": 8.95,
@@ -2822,7 +3169,8 @@
      "nombre": "BONPREU Filets  de lluç del Cap sense pell",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-filets-de-lluc-del-cap-sense-pell/76608"
     },
     "gambas": {
      "precio": 4.99,
@@ -2830,7 +3178,8 @@
      "nombre": "IFA Gamba pelada crua mitjana",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/ifa-gamba-pelada-crua-mitjana/27125"
     },
     "calamar": {
      "precio": 4.49,
@@ -2838,7 +3187,8 @@
      "nombre": "BONPREU Calamar trossejat",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-calamar-trossejat/39721"
     },
     "brocoli": {
      "precio": 2.29,
@@ -2846,7 +3196,8 @@
      "nombre": "IFA Bròcoli",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/ifa-brocoli/89668"
     },
     "espinacas": {
      "precio": 0.95,
@@ -2854,7 +3205,8 @@
      "nombre": "BONPREU Espinacs",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-espinacs/14186"
     },
     "judias": {
      "precio": 1.55,
@@ -2862,7 +3214,8 @@
      "nombre": "BONPREU Mongetes tendres rodones",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-mongetes-tendres-rodones/32178"
     },
     "salteado": {
      "precio": 1.16,
@@ -2870,7 +3223,8 @@
      "nombre": "BONPREU Saltat de verdures",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-saltat-de-verdures/20622"
     },
     "guisantes": {
      "precio": 1.39,
@@ -2878,7 +3232,8 @@
      "nombre": "BONPREU Pèsols fins",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pesols-fins/62774"
     },
     "huevos": {
      "precio": 3.05,
@@ -2886,7 +3241,8 @@
      "nombre": "BONPREU Ous frescos de gallines soltes en el galliner L",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-ous-frescos-de-gallines-soltes-en-el-galliner-l/38974"
     },
     "queso": {
      "precio": 1.65,
@@ -2894,7 +3250,8 @@
      "nombre": "BONPREU Formatge ratllat mozzarella",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-formatge-ratllat-mozzarella/81420"
     },
     "pimiento": {
      "precio": 3.49,
@@ -2902,7 +3259,8 @@
      "nombre": " Pebrot dolç vermell 1 u.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/pebrot-dolc-vermell-1-u/07313"
     },
     "calabacin": {
      "precio": 1.89,
@@ -2910,7 +3268,8 @@
      "nombre": " Carbassó  1 u.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/carbasso-1-u/07315"
     },
     "zanahoria": {
      "precio": 0.79,
@@ -2918,7 +3277,8 @@
      "nombre": "LA COLLITA Pastanagues en bossa de 500 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-pastanagues-en-bossa-de-500-g/06681"
     },
     "tomate": {
      "precio": 2.69,
@@ -2926,7 +3286,8 @@
      "nombre": " Tomàquet de pera 1 u.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/tomaquet-de-pera-1-u/04016"
     },
     "ensalada": {
      "precio": 0.85,
@@ -2934,7 +3295,8 @@
      "nombre": "LA COLLITA Amanida 4 estacions",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-amanida-4-estacions/35633"
     },
     "champi": {
      "precio": 1.69,
@@ -2942,7 +3304,8 @@
      "nombre": "LA COLLITA Xampinyons laminats safata 250 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-xampinyons-laminats-safata-250-g/04453"
     },
     "limon": {
      "precio": 2.29,
@@ -2950,7 +3313,8 @@
      "nombre": "LA COLLITA Llimona malla 1 kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-llimona-malla-1-kg/23901"
     },
     "yogur": {
      "precio": 1.34,
@@ -2958,7 +3322,8 @@
      "nombre": "BONPREU Iogurt natural",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-iogurt-natural/90812"
     },
     "pan_rallado": {
      "precio": 0.85,
@@ -2966,7 +3331,8 @@
      "nombre": "BONPREU Pa ratllat en bossa de 750 grams",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pa-ratllat-en-bossa-de-750-grams/83912"
     },
     "jamon": {
      "precio": 2.05,
@@ -2974,7 +3340,8 @@
      "nombre": "BONPREU Pernil cuit",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pernil-cuit/83518"
     },
     "fideos": {
      "precio": 0.85,
@@ -2982,7 +3349,8 @@
      "nombre": "BONPREU Fideus gruixuts",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-fideus-gruixuts/60793"
     },
     "caldo_pollo": {
      "precio": 0.75,
@@ -2990,7 +3358,8 @@
      "nombre": "BONPREU Brou de pollastre  UHT",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-brou-de-pollastre-uht/13238"
     },
     "caldo_pescado": {
      "precio": 0.95,
@@ -2998,7 +3367,8 @@
      "nombre": "BONPREU Brou de peix i marisc UHT",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-brou-de-peix-i-marisc-uht/81028"
     },
     "pavo": {
      "precio": 5.59,
@@ -3006,7 +3376,8 @@
      "nombre": "BONPREU Pit filetejat d'indiot tall prim",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pit-filetejat-d-indiot-tall-prim/46785"
     },
     "burger_pavo": {
      "precio": 4.99,
@@ -3014,7 +3385,8 @@
      "nombre": "BONPREU Burger d'indiot",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-burger-d-indiot/00837"
     },
     "fideos_arroz": {
      "precio": 1.45,
@@ -3022,7 +3394,8 @@
      "nombre": "ORIENTAL SELECTION Noodles d'arròs",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/oriental-selection-noodles-d-arros/12497"
     },
     "solomillo": {
      "precio": 9.45,
@@ -3030,7 +3403,8 @@
      "nombre": "BONPREU Filet de porc  al buit",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-filet-de-porc-al-buit/09106"
     },
     "ternera": {
      "precio": 21.99,
@@ -3038,7 +3412,8 @@
      "nombre": "BONPREU DE L'ERA Bistec de vedella",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-de-l-era-bistec-de-vedella/09452"
     },
     "alubias_rojas": {
      "precio": 1.2,
@@ -3046,7 +3421,8 @@
      "nombre": "BONPREU Mongetes vermelles cuites extra",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-mongetes-vermelles-cuites-extra/17897"
     },
     "lasana": {
      "precio": 1.65,
@@ -3054,7 +3430,8 @@
      "nombre": "EL PAVO Pasta per lasanya",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/el-pavo-pasta-per-lasanya/06271"
     },
     "bacalao": {
      "precio": 7.99,
@@ -3062,7 +3439,8 @@
      "nombre": "BONPREU Filets de bacallà d'Islàndia al punt de sal",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-filets-de-bacalla-d-islandia-al-punt-de-sal/67161"
     },
     "emperador": {
      "precio": 4.59,
@@ -3070,7 +3448,8 @@
      "nombre": "FANDICOSTA Rodanxa de peix espasa",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/fandicosta-rodanxa-de-peix-espasa/26774"
     },
     "teriyaki": {
      "precio": 2.39,
@@ -3078,7 +3457,8 @@
      "nombre": "MAGGI Salsa Teriyaki",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/maggi-salsa-teriyaki/41399"
     },
     "nata": {
      "precio": 1.75,
@@ -3086,7 +3466,8 @@
      "nombre": "BONPREU Nata líquida per cuinar",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-nata-liquida-per-cuinar/16527"
     },
     "mostaza": {
      "precio": 3.99,
@@ -3094,7 +3475,8 @@
      "nombre": "MAILLE Mostassa de Dijón",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/maille-mostassa-de-dijon/02324"
     },
     "edamame": {
      "precio": 1.85,
@@ -3102,7 +3484,8 @@
      "nombre": "SUSHI KING Edamame de faves de soja amb closca",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/sushi-king-edamame-de-faves-de-soja-amb-closca/59501"
     },
     "esparragos": {
      "precio": 2.95,
@@ -3110,7 +3493,8 @@
      "nombre": "LA COLLITA Espàrrecs verds prims en manat de 250g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-esparrecs-verds-prims-en-manat-de-250g/25431"
     },
     "bonito": {
      "precio": 3.25,
@@ -3118,7 +3502,8 @@
      "nombre": "BONPREU Bonítol del nord en oli d'oliva",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-bonitol-del-nord-en-oli-d-oliva/16819"
     },
     "caballa": {
      "precio": 1.59,
@@ -3126,7 +3511,8 @@
      "nombre": "BONPREU Cavalla del sud amb oli d'oliva",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-cavalla-del-sud-amb-oli-d-oliva/15207"
     },
     "sardinas": {
      "precio": 1.59,
@@ -3134,7 +3520,8 @@
      "nombre": "BONPREU Sardines en oli d'oliva",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-sardines-en-oli-d-oliva/25913"
     },
     "pan_integral": {
      "precio": 0.9,
@@ -3142,7 +3529,8 @@
      "nombre": "BONPREU Pa de motlle 100% integral",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pa-de-motlle-100-integral/59865"
     },
     "langostinos": {
      "precio": 4.29,
@@ -3150,7 +3538,8 @@
      "nombre": "PESCANOVA Llagostí pelat cru",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/pescanova-llagosti-pelat-cru/69361"
     },
     "masa_empanadilla": {
      "precio": 1.25,
@@ -3158,7 +3547,8 @@
      "nombre": "BUITONI Massa per a crestes i postres",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/buitoni-massa-per-a-crestes-i-postres/55677"
     },
     "pasta_lentejas": {
      "precio": 1.99,
@@ -3166,7 +3556,8 @@
      "nombre": "GALLO NATURE Espirals de llenties",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/gallo-nature-espirals-de-llenties/45742"
     },
     "hummus": {
      "precio": 1.35,
@@ -3174,7 +3565,8 @@
      "nombre": "TERRA I TAST Hummus de cigrons",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/terra-i-tast-hummus-de-cigrons/31874"
     },
     "noquis": {
      "precio": 0.99,
@@ -3182,7 +3574,8 @@
      "nombre": "BONPREU Nyoquis de patata",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-nyoquis-de-patata/58811"
     },
     "berenjena": {
      "precio": 2.29,
@@ -3190,7 +3583,8 @@
      "nombre": " Albergínia negra 1 u.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/alberginia-negra-1-u/07319"
     },
     "quinoa": {
      "precio": 1.56,
@@ -3198,7 +3592,8 @@
      "nombre": "BRILLANTE Quinoa blanca i vermella",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/brillante-quinoa-blanca-i-vermella/21190"
     },
     "dorada": {
      "precio": 28.95,
@@ -3206,7 +3601,8 @@
      "nombre": " Filet d'Orada",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/filet-d-orada/22795"
     },
     "copos_maiz": {
      "precio": 1.5,
@@ -3214,7 +3610,8 @@
      "nombre": "BONPREU Flocs de blat de moro",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-flocs-de-blat-de-moro/08946"
     },
     "pesto": {
      "precio": 1.9,
@@ -3222,7 +3619,8 @@
      "nombre": "BONPREU Salsa Pesto",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-salsa-pesto/18067"
     },
     "salchichas": {
      "precio": 1.75,
@@ -3230,7 +3628,8 @@
      "nombre": "WUDY Salsitxes de pollastre i indiot Clàssiques",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/wudy-salsitxes-de-pollastre-i-indiot-classiques/37995"
     },
     "pina": {
      "precio": 2.49,
@@ -3238,7 +3637,8 @@
      "nombre": "BONPREU Rodanxes de pinya amb el seu suc",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-rodanxes-de-pinya-amb-el-seu-suc/26737"
     },
     "leche": {
      "precio": 0.83,
@@ -3246,7 +3646,8 @@
      "nombre": "BONPREU Llet semidesnatada en cartró",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-llet-semidesnatada-en-cartro/81178"
     },
     "calabaza": {
      "precio": 1.99,
@@ -3254,7 +3655,8 @@
      "nombre": "LA COLLITA Carbassa tallada",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-carbassa-tallada/27250"
     },
     "gazpacho": {
      "precio": 1.79,
@@ -3262,7 +3664,8 @@
      "nombre": "SUMMUM Gaspatxo en cartró d'1 litre",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/summum-gaspatxo-en-cartro-d-1-litre/50548"
     },
     "tinta": {
      "precio": 0.69,
@@ -3270,7 +3673,8 @@
      "nombre": "NORTINDAL Tinta sípia 4 sobres",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/nortindal-tinta-sipia-4-sobres/65547"
     },
     "anacardos": {
      "precio": 1.99,
@@ -3278,7 +3682,8 @@
      "nombre": "BONPREU Anacards crus",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-anacards-crus/57714"
     },
     "feta": {
      "precio": 2.5,
@@ -3286,7 +3691,8 @@
      "nombre": "HOTOS Daus de formatge feta",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/hotos-daus-de-formatge-feta/80902"
     },
     "manzana": {
      "precio": 2.69,
@@ -3294,7 +3700,8 @@
      "nombre": "LA COLLITA Poma golden de Girona Km0 bossa 1,5 kg",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-poma-golden-de-girona-km0-bossa-1-5-kg/49235"
     },
     "pan_burger": {
      "precio": 0.85,
@@ -3302,7 +3709,8 @@
      "nombre": "BONPREU Panet rodó per a hamburgueses",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-panet-rodo-per-a-hamburgueses/24409"
     },
     "pan_barra": {
      "precio": 0.89,
@@ -3310,7 +3718,8 @@
      "nombre": " Barra de pa",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/barra-de-pa/14481"
     },
     "avena": {
      "precio": 0.85,
@@ -3318,7 +3727,8 @@
      "nombre": "BONPREU Flocs de civada",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-flocs-de-civada/07381"
     },
     "platano": {
      "precio": 1.25,
@@ -3326,7 +3736,8 @@
      "nombre": " Banana 1 u.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/banana-1-u/07424"
     },
     "naranja": {
      "precio": 2.49,
@@ -3334,7 +3745,8 @@
      "nombre": " Taronja 1 u.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/taronja-1-u/07398"
     },
     "mandarina": {
      "precio": 2.55,
@@ -3342,7 +3754,8 @@
      "nombre": " Mandarina 1 u.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/mandarina-1-u/09910"
     },
     "kiwi": {
      "precio": 3.49,
@@ -3350,7 +3763,8 @@
      "nombre": "ZESPRI Kiwi verd en safata de 500 g",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/zespri-kiwi-verd-en-safata-de-500-g/01086"
     },
     "pera": {
      "precio": 2.29,
@@ -3358,7 +3772,8 @@
      "nombre": " Pera Conference Km0 1 u.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/pera-conference-km0-1-u/07422"
     },
     "aguacate": {
      "precio": 4.99,
@@ -3366,7 +3781,8 @@
      "nombre": " Alvocat 1 u.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/alvocat-1-u/07426"
     },
     "pepino": {
      "precio": 1.69,
@@ -3374,7 +3790,8 @@
      "nombre": " Cogombre  1 u.",
      "aprox": true,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/cogombre-1-u/07318"
     },
     "fresas": {
      "precio": 2.69,
@@ -3382,7 +3799,8 @@
      "nombre": "ARDO Maduixes",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/ardo-maduixes/75555"
     },
     "frutos_rojos": {
      "precio": 2.85,
@@ -3390,7 +3808,8 @@
      "nombre": "ARDO Fruites del bosc",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/ardo-fruites-del-bosc/97903"
     },
     "queso_batido": {
      "precio": 1.72,
@@ -3398,7 +3817,8 @@
      "nombre": "IFA Formatge fresc batut",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/ifa-formatge-fresc-batut/47285"
     },
     "queso_fresco": {
      "precio": 1.29,
@@ -3406,7 +3826,8 @@
      "nombre": "BONPREU Formatge fresc",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-formatge-fresc/43886"
     },
     "queso_lonchas": {
      "precio": 2.49,
@@ -3414,7 +3835,8 @@
      "nombre": "BONPREU Formatge de vaca tendre a talls",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-formatge-de-vaca-tendre-a-talls/55562"
     },
     "pavo_fiambre": {
      "precio": 2.59,
@@ -3422,7 +3844,8 @@
      "nombre": "BONPREU Pit d'indiot cuit a talls fins",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pit-d-indiot-cuit-a-talls-fins/31184"
     },
     "serrano": {
      "precio": 3.69,
@@ -3430,7 +3853,8 @@
      "nombre": "BONPREU Pernil serrano reserva",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pernil-serrano-reserva/26398"
     },
     "kefir": {
      "precio": 1.1,
@@ -3438,7 +3862,8 @@
      "nombre": "UBACH Quefir natural Km0",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/ubach-quefir-natural-km0/67546"
     },
     "crema_cacahuete": {
      "precio": 2.75,
@@ -3446,7 +3871,8 @@
      "nombre": "BONPREU Crema de cacauet",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-crema-de-cacauet/64813"
     },
     "cacao": {
      "precio": 4.4,
@@ -3454,7 +3880,8 @@
      "nombre": "IFA Cacau pur desgreixat en pols 0% sucres afegits",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/ifa-cacau-pur-desgreixat-en-pols-0-sucres-afegits/31460"
     },
     "miel": {
      "precio": 3.2,
@@ -3462,7 +3889,8 @@
      "nombre": "REINA APICOLA Mel de mil flors",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/reina-apicola-mel-de-mil-flors/79514"
     },
     "mermelada": {
      "precio": 1.45,
@@ -3470,7 +3898,8 @@
      "nombre": "BONPREU Melmelada de maduixa sense sucres afegits",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-melmelada-de-maduixa-sense-sucres-afegits/78629"
     },
     "nueces": {
      "precio": 3.75,
@@ -3478,7 +3907,8 @@
      "nombre": "BONPREU Nous sense closca crues",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-nous-sense-closca-crues/64662"
     },
     "almendras": {
      "precio": 2.4,
@@ -3486,7 +3916,8 @@
      "nombre": "BONPREU Ametlles crues amb pell Km0",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-ametlles-crues-amb-pell-km0/13709"
     },
     "pasas": {
      "precio": 1.44,
@@ -3494,7 +3925,8 @@
      "nombre": "BONPREU Panses sultanes dessecades",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-panses-sultanes-dessecades/26788"
     },
     "chia": {
      "precio": 2.09,
@@ -3502,7 +3934,8 @@
      "nombre": "BONPREU Llavors de xia ecològiques",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-llavors-de-xia-ecologiques/34332"
     },
     "tortitas_arroz": {
      "precio": 1.15,
@@ -3510,7 +3943,8 @@
      "nombre": "BONPREU Coquetes d'arròs",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-coquetes-d-arros/16743"
     },
     "tofu": {
      "precio": 2.45,
@@ -3518,7 +3952,8 @@
      "nombre": "BONPREU Tofu ecològic",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-tofu-ecologic/20917"
     },
     "soja_texturizada": {
      "precio": 2.25,
@@ -3526,7 +3961,8 @@
      "nombre": "IFA Soja texturitzada",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/ifa-soja-texturitzada/55161"
     },
     "caldo_verduras": {
      "precio": 0.85,
@@ -3534,7 +3970,8 @@
      "nombre": "IFA Brou de verdures en pastilles",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/ifa-brou-de-verdures-en-pastilles/90407"
     },
     "salsa_soja": {
      "precio": 1.65,
@@ -3542,7 +3979,8 @@
      "nombre": "CAMILL Salsa de soja tradicional",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/camill-salsa-de-soja-tradicional/21086"
     },
     "harina_garbanzo": {
      "precio": 2.59,
@@ -3550,7 +3988,8 @@
      "nombre": "BONPREU Farina de cigró sense gluten ecològica",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-farina-de-cigro-sense-gluten-ecologica/63503"
     },
     "seitan": {
      "precio": 3.45,
@@ -3558,7 +3997,8 @@
      "nombre": "VEGETALIA Seitan ecològic",
      "aprox": false,
      "anterior": null,
-     "fecha": "2026-10-22"
+     "fecha": "2026-10-22",
+     "url": "https://www.compraonline.bonpreuesclat.cat/products/vegetalia-seitan-ecologic/56072"
     }
    },
    "fallos": []

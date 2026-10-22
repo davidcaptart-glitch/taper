@@ -921,7 +921,8 @@ function renderCompra(){
     :`<p class="small muted" style="margin:4px 0">${l.fee?`Envío: ${eur(l.fee)}`:"Sin envío"}${l.min?` · pedido mínimo ${eur(l.min)}`:""} (tarifa de ${esc(superById((l.groups[0]||{}).sup||mainSuper()).nombre||"tu supermercado")})</p>`}`;
   if(wi!=null)h+=`<p class="small muted" style="margin:0">Llega o se compra el ${esc(longDate(deliveryDate(sh.weeks[wi])))}. Lo que se cocina antes sale de lo que ya hay en casa.</p>`;
   if(l.mode==="online"){
-    h+=`<p class="shophint">Toca 🛒 para abrir el producto en Mercadona y añadirlo al carro.</p>`;
+    if(l.items.some(it=>prodUrl(it)))h+=`<button class="btn wide" id="orderSteps" style="margin:8px 0">${ico("shopping-cart")} Hacer el pedido paso a paso</button>`;
+    h+=`<p class="shophint">Te enseño los productos de uno en uno: lo abres en la web o app del súper, lo añades al carro y vuelves para el siguiente. También puedes tocar 🛒 en cada producto.</p>`;
   }
   if(l.autoStore)h+=`<div class="infobox">🏪 Con esta compra (${eur(l.cost)}) no llegas al mínimo de ${eur(l.autoStore.min)} para pedirla ${l.autoStore.mode==="online"?"online":"a domicilio"}: te faltan ${eur(l.autoStore.short)}. Te la dejo para <b>comprar en tienda</b>${wi!=null?", o júntala con la compra del mes":""}. <button class="btn ghost small" data-lm="${l.autoStore.mode}">Pedirla ${l.autoStore.mode==="online"?"online":"a domicilio"} igualmente</button></div>`;
   if(l.belowMin){const bg=l.groups.find(g=>g.belowMin);
@@ -959,7 +960,7 @@ function renderCompra(){
       for(const it of bySec[sec].sort((a,b)=>P[a.pid].name.localeCompare(P[b.pid].name))){
         const key=checkKey(month,listSel,it.pid),done=!!S.checks[key],moved=(S.assign[month]||{})[it.pid]!=null&&listSel!=="mes";
         const sx=it.sup!=="mercadona"&&PS&&PS.supers[it.sup]?PS.supers[it.sup].productos[it.pid]:null;
-        h+=`<label class="item ${done?"done":""}"><input type="checkbox" data-ck="${key}" ${done?"checked":""}>${prodImg(it.pid)}<span class="t">${it.packs} × ${esc(P[it.pid].name)}<small>Necesitas ${fmtQty(it.q,P[it.pid].unit)}${P[it.pid].keep==="congelar"?", para congelar":""}${moved?" · adelantado de la compra del mes":""}${sx?` · ${esc(sx.nombre)}`:""}</small></span><span class="p">${eur(it.cost)}${upTag(it.pid)}</span>${l.mode==="online"&&it.sup==="mercadona"&&P[it.pid].mid?`<a class="mlink" href="https://tienda.mercadona.es/product/${encodeURIComponent(P[it.pid].mid)}/" target="_blank" rel="noopener" aria-label="Abrir ${esc(P[it.pid].name)} en Mercadona">🛒</a>`:""}</label>`}
+        h+=`<label class="item ${done?"done":""}"><input type="checkbox" data-ck="${key}" ${done?"checked":""}>${prodImg(it.pid)}<span class="t">${it.packs} × ${esc(P[it.pid].name)}<small>Necesitas ${fmtQty(it.q,P[it.pid].unit)}${P[it.pid].keep==="congelar"?", para congelar":""}${moved?" · adelantado de la compra del mes":""}${sx?` · ${esc(sx.nombre)}`:""}</small></span><span class="p">${eur(it.cost)}${upTag(it.pid)}</span>${l.mode==="online"&&prodUrl(it)?`<a class="mlink" href="${esc(prodUrl(it))}" target="_blank" rel="noopener" aria-label="Abrir ${esc(P[it.pid].name)} en ${esc(superById(it.sup).nombre||"el súper")}">🛒</a>`:""}</label>`}
       h+=`</details>`});
   }
   h+=`</details>`;
@@ -976,6 +977,7 @@ function renderCompra(){
   h+=`</details>`;
   main.innerHTML=h+`</section>`;
   main.querySelectorAll("[data-list]").forEach(b=>b.onclick=()=>{listSel=b.dataset.list;render()});
+  document.getElementById("orderSteps")?.addEventListener("click",()=>openOrderSteps(month,l));
   document.getElementById("sendList")?.addEventListener("click",()=>shareList(month,l,listSel==="mes"?"Compra del mes":"Compra de la semana del "+shortDate(sh.weeks[wi])));
   document.getElementById("shareMenuC")?.addEventListener("click",openShareMenu);
   document.getElementById("shopDone")?.addEventListener("click",()=>{const m=month,k=listSel;markShopDone(m,k);render();askTicket(m,k)});
@@ -1280,6 +1282,47 @@ function openUseUp(){
     dlg.querySelectorAll("[data-open3]").forEach(b=>b.onclick=()=>openRecipe(b.dataset.open3));
     dlg.querySelector("#hvEdit").onclick=()=>{step=0;draw()};
   };
+  draw();
+}
+
+// Enlace a la ficha del producto en su súper (Mercadona por su código; los demás, el de la tabla de equivalencias)
+const prodUrl=it=>it.sup==="mercadona"?(P[it.pid].mid?`https://tienda.mercadona.es/product/${encodeURIComponent(P[it.pid].mid)}/`:null):((((PS||{}).supers||{})[it.sup]||{}).productos||{})[it.pid]?.url||null;
+// Pedido online producto a producto (ningún súper deja que otra app llene el carro de golpe), súper por súper
+function openOrderSteps(m,l){
+  const so=s=>s===mainSuper()?0:1;
+  const its=l.items.slice().sort((a,b)=>so(a.sup)-so(b.sup)||a.sup.localeCompare(b.sup)||STORE_ORDER.indexOf(P[a.pid].sec)-STORE_ORDER.indexOf(P[b.pid].sec)||P[a.pid].name.localeCompare(P[b.pid].name));
+  const withLink=its.filter(it=>prodUrl(it)),noLink=its.filter(it=>!prodUrl(it));
+  const done=it=>!!S.checks[checkKey(m,l.key,it.pid)];
+  let i=Math.max(0,withLink.findIndex(it=>!done(it)));
+  const draw=()=>{
+    const left=withLink.filter(it=>!done(it));
+    if(i>=withLink.length||!left.length){
+      showDialog(`<div class="mod">${closeBtn}<h2>${left.length?"Casi está":"¡Pedido listo!"}</h2>
+        <p>${withLink.length-left.length} de ${withLink.length} productos añadidos al carro.</p>
+        ${left.length?`<p class="small">Te faltan: ${esc(left.map(it=>P[it.pid].name).join(", "))}.</p><button class="btn wide" id="osBack">Ir a los que faltan</button>`:""}
+        ${noLink.length?`<p class="small muted">Búscalos a mano: ${esc(noLink.map(it=>it.packs+" × "+P[it.pid].name+" ("+(superById(it.sup).nombre||it.sup)+")").join(", "))}.</p>`:""}
+        <p class="small muted">Cuando termines el pedido, márcalo en Compra con «Ya he hecho esta compra».</p>
+        <div class="actions"><button class="btn ghost wide" data-x>Cerrar</button></div></div>`);
+      dlg.querySelector("#osBack")?.addEventListener("click",()=>{i=withLink.indexOf(left[0]);draw()});
+      return;
+    }
+    const it=withLink[i],p=P[it.pid],url=prodUrl(it),sn=superById(it.sup).nombre||it.sup,sx=it.sup!=="mercadona"&&PS&&PS.supers[it.sup]?PS.supers[it.sup].productos[it.pid]:null;
+    showDialog(`<div class="mod ostep">${closeBtn}<div class="small muted">Producto ${i+1} de ${withLink.length} · ${withLink.length-left.length} añadidos</div>
+      <div class="osbar"><i style="width:${Math.round((withLink.length-left.length)/withLink.length*100)}%"></i></div>
+      <div class="osimg">${prodImg(it.pid)}</div>
+      <h2 style="text-align:center;margin:6px 0 2px">${it.packs} × ${esc(p.name)}</h2>
+      ${sx?`<p class="small" style="text-align:center;margin:2px 0">En ${esc(sn)}: ${esc(sx.nombre)}</p>`:""}
+      <p class="small muted" style="text-align:center;margin:0">${eur(it.cost)} · ${esc(p.sec)}${done(it)?" · ✓ ya añadido":""}</p>
+      <a class="btn wide" id="osOpen" href="${esc(url)}" target="_blank" rel="noopener" style="margin-top:14px">${ico("shopping-cart")} Abrir en ${esc(sn)}</a>
+      <button class="btn wide" id="osOk" style="margin-top:8px">✓ Añadido, siguiente</button>
+      <div class="actions"><button class="btn ghost" id="osPrev" ${i===0?"disabled":""}>Anterior</button><button class="btn ghost" id="osSkip">Saltar</button></div></div>`);
+    dlg.querySelector("#osOk").onclick=()=>{S.checks[checkKey(m,l.key,it.pid)]=true;S.checkedAt=S.checkedAt||{};S.checkedAt[checkKey(m,l.key,it.pid)]=todayISO();save();
+      if(S.share)markShared(S.share.codigo,checkKey(m,l.key,it.pid),true);
+      const nx=withLink.findIndex((x,j)=>j>i&&!done(x));i=nx<0?withLink.length:nx;draw()};
+    dlg.querySelector("#osSkip").onclick=()=>{i++;draw()};
+    dlg.querySelector("#osPrev").onclick=()=>{i=Math.max(0,i-1);draw()};
+  };
+  dlg.addEventListener("close",()=>{if(tab==="compra")render()},{once:true});
   draw();
 }
 

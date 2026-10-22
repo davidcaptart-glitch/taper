@@ -719,6 +719,16 @@
         "La lista de la compra y cada sección se pliegan. Solo va abierta la primera sección con cosas por coger.",
         "Cada sección dice cuánto llevas: «2 de 4» o «✓ todo»."
       ]
+    },
+    {
+      "version": 79,
+      "fecha": "2026-10-23",
+      "titulo": "Haz el pedido online paso a paso",
+      "cambios": [
+        "En Compra (modo Online), «Hacer el pedido paso a paso»: te enseño cada producto, lo abres en la web o app de su súper, lo añades al carro y pasas al siguiente.",
+        "Funciona con Mercadona, Dia, Consum, Condis, Eroski y Bonpreu; si repartes la compra, va súper por súper.",
+        "Al final te digo si te has dejado alguno."
+      ]
     }
   ]
 }

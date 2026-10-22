@@ -47,6 +47,7 @@ def actualizar_super(sid, cp, previo, hoy):
                 "envase": r.get("envase") or prod.get("envase"),
                 "nombre": r.get("nombre") or prod.get("nombre"),
                 "aprox": bool(prod.get("aprox")),
+                "url": prod.get("url"),
                 "anterior": antes.get("precio") if antes.get("fecha") != hoy else antes.get("anterior"),
                 "fecha": hoy,
             }
@@ -58,6 +59,10 @@ def actualizar_super(sid, cp, previo, hoy):
             if seguidos >= MAX_FALLOS_SEGUIDOS:
                 out["fallos"].append("Demasiados fallos seguidos: se para este supermercado hasta la semana que viene")
                 break
+    # El enlace a la ficha del producto (para hacer el pedido paso a paso desde la app)
+    for pid, v in out["productos"].items():
+        if pid in eq["productos"] and eq["productos"][pid].get("url"):
+            v["url"] = eq["productos"][pid]["url"]
     # Productos que ya no están en la tabla se quitan
     out["productos"] = {k: v for k, v in out["productos"].items() if k in eq["productos"]}
     if bien:

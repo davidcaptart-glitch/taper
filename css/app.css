@@ -991,3 +991,9 @@ details.aisle[open]>summary h3::after{transform:rotate(-135deg)}
 details.aisle[open]>summary h3{margin-bottom:8px}
 details.aisle.full>summary h3{opacity:.6}
 details.aisle{margin-top:10px}
+
+/* Pedido paso a paso */
+.ostep .osbar{height:6px;border-radius:3px;background:var(--line);margin:8px 0 14px;overflow:hidden}
+.ostep .osbar i{display:block;height:100%;background:var(--accent)}
+.ostep .osimg{display:grid;place-items:center}
+.ostep .osimg .pimg,.ostep .osimg img{width:140px;height:140px;border-radius:18px;object-fit:contain}
