@@ -14,38 +14,57 @@ function weeksInMonth(m){
 const monthOfWeek=start=>start.slice(0,7);
 
 /* ---------- Quién está y qué comida toca ---------- */
-// Cuándo está cada miembro de la familia (tú estás siempre)
-function presentByRule(k,d){
+// Turnos alternos: el turno empieza el día del cambio (anchor) y se repite cada 14 días.
+// Semanas alternas = 7 días; fines de semana alternos = 3 días (p. ej. viernes a domingo).
+// El primer día puede llegar a la comida o a la cena; el último puede irse después de comer o de cenar.
+function turnInfo(pr){
+  let anchor=pr.anchor||mondayOf(todayISO()), arrive=pr.arrive, leave=pr.leave;
+  // Datos antiguos: semanas de lunes a domingo; fines de semana del viernes (cena) al domingo
+  if(pr.type==="findes"&&!arrive&&dow(anchor)!==4){anchor=addDays(mondayOf(anchor),4);arrive="cena"}
+  return {anchor,len:pr.type==="findes"?3:7,arrive:arrive||"comida",leave:leave||"cena"};
+}
+// Cuándo está cada miembro de la familia (tú estás siempre). Sin comida indicada: si está en algún momento del día
+function presentByRule(k,d,meal){
   if(k.id==="yo")return true;
   const pr=k.presence||{type:"siempre"}, w=dow(d);
   if(pr.type==="siempre")return true;
   if(pr.type==="manual")return false;
   if(pr.type==="dias")return (pr.days||[]).includes(w);
-  const anchor=mondayOf(pr.anchor||todayISO());
-  const even=((Math.round(daysBetween(anchor,mondayOf(d))/7)%2)+2)%2===0;
-  if(pr.type==="alternas")return even;
-  if(pr.type==="findes")return even&&(w>=5||w===4);   // viernes (cena), sábado y domingo
+  if(pr.type==="alternas"||pr.type==="findes"){
+    const t=turnInfo(pr), off=((daysBetween(t.anchor,d)%14)+14)%14;
+    if(off>=t.len)return false;
+    if(meal&&off===0&&t.arrive==="cena"&&meal==="comida")return false;
+    if(meal&&off===t.len-1&&t.leave==="comida"&&meal==="cena")return false;
+    return true;
+  }
   return false;
 }
+// Frase que resume el turno, para enseñarla en el asistente y el perfil
+function turnText(k){
+  const pr=k.presence||{};if(pr.type!=="alternas"&&pr.type!=="findes")return "";
+  const t=turnInfo(pr),last=addDays(t.anchor,t.len-1);
+  return `Está contigo del ${DAYS[dow(t.anchor)].toLowerCase()} (${t.arrive==="cena"?"cena":"comida"}) al ${DAYS[dow(last)].toLowerCase()} (${t.leave==="cena"?"cena":"comida"}), ${pr.type==="findes"?"fines de semana alternos":"semanas alternas"}. Próximo turno: ${shortDate(nextTurn(t))}.`;
+}
+function nextTurn(t){const off=((daysBetween(t.anchor,todayISO())%14)+14)%14;return addDays(todayISO(),off<t.len?-off:14-off)}
 const kidPresentByRule=presentByRule;
 // Quién está un día: lo que diga su horario, salvo que ese día lo hayas cambiado
-function peopleAt(d){
+function peopleAt(d,meal){
   const o=(S.days[d]||{}).kids||{};
-  return S.people.filter(k=>k.id==="yo"||(o[k.id]!=null?o[k.id]:presentByRule(k,d)));
+  return S.people.filter(k=>k.id==="yo"||(o[k.id]!=null?o[k.id]:presentByRule(k,d,meal)));
 }
-const kidsAt=d=>peopleAt(d).filter(p=>p.kind==="nino");
-const adultsAt=d=>peopleAt(d).filter(p=>p.kind==="adulto");
+const kidsAt=(d,meal)=>peopleAt(d,meal).filter(p=>p.kind==="nino");
+const adultsAt=(d,meal)=>peopleAt(d,meal).filter(p=>p.kind==="adulto");
 const others=()=>S.people.filter(p=>p.id!=="yo");
 function mealState(d,meal){
   const o=S.days[d]||{};
   if(o[meal])return o[meal];
   let st=S.home.weekTpl[dow(d)][meal];
   // Festivo con los niños en casa: se cocina la comida y la cena
-  if(isHoliday(d)&&kidsAt(d).length){if(meal==="comida"&&st!=="fuera")st="cocinar";if(meal==="cena"&&st==="libre")st="cocinar"}
+  if(isHoliday(d)&&kidsAt(d,meal).length){if(meal==="comida"&&st!=="fuera")st="cocinar";if(meal==="cena"&&st==="libre")st="cocinar"}
   return st;
 }
 function fixedFor(d,meal){
-  const ks=kidsAt(d).length;
+  const ks=kidsAt(d,meal).length;
   return S.fixed.find(f=>f.dow===dow(d)&&f.meal===meal&&(f.who==="todas"||(f.who==="con"&&ks)||(f.who==="sin"&&!ks)))||null;
 }
 
@@ -109,10 +128,10 @@ function buildSlots(start){
     for(const meal of ["comida","cena"]){
       const st=mealState(d,meal);
       if(st!=="cocinar"&&st!=="solotaper")continue;
-      const ks=st==="solotaper"?[]:kidsAt(d);
-      const as=st==="solotaper"?[]:adultsAt(d);
+      const ks=st==="solotaper"?[]:kidsAt(d,meal);
+      const as=st==="solotaper"?[]:adultsAt(d,meal);
       // Táper para el día siguiente: los adultos que estén y se lleven táper
-      const tupper=meal==="cena"&&mealState(addDays(d,1),"comida")==="taper"?adultsAt(addDays(d,1)).filter(a=>a.id==="yo"||a.tupper):[];
+      const tupper=meal==="cena"&&mealState(addDays(d,1),"comida")==="taper"?adultsAt(addDays(d,1),"comida").filter(a=>a.id==="yo"||a.tupper):[];
       if(st==="solotaper"&&!tupper.length)continue;
       const f=st==="solotaper"?null:fixedFor(d,meal);
       const slot={id:d+"|"+meal,date:d,meal,eaters:as,kids:ks,tupper,fixed:f};

@@ -80,7 +80,10 @@ function stepBody(fullId){
         <label class="row small"><input type="checkbox" data-kf="tupper" ${k.tupper?"checked":""} style="width:auto"> Se lleva táper los días de táper</label>`
       :`<div class="field"><label>Edad</label><input type="number" min="1" max="25" data-kf="age" value="${esc(k.age||"")}"><div class="hint">Su ración: ${String(k.factor).replace(".",",")} de la de un adulto (se calcula con la edad).</div></div>`}
       <div class="field"><label>¿Cuándo come en casa?</label><select data-kf="ptype">${ptypes.map(([v,t])=>`<option value="${v}" ${pr.type===v?"selected":""}>${t}</option>`).join("")}</select></div>
-      ${pr.type==="alternas"||pr.type==="findes"?`<div class="field"><label>Un lunes de una semana en que está</label><input type="date" data-kf="anchor" value="${esc(pr.anchor||mondayOf(todayISO()))}"></div>`:""}
+      ${pr.type==="alternas"||pr.type==="findes"?(()=>{const t=turnInfo(pr);return `<div class="field"><label>Un día en que empieza su turno contigo (el día del cambio)</label><input type="date" data-kf="anchor" value="${esc(t.anchor)}"><div class="hint">Por ejemplo, un viernes en que viene contigo.</div></div>
+        <div class="row"><div class="field" style="flex:1"><label>Ese día llega para</label><select data-kf="arrive"><option value="comida" ${t.arrive==="comida"?"selected":""}>la comida</option><option value="cena" ${t.arrive==="cena"?"selected":""}>la cena</option></select></div>
+        <div class="field" style="flex:1"><label>El último día se va</label><select data-kf="leave"><option value="cena" ${t.leave==="cena"?"selected":""}>después de cenar</option><option value="comida" ${t.leave==="comida"?"selected":""}>después de comer</option></select></div></div>
+        <div class="okbox small">${esc(turnText(k))}</div>`})():""}
       ${pr.type==="dias"?`<div class="chips">${DSHORT.map((d,i)=>chip("data-kday",i,(pr.days||[]).includes(i),d)).join("")}</div>`:""}
       </div>`}
     return h+`<div class="actions"><button class="btn ghost" id="addAdult">+ Pareja u otro adulto</button><button class="btn ghost" id="addKid">+ Hijo o hija</button></div>`;
@@ -182,8 +185,10 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
       if(f==="factor")k.factor=Number(i.value)||1;
       if(f==="tupper")k.tupper=i.checked;
       if(f==="age"){k.age=Number(i.value)||null;k.factor=factorForAge(k.age)}
-      if(f==="ptype")k.presence={...k.presence,type:i.value,anchor:k.presence.anchor||mondayOf(todayISO())};
+      if(f==="ptype"){const fri=addDays(mondayOf(todayISO()),4);k.presence={...k.presence,type:i.value,anchor:k.presence.anchor||fri,arrive:k.presence.arrive||(i.value==="findes"?"cena":"comida"),leave:k.presence.leave||"cena"}}
       if(f==="anchor")k.presence.anchor=i.value;
+      if(f==="arrive")k.presence.arrive=i.value;
+      if(f==="leave")k.presence.leave=i.value;
       rerender()});
     c.querySelectorAll("[data-kday]").forEach(b=>b.onclick=()=>{const d=Number(b.dataset.kday),ds=k.presence.days||[];k.presence.days=ds.includes(d)?ds.filter(x=>x!==d):[...ds,d];rerender()})});
   qa("[data-goal]").forEach(b=>b.onclick=()=>{const g=b.dataset.goal;if(a.goals.includes(g))a.goals=a.goals.filter(x=>x!==g);else if(a.goals.length<3)a.goals.push(g);else{toast("Máximo 3 objetivos: quita uno antes");return}rerender()});

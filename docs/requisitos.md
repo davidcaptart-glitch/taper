@@ -104,7 +104,8 @@ aprende se ve y se corrige en una pantalla "Lo que sé de ti" (por persona: adul
 - Semana tipo por día: comida y cena = cocino / táper / fuera / libre. Caprichos (p. ej. viernes pizza,
   fin de semana carbonara): cuentan para compra y presupuesto, no para objetivos.
 - Si dejas de cocinar un plato: cocinar solo el táper, pasarlo al día siguiente o no cocinarlo.
-- Cada hijo con su propio horario (uno siempre, otro fines de semana alternos…).
+- Cada hijo con su propio horario (uno siempre, otro fines de semana alternos…). Turnos alternos con día del
+  cambio, comida de llegada y de salida (p. ej. Lukas: de viernes cena a jueves cena); presencia comida a comida.
 
 ### Después de cada comida
 - Se pregunta "¿qué tal?" hora y media después de la hora de cada comida: valoración por persona, o

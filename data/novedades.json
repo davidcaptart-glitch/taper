@@ -151,6 +151,15 @@
       "cambios": [
         "La app usa siempre el tema claro aunque tu móvil esté en modo oscuro. Puedes cambiarlo en Perfil › Copia de seguridad y novedades › Aspecto."
       ]
+    },
+    {
+      "version": 16,
+      "fecha": "2026-10-22",
+      "titulo": "Turnos de custodia exactos",
+      "cambios": [
+        "Semanas o fines de semana alternos con el día del cambio que tengáis (por ejemplo, de viernes noche a jueves noche).",
+        "Indicas si ese día llega para comer o para cenar, y si el último día se va después de comer o de cenar: el menú y la compra se ajustan comida a comida."
+      ]
     }
   ]
 }
