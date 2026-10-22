@@ -202,7 +202,7 @@ function moveToNext(rid,from){
 }
 function renderMenu(){
   const weeks=weeksInMonth(month);
-  let h=`<section class="view">`+sportCard()+rateCard();
+  let h=`<section class="view">`+reviewCard()+sportCard()+rateCard();
   if(!weeks.length)h+=`<div class="empty"><p>No hay semanas que empiecen este mes.</p></div>`;
   for(const start of weeks){
     const wk=S.plans[start], dates=weekDates(start);
@@ -235,6 +235,7 @@ function renderMenu(){
   main.querySelectorAll("[data-regen]").forEach(b=>b.onclick=()=>{if(confirm("¿Rehacer los platos de esta semana? Se mantienen los que elegiste a mano.")){genWeekFromScratch(b.dataset.regen);save();render();toast("Platos rehechos")}});
   main.querySelectorAll("[data-swap]").forEach(b=>b.onclick=()=>openSwap(b.dataset.swap));
   main.querySelectorAll("[data-sacr]").forEach(b=>b.onclick=()=>openSacrifice(b.dataset.sacr));
+  bindReview(main);
   main.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>openDay(b.dataset.day));
   main.querySelectorAll("[data-session]").forEach(b=>b.onclick=()=>openSession(b.dataset.session));
   main.querySelectorAll("[data-rate]").forEach(b=>b.onclick=()=>{const [sid,rid,who,v]=b.dataset.rate.split("~");
@@ -251,6 +252,37 @@ function renderMenu(){
   main.querySelectorAll("[data-ate]").forEach(b=>b.onclick=()=>{S.meals[b.dataset.ate]={status:"ok"};save();render()});
   main.querySelectorAll("[data-notate]").forEach(b=>b.onclick=()=>{const v=b.dataset.notate;openNotEaten(v.slice(0,v.lastIndexOf("|")),v.slice(v.lastIndexOf("|")+1))});
   bindOpen();
+}
+
+/* ---------- Resumen del mes ---------- */
+function reviewHTML(rv,compact){
+  const mn=monthName(rv.m);
+  let h=`<h3>Resumen de ${esc(mn)}</h3>
+    <p>${rv.ok?`✅ Dentro del presupuesto: ${eur(rv.spent)} de ${eur(rv.budget)}.`:`⚠️ Te pasaste: ${eur(rv.spent)} de ${eur(rv.budget)} (${eur(rv.spent-rv.budget)} más).`}
+    <span class="small muted">${rv.realComplete?"Con lo que apuntaste que pagaste.":rv.real?"Faltan tickets por apuntar: uso lo previsto.":"Con lo previsto (no apuntaste lo pagado)."}</span></p>`;
+  if(!rv.ok&&rv.reasons.length)h+=`<p class="small"><b>Por qué:</b></p><ul class="small">${rv.reasons.map(r=>`<li>${esc(r.txt)}</li>`).join("")}</ul>`;
+  h+=`<p class="small">${rv.protDays?`💪 Proteína: llegaste ${rv.protOk} de ${rv.protDays} días. `:""}${rv.planned?`🏃 Entrenos: ${rv.done} de ${rv.planned}. `:""}${rv.out+rv.other+rv.notCooked?`🍽️ ${rv.out} comidas fuera, ${rv.other} cambiadas por otra cosa y ${rv.notCooked} sin cocinar.`:""}</p>`;
+  if(!rv.ok){
+    const fixes=rv.reasons.filter(r=>r.fix);
+    h+=`<p class="small"><b>Para el mes que viene:</b> un presupuesto realista sería <b>${eur(rv.proposal)}</b>${fixes.length?`, o mantener ${eur(rv.budget)} aplicando: ${fixes.map(f=>f.fixTxt.toLowerCase()).join(" y ")}`:""}.</p>
+      <div class="actions"><button class="btn small" data-rvset="${rv.proposal}">Usar ${eur(rv.proposal)}</button>${fixes.length?`<button class="btn ghost small" data-rvfix="${rv.m}">Mantener y aplicar medidas</button>`:""}${compact?`<button class="btn ghost small" data-rvok="${rv.m}">Entendido</button>`:""}</div>`;
+  }else if(compact)h+=`<div class="actions"><button class="btn ghost small" data-rvok="${rv.m}">Entendido</button></div>`;
+  return h;
+}
+function bindReview(root){
+  root.querySelectorAll("[data-rvset]").forEach(b=>b.onclick=()=>{S.home.budget.month=Number(b.dataset.rvset);S.home.budget.week=null;S.reviewed=S.reviewed||{};S.reviewed[prevMonth()]=true;save();render();toast("Presupuesto: "+eur(S.home.budget.month)+" al mes")});
+  root.querySelectorAll("[data-rvfix]").forEach(b=>b.onclick=()=>{const rv=monthReview(b.dataset.rvfix);
+    for(const r of rv.reasons){if(!r.fix)continue;if(r.fix.weekMode)S.home.shop.weekMode=r.fix.weekMode;if(r.fix.sacrifice){S.home.sacrifice=S.home.sacrifice||{};S.home.sacrifice[r.fix.sacrifice]=true}}
+    S.reviewed=S.reviewed||{};S.reviewed[b.dataset.rvfix]=true;
+    for(const s of Object.keys(S.plans))if(s>=weekStartFor(todayISO())&&!S.plans[s].confirmed)genWeekFromScratch(s);save();render();toast("Medidas aplicadas al menú")});
+  root.querySelectorAll("[data-rvok]").forEach(b=>b.onclick=()=>{S.reviewed=S.reviewed||{};S.reviewed[b.dataset.rvok]=true;save();render()});
+}
+const prevMonth=()=>{const d=new Date();return iso(new Date(d.getFullYear(),d.getMonth()-1,1)).slice(0,7)};
+// Los primeros 10 días del mes sale el resumen del anterior (si había menús)
+function reviewCard(){
+  const pm=prevMonth();if((S.reviewed||{})[pm]||new Date().getDate()>10)return "";
+  if(!weeksInMonth(pm).some(s=>S.plans[s]))return "";
+  return `<div class="rate" id="rvCard">${reviewHTML(monthReview(pm),true)}</div>`;
 }
 
 /* ---------- Ventanas ---------- */
@@ -544,6 +576,7 @@ function renderCompra(){
       for(const [pid,arr] of u)h+=`<li><b>${esc(P[pid].name)}</b>: `+arr.map(a=>`${fmtQty(a.q,P[pid].unit)} para ${a.label} (${esc(a.name)})`).join("; ")+`</li>`;
       h+=`</ul></div>`}
   }
+  if(listSel==="mes")h+=`<div class="card">${reviewHTML(monthReview(month),false)}</div>`;
   const wb=weekBudget(month);
   h+=`<div class="card"><h2>Presupuesto por semana</h2><table class="wtable">${sh.weeks.map((s,i)=>`<tr><td>Semana del ${shortDate(s)}${i===0?" (con la compra del mes)":""}</td><td class="${sh.perWeek[i]>wb?"up":""}">${eur(sh.perWeek[i])} / ${eur(wb)}</td></tr>`).join("")}</table></div>`;
   main.innerHTML=h+`</section>`;
@@ -552,6 +585,7 @@ function renderCompra(){
   main.querySelectorAll("[data-ck]").forEach(i=>i.onchange=()=>{if(i.checked)S.checks[i.dataset.ck]=true;else delete S.checks[i.dataset.ck];i.closest(".item").classList.toggle("done",i.checked);save()});
   document.getElementById("spentIn").onchange=e=>{const v=e.target.value;if(v==="")delete S.spent[sk];else S.spent[sk]=Number(v);save();renderHeader()};
   main.querySelectorAll("[data-saveorder]").forEach(b=>b.onclick=()=>{const items={};for(const it of l.items)items[it.pid]=it.packs;S.orders[b.dataset.saveorder]={items,savedAt:todayISO()};save();render();toast("Pedido guardado")});
+  bindReview(main);
   const fm=document.getElementById("fillMin");if(fm)fm.onclick=()=>{const r=fillToMinimum(month,wi);render();toast(r.moved.length?(r.ok?"Completado con: ":"No llega del todo. Añadido: ")+r.moved.join(", ").toLowerCase():"No hay nada del mes que se pueda adelantar")};
 }
 

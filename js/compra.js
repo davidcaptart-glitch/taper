@@ -69,3 +69,33 @@ function fillToMinimum(m,wi){
   for(const it of cands){if(cost>=min)break;a[it.pid]=wi;cost+=it.cost;moved.push(P[it.pid].name)}
   save();return {moved,ok:cost>=min,cost};
 }
+
+/* ---------- Resumen del mes ---------- */
+// Analiza un mes: presupuesto previsto y real, por qué se desvió, objetivos y propuesta para el siguiente
+function monthReview(m){
+  const sh=shopping(m), budget=Number(S.home.budget.month)||0, weeks=sh.weeks;
+  const realEntries=Object.entries(S.spent).filter(([k])=>k.startsWith(m+"|"));
+  const real=realEntries.reduce((t,[,v])=>t+(Number(v)||0),0);
+  const listsWith=Object.values(sh.lists).filter(l=>l.items.length).length;
+  const fees=Object.values(sh.lists).reduce((t,l)=>t+l.fee,0);
+  const eaten=weeks.reduce((t,st)=>t+(S.plans[st]?weekCost(st):0),0);
+  const spent=real&&realEntries.length>=listsWith?real:sh.total;
+  const reasons=[];
+  if(fees>0)reasons.push({eur:fees,txt:`Envíos de los pedidos online: ${eur(fees)}`,fix:{weekMode:"tienda"},fixTxt:"Compra semanal en tienda"});
+  if(sh.extrasTotal>0)reasons.push({eur:sh.extrasTotal,txt:`Caprichos y platos fijos sin receta: ${eur(sh.extrasTotal)}`});
+  const over=weeks.filter(st=>S.plans[st]&&weekCost(st)>weekFoodTarget(st)+0.5);
+  if(over.length)reasons.push({eur:over.reduce((t,st)=>t+weekCost(st)-weekFoodTarget(st),0),txt:`${over.length} ${over.length===1?"semana se pasó":"semanas se pasaron"} incluso con los platos más baratos que encajaban`,fix:{sacrifice:"proteina"},fixTxt:"Menos pescado y carne"});
+  const stock=sh.total-fees-sh.extrasTotal-(Number(S.home.budget.basics)||0)-eaten;
+  if(stock>5)reasons.push({eur:stock,txt:`Envases enteros: ${eur(stock)} de comida que queda en casa para otras semanas (arroz, aceite de los botes, congelados…)`});
+  if(real&&realEntries.length>=listsWith&&real>sh.total+3)reasons.push({eur:real-sh.total,txt:`Pagaste ${eur(real-sh.total)} más de lo previsto en la lista: compras fuera de la lista o precios distintos`});
+  reasons.sort((a,b)=>b.eur-a.eur);
+  // Objetivos: proteína, entrenos y comidas fuera o cambiadas
+  const days=[];const [y,mm]=m.split("-").map(Number);for(let d=1;d<=new Date(y,mm,0).getDate();d++)days.push(iso(new Date(y,mm-1,d)));
+  const past=days.filter(d=>d<todayISO()&&S.plans[weekStartFor(d)]);
+  let protDays=0,protOk=0;for(const d of past){const pt=dayProtein(me(),d);if(pt&&!pt.unknown){protDays++;if(pt.got>=pt.target*0.85)protOk++}}
+  let planned=0,done=0;for(const d of past){const ps=plannedSessions(d);planned+=ps.length;const res=((S.sport||{})[d]||{}).res||{};ps.forEach((_,i)=>{if(!res[i]||res[i].st!=="no")done++})}
+  const meals=Object.entries(S.meals||{}).filter(([k])=>k.startsWith(m));
+  const out=meals.filter(([,v])=>v.status==="fuera").length, other=meals.filter(([,v])=>v.status==="otro").length, notCooked=meals.filter(([,v])=>v.status==="nada").length;
+  const proposal=Math.ceil(Math.max(spent,budget*0.5)/5)*5;
+  return {m,budget,forecast:sh.total,real,realComplete:realEntries.length>=listsWith&&real>0,spent,ok:spent<=budget,reasons,protDays,protOk,planned,done,out,other,notCooked,proposal,fees};
+}

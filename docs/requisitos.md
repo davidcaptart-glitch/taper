@@ -52,6 +52,16 @@ aprende se ve y se corrige en una pantalla "Lo que sé de ti" (por persona: adul
   platos, menos peso a los gustos, compra semanal en tienda (sin envío) o subir el presupuesto a lo que cuesta.
   Se puede dejar decidido en el asistente.
 
+### Resumen del mes
+- Al final de cada mes: previsto frente a gastado de verdad, por qué se desvió (envíos, caprichos, semanas que
+  no llegaban, envases enteros, compras fuera de lista), proteína, entrenos y comidas fuera. Propone un
+  presupuesto realista o medidas para mantener el actual, con botones para aplicarlo.
+
+### Escanear tickets (pendiente)
+- Leer el ticket digital de Mercadona (PDF) o una foto del de papel (reconocimiento de texto en el móvil).
+- Apuntar el gasto real, relacionar cada línea con los productos, ver en qué se va el dinero (por pasillo, por
+  tipo, fuera de la lista), actualizar precios reales y marcar como comprado. Se usa en el resumen del mes.
+
 ### Planificación
 - Asistente de planificación (por defecto domingo 17:00):
   1. Entrenos de la semana (prerrellenado con la plantilla).

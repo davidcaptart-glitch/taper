@@ -1,17 +1,17 @@
 // Service worker de Táper: guarda la app para usarla sin conexión.
-// Al cambiar cualquier archivo de la app, sube VERSION para que los móviles descarguen la nueva.
-const VERSION = "taper-v2";
+// Al cambiar cualquier archivo de la app, sube VERSION aquí y el ?v= de index.html para que los móviles descarguen la nueva.
+const VERSION = "taper-v3";
 const SHELL = [
   "./",
   "index.html",
-  "css/app.css",
-  "js/base.js",
-  "js/datos.js",
-  "js/gustos.js",
-  "js/plan.js",
-  "js/compra.js",
-  "js/bienvenida.js",
-  "js/ui.js",
+  "css/app.css?v=3",
+  "js/base.js?v=3",
+  "js/datos.js?v=3",
+  "js/gustos.js?v=3",
+  "js/plan.js?v=3",
+  "js/compra.js?v=3",
+  "js/bienvenida.js?v=3",
+  "js/ui.js?v=3",
   "manifest.webmanifest",
   "data/festivos.json",
   "data/productos.json",
@@ -48,8 +48,10 @@ self.addEventListener("fetch", e => {
   if (networkFirst) {
     // precios.json se pide con ?t=… para saltarse cachés: se guarda sin ese parámetro
     const key = url.pathname.endsWith("precios.json") ? new Request(url.origin + url.pathname) : req;
+    // "no-cache": pregunta siempre al servidor si hay versión nueva (si no la hay, responde rápido)
+    const fresh = req.mode === "navigate" ? req : new Request(req.url, { cache: "no-cache" });
     e.respondWith(
-      fetch(req).then(res => {
+      fetch(fresh).then(res => {
         if (res.ok) { const copy = res.clone(); caches.open(VERSION).then(c => c.put(key, copy)); }
         return res;
       }).catch(() => caches.match(key, { ignoreSearch: true }).then(r => r || caches.match("index.html")))
