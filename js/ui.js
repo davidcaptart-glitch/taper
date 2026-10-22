@@ -1117,87 +1117,139 @@ function knowHTML(p){
 let accOpen=new Set();
 // Apartado desplegable del Perfil (recuerda si estaba abierto)
 const acc=(id,ic,title,sub,body)=>`<details class="acc" data-acc="${id}" ${accOpen.has(id)?"open":""}><summary><span class="ico">${ICONS[ic]?ico(ic):ic}</span><span class="tx">${title}${sub?`<small>${esc(sub)}</small>`:""}</span></summary><div class="accbody">${body}</div></details>`;
+// Una línea con lo esencial de cada persona (para su tarjeta en Perfil)
+function personLine(p){
+  const al=(p.allergies||[]).length,pr=(p.presence||{}).type;
+  return [p.ageRange?ageLabel(p.ageRange)+" años":p.kind==="nino"&&p.age?p.age+" años":p.kind==="adulto"?"adulto":"",
+    DIETS[dietOf(p)][1].toLowerCase(),al?al+(al===1?" alergia":" alergias"):"sin alergias",
+    !isMe(p)&&pr&&pr!=="siempre"?{alternas:"semanas alternas",findes:"fines de semana alternos",dias:"algunos días",manual:"lo marcas cada semana"}[pr]:"",
+    p.trains?"hace deporte":""].filter(Boolean).join(" · ");
+}
+// Ficha de una persona: todo lo suyo en un solo sitio, en 3 pestañas
+let personTab="comida";
+function openPerson(pid){
+  const p=S.people.find(x=>x.id===pid);if(!p)return;
+  const draw=()=>{
+    const RV={2:"❤️",1:"👍",rare:"🙂","-1":"👎"},hist=historyOf(p,20),y=isMe(p);
+    let body="";
+    if(personTab==="comida")body=knowHTML(p)+`<details style="margin-top:12px"><summary class="small"><b>Historial</b> <span class="muted">(${hist.length} ${hist.length===1?"comida reciente":"comidas recientes"})</span></summary>
+      ${hist.length?`<table class="wtable">${hist.map(x=>`<tr><td>${DSHORT[dow(x.date)]} ${shortDate(x.date)} · ${x.meal}</td><td style="text-align:left;padding-left:8px">${esc(x.name)}${x.note?` <span class="small muted">${esc(x.note)}</span>`:""}</td><td>${x.v!=null?RV[x.v]:""}</td></tr>`).join("")}</table>`:`<p class="small muted">Aún no hay comidas pasadas.</p>`}</details>`;
+    if(personTab==="cuando"){
+      if(y)body=`<p class="small">Tú estás siempre en casa para el menú. Lo que cambia de cada día (comes fuera, no cocinas…) se marca en el Menú tocando «Cambiar este día».</p>${smallSummary(p)}<button class="btn ghost small" data-edit="familia">Cambiar desayunos, almuerzos y meriendas</button>`;
+      else body=`<div class="small muted">${p.kind==="nino"?"niño o niña":"adulto"} · ración ${String(p.factor).replace(".",",")}${p.tupper?" · se lleva táper":""}</div>
+        ${turnText(p)?`<div class="small" style="margin-top:6px">${esc(turnText(p))}</div>`:""}${mealsAwayText(p)?`<div class="small" style="margin-top:4px">🍽️ ${esc(mealsAwayText(p))}</div>`:""}
+        ${smallSummary(p)}<button class="btn ghost small" data-edit="familia" style="margin-top:8px">Cambiar cuándo está y qué comidas hace</button>${kidCalendar(p)}${changesHTML(p)}`}
+    if(personTab==="deporte"){
+      const ad=p.kind==="adulto";
+      body=`${ad?`<h3>Objetivos</h3><p class="small">${esc(p.goals.map(g=>GOALS[g][0]).join(", ")||"Sin indicar")}</p><button class="btn ghost small" data-edit="objetivos:${p.id}">Cambiar objetivos</button>`:""}
+        <h3 style="margin-top:14px">Deporte</h3><p class="small">${p.trains?esc(p.sports.map(s=>SPORTS[s]).join(", ")||"Hace deporte")+" · "+Object.values(p.train||{}).flat().length+" sesiones a la semana":(y?"No entrenas":"No hace deporte")}</p>
+        <button class="btn ghost small" data-edit="entreno:${p.id}">${p.trains?"Cambiar días y horas":"Indicar deporte"}</button>`}
+    const inv=!y&&p.kind==="adulto"&&servidorOn();
+    showDialog(`<div class="mod person">${closeBtn}<div class="row" style="gap:12px;align-items:center"><span class="pav">${esc((p.name||"?").trim().charAt(0).toUpperCase())}</span><div><h2 style="margin:0">${esc(y?(p.name||"Tú"):personName(p))}</h2><div class="small muted">${esc(personLine(p))}</div></div></div>
+      ${inv?`<button class="btn ghost small" data-invite="${esc(p.id)}" style="margin:10px 0 0">${ico("mail-forward")} ${p.joined?"Reenviar invitación":"Que rellene sus preferencias"}</button>`:""}
+      <div class="segtab" role="tablist" style="margin-top:12px">${[["comida","Comida"],["cuando",y?"Comidas del día":"Cuándo está"],["deporte","Deporte y objetivos"]].map(([k,t])=>`<button role="tab" data-ptab="${k}" aria-selected="${personTab===k}">${t}</button>`).join("")}</div>
+      <div class="pbody">${body}</div></div>`,true);
+    dlg.querySelectorAll("[data-ptab]").forEach(b=>b.onclick=()=>{personTab=b.dataset.ptab;draw()});
+    bindPersonStuff(dlg,draw);
+  };
+  draw();
+}
+// Desayunos, almuerzos y meriendas de una persona, en una línea
+function smallSummary(p){
+  if(!p.smallSet)return `<p class="small muted" style="margin:8px 0 4px">Desayunos, almuerzos y meriendas: sin indicar (de momento no los planifico).</p>`;
+  const t=Object.keys(SMALL).filter(m=>((p.smallMeals||{})[m]||[]).some(x=>x!=="no")).map(m=>SMALL[m][1].toLowerCase());
+  return `<p class="small" style="margin:8px 0 4px">${t.length?"Hace "+t.join(", "):"No hace desayuno, almuerzo ni merienda en casa"}.</p>`;
+}
+// Botones de la ficha de una persona (también sirven en el Perfil)
+function bindPersonStuff(root,redraw){
+  const q=s=>root.querySelectorAll(s),find=id=>S.people.find(p=>p.id===id),again=()=>{save();redraw()};
+  q("[data-edit]").forEach(b=>b.onclick=()=>{if(dlg.open)dlg.close();openWizard(b.dataset.edit,"perfil");scrollTo(0,0)});
+  bindCasa(root);
+  q("[data-addch]").forEach(b=>b.onclick=()=>openChange(b.dataset.addch));
+  q("[data-delch]").forEach(b=>b.onclick=()=>{const [pp,cid]=b.dataset.delch.split("|");const p=find(pp);const c=(p.changes||[]).find(x=>x.id===cid);p.changes=p.changes.filter(x=>x.id!==cid);save();
+    if(c)for(const s of Object.keys(S.plans))if(addDays(s,6)>=c.from&&s<=c.to)ensureWeek(s);again();toast("Cambio quitado")});
+  q("[data-cal]").forEach(b=>b.onclick=()=>{const [yy,m]=(calMonth||month).split("-").map(Number);calMonth=iso(new Date(yy,m-1+Number(b.dataset.cal),1)).slice(0,7);redraw()});
+  q("[data-kcal]").forEach(b=>b.onclick=()=>{const [id,d]=b.dataset.kcal.split("|"),k=find(id);const o=S.days[d]=S.days[d]||{};o.kids=o.kids||{};
+    const ruleOn=presentByRule(k,d),nowOn=peopleAt(d).includes(k);
+    if(!nowOn===ruleOn)delete o.kids[id];else o.kids[id]=!nowOn;
+    save();if(S.plans[weekStartFor(d)])ensureWeek(weekStartFor(d));again()});
+  q("[data-unI]").forEach(b=>b.onclick=e=>{e.preventDefault();const [pp,pid]=b.dataset.uni.split("|");setIng(find(pp),pid,0);redraw()});
+  q("[data-unD]").forEach(b=>b.onclick=()=>{const [pp,rid]=b.dataset.und.split("|");setDish(find(pp),rid,null);redraw()});
+  q("[data-lok]").forEach(b=>b.onclick=()=>{const [pp,pid,v]=b.dataset.lok.split("|");setIng(find(pp),pid,Number(v),"Aprendido de tus valoraciones");redraw()});
+  q("[data-lno]").forEach(b=>b.onclick=()=>{const [pp,pid]=b.dataset.lno.split("|");find(pp).tastes.ignore[pid]=true;again()});
+}
 function renderPerfil(){
-  const RV={2:"❤️",1:"👍",rare:"🙂","-1":"👎"};
-  const fav=Object.values(me().tastes.dish).filter(v=>v>=1.5).length, rated=S.ratings.filter(x=>x.who===me().id).length, wks=Object.values(S.plans).filter(w=>w.confirmed).length;
+  const fav=Object.values(me().tastes.dish).filter(v=>v>=1.5).length, rated=S.ratings.filter(x=>x.who===me().id).length;
   let h=`<section class="view"><div class="phero"><button class="avatar ${S.avatar&&owns(S.avatar)?"emo":""}" id="avBtn" aria-label="Cambiar avatar">${S.avatar&&owns(S.avatar)?SHOP[S.avatar].ico:esc((me().name||"T").trim().charAt(0).toUpperCase())}</button>
     <div><div class="veb">Tu perfil</div><h1 class="vh">Hola, <em>${esc(me().name||"tú")}</em></h1>
-    <p>${S.people.length>1?`${S.people.length} en casa · `:""}${budgetSet()?eur(S.home.budget.month)+" al mes":"sin presupuesto"} · ${esc(chosenSupers().map(s=>superById(s).nombre).join(", "))}</p></div></div>
-    <div class="pstats"><div><b>${rated}</b><small>platos valorados</small></div><div><b>${fav}</b><small>favoritos</small></div><div><b>${wks}</b><small>semanas planificadas</small></div></div>`;
-  let fam="";
-  for(const p of S.people){const hist=historyOf(p,20);
-    const body=`${!isMe(p)?`<div class="small muted">${p.kind==="nino"?(p.age?p.age+" años · ":"")+"niño o niña":"adulto"} · ración ${String(p.factor).replace(".",",")}${p.tupper?" · se lleva táper":""}</div>${turnText(p)?`<div class="small" style="margin-top:6px">${esc(turnText(p))}</div>`:""}${mealsAwayText(p)?`<div class="small" style="margin-top:4px">🍽️ ${esc(mealsAwayText(p))}</div>`:""}${kidCalendar(p)}${changesHTML(p)}`:""}${knowHTML(p)}
-      <details style="margin-top:12px"><summary class="small"><b>Historial</b> <span class="muted">(${hist.length} ${hist.length===1?"comida reciente":"comidas recientes"})</span></summary>
-      ${hist.length?`<table class="wtable">${hist.map(x=>`<tr><td>${DSHORT[dow(x.date)]} ${shortDate(x.date)} · ${x.meal}</td><td style="text-align:left;padding-left:8px">${esc(x.name)}${x.note?` <span class="small muted">${esc(x.note)}</span>`:""}</td><td>${x.v!=null?RV[x.v]:""}</td></tr>`).join("")}</table>`:`<p class="small muted">Aún no hay comidas pasadas.</p>`}</details>`;
-    const likes=Object.values(p.tastes.dish).filter(v=>v>=1).length, nos=Object.values(p.tastes.ing).filter(v=>v<0).length;
-    const sub=`${likes} ${likes===1?"plato favorito":"platos favoritos"} · ${nos} ${nos===1?"cosa":"cosas"} que no ${isMe(p)?"te":"le"} ${nos===1?"gusta":"gustan"}`;
-    if(isMe(p))h+=acc(p.id,"mood-smile","Lo que sé de ti",sub,body);
-    else fam+=acc(p.id,"user",esc(personName(p)),sub,body);
-  }
-  if(fam)h+=acc("familia","users-group","Tu familia",S.people.filter(p=>!isMe(p)).map(personName).join(", "),fam);
-  const items=[["aparatos","Aparatos",Object.entries(APP).filter(([k])=>S.home.apps.includes(k)).map(([,v])=>v).join(", ")],["zona","Supermercados y zona",[chosenSupers().map(s=>superById(s).nombre).join(", ")+(cheapestMode()?" (lo más barato)":""),S.home.cp,S.home.municipio].filter(Boolean).join(" · ")||"Sin indicar"],["dieta","Dieta y alergias",S.people.map(p=>(p.id==="yo"?"Tú":personName(p))+": "+DIETS[dietOf(p)][1].toLowerCase()+((p.allergies||[]).length?" · "+p.allergies.length+" alergias":"")).join(" · ")],["familia","Quién come en casa",others().map(personName).join(", ")||"Solo tú"],
-    ...kids().map(k=>["entreno:"+k.id,"Deporte de "+personName(k),k.trains?k.sports.map(s=>SPORTS[s]).join(", "):"No hace deporte"]),
-    ...adults().flatMap(a=>[["objetivos:"+a.id,isMe(a)?"Tus objetivos":"Objetivos de "+personName(a),a.goals.map(g=>GOALS[g][0]).join(", ")],["entreno:"+a.id,isMe(a)?"Tu entrenamiento":"Entrenamiento de "+personName(a),a.trains?a.sports.map(s=>SPORTS[s]).join(", "):"No entrena"]]),["cocina","Tu semana, caprichos y horario",(S.home.cookMode==="lote"?"Por lotes":"Cada día")+" · "+S.fixed.length+" platos fijos"],
-    ["plan","Planificación",(S.home.start&&S.home.start>todayISO()?"Empieza el "+shortDate(S.home.start)+" · ":"")+{diaria:"Cada día",semanal:"Cada semana",quincenal:"Cada dos semanas",mensual:"Cada mes"}[S.home.planFreq]+", "+DAYS[S.home.planDay].toLowerCase()+" a las "+S.home.planTime],
+    <p>${S.people.length>1?`${S.people.length} en casa · `:""}${budgetSet()?eur(S.home.budget.month)+" al mes":"sin presupuesto"} · ${esc(chosenSupers().map(s=>superById(s).nombre).join(", "))}</p>
+    ${rated||fav?`<p class="small muted" style="margin:2px 0 0">${rated} ${rated===1?"plato valorado":"platos valorados"} · ${fav} ${fav===1?"favorito":"favoritos"}</p>`:""}</div></div>`;
+  // 1. Personas: una tarjeta por persona; al tocarla, su ficha
+  h+=acc("personas","users-group","Personas",S.people.map(p=>isMe(p)?"tú":personName(p)).join(", "),
+    `<div class="plist">${S.people.map(p=>`<button class="prow" data-person="${esc(p.id)}"><span class="pav">${esc((p.name||"?").trim().charAt(0).toUpperCase())}</span><span class="pt"><b>${esc(isMe(p)?(p.name||"Tú")+" (tú)":personName(p))}</b><small>${esc(personLine(p))}</small></span>${ico("chevron-right")||"›"}</button>`).join("")}</div>
+    <button class="btn ghost small" data-edit="familia" style="margin-top:8px">${ico("plus")||"+"} Añadir o quitar personas</button>`);
+  // 2. Tu casa y tu menú
+  const items=[["aparatos","Aparatos",Object.entries(APP).filter(([k])=>S.home.apps.includes(k)).map(([,v])=>v).join(", ")],
+    ["cocina","Cómo cocinas",(S.home.cookMode==="lote"?"Por lotes":"Cada día")+((repRule("comida").days||1)>1||(repRule("cena").days||1)>1?" · repites platos":"")+" · "+S.fixed.length+" platos fijos"],
     ["dificultad","Dificultad de los platos",{facil:"Solo fáciles",moderada:"Fáciles y moderados",dificil:"Todas"}[maxDiff()]],
+    ["plan","Planificación",(S.home.start&&S.home.start>todayISO()?"Empieza el "+shortDate(S.home.start)+" · ":"")+{diaria:"Cada día",semanal:"Cada semana",quincenal:"Cada dos semanas",mensual:"Cada mes"}[S.home.planFreq]+", "+DAYS[S.home.planDay].toLowerCase()+" a las "+S.home.planTime],
+    ["zona","Supermercados y código postal",[chosenSupers().map(s=>superById(s).nombre).join(", ")+(cheapestMode()?" (lo más barato)":""),S.home.cp,S.home.municipio].filter(Boolean).join(" · ")||"Sin indicar"],
     ["compra","Compra y presupuesto",budgetSet()?eur(S.home.budget.month)+" al mes":"Sin presupuesto"]];
-  h+=acc("ajustes","settings","Ajustes","Familia, objetivos, entrenos, compra…",`<div class="settingslist">${items.map(([id,t,d])=>`<button data-edit="${id}">${t}<small>${esc(d)}</small></button>`).join("")}</div>`);
-  if(servidorOn())h+=acc("casa","home","Casa compartida",S.casa?adults().filter(a=>a.joined&&!isMe(a)).map(personName).concat(["tú"]).join(", ")+" · mismo menú y compra":"Invita a tu pareja a ver y cambiar el menú",casaCard());
+  h+=acc("casamenu","home","Tu casa y tu menú","Cocina, planificación, súper, presupuesto y festivos",
+    `<button class="btn small" id="afinarOpen" style="margin-bottom:8px">${ico("sparkles")} Afinar mi menú</button>
+    <div class="settingslist">${items.map(([id,t,d])=>`<button data-edit="${id}">${t}<small>${esc(d)}</small></button>`).join("")}</div>
+    <details class="more" style="margin-top:10px"><summary>${ico("calendar-event")} Festivos <span class="small muted">· Cataluña${S.home.municipio?" y "+esc(S.home.municipio):""}${S.home.festivosExtra.length?" · "+S.home.festivosExtra.length+" añadidos":""}</span></summary>
+      <p class="small muted">Se usan los de Cataluña${S.home.municipio&&FEST&&FEST.locales[S.home.municipio]?" y los locales de "+esc(S.home.municipio):""}. Añade los locales de tu municipio u otros días especiales.</p>
+      ${S.home.festivosExtra.map(d=>`<div class="fixed"><span>${esc(longDate(d))}</span><button class="btn ghost small" data-delfest="${d}">Quitar</button></div>`).join("")}
+      <div class="row"><input type="date" id="festIn" style="flex:1"><button class="btn small" id="festAdd">Añadir</button></div></details>`);
+  // 3. Compartir
+  if(servidorOn())h+=acc("compartir","share","Compartir",S.casa?"Casa compartida activa":"Casa compartida, menú compartido e invitar",
+    casaCard().replace('<div class="card">','<div>')+`<div class="actions" style="margin-top:10px"><button class="btn ghost small" id="shareMenuP">${ico("users")} Que alguien vea el menú (solo ver)</button><button class="btn ghost small" id="shareApp">${ico("share")} Recomendar Táper</button></div>`);
+  // 4. Coins y aspecto
+  h+=acc("coins","coins","Coins y aspecto","Tus coins, la tienda, colores y estéticas",`<div id="coinsBox">${servidorOn()?`<p class="small muted">Cargando tus coins…</p>`:""}</div>
+    <p class="small muted">Ganas coins cuando alguien abre tu enlace (+1), empieza a usar Táper (+10), cada semana que la sigue usando (+2) y por cada ticket que subes (+3).</p>
+    <details class="more"><summary>${ico("share")} Tu QR y tu enlace para invitar</summary><div id="qrBox" style="display:grid;place-items:center;margin:10px 0;background:#fff;border-radius:12px;padding:10px"></div>
+      <div class="actions"><button class="btn ghost small" id="copyApp">Copiar enlace</button></div></details>
+    <div class="field"><label>Tema</label><div class="chips">${[["light","Claro"],["dark","Oscuro"],["auto","Como el móvil"]].map(([k,t])=>chip("data-theme-set",k,(S.home.theme||"light")===k,t)).join("")}</div></div>
+    <div class="field"><label>Color</label><div class="chips">${chip("data-accent","rojo",!S.accent||S.accent==="rojo","🍅 Rojo")}${Object.keys(ACCENTS).filter(k=>k!=="rojo"&&owns("tema_"+k)).map(k=>chip("data-accent",k,S.accent===k,SHOP["tema_"+k].ico+" "+SHOP["tema_"+k].t.replace("Tema ",""))).join("")}<button class="chip" id="moreColors">🛍️ Más colores</button></div></div>
+    <div class="field"><label>Estética</label><div class="chips">${chip("data-skin","",!S.skin,"✨ Normal")}${Object.keys(SHOP).filter(k=>k.startsWith("skin_")&&owns(k)).map(k=>chip("data-skin",k.slice(5),S.skin===k.slice(5),SHOP[k].ico+" "+SHOP[k].t)).join("")}<button class="chip" id="moreSkins">🛍️ Más estéticas</button></div>
+      <div class="hint">Las estéticas cambian el fondo, las letras y las tarjetas. Con una estética puesta, manda su color. Toca tu inicial arriba para cambiar el avatar.</div></div>`);
+  // 5. Avisos
   h+=acc("avisos","bell","Avisos en el móvil",S.notif&&S.notif.on?"Activados":"Desactivados",avisosCard().replace('<div class="card"><h2>Avisos en el móvil</h2>','<div>'));
-  h+=acc("coins","coins","Invita y gana coins","Tu QR personal y tus coins",`<p class="small muted">Este es <b>tu</b> código: quien lo escanee con la cámara del móvil abre Táper y queda como invitado tuyo. Ganas coins solo cuando hay respuesta: alguien abre tu enlace (+1), empieza a usar Táper (+10) y cada semana que la sigue usando (+2).</p>
-    <div id="coinsBox">${servidorOn()?`<p class="small muted">Cargando tus coins…</p>`:""}</div>
-    <div id="qrBox" style="display:grid;place-items:center;margin:10px 0;background:#fff;border-radius:12px;padding:10px"></div>
-    <div class="actions"><button class="btn" id="shareApp">Enviar el enlace</button><button class="btn ghost" id="copyApp">Copiar enlace</button></div>`);
-  h+=acc("privacidad","lock","Tus datos y privacidad","Qué se queda en tu móvil y qué sale",`<p class="small"><b>Se queda solo en tu móvil:</b> tu familia, gustos, alergias, menús, lista de la compra, valoraciones y las fotos de tus platos. No hay cuenta ni contraseña.</p>
-    <p class="small"><b>Sale del móvil solo si lo usas:</b></p>
-    <ul class="small" style="margin:0 0 6px 18px;padding:0">
+  // 6. Tus datos
+  h+=acc("datos","lock","Tus datos",`Copia de seguridad y privacidad · versión ${APP_VERSION}`,`<p class="small muted">Todo se guarda solo en este móvil. Descarga una copia de vez en cuando y antes de cambiar de móvil.</p>
+    ${needsTransfer()?`<div class="okbox"><b>¿Vas a instalar Táper?</b> Tus datos pasarán solos a la app. Si no te los reconoce, usa este código de traspaso: <b style="letter-spacing:.15em">${esc(transferCode())}</b></div>`:""}
+    ${isStandalone()&&servidorOn()?`<button class="btn ghost small" id="trBring" style="margin-bottom:8px">Traer mis datos de Safari</button>`:""}
+    <div class="actions"><button class="btn" id="exp">Exportar copia</button><button class="btn ghost" id="imp">Importar copia</button></div><input type="file" id="impFile" accept="application/json,.json" hidden>
+    <details class="more"><summary>Empezar de cero</summary><p class="small muted">Guardo tus datos en este móvil, la app vuelve a la primera pantalla y, cuando quieras, los recuperas tal cual.</p>
+      <div class="actions"><button class="btn small" id="fresh">Empezar de cero (guardando mis datos)</button>${snapshot()?`<button class="btn ghost small" id="restoreSnap">Recuperar mis datos del ${esc(new Date(snapshot().at).toLocaleString("es-ES",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}))}</button>`:""}</div></details>
+    <h3 style="margin-top:14px">Privacidad</h3>
+    <p class="small">Tu familia, gustos, menús y compra se quedan en tu móvil: no hay cuenta ni contraseña. Solo sale lo necesario para lo que uses (avisos, precios de tu zona, tickets, compartir) a un servidor propio de Táper, y no se vende ni se comparte.</p>
+    <details class="more"><summary>Ver el detalle</summary><ul class="small" style="margin:6px 0 6px 18px;padding:0">
       <li><b>Avisos:</b> el texto de tus próximos avisos, para mandártelos a su hora.</li>
       <li><b>Código postal:</b> para saber qué precios de supermercado te tocan.</li>
       <li><b>Tickets:</b> los productos y precios del ticket, sin tu nombre, para corregir precios. La foto no se guarda.</li>
       <li><b>Casa compartida o menú compartido:</b> una copia del menú, la familia y la compra mientras compartas, para que lo vea la otra persona.</li>
       <li><b>Invitaciones y coins:</b> un código anónimo (${esc(S.uid||"")}) con tus coins y a quién invitaste.</li>
-      <li><b>Visitas:</b> un recuento anónimo, sin cookies, que puedes quitar en Sugerencias y opinión.</li></ul>
-    <p class="small muted">Todo va a un servidor propio de Táper (Cloudflare). No se vende ni se comparte con nadie. Para llevarte tus datos o borrarlo todo, usa Copia y novedades.</p>`);
-  h+=acc("opinion","message-circle","Sugerencias y opinión","Ideas, recetas, encuesta y privacidad",`${suggestUrl()?`<p class="small muted">¿Se te ocurre una mejora, una receta o has visto un fallo? Cuéntamelo.</p><a class="btn" href="${esc(suggestUrl())}" target="_blank" rel="noopener">Enviar una sugerencia</a>`:`<p class="small muted">Pronto podrás enviar sugerencias desde aquí.</p>`}
-    <div class="actions">${recipeSuggestOn()?`<button class="btn ghost small" id="sugRec2">🍳 Sugerir una receta</button>`:""}${surveyOn()?`<button class="btn ghost small" id="svProfile">📋 Encuesta del mes</button>`:""}</div>
-    <label class="row small"><input type="checkbox" id="noStats" ${S.noStats?"":"checked"} style="width:auto"> Contar mis visitas de forma anónima (sin cookies ni datos personales) para saber cuánta gente usa Táper</label>`);
-  h+=acc("festivos","calendar-event","Festivos",`Cataluña${S.home.municipio?" y "+S.home.municipio:""}${S.home.festivosExtra.length?" · "+S.home.festivosExtra.length+" añadidos":""}`,`<p class="small muted">Se usan los de Cataluña${S.home.municipio&&FEST&&FEST.locales[S.home.municipio]?" y los locales de "+esc(S.home.municipio):""}. Añade los locales de tu municipio u otros días especiales.</p>
-    ${S.home.festivosExtra.map(d=>`<div class="fixed"><span>${esc(longDate(d))}</span><button class="btn ghost small" data-delfest="${d}">Quitar</button></div>`).join("")}
-    <div class="row"><input type="date" id="festIn" style="flex:1"><button class="btn small" id="festAdd">Añadir</button></div>`);
-  h+=acc("app","package","Copia de seguridad y novedades",`Versión ${APP_VERSION} · tu código ${S.uid}`,`<p class="small muted">Todo se guarda solo en este móvil. Descarga una copia de vez en cuando y antes de cambiar de móvil.</p>
-    ${needsTransfer()?`<div class="okbox"><b>¿Vas a instalar Táper?</b> Tus datos pasarán solos a la app. Si no te los reconoce, usa este código de traspaso: <b style="letter-spacing:.15em">${esc(transferCode())}</b></div>`:""}
-    ${isStandalone()&&servidorOn()?`<button class="btn ghost small" id="trBring" style="margin-bottom:8px">Traer mis datos de Safari</button>`:""}
-    <div class="okbox small" style="margin-bottom:10px"><b>Probar el inicio de la app</b><br>Guardo tus datos en este móvil, empiezas de cero y, cuando quieras, los recuperas tal cual.
-      <div class="actions" style="margin-top:8px"><button class="btn small" id="fresh">Empezar de cero (guardando mis datos)</button>${snapshot()?`<button class="btn ghost small" id="restoreSnap">Recuperar mis datos del ${esc(new Date(snapshot().at).toLocaleString("es-ES",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}))}</button>`:""}</div></div>
-    <div class="actions"><button class="btn" id="exp">Exportar copia</button><button class="btn ghost" id="imp">Importar copia</button></div><input type="file" id="impFile" accept="application/json,.json" hidden>
-    <div class="field"><label>Aspecto</label><div class="chips">${[["light","Claro"],["dark","Oscuro"],["auto","Como el móvil"]].map(([k,t])=>chip("data-theme-set",k,(S.home.theme||"light")===k,t)).join("")}</div></div>
-    <div class="field"><label>Color</label><div class="chips">${chip("data-accent","rojo",!S.accent||S.accent==="rojo","🍅 Rojo")}${Object.keys(ACCENTS).filter(k=>k!=="rojo"&&owns("tema_"+k)).map(k=>chip("data-accent",k,S.accent===k,SHOP["tema_"+k].ico+" "+SHOP["tema_"+k].t.replace("Tema ",""))).join("")}<button class="chip" id="moreColors">🛍️ Más colores</button></div></div>
-    <div class="field"><label>Estética</label><div class="chips">${chip("data-skin","",!S.skin,"✨ Normal")}${Object.keys(SHOP).filter(k=>k.startsWith("skin_")&&owns(k)).map(k=>chip("data-skin",k.slice(5),S.skin===k.slice(5),SHOP[k].ico+" "+SHOP[k].t)).join("")}<button class="chip" id="moreSkins">🛍️ Más estéticas</button></div>
-      <div class="hint">Las estéticas cambian el fondo, las letras y las tarjetas. Con una estética puesta, manda su color.</div></div>
-    <div class="actions"><button class="btn ghost small" id="newsAll">Ver todas las novedades</button><button class="btn ghost small" id="restartWiz">Repetir el asistente</button></div>`);
+      <li><b>Visitas:</b> un recuento anónimo, sin cookies, que puedes quitar aquí abajo.</li></ul></details>
+    <label class="row small"><input type="checkbox" id="noStats" ${S.noStats?"":"checked"} style="width:auto"> Contar mis visitas de forma anónima (sin cookies ni datos personales)</label>
+    <div class="actions"><button class="btn ghost small" id="newsAll">Ver todas las novedades</button></div>
+    <p class="small muted">Versión ${APP_VERSION} · tu código ${esc(S.uid)}</p>`);
+  // Al final, en una línea: sugerencias
+  h+=`<div class="pfoot">${suggestUrl()?`<a href="${esc(suggestUrl())}" target="_blank" rel="noopener">${ico("message-circle")} Enviar una sugerencia</a>`:""}${recipeSuggestOn()?`<button class="linkbtn" id="sugRec2">${ico("chef-hat")} Sugerir una receta</button>`:""}${surveyOn()?`<button class="linkbtn" id="svProfile">${ico("chart-bar")} Encuesta del mes</button>`:""}</div>`;
   h+=`</section>`;
   main.innerHTML=h;
-  const q=s=>main.querySelectorAll(s), find=id=>S.people.find(p=>p.id===id);
+  const q=s=>main.querySelectorAll(s);
   q("details.acc").forEach(d=>d.addEventListener("toggle",()=>{if(d.open)accOpen.add(d.dataset.acc);else accOpen.delete(d.dataset.acc)}));
-  q("[data-edit]").forEach(b=>b.onclick=()=>{openWizard(b.dataset.edit);scrollTo(0,0)});
-  bindCasa(main);
-  q("[data-addch]").forEach(b=>b.onclick=()=>openChange(b.dataset.addch));
-  q("[data-delch]").forEach(b=>b.onclick=()=>{const [pp,cid]=b.dataset.delch.split("|");const p=find(pp);const c=(p.changes||[]).find(x=>x.id===cid);p.changes=p.changes.filter(x=>x.id!==cid);save();
-    if(c)for(const s of Object.keys(S.plans))if(addDays(s,6)>=c.from&&s<=c.to)ensureWeek(s);save();render();toast("Cambio quitado")});
-  q("[data-cal]").forEach(b=>b.onclick=()=>{const [y,m]=(calMonth||month).split("-").map(Number);calMonth=iso(new Date(y,m-1+Number(b.dataset.cal),1)).slice(0,7);render()});
-  q("[data-kcal]").forEach(b=>b.onclick=()=>{const [id,d]=b.dataset.kcal.split("|"),k=find(id);const o=S.days[d]=S.days[d]||{};o.kids=o.kids||{};
-    const ruleOn=presentByRule(k,d), nowOn=peopleAt(d).includes(k);
-    if(!nowOn===ruleOn)delete o.kids[id];else o.kids[id]=!nowOn;
-    save();if(S.plans[weekStartFor(d)])ensureWeek(weekStartFor(d));save();render()});
-  q("[data-unI]").forEach(b=>b.onclick=e=>{e.preventDefault();const [pp,pid]=b.dataset.uni.split("|");setIng(find(pp),pid,0);render()});
-  q("[data-unD]").forEach(b=>b.onclick=()=>{const [pp,rid]=b.dataset.und.split("|");setDish(find(pp),rid,null);render()});
-  q("[data-lok]").forEach(b=>b.onclick=()=>{const [pp,pid,v]=b.dataset.lok.split("|");setIng(find(pp),pid,Number(v),"Aprendido de tus valoraciones");render()});
-  q("[data-lno]").forEach(b=>b.onclick=()=>{const [pp,pid]=b.dataset.lno.split("|");find(pp).tastes.ignore[pid]=true;save();render()});
+  q("[data-person]").forEach(b=>b.onclick=()=>{personTab="comida";openPerson(b.dataset.person)});
+  bindPersonStuff(main,render);
+  bindAfinar(main);
+  document.getElementById("shareMenuP")?.addEventListener("click",openShareMenu);
   q("[data-delfest]").forEach(b=>b.onclick=()=>{S.home.festivosExtra=S.home.festivosExtra.filter(d=>d!==b.dataset.delfest);save();refreshPlans();render()});
   document.getElementById("festAdd").onclick=()=>{const v=document.getElementById("festIn").value;if(v&&!S.home.festivosExtra.includes(v)){S.home.festivosExtra.push(v);S.home.festivosExtra.sort();save();refreshPlans();render()}};
   document.getElementById("fresh")?.addEventListener("click",()=>{
     showDialog(`<div class="mod">${closeBtn}<h2>¿Empezar de cero?</h2><p>Guardo una copia de todo en este móvil (familia, gustos, menús, compra…) y la app vuelve a la primera pantalla, como si la abrieras por primera vez.</p>
-      <p class="small muted">Para volver a tus datos: botón «Recuperar mis datos» en la primera pantalla o aquí, en Perfil. Si ya había otra copia guardada, se sustituye por esta.</p>
+      <p class="small muted">Para volver a tus datos: botón «Recuperar mis datos» en la primera pantalla o aquí, en Perfil › Tus datos. Si ya había otra copia guardada, se sustituye por esta.</p>
       <div class="actions"><button class="btn wide" id="freshOk">Guardar y empezar de cero</button></div></div>`);
     dlg.querySelector("#freshOk").onclick=()=>{if(startFresh()){dlg.close();wiz={i:0,single:null};tab="wizard";render();scrollTo(0,0);toast("Tus datos están guardados. Empieza cuando quieras")}}});
   document.getElementById("restoreSnap")?.addEventListener("click",()=>{if(confirm("¿Recuperar tus datos guardados? Lo que tienes ahora se sustituye.")&&restoreSnapshot()){tab="perfil";render();toast("Datos recuperados")}});
@@ -1218,10 +1270,10 @@ function renderPerfil(){
   document.getElementById("sugRec2")?.addEventListener("click",openSuggestRecipe);
   document.getElementById("noStats").onchange=e=>{S.noStats=!e.target.checked;save();toast(S.noStats?"No se contarán tus visitas":"Gracias: se contarán de forma anónima")};
   const url=shareLink();fillStats();
-  loadScript("https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js").then(()=>{const qr=qrcode(0,"M");qr.addData(url);qr.make();const b=document.getElementById("qrBox");if(b)b.innerHTML=qr.createSvgTag({cellSize:6,margin:2,scalable:true}).replace("<svg ",'<svg style="width:220px;height:220px" ')}).catch(()=>{const b=document.getElementById("qrBox");if(b)b.textContent=url});
-  document.getElementById("shareApp").onclick=async()=>{try{if(navigator.share){await navigator.share({title:"Táper",text:"Menú semanal, tápers y lista de la compra con precios de Mercadona",url});evento("compartir").then(fillStats)}else{await navigator.clipboard?.writeText(url);toast("Enlace copiado");evento("compartir").then(fillStats)}}catch(e){}};
+  const qrb=main.querySelector("#qrBox");qrb&&qrb.closest("details").addEventListener("toggle",()=>{if(qrb.innerHTML)return;
+    loadScript("https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js").then(()=>{const qr=qrcode(0,"M");qr.addData(url);qr.make();qrb.innerHTML=qr.createSvgTag({cellSize:6,margin:2,scalable:true}).replace("<svg ",'<svg style="width:220px;height:220px" ')}).catch(()=>{qrb.textContent=url})});
+  document.getElementById("shareApp")?.addEventListener("click",async()=>{try{if(navigator.share){await navigator.share({title:"Táper",text:"Menú semanal, tápers y lista de la compra con precios de Mercadona",url});evento("compartir").then(fillStats)}else{await navigator.clipboard?.writeText(url);toast("Enlace copiado");evento("compartir").then(fillStats)}}catch(e){}});
   document.getElementById("copyApp").onclick=()=>{navigator.clipboard?.writeText(url).then(()=>{toast("Enlace copiado");evento("compartir").then(fillStats)},()=>toast(url))};
-  document.getElementById("restartWiz").onclick=()=>{S.onboarded=false;wiz={i:0,single:null};save();render()};
 }
 
 /* ---------- Navegación y arranque ---------- */

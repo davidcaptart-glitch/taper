@@ -572,7 +572,7 @@ function startAfinar(keys){
 function finishAfinar(){
   const inv=S.afinar&&S.afinar.invite;wiz={i:0,single:null};
   preparingScreen(()=>{redoFromToday()},()=>{
-    if(inv){S.afinar.invite=false;tab="perfil";accOpen.add("casa");render();toast("Invita desde aquí a tu familiar")}
+    if(inv){S.afinar.invite=false;tab="perfil";accOpen.add("compartir");render();toast("Invita desde aquí a tu familiar")}
     else{tab="menu";render();toast("Menú rehecho con lo que me has contado")}});
 }
 // En el Menú: después del primer menú, "¿Quieres afinarlo más?" (y luego, siempre a mano)

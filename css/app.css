@@ -997,3 +997,14 @@ details.aisle{margin-top:10px}
 .ostep .osbar i{display:block;height:100%;background:var(--accent)}
 .ostep .osimg{display:grid;place-items:center}
 .ostep .osimg .pimg,.ostep .osimg img{width:140px;height:140px;border-radius:18px;object-fit:contain}
+
+/* Perfil: personas y ficha */
+.plist{display:grid;gap:8px}
+.prow{display:flex;align-items:center;gap:12px;width:100%;border:0;background:var(--surface-2);border-radius:16px;padding:10px 12px;text-align:left;font:inherit;color:inherit;cursor:pointer}
+.prow .pt{flex:1;min-width:0}.prow .pt b{display:block}.prow .pt small{display:block;color:var(--muted);font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pav{width:40px;height:40px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700;flex:none}
+.mod.person .pbody{margin-top:12px}
+.pfoot{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:18px 0 6px;font-size:.88rem}
+.pfoot a,.linkbtn{color:var(--muted);text-decoration:none;border:0;background:none;font:inherit;cursor:pointer;display:inline-flex;gap:5px;align-items:center}
+.prow{box-sizing:border-box;max-width:100%}.prow .ic{flex:none;color:var(--muted)}
+.plist{grid-template-columns:minmax(0,1fr)}.plist>.prow{min-width:0;width:auto}.prow .pt{overflow:hidden}

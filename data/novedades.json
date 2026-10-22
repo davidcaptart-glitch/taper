@@ -747,6 +747,17 @@
         "En Android, desde el correo o la app del súper: toca Compartir en el PDF del ticket y elige Táper. Se abre y se lee solo.",
         "En iPhone, de momento, súbelo desde Compra › Subir el ticket."
       ]
+    },
+    {
+      "version": 84,
+      "fecha": "2026-10-23",
+      "titulo": "Perfil más claro",
+      "cambios": [
+        "Perfil pasa de 11 apartados a 6: Personas, Tu casa y tu menú, Compartir, Coins y aspecto, Avisos y Tus datos.",
+        "Cada persona tiene su ficha con tres pestañas: comida (dieta, alergias, gustos), cuándo está (custodia, calendario, cambios) y deporte y objetivos.",
+        "Festivos y «Afinar mi menú» están ahora en Tu casa y tu menú; colores y estéticas, en Coins y aspecto; la privacidad, en Tus datos.",
+        "Las sugerencias y la encuesta, como enlaces al final."
+      ]
     }
   ]
 }
