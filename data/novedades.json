@@ -93,6 +93,18 @@
         "Avisa de lo que lleva más de 3 meses y lo propone antes en los menús.",
         "El día de un plato con carne o pescado congelado te pregunta si lo descongelaste; si no, te da un plan B."
       ]
+    },
+    {
+      "version": 10,
+      "fecha": "2026-10-22",
+      "titulo": "Fotos, avisos y coins",
+      "cambios": [
+        "Fotos de los productos y de los platos (un collage con sus ingredientes). Haz una foto de tu plato y la verás en su lugar.",
+        "Avisos en el móvil: descongelar, qué cocinar hoy, ¿qué tal?, ¿entrenaste?, planificar… Actívalos en Perfil.",
+        "Tu QR personal para invitar: ganas coins al compartir, cuando alguien empieza a usar Táper y cada semana que la sigue usando.",
+        "Más de 20 deportes para elegir, agrupados por tipo.",
+        "Para ahorrar puedes aceptar repetir platos, entre semanas o en la misma semana."
+      ]
     }
   ]
 }

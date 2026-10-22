@@ -24,7 +24,7 @@
     "tipoReceta": "Receta nueva"
   },
   "avisos": {
-    "url": "",
+    "url": "https://taper-avisos.taper-david.workers.dev",
     "vapidPublic": "BBt_pdF9LNXTil3nPVc_RX6itc-JIQw1fOF-1yiDgCNY097PNXKuci7kCSwlIW9mapPWuK6OixrUIRGlaivuIWE"
   }
 }

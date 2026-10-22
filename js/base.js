@@ -2,16 +2,25 @@
 "use strict";
 
 // Versión de la app: súbela (y el ?v= de index.html y VERSION de sw.js) en cada mejora, y añade sus novedades a data/novedades.json
-const APP_VERSION = 9;
+const APP_VERSION = 10;
 
 /* ---------- Utilidades ---------- */
 const DAYS = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];   // índice 0 = lunes
 const DSHORT = ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"];
 const APP = {air:"Air fryer",horno:"Horno",vitro:"Vitro o fogones",micro:"Microondas",ninguno:"Sin cocinar"};
 const GROUP = {carne:"Carne",pescado:"Pescado",legumbre:"Legumbre",huevo:"Huevo",vegetal:"Vegetal"};
-const SPORTS = {fuerza:"Fuerza o gimnasio",calistenia:"Calistenia",correr:"Correr",bici:"Bici",natacion:"Natación",equipo:"Deporte de equipo",yoga:"Yoga o pilates",otro:"Otro"};
-const ENDURANCE = new Set(["correr","bici","natacion","equipo"]);
-const STRENGTH = new Set(["fuerza","calistenia"]);
+// Deportes: resistencia (piden más hidratos), fuerza (más proteína), mixtos (las dos cosas) y suaves
+const SPORTS = {
+  fuerza:"Fuerza o gimnasio",calistenia:"Calistenia",escalada:"Escalada",
+  crossfit:"CrossFit",hiit:"HIIT o funcional",boxeo:"Boxeo",artes:"Artes marciales",
+  correr:"Correr",bici:"Bici",spinning:"Spinning",natacion:"Natación",montana:"Senderismo o montaña",triatlon:"Triatlón",remo:"Remo",
+  futbol:"Fútbol",baloncesto:"Baloncesto",padel:"Pádel",tenis:"Tenis",equipo:"Otro deporte de equipo",baile:"Baile",
+  yoga:"Yoga",pilates:"Pilates",otro:"Otro"
+};
+const SPORT_GROUPS = {"Fuerza":["fuerza","calistenia","escalada"],"Mixtos":["crossfit","hiit","boxeo","artes"],
+  "Resistencia":["correr","bici","spinning","natacion","montana","triatlon","remo"],"Equipo y raqueta":["futbol","baloncesto","padel","tenis","equipo","baile"],"Suaves":["yoga","pilates","otro"]};
+const ENDURANCE = new Set(["correr","bici","spinning","natacion","montana","triatlon","remo","futbol","baloncesto","padel","tenis","equipo","baile","crossfit","hiit","boxeo","artes"]);
+const STRENGTH = new Set(["fuerza","calistenia","escalada","crossfit","hiit","boxeo","artes"]);
 const GOALS = {
   rendimiento:["Rendimiento deportivo","Hidratos antes de entrenar y recuperación después"],
   musculo:["Ganar músculo","Más proteína y raciones algo mayores"],
@@ -20,10 +29,10 @@ const GOALS = {
   ahorrar:["Ahorrar","Recetas baratas y aprovechar ingredientes"],
   rapido:["Ir rápido","Recetas de menos de 20 minutos"]
 };
+const REPEAT = {no:["No repetir","Variedad máxima"],semanas:["Repetir entre semanas","Algún plato de las semanas anteriores"],semana:["Repetir también en la misma semana","El mismo plato dos veces y platos que comparten ingredientes"]};
 const SACRIFICES = {
   proteina:["Menos pescado y carne","Más legumbre y huevo, que son más baratos"],
   raciones:["Raciones algo más ajustadas","Un 10 % menos en las raciones de los adultos"],
-  repetir:["Repetir más platos","Aprovechar mejor los ingredientes que ya compras"],
   gustos:["Dar menos peso a los gustos","Sigue sin poner lo que no os gusta, pero no busca tanto lo favorito"]
 };
 const MEALSTATE = {cocinar:"Cocino",taper:"Táper",fuera:"Fuera",libre:"Libre"};

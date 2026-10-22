@@ -64,6 +64,16 @@ export default {
         if (p.length) await env.TAPER.delete("pend:" + uid);
         return json(req, p);
       }
+      if (req.method === "POST" && url.pathname === "/evento") return json(req, await evento(env, await req.json()));
+      if (req.method === "GET" && url.pathname === "/stats") {
+        const uid = url.searchParams.get("uid");
+        if (!uidOk(uid)) return json(req, {}, 400);
+        return json(req, (await env.TAPER.get("st:" + uid, "json")) || nuevaFicha());
+      }
+      if (req.method === "GET" && url.pathname === "/admin") {
+        if (!env.ADMIN_KEY || url.searchParams.get("clave") !== env.ADMIN_KEY) return json(req, { error: "clave no válida" }, 403);
+        return json(req, await resumenAdmin(env));
+      }
       if (url.pathname === "/") return json(req, { ok: true, servicio: "avisos de Táper" });
       return json(req, { error: "no encontrado" }, 404);
     } catch (e) {
@@ -97,6 +107,65 @@ async function enviarPendientes(env) {
       if (r === 404 || r === 410) { await env.TAPER.delete(k.name); await env.TAPER.delete("pend:" + uid); }
     }
   } while (cursor);
+}
+
+/* ---------- Invitaciones, contadores y coins ---------- */
+// Coins: compartir +1 (máx. 3 al día) · alguien instala con tu QR +10 · cada semana que lo usa +2
+//        · tu propio uso semanal +1 · bienvenida al invitado +5
+const COINS = { compartir: 1, instalacion: 10, activoInvitado: 2, activoPropio: 1, bienvenida: 5 };
+const nuevaFicha = () => ({ compartido: 0, instalados: 0, activos: 0, coins: 0, historial: [] });
+const semana = (d = new Date()) => { const t = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate())); const n = (t.getUTCDay() + 6) % 7; t.setUTCDate(t.getUTCDate() - n + 3); const y = new Date(Date.UTC(t.getUTCFullYear(), 0, 4)); return t.getUTCFullYear() + "-W" + String(1 + Math.round(((t - y) / 864e5 - 3 + ((y.getUTCDay() + 6) % 7)) / 7)).padStart(2, "0"); };
+const hoy = () => new Date().toISOString().slice(0, 10);
+
+async function sumar(env, uid, campo, coins, motivo) {
+  const f = (await env.TAPER.get("st:" + uid, "json")) || nuevaFicha();
+  if (campo) f[campo] = (f[campo] || 0) + 1;
+  if (coins) { f.coins += coins; f.historial = [{ fecha: hoy(), coins, motivo }].concat(f.historial).slice(0, 30); }
+  await env.TAPER.put("st:" + uid, JSON.stringify(f));
+}
+async function contarGlobal(env, campo) {
+  const g = (await env.TAPER.get("global", "json")) || {};
+  g[campo] = (g[campo] || 0) + 1; await env.TAPER.put("global", JSON.stringify(g));
+}
+async function evento(env, b) {
+  if (!b || !uidOk(b.uid)) return { error: "usuario no válido" };
+  const uid = b.uid, ref = uidOk(b.ref) && b.ref !== uid ? b.ref : null;
+  if (b.tipo === "compartir") {
+    const k = "sh:" + uid + ":" + hoy(), n = Number((await env.TAPER.get(k)) || 0);
+    await env.TAPER.put(k, String(n + 1), { expirationTtl: 60 * 60 * 48 });
+    await sumar(env, uid, "compartido", n < 3 ? COINS.compartir : 0, "Has compartido Táper");
+    await contarGlobal(env, "compartidos");
+    return { ok: true };
+  }
+  if (b.tipo === "instalar") {
+    if (await env.TAPER.get("in:" + uid)) return { ok: true, repetido: true };
+    await env.TAPER.put("in:" + uid, ref || "-");
+    await contarGlobal(env, "instalaciones");
+    if (ref) {
+      await sumar(env, ref, "instalados", COINS.instalacion, "Alguien ha empezado a usar Táper con tu invitación");
+      await sumar(env, uid, null, COINS.bienvenida, "Bienvenida por llegar con una invitación");
+    }
+    return { ok: true };
+  }
+  if (b.tipo === "activo") {
+    const w = semana(), k = "ac:" + uid + ":" + w;
+    if (await env.TAPER.get(k)) return { ok: true, repetido: true };
+    await env.TAPER.put(k, "1", { expirationTtl: 60 * 60 * 24 * 60 });
+    await sumar(env, uid, null, COINS.activoPropio, "Has usado Táper esta semana");
+    const g = (await env.TAPER.get("global", "json")) || {};
+    g["activos:" + w] = (g["activos:" + w] || 0) + 1; await env.TAPER.put("global", JSON.stringify(g));
+    const r = await env.TAPER.get("in:" + uid);
+    if (r && r !== "-") await sumar(env, r, "activos", COINS.activoInvitado, "Una persona que invitaste sigue usando Táper");
+    return { ok: true };
+  }
+  return { error: "evento desconocido" };
+}
+async function resumenAdmin(env) {
+  const g = (await env.TAPER.get("global", "json")) || {};
+  const w = semana(), prev = semana(new Date(Date.now() - 7 * 864e5));
+  let avisos = 0, cursor;
+  do { const l = await env.TAPER.list({ prefix: "sub:", cursor }); avisos += l.keys.length; cursor = l.list_complete ? null : l.cursor; } while (cursor);
+  return { instalaciones: g.instalaciones || 0, compartidos: g.compartidos || 0, activosEstaSemana: g["activos:" + w] || 0, activosSemanaPasada: g["activos:" + prev] || 0, conAvisos: avisos };
 }
 
 /* ---------- Push sin contenido firmado con VAPID (ES256) ---------- */

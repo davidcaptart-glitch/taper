@@ -57,7 +57,7 @@ function renderCongelador(){
   if(old.length)h+=`<div class="warnbox">🕒 ${old.length===1?"Esto lleva":"Estas cosas llevan"} más de ${FREEZER_MONTHS} meses congelado: ${old.map(e=>esc(P[e.pid].name.toLowerCase())).join(", ")}. Mejor gastarlo pronto; te lo propondré en los próximos menús.</div>`;
   if(!st.length)h+=`<div class="empty"><p>El congelador está vacío (o aún no has marcado compras de congelar).</p></div>`;
   for(const e of st){const p=P[e.pid],nx=nextUses(e.pid);
-    h+=`<div class="item"><span class="t"><b>${esc(p.name)}</b><small>${fmtQty(e.left,p.unit)} · desde el ${esc(shortDate(e.at))} (${e.days} días)${e.days>FREEZER_MONTHS*30?" · ⚠️ gastar pronto":""}${e.src==="mano"?" · añadido a mano":""}</small>
+    h+=`<div class="item">${prodImg(e.pid)}<span class="t"><b>${esc(p.name)}</b><small>${fmtQty(e.left,p.unit)} · desde el ${esc(shortDate(e.at))} (${e.days} días)${e.days>FREEZER_MONTHS*30?" · ⚠️ gastar pronto":""}${e.src==="mano"?" · añadido a mano":""}</small>
       ${nx.length?`<small>Para: ${nx.map(u=>esc(DSHORT[dow(u.slot.date)]+" "+shortDate(u.slot.date)+" ("+u.r.name.toLowerCase()+")")).join("; ")}</small>`:""}</span>
       <button class="btn ghost small" data-fzout="${e.pid}|${Math.round(e.left)}">Ya no está</button></div>`}
   const prods=Object.values(P).filter(p=>p.keep==="congelar"||p.keep==="congelado").sort((a,b)=>a.name.localeCompare(b.name));

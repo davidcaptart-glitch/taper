@@ -1,20 +1,21 @@
 // Service worker de Táper: guarda la app para usarla sin conexión.
 // Al cambiar cualquier archivo de la app, sube VERSION aquí y el ?v= de index.html para que los móviles descarguen la nueva.
-const VERSION = "taper-v9";
+const VERSION = "taper-v10";
 const SHELL = [
   "./",
   "index.html",
-  "css/app.css?v=9",
-  "js/base.js?v=9",
-  "js/datos.js?v=9",
-  "js/gustos.js?v=9",
-  "js/plan.js?v=9",
-  "js/compra.js?v=9",
-  "js/tickets.js?v=9",
-  "js/congelador.js?v=9",
-  "js/avisos.js?v=9",
-  "js/bienvenida.js?v=9",
-  "js/ui.js?v=9",
+  "css/app.css?v=10",
+  "js/base.js?v=10",
+  "js/datos.js?v=10",
+  "js/fotos.js?v=10",
+  "js/gustos.js?v=10",
+  "js/plan.js?v=10",
+  "js/compra.js?v=10",
+  "js/tickets.js?v=10",
+  "js/congelador.js?v=10",
+  "js/avisos.js?v=10",
+  "js/bienvenida.js?v=10",
+  "js/ui.js?v=10",
   "manifest.webmanifest",
   "data/festivos.json",
   "data/supermercados.json",
@@ -72,7 +73,8 @@ self.addEventListener("fetch", e => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
   const isFont = url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com";
-  if (url.origin !== location.origin && !isFont) return;
+  const isPhoto = url.hostname === "prod-mercadona.imgix.net";   // fotos de los productos: se guardan para verlas sin conexión
+  if (url.origin !== location.origin && !isFont && !isPhoto) return;
 
   const networkFirst = url.origin === location.origin &&
     (req.mode === "navigate" || /\.(json|html|js|css)$/.test(url.pathname) || url.pathname.endsWith("/"));

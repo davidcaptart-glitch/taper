@@ -11,10 +11,10 @@ crons = ["*/10 * * * *"]
 VAPID_PUBLIC = "BBt_pdF9LNXTil3nPVc_RX6itc-JIQw1fOF-1yiDgCNY097PNXKuci7kCSwlIW9mapPWuK6OixrUIRGlaivuIWE"
 VAPID_SUBJECT = "https://davidcaptart-glitch.github.io/taper/"
 
-# El espacio de datos (KV) se crea al desplegar; su id se rellena entonces
-# [[kv_namespaces]]
-# binding = "TAPER"
-# id = ""
+# Espacio de datos (KV): suscripciones y avisos pendientes
+[[kv_namespaces]]
+binding = "TAPER"
+id = "4c4b0fed5d744e5d8c4befeffce38c50"
 
 # La clave privada VAPID NO va aquí: se guarda como secreto con
 #   npx wrangler secret put VAPID_PRIVATE_JWK

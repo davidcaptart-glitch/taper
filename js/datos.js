@@ -7,7 +7,7 @@ let PR = null, prOffline = false, SUPERS = [], ZONES = null, zoneMissing = false
 
 function setProducts(list){
   P={};
-  for(const p of list)P[p.id]={id:p.id,name:p.nombre,env:p.envase,unit:p.unidad,est:p.precio_estimado,keep:p.conservacion,aisle:p.pasillo,sec:p.seccion||p.pasillo,thaw:!!p.descongelar,mid:p.mercadona_id||null};
+  for(const p of list)P[p.id]={id:p.id,name:p.nombre,env:p.envase,unit:p.unidad,est:p.precio_estimado,keep:p.conservacion,aisle:p.pasillo,sec:p.seccion||p.pasillo,thaw:!!p.descongelar,mid:p.mercadona_id||null,img:p.foto||null};
 }
 // Secciones de Mercadona en el orden habitual de recorrido de la tienda (congelados al final)
 const STORE_ORDER=["Fruta y verdura","Panadería y pastelería","Charcutería y quesos","Carne","Marisco y pescado","Huevos, leche y mantequilla","Postres y yogures",

@@ -48,6 +48,7 @@ function renderWizard(){
 }
 function finishOnboarding(){
   S.onboarded=true;save();
+  if(typeof trackOnBoot==="function")trackOnBoot();
   const start=weekStartFor(todayISO());
   for(const s of [start,addDays(start,7)])if(!S.plans[s]||!Object.keys(S.plans[s].slots).length)genWeekFromScratch(s);
   save();tab="menu";render();toast("Menú generado. Puedes cambiar lo que quieras");
@@ -94,7 +95,7 @@ function stepBody(fullId){
   if(id==="entreno"){
     let h=`<div class="chips">${chip("data-trains","1",a.trains,you?"Sí, entreno":"Sí, entrena")}${chip("data-trains","0",!a.trains,"No")}</div>`;
     if(!a.trains)return h;
-    h+=`<div class="group"><h3>¿Qué haces? (puedes elegir varios)</h3><div class="chips">${Object.entries(SPORTS).map(([k,v])=>chip("data-sport",k,a.sports.includes(k),v)).join("")}</div></div>
+    h+=`<div class="group"><h3>¿Qué ${you?"haces":"hace"}? (puedes elegir varios)</h3>${Object.entries(SPORT_GROUPS).map(([g,ks])=>`<div class="small muted" style="margin:8px 0 4px">${g}</div><div class="chips">${ks.map(k=>chip("data-sport",k,a.sports.includes(k),SPORTS[k])).join("")}</div>`).join("")}</div>
     <div class="group"><h3>${you?"Tu":"Su"} semana habitual</h3><p class="muted small" style="margin:0 0 8px">Con la hora de cada sesión sé si se entrena antes o después de comer. Cada semana te la propondré ya rellena y solo cambiarás lo que varíe.</p>`;
     for(let d=0;d<7;d++){const ss=a.train[d]||[];
       h+=`<div class="daycard"><div class="row"><b>${DAYS[d]}</b><span class="spacer"></span>${ss.length<2?`<button class="btn ghost small" data-addsess="${d}">+ Sesión</button>`:""}</div>
@@ -130,6 +131,7 @@ function stepBody(fullId){
     <div class="field"><label for="wzBM">Presupuesto al mes (€)</label><input id="wzBM" type="number" min="0" step="5" value="${b.month}"></div>
     <div class="field"><label for="wzBW">Presupuesto a la semana (€)</label><input id="wzBW" type="number" min="0" step="1" value="${b.week??""}" placeholder="Automático: el del mes entre las semanas"></div>
     <div class="field"><label for="wzBB">Básicos al mes: aceite, sal, especias (€)</label><input id="wzBB" type="number" min="0" step="1" value="${b.basics}"></div>
+    <div class="group"><h3>¿Te importa repetir platos para ahorrar?</h3><div>${Object.entries(REPEAT).map(([k,[t,d]])=>`<button type="button" class="alt" data-rep="${k}" style="${(H.repeat||"no")===k?"outline:2px solid var(--tomato)":""}"><b>${t}</b><small>${d}</small></button>`).join("")}</div></div>
     <div class="group"><h3>Si no llega el presupuesto, acepto…</h3><p class="muted small" style="margin:0 0 8px">Siempre intento acercarme al máximo. Si no llego, te preguntaré; puedes dejarlo decidido aquí.</p>
     <div class="chips">${Object.entries(SACRIFICES).map(([k,[t]])=>chip("data-sac",k,(H.sacrifice||{})[k],t)).join("")}</div></div>`;
   }
@@ -195,6 +197,7 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
   qa("[data-xmt]").forEach(i=>i.onchange=()=>{H.extraMeals[i.dataset.xmt]=i.value;save()});
   qa("[data-cook]").forEach(b=>b.onclick=()=>{H.cookMode=b.dataset.cook;rerender()});
   qa("[data-cday]").forEach(b=>b.onclick=()=>{const d=Number(b.dataset.cday);H.cookDays=H.cookDays.includes(d)?H.cookDays.filter(x=>x!==d):[...H.cookDays,d];rerender()});
+  qa("[data-rep]").forEach(b=>b.onclick=()=>{H.repeat=b.dataset.rep;rerender()});
   qa("[data-sac]").forEach(b=>b.onclick=()=>{const sc=H.sacrifice=H.sacrifice||{},k=b.dataset.sac;if(sc[k])delete sc[k];else sc[k]=true;rerender()});
   qa("[data-mode]").forEach(b=>b.onclick=()=>{const [k,v]=b.dataset.mode.split(":");H.shop[k]=v;rerender()});
   qa("[data-ing]").forEach(b=>b.onclick=()=>{const p=S.people.find(x=>x.id===b.dataset.person),pid=b.dataset.ing;

@@ -169,7 +169,22 @@ aprende se ve y se corrige en una pantalla "Lo que sé de ti" (por persona: adul
   descongelar (21:30), qué cocinar hoy (18:30), valorar el plato de ayer (14:00), planificar (según usuario),
   subidas de precio (domingo), presupuesto, congelador. Varios usuarios: una suscripción por móvil.
 
-### Notificaciones: opciones (decisión pendiente)
+### Notificaciones (hecho, Cloudflare)
+- Servidor `avisos/` (Cloudflare Worker `taper-avisos`, https://taper-avisos.taper-david.workers.dev): cada móvil
+  manda sus próximos avisos (descongelar, cocinar hoy, ¿qué tal?, ¿entrenaste?, planificar, congelador); cada
+  10 minutos el servidor despierta a los que tienen avisos y el móvil los muestra. Push sin contenido firmado
+  con VAPID (la clave privada es un secreto del Worker). Desplegar: `cd avisos && npx wrangler@3 deploy`.
+
+### Invitaciones y coins (hecho, mismo servidor)
+- QR personal (`?ref=U-XXXX`). Coins: compartir +1 (máx. 3/día), alguien empieza a usarla con tu invitación +10,
+  cada semana que la usa +2, tu uso semanal +1, bienvenida al invitado +5. Pendiente: en qué se gastan.
+- Panel de David: `/admin?clave=…` (clave guardada como secreto ADMIN_KEY).
+
+### Imágenes (hecho, parcial)
+- Foto de cada producto (tienda de Mercadona), collage de ingredientes por plato y foto propia del plato
+  (solo en el móvil). Pendiente: fotos reales de los 220 platos.
+
+### Notificaciones: opciones (decidido: A)
 Una app web sin servidor no puede programar avisos en el móvil. Opciones:
 - **A. Recomendada: un pequeño servidor gratuito (Cloudflare Workers).** Cada móvil se apunta a los avisos y
   envía sus próximos avisos con hora y texto (descongelar, qué cocinar, ¿qué tal?, ¿entrenaste?, planificar,

@@ -60,7 +60,7 @@ function mealLine(d,meal,wk){
   const who=[...(st==="solotaper"?[]:["tú"]),...sl.kids.map(k=>personName(k))];
   const comp=company(sl);
   let h=`<div style="margin-top:6px"><div class="small muted">${label}${st==="solotaper"?" (solo el táper de mañana)":""}${sl.tupper.length&&st!=="solotaper"?" + táper de mañana":""}${comp.length?" · con "+esc(comp.map(personName).join(" y ")):""}</div>`;
-  if(r)h+=`<button class="name" data-open="${r.id}" data-slot="${sl.id}">${esc(r.name)}</button>`;
+  if(r)h+=`<div class="dishrow">${dishImg(r,"s")}<button class="name" data-open="${r.id}" data-slot="${sl.id}">${esc(r.name)}</button></div>`;
   else if(sl.fixed)h+=`<b>${esc(sl.fixed.name)}</b>`;
   h+=`<div class="meta">${r?`${recipeTime(r)} min · ${r.prot||"?"} g proteína · ${String(sl.portions).replace(".",",")} raciones`:sl.fixed?"Plato fijo":""}</div>`;
   if(r){const ps=(st==="solotaper"?[]:sl.eaters).concat(sl.kids);
@@ -290,11 +290,19 @@ function reviewCard(){
 
 /* ---------- Ventanas ---------- */
 // No se llega al presupuesto: elige qué sacrificar o sube el presupuesto a lo que realmente cuesta
+// Cuánto se ahorraría esta semana repitiendo (se prueba sin guardar)
+function repeatSaving(start,mode){
+  // Media de varios menús con y sin repetir (el reparto tiene algo de azar)
+  const keep=JSON.stringify(S.plans[start]),old=S.home.repeat;const avg=m=>{S.home.repeat=m;let t=0;for(let i=0;i<4;i++){try{genWeekFromScratch(start)}catch(e){}t+=weekCost(start)}return t/4};
+  const base=avg("no"),con=avg(mode);
+  S.plans[start]=JSON.parse(keep);S.home.repeat=old;return Math.max(0,Math.round((base-con)*10)/10);
+}
 function openSacrifice(start){
   const sc=S.home.sacrifice=S.home.sacrifice||{};
   const cost=weekCost(start),target=weekFoodTarget(start),m=monthOfWeek(start),wb=weekBudget(m),need=Math.ceil((wb+cost-target)/5)*5;
   showDialog(`<div class="mod">${closeBtn}<h2>¿Qué sacrificamos?</h2><p class="small muted">Faltan unos ${eur(cost-target)} esta semana. Elige lo que te parezca bien y vuelvo a preparar el menú.</p>
     ${Object.entries(SACRIFICES).map(([k,[t,d]])=>`<label class="alt" style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" data-sk="${k}" ${sc[k]?"checked":""} style="width:auto;margin-top:4px"><span><b>${t}</b><small>${d}</small></span></label>`).join("")}
+    <div class="field"><label for="repSel">Repetir platos</label><select id="repSel">${Object.entries(REPEAT).map(([k,[t]])=>`<option value="${k}" ${(S.home.repeat||"no")===k?"selected":""}>${t}${k!=="no"?" (ahorra unos "+eur(repeatSaving(start,k))+" esta semana)":""}</option>`).join("")}</select></div>
     ${S.home.shop.weekMode==="online"?`<label class="alt" style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" id="toShop" style="width:auto;margin-top:4px"><span><b>Hacer la compra semanal en tienda</b><small>Te ahorras ${eur(S.home.shop.fee)} de envío cada semana</small></span></label>`:""}
     <label class="alt" style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" id="raiseB" style="width:auto;margin-top:4px"><span><b>Subir el presupuesto semanal a ${eur(need)}</b><small>Ahora es ${eur(wb)}. Es lo que cuesta este menú sin sacrificar nada más.</small></span></label>
     <div class="actions"><button class="btn" id="sacOk">Rehacer el menú</button></div></div>`);
@@ -302,6 +310,7 @@ function openSacrifice(start){
     dlg.querySelectorAll("[data-sk]").forEach(c=>{if(c.checked)sc[c.dataset.sk]=true;else delete sc[c.dataset.sk]});
     if(dlg.querySelector("#raiseB").checked)S.home.budget.week=need;
     if(dlg.querySelector("#toShop")?.checked)S.home.shop.weekMode="tienda";
+    S.home.repeat=dlg.querySelector("#repSel").value;
     for(const s of Object.keys(S.plans))if(s>=weekStartFor(todayISO())&&!S.plans[s].confirmed||s===start)genWeekFromScratch(s);
     save();dlg.close();render();
     const c2=weekCost(start),t2=weekFoodTarget(start);toast(c2<=t2+0.5?"Listo: "+eur(c2)+" de "+eur(t2):"Más cerca: "+eur(c2)+" de "+eur(t2)+". Puedes sacrificar algo más");
@@ -360,8 +369,8 @@ function openSwap(sid){
   const sel=R.filter(r=>variantFor(r)).sort((a,b)=>a.name.localeCompare(b.name));
   showDialog(`<div class="mod">${closeBtn}<h2>Cambiar plato</h2><div class="small muted">${esc(longDate(d))}, ${sl.meal}${company(sl).length?" · con "+esc(company(sl).map(personName).join(" y ")):""}</div>
     ${needLine(sl)}
-    <div style="margin-top:10px">${alts.map(({r,miss})=>`<button class="alt" data-pick="${r.id}"><b>${esc(r.name)}</b><small>${recipeTime(r)} min · ${r.prot||"?"} g proteína · ${eur(rationCost(r))}/ración · ${r.type==="c"?"⚡ hidratos":"🥗 ligera"}</small>
-      ${miss?(miss.length?`<span class="badge miss">Te falta: ${esc(miss.slice(0,3).map(p=>P[p].name.toLowerCase()).join(", "))}${miss.length>3?"…":""}</span>`:`<span class="badge ok">Tienes todo</span>`):""}</button>`).join("")||"<p>No hay alternativas con tus filtros.</p>"}</div>
+    <div style="margin-top:10px">${alts.map(({r,miss})=>`<button class="alt altimg" data-pick="${r.id}">${dishImg(r,"s")}<span><b>${esc(r.name)}</b><small>${recipeTime(r)} min · ${r.prot||"?"} g proteína · ${eur(rationCost(r))}/ración · ${r.type==="c"?"⚡ hidratos":"🥗 ligera"}</small>
+      ${miss?(miss.length?`<span class="badge miss">Te falta: ${esc(miss.slice(0,3).map(p=>P[p].name.toLowerCase()).join(", "))}${miss.length>3?"…":""}</span>`:`<span class="badge ok">Tienes todo</span>`):""}</span></button>`).join("")||"<p>No hay alternativas con tus filtros.</p>"}</div>
     <div class="field"><label for="anyR">O elige cualquier receta</label><select id="anyR"><option value="">…</option>${sel.map(r=>`<option value="${r.id}">${esc(r.name)}</option>`).join("")}</select></div></div>`);
   const pick=rid=>{setSlotRecipe(sl,rid);dlg.close();render();
     const inv=inventory(monthOfWeek(weekStartFor(d)),sl.id);const miss=inv?missingFor(RX[rid],sl,inv):[];
@@ -396,6 +405,8 @@ function openRecipe(id,sid){
     const cost=rationCost(r);
     showDialog(`<div class="mod">${closeBtn}
       <span class="pill ${r.type==="c"?"carga":"ligera"}">${r.type==="c"?"⚡ Con hidratos":"🥗 Ligera"}</span>${r.kid?` <span class="pill kid">Gusta a niños</span>`:""}${r.heavy?` <span class="pill fixed">Pesada</span>`:""}
+      ${dishImg(r,"l")}
+      <div class="row" style="margin-top:6px"><label class="btn ghost small">📷 ${MYPHOTOS[r.id]?"Cambiar mi foto":"Foto de mi plato"}<input type="file" accept="image/*" capture="environment" id="myPh" hidden></label>${MYPHOTOS[r.id]?`<button class="btn ghost small" id="myPhDel">Quitar mi foto</button>`:""}</div>
       <h2>${esc(r.name)}</h2>${r.sug?`<div class="small muted">💡 ${r.author?"Sugerida por "+esc(r.author):"Sugerida por la comunidad"}</div>`:""}
       <div class="stats"><div><b>${v.time} min</b><small>${v.active} de trabajo</small></div><div><b>${r.prot||"?"} g</b><small>proteína</small></div><div><b>${r.kcal?r.kcal+" kcal":eur(cost)}</b><small>${r.kcal?eur(cost)+"/ración":"por ración"}</small></div></div>
       ${r.carb!=null?`<div class="small muted">Por ración: ${r.carb} g hidratos · ${r.fat} g grasa · aguanta ${r.fridge} días en la nevera${r.freeze?" · se puede congelar":""}</div>`:""}
@@ -411,6 +422,8 @@ function openRecipe(id,sid){
         <button class="btn ghost small" data-love>❤️ Me encanta</button><button class="btn ghost small" data-hate>👎 No me gusta</button></div>
       <h3 style="margin-top:10px">Más como esta</h3><div>${similar(r).map(x=>`<button class="alt" data-sim="${x.id}"><b>${esc(x.name)}</b><small>${recipeTime(x)} min · ${x.prot||"?"} g proteína</small></button>`).join("")}</div></div>`);
     dlg.querySelectorAll("[data-vi]").forEach(b=>b.onclick=()=>{vi=Number(b.dataset.vi);draw()});
+    dlg.querySelector("#myPh").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{await saveMyPhoto(r.id,f);draw();render();toast("¡Qué buena pinta! Foto guardada")}catch(x){toast("No se ha podido guardar la foto")}};
+    dlg.querySelector("#myPhDel")?.addEventListener("click",async()=>{await deleteMyPhoto(r.id);draw();render()});
     dlg.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{serv=Math.max(0.5,serv+Number(b.dataset.s));draw()});
     dlg.querySelector("[data-cook]").onclick=()=>openCook(r,r.vars[vi],serv);
     const who=()=>S.people.find(p=>p.id===dlg.querySelector("#rWho").value);
@@ -570,7 +583,7 @@ function renderCompra(){
     h+=`<div class="aisle"><h3>${l.mode==="tienda"?`<span class="secn">${si+1}</span>`:""}${esc(sec)} <span class="muted small">· ${bySec[sec].length}</span></h3>`;
     for(const it of bySec[sec].sort((a,b)=>P[a.pid].name.localeCompare(P[b.pid].name))){
       const key=checkKey(month,listSel,it.pid),done=!!S.checks[key],moved=(S.assign[month]||{})[it.pid]!=null&&listSel!=="mes";
-      h+=`<label class="item ${done?"done":""}"><input type="checkbox" data-ck="${key}" ${done?"checked":""}><span class="t">${it.packs} × ${esc(P[it.pid].name)}<small>Necesitas ${fmtQty(it.q,P[it.pid].unit)}${P[it.pid].keep==="congelar"?", para congelar":""}${moved?" · adelantado de la compra del mes":""}</small></span><span class="p">${eur(it.cost)}${upTag(it.pid)}</span>${l.mode==="online"&&P[it.pid].mid?`<a class="mlink" href="https://tienda.mercadona.es/product/${encodeURIComponent(P[it.pid].mid)}/" target="_blank" rel="noopener" aria-label="Abrir ${esc(P[it.pid].name)} en Mercadona">🛒</a>`:""}</label>`}
+      h+=`<label class="item ${done?"done":""}"><input type="checkbox" data-ck="${key}" ${done?"checked":""}>${prodImg(it.pid)}<span class="t">${it.packs} × ${esc(P[it.pid].name)}<small>Necesitas ${fmtQty(it.q,P[it.pid].unit)}${P[it.pid].keep==="congelar"?", para congelar":""}${moved?" · adelantado de la compra del mes":""}</small></span><span class="p">${eur(it.cost)}${upTag(it.pid)}</span>${l.mode==="online"&&P[it.pid].mid?`<a class="mlink" href="https://tienda.mercadona.es/product/${encodeURIComponent(P[it.pid].mid)}/" target="_blank" rel="noopener" aria-label="Abrir ${esc(P[it.pid].name)} en Mercadona">🛒</a>`:""}</label>`}
     h+=`</div>`});
   const sk=month+"|"+listSel;
   h+=`<div class="card"><h2>Lo que he pagado</h2><div class="spend"><span class="small muted">Apunta el total del ticket o del pedido para comparar con lo previsto (${eur(l.cost+l.fee)}).</span><input type="number" min="0" step="0.01" id="spentIn" value="${S.spent[sk]??""}" placeholder="0,00"></div></div>`;
@@ -612,7 +625,7 @@ function renderRecetas(){
   });
   h+=`<p class="small muted">${list.length} recetas</p>`;
   for(const r of list){const dp=dishPref(a,r.id),can=!!variantFor(r);
-    h+=`<button class="rcard ${dp<=-1||!can?"no":""}" data-open="${r.id}"><span class="t"><b>${dp>=1.5?"❤️ ":""}${r.sug?"💡 ":""}${esc(r.name)}</b><small>${recipeTime(r)} min · ${r.prot||"?"} g proteína${r.kcal?" · "+r.kcal+" kcal":""}${!can?" · no tienes el aparato":""}${dp<=-1?" · descartada":""}</small></span><span class="pill ${r.type==="c"?"carga":"ligera"}">${r.type==="c"?"⚡":"🥗"}</span></button>`}
+    h+=`<button class="rcard ${dp<=-1||!can?"no":""}" data-open="${r.id}">${dishImg(r,"s")}<span class="t"><b>${dp>=1.5?"❤️ ":""}${r.sug?"💡 ":""}${esc(r.name)}</b><small>${recipeTime(r)} min · ${r.prot||"?"} g proteína${r.kcal?" · "+r.kcal+" kcal":""}${!can?" · no tienes el aparato":""}${dp<=-1?" · descartada":""}</small></span><span class="pill ${r.type==="c"?"carga":"ligera"}">${r.type==="c"?"⚡":"🥗"}</span></button>`}
   main.innerHTML=h+"</section>";
   main.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{recFilter=b.dataset.f;render()});
   document.getElementById("sugRec")?.addEventListener("click",openSuggestRecipe);
@@ -673,7 +686,8 @@ function renderPerfil(){
   <div class="card"><h2>Copia de seguridad</h2><div class="hint" style="color:var(--muted)">Todo se guarda solo en este móvil. Descarga una copia de vez en cuando y antes de cambiar de móvil.</div>
     <div class="actions"><button class="btn" id="exp">Exportar copia</button><button class="btn ghost" id="imp">Importar copia</button></div><input type="file" id="impFile" accept="application/json,.json" hidden>
     <button class="btn ghost small" id="restartWiz">Repetir el asistente de bienvenida</button></div>
-  <div class="card"><h2>Compartir Táper</h2><p class="small muted">Quien escanee este código con la cámara del móvil abre la app y la puede instalar. Cada persona tiene sus propios datos en su móvil.</p>
+  <div class="card"><h2>Invita y gana coins</h2><p class="small muted">Este es <b>tu</b> código: quien lo escanee con la cámara del móvil abre Táper y queda como invitado tuyo. Ganas coins cuando compartes, cuando alguien empieza a usarla y cada semana que la sigue usando.</p>
+    <div id="coinsBox">${servidorOn()?`<p class="small muted">Cargando tus coins…</p>`:""}</div>
     <div id="qrBox" style="display:grid;place-items:center;margin:10px 0;background:#fff;border-radius:12px;padding:10px"></div>
     <div class="actions"><button class="btn" id="shareApp">Enviar el enlace</button><button class="btn ghost" id="copyApp">Copiar enlace</button></div></div>
   ${avisosCard()}
@@ -706,10 +720,10 @@ function renderPerfil(){
   document.getElementById("svProfile")?.addEventListener("click",openSurvey);
   document.getElementById("sugRec2")?.addEventListener("click",openSuggestRecipe);
   document.getElementById("noStats").onchange=e=>{S.noStats=!e.target.checked;save();toast(S.noStats?"No se contarán tus visitas":"Gracias: se contarán de forma anónima")};
-  const url=location.origin+location.pathname.replace(/index\.html$/,"");
+  const url=shareLink();fillStats();
   loadScript("https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js").then(()=>{const qr=qrcode(0,"M");qr.addData(url);qr.make();const b=document.getElementById("qrBox");if(b)b.innerHTML=qr.createSvgTag({cellSize:6,margin:2,scalable:true}).replace("<svg ",'<svg style="width:220px;height:220px" ')}).catch(()=>{const b=document.getElementById("qrBox");if(b)b.textContent=url});
-  document.getElementById("shareApp").onclick=async()=>{try{await navigator.share({title:"Táper",text:"Menú semanal, tápers y lista de la compra con precios de Mercadona",url})}catch(e){if(!navigator.share){navigator.clipboard?.writeText(url);toast("Enlace copiado")}}};
-  document.getElementById("copyApp").onclick=()=>{navigator.clipboard?.writeText(url).then(()=>toast("Enlace copiado"),()=>toast(url))};
+  document.getElementById("shareApp").onclick=async()=>{try{if(navigator.share){await navigator.share({title:"Táper",text:"Menú semanal, tápers y lista de la compra con precios de Mercadona",url});evento("compartir").then(fillStats)}else{await navigator.clipboard?.writeText(url);toast("Enlace copiado");evento("compartir").then(fillStats)}}catch(e){}};
+  document.getElementById("copyApp").onclick=()=>{navigator.clipboard?.writeText(url).then(()=>{toast("Enlace copiado");evento("compartir").then(fillStats)},()=>toast(url))};
   document.getElementById("restartWiz").onclick=()=>{S.onboarded=false;wiz={i:0,single:null};save();render()};
 }
 
@@ -864,6 +878,7 @@ async function boot(){
   }catch(e){main.innerHTML=`<section class="view"><div class="empty"><h2>No se han podido cargar las recetas</h2><p>Comprueba la conexión y vuelve a abrir la app.</p></div></section>`;return}
   try{FEST=await getJSON("data/festivos.json")}catch(e){FEST=null}
   try{SUPERS=(await getJSON("data/supermercados.json")).supermercados}catch(e){SUPERS=[{id:"mercadona",nombre:"Mercadona",estado:"activo"}]}
+  await loadMyPhotos();
   PR=loadSavedPrices();
   // Precios de la zona del usuario: el almacén que corresponde a su código postal (si aún no está, los de la zona principal)
   try{ZONES=await getJSON("data/zonas.json",true)}catch(e){ZONES=null}
@@ -886,6 +901,7 @@ async function boot(){
   else if(!S.onboarded){S.seenVersion=APP_VERSION;save()}
   checkUpdate();startCounter();
   if(avisosOn()&&S.notif&&S.notif.on){shareWithSW().catch(()=>{});queueSyncAvisos()}
+  trackOnBoot();
 }
 boot();
 if("serviceWorker" in navigator&&location.protocol!=="file:")navigator.serviceWorker.register("sw.js").catch(()=>{});
