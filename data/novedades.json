@@ -452,6 +452,16 @@
       "cambios": [
         "Si el día del aviso para preparar el mes cae en festivo, te aviso el día laborable anterior (por ejemplo, el 24 de diciembre en vez de Navidad)."
       ]
+    },
+    {
+      "version": 48,
+      "fecha": "2026-10-22",
+      "titulo": "Tu código postal",
+      "cambios": [
+        "El código postal es obligatorio: con él saco los precios de tu zona, sé qué supermercados te llevan la compra y cuáles son tus festivos.",
+        "Al escribirlo, rellena el municipio solo (si hay varias poblaciones, eliges la tuya con un toque).",
+        "Si ya usabas Táper sin código postal, la campana te lo pide."
+      ]
     }
   ]
 }

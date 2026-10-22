@@ -169,7 +169,9 @@ function stepBody(fullId){
     ${ch.length>1?`<div class="field"><label>Tu supermercado principal</label><div class="chips">${ch.map(s=>chip("data-mainsup",s,H.super===s,esc(superById(s).nombre))).join("")}</div></div>
     <div class="field"><label>¿Cómo hago la lista?</label><div class="chips">${chip("data-strat","barato",H.shop.strategy==="barato","Cada cosa donde sea más barata")}${chip("data-strat","principal",H.shop.strategy!=="barato","Todo en el principal")}</div>
       <div class="hint">Puedes cambiarlo cuando quieras desde la lista de la compra.</div></div>`:""}
-    <div class="field"><label for="wzCp">Código postal</label><input id="wzCp" type="text" inputmode="numeric" maxlength="5" value="${esc(H.cp)}" placeholder="08784"></div>
+    <div class="field"><label for="wzCp">Tu código postal</label><input id="wzCp" type="text" inputmode="numeric" maxlength="5" value="${esc(H.cp)}" placeholder="Por ejemplo, 08784" autocomplete="postal-code">
+      <div class="hint">Lo uso para los precios de tu zona, saber qué supermercados te llevan la compra a casa y tus festivos.</div></div>
+    ${(H.cpPlaces||[]).length>1?`<div class="field"><label>¿Cuál es tu municipio?</label><div class="chips">${H.cpPlaces.map(p=>chip("data-place",p,H.municipio===p,esc(p))).join("")}</div></div>`:""}
     <div class="field"><label for="wzMun">Municipio (para los festivos locales)</label><input id="wzMun" type="text" list="wzMunList" value="${esc(H.municipio)}" placeholder="Por ejemplo, Piera"><datalist id="wzMunList">${Object.keys((FEST||{}).locales||{}).map(m=>`<option value="${esc(m)}">`).join("")}</datalist>
     <div class="hint">Si tu municipio no sale en la lista, añade sus festivos locales en Perfil > Festivos.</div></div>
     ${zoneMissing?`<div class="warnbox">Tu código postal aún no tiene precios propios: de momento verás los de otra zona (pueden variar unos céntimos). ${S.zoneAsked===H.cp?"Ya lo has pedido; se añadirá en la próxima actualización.":`<button class="btn small" id="askZone">Pedir mi zona</button>`}</div>`:""}`;}
@@ -305,6 +307,15 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
   q("#wzRestore")&&(q("#wzRestore").onclick=()=>{if(restoreSnapshot()){wiz={i:0,single:null};tab="menu";render();toast("Datos recuperados")}});
   ["#wzMPD","#wzMPA"].forEach(sel=>q(sel)&&(q(sel).onchange=()=>{H.monthPrepDay=Number(q("#wzMPD").value);H.monthPrepAlt=Number(q("#wzMPA").value);save();q("#mpPrev").textContent=monthPrepPreview(H)}));
   q("#wzBM")&&(q("#wzBM").oninput=e=>{const v=Number(e.target.value);e.target.style.setProperty("--p",(v-40)/8.6+"%");q("#bVal").textContent=v;q("#bWeek").textContent=eur(v/4.3)});
+  // Código postal: al escribir los 5 números, busco el municipio (y, si hay varios, los ofrezco)
+  q("#wzCp")&&(q("#wzCp").oninput=async e=>{const cp=e.target.value.trim();if(!/^\d{5}$/.test(cp)||cp===H.cpLooked)return;H.cpLooked=cp;
+    try{const r=await fetch("https://api.zippopotam.us/es/"+cp);if(!r.ok)throw 0;const d=await r.json();
+      const places=[...new Set((d.places||[]).map(p=>p["place name"]))];const known=Object.keys((FEST||{}).locales||{});
+      H.cp=cp;H.cpPlaces=places;H.cpRegion=(d.places||[])[0]?.state||"";
+      if(!H.municipio||!places.includes(H.municipio))H.municipio=places.find(p=>known.includes(p))||(places.length===1?places[0]:"");
+      rerender();setTimeout(()=>{const i=document.getElementById("wzCp");if(i){i.focus();i.setSelectionRange(5,5)}},0)}
+    catch(err){H.cp=cp;H.cpPlaces=[]}});
+  qa("[data-place]").forEach(b=>b.onclick=()=>{H.municipio=b.dataset.place;rerender()});
   qa("[data-super]").forEach(b=>b.onclick=()=>{const sid=b.dataset.super;let ch=H.supers&&H.supers.length?[...H.supers]:[H.super||"mercadona"];
     if(ch.includes(sid)){if(ch.length===1){toast("Elige al menos un supermercado");return}ch=ch.filter(x=>x!==sid)}else ch.push(sid);
     H.supers=ch;if(!ch.includes(H.super))H.super=ch[0];rerender()});
@@ -382,7 +393,7 @@ function validateStep(fullId){
   const H=S.home,a=stepPerson(fullId),id=stepKind(fullId),v=s=>{const e=main.querySelector(s);return e?e.value:null};
   if(id==="hola"){a.name=(v("#wzName")||"").trim()}
   if(id==="aparatos"&&!H.apps.length){toast("Elige al menos uno");return false}
-  if(id==="zona"){const cp=(v("#wzCp")||"").trim();if(cp&&!/^\d{5}$/.test(cp)){toast("El código postal tiene 5 números");return false}H.cp=cp;H.municipio=(v("#wzMun")||"").trim()}
+  if(id==="zona"){const cp=(v("#wzCp")||"").trim();if(!/^\d{5}$/.test(cp)){toast(cp?"El código postal tiene 5 números":"Pon tu código postal: lo necesito para tus precios");document.getElementById("wzCp")?.focus();return false}H.cp=cp;H.municipio=(v("#wzMun")||"").trim()}
   if(id==="familia"){main.querySelectorAll(".kidcard [data-kf=name]").forEach(i=>{const k=S.people.find(p=>p.id===i.closest(".kidcard").dataset.kid);k.name=i.value.trim()});
     if(others().some(k=>!k.name)){toast("Escribe el nombre de cada persona");return false}
     const sin=others().find(k=>(k.presence||{}).type!=="manual"&&(!k.mealsSet||(((k.away||{}).comida||[]).length===7&&((k.away||{}).cena||[]).length===7)));

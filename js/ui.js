@@ -1128,6 +1128,7 @@ function inboxItems(){
   }catch(e){}
   try{for(const k of S.people)if(!k.smallSet&&(k.id==="yo"||(k.presence||{}).type!=="manual"))out.push({ico:"🥐",t:k.id==="yo"?"¿Desayunas, almuerzas y meriendas?":`¿Qué desayuna y merienda ${personName(k)}?`,s:"Te propongo desayunos, almuerzos y meriendas sanos",go:()=>{dlg.close();openWizard("familia");scrollTo(0,0)}})}catch(e){}
   try{for(const k of others())if(!k.mealsSet&&(k.presence||{}).type!=="manual")out.push({ico:"🍽️",t:`¿Qué comidas hace ${personName(k)} en casa?`,s:"Comida y cena de cada día: así no cocino de más",go:()=>{dlg.close();openWizard("familia");scrollTo(0,0)}})}catch(e){}
+  try{if(S.onboarded&&!/^\d{5}$/.test(S.home.cp||""))out.push({ico:"📍",t:"Pon tu código postal",s:"Para tus precios, los supermercados que te reparten y tus festivos",go:()=>{dlg.close();openWizard("zona");scrollTo(0,0)}})}catch(e){}
   try{for(const r of shopDueNow())out.push({ico:"🛒",t:r.title.replace("🛒 ",""),s:r.body,go:()=>openShopReminder(r)})}catch(e){}
   try{const nx=monthPrepDue();if(nx)out.push({ico:"📋",t:`Prepara ${mName(nx)}`,s:"5 preguntas y te dejo el menú y el pedido del mes listos",go:()=>{dlg.close();openMonthPrep(nx)}})}catch(e){}
   try{const n=pendingMeals().length;if(n)out.push({ico:"⭐",t:n===1?"1 comida por valorar":`${n} comidas por valorar`,s:"Así aprendo lo que os gusta",go:go("menu")})}catch(e){}
