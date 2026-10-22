@@ -77,6 +77,15 @@ function buildSchedule(){
         for(let i=0;i<2;i++)push(at(addDays(day,i),"20:00"),`🧊 Reparte y congela: ${pend.length} ${pend.length===1?"bolsa":"bolsas"}`,`Una bolsa por plato con su día (${[...new Set(pend.map(b=>P[b.pid].name.toLowerCase()))].slice(0,3).join(", ")}…). Márcalas en la compra.`,"frz|"+m+"|"+key)}}
   }catch(e){}}
   if(T.compra!==false){try{
+    // Ticket: la noche del día de la compra y la mañana siguiente, si no se ha subido
+    for(const m of [today.slice(0,7),nextMonthOf(today.slice(0,7))]){const sh=shopping(m);
+      for(const l of Object.values(sh.lists)){if(!l.items.length)continue;const ws=sh.weeks[l.key==="mes"?0:Number(l.key)];if(!ws)continue;
+        const day=deliveryDate(ws),k=shopKey(m,l.key);
+        if((S.tickets||[]).some(t=>t.m===m&&t.list===l.key)||(S.ticketSkip||{})[k])continue;
+        push(at(day,"21:00"),"📸 ¿Subes el ticket de la compra?","Escanéalo y ganas 3 coins (y afino los precios para todos)","tk|"+k);
+        push(at(addDays(day,1),"10:00"),"📸 Te queda subir el ticket","Escanéalo y ganas 3 coins","tk|"+k)}}
+  }catch(e){}}
+  if(T.compra!==false){try{
     for(const r of shopReminders()){
       const snooze=((S.shopSnooze||{})[shopKey(r.m,r.key)])||"";
       for(let i=0;i<4;i++){const d=addDays(r.due>today?r.due:today,i);if(d<snooze)continue;

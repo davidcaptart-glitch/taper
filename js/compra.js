@@ -108,6 +108,27 @@ function shopReminders(){
 const shopDueNow=()=>shopReminders().filter(r=>r.due<=todayISO()&&!(((S.shopSnooze||{})[shopKey(r.m,r.key)]||"")>todayISO()));
 // Bolsas para congelar pendientes de una lista
 const bagsPending=(sh,key)=>(sh.bags[key]||[]).filter(b=>!(S.bags||{})[b.id]);
+// Compras ya hechas (o cuyo día ya ha pasado) sin ticket subido, de los últimos días
+function ticketDue(){
+  const out=[],today=todayISO(),cur=today.slice(0,7),[y,mm]=cur.split("-").map(Number),prev=iso(new Date(y,mm-2,1)).slice(0,7);
+  for(const m of [prev,cur]){let sh;try{sh=shopping(m)}catch(e){continue}
+    for(const l of Object.values(sh.lists)){if(!l.items.length)continue;
+      const ws=sh.weeks[l.key==="mes"?0:Number(l.key)];if(!ws)continue;const day=deliveryDate(ws),k=shopKey(m,l.key);
+      if((S.tickets||[]).some(t=>t.m===m&&t.list===l.key)||(S.ticketSkip||{})[k])continue;
+      const done=!!(S.shopDone||{})[k];
+      if(!(done||day<=today)||day<addDays(today,-5))continue;
+      out.push({m,key:l.key,day,k,title:l.key==="mes"?"la compra del mes":"la compra de la semana"})}}
+  return out;
+}
+function askTicket(m,key){
+  showDialog(`<div class="mod">${closeBtn}<div class="veb">Compra hecha</div><h2 class="vh" style="font-size:1.8rem">¿Subes el <em>ticket</em>?</h2>
+    <p>Así sé lo que has gastado de verdad y corrijo los precios para todos. <b>+3 coins</b> por ticket.</p>
+    <div class="actions"><button class="btn wide" id="atScan">📸 Escanear el ticket</button></div>
+    <div class="actions"><button class="btn ghost" id="atLater">Luego</button><button class="btn ghost" id="atNo">No tengo ticket</button></div></div>`);
+  dlg.querySelector("#atScan").onclick=()=>openTicketScan();
+  dlg.querySelector("#atLater").onclick=()=>dlg.close();
+  dlg.querySelector("#atNo").onclick=()=>{S.ticketSkip=S.ticketSkip||{};S.ticketSkip[shopKey(m,key)]=todayISO();save();dlg.close();render()};
+}
 function markShopDone(m,key){S.shopDone=S.shopDone||{};S.shopDone[shopKey(m,key)]=todayISO();save()}
 // Lo que tienes en casa: lo comprado (marcado) menos lo que necesitan los demás platos del mes
 function inventory(m,exceptId){

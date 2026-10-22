@@ -888,3 +888,9 @@ input.switch:checked::after{transform:translateX(20px)}
 .wp.on small,.wp.on i{color:rgba(255,255,255,.75)}
 .wp.past{opacity:.6}
 .wp:active{transform:scale(.96)}
+
+/* ---------- Pedir el ticket ---------- */
+.tkban{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#FFF4D6,var(--surface) 70%);border-radius:18px;padding:12px;margin:8px 0;box-shadow:0 8px 20px -14px rgba(160,110,0,.5)}
+.tkban .ti{font-size:1.5rem}
+.tkban>span:nth-child(2){flex:1;min-width:0}.tkban b{display:block;font-size:.92rem}.tkban small{color:var(--muted);font-size:.78rem}
+.tkx{border:0;background:none;color:var(--muted);font-size:1rem;padding:4px 6px}

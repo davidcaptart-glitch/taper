@@ -488,6 +488,16 @@
         "🍽️ A la hora de cada comida (desayuno, almuerzo, comida, merienda y cena), qué toca y para quién. Si alguien se lleva el almuerzo, te recuerdo prepararlo a la hora del desayuno.",
         "Todos los avisos se pueden quitar uno a uno en Perfil › Avisos, y cada notificación te lo recuerda."
       ]
+    },
+    {
+      "version": 52,
+      "fecha": "2026-10-22",
+      "titulo": "Sube el ticket y gana coins",
+      "cambios": [
+        "Cuando haces una compra, te pido el ticket: al marcarla como hecha, en la campana, en la lista y con un aviso esa noche y la mañana siguiente (se puede quitar en Perfil › Avisos).",
+        "🪙 +3 coins por cada ticket nuevo (con fecha reciente y al menos 3 productos de comida), hasta 3 tickets con premio por semana.",
+        "Cada ticket me ayuda a saber lo que gastas de verdad y a corregir los precios para todos. Solo se envían, sin datos personales, los precios que no cuadran."
+      ]
     }
   ]
 }

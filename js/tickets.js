@@ -99,7 +99,7 @@ function matchLine(desc){
 /* ---------- Ver el ticket, corregirlo y guardarlo ---------- */
 function openTicketScan(){
   showDialog(`<div class="mod">${closeBtn}<h2>Escanear un ticket</h2>
-    <p class="small muted">Haz una foto al ticket de papel (bien plano y con luz) o elige el PDF del ticket digital de Mercadona. Se lee en tu móvil: no se envía a ningún sitio.</p>
+    <p class="small muted">Haz una foto al ticket de papel (bien plano y con luz) o elige el PDF del ticket digital de Mercadona. Se lee en tu móvil. Solo se envían, sin datos personales, los precios que no cuadran, para corregirlos para todos. Cada ticket nuevo te da 3 coins.</p>
     <div class="actions"><label class="btn">📷 Foto del ticket<input type="file" accept="image/*" capture="environment" id="tkImg" hidden></label>
     <label class="btn ghost">📄 PDF o imagen guardada<input type="file" accept="application/pdf,image/*" id="tkFile" hidden></label></div>
     <div id="tkState" class="small muted"></div></div>`);
@@ -166,12 +166,24 @@ function reportTicketPrices(t){
   fetch(CFG.avisos.url.replace(/\/$/,"")+"/ticket-precios",{method:"POST",headers:{"Content-Type":"application/json"},
     body:JSON.stringify({uid:S.uid,cp:S.home.cp||"",super:t.super,tienda:t.store||"",fecha:t.date,items:items.slice(0,40)})}).catch(()=>{});
 }
+// Coins por ticket: solo tickets recientes, con total y al menos 3 productos de comida
+async function rewardTicket(t){
+  if(typeof servidorOn!=="function"||!servidorOn())return;
+  if(!(t.total>0)||t.lines.filter(l=>l.food).length<3||Math.abs(daysBetween(t.date,todayISO()))>10)return;
+  try{const raw=[t.date,t.total,t.store,t.lines.length,t.lines.slice(0,5).map(l=>l.desc+l.amount).join("|")].join("#");
+    const h=[...new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(raw)))].map(b=>b.toString(16).padStart(2,"0")).join("").slice(0,32);
+    const r=await postAvisos("/evento",{uid:S.uid,tipo:"ticket",hash:h});
+    if(r&&r.coins)setTimeout(()=>toast(`🪙 +${r.coins} coins por subir el ticket`),1200);
+    else if(r&&r.limite)setTimeout(()=>toast("Ticket guardado (esta semana ya has llegado al máximo de coins por tickets)"),1200);
+  }catch(e){}
+}
 function saveTicket(tk,date,dest){
   S.tickets=S.tickets||[];
   const lines=tk.lines.map(l=>({qty:l.qty,desc:l.desc,amount:l.amount,kg:l.kg||null,food:l.food,pid:l.pid||null,mid:l.match?l.match.mid:null,group:l.pid?P[l.pid].aisle:l.group}));
   const t={id:uid("t"),date,m:dest.m,list:dest.key,super:tk.super||"otro",store:tk.store||"",total:tk.total,food:Math.round(lines.filter(l=>l.food).reduce((s,l)=>s+l.amount,0)*100)/100,lines};
   S.tickets.push(t);
   reportTicketPrices(t);
+  rewardTicket(t);
   // Lo pagado de esa lista = suma de sus tickets (solo comida)
   S.spent[dest.m+"|"+dest.key]=Math.round(S.tickets.filter(x=>x.m===dest.m&&x.list===dest.key).reduce((s,x)=>s+x.food,0)*100)/100;
   // Marca como comprado lo de la lista que aparece en el ticket

@@ -224,7 +224,8 @@ async function envia(env, uid, d) {
 // Coins solo por retorno real: alguien abre tu enlace +1 (una vez por persona y conexión) · empieza a usar
 // Táper +10 · cada semana que la usa +2 · tu propio uso semanal +1 · bienvenida al invitado +5.
 // Pulsar "compartir" se cuenta, pero no da coins.
-const COINS = { visita: 1, instalacion: 10, activoInvitado: 2, activoPropio: 1, bienvenida: 5 };
+const COINS = { visita: 1, instalacion: 10, activoInvitado: 2, activoPropio: 1, bienvenida: 5, ticket: 3 };
+const MAX_TICKETS_SEMANA = 3;
 const MAX_VISITAS_DIA = 10;
 /* ---------- Corrección automática de precios con los tickets ----------
    Con los tickets de los últimos 60 días, por supermercado y producto:
@@ -312,6 +313,19 @@ async function evento(env, b, req) {
       await sumar(env, uid, null, COINS.bienvenida, "Bienvenida por llegar con una invitación");
     }
     return { ok: true };
+  }
+  // Ticket de la compra subido: +3 coins, una vez por ticket (huella) y como mucho 3 por semana
+  if (b.tipo === "ticket") {
+    const h = String(b.hash || "");
+    if (!/^[a-f0-9]{16,64}$/.test(h)) return { error: "ticket no válido" };
+    const kh = "tkh:" + uid + ":" + h;
+    if (await env.TAPER.get(kh)) return { ok: true, repetido: true };
+    const kw = "tkw:" + uid + ":" + semana(), n = Number(await env.TAPER.get(kw)) || 0;
+    await env.TAPER.put(kh, "1", { expirationTtl: 60 * 60 * 24 * 400 });
+    if (n >= MAX_TICKETS_SEMANA) return { ok: true, limite: true };
+    await env.TAPER.put(kw, String(n + 1), { expirationTtl: 60 * 60 * 24 * 14 });
+    await sumar(env, uid, "tickets", COINS.ticket, "Ticket de la compra subido");
+    return { ok: true, coins: COINS.ticket };
   }
   if (b.tipo === "activo") {
     const w = semana(), k = "ac:" + uid + ":" + w;

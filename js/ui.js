@@ -317,7 +317,7 @@ function openShopReminder(r){
     <div class="actions"><button class="btn wide" id="srList">Ver la lista</button></div>
     <div class="actions"><button class="btn ghost" id="srDone">✓ Ya la he hecho</button><button class="btn ghost" id="srLater">⏰ Mañana</button></div></div>`);
   dlg.querySelector("#srList").onclick=()=>{dlg.close();month=r.m;tab="compra";listSel=r.key;render();scrollTo(0,0)};
-  dlg.querySelector("#srDone").onclick=()=>{markShopDone(r.m,r.key);dlg.close();render();toast("Hecho. ¡Buena compra!")};
+  dlg.querySelector("#srDone").onclick=()=>{markShopDone(r.m,r.key);render();askTicket(r.m,r.key)};
   dlg.querySelector("#srLater").onclick=()=>{S.shopSnooze=S.shopSnooze||{};S.shopSnooze[shopKey(r.m,r.key)]=addDays(todayISO(),1);save();dlg.close();render();toast("Te lo recuerdo mañana")};
 }
 // Acciones que llegan desde una notificación ("Ya está" o tocarla)
@@ -847,6 +847,7 @@ function renderCompra(){
     h+=`<details class="frzcard" ${done<bg.length?"open":""}><summary><span class="fzi">🧊</span><span><b>Al llegar: ${bg.length} ${bg.length===1?"bolsa":"bolsas"} para congelar</b><small>${done===bg.length?"✓ Todas hechas":`${done} de ${bg.length} hechas · una bolsa por plato, con su día`}</small></span></summary>
       ${bg.map(b=>{const r=RX[b.rid],on=!!(S.bags||{})[b.id];return `<label class="bag ${on?"done":""}"><input type="checkbox" data-bag="${esc(b.id)}" ${on?"checked":""}>${r?dishImg(r,"s"):prodImg(b.pid)}<span><b>${esc(P[b.pid].name)} · ${fmtQty(b.q,P[b.pid].unit)}</b><small>Etiqueta: ${esc(DAYS[dow(b.date)])} ${esc(shortDate(b.date))}${r?" · "+esc(r.name):""}</small></span></label>`}).join("")}
       <p class="small muted" style="margin:8px 2px 0">Aplana las bolsas para que se congelen y descongelen antes. La noche antes de cada día te aviso de pasarla a la nevera.</p></details>`}}
+  if(ticketDue().some(x=>x.m===month&&x.key===listSel))h+=`<div class="tkban"><span class="ti">📸</span><span><b>Sube el ticket de esta compra</b><small>+3 coins y me ayudas a afinar los precios</small></span><button class="btn small" id="tkBanner">Escanear</button><button class="tkx" id="tkSkip" aria-label="No tengo ticket">✕</button></div>`;
   if(l.items.length&&!shopIsDone(month,l))h+=`<div class="row" style="margin:4px 0 8px"><button class="btn ghost small" id="shopDone">✓ Ya he hecho esta compra</button></div>`;
   else if(l.items.length)h+=`<p class="small okt" style="margin:4px 0 8px;color:var(--ok);font-weight:600">✓ Compra hecha</p>`;
   if(listSel==="mes")h+=shopPlanCard(month);
@@ -880,14 +881,18 @@ function renderCompra(){
   h+=`<div class="card"><h2>Presupuesto por semana</h2><table class="wtable">${sh.weeks.map((s,i)=>`<tr><td>Semana del ${shortDate(s)}${i===0?" (con la compra del mes)":""}</td><td class="${sh.perWeek[i]>wb?"up":""}">${eur(sh.perWeek[i])} / ${eur(wb)}</td></tr>`).join("")}</table></div>`;
   main.innerHTML=h+`</section>`;
   main.querySelectorAll("[data-list]").forEach(b=>b.onclick=()=>{listSel=b.dataset.list;render()});
-  document.getElementById("shopDone")?.addEventListener("click",()=>{markShopDone(month,listSel);render();toast("Hecho: no te lo recuerdo más")});
+  document.getElementById("shopDone")?.addEventListener("click",()=>{const m=month,k=listSel;markShopDone(m,k);render();askTicket(m,k)});
+  document.getElementById("tkBanner")?.addEventListener("click",()=>openTicketScan());
+  document.getElementById("tkSkip")?.addEventListener("click",()=>{S.ticketSkip=S.ticketSkip||{};S.ticketSkip[shopKey(month,listSel)]=todayISO();save();render()});
   main.querySelectorAll("[data-bag]").forEach(i=>i.onchange=()=>{S.bags=S.bags||{};if(i.checked)S.bags[i.dataset.bag]=todayISO();else delete S.bags[i.dataset.bag];save();render()});
   main.querySelectorAll("[data-splan]").forEach(b=>b.onclick=()=>{const p=SHOP_PLANS.find(x=>x.id===b.dataset.splan);
     S.home.shop.monthMode=p.month;S.home.shop.weekMode=p.week;for(const k of Object.keys(S.modes))if(k.startsWith(month+"|"))delete S.modes[k];
     save();render();toast("Hecho: "+p.t.toLowerCase())});
   main.querySelectorAll("[data-strat]").forEach(b=>b.onclick=()=>{S.home.shop.strategy=b.dataset.strat;save();render();toast(b.dataset.strat==="barato"?"Cada producto, donde sale más barato":"Todo en "+superById(mainSuper()).nombre)});
   main.querySelectorAll("[data-lm]").forEach(b=>b.onclick=()=>{S.modes[month+"|"+listSel]=b.dataset.lm;save();render()});
-  main.querySelectorAll("[data-ck]").forEach(i=>i.onchange=()=>{S.checkedAt=S.checkedAt||{};if(i.checked){S.checks[i.dataset.ck]=true;S.checkedAt[i.dataset.ck]=todayISO()}else{delete S.checks[i.dataset.ck];delete S.checkedAt[i.dataset.ck]}i.closest(".item").classList.toggle("done",i.checked);save()});
+  main.querySelectorAll("[data-ck]").forEach(i=>i.onchange=()=>{S.checkedAt=S.checkedAt||{};if(i.checked){S.checks[i.dataset.ck]=true;S.checkedAt[i.dataset.ck]=todayISO()}else{delete S.checks[i.dataset.ck];delete S.checkedAt[i.dataset.ck]}i.closest(".item").classList.toggle("done",i.checked);save();
+    // Lista completa: se pide el ticket
+    if(i.checked&&l.items.every(it=>S.checks[checkKey(month,l.key,it.pid)])&&!(S.tickets||[]).some(t=>t.m===month&&t.list===l.key))setTimeout(()=>askTicket(month,l.key),400)});
   document.getElementById("spentIn").onchange=e=>{const v=e.target.value;if(v==="")delete S.spent[sk];else S.spent[sk]=Number(v);save();renderHeader()};
   main.querySelectorAll("[data-saveorder]").forEach(b=>b.onclick=()=>{const items={};for(const it of l.items)items[it.pid]=it.packs;S.orders[b.dataset.saveorder]={items,savedAt:todayISO()};save();render();toast("Pedido guardado")});
   bindReview(main);bindSpending();
@@ -1153,6 +1158,7 @@ function inboxItems(){
   try{for(const k of S.people)if(!k.smallSet&&(k.id==="yo"||(k.presence||{}).type!=="manual"))out.push({ico:"🥐",t:k.id==="yo"?"¿Desayunas, almuerzas y meriendas?":`¿Qué desayuna y merienda ${personName(k)}?`,s:"Te propongo desayunos, almuerzos y meriendas sanos",go:()=>{dlg.close();openWizard("familia");scrollTo(0,0)}})}catch(e){}
   try{for(const k of others())if(!k.mealsSet&&(k.presence||{}).type!=="manual")out.push({ico:"🍽️",t:`¿Qué comidas hace ${personName(k)} en casa?`,s:"Comida y cena de cada día: así no cocino de más",go:()=>{dlg.close();openWizard("familia");scrollTo(0,0)}})}catch(e){}
   try{if(S.onboarded&&!/^\d{5}$/.test(S.home.cp||""))out.push({ico:"📍",t:"Pon tu código postal",s:"Para tus precios, los supermercados que te reparten y tus festivos",go:()=>{dlg.close();openWizard("zona");scrollTo(0,0)}})}catch(e){}
+  try{for(const x of ticketDue())out.push({ico:"📸",t:`Sube el ticket de ${x.title}`,s:"+3 coins · y afino los precios para todos",go:()=>{dlg.close();askTicket(x.m,x.key)}})}catch(e){}
   try{for(const r of shopDueNow())out.push({ico:"🛒",t:r.title.replace("🛒 ",""),s:r.body,go:()=>openShopReminder(r)})}catch(e){}
   try{const nx=monthPrepDue();if(nx)out.push({ico:"📋",t:`Prepara ${mName(nx)}`,s:"5 preguntas y te dejo el menú y el pedido del mes listos",go:()=>{dlg.close();openMonthPrep(nx)}})}catch(e){}
   try{const n=pendingMeals().length;if(n)out.push({ico:"⭐",t:n===1?"1 comida por valorar":`${n} comidas por valorar`,s:"Así aprendo lo que os gusta",go:go("menu")})}catch(e){}
