@@ -70,6 +70,45 @@ function mealLine(d,meal,wk){
   }
   return h+`</div>`;
 }
+/* ---------- ¿Entrenaste? (una hora después de cada sesión) ---------- */
+function pendingSports(){
+  const today=todayISO(), now=new Date(), mins=now.getHours()*60+now.getMinutes(), out=[];
+  for(let k=2;k>=0;k--){const d=addDays(today,-k), wk=S.plans[weekStartFor(d)];if(!wk||d<(wk.createdAt||"9"))continue;
+    const res=((S.sport||{})[d]||{}).res||{};
+    plannedSessions(d).forEach((s,i)=>{if(res[i])return;if(k===0&&mins<toMin(sessTime(s))+60)return;out.push({d,i,s})})}
+  return out;
+}
+function sportCard(){
+  const list=pendingSports();if(!list.length)return "";
+  const {d,i,s}=list[list.length-1], key=d+"|"+i, today=d===todayISO();
+  return `<div class="rate"><h3>¿Hiciste ${esc((SPORTS[s.type]||s.type).toLowerCase())}${today?" hoy":" el "+esc(longDate(d))} a las ${esc(sessTime(s))}?</h3><div class="small muted">Con esto recalculo lo que te conviene comer${list.length>1?` · ${list.length-1} más pendientes`:""}</div>
+    <div class="actions"><button class="btn small" data-sp="${key}|si">Sí</button><button class="btn ghost small" data-sp="${key}|no">No</button><button class="btn ghost small" data-spother="${key}">Hice otra cosa</button></div>
+    <div class="chips hidden" id="spOther">${Object.entries(SPORTS).map(([k,v])=>`<button class="chip" data-sp="${key}|otro|${k}">${v}</button>`).join("")}</div></div>`;
+}
+// Cambia los entrenos y, si las comidas que quedan ya no encajan, propone cambiarlas
+function withRecalc(change){
+  const today=todayISO(), starts=[weekStartFor(today),addDays(weekStartFor(today),7)];
+  const future=()=>starts.flatMap(st=>S.plans[st]?buildSlots(st).filter(sl=>!sl.fixed&&(sl.date>today||(sl.date===today&&sl.meal==="cena"))):[]);
+  const before=Object.fromEntries(future().map(sl=>[sl.id,sl.need]));
+  change();save();
+  const bad=[];
+  for(const sl of future()){const b=before[sl.id];if(!b)continue;
+    if(b.carbs===sl.need.carbs&&b.prot===sl.need.prot&&b.noHeavy===sl.need.noHeavy)continue;
+    const wk=S.plans[weekStartFor(sl.date)], r=RX[(wk.slots[sl.id]||{}).recipe];if(!r)continue;
+    const mismatch=(sl.need.carbs&&r.type!=="c")||(!sl.need.carbs&&sl.meal==="cena"&&r.type==="c"&&!sl.need.prot)||(sl.need.noHeavy&&r.heavy);
+    if(mismatch)bad.push({sl,r});
+  }
+  render();
+  if(!bad.length){toast("Apuntado. Las comidas que quedan siguen encajando");return}
+  showDialog(`<div class="mod">${closeBtn}<h2>He recalculado</h2><p class="small muted">Con el cambio de entreno, ${bad.length===1?"este plato ya no encaja del todo":"estos platos ya no encajan del todo"}:</p>
+    ${bad.map(({sl,r})=>`<div class="daycard"><div class="small muted">${DSHORT[dow(sl.date)]} ${shortDate(sl.date)} · ${sl.meal}</div><b>${esc(r.name)}</b>${needLine(sl)||`<div class="need">🥗 Ahora toca algo más ligero</div>`}
+      <div class="chips" style="margin-top:6px">${alternatives(sl,3).map(({r:x})=>`<button class="chip" data-rc="${sl.id}|${x.id}">${esc(x.name)}</button>`).join("")}</div></div>`).join("")}
+    <div class="actions"><button class="btn ghost" data-x>Dejarlo así</button></div></div>`);
+  dlg.querySelectorAll("[data-rc]").forEach(b=>b.onclick=()=>{const v=b.dataset.rc,i=v.lastIndexOf("|"),sid=v.slice(0,i),rid=v.slice(i+1);
+    setSlotRecipe(slotFor(sid.slice(0,10),sid.slice(11)),rid);b.closest(".daycard").innerHTML=`<b>Cambiado por ${esc(RX[rid].name)}</b>`;render()});
+}
+function setSport(d,i,st,type){S.sport=S.sport||{};const x=S.sport[d]=S.sport[d]||{};x.res=x.res||{};x.res[i]={st,type:type||null}}
+
 /* ---------- ¿Qué tal? (después de cada comida) ---------- */
 // Comidas ya pasadas sin respuesta: se pregunta hora y media después de la hora de cada comida
 function pendingMeals(){
@@ -88,8 +127,11 @@ function pendingMeals(){
       const sl=buildSlots(weekStartFor(d)).find(s=>s.id===key);if(!sl)continue;
       const v=wk.slots[sl.id], r=v&&RX[v.recipe];if(!r)continue;
       const who=sl.eaters.concat(sl.kids).filter(p=>!S.ratings.some(x=>x.slot===key&&x.who===p.id));
-      if(!who.length){S.meals[key]={status:"ok"};continue}
-      out.push({key,d,meal,r,taper:false,who,sl});
+      // Quien cocina (el adulto) responde además si fue fácil y si lo repetiría
+      const mine=S.ratings.find(x=>x.slot===key&&x.who===me().id);
+      const cook=!!(mine&&(mine.ease==null||mine.again==null));
+      if(!who.length&&!cook){S.meals[key]={status:"ok"};continue}
+      out.push({key,d,meal,r,taper:false,who,sl,cook});
     }
   }
   return out;
@@ -102,15 +144,19 @@ function dayCounter(d,pt){
 }
 function rateCard(){
   const list=pendingMeals();if(!list.length)return "";
-  const {key,d,meal,r,taper,who}=list[list.length-1];
+  const {key,d,meal,r,taper,who,cook}=list[list.length-1];
   const when=(meal==="comida"?"la comida":"la cena")+" del "+longDate(d);
   if(taper)return `<div class="rate"><h3>¿Te comiste el táper de ${esc(r.name.toLowerCase())}?</h3><div class="small muted">${esc(when)}${list.length>1?` · ${list.length-1} más pendientes`:""}</div>
     <div class="actions"><button class="btn small" data-ate="${key}">Sí</button><button class="btn ghost small" data-notate="${key}|${r.id}">No, otra cosa</button></div></div>`;
   return `<div class="rate"><h3>¿Qué tal ${esc(r.name.toLowerCase())}?</h3><div class="small muted">${esc(when)}${list.length>1?` · ${list.length-1} más pendientes`:""}</div>
     ${who.map(p=>`<div class="who"><div class="small"><b>${esc(personName(p))}</b></div><div class="chips">
-      <button class="chip" data-rate="${key}|${r.id}|${p.id}|2">❤️ Me encantó</button><button class="chip" data-rate="${key}|${r.id}|${p.id}|1">👍 Bien</button>
-      <button class="chip" data-rate="${key}|${r.id}|${p.id}|rare">🙂 Bien, pero no a menudo</button><button class="chip" data-rate="${key}|${r.id}|${p.id}|-1">👎 No me gustó</button></div></div>`).join("")}
-    <button class="btn ghost small" style="margin-top:8px" data-notate="${key}|${r.id}">No me lo comí o comí otra cosa</button></div>`;
+      <button class="chip" data-rate="${key}~${r.id}~${p.id}~2">❤️ ${p.kind==="adulto"?"Me encantó":"Le encantó"}</button><button class="chip" data-rate="${key}~${r.id}~${p.id}~1">👍 Bien</button>
+      <button class="chip" data-rate="${key}~${r.id}~${p.id}~-1">👎 No ${p.kind==="adulto"?"me":"le"} gustó</button></div></div>`).join("")}
+    ${cook?(()=>{const m=S.ratings.find(x=>x.slot===key&&x.who===me().id);return `<div class="who"><div class="small"><b>¿Fue fácil de cocinar?</b></div><div class="chips">
+      ${[["facil","😌 Fácil"],["normal","🙂 Normal"],["dificil","😓 Complicado"]].map(([v,t])=>`<button class="chip" data-ease="${key}~${v}" aria-pressed="${m.ease===v}">${t}</button>`).join("")}</div></div>
+      <div class="who"><div class="small"><b>¿Lo repetirías?</b></div><div class="chips">
+      ${[["menudo","🔁 Sí, a menudo"],["aveces","🗓️ De vez en cuando"],["no","🚫 No quiero repetirlo"]].map(([v,t])=>`<button class="chip" data-again="${key}~${v}" aria-pressed="${m.again===v}">${t}</button>`).join("")}</div></div>`})():""}
+    ${who.length?`<button class="btn ghost small" style="margin-top:8px" data-notate="${key}|${r.id}">No me lo comí o comí otra cosa</button>`:""}</div>`;
 }
 // Qué pasó si no se comió lo previsto
 function openNotEaten(key,rid){
@@ -154,7 +200,7 @@ function moveToNext(rid,from){
 }
 function renderMenu(){
   const weeks=weeksInMonth(month);
-  let h=`<section class="view">`+rateCard();
+  let h=`<section class="view">`+sportCard()+rateCard();
   if(!weeks.length)h+=`<div class="empty"><p>No hay semanas que empiecen este mes.</p></div>`;
   for(const start of weeks){
     const wk=S.plans[start], dates=weekDates(start);
@@ -172,7 +218,7 @@ function renderMenu(){
       const sess=sessionsOn(d);
       const empty=["comida","cena"].every(m=>["fuera","libre"].includes(mealState(d,m)));
       h+=`<div class="slot ${empty?"extra":""}"><div class="day">${DSHORT[dow(d)]}<small>${shortDate(d)}</small></div><div>
-        <div class="tags">${hol?`<span class="pill carga">${esc(holidayName(d))}</span>`:""}${ks.map(k=>`<span class="pill kid">${esc(personName(k))}</span>`).join("")}${sess.map(s=>`<span class="pill ligera">${esc(SPORTS[s.type])} ${s.when==="manana"?"mañana":"tarde"}</span>`).join("")}</div>
+        <div class="tags">${hol?`<span class="pill carga">${esc(holidayName(d))}</span>`:""}${ks.map(k=>`<span class="pill kid">${esc(personName(k))}</span>`).join("")}${sess.map(s=>`<span class="pill ligera">${esc(SPORTS[s.type])} ${esc(sessTime(s))}</span>`).join("")}</div>
         ${mealLine(d,"comida",wk)}${mealLine(d,"cena",wk)}
         ${dayCounter(d,pt)}
         <div class="ops"><button class="btn ghost small" data-day="${d}">Cambiar este día</button></div></div></div>`;
@@ -185,9 +231,17 @@ function renderMenu(){
   main.querySelectorAll("[data-swap]").forEach(b=>b.onclick=()=>openSwap(b.dataset.swap));
   main.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>openDay(b.dataset.day));
   main.querySelectorAll("[data-session]").forEach(b=>b.onclick=()=>openSession(b.dataset.session));
-  main.querySelectorAll("[data-rate]").forEach(b=>b.onclick=()=>{const [sid,rid,who,v]=b.dataset.rate.split("|");
+  main.querySelectorAll("[data-rate]").forEach(b=>b.onclick=()=>{const [sid,rid,who,v]=b.dataset.rate.split("~");
     if(v==="-1"){openDislike(rid,who,sid);return}
-    addRating({slot:sid,rid,who,v:v==="rare"?1:Number(v),rare:v==="rare"});if(v==="2")setDish(S.people.find(p=>p.id===who),rid,2,"Te encantó");render();toast("¡Apuntado!")});
+    addRating({slot:sid,rid,who,v:Number(v)});if(v==="2")setDish(S.people.find(p=>p.id===who),rid,2,who===me().id?"Te encantó":"Le encantó");render();toast("¡Apuntado!")});
+  main.querySelectorAll("[data-sp]").forEach(b=>b.onclick=()=>{const [d,i,st,type]=b.dataset.sp.split("|");withRecalc(()=>setSport(d,Number(i),st,type))});
+  main.querySelectorAll("[data-spother]").forEach(b=>b.onclick=()=>document.getElementById("spOther").classList.toggle("hidden"));
+  const myRating=key=>S.ratings.find(x=>x.slot===key&&x.who===me().id);
+  main.querySelectorAll("[data-ease]").forEach(b=>b.onclick=()=>{const [k,v]=b.dataset.ease.split("~");const m=myRating(k);m.ease=v;save();render()});
+  main.querySelectorAll("[data-again]").forEach(b=>b.onclick=()=>{const [k,v]=b.dataset.again.split("~");const m=myRating(k);m.again=v;m.rare=v==="aveces";
+    if(v==="menudo")setDish(me(),m.rid,2,"Lo repetirías a menudo");
+    if(v==="no"){setDish(me(),m.rid,-1,"No lo repetirías");toast("No lo volveré a proponer")}
+    save();render()});
   main.querySelectorAll("[data-ate]").forEach(b=>b.onclick=()=>{S.meals[b.dataset.ate]={status:"ok"};save();render()});
   main.querySelectorAll("[data-notate]").forEach(b=>b.onclick=()=>{const v=b.dataset.notate;openNotEaten(v.slice(0,v.lastIndexOf("|")),v.slice(v.lastIndexOf("|")+1))});
   bindOpen();
@@ -204,11 +258,20 @@ function openDay(d){
     const ks=kids();
     showDialog(`<div class="mod">${closeBtn}<h2>${esc(longDate(d))}</h2>${isHoliday(d)?`<span class="pill carga">${esc(holidayName(d))}</span>`:""}
       ${ks.length?`<h3 style="margin-top:12px">¿Quién está?</h3><div class="chips">${ks.map(k=>chip("data-dk",k.id,kidsAt(d).includes(k),esc(personName(k)))).join("")}</div>`:""}
+      ${adults().some(a=>a.trains)?`<h3 style="margin-top:12px">Entreno</h3>
+        ${plannedSessions(d).map((s,i)=>{const r=(((S.sport||{})[d]||{}).res||{})[i];return `<div class="row small" style="margin:4px 0">${esc(SPORTS[s.type])} a las ${esc(sessTime(s))}${r?` · ${r.st==="no"?"no lo hiciste":r.st==="otro"?"hiciste "+esc(SPORTS[r.type].toLowerCase()):"hecho ✓"}`:""}<span class="spacer"></span><button class="btn ghost small" data-dsx="${i}">${r&&r.st==="no"?"Sí lo hago":"No lo hago"}</button></div>`}).join("")}
+        ${(((S.sport||{})[d]||{}).extra||[]).map((s,i)=>`<div class="row small" style="margin:4px 0">${esc(SPORTS[s.type])} a las ${esc(s.time)} (añadido)<span class="spacer"></span><button class="btn ghost small" data-dse="${i}">Quitar</button></div>`).join("")}
+        <div class="row" style="margin-top:6px"><select id="dsT" style="flex:1">${Object.entries(SPORTS).map(([k,v])=>`<option value="${k}">${v}</option>`).join("")}</select><input type="time" id="dsH" value="19:00" style="width:auto"><button class="btn small" data-dsa>Añadir</button></div>`:""}
       ${["comida","cena"].map(m=>`<h3 style="margin-top:12px">${m==="comida"?"Comida":"Cena"}</h3><div class="chips">${(m==="comida"?["taper","cocinar","fuera","libre"]:["cocinar","solotaper","fuera","libre"]).map(v=>chip("data-dm",m+":"+v,mealState(d,m)===v,v==="solotaper"?"Solo el táper":MEALSTATE[v])).join("")}</div>`).join("")}
       <div class="actions"><button class="btn ghost" data-reset>Como la semana tipo</button><button class="btn" data-x>Hecho</button></div></div>`);
     dlg.querySelectorAll("[data-dk]").forEach(b=>b.onclick=()=>{const id=b.dataset.dk;o.kids=o.kids||{};o.kids[id]=!kidsAt(d).some(k=>k.id===id);after()});
     dlg.querySelectorAll("[data-dm]").forEach(b=>b.onclick=()=>{const [m,v]=b.dataset.dm.split(":");changeMeal(d,m,v,draw)});
     dlg.querySelector("[data-reset]").onclick=()=>{delete S.days[d];after();dlg.close()};
+    const sp=()=>{S.sport=S.sport||{};return S.sport[d]=S.sport[d]||{}};
+    dlg.querySelectorAll("[data-dsx]").forEach(b=>b.onclick=()=>{const i=Number(b.dataset.dsx),x=sp();x.res=x.res||{};
+      withRecalc(()=>{if(x.res[i]&&x.res[i].st==="no")delete x.res[i];else x.res[i]={st:"no"}});if(!dlg.open||dlg.querySelector("[data-dsa]"))draw()});
+    dlg.querySelectorAll("[data-dse]").forEach(b=>b.onclick=()=>{const x=sp();withRecalc(()=>x.extra.splice(Number(b.dataset.dse),1));if(!dlg.open||dlg.querySelector("[data-dsa]"))draw()});
+    dlg.querySelector("[data-dsa]")?.addEventListener("click",()=>{const x=sp();withRecalc(()=>(x.extra=x.extra||[]).push({type:dlg.querySelector("#dsT").value,time:dlg.querySelector("#dsH").value||"19:00"}));if(!dlg.open||dlg.querySelector("[data-dsa]"))draw()});
   };
   const after=()=>{save();ensureWeek(weekStartFor(d));save();draw();render()};
   draw();
@@ -353,7 +416,7 @@ function openSession(cd){
 function openWeekPlanner(start){
   let step=0;
   const wk=S.plans[start]=S.plans[start]||{start,slots:{},training:null,confirmed:false};
-  if(!wk.training){wk.training={};for(const d of weekDates(start))wk.training[d]=JSON.parse(JSON.stringify(sessionsOn(d)))}
+  if(!wk.training){wk.training={};for(const d of weekDates(start))wk.training[d]=JSON.parse(JSON.stringify(plannedSessions(d)))}
   const a=me(), sports=a&&a.sports.length?a.sports:Object.keys(SPORTS);
   const draw=()=>{
     let h=`<div class="mod">${closeBtn}<div class="small muted">Semana del ${shortDate(start)} · paso ${step+1} de 4</div>`;
@@ -361,7 +424,7 @@ function openWeekPlanner(start){
       h+=`<h2>¿Cómo entrenas esta semana?</h2><p class="small muted">Viene rellena con tu semana habitual.</p>`;
       for(const d of weekDates(start)){const ss=wk.training[d]||[];
         h+=`<div class="daycard"><div class="row"><b>${DSHORT[dow(d)]} ${shortDate(d)}</b><span class="spacer"></span>${ss.length<2?`<button class="btn ghost small" data-as="${d}">+ Sesión</button>`:""}</div>
-        ${ss.map((s,i)=>`<div class="sess"><select data-tw="${d}|${i}"><option value="manana" ${s.when==="manana"?"selected":""}>Mañana</option><option value="tarde" ${s.when==="tarde"?"selected":""}>Tarde</option></select>
+        ${ss.map((s,i)=>`<div class="sess"><input type="time" data-tw="${d}|${i}" value="${esc(sessTime(s))}" style="width:auto" aria-label="Hora">
         <select data-tt="${d}|${i}">${sports.map(k=>`<option value="${k}" ${s.type===k?"selected":""}>${SPORTS[k]}</option>`).join("")}</select><button class="btn ghost small" data-ds="${d}|${i}">✕</button></div>`).join("")}</div>`}
     }
     if(step===1){
@@ -392,9 +455,9 @@ function openWeekPlanner(start){
     h+=`<div class="actions">${step>0?`<button class="btn ghost" data-pb>Atrás</button>`:""}<button class="btn" data-pn>${step===3?"Confirmar la semana":"Siguiente"}</button></div></div>`;
     showDialog(h);
     const q=s=>dlg.querySelectorAll(s);
-    q("[data-as]").forEach(b=>b.onclick=()=>{const d=b.dataset.as;(wk.training[d]=wk.training[d]||[]).push({when:"tarde",type:sports[0]});save();draw()});
+    q("[data-as]").forEach(b=>b.onclick=()=>{const d=b.dataset.as;(wk.training[d]=wk.training[d]||[]).push({time:"19:00",type:sports[0]});save();draw()});
     q("[data-ds]").forEach(b=>b.onclick=()=>{const [d,i]=b.dataset.ds.split("|");wk.training[d].splice(Number(i),1);save();draw()});
-    q("[data-tw]").forEach(s=>s.onchange=()=>{const [d,i]=s.dataset.tw.split("|");wk.training[d][i].when=s.value;save()});
+    q("[data-tw]").forEach(s=>s.onchange=()=>{const [d,i]=s.dataset.tw.split("|");wk.training[d][i].time=s.value;delete wk.training[d][i].when;save()});
     q("[data-tt]").forEach(s=>s.onchange=()=>{const [d,i]=s.dataset.tt.split("|");wk.training[d][i].type=s.value;save()});
     q("[data-wk]").forEach(b=>b.onclick=()=>{const [d,id]=b.dataset.wk.split("|");const o=S.days[d]=S.days[d]||{};o.kids=o.kids||{};o.kids[id]=!kidsAt(d).some(k=>k.id===id);save();draw()});
     q("[data-wm]").forEach(s=>s.onchange=()=>{const [d,m]=s.dataset.wm.split("|");S.days[d]=S.days[d]||{};S.days[d][m]=s.value;save()});

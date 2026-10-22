@@ -44,29 +44,41 @@ function fixedFor(d,meal){
 
 /* ---------- Entrenos ---------- */
 // Sesiones de un día: las de la semana (si se han ajustado al planificar) o la semana habitual
-function sessionsOn(d){
+// Sesiones previstas: las de la semana (si se han ajustado al planificar) o la semana habitual
+function plannedSessions(d){
   const wk=S.plans[weekStartFor(d)];
   if(wk&&wk.training&&wk.training[d])return wk.training[d];
   const out=[];for(const a of adults())if(a.trains)for(const s of (a.train[dow(d)]||[]))out.push(s);
   return out;
 }
-const sessLabel=s=>(SPORTS[s.type]||s.type).toLowerCase()+(s.when==="manana"?" por la mañana":" por la tarde");
+// Sesiones reales: las previstas menos las que no hiciste, con las que cambiaste y las que añadiste
+function sessionsOn(d){
+  const real=(S.sport||{})[d]||{}, res=real.res||{};
+  const out=[];
+  plannedSessions(d).forEach((s,i)=>{const r=res[i];if(r&&r.st==="no")return;out.push(r&&r.st==="otro"?{...s,type:r.type||s.type}:s)});
+  return out.concat(real.extra||[]);
+}
+const toMin=t=>{const [h,m]=String(t||"0:0").split(":").map(Number);return h*60+(m||0)};
+const sessTime=s=>s.time||(s.when==="tarde"?"19:00":"08:00");
+// Antes o después de comer, según la hora del entreno y la de la comida
+const whenOf=s=>s.time?(toMin(s.time)<toMin(S.home.mealTimes.comida)?"manana":"tarde"):(s.when||"manana");
+const sessLabel=s=>(SPORTS[s.type]||s.type).toLowerCase()+" a las "+sessTime(s);
 // Qué necesita un plato según los entrenos de alrededor
 function needsFor(slot){
   const d=slot.date, out={carbs:false,prot:false,noHeavy:false,why:[]};
   if(slot.meal==="cena"){
     const sD=sessionsOn(d), sN=slot.tupper.length?sessionsOn(addDays(d,1)):[];
     if(sN.length){out.carbs=true;out.why.push("mañana entrenas: "+sN.map(sessLabel).join(" y "))}
-    const pmD=sD.filter(s=>s.when==="tarde");
+    const pmD=sD.filter(s=>whenOf(s)==="tarde");
     if(pmD.length){out.prot=true;out.why.push("recuperación de "+pmD.map(s=>SPORTS[s.type].toLowerCase()).join(" y "));if(pmD.some(s=>ENDURANCE.has(s.type)))out.carbs=true}
-    if(sN.some(s=>s.when==="manana"))out.prot=true;
+    if(sN.some(s=>whenOf(s)==="manana"))out.prot=true;
     if(sN.some(s=>ENDURANCE.has(s.type))){out.noHeavy=true}
     if(sN.length>=2){out.prot=true;out.why.push("día doble")}
   }else{
     const sD=sessionsOn(d);
     if(sD.length){out.carbs=true;out.why.push("hoy entrenas: "+sD.map(sessLabel).join(" y "))}
-    if(sD.some(s=>s.when==="tarde"&&ENDURANCE.has(s.type)))out.noHeavy=true;
-    if(sD.some(s=>s.when==="manana"))out.prot=true;
+    if(sD.some(s=>whenOf(s)==="tarde"&&ENDURANCE.has(s.type)))out.noHeavy=true;
+    if(sD.some(s=>whenOf(s)==="manana"))out.prot=true;
   }
   return out;
 }
@@ -185,6 +197,9 @@ function scoreRecipe(r,slot,ctx){
   if(r.red&&(c.red||0)>=(goals.includes("sano")?1:2))s-=3;
   if(r.group==="huevo"&&(c.huevo||0)>=2)s-=3;
   if(ctx.have)s+=ctx.have(r)*1.5;
+  // Facilidad: lo que te resultó complicado sale menos; lo fácil, algo más
+  const mineR=S.ratings.filter(x=>x.rid===r.id&&x.ease&&slot.eaters.concat(slot.tupper).some(a=>a.id===x.who));
+  if(mineR.some(x=>x.ease==="dificil"))s-=2.5;else if(mineR.some(x=>x.ease==="facil"))s+=0.6;
   return s;
 }
 function makeCtx(start,exceptId){

@@ -66,6 +66,16 @@ aprende se ve y se corrige en una pantalla "Lo que sé de ti" (por persona: adul
 - Horario de comida y cena configurable. Otras comidas (desayuno, media mañana, merienda, pre y post entreno,
   recena) con su hora. **Pendiente**: proponer opciones para esas comidas, con su compra y su proteína.
 
+### Después de cada entreno
+- Cada sesión guarda su hora (semana habitual y planificación). Antes o después de comer se deduce de la hora.
+- Una hora después se pregunta "¿Hiciste X a las HH:MM?": sí / no / otra cosa. También se puede añadir un
+  entreno no previsto desde "Cambiar este día". La app recalcula lo que necesitan las comidas que quedan y,
+  si alguna ya no encaja, propone cambiarla.
+
+### Tras cocinar un plato
+- Además de la valoración: "¿Fue fácil de cocinar?" (fácil / normal / complicado: lo complicado sale menos) y
+  "¿Lo repetirías?" (a menudo / de vez en cuando / no quiero repetirlo: no vuelve a salir).
+
 ### Gustos y aprendizaje
 - Valorar cada plato al día siguiente (👍 / 👎 / "bien, pero no a menudo"), por separado tú y el niño.
 - "No me gusta" con motivo: ingrediente concreto, preparación, pesado, sabor, mucho trabajo, texto libre.

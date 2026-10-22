@@ -56,7 +56,7 @@ function defaultState(){
       shop:{monthMode:"online",weekMode:"online",delivery:1,min:50,fee:8.2},
       budget:{month:180,week:null,basics:6},festivosExtra:[]},
     people:[defaultAdult("")],
-    fixed:[], plans:{}, days:{}, ratings:[], prices:{}, checks:{}, assign:{}, modes:{}, spent:{}, orders:{}, base:null
+    fixed:[], plans:{}, days:{}, ratings:[], prices:{}, checks:{}, assign:{}, modes:{}, spent:{}, orders:{}, sport:{}, base:null
   };
 }
 function mergeState(o){
@@ -73,7 +73,7 @@ function migrateV1(o){
   if(st.sunday===false)s.home.weekTpl[6].cena="libre";
   const me=s.people[0];
   if(Array.isArray(st.training)&&st.training.length){me.trains=true;me.sports=["calistenia","correr"];me.goals=["rendimiento","sano"];
-    for(const d of st.training)me.train[d]=[{when:"manana",type:"calistenia"}]}
+    for(const d of st.training)me.train[d]=[{time:"08:00",type:"calistenia"}]}
   if(st.kidAnchor)s.people.push({...defaultAdult(),id:"hijo1",name:"",kind:"nino",age:null,factor:Number(st.kidFactor)||0.6,goals:["sano"],
     presence:{type:"alternas",anchor:st.kidAnchor},tastes:{ing:{},dish:{},ignore:{},src:{}}});
   for(const r of o.dislikes||[]){me.tastes.dish[r]=-1;me.tastes.src["d:"+r]="Lo marcaste antes"}

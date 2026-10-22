@@ -86,10 +86,10 @@ function stepBody(id){
     let h=`<div class="chips">${chip("data-trains","1",a.trains,"Sí, entreno")}${chip("data-trains","0",!a.trains,"No")}</div>`;
     if(!a.trains)return h;
     h+=`<div class="group"><h3>¿Qué haces? (puedes elegir varios)</h3><div class="chips">${Object.entries(SPORTS).map(([k,v])=>chip("data-sport",k,a.sports.includes(k),v)).join("")}</div></div>
-    <div class="group"><h3>Tu semana habitual</h3><p class="muted small" style="margin:0 0 8px">Cada semana te la propondré ya rellena y solo cambiarás lo que varíe.</p>`;
+    <div class="group"><h3>Tu semana habitual</h3><p class="muted small" style="margin:0 0 8px">Con la hora de cada sesión sé si entrenas antes o después de comer. Cada semana te la propondré ya rellena y solo cambiarás lo que varíe.</p>`;
     for(let d=0;d<7;d++){const ss=a.train[d]||[];
       h+=`<div class="daycard"><div class="row"><b>${DAYS[d]}</b><span class="spacer"></span>${ss.length<2?`<button class="btn ghost small" data-addsess="${d}">+ Sesión</button>`:""}</div>
-      ${ss.map((s,i)=>`<div class="sess"><select data-sw="${d}:${i}"><option value="manana" ${s.when==="manana"?"selected":""}>Mañana</option><option value="tarde" ${s.when==="tarde"?"selected":""}>Tarde</option></select>
+      ${ss.map((s,i)=>`<div class="sess"><input type="time" data-sw="${d}:${i}" value="${esc(sessTime(s))}" style="width:auto" aria-label="Hora">
       <select data-st="${d}:${i}">${(a.sports.length?a.sports:Object.keys(SPORTS)).map(k=>`<option value="${k}" ${s.type===k?"selected":""}>${SPORTS[k]}</option>`).join("")}</select>
       <button class="btn ghost small" data-delsess="${d}:${i}" aria-label="Quitar sesión">✕</button></div>`).join("")}</div>`}
     return h+`</div>`;
@@ -166,9 +166,9 @@ function bindStep(id){
   qa("[data-goal]").forEach(b=>b.onclick=()=>{const g=b.dataset.goal;if(a.goals.includes(g))a.goals=a.goals.filter(x=>x!==g);else if(a.goals.length<3)a.goals.push(g);else{toast("Máximo 3 objetivos: quita uno antes");return}rerender()});
   qa("[data-trains]").forEach(b=>b.onclick=()=>{a.trains=b.dataset.trains==="1";rerender()});
   qa("[data-sport]").forEach(b=>b.onclick=()=>{const k=b.dataset.sport;a.sports=a.sports.includes(k)?a.sports.filter(x=>x!==k):[...a.sports,k];rerender()});
-  qa("[data-addsess]").forEach(b=>b.onclick=()=>{const d=b.dataset.addsess;const ss=a.train[d]=a.train[d]||[];ss.push({when:ss.length?"tarde":"manana",type:a.sports[0]||"fuerza"});rerender()});
+  qa("[data-addsess]").forEach(b=>b.onclick=()=>{const d=b.dataset.addsess;const ss=a.train[d]=a.train[d]||[];ss.push({time:ss.length?"19:00":"08:00",type:a.sports[0]||"fuerza"});rerender()});
   qa("[data-delsess]").forEach(b=>b.onclick=()=>{const [d,i]=b.dataset.delsess.split(":");a.train[d].splice(Number(i),1);if(!a.train[d].length)delete a.train[d];rerender()});
-  qa("[data-sw]").forEach(s=>s.onchange=()=>{const [d,i]=s.dataset.sw.split(":");a.train[d][i].when=s.value;save()});
+  qa("[data-sw]").forEach(s=>s.onchange=()=>{const [d,i]=s.dataset.sw.split(":");a.train[d][i].time=s.value;delete a.train[d][i].when;save()});
   qa("[data-st]").forEach(s=>s.onchange=()=>{const [d,i]=s.dataset.st.split(":");a.train[d][i].type=s.value;save()});
   qa("[data-tpl]").forEach(s=>s.onchange=()=>{const [d,m]=s.dataset.tpl.split(":");H.weekTpl[d][m]=s.value;save()});
   qa("[data-mt]").forEach(i=>i.onchange=()=>{H.mealTimes[i.dataset.mt]=i.value;save()});
