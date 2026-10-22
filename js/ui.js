@@ -740,7 +740,7 @@ function renderPerfil(){
   let h=`<section class="view"><div class="hero"><div class="eyebrow">Tu perfil</div><h2>${me().name?"Hola, "+esc(me().name):"Hola"}</h2><p>${S.people.length>1?`${S.people.length} personas en casa · `:""}${eur(S.home.budget.month)} al mes · ${esc(chosenSupers().map(s=>superById(s).nombre).join(", "))}</p></div>`;
   let fam="";
   for(const p of S.people){const hist=historyOf(p,20);
-    const body=`${p.id!=="yo"?`<div class="small muted">${p.kind==="nino"?(p.age?p.age+" años · ":"")+"niño o niña":"adulto"} · ración ${String(p.factor).replace(".",",")}${p.tupper?" · se lleva táper":""}</div>${turnText(p)?`<div class="small" style="margin-top:6px">${esc(turnText(p))}</div>`:""}${kidCalendar(p)}${changesHTML(p)}`:""}${knowHTML(p)}
+    const body=`${p.id!=="yo"?`<div class="small muted">${p.kind==="nino"?(p.age?p.age+" años · ":"")+"niño o niña":"adulto"} · ración ${String(p.factor).replace(".",",")}${p.tupper?" · se lleva táper":""}</div>${turnText(p)?`<div class="small" style="margin-top:6px">${esc(turnText(p))}</div>`:""}${mealsAwayText(p)?`<div class="small" style="margin-top:4px">🍽️ ${esc(mealsAwayText(p))}</div>`:""}${kidCalendar(p)}${changesHTML(p)}`:""}${knowHTML(p)}
       <details style="margin-top:12px"><summary class="small"><b>Historial</b> <span class="muted">(${hist.length} ${hist.length===1?"comida reciente":"comidas recientes"})</span></summary>
       ${hist.length?`<table class="wtable">${hist.map(x=>`<tr><td>${DSHORT[dow(x.date)]} ${shortDate(x.date)} · ${x.meal}</td><td style="text-align:left;padding-left:8px">${esc(x.name)}${x.note?` <span class="small muted">${esc(x.note)}</span>`:""}</td><td>${x.v!=null?RV[x.v]:""}</td></tr>`).join("")}</table>`:`<p class="small muted">Aún no hay comidas pasadas.</p>`}</details>`;
     const likes=Object.values(p.tastes.dish).filter(v=>v>=1).length, nos=Object.values(p.tastes.ing).filter(v=>v<0).length;
@@ -876,6 +876,7 @@ function openUseUp(){
 function inboxItems(){
   const out=[], today=todayISO(), go=(t,fn)=>()=>{dlg.close();tab=t;render();scrollTo(0,0);if(fn)setTimeout(fn,60)};
   try{if(notifBlocked())out.push({ico:"🔕",t:"Tus avisos están bloqueados",s:"Te enseño cómo activarlos en 4 toques",go:()=>openPermHelp()})}catch(e){}
+  try{for(const k of others())if(!k.mealsSet&&(k.presence||{}).type!=="manual")out.push({ico:"🍽️",t:`¿Qué comidas hace ${personName(k)} en casa?`,s:"Comida y cena de cada día: así no cocino de más",go:()=>{dlg.close();openWizard("familia");scrollTo(0,0)}})}catch(e){}
   try{const n=pendingMeals().length;if(n)out.push({ico:"⭐",t:n===1?"1 comida por valorar":`${n} comidas por valorar`,s:"Así aprendo lo que os gusta",go:go("menu")})}catch(e){}
   try{const n=pendingSports().length;if(n)out.push({ico:"🏃",t:n===1?"¿Hiciste el entreno?":`${n} entrenos por confirmar`,s:"Para recalcular lo que te conviene comer",go:go("menu")})}catch(e){}
   try{if(thawCard())out.push({ico:"❄️",t:"¿Descongelaste lo de hoy?",s:"Si se te olvidó, tienes un plan B",go:go("menu")})}catch(e){}

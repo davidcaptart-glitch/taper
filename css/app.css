@@ -411,3 +411,11 @@ nav.tabs{background:color-mix(in srgb,var(--silver-1) 88%,transparent);border-to
 .cmp summary{cursor:pointer;list-style:none}
 .cmp summary::-webkit-details-marker{display:none}
 .cmp .wtable{margin:10px 0}
+
+/* ---------- Comidas en casa por día ---------- */
+.mealgrid{border-collapse:separate;border-spacing:4px;width:100%;table-layout:fixed}
+.mealgrid th{font-size:.72rem;font-weight:600;color:var(--ink-2)}
+.mealgrid td:first-child{font-size:.8rem;font-weight:600;width:62px;padding-right:2px}
+.mg{width:100%;aspect-ratio:1;max-width:38px;border:0;border-radius:9px;background:var(--surface-2);box-shadow:inset 0 0 0 1.5px var(--line);color:#fff;font-weight:700;display:grid;place-items:center;margin:auto;transition:transform .12s var(--ease),background .15s}
+.mg[aria-pressed="true"]{background:var(--accent);box-shadow:none}
+.mg:active{transform:scale(.9)}

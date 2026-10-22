@@ -89,6 +89,13 @@ function stepBody(fullId){
         <div class="field" style="flex:1"><label>El último día se va</label><select data-kf="leave"><option value="cena" ${t.leave==="cena"?"selected":""}>después de cenar</option><option value="comida" ${t.leave==="comida"?"selected":""}>después de comer</option></select></div></div>
         <div class="okbox small">${esc(turnText(k))}</div>`})():""}
       ${pr.type==="dias"?`<div class="chips">${DSHORT.map((d,i)=>chip("data-kday",i,(pr.days||[]).includes(i),d)).join("")}</div>`:""}
+      ${pr.type!=="manual"?(()=>{const aw=k.away||{};return `<div class="field"><label>Cuando está contigo, ¿qué comidas hace en casa?</label>
+        <div class="hint" style="margin:0 0 6px">Cada persona es distinta: marca solo las que hace en casa. Las que haga fuera (comedor del cole, trabajo…), déjalas sin marcar.</div>
+        ${k.mealsSet?"":`<div class="warnbox small" style="margin:0 0 8px">Sin confirmar: marca sus comidas${k.away?"":" (ahora cuento que hace todas en casa)"}.</div>`}
+        <table class="mealgrid"><tr><th></th>${DSHORT.map(d=>`<th>${d}</th>`).join("")}</tr>
+        ${["comida","cena"].map(m=>`<tr><td>${m==="comida"?"Comida":"Cena"}</td>${DSHORT.map((_,i)=>{const home=!(aw[m]||[]).includes(i);return `<td><button type="button" class="mg" data-away="${m}|${i}" aria-pressed="${home}" aria-label="${m} ${DAYS[i]}: ${home?"en casa":"fuera"}">${home?"✓":""}</button></td>`}).join("")}</tr>`).join("")}</table>
+        <div class="chips" style="margin-top:8px">${chip("data-awayq","cole",k.mealsSet&&(aw.comida||[]).join()==="0,1,2,3,4"&&!(aw.cena||[]).length,"Entre semana solo cena en casa")}${chip("data-awayq","todo",k.mealsSet&&!(aw.comida||[]).length&&!(aw.cena||[]).length,"Todas en casa")}${chip("data-awayq","nada",false,"Desmarcar todo")}</div>
+        <label class="row small" style="margin-top:6px"><input type="checkbox" data-kf="awayhol" ${k.awayHolidays?"":"checked"} style="width:auto"> Los festivos come en casa</label></div>`})():""}
       </div>`}
     return h+`<div class="actions"><button class="btn ghost" id="addAdult">+ Pareja u otro adulto</button><button class="btn ghost" id="addKid">+ Hijo o hija</button></div>`;
   }
@@ -188,8 +195,8 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
   qa("[data-mainsup]").forEach(b=>b.onclick=()=>{H.super=b.dataset.mainsup;rerender()});
   qa("[data-strat]").forEach(b=>b.onclick=()=>{H.shop.strategy=b.dataset.strat;rerender()});
   qa("[data-app]").forEach(b=>b.onclick=()=>{const k=b.dataset.app;H.apps=H.apps.includes(k)?H.apps.filter(x=>x!==k):[...H.apps,k];rerender()});
-  q("#addKid")&&(q("#addKid").onclick=()=>{S.people.push({...defaultAdult(),id:uid("k"),kind:"nino",goals:["sano"],factor:0.6,presence:{type:"siempre"}});rerender()});
-  q("#addAdult")&&(q("#addAdult").onclick=()=>{S.people.push({...defaultAdult(),id:uid("a"),kind:"adulto",goals:["sano"],factor:1,tupper:false,presence:{type:"siempre"}});rerender()});
+  q("#addKid")&&(q("#addKid").onclick=()=>{S.people.push({...defaultAdult(),id:uid("k"),kind:"nino",goals:["sano"],factor:0.6,presence:{type:"siempre"},away:{comida:[0,1,2,3,4,5,6],cena:[0,1,2,3,4,5,6]},mealsSet:false});rerender()});
+  q("#addAdult")&&(q("#addAdult").onclick=()=>{S.people.push({...defaultAdult(),id:uid("a"),kind:"adulto",goals:["sano"],factor:1,tupper:false,presence:{type:"siempre"},away:{comida:[0,1,2,3,4,5,6],cena:[0,1,2,3,4,5,6]},mealsSet:false});rerender()});
   qa("[data-delkid]").forEach(b=>b.onclick=()=>{if(confirm("¿Quitar a esta persona y sus gustos?")){S.people=S.people.filter(p=>p.id!==b.dataset.delkid);rerender()}});
   qa(".kidcard").forEach(c=>{const k=S.people.find(p=>p.id===c.dataset.kid);
     c.querySelectorAll("[data-kf]").forEach(i=>i.onchange=()=>{const f=i.dataset.kf;
@@ -199,9 +206,14 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
       if(f==="age"){k.age=Number(i.value)||null;k.factor=factorForAge(k.age)}
       if(f==="ptype"){const fri=addDays(mondayOf(todayISO()),4);k.presence={...k.presence,type:i.value,anchor:k.presence.anchor||fri,arrive:k.presence.arrive||(i.value==="findes"?"cena":"comida"),leave:k.presence.leave||"cena"}}
       if(f==="anchor")k.presence.anchor=i.value;
+      if(f==="awayhol")k.awayHolidays=!i.checked;
       if(f==="arrive")k.presence.arrive=i.value;
       if(f==="leave")k.presence.leave=i.value;
       rerender()});
+    c.querySelectorAll("[data-away]").forEach(b=>b.onclick=()=>{const [m,d]=b.dataset.away.split("|"),n=Number(d);k.away=k.away||{};const ds=k.away[m]||[];
+      k.away[m]=ds.includes(n)?ds.filter(x=>x!==n):[...ds,n];k.mealsSet=true;replanFrom(todayISO());rerender()});
+    c.querySelectorAll("[data-awayq]").forEach(b=>b.onclick=()=>{const q=b.dataset.awayq,all=[0,1,2,3,4,5,6];
+      k.away=q==="cole"?{comida:[0,1,2,3,4],cena:[]}:q==="nada"?{comida:all,cena:all}:{};k.mealsSet=q!=="nada";replanFrom(todayISO());rerender()});
     c.querySelectorAll("[data-kday]").forEach(b=>b.onclick=()=>{const d=Number(b.dataset.kday),ds=k.presence.days||[];k.presence.days=ds.includes(d)?ds.filter(x=>x!==d):[...ds,d];rerender()})});
   qa("[data-goal]").forEach(b=>b.onclick=()=>{const g=b.dataset.goal;if(a.goals.includes(g))a.goals=a.goals.filter(x=>x!==g);else if(a.goals.length<3)a.goals.push(g);else{toast("Máximo 3 objetivos: quita uno antes");return}rerender()});
   qa("[data-trains]").forEach(b=>b.onclick=()=>{a.trains=b.dataset.trains==="1";rerender()});
@@ -246,7 +258,9 @@ function validateStep(fullId){
   if(id==="aparatos"&&!H.apps.length){toast("Elige al menos uno");return false}
   if(id==="zona"){const cp=(v("#wzCp")||"").trim();if(cp&&!/^\d{5}$/.test(cp)){toast("El código postal tiene 5 números");return false}H.cp=cp;H.municipio=(v("#wzMun")||"").trim()}
   if(id==="familia"){main.querySelectorAll(".kidcard [data-kf=name]").forEach(i=>{const k=S.people.find(p=>p.id===i.closest(".kidcard").dataset.kid);k.name=i.value.trim()});
-    if(others().some(k=>!k.name)){toast("Escribe el nombre de cada persona");return false}}
+    if(others().some(k=>!k.name)){toast("Escribe el nombre de cada persona");return false}
+    const sin=others().find(k=>(k.presence||{}).type!=="manual"&&(!k.mealsSet||(((k.away||{}).comida||[]).length===7&&((k.away||{}).cena||[]).length===7)));
+    if(sin){toast(`Marca qué comidas hace ${personName(sin)} en casa`);return false}}
   if(id==="objetivos"){if(!a.goals.length){toast("Elige al menos un objetivo");return false}a.weight=Number(v("#wzW"))||null}
   if(id==="cocina"&&H.cookMode==="lote"&&!H.cookDays.length){toast("Elige al menos un día para cocinar");return false}
   if(id==="plan"){const st=v("#wzStart");H.start=st&&st>todayISO()?st:null;

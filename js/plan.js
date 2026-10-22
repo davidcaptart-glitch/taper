@@ -34,9 +34,24 @@ function changeFor(k,d,meal){
   }
   return null;
 }
+// Comidas que una persona hace fuera aunque ese día esté contigo (cole, trabajo…): k.away = {comida:[días], cena:[días]}
+// Los festivos come en casa salvo que se diga lo contrario (k.awayHolidays)
+function eatsAway(k,d,meal){
+  if(!meal||!k.away)return false;
+  if(!(k.away[meal]||[]).includes(dow(d)))return false;
+  return !(isHoliday(d)&&!k.awayHolidays);
+}
+function mealsAwayText(k){
+  const a=k.away||{},t=[];
+  for(const m of ["comida","cena"]){const ds=(a[m]||[]).slice().sort();if(!ds.length)continue;
+    const lab=ds.join()==="0,1,2,3,4"?"de lunes a viernes":ds.map(i=>DAYS[i].toLowerCase()).join(", ");
+    t.push(`${m==="comida"?"Come":"Cena"} fuera ${lab}`)}
+  return t.length?t.join(" · ")+(k.awayHolidays?"":" (los festivos, en casa)"):"";
+}
 function presentByRule(k,d,meal){
   if(k.id==="yo")return true;
   const ch=changeFor(k,d,meal);if(ch)return ch.with;
+  if(eatsAway(k,d,meal))return false;
   const pr=k.presence||{type:"siempre"}, w=dow(d);
   if(pr.type==="siempre")return true;
   if(pr.type==="manual")return false;
@@ -351,6 +366,9 @@ function fitBudget(start){
 }
 function balanceOf(wk){const c={};for(const v of Object.values(wk.slots)){const r=RX[v.recipe];if(r){c[r.group]=(c[r.group]||0)+1;if(r.red)c.red=(c.red||0)+1}}
   return Math.min(c.legumbre||0,2)+Math.min(c.pescado||0,2)-Math.max(0,(c.carne||0)-3)-Math.max(0,(c.red||0)-1)-Math.max(0,(c.huevo||0)-2)}
+
+// Tras cambiar quién come cada comida: se recalculan las semanas desde esa fecha
+function replanFrom(d){for(const s of Object.keys(S.plans))if(addDays(s,6)>=d)ensureWeek(s)}
 
 /* ---------- Previsión ---------- */
 // Siempre hay menú preparado hasta el final del mes siguiente (o del mes en que empieza el plan, si es más tarde)

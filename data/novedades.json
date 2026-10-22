@@ -227,6 +227,16 @@
         "Si no te reconoce (por ejemplo, si has cambiado de wifi a datos), usa tu código de traspaso: está en Perfil › Copia y novedades de Safari.",
         "Ya tienes precios reales de DIA, Condis, Consum y Eroski: márcalos en Perfil › Ajustes › Supermercados y zona."
       ]
+    },
+    {
+      "version": 24,
+      "fecha": "2026-10-22",
+      "titulo": "Qué comidas hace cada uno en casa",
+      "cambios": [
+        "Cada persona tiene sus comidas: marca qué días come y cena en casa cuando está contigo (por ejemplo, si entre semana come en el cole). Está en Perfil › Ajustes › Quién come en casa.",
+        "No doy nada por hecho: al añadir a alguien hay que marcar sus comidas, y si ya estaba, la campana te pide que lo revises.",
+        "El menú, las raciones, la compra y los avisos solo cuentan a quien come en casa en cada comida. Los festivos come en casa, salvo que lo desmarques."
+      ]
     }
   ]
 }
