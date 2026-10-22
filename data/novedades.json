@@ -785,6 +785,14 @@
       "cambios": [
         "Al tocar un color o una estética que no tienes, toda la app se pone así para que veas cómo queda. Si no lo compras, vuelve a como estaba."
       ]
+    },
+    {
+      "version": 92,
+      "fecha": "2026-10-23",
+      "titulo": "Sugerencias sin salir de Táper",
+      "cambios": [
+        "«Enviar una sugerencia» se abre dentro de la app: eliges si es una mejora, un fallo, una receta u otra cosa, escribes y listo."
+      ]
     }
   ]
 }

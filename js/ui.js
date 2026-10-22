@@ -1231,7 +1231,7 @@ function renderPerfil(){
     <div class="actions"><button class="btn ghost small" id="newsAll">Ver todas las novedades</button></div>
     <p class="small muted">Versión ${APP_VERSION} · tu código ${esc(S.uid)}</p>`);
   // Al final, en una línea: sugerencias
-  h+=`<div class="pfoot">${suggestUrl()?`<a href="${esc(suggestUrl())}" target="_blank" rel="noopener">${ico("message-circle")} Enviar una sugerencia</a>`:""}${recipeSuggestOn()?`<button class="linkbtn" id="sugRec2">${ico("chef-hat")} Sugerir una receta</button>`:""}${surveyOn()?`<button class="linkbtn" id="svProfile">${ico("chart-bar")} Encuesta del mes</button>`:""}</div>`;
+  h+=`<div class="pfoot">${recipeSuggestOn()?`<button class="linkbtn" id="sugGen">${ico("message-circle")} Enviar una sugerencia</button>`:""}${recipeSuggestOn()?`<button class="linkbtn" id="sugRec2">${ico("chef-hat")} Sugerir una receta</button>`:""}${surveyOn()?`<button class="linkbtn" id="svProfile">${ico("chart-bar")} Encuesta del mes</button>`:""}</div>`;
   h+=`</section>`;
   main.innerHTML=h;
   const q=s=>main.querySelectorAll(s);
@@ -1259,6 +1259,7 @@ function renderPerfil(){
   bindAvisos();
   document.getElementById("svProfile")?.addEventListener("click",openSurvey);
   document.getElementById("sugRec2")?.addEventListener("click",openSuggestRecipe);
+  document.getElementById("sugGen")?.addEventListener("click",()=>openSuggestion());
   document.getElementById("noStats").onchange=e=>{S.noStats=!e.target.checked;save();toast(S.noStats?"No se contarán tus visitas":"Gracias: se contarán de forma anónima")};
   const url=shareLink();fillStats();
   const qrb=main.querySelector("#qrBox");qrb&&qrb.closest("details").addEventListener("toggle",()=>{if(qrb.innerHTML)return;
@@ -1466,6 +1467,25 @@ function startCounter(){
     setTimeout(()=>{try{window.goatcounter.count&&window.goatcounter.count({path:"instalada",title:"App instalada",event:true})}catch(e){}},3000)}
 }
 // Enlace al formulario de sugerencias con la versión de la app y el código de usuario ya rellenados
+// Sugerencias dentro de la app: se envían por detrás al formulario (con la versión y el código, sin que se vea Google)
+const SUG_TYPES=[["Mejora","bulb","Una idea para mejorar"],["Fallo","alert-triangle","Algo no funciona bien"],["Receta nueva","chef-hat","Un plato que echas de menos"],["Otra cosa","message-circle","Cualquier otra cosa"]];
+function openSuggestion(type){
+  let tp=type||"Mejora";
+  const draw=()=>{const cur=SUG_TYPES.find(x=>x[0]===tp);
+    showDialog(`<div class="mod">${closeBtn}<h2>Cuéntanos</h2><p class="small muted">Lo leemos todo. Así mejora Táper.</p>
+      <div class="sugtypes">${SUG_TYPES.map(([k,ic,d])=>`<button class="sugt ${k===tp?"on":""}" data-sgt="${esc(k)}">${ico(ic)}<b>${esc(k)}</b><small>${esc(d)}</small></button>`).join("")}</div>
+      <div class="field"><label for="sgTxt">${tp==="Fallo"?"¿Qué ha pasado? ¿Dónde?":tp==="Receta nueva"?"¿Qué plato? Si sabes cómo se hace, cuéntalo":"Cuéntanos"}</label><textarea id="sgTxt" rows="5" placeholder="${tp==="Fallo"?"Por ejemplo: en Compra, al tocar… no pasa nada":"Escribe aquí"}"></textarea></div>
+      <div class="field"><label for="sgC">Tu nombre o correo (opcional, por si queremos responderte)</label><input id="sgC" type="text" value="${esc(me().name||"")}" autocomplete="email"></div>
+      <div class="actions"><button class="btn wide" id="sgOk">Enviar</button></div></div>`);
+    dlg.querySelectorAll("[data-sgt]").forEach(b=>b.onclick=()=>{const t=dlg.querySelector("#sgTxt").value,c=dlg.querySelector("#sgC").value;tp=b.dataset.sgt;draw();dlg.querySelector("#sgTxt").value=t;dlg.querySelector("#sgC").value=c});
+    dlg.querySelector("#sgOk").onclick=async()=>{const txt=dlg.querySelector("#sgTxt").value.trim();if(txt.length<3){toast("Escribe algo antes de enviar");dlg.querySelector("#sgTxt").focus();return}
+      const c=CFG.sugerenciasEnvio.campos,fd=new URLSearchParams();
+      fd.append(c.tipo,tp);fd.append(c.texto,txt);fd.append(c.contacto,[dlg.querySelector("#sgC").value.trim(),S.uid].filter(Boolean).join(" · "));fd.append(c.version,String(APP_VERSION));
+      try{await fetch(CFG.sugerenciasEnvio.url,{method:"POST",mode:"no-cors",body:fd})}catch(e){toast("Sin conexión: inténtalo más tarde");return}
+      showDialog(`<div class="mod">${closeBtn}<h2>¡Gracias!</h2><p>Nos ha llegado tu ${tp==="Fallo"?"aviso":tp==="Receta nueva"?"receta":"sugerencia"}. ${tp==="Fallo"?"Lo miramos lo antes posible.":"La tendremos en cuenta."}</p><div class="actions"><button class="btn wide" data-x>Cerrar</button></div></div>`)};
+  };
+  draw();
+}
 function suggestUrl(){if(!CFG.sugerencias)return null;let u=CFG.sugerencias.replace(/(entry\.\d+=)0(&|$)/,"$1"+APP_VERSION+"$2");
   const c=CFG.sugerenciasEnvio&&CFG.sugerenciasEnvio.campos&&CFG.sugerenciasEnvio.campos.contacto;if(c)u+="&"+c+"="+encodeURIComponent((me().name?me().name+" · ":"")+S.uid);return u}
 
