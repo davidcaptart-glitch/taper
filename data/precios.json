@@ -649,9 +649,126 @@
       "anterior": null,
       "precio_kilo": 5.8,
       "fecha": "2026-10-22"
+    },
+    "dorada": {
+      "mercadona_id": "87302",
+      "nombre_mercadona": "Filetes de dorada",
+      "formato": "Bandeja 0.2 kg",
+      "precio": 4.5,
+      "anterior": null,
+      "precio_kilo": 22.5,
+      "fecha": "2026-10-22"
+    },
+    "copos_maiz": {
+      "mercadona_id": "22966",
+      "nombre_mercadona": "Cereales copos de maíz Corn Flakes Hacendado 0% azúcares añadidos",
+      "formato": "Caja 0.5 kg",
+      "precio": 1.5,
+      "anterior": null,
+      "precio_kilo": 3.0,
+      "fecha": "2026-10-22"
+    },
+    "pesto": {
+      "mercadona_id": "35438",
+      "nombre_mercadona": "Salsa Pesto con albahaca Hacendado",
+      "formato": "Tarro 0.19 kg",
+      "precio": 1.95,
+      "anterior": null,
+      "precio_kilo": 10.26,
+      "fecha": "2026-10-22"
+    },
+    "salchichas": {
+      "mercadona_id": "53056",
+      "nombre_mercadona": "Salchichas cocidas Hacendado de pollo y pavo sabor ahumado",
+      "formato": "0.4 kg",
+      "precio": 1.5,
+      "anterior": null,
+      "precio_kilo": 3.75,
+      "fecha": "2026-10-22"
+    },
+    "pina": {
+      "mercadona_id": "15203",
+      "nombre_mercadona": "Piña en su jugo Hacendado rodajas",
+      "formato": "Pack-3 0.681 kg",
+      "precio": 2.1,
+      "anterior": null,
+      "precio_kilo": 3.08,
+      "fecha": "2026-10-22"
+    },
+    "leche": {
+      "mercadona_id": "10382",
+      "nombre_mercadona": "Leche semidesnatada Hacendado",
+      "formato": "Brik 1.0 l",
+      "precio": 0.83,
+      "anterior": null,
+      "precio_kilo": 0.83,
+      "fecha": "2026-10-22"
+    },
+    "calabaza": {
+      "mercadona_id": "3527",
+      "nombre_mercadona": "Calabaza cacahuete cortada a trozos",
+      "formato": "Bandeja 0.45 kg",
+      "precio": 1.57,
+      "anterior": null,
+      "precio_kilo": 3.5,
+      "fecha": "2026-10-22"
+    },
+    "gazpacho": {
+      "mercadona_id": "15604",
+      "nombre_mercadona": "Gazpacho tradicional Hacendado",
+      "formato": "Botella 1.0 l",
+      "precio": 1.6,
+      "anterior": null,
+      "precio_kilo": 1.6,
+      "fecha": "2026-10-22"
+    },
+    "tinta": {
+      "mercadona_id": "24256",
+      "nombre_mercadona": "Tinta de sepia Nortindal congelada",
+      "formato": "Paquete 0.032 kg",
+      "precio": 2.75,
+      "anterior": null,
+      "precio_kilo": 85.94,
+      "fecha": "2026-10-22"
+    },
+    "anacardos": {
+      "mercadona_id": "23365",
+      "nombre_mercadona": "Anacardo natural Hacendado",
+      "formato": "Paquete 0.2 kg",
+      "precio": 2.7,
+      "anterior": null,
+      "precio_kilo": 13.5,
+      "fecha": "2026-10-22"
+    },
+    "feta": {
+      "mercadona_id": "51197",
+      "nombre_mercadona": "Queso feta mezcla Hacendado en dados",
+      "formato": "Tarrina 0.37 kg",
+      "precio": 2.4,
+      "anterior": null,
+      "precio_kilo": 6.49,
+      "fecha": "2026-10-22"
+    },
+    "manzana": {
+      "mercadona_id": "3028",
+      "nombre_mercadona": "Manzana Golden",
+      "formato": "Pieza 0.19 kg",
+      "precio": 0.38,
+      "anterior": null,
+      "precio_kilo": 2.0,
+      "fecha": "2026-10-22"
+    },
+    "pan_burger": {
+      "mercadona_id": "17665",
+      "nombre_mercadona": "Pan de burger Hacendado Rústico",
+      "formato": "Paquete 0.22 kg",
+      "precio": 0.95,
+      "anterior": null,
+      "precio_kilo": 4.32,
+      "fecha": "2026-10-22"
     }
   },
   "fallos_ultima_vez": [],
   "registro": [],
-  "ejecutado": "2026-10-22T06:19:52+00:00"
+  "ejecutado": "2026-10-22T06:50:33+00:00"
 }

@@ -59,6 +59,8 @@ aprende se ve y se corrige en una pantalla "Lo que sé de ti" (por persona: adul
 
 ### Escanear tickets (pendiente)
 - Leer el ticket digital de Mercadona (PDF) o una foto del de papel (reconocimiento de texto en el móvil).
+- Lo que no es comida (limpieza, droguería, higiene, mascotas, hogar…) se descarta directamente del gasto y de
+  los cálculos; se reconoce por la sección de Mercadona de cada producto.
 - Apuntar el gasto real, relacionar cada línea con los productos, ver en qué se va el dinero (por pasillo, por
   tipo, fuera de la lista), actualizar precios reales y marcar como comprado. Se usa en el resumen del mes.
 
