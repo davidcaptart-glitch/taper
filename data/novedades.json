@@ -63,6 +63,16 @@
         "Una encuesta muy corta a principios de cada mes para saber qué te gusta y qué mejorar.",
         "Contamos las visitas de forma anónima, sin cookies ni datos personales, para saber cuánta gente usa Táper. Puedes desactivarlo en Perfil."
       ]
+    },
+    {
+      "version": 7,
+      "fecha": "2026-10-22",
+      "titulo": "Sugiere tus recetas",
+      "cambios": [
+        "Nuevo botón «Sugerir una receta» en Recetas y en Perfil: cuéntanos qué receta te gustaría ver.",
+        "Tus sugerencias se guardan en «Mis recetas sugeridas» con su estado, y si se aprueba te avisamos cuando ya esté en Táper.",
+        "Las recetas de la comunidad llevan 💡 y tienen su propio filtro."
+      ]
     }
   ]
 }

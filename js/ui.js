@@ -393,7 +393,7 @@ function openRecipe(id,sid){
     const cost=rationCost(r);
     showDialog(`<div class="mod">${closeBtn}
       <span class="pill ${r.type==="c"?"carga":"ligera"}">${r.type==="c"?"⚡ Con hidratos":"🥗 Ligera"}</span>${r.kid?` <span class="pill kid">Gusta a niños</span>`:""}${r.heavy?` <span class="pill fixed">Pesada</span>`:""}
-      <h2>${esc(r.name)}</h2>
+      <h2>${esc(r.name)}</h2>${r.sug?`<div class="small muted">💡 Sugerida por la comunidad${r.author?" · "+esc(r.author):""}</div>`:""}
       <div class="stats"><div><b>${v.time} min</b><small>${v.active} de trabajo</small></div><div><b>${r.prot||"?"} g</b><small>proteína</small></div><div><b>${r.kcal?r.kcal+" kcal":eur(cost)}</b><small>${r.kcal?eur(cost)+"/ración":"por ración"}</small></div></div>
       ${r.carb!=null?`<div class="small muted">Por ración: ${r.carb} g hidratos · ${r.fat} g grasa · aguanta ${r.fridge} días en la nevera${r.freeze?" · se puede congelar":""}</div>`:""}
       ${sl?`<div class="nutr" style="margin-top:6px">${(sl.eaters.length?sl.eaters:sl.tupper).concat(sl.kids).map(p=>`<div>${p.id==="yo"?"Tu plato":esc(personName(p))}: ${nutrTxt(portionNutr(r,factorOf(p)))}</div>`).join("")}</div>`:""}
@@ -595,20 +595,24 @@ function renderCompra(){
 function renderRecetas(){
   const a=me();
   const fl={todas:"Todas",fav:"Favoritas",nuevas:"Sin probar",no:"Descartadas",c:"⚡ Hidratos",l:"🥗 Ligeras",kid:"Gustan a niños"};
+  if(R.some(r=>r.sug))fl.comunidad="💡 De la comunidad";
   for(const k of S.home.apps)fl[k]=APP[k];
-  let h=`<section class="view"><div class="field"><input type="text" id="rq" placeholder="Buscar receta o ingrediente" value="${esc(recSearch)}"></div><div class="filters">`+Object.entries(fl).map(([k,v])=>`<button class="btn ${recFilter===k?"":"ghost"} small" data-f="${k}">${v}</button>`).join("")+`</div>`;
+  let h=`<section class="view">${recipeSuggestOn()?`<button class="btn ghost small" id="sugRec" style="margin:4px 0 10px">💡 Sugerir una receta</button>`:""}<div class="field"><input type="text" id="rq" placeholder="Buscar receta o ingrediente" value="${esc(recSearch)}"></div><div class="filters">`+Object.entries(fl).map(([k,v])=>`<button class="btn ${recFilter===k?"":"ghost"} small" data-f="${k}">${v}</button>`).join("")+`</div>`;
+  const ms=S.mySug||[];
+  if(ms.length)h+=`<details class="card" style="margin-top:0"><summary><b>Mis recetas sugeridas</b> <span class="small muted">(${ms.length})</span></summary>${ms.slice().reverse().map(x=>`<div class="fixed"><span><b>${esc(x.name)}</b><small>${x.code} · ${x.status==="aprobada"?"✅ Aprobada y publicada":"⏳ Enviada el "+esc(shortDate(x.at))+", pendiente de revisar"}</small></span>${x.status==="aprobada"&&x.rid&&RX[x.rid]?`<button class="btn ghost small" data-open="${x.rid}">Ver</button>`:""}</div>`).join("")}</details>`;
   const qn=recSearch.toLowerCase();
   const tried=new Set(S.ratings.map(x=>x.rid));
   const list=R.filter(r=>{
     if(qn&&!(r.name.toLowerCase().includes(qn)||r.ing.some(([p])=>P[p].name.toLowerCase().includes(qn))))return false;
     const dp=dishPref(a,r.id);
-    switch(recFilter){case "fav":return dp>=1.5;case "nuevas":return !tried.has(r.id);case "no":return dp<=-1;case "c":return r.type==="c";case "l":return r.type==="l";case "kid":return r.kid;case "todas":return true;default:return r.vars.some(v=>v.app===recFilter)}
+    switch(recFilter){case "comunidad":return !!r.sug;case "fav":return dp>=1.5;case "nuevas":return !tried.has(r.id);case "no":return dp<=-1;case "c":return r.type==="c";case "l":return r.type==="l";case "kid":return r.kid;case "todas":return true;default:return r.vars.some(v=>v.app===recFilter)}
   });
   h+=`<p class="small muted">${list.length} recetas</p>`;
   for(const r of list){const dp=dishPref(a,r.id),can=!!variantFor(r);
-    h+=`<button class="rcard ${dp<=-1||!can?"no":""}" data-open="${r.id}"><span class="t"><b>${dp>=1.5?"❤️ ":""}${esc(r.name)}</b><small>${recipeTime(r)} min · ${r.prot||"?"} g proteína${r.kcal?" · "+r.kcal+" kcal":""}${!can?" · no tienes el aparato":""}${dp<=-1?" · descartada":""}</small></span><span class="pill ${r.type==="c"?"carga":"ligera"}">${r.type==="c"?"⚡":"🥗"}</span></button>`}
+    h+=`<button class="rcard ${dp<=-1||!can?"no":""}" data-open="${r.id}"><span class="t"><b>${dp>=1.5?"❤️ ":""}${r.sug?"💡 ":""}${esc(r.name)}</b><small>${recipeTime(r)} min · ${r.prot||"?"} g proteína${r.kcal?" · "+r.kcal+" kcal":""}${!can?" · no tienes el aparato":""}${dp<=-1?" · descartada":""}</small></span><span class="pill ${r.type==="c"?"carga":"ligera"}">${r.type==="c"?"⚡":"🥗"}</span></button>`}
   main.innerHTML=h+"</section>";
   main.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{recFilter=b.dataset.f;render()});
+  document.getElementById("sugRec")?.addEventListener("click",openSuggestRecipe);
   const rq=document.getElementById("rq");rq.oninput=()=>{recSearch=rq.value;clearTimeout(rq._t);rq._t=setTimeout(()=>{render();const x=document.getElementById("rq");x.focus();x.setSelectionRange(x.value.length,x.value.length)},250)};
   bindOpen();
 }
@@ -671,6 +675,7 @@ function renderPerfil(){
     <div class="actions"><button class="btn" id="shareApp">Enviar el enlace</button><button class="btn ghost" id="copyApp">Copiar enlace</button></div></div>
   <div class="card"><h2>Sugerencias y privacidad</h2>
     ${suggestUrl()?`<p class="small muted">¿Se te ocurre una mejora, una receta o has visto un fallo? Cuéntamelo.</p><a class="btn" href="${esc(suggestUrl())}" target="_blank" rel="noopener">💡 Enviar una sugerencia</a>`:`<p class="small muted">Pronto podrás enviar sugerencias desde aquí.</p>`}
+    ${recipeSuggestOn()?`<button class="btn ghost small" id="sugRec2" style="margin-top:8px">🍳 Sugerir una receta</button>`:""}
     ${surveyOn()?`<button class="btn ghost small" id="svProfile" style="margin-top:8px">📋 Responder la encuesta del mes</button>`:""}
     <label class="row small" style="margin-top:12px"><input type="checkbox" id="noStats" ${S.noStats?"":"checked"} style="width:auto"> Contar mis visitas de forma anónima (sin cookies ni datos personales) para saber cuánta gente usa Táper</label></div>
   <div class="card"><h2>Novedades</h2><p class="small muted">Versión ${APP_VERSION}. La app se actualiza sola y te cuenta qué ha mejorado.</p><button class="btn ghost small" id="newsAll">Ver todas las novedades</button></div></section>`;
@@ -694,6 +699,7 @@ function renderPerfil(){
   const f=document.getElementById("impFile");document.getElementById("imp").onclick=()=>f.click();f.onchange=()=>{if(f.files[0])importBackup(f.files[0]);f.value=""};
   document.getElementById("newsAll").onclick=()=>openNews(true);
   document.getElementById("svProfile")?.addEventListener("click",openSurvey);
+  document.getElementById("sugRec2")?.addEventListener("click",openSuggestRecipe);
   document.getElementById("noStats").onchange=e=>{S.noStats=!e.target.checked;save();toast(S.noStats?"No se contarán tus visitas":"Gracias: se contarán de forma anónima")};
   const url=location.origin+location.pathname.replace(/index\.html$/,"");
   loadScript("https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js").then(()=>{const qr=qrcode(0,"M");qr.addData(url);qr.make();const b=document.getElementById("qrBox");if(b)b.innerHTML=qr.createSvgTag({cellSize:6,margin:2,scalable:true}).replace("<svg ",'<svg style="width:220px;height:220px" ')}).catch(()=>{const b=document.getElementById("qrBox");if(b)b.textContent=url});
@@ -721,6 +727,59 @@ function startCounter(){
 }
 // Enlace al formulario de sugerencias con la versión de la app ya rellenada
 function suggestUrl(){if(!CFG.sugerencias)return null;return CFG.sugerencias.replace(/(entry\.\d+=)0(&|$)/,"$1"+APP_VERSION+"$2")}
+
+/* ---------- Sugerir una receta ---------- */
+// Se envía al formulario de sugerencias como "Receta nueva", con el texto ordenado para leerlo de un vistazo
+const recipeSuggestOn=()=>!!(CFG.sugerenciasEnvio&&CFG.sugerenciasEnvio.url);
+function openSuggestRecipe(){
+  showDialog(`<div class="mod">${closeBtn}<h2>Sugerir una receta</h2><p class="small muted">Dinos qué receta te gustaría ver en Táper; con el nombre basta. Si encaja (rápida, sencilla y con productos del súper), la añadiremos para todos.</p>
+    <div class="field"><label for="srN">¿Qué receta te gustaría?</label><input type="text" id="srN" placeholder="Por ejemplo, pollo al limón con arroz"></div>
+    <details style="margin:6px 0 10px"><summary class="small"><b>Añadir detalles (opcional)</b></summary>
+    <div class="field"><label for="srI">Ingredientes</label><textarea id="srI" rows="3" placeholder="Uno por línea, con cantidades si las sabes" style="width:100%;border:1.5px solid var(--line);background:var(--bg);border-radius:10px;padding:10px 12px;font:inherit;color:inherit"></textarea></div>
+    <div class="field"><label for="srP">¿Cómo se hace?</label><textarea id="srP" rows="4" placeholder="Los pasos, como se lo explicarías a un amigo" style="width:100%;border:1.5px solid var(--line);background:var(--bg);border-radius:10px;padding:10px 12px;font:inherit;color:inherit"></textarea></div>
+    <div class="row"><div class="field" style="flex:1"><label for="srT">Tiempo aprox. (min)</label><input type="number" id="srT" min="1" max="240"></div>
+      <div class="field" style="flex:1.3"><label for="srA">Aparato</label><select id="srA"><option value="Sin indicar">Sin indicar</option>${Object.entries(APP).map(([k,v])=>`<option value="${esc(v)}">${esc(v)}</option>`).join("")}</select></div></div>
+    <label class="row small"><input type="checkbox" id="srK" style="width:auto"> Suele gustar a niños</label></details>
+    <div class="field" style="margin-top:10px"><label for="srC">Tu nombre o correo (opcional)</label><input type="text" id="srC"></div>
+    <div class="actions"><button class="btn" id="srSend">Enviar receta</button></div></div>`);
+  dlg.querySelector("#srSend").onclick=async()=>{
+    const v=id=>dlg.querySelector(id).value.trim();
+    if(!v("#srN")){toast("Escribe el nombre de la receta");return}
+    const code="R-"+Math.random().toString(36).slice(2,6).toUpperCase();
+    const txt=`CÓDIGO: ${code}
+RECETA: ${v("#srN")}
+
+INGREDIENTES:
+${v("#srI")||"(sin indicar)"}
+
+CÓMO SE HACE:
+${v("#srP")||"(sin indicar)"}
+
+Tiempo: ${v("#srT")||"?"} min · Aparato: ${v("#srA")} · ${dlg.querySelector("#srK").checked?"Gusta a niños":"Sin indicar si gusta a niños"}`;
+    const c=CFG.sugerenciasEnvio.campos, fd=new URLSearchParams();
+    fd.append(c.tipo,CFG.sugerenciasEnvio.tipoReceta||"Receta nueva");fd.append(c.texto,txt);if(v("#srC"))fd.append(c.contacto,v("#srC"));fd.append(c.version,String(APP_VERSION));
+    try{await fetch(CFG.sugerenciasEnvio.url,{method:"POST",mode:"no-cors",body:fd})}catch(e){toast("Sin conexión: inténtalo más tarde");return}
+    S.mySug=S.mySug||[];S.mySug.push({code,name:v("#srN"),at:todayISO(),status:"enviada"});save();
+    dlg.close();render();toast("¡Gracias! Receta enviada (código "+code+")");
+  };
+}
+
+// ¿Alguna receta sugerida por esta persona ya está publicada? Avisa y la marca como aprobada
+function checkApprovedSuggestions(){
+  const mine=(S.mySug||[]).filter(x=>x.status==="enviada");if(!mine.length)return null;
+  const done=[];for(const x of mine){const r=R.find(r=>r.sug===x.code);if(r){x.status="aprobada";x.rid=r.id;x.approvedAt=todayISO();done.push({x,r})}}
+  if(!done.length)return null;
+  for(const {r} of done)setDish(me(),r.id,2,"Es tu receta sugerida");
+  save();
+  try{if("Notification" in window&&Notification.permission==="granted")navigator.serviceWorker?.ready.then(reg=>reg.showNotification("🎉 Tu receta ya está en Táper",{body:done.map(d=>d.r.name).join(", "),icon:"icons/icon-192.png"}))}catch(e){}
+  return done;
+}
+function showApproved(done){
+  showDialog(`<div class="mod">${closeBtn}<h2>🎉 ¡Tu receta ya está en Táper!</h2>
+    <p>Gracias por sugerirla. Ya está disponible para todos y te la propondré en tus menús.</p>
+    ${done.map(({r})=>`<button class="alt" data-open3="${r.id}"><b>${esc(r.name)}</b><small>${recipeTime(r)} min · ${r.prot||"?"} g proteína</small></button>`).join("")}</div>`);
+  dlg.querySelectorAll("[data-open3]").forEach(b=>b.onclick=()=>openRecipe(b.dataset.open3));
+}
 
 /* ---------- Encuesta de satisfacción mensual ---------- */
 // Las opciones deben coincidir exactamente con las del formulario de Google
@@ -805,8 +864,10 @@ async function boot(){
   // Al abrir, la semana actual y la siguiente tienen menú si ya se había planificado alguna
   if(S.onboarded){const s=weekStartFor(todayISO());if(!S.plans[s])genWeekFromScratch(s);save()}
   render();
-  // Tras actualizar: explica qué ha mejorado (no a quien acaba de empezar)
-  if(S.onboarded&&NEWS&&(S.seenVersion||0)<APP_VERSION)openNews(false);
+  // Tras actualizar: explica qué ha mejorado (no a quien acaba de empezar); y avisa si su receta sugerida ya está
+  const approved=checkApprovedSuggestions();
+  if(approved)showApproved(approved);
+  else if(S.onboarded&&NEWS&&(S.seenVersion||0)<APP_VERSION)openNews(false);
   else if(!S.onboarded){S.seenVersion=APP_VERSION;save()}
   checkUpdate();startCounter();
 }

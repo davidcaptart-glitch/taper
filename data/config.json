@@ -12,5 +12,15 @@
       "comentario": "entry.84274763",
       "version": "entry.1894034102"
     }
+  },
+  "sugerenciasEnvio": {
+    "url": "https://docs.google.com/forms/d/e/1FAIpQLSfkZQCkxvlapO2XxowaHgEnRGux5HdutpGWNirrYHaoncmOJw/formResponse",
+    "campos": {
+      "tipo": "entry.2138070440",
+      "texto": "entry.863318136",
+      "contacto": "entry.64107793",
+      "version": "entry.1514801170"
+    },
+    "tipoReceta": "Receta nueva"
   }
 }

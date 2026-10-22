@@ -70,6 +70,13 @@ aprende se ve y se corrige en una pantalla "Lo que sé de ti" (por persona: adul
   botón "Enviar sugerencia" (formulario de Google con aviso por correo) y encuesta mensual dentro de la app
   (estrellas, lo que más y menos gusta, cuánto pagaría: 1-3 / 4-6 / 7-9 €). Configuración en `data/config.json`.
 
+### Recetas sugeridas por los usuarios (hecho)
+- Botón "Sugerir una receta" (Recetas y Perfil): solo el nombre es obligatorio; detalles opcionales. Se envía al
+  formulario de sugerencias como "Receta nueva" con un código (R-XXXX) y se guarda en "Mis recetas sugeridas".
+- Para aprobarla: David pasa el código; se añade a `data/recetas.json` con `"sugerida": "R-XXXX"` (y `"autor"` si
+  se quiere). Al abrir la app, quien la sugirió recibe "¡Tu receta ya está en Táper!" (y notificación si las
+  tiene activadas) y queda como favorita. Las recetas de la comunidad llevan 💡 y su propio filtro.
+
 ### Escanear tickets (hecho)
 - Leer el ticket digital de Mercadona (PDF) o una foto del de papel (reconocimiento de texto en el móvil).
 - Lo que no es comida (limpieza, droguería, higiene, mascotas, hogar…) se descarta directamente del gasto y de
