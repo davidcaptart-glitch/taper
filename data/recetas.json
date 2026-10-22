@@ -34619,6 +34619,3774 @@
           ]
         }
       ]
+    },
+    {
+      "id": "tofusalteado",
+      "nombre": "Tofu salteado con verduras y arroz",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegano",
+      "ingredientes": [
+        {
+          "producto": "tofu",
+          "cantidad": 125
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 70
+        },
+        {
+          "producto": "salteado",
+          "cantidad": 150
+        },
+        {
+          "producto": "salsa_soja",
+          "cantidad": 15
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 3
+        }
+      ],
+      "nutricion": {
+        "kcal": 570,
+        "proteina": 25,
+        "hidratos": 67,
+        "grasa": 21
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En un cazo con agua y sal a fuego fuerte, cuece el arroz 15 min y escúrrelo con el colador.",
+            "En la tabla, seca el tofu con papel de cocina, córtalo en dados y pica el ajo.",
+            "En una sartén grande a fuego medio-alto, dora el tofu con un chorrito de aceite 6 min, girándolo, y resérvalo.",
+            "En la misma sartén a fuego fuerte, saltea las verduras congeladas con el ajo 6 min.",
+            "Devuelve el tofu a la sartén, añade la salsa de soja, remueve 1 min a fuego fuerte y sirve con el arroz."
+          ],
+          "utensilios": [
+            "cazo",
+            "colador",
+            "sartén grande",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 15
+            },
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 6
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "fuerte",
+              "min": 6
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "fuerte",
+              "min": 1
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 30,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En un cazo con agua y sal a fuego fuerte, cuece el arroz 15 min y escúrrelo con el colador.",
+            "En la tabla, corta el tofu en dados y mézclalo en un bol con una cucharada de salsa de soja y una cucharadita de aceite.",
+            "Pon el tofu en la cesta de la air fryer a 200 °C 14 min, sacudiendo la cesta a mitad, hasta que esté dorado.",
+            "En una sartén grande a fuego fuerte, saltea las verduras congeladas con el ajo picado y un chorrito de aceite 6 min.",
+            "Mezcla las verduras con el tofu y el resto de la salsa de soja y sirve con el arroz."
+          ],
+          "utensilios": [
+            "cazo",
+            "colador",
+            "bol",
+            "cesta de la air fryer",
+            "sartén grande"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 15
+            },
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 14,
+              "nota": "sacude a mitad"
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "fuerte",
+              "min": 6
+            },
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "currytofu",
+      "nombre": "Curry de tofu con leche de coco y arroz",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegano",
+      "ingredientes": [
+        {
+          "producto": "tofu",
+          "cantidad": 125
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 70
+        },
+        {
+          "producto": "coco",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        },
+        {
+          "producto": "espinacas",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 60
+        }
+      ],
+      "nutricion": {
+        "kcal": 680,
+        "proteina": 26,
+        "hidratos": 68,
+        "grasa": 33
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En un cazo con agua y sal a fuego fuerte, cuece el arroz 15 min y escúrrelo con el colador.",
+            "En la tabla, pica la cebolla y corta el tofu en dados.",
+            "En una cacerola a fuego medio, sofríe la cebolla con un chorrito de aceite y una cucharada de curry 5 min.",
+            "Añade el tomate, la leche de coco, las espinacas congeladas y el tofu y deja a fuego medio 10 min, removiendo de vez en cuando. Sirve con el arroz."
+          ],
+          "utensilios": [
+            "cazo",
+            "colador",
+            "cacerola",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 15
+            },
+            null,
+            {
+              "utensilio": "cacerola",
+              "fuego": "medio",
+              "min": 5
+            },
+            {
+              "utensilio": "cacerola",
+              "fuego": "medio",
+              "min": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bolosoja",
+      "nombre": "Espaguetis a la boloñesa de soja texturizada",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegano",
+      "ingredientes": [
+        {
+          "producto": "espaguetis",
+          "cantidad": 90
+        },
+        {
+          "producto": "soja_texturizada",
+          "cantidad": 35
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 150
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 50
+        },
+        {
+          "producto": "caldo_verduras",
+          "cantidad": 0.25
+        }
+      ],
+      "nutricion": {
+        "kcal": 620,
+        "proteina": 31,
+        "hidratos": 86,
+        "grasa": 13
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 40,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En un bol, cubre la soja texturizada con agua muy caliente y la pastilla de caldo desmenuzada; deja 10 min y escúrrela apretando con las manos.",
+            "En la tabla, pica muy fina la cebolla y la zanahoria.",
+            "En una cacerola a fuego medio, sofríe la cebolla y la zanahoria con aceite 8 min.",
+            "Añade la soja escurrida, el tomate, orégano y sal, tapa y deja a fuego bajo 15 min, removiendo de vez en cuando.",
+            "Mientras, en una olla con agua y sal a fuego fuerte, cuece los espaguetis 10 min, escúrrelos con el colador y sírvelos con la salsa."
+          ],
+          "utensilios": [
+            "bol",
+            "tabla y cuchillo",
+            "cacerola",
+            "olla",
+            "colador"
+          ],
+          "info": [
+            null,
+            null,
+            {
+              "utensilio": "cacerola",
+              "fuego": "medio",
+              "min": 8
+            },
+            {
+              "utensilio": "cacerola",
+              "fuego": "bajo",
+              "min": 15
+            },
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tacossoja",
+      "nombre": "Tacos de soja texturizada con guacamole",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegano",
+      "ingredientes": [
+        {
+          "producto": "tortillas",
+          "cantidad": 2
+        },
+        {
+          "producto": "soja_texturizada",
+          "cantidad": 35
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 50
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 50
+        },
+        {
+          "producto": "maiz",
+          "cantidad": 30
+        },
+        {
+          "producto": "aguacate",
+          "cantidad": 70
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 50
+        },
+        {
+          "producto": "limon",
+          "cantidad": 10
+        }
+      ],
+      "nutricion": {
+        "kcal": 640,
+        "proteina": 29,
+        "hidratos": 64,
+        "grasa": 27
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 18,
+          "pasos": [
+            "En un bol, cubre la soja texturizada con agua muy caliente 10 min y escúrrela apretando con las manos.",
+            "En la tabla, pica la cebolla y el pimiento. En un bol, chafa el aguacate con zumo de limón, sal y el tomate picado.",
+            "En una sartén grande a fuego medio-alto, sofríe la cebolla y el pimiento con aceite 6 min.",
+            "Añade la soja, el tomate frito, el maíz escurrido, comino y pimentón y deja a fuego medio 5 min.",
+            "Calienta las tortillas en la sartén a fuego medio 1 min y rellénalas con la soja y el guacamole."
+          ],
+          "utensilios": [
+            "bol",
+            "tabla y cuchillo",
+            "sartén grande"
+          ],
+          "info": [
+            null,
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 6
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 5
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tortvegana",
+      "nombre": "Tortilla de patatas vegana (con harina de garbanzo)",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegano",
+      "ingredientes": [
+        {
+          "producto": "patata",
+          "cantidad": 250
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        },
+        {
+          "producto": "harina_garbanzo",
+          "cantidad": 50
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 50
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 80
+        }
+      ],
+      "nutricion": {
+        "kcal": 610,
+        "proteina": 18,
+        "hidratos": 76,
+        "grasa": 24
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 45,
+          "minutos_trabajo": 20,
+          "pasos": [
+            "En la tabla, pela las patatas y córtalas en láminas finas, y la cebolla en juliana.",
+            "En una sartén grande a fuego medio, pocha la patata y la cebolla en aceite abundante, tapada, 20 min hasta que estén tiernas. Escurre el aceite.",
+            "En un bol, bate la harina de garbanzo con 90 ml de agua por ración, sal y una pizca de cúrcuma; mezcla con las patatas y deja reposar 5 min.",
+            "En una sartén antiadherente a fuego medio con un hilo de aceite, cuaja la tortilla 5 min, dale la vuelta con un plato y cuaja la otra cara 4 min.",
+            "Sirve con la ensalada y el tomate aliñados."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "sartén grande",
+            "bol",
+            "sartén antiadherente",
+            "plato"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 20
+            },
+            null,
+            {
+              "utensilio": "sartén antiadherente",
+              "fuego": "medio",
+              "min": 9,
+              "nota": "vuelta con un plato a mitad"
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "micro",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En la tabla, pela las patatas y córtalas en láminas finas, y la cebolla en juliana.",
+            "En un bol apto para microondas, mezcla patata y cebolla con 2 cucharadas de aceite y sal. Microondas a 800 W, tapado, 10 min, removiendo a mitad.",
+            "En otro bol, bate la harina de garbanzo con 90 ml de agua por ración, sal y una pizca de cúrcuma; mezcla con las patatas y deja reposar 5 min.",
+            "En una sartén antiadherente a fuego medio con un hilo de aceite, cuaja la tortilla 5 min, dale la vuelta con un plato y cuaja la otra cara 4 min.",
+            "Sirve con la ensalada y el tomate aliñados."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "bol apto para microondas",
+            "bol",
+            "sartén antiadherente",
+            "plato"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "microondas",
+              "potencia": 800,
+              "min": 10,
+              "nota": "tapado, remueve a mitad"
+            },
+            null,
+            {
+              "utensilio": "sartén antiadherente",
+              "fuego": "medio",
+              "min": 9,
+              "nota": "vuelta con un plato a mitad"
+            },
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fajitasseitan",
+      "nombre": "Fajitas de seitán con pimientos",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegano",
+      "ingredientes": [
+        {
+          "producto": "seitan",
+          "cantidad": 100
+        },
+        {
+          "producto": "tortillas",
+          "cantidad": 2
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 100
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 60
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 30
+        },
+        {
+          "producto": "limon",
+          "cantidad": 10
+        }
+      ],
+      "nutricion": {
+        "kcal": 540,
+        "proteina": 34,
+        "hidratos": 59,
+        "grasa": 19
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En la tabla, corta el seitán, el pimiento y la cebolla en tiras, y el tomate en dados.",
+            "En una sartén grande a fuego fuerte, saltea el pimiento y la cebolla con un chorrito de aceite 7 min.",
+            "Añade el seitán con comino, pimentón, ajo en polvo y zumo de limón y saltea a fuego medio-alto 4 min.",
+            "Calienta las tortillas en la sartén a fuego medio 1 min y rellénalas con el seitán, las verduras, el tomate y la lechuga."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "sartén grande"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "fuerte",
+              "min": 7
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 4
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 1
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 22,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En la tabla, corta el seitán, el pimiento y la cebolla en tiras y mézclalos en un bol con aceite, comino, pimentón, ajo en polvo y zumo de limón.",
+            "Pon la mezcla en la cesta de la air fryer a 200 °C 12 min, removiendo a mitad.",
+            "Calienta las tortillas en una sartén a fuego medio 1 min.",
+            "Rellena las tortillas con el seitán y las verduras, el tomate en dados y la lechuga."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "bol",
+            "cesta de la air fryer",
+            "sartén"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 12,
+              "nota": "remueve a mitad"
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 1
+            },
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "paellaverd",
+      "nombre": "Paella de verduras con garbanzos",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegano",
+      "ingredientes": [
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "garbanzos",
+          "cantidad": 130
+        },
+        {
+          "producto": "judias",
+          "cantidad": 60
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 60
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 80
+        },
+        {
+          "producto": "berenjena",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 40
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 3
+        },
+        {
+          "producto": "caldo_verduras",
+          "cantidad": 0.5
+        }
+      ],
+      "nutricion": {
+        "kcal": 640,
+        "proteina": 19,
+        "hidratos": 96,
+        "grasa": 17
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 45,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En la tabla, corta el pimiento en tiras, el calabacín y la berenjena en rodajas y pica el ajo.",
+            "En una paellera a fuego medio-alto, sofríe el pimiento, la berenjena, el calabacín y las judías con aceite 8 min.",
+            "Añade el ajo, el tomate y una cucharadita de pimentón y deja a fuego medio 3 min. Mientras, calienta en un cazo 250 ml de agua por ración con la pastilla de caldo.",
+            "Añade el arroz y los garbanzos escurridos, rehoga 1 min y echa el caldo caliente con una pizca de colorante. Cuece a fuego fuerte 8 min.",
+            "Baja a fuego bajo 10 min sin remover y deja reposar 5 min tapada con un paño."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "paellera",
+            "cazo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "paellera",
+              "fuego": "medio-alto",
+              "min": 8
+            },
+            {
+              "utensilio": "paellera",
+              "fuego": "medio",
+              "min": 3
+            },
+            {
+              "utensilio": "paellera",
+              "fuego": "fuerte",
+              "min": 8
+            },
+            {
+              "utensilio": "paellera",
+              "fuego": "bajo",
+              "min": 10,
+              "nota": "reposa 5 min"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alubiasestofadas",
+      "nombre": "Alubias blancas guisadas con tomate (kuru fasulye)",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "dieta": "vegano",
+      "ingredientes": [
+        {
+          "producto": "alubias",
+          "cantidad": 200
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 100
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 50
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 50
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 3
+        },
+        {
+          "producto": "pan_barra",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 480,
+        "proteina": 21,
+        "hidratos": 62,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 35,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En la tabla, pica la cebolla, el pimiento, la zanahoria y el ajo.",
+            "En una cacerola a fuego medio, sofríe las verduras con aceite 8 min.",
+            "Añade el tomate, una cucharadita de pimentón, comino y 150 ml de agua por ración y deja a fuego medio 5 min.",
+            "Lava las alubias en el colador, añádelas y deja a fuego bajo, tapado, 15 min.",
+            "Sirve caliente con el pan."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "cacerola",
+            "colador"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "cacerola",
+              "fuego": "medio",
+              "min": 8
+            },
+            {
+              "utensilio": "cacerola",
+              "fuego": "medio",
+              "min": 5
+            },
+            {
+              "utensilio": "cacerola",
+              "fuego": "bajo",
+              "min": 15
+            },
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "padthaitofu",
+      "nombre": "Pad thai de tofu con cacahuete",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegano",
+      "ingredientes": [
+        {
+          "producto": "fideos_arroz",
+          "cantidad": 70
+        },
+        {
+          "producto": "tofu",
+          "cantidad": 100
+        },
+        {
+          "producto": "salteado",
+          "cantidad": 120
+        },
+        {
+          "producto": "crema_cacahuete",
+          "cantidad": 15
+        },
+        {
+          "producto": "salsa_soja",
+          "cantidad": 15
+        },
+        {
+          "producto": "limon",
+          "cantidad": 15
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 3
+        }
+      ],
+      "nutricion": {
+        "kcal": 630,
+        "proteina": 25,
+        "hidratos": 71,
+        "grasa": 27
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 18,
+          "pasos": [
+            "En un bol, cubre los fideos con agua muy caliente 8 min y escúrrelos con el colador.",
+            "En la tabla, corta el tofu en dados y pica el ajo. En un bol, mezcla la crema de cacahuete, la salsa de soja, el zumo de limón y 2 cucharadas de agua.",
+            "En un wok a fuego fuerte, dora el tofu con aceite 5 min y resérvalo.",
+            "En el mismo wok a fuego fuerte, saltea las verduras congeladas con el ajo 5 min.",
+            "Añade los fideos, el tofu y la salsa y saltea a fuego medio-alto 2 min, removiendo."
+          ],
+          "utensilios": [
+            "bol",
+            "colador",
+            "tabla y cuchillo",
+            "wok"
+          ],
+          "info": [
+            null,
+            null,
+            {
+              "utensilio": "wok",
+              "fuego": "fuerte",
+              "min": 5
+            },
+            {
+              "utensilio": "wok",
+              "fuego": "fuerte",
+              "min": 5
+            },
+            {
+              "utensilio": "wok",
+              "fuego": "medio-alto",
+              "min": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tofucrujiente",
+      "nombre": "Tofu crujiente con brócoli y arroz",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegano",
+      "ingredientes": [
+        {
+          "producto": "tofu",
+          "cantidad": 150
+        },
+        {
+          "producto": "brocoli",
+          "cantidad": 150
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 70
+        },
+        {
+          "producto": "salsa_soja",
+          "cantidad": 15
+        },
+        {
+          "producto": "pan_rallado",
+          "cantidad": 10
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 3
+        }
+      ],
+      "nutricion": {
+        "kcal": 630,
+        "proteina": 31,
+        "hidratos": 72,
+        "grasa": 23
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 32,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En un cazo con agua y sal a fuego fuerte, cuece el arroz 15 min y escúrrelo con el colador.",
+            "En la tabla, corta el tofu en dados. En un bol, mézclalo con la salsa de soja, una cucharadita de aceite y el ajo picado, y rebózalo con el pan rallado.",
+            "Pon el tofu en la cesta de la air fryer a 200 °C 15 min, sacudiendo a mitad.",
+            "En un bol apto para microondas con 2 cucharadas de agua, cocina el brócoli a 800 W, tapado, 6 min.",
+            "Sirve el tofu con el brócoli aliñado con aceite y el arroz."
+          ],
+          "utensilios": [
+            "cazo",
+            "colador",
+            "bol",
+            "cesta de la air fryer",
+            "bol apto para microondas"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 15
+            },
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 15,
+              "nota": "sacude a mitad"
+            },
+            {
+              "utensilio": "microondas",
+              "potencia": 800,
+              "min": 6,
+              "nota": "tapado"
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 35,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En un cazo con agua y sal a fuego fuerte, cuece el arroz 15 min y escúrrelo con el colador.",
+            "En la tabla, corta el tofu en dados. En un bol, mézclalo con la salsa de soja, una cucharadita de aceite y el ajo picado, y rebózalo con el pan rallado.",
+            "Hornea el tofu en bandeja con papel de horno a 210 °C, con aire, 25 min; a los 10 min dale la vuelta y añade el brócoli con un hilo de aceite.",
+            "Sirve el tofu con el brócoli y el arroz."
+          ],
+          "utensilios": [
+            "cazo",
+            "colador",
+            "bol",
+            "bandeja de horno",
+            "papel de horno"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 15
+            },
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 210,
+              "modo": "con aire",
+              "min": 25,
+              "nota": "añade el brócoli a los 10 min"
+            },
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cremacalabgarb",
+      "nombre": "Crema de calabaza con garbanzos crujientes",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegano",
+      "ingredientes": [
+        {
+          "producto": "calabaza",
+          "cantidad": 250
+        },
+        {
+          "producto": "patata",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "garbanzos",
+          "cantidad": 150
+        },
+        {
+          "producto": "caldo_verduras",
+          "cantidad": 0.5
+        }
+      ],
+      "nutricion": {
+        "kcal": 460,
+        "proteina": 15,
+        "hidratos": 56,
+        "grasa": 17
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 35,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En la tabla, trocea la calabaza, la patata y la cebolla.",
+            "En una olla a fuego medio, rehoga las verduras con un chorrito de aceite 5 min.",
+            "Cubre con 300 ml de agua por ración y la pastilla de caldo y cuece a fuego medio 20 min.",
+            "Mientras, en una sartén a fuego medio-alto, tuesta los garbanzos escurridos y secos con aceite, pimentón y comino 8 min, hasta que crujan.",
+            "Tritura la crema con la batidora, ajusta de sal y sírvela con los garbanzos por encima."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "olla",
+            "sartén",
+            "batidora"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "olla",
+              "fuego": "medio",
+              "min": 5
+            },
+            {
+              "utensilio": "olla",
+              "fuego": "medio",
+              "min": 20
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio-alto",
+              "min": 8
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 35,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En la tabla, trocea la calabaza, la patata y la cebolla.",
+            "En una olla a fuego medio, rehoga las verduras con un chorrito de aceite 5 min.",
+            "Cubre con 300 ml de agua por ración y la pastilla de caldo y cuece a fuego medio 20 min.",
+            "Mientras, seca los garbanzos, alíñalos con aceite, pimentón y comino y ponlos en la cesta de la air fryer a 200 °C 15 min, sacudiendo a mitad.",
+            "Tritura la crema con la batidora, ajusta de sal y sírvela con los garbanzos por encima."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "olla",
+            "cesta de la air fryer",
+            "batidora"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "olla",
+              "fuego": "medio",
+              "min": 5
+            },
+            {
+              "utensilio": "olla",
+              "fuego": "medio",
+              "min": 20
+            },
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 15,
+              "nota": "sacude a mitad"
+            },
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pastachampi",
+      "nombre": "Espaguetis cremosos con champiñones y guisantes (sin lácteos)",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegano",
+      "ingredientes": [
+        {
+          "producto": "espaguetis",
+          "cantidad": 90
+        },
+        {
+          "producto": "champi",
+          "cantidad": 120
+        },
+        {
+          "producto": "guisantes",
+          "cantidad": 60
+        },
+        {
+          "producto": "crema_soja",
+          "cantidad": 60
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 3
+        }
+      ],
+      "nutricion": {
+        "kcal": 610,
+        "proteina": 20,
+        "hidratos": 80,
+        "grasa": 21
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 22,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En una olla con agua y sal a fuego fuerte, cuece los espaguetis 10 min; guarda un vaso del agua y escúrrelos con el colador.",
+            "En la tabla, pica la cebolla y el ajo.",
+            "En una sartén grande a fuego medio-alto, saltea los champiñones con la cebolla, el ajo y un chorrito de aceite 6 min.",
+            "Añade los guisantes, la crema de soja, pimienta y nuez moscada y deja a fuego medio 4 min.",
+            "Echa la pasta y un chorrito del agua de cocción y mezcla a fuego medio 1 min."
+          ],
+          "utensilios": [
+            "olla",
+            "colador",
+            "tabla y cuchillo",
+            "sartén grande"
+          ],
+          "info": [
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 10
+            },
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 6
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 4
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pimrellenossoja",
+      "nombre": "Pimientos rellenos de soja texturizada y arroz",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "dieta": "vegano",
+      "ingredientes": [
+        {
+          "producto": "pimiento",
+          "cantidad": 200
+        },
+        {
+          "producto": "soja_texturizada",
+          "cantidad": 25
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 40
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 60
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "champi",
+          "cantidad": 50
+        },
+        {
+          "producto": "caldo_verduras",
+          "cantidad": 0.25
+        }
+      ],
+      "nutricion": {
+        "kcal": 460,
+        "proteina": 20,
+        "hidratos": 57,
+        "grasa": 14
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 60,
+          "minutos_trabajo": 20,
+          "pasos": [
+            "En un bol, cubre la soja texturizada con agua muy caliente y la pastilla de caldo desmenuzada; deja 10 min y escúrrela apretando con las manos.",
+            "En un cazo con agua y sal a fuego fuerte, cuece el arroz 12 min y escúrrelo con el colador.",
+            "En la tabla, pica la cebolla y los champiñones; corta la tapa de los pimientos y vacíalos de semillas.",
+            "En una sartén a fuego medio-alto, sofríe la cebolla, los champiñones y la soja con aceite 6 min. Añade el tomate frito, el arroz y orégano.",
+            "Rellena los pimientos, ponlos en una fuente de horno con un hilo de aceite y hornea a 190 °C, arriba y abajo, 35 min."
+          ],
+          "utensilios": [
+            "bol",
+            "cazo",
+            "colador",
+            "sartén",
+            "fuente de horno"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 12
+            },
+            null,
+            {
+              "utensilio": "sartén",
+              "fuego": "medio-alto",
+              "min": 6
+            },
+            {
+              "utensilio": "horno",
+              "temp": 190,
+              "modo": "arriba y abajo",
+              "min": 35
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 45,
+          "minutos_trabajo": 20,
+          "pasos": [
+            "En un bol, cubre la soja texturizada con agua muy caliente y la pastilla de caldo desmenuzada; deja 10 min y escúrrela apretando con las manos.",
+            "En un cazo con agua y sal a fuego fuerte, cuece el arroz 12 min y escúrrelo con el colador.",
+            "En la tabla, pica la cebolla y los champiñones; corta la tapa de los pimientos y vacíalos de semillas.",
+            "En una sartén a fuego medio-alto, sofríe la cebolla, los champiñones y la soja con aceite 6 min. Añade el tomate frito, el arroz y orégano.",
+            "Rellena los pimientos, píntalos de aceite y ponlos en la cesta de la air fryer a 180 °C 20 min."
+          ],
+          "utensilios": [
+            "bol",
+            "cazo",
+            "colador",
+            "sartén",
+            "cesta de la air fryer"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 12
+            },
+            null,
+            {
+              "utensilio": "sartén",
+              "fuego": "medio-alto",
+              "min": 6
+            },
+            {
+              "utensilio": "air fryer",
+              "temp": 180,
+              "min": 20
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "berenlentejas",
+      "nombre": "Berenjenas rellenas de lentejas y tomate",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "dieta": "vegano",
+      "ingredientes": [
+        {
+          "producto": "berenjena",
+          "cantidad": 250
+        },
+        {
+          "producto": "lentejas",
+          "cantidad": 150
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 60
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 40
+        },
+        {
+          "producto": "pan_rallado",
+          "cantidad": 10
+        }
+      ],
+      "nutricion": {
+        "kcal": 440,
+        "proteina": 17,
+        "hidratos": 50,
+        "grasa": 16
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 50,
+          "minutos_trabajo": 20,
+          "pasos": [
+            "En la tabla, parte la berenjena a lo largo, haz cortes en cruz en la carne sin llegar a la piel y píntala con aceite.",
+            "Hornéala boca abajo en bandeja con papel de horno a 200 °C, arriba y abajo, 25 min.",
+            "Mientras, pica la cebolla y el pimiento y sofríelos en una sartén a fuego medio con aceite 7 min.",
+            "Vacía la pulpa de la berenjena con una cuchara, pícala y añádela a la sartén con las lentejas lavadas en el colador, el tomate frito y comino; deja a fuego medio 5 min.",
+            "Rellena las berenjenas, espolvorea el pan rallado y gratina a 220 °C 8 min."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "bandeja de horno",
+            "papel de horno",
+            "sartén",
+            "colador"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 200,
+              "modo": "arriba y abajo",
+              "min": 25
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 7
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 5
+            },
+            {
+              "utensilio": "horno",
+              "temp": 220,
+              "modo": "gratinar",
+              "min": 8
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 40,
+          "minutos_trabajo": 18,
+          "pasos": [
+            "En la tabla, parte la berenjena a lo largo, haz cortes en cruz en la carne sin llegar a la piel y píntala con aceite.",
+            "Ponla boca arriba en la cesta de la air fryer a 190 °C 18 min.",
+            "Mientras, pica la cebolla y el pimiento y sofríelos en una sartén a fuego medio con aceite 7 min.",
+            "Vacía la pulpa de la berenjena con una cuchara, pícala y añádela a la sartén con las lentejas lavadas en el colador, el tomate frito y comino; deja a fuego medio 5 min.",
+            "Rellena las berenjenas, espolvorea el pan rallado y vuelve a la air fryer a 200 °C 5 min."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "cesta de la air fryer",
+            "sartén",
+            "colador"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 18
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 7
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 5
+            },
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tajineveg",
+      "nombre": "Tajine de verduras y garbanzos con cuscús",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "dieta": "vegano",
+      "ingredientes": [
+        {
+          "producto": "garbanzos",
+          "cantidad": 120
+        },
+        {
+          "producto": "cuscus",
+          "cantidad": 60
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 100
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 70
+        },
+        {
+          "producto": "patata",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 60
+        },
+        {
+          "producto": "pasas",
+          "cantidad": 15
+        },
+        {
+          "producto": "caldo_verduras",
+          "cantidad": 0.5
+        }
+      ],
+      "nutricion": {
+        "kcal": 650,
+        "proteina": 21,
+        "hidratos": 102,
+        "grasa": 15
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 40,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En la tabla, pica la cebolla y corta la zanahoria, la patata y el calabacín en bastones gruesos.",
+            "En una cacerola a fuego medio, rehoga la cebolla con aceite, comino, jengibre, canela y cúrcuma 5 min.",
+            "Añade la zanahoria, la patata, el tomate y 150 ml de agua por ración con la pastilla de caldo; tapa y deja a fuego medio 10 min.",
+            "Añade el calabacín, los garbanzos escurridos y las pasas y deja a fuego medio 10 min más.",
+            "En un cazo a fuego fuerte, hierve el mismo volumen de agua que de cuscús con sal; viértelo sobre el cuscús en un bol, tapa 5 min y suéltalo con un tenedor y un hilo de aceite."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "cacerola",
+            "cazo",
+            "bol"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "cacerola",
+              "fuego": "medio",
+              "min": 5
+            },
+            {
+              "utensilio": "cacerola",
+              "fuego": "medio",
+              "min": 10
+            },
+            {
+              "utensilio": "cacerola",
+              "fuego": "medio",
+              "min": 10
+            },
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 3,
+              "nota": "reposa 5 min tapado"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bolbuda",
+      "nombre": "Bol de tofu, edamame, aguacate y arroz",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "dieta": "vegano",
+      "ingredientes": [
+        {
+          "producto": "arroz",
+          "cantidad": 70
+        },
+        {
+          "producto": "tofu",
+          "cantidad": 100
+        },
+        {
+          "producto": "edamame",
+          "cantidad": 80
+        },
+        {
+          "producto": "aguacate",
+          "cantidad": 70
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 50
+        },
+        {
+          "producto": "pepino",
+          "cantidad": 60
+        },
+        {
+          "producto": "salsa_soja",
+          "cantidad": 15
+        }
+      ],
+      "nutricion": {
+        "kcal": 670,
+        "proteina": 30,
+        "hidratos": 69,
+        "grasa": 28
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En un cazo con agua y sal a fuego fuerte, cuece el arroz 15 min y escúrrelo con el colador.",
+            "En un cazo con agua y sal a fuego fuerte, cuece el edamame 4 min y escúrrelo.",
+            "En la tabla, corta el tofu en dados. En una sartén antiadherente a fuego medio-alto, dóralo con un hilo de aceite 5 min y añade la salsa de soja al final.",
+            "Corta el aguacate y el pepino, ralla la zanahoria y monta el bol con el arroz, el tofu, el edamame y las verduras."
+          ],
+          "utensilios": [
+            "cazo",
+            "colador",
+            "sartén antiadherente",
+            "tabla y cuchillo",
+            "rallador"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 15
+            },
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 4
+            },
+            {
+              "utensilio": "sartén antiadherente",
+              "fuego": "medio-alto",
+              "min": 5
+            },
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "arrozfritotofu",
+      "nombre": "Arroz frito con tofu y verduras",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegano",
+      "ingredientes": [
+        {
+          "producto": "arroz",
+          "cantidad": 75
+        },
+        {
+          "producto": "tofu",
+          "cantidad": 100
+        },
+        {
+          "producto": "guisantes",
+          "cantidad": 50
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 50
+        },
+        {
+          "producto": "maiz",
+          "cantidad": 30
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 30
+        },
+        {
+          "producto": "salsa_soja",
+          "cantidad": 15
+        }
+      ],
+      "nutricion": {
+        "kcal": 590,
+        "proteina": 24,
+        "hidratos": 77,
+        "grasa": 19
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En un cazo con agua y sal a fuego fuerte, cuece el arroz 15 min, escúrrelo con el colador y extiéndelo para que se enfríe (mejor si es de la víspera).",
+            "En la tabla, corta el tofu, la zanahoria y la cebolla en dados pequeños.",
+            "En un wok a fuego fuerte, dora el tofu con aceite 5 min.",
+            "Añade la zanahoria, la cebolla, los guisantes y el maíz escurrido y saltea a fuego fuerte 4 min.",
+            "Añade el arroz y la salsa de soja y saltea a fuego fuerte 3 min sin dejar de remover."
+          ],
+          "utensilios": [
+            "cazo",
+            "colador",
+            "tabla y cuchillo",
+            "wok"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 15
+            },
+            null,
+            {
+              "utensilio": "wok",
+              "fuego": "fuerte",
+              "min": 5
+            },
+            {
+              "utensilio": "wok",
+              "fuego": "fuerte",
+              "min": 4
+            },
+            {
+              "utensilio": "wok",
+              "fuego": "fuerte",
+              "min": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "revueltotofu",
+      "nombre": "Revuelto de tofu con verduras y pan tostado",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "dieta": "vegano",
+      "ingredientes": [
+        {
+          "producto": "tofu",
+          "cantidad": 150
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "espinacas",
+          "cantidad": 50
+        },
+        {
+          "producto": "pan_barra",
+          "cantidad": 60
+        }
+      ],
+      "nutricion": {
+        "kcal": 500,
+        "proteina": 28,
+        "hidratos": 43,
+        "grasa": 23
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En la tabla, pica la cebolla, el pimiento y el tomate.",
+            "En una sartén a fuego medio-alto, sofríe la cebolla y el pimiento con aceite 5 min.",
+            "Desmenuza el tofu con un tenedor dentro de la sartén, añade cúrcuma, pimentón y sal, el tomate y las espinacas y deja a fuego medio 6 min, removiendo.",
+            "Tuesta el pan en la tostadora 3 min y sirve con el revuelto."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "sartén",
+            "tostadora"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén",
+              "fuego": "medio-alto",
+              "min": 5
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 6
+            },
+            {
+              "utensilio": "tostadora",
+              "min": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "canelonesespinacas",
+      "nombre": "Canelones de espinacas y queso con tomate",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegetariano",
+      "ingredientes": [
+        {
+          "producto": "lasana",
+          "cantidad": 50
+        },
+        {
+          "producto": "espinacas",
+          "cantidad": 150
+        },
+        {
+          "producto": "queso_fresco",
+          "cantidad": 80
+        },
+        {
+          "producto": "queso",
+          "cantidad": 30
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 590,
+        "proteina": 28,
+        "hidratos": 53,
+        "grasa": 28
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 45,
+          "minutos_trabajo": 25,
+          "pasos": [
+            "En un bol, hidrata las placas de lasaña en agua caliente el tiempo que indique el envase.",
+            "En la tabla, pica la cebolla. En una sartén a fuego medio, sofríela con aceite y añade las espinacas descongeladas y escurridas; 8 min en total.",
+            "Fuera del fuego, mezcla las espinacas con el queso fresco desmenuzado, sal y nuez moscada.",
+            "Rellena las placas y enróllalas. En una fuente de horno, pon la mitad del tomate, los canelones, el resto del tomate y la mozzarella.",
+            "Hornea a 200 °C, arriba y abajo, 20 min y gratina 3 min al final."
+          ],
+          "utensilios": [
+            "bol",
+            "tabla y cuchillo",
+            "sartén",
+            "fuente de horno"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 8
+            },
+            null,
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 200,
+              "modo": "arriba y abajo",
+              "min": 20,
+              "nota": "gratina 3 min al final"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pastahornoveg",
+      "nombre": "Macarrones al horno con verduras y mozzarella",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegetariano",
+      "ingredientes": [
+        {
+          "producto": "pasta",
+          "cantidad": 90
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 120
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 80
+        },
+        {
+          "producto": "berenjena",
+          "cantidad": 60
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "queso",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 610,
+        "proteina": 23,
+        "hidratos": 79,
+        "grasa": 21
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 40,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En una olla con agua y sal a fuego fuerte, cuece los macarrones 8 min (2 min menos de lo indicado) y escúrrelos con el colador.",
+            "En la tabla, corta el calabacín, la berenjena y la cebolla en dados.",
+            "En una sartén grande a fuego medio-alto, saltea las verduras con aceite 8 min.",
+            "Añade el tomate, orégano y sal y deja a fuego medio 5 min. Mézclalo con la pasta en una fuente de horno y cubre con la mozzarella.",
+            "Gratina a 220 °C 10 min, hasta que el queso se dore."
+          ],
+          "utensilios": [
+            "olla",
+            "colador",
+            "tabla y cuchillo",
+            "sartén grande",
+            "fuente de horno"
+          ],
+          "info": [
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 8
+            },
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 8
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 5
+            },
+            {
+              "utensilio": "horno",
+              "temp": 220,
+              "modo": "gratinar",
+              "min": 10
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 35,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En una olla con agua y sal a fuego fuerte, cuece los macarrones 8 min (2 min menos de lo indicado) y escúrrelos con el colador.",
+            "En la tabla, corta el calabacín, la berenjena y la cebolla en dados.",
+            "En una sartén grande a fuego medio-alto, saltea las verduras con aceite 8 min.",
+            "Añade el tomate, orégano y sal y deja a fuego medio 5 min. Mézclalo con la pasta en un molde apto para air fryer y cubre con la mozzarella.",
+            "Air fryer a 200 °C 6 min, hasta que el queso se dore."
+          ],
+          "utensilios": [
+            "olla",
+            "colador",
+            "tabla y cuchillo",
+            "sartén grande",
+            "molde apto para air fryer"
+          ],
+          "info": [
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 8
+            },
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 8
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 5
+            },
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "quesadillasveg",
+      "nombre": "Quesadillas de alubias rojas, maíz y queso",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegetariano",
+      "ingredientes": [
+        {
+          "producto": "tortillas",
+          "cantidad": 2
+        },
+        {
+          "producto": "alubias_rojas",
+          "cantidad": 100
+        },
+        {
+          "producto": "maiz",
+          "cantidad": 40
+        },
+        {
+          "producto": "queso",
+          "cantidad": 40
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 40
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 60
+        },
+        {
+          "producto": "aguacate",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 620,
+        "proteina": 26,
+        "hidratos": 64,
+        "grasa": 27
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En la tabla, pica el pimiento y el tomate. En un bol, chafa las alubias escurridas con comino y sal; en otro, chafa el aguacate con la mitad del tomate y sal.",
+            "Unta una tortilla con las alubias, reparte el pimiento, el maíz escurrido y el queso y tapa con la otra tortilla.",
+            "En una sartén antiadherente a fuego medio, dora la quesadilla 3 min por cada lado, hasta que se funda el queso.",
+            "Córtala en triángulos y sirve con el guacamole y el resto del tomate."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "bol",
+            "sartén antiadherente"
+          ],
+          "info": [
+            null,
+            null,
+            {
+              "utensilio": "sartén antiadherente",
+              "fuego": "medio",
+              "min": 6,
+              "nota": "vuelta a mitad"
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 18,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En la tabla, pica el pimiento y el tomate. En un bol, chafa las alubias escurridas con comino y sal; en otro, chafa el aguacate con la mitad del tomate y sal.",
+            "Unta una tortilla con las alubias, reparte el pimiento, el maíz escurrido y el queso, dóblala por la mitad y sujétala con un palillo.",
+            "Pon la quesadilla en la cesta de la air fryer a 190 °C 6 min, dándole la vuelta a mitad.",
+            "Córtala en triángulos y sirve con el guacamole y el resto del tomate."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "bol",
+            "cesta de la air fryer"
+          ],
+          "info": [
+            null,
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 6,
+              "nota": "da la vuelta a mitad"
+            },
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "calabquinoa",
+      "nombre": "Calabacines rellenos de quinoa, tomate y queso",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "dieta": "vegetariano",
+      "ingredientes": [
+        {
+          "producto": "calabacin",
+          "cantidad": 300
+        },
+        {
+          "producto": "quinoa",
+          "cantidad": 125
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 60
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "feta",
+          "cantidad": 40
+        },
+        {
+          "producto": "queso",
+          "cantidad": 25
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        }
+      ],
+      "nutricion": {
+        "kcal": 590,
+        "proteina": 29,
+        "hidratos": 45,
+        "grasa": 33
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 45,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En la tabla, parte los calabacines a lo largo, vacíalos con una cuchara dejando 1 cm de borde y pica la pulpa y la cebolla.",
+            "Hornea las barquitas en una fuente de horno con un hilo de aceite a 200 °C, arriba y abajo, 12 min.",
+            "Mientras, en una sartén a fuego medio, sofríe la cebolla y la pulpa con aceite 8 min.",
+            "En un bol, mezcla el sofrito con la quinoa, el tomate frito, el feta desmenuzado y el huevo batido.",
+            "Rellena las barquitas, cubre con la mozzarella y gratina a 220 °C 10 min, hasta que el relleno cuaje y se dore."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "fuente de horno",
+            "sartén",
+            "bol"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 200,
+              "modo": "arriba y abajo",
+              "min": 12
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 8
+            },
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 220,
+              "modo": "gratinar",
+              "min": 10
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 35,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En la tabla, parte los calabacines a lo largo, vacíalos con una cuchara dejando 1 cm de borde y pica la pulpa y la cebolla.",
+            "Pinta las barquitas con aceite y ponlas en la cesta de la air fryer a 180 °C 10 min.",
+            "Mientras, en una sartén a fuego medio, sofríe la cebolla y la pulpa con aceite 8 min.",
+            "En un bol, mezcla el sofrito con la quinoa, el tomate frito, el feta desmenuzado y el huevo batido.",
+            "Rellena las barquitas, cubre con la mozzarella y vuelve a la air fryer a 190 °C 10 min, hasta que el relleno cuaje."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "cesta de la air fryer",
+            "sartén",
+            "bol"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 180,
+              "min": 10
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 8
+            },
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "empanadillasespinacas",
+      "nombre": "Empanadillas de espinacas y queso al horno",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegetariano",
+      "ingredientes": [
+        {
+          "producto": "masa_empanadilla",
+          "cantidad": 6
+        },
+        {
+          "producto": "espinacas",
+          "cantidad": 120
+        },
+        {
+          "producto": "queso_fresco",
+          "cantidad": 60
+        },
+        {
+          "producto": "queso",
+          "cantidad": 25
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 30
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 0.5
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 80
+        }
+      ],
+      "nutricion": {
+        "kcal": 640,
+        "proteina": 29,
+        "hidratos": 65,
+        "grasa": 28
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 40,
+          "minutos_trabajo": 20,
+          "pasos": [
+            "En la tabla, pica la cebolla. En una sartén a fuego medio, rehógala con aceite junto a las espinacas descongeladas y bien escurridas 8 min.",
+            "En un bol, mezcla las espinacas con el queso fresco desmenuzado, la mozzarella, sal y nuez moscada.",
+            "Rellena las obleas, ciérralas presionando el borde con un tenedor, ponlas en una bandeja con papel de horno y píntalas con huevo batido.",
+            "Hornea a 200 °C, arriba y abajo, 15 min, hasta que estén doradas.",
+            "Sirve con la ensalada y el tomate aliñados."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "sartén",
+            "bol",
+            "bandeja de horno",
+            "papel de horno"
+          ],
+          "info": [
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 8
+            },
+            null,
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 200,
+              "modo": "arriba y abajo",
+              "min": 15
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 32,
+          "minutos_trabajo": 20,
+          "pasos": [
+            "En la tabla, pica la cebolla. En una sartén a fuego medio, rehógala con aceite junto a las espinacas descongeladas y bien escurridas 8 min.",
+            "En un bol, mezcla las espinacas con el queso fresco desmenuzado, la mozzarella, sal y nuez moscada.",
+            "Rellena las obleas, ciérralas presionando el borde con un tenedor y píntalas con huevo batido.",
+            "Ponlas sobre papel de horno en la cesta de la air fryer a 180 °C 10 min, dándoles la vuelta a mitad.",
+            "Sirve con la ensalada y el tomate aliñados."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "sartén",
+            "bol",
+            "cesta de la air fryer",
+            "papel de horno"
+          ],
+          "info": [
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 8
+            },
+            null,
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 180,
+              "min": 10,
+              "nota": "da la vuelta a mitad"
+            },
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "musacaveg",
+      "nombre": "Musaca vegetariana de lentejas",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "dieta": "vegetariano",
+      "ingredientes": [
+        {
+          "producto": "berenjena",
+          "cantidad": 200
+        },
+        {
+          "producto": "patata",
+          "cantidad": 120
+        },
+        {
+          "producto": "lentejas",
+          "cantidad": 150
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 100
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "yogur",
+          "cantidad": 1
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "queso",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 700,
+        "proteina": 36,
+        "hidratos": 64,
+        "grasa": 29
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 60,
+          "minutos_trabajo": 20,
+          "pasos": [
+            "En la tabla, corta la berenjena y la patata en rodajas finas.",
+            "Ponlas en una bandeja de horno con papel, píntalas con aceite y sal y hornea a 200 °C, con aire, 20 min.",
+            "Mientras, en una sartén a fuego medio, sofríe la cebolla picada con aceite; añade el tomate, las lentejas lavadas, canela y orégano y deja 15 min en total.",
+            "En un bol, bate el yogur con el huevo, sal y la mitad del queso.",
+            "En una fuente de horno, haz capas de patata, berenjena y lentejas; cubre con la mezcla de yogur y el resto del queso y hornea a 190 °C, arriba y abajo, 25 min, hasta que cuaje y se dore."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "bandeja de horno",
+            "sartén",
+            "bol",
+            "fuente de horno"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 200,
+              "modo": "con aire",
+              "min": 20
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 15
+            },
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 190,
+              "modo": "arriba y abajo",
+              "min": 25
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "risottocalabaza",
+      "nombre": "Risotto de calabaza con feta",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegetariano",
+      "ingredientes": [
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "calabaza",
+          "cantidad": 150
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "caldo_verduras",
+          "cantidad": 0.5
+        },
+        {
+          "producto": "queso",
+          "cantidad": 40
+        },
+        {
+          "producto": "feta",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 620,
+        "proteina": 21,
+        "hidratos": 77,
+        "grasa": 25
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 35,
+          "minutos_trabajo": 25,
+          "pasos": [
+            "En la tabla, corta la calabaza en dados pequeños y pica la cebolla.",
+            "En un cazo a fuego medio, calienta 300 ml de agua por ración con la pastilla de caldo y mantenlo caliente.",
+            "En una cacerola a fuego medio, rehoga la cebolla y la calabaza con aceite 6 min.",
+            "Añade el arroz, remueve 1 min y ve echando el caldo caliente poco a poco, removiendo con la cuchara de madera, 18 min a fuego medio.",
+            "Fuera del fuego, mezcla la mozzarella hasta que quede cremoso y sirve con el feta desmenuzado por encima."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "cazo",
+            "cacerola",
+            "cuchara de madera"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "cazo",
+              "fuego": "medio",
+              "min": 3
+            },
+            {
+              "utensilio": "cacerola",
+              "fuego": "medio",
+              "min": 6
+            },
+            {
+              "utensilio": "cacerola",
+              "fuego": "medio",
+              "min": 18
+            },
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "noquisgratinados",
+      "nombre": "Ñoquis gratinados con espinacas y queso",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegetariano",
+      "ingredientes": [
+        {
+          "producto": "noquis",
+          "cantidad": 200
+        },
+        {
+          "producto": "espinacas",
+          "cantidad": 120
+        },
+        {
+          "producto": "nata",
+          "cantidad": 60
+        },
+        {
+          "producto": "queso",
+          "cantidad": 40
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 3
+        }
+      ],
+      "nutricion": {
+        "kcal": 640,
+        "proteina": 22,
+        "hidratos": 72,
+        "grasa": 26
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En una olla con agua y sal a fuego fuerte, cuece los ñoquis 3 min, hasta que floten, y sácalos con la espumadera.",
+            "En una sartén a fuego medio, dora el ajo picado con un hilo de aceite, añade las espinacas descongeladas y escurridas, la nata, nuez moscada y sal y deja 8 min en total.",
+            "En una fuente de horno, mezcla los ñoquis con las espinacas y cubre con la mozzarella.",
+            "Gratina a 220 °C 10 min, hasta que el queso se dore."
+          ],
+          "utensilios": [
+            "olla",
+            "espumadera",
+            "sartén",
+            "fuente de horno"
+          ],
+          "info": [
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 3
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 8
+            },
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 220,
+              "modo": "gratinar",
+              "min": 10
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En una olla con agua y sal a fuego fuerte, cuece los ñoquis 3 min, hasta que floten, y sácalos con la espumadera.",
+            "En una sartén a fuego medio, dora el ajo picado con un hilo de aceite, añade las espinacas descongeladas y escurridas, la nata, nuez moscada y sal y deja 8 min en total.",
+            "En un molde apto para air fryer, mezcla los ñoquis con las espinacas y cubre con la mozzarella.",
+            "Air fryer a 200 °C 7 min, hasta que el queso se dore."
+          ],
+          "utensilios": [
+            "olla",
+            "espumadera",
+            "sartén",
+            "molde apto para air fryer"
+          ],
+          "info": [
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 3
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 8
+            },
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pastanorma",
+      "nombre": "Pasta alla norma (berenjena, tomate y queso)",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegetariano",
+      "ingredientes": [
+        {
+          "producto": "pasta",
+          "cantidad": 90
+        },
+        {
+          "producto": "berenjena",
+          "cantidad": 150
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 150
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 3
+        },
+        {
+          "producto": "queso_fresco",
+          "cantidad": 60
+        },
+        {
+          "producto": "feta",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 700,
+        "proteina": 26,
+        "hidratos": 81,
+        "grasa": 27
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En la tabla, corta la berenjena en dados y pica el ajo.",
+            "En una sartén grande a fuego medio-alto, dora la berenjena con aceite y sal 8 min, removiendo.",
+            "Añade el ajo y el tomate con albahaca u orégano y deja a fuego medio 10 min.",
+            "Mientras, en una olla con agua y sal a fuego fuerte, cuece la pasta 10 min y escúrrela con el colador.",
+            "Mezcla la pasta con la salsa y sirve con el queso fresco y el feta desmenuzados por encima."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "sartén grande",
+            "olla",
+            "colador"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 8
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 10
+            },
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 10
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En la tabla, corta la berenjena en dados y alíñala con aceite y sal.",
+            "Pon la berenjena en la cesta de la air fryer a 200 °C 15 min, sacudiendo a mitad.",
+            "Mientras, en una cacerola a fuego medio, sofríe el ajo picado con un hilo de aceite y añade el tomate con albahaca u orégano; deja 10 min.",
+            "En una olla con agua y sal a fuego fuerte, cuece la pasta 10 min y escúrrela con el colador.",
+            "Mezcla la pasta con la salsa y la berenjena y sirve con el queso fresco y el feta desmenuzados por encima."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "cesta de la air fryer",
+            "cacerola",
+            "olla",
+            "colador"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 15,
+              "nota": "sacude a mitad"
+            },
+            {
+              "utensilio": "cacerola",
+              "fuego": "medio",
+              "min": 10
+            },
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 10
+            },
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pastellentejas",
+      "nombre": "Pastel de lentejas con puré de patata gratinado",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegetariano",
+      "ingredientes": [
+        {
+          "producto": "lentejas",
+          "cantidad": 150
+        },
+        {
+          "producto": "patata",
+          "cantidad": 250
+        },
+        {
+          "producto": "leche",
+          "cantidad": 60
+        },
+        {
+          "producto": "queso",
+          "cantidad": 30
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 50
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 80
+        }
+      ],
+      "nutricion": {
+        "kcal": 600,
+        "proteina": 27,
+        "hidratos": 77,
+        "grasa": 17
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 50,
+          "minutos_trabajo": 20,
+          "pasos": [
+            "En la tabla, pela las patatas y córtalas en trozos; pica la cebolla y la zanahoria.",
+            "En una olla con agua y sal a fuego fuerte, cuece las patatas 20 min; escúrrelas y cháfalas con la leche, sal y nuez moscada.",
+            "Mientras, en una sartén a fuego medio, sofríe la cebolla y la zanahoria con aceite 8 min; añade el tomate y las lentejas lavadas en el colador y deja 7 min más.",
+            "En una fuente de horno, extiende las lentejas, cubre con el puré y espolvorea el queso.",
+            "Gratina a 220 °C 10 min, hasta que se dore."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "olla",
+            "colador",
+            "sartén",
+            "fuente de horno"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 20
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 15
+            },
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 220,
+              "modo": "gratinar",
+              "min": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tortitascalab",
+      "nombre": "Tortitas de calabacín y feta con ensalada",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "dieta": "vegetariano",
+      "ingredientes": [
+        {
+          "producto": "calabacin",
+          "cantidad": 250
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        },
+        {
+          "producto": "feta",
+          "cantidad": 50
+        },
+        {
+          "producto": "harina_garbanzo",
+          "cantidad": 30
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 100
+        },
+        {
+          "producto": "yogur",
+          "cantidad": 1
+        }
+      ],
+      "nutricion": {
+        "kcal": 650,
+        "proteina": 37,
+        "hidratos": 33,
+        "grasa": 40
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 20,
+          "pasos": [
+            "Ralla el calabacín con el rallador, sálalo y déjalo escurrir 10 min en el colador; después apriétalo bien con las manos.",
+            "En un bol, mezcla el calabacín con los huevos, el feta desmenuzado, la harina de garbanzo, pimienta y menta seca.",
+            "En una sartén antiadherente a fuego medio-alto con un hilo de aceite, echa cucharadas de masa, aplánalas y cuájalas 3-4 min por cada lado, por tandas.",
+            "En un bol, mezcla el yogur con sal y ajo en polvo y sirve las tortitas con la salsa, la ensalada y el tomate."
+          ],
+          "utensilios": [
+            "rallador",
+            "colador",
+            "bol",
+            "sartén antiadherente"
+          ],
+          "info": [
+            null,
+            null,
+            {
+              "utensilio": "sartén antiadherente",
+              "fuego": "medio-alto",
+              "min": 8,
+              "nota": "por tandas, vuelta a mitad"
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 30,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "Ralla el calabacín con el rallador, sálalo y déjalo escurrir 10 min en el colador; después apriétalo bien con las manos.",
+            "En un bol, mezcla el calabacín con los huevos, el feta desmenuzado, la harina de garbanzo, pimienta y menta seca.",
+            "Forma tortitas sobre papel de horno en la cesta de la air fryer, píntalas de aceite y cocina a 190 °C 12 min, dándoles la vuelta a mitad.",
+            "En un bol, mezcla el yogur con sal y ajo en polvo y sirve las tortitas con la salsa, la ensalada y el tomate."
+          ],
+          "utensilios": [
+            "rallador",
+            "colador",
+            "bol",
+            "cesta de la air fryer",
+            "papel de horno"
+          ],
+          "info": [
+            null,
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 12,
+              "nota": "da la vuelta a mitad"
+            },
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ensgarbcruda",
+      "nombre": "Ensalada completa de garbanzos, aguacate y zanahoria",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "dieta": "crudivegano",
+      "ingredientes": [
+        {
+          "producto": "garbanzos",
+          "cantidad": 200
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 100
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 50
+        },
+        {
+          "producto": "pepino",
+          "cantidad": 60
+        },
+        {
+          "producto": "aguacate",
+          "cantidad": 60
+        },
+        {
+          "producto": "limon",
+          "cantidad": 10
+        }
+      ],
+      "nutricion": {
+        "kcal": 490,
+        "proteina": 18,
+        "hidratos": 42,
+        "grasa": 25
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 10,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Lava y escurre los garbanzos en el colador.",
+            "En la tabla, corta el tomate, el pepino y el aguacate en dados y ralla la zanahoria con el rallador.",
+            "En un bol grande, mezcla la lechuga con las verduras y los garbanzos.",
+            "Aliña con aceite, zumo de limón, sal y comino y sirve."
+          ],
+          "utensilios": [
+            "colador",
+            "tabla y cuchillo",
+            "rallador",
+            "bol grande"
+          ],
+          "info": [
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gazpachocasero",
+      "nombre": "Gazpacho casero con picadillo y garbanzos",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "dieta": "crudivegano",
+      "ingredientes": [
+        {
+          "producto": "tomate",
+          "cantidad": 300
+        },
+        {
+          "producto": "pepino",
+          "cantidad": 80
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 50
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 20
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 2
+        },
+        {
+          "producto": "garbanzos",
+          "cantidad": 150
+        }
+      ],
+      "nutricion": {
+        "kcal": 410,
+        "proteina": 15,
+        "hidratos": 39,
+        "grasa": 20
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 15,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En la tabla, trocea el tomate, la mitad del pepino y del pimiento, la cebolla y el ajo.",
+            "Tritura con la batidora con el aceite, un chorrito de vinagre, sal y 50 ml de agua fría por ración hasta que quede fino; si quieres, pásalo por el colador.",
+            "Pica en daditos el resto del pepino y del pimiento; lava y escurre los garbanzos.",
+            "Sírvelo bien frío (si te da tiempo, 30 min en una jarra en la nevera) con el picadillo y los garbanzos por encima."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "batidora",
+            "colador",
+            "jarra"
+          ],
+          "info": [
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "zoodlespesto",
+      "nombre": "Espaguetis de calabacín con pesto de anacardos y alubias",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "dieta": "crudivegano",
+      "ingredientes": [
+        {
+          "producto": "calabacin",
+          "cantidad": 300
+        },
+        {
+          "producto": "anacardos",
+          "cantidad": 25
+        },
+        {
+          "producto": "alubias",
+          "cantidad": 120
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 100
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 2
+        },
+        {
+          "producto": "limon",
+          "cantidad": 10
+        }
+      ],
+      "nutricion": {
+        "kcal": 440,
+        "proteina": 18,
+        "hidratos": 33,
+        "grasa": 25
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 15,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "Corta el calabacín en tallarines con el espiralizador o en tiras finas con el pelador; sálalo un poco y déjalo 5 min.",
+            "Tritura con la batidora los anacardos con el ajo, el aceite, zumo de limón, albahaca seca, sal y 2-3 cucharadas de agua hasta tener un pesto cremoso.",
+            "Lava y escurre las alubias en el colador y corta el tomate en dados en la tabla.",
+            "En un bol, mezcla los tallarines escurridos con el pesto y sirve con las alubias y el tomate por encima."
+          ],
+          "utensilios": [
+            "espiralizador o pelador",
+            "batidora",
+            "colador",
+            "tabla y cuchillo",
+            "bol"
+          ],
+          "info": [
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pokevegano",
+      "nombre": "Poke vegano de tofu marinado, quinoa y aguacate",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "dieta": "crudivegano",
+      "ingredientes": [
+        {
+          "producto": "tofu",
+          "cantidad": 125
+        },
+        {
+          "producto": "quinoa",
+          "cantidad": 125
+        },
+        {
+          "producto": "aguacate",
+          "cantidad": 70
+        },
+        {
+          "producto": "pepino",
+          "cantidad": 60
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 50
+        },
+        {
+          "producto": "maiz",
+          "cantidad": 40
+        },
+        {
+          "producto": "salsa_soja",
+          "cantidad": 15
+        }
+      ],
+      "nutricion": {
+        "kcal": 540,
+        "proteina": 26,
+        "hidratos": 41,
+        "grasa": 29
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 20,
+          "minutos_trabajo": 20,
+          "pasos": [
+            "En la tabla, corta el tofu en dados y ponlo en un bol con la salsa de soja, un hilo de aceite y jengibre en polvo; deja marinar 10 min.",
+            "Corta el pepino y el aguacate en láminas y ralla la zanahoria con el rallador; escurre el maíz en el colador.",
+            "Suelta la quinoa cocida con un tenedor y ponla en la base del bol.",
+            "Coloca encima el tofu marinado, las verduras y el maíz y riega con el jugo de la marinada."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "bol",
+            "rallador",
+            "colador"
+          ],
+          "info": [
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enslentmed",
+      "nombre": "Ensalada mediterránea de lentejas",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "dieta": "crudivegano",
+      "ingredientes": [
+        {
+          "producto": "lentejas",
+          "cantidad": 200
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 100
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 50
+        },
+        {
+          "producto": "pepino",
+          "cantidad": 60
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 20
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 30
+        },
+        {
+          "producto": "limon",
+          "cantidad": 10
+        }
+      ],
+      "nutricion": {
+        "kcal": 360,
+        "proteina": 17,
+        "hidratos": 38,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 12,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Lava y escurre bien las lentejas en el colador.",
+            "En la tabla, pica en daditos el tomate, el pimiento, el pepino, la zanahoria y la cebolla.",
+            "En un bol, mezcla las lentejas con las verduras.",
+            "Aliña con aceite, zumo de limón, sal, comino y perejil y deja reposar 5 min antes de servir."
+          ],
+          "utensilios": [
+            "colador",
+            "tabla y cuchillo",
+            "bol"
+          ],
+          "info": [
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ensmexicana",
+      "nombre": "Ensalada mexicana de alubias rojas, maíz y aguacate",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "dieta": "crudivegano",
+      "ingredientes": [
+        {
+          "producto": "alubias_rojas",
+          "cantidad": 150
+        },
+        {
+          "producto": "maiz",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 100
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 40
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 20
+        },
+        {
+          "producto": "aguacate",
+          "cantidad": 60
+        },
+        {
+          "producto": "limon",
+          "cantidad": 15
+        }
+      ],
+      "nutricion": {
+        "kcal": 410,
+        "proteina": 16,
+        "hidratos": 37,
+        "grasa": 19
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 12,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Lava y escurre las alubias y el maíz en el colador.",
+            "En la tabla, corta el tomate, el pimiento, la cebolla y el aguacate en dados.",
+            "En un bol, mezcla todo con zumo de limón, aceite, sal, comino y una pizca de guindilla al gusto.",
+            "Deja reposar 5 min y sirve."
+          ],
+          "utensilios": [
+            "colador",
+            "tabla y cuchillo",
+            "bol"
+          ],
+          "info": [
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enstofupepino",
+      "nombre": "Ensalada de tofu, pepino y zanahoria con aliño de soja",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "dieta": "crudivegano",
+      "ingredientes": [
+        {
+          "producto": "tofu",
+          "cantidad": 150
+        },
+        {
+          "producto": "pepino",
+          "cantidad": 120
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 60
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 40
+        },
+        {
+          "producto": "anacardos",
+          "cantidad": 15
+        },
+        {
+          "producto": "salsa_soja",
+          "cantidad": 15
+        },
+        {
+          "producto": "limon",
+          "cantidad": 10
+        }
+      ],
+      "nutricion": {
+        "kcal": 410,
+        "proteina": 25,
+        "hidratos": 16,
+        "grasa": 27
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 12,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En la tabla, escurre el tofu y córtalo en láminas o dados; corta el pepino en rodajas finas.",
+            "Ralla la zanahoria con el rallador.",
+            "En un bol, mezcla la salsa de soja con el zumo de limón, el aceite y jengibre en polvo.",
+            "Monta el plato con la lechuga, el pepino, el tofu y la zanahoria, riega con el aliño y espolvorea los anacardos picados."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "rallador",
+            "bol"
+          ],
+          "info": [
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alubiasperejil",
+      "nombre": "Ensalada de alubias blancas con tomate y perejil",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "dieta": "crudivegano",
+      "ingredientes": [
+        {
+          "producto": "alubias",
+          "cantidad": 200
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 120
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 50
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 25
+        },
+        {
+          "producto": "pepino",
+          "cantidad": 60
+        },
+        {
+          "producto": "limon",
+          "cantidad": 10
+        }
+      ],
+      "nutricion": {
+        "kcal": 340,
+        "proteina": 16,
+        "hidratos": 35,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 10,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Lava y escurre las alubias en el colador.",
+            "En la tabla, pica fino el tomate, el pimiento, el pepino y la cebolla.",
+            "En un bol, mezcla las alubias con las verduras y abundante perejil.",
+            "Aliña con aceite, zumo de limón, sal y pimienta y sirve."
+          ],
+          "utensilios": [
+            "colador",
+            "tabla y cuchillo",
+            "bol"
+          ],
+          "info": [
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ajoblanco",
+      "nombre": "Ajoblanco con garbanzos especiados y manzana",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "dieta": "crudivegano",
+      "ingredientes": [
+        {
+          "producto": "almendras",
+          "cantidad": 40
+        },
+        {
+          "producto": "pan_barra",
+          "cantidad": 30
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 2
+        },
+        {
+          "producto": "garbanzos",
+          "cantidad": 120
+        },
+        {
+          "producto": "manzana",
+          "cantidad": 80
+        }
+      ],
+      "nutricion": {
+        "kcal": 640,
+        "proteina": 20,
+        "hidratos": 46,
+        "grasa": 39
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 15,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En un bol, remoja el pan en agua 5 min y escúrrelo.",
+            "Tritura con la batidora las almendras con el pan, el ajo, el aceite, un chorrito de vinagre, sal y 200 ml de agua fría por ración hasta que quede muy fino.",
+            "Lava y escurre los garbanzos en el colador y alíñalos con pimentón, comino y un hilo de aceite. En la tabla, corta la manzana en dados.",
+            "Sírvelo bien frío (si te da tiempo, 30 min en la nevera) con la manzana y los garbanzos por encima."
+          ],
+          "utensilios": [
+            "bol",
+            "batidora",
+            "colador",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ]
     }
   ]
 }

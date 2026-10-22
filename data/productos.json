@@ -2097,6 +2097,139 @@
       "foto": "https://prod-mercadona.imgix.net/images/a202828b49681aeceaa281bc820c1a18.jpg?fit=crop&h=200&w=200",
       "alergenos": [],
       "origen": []
+    },
+    {
+      "id": "tofu",
+      "nombre": "Tofu firme",
+      "envase": 400,
+      "unidad": "g",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 1.75,
+      "mercadona_id": "51097",
+      "precio_por": "envase",
+      "nombre_mercadona": "Tofu firme Hacendado",
+      "seccion": "Pizzas y platos preparados",
+      "foto": "https://prod-mercadona.imgix.net/images/f8b6c07b6944b7b7e9b421f7f013f516.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "soja"
+      ],
+      "origen": []
+    },
+    {
+      "id": "soja_texturizada",
+      "nombre": "Soja texturizada",
+      "envase": 200,
+      "unidad": "g",
+      "conservacion": "despensa",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 2.7,
+      "mercadona_id": "13926",
+      "precio_por": "envase",
+      "nombre_mercadona": "Soja texturizada Luengo",
+      "seccion": "Arroz, legumbres y pasta",
+      "foto": "https://prod-mercadona.imgix.net/images/2e49aeea5693521296dc231e58aab300.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "soja"
+      ],
+      "origen": []
+    },
+    {
+      "id": "caldo_verduras",
+      "nombre": "Caldo de verduras (pastillas)",
+      "envase": 12,
+      "unidad": "ud",
+      "conservacion": "despensa",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 0.85,
+      "mercadona_id": "15592",
+      "precio_por": "envase",
+      "nombre_mercadona": "Caldo de verduras Hacendado en pastillas",
+      "seccion": "Conservas, caldos y cremas",
+      "foto": "https://prod-mercadona.imgix.net/images/c2dad675fcad5572a3b39c12a2246eab.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "apio"
+      ],
+      "origen": []
+    },
+    {
+      "id": "salsa_soja",
+      "nombre": "Salsa de soja",
+      "envase": 250,
+      "unidad": "ml",
+      "conservacion": "despensa",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 1.2,
+      "mercadona_id": "17360",
+      "precio_por": "envase",
+      "nombre_mercadona": "Salsa de Soja Hacendado",
+      "seccion": "Aceite, especias y salsas",
+      "foto": "https://prod-mercadona.imgix.net/images/ecdca4a8897163723c7826a359c12db8.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "soja",
+        "gluten"
+      ],
+      "origen": []
+    },
+    {
+      "id": "harina_garbanzo",
+      "nombre": "Harina de garbanzo",
+      "envase": 500,
+      "unidad": "g",
+      "conservacion": "despensa",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 2.0,
+      "mercadona_id": "29373",
+      "precio_por": "envase",
+      "nombre_mercadona": "Harina de garbanzo Hacendado",
+      "seccion": "Panadería y pastelería",
+      "foto": "https://prod-mercadona.imgix.net/images/618e741aec78f29e6da87ec913990715.jpg?fit=crop&h=200&w=200",
+      "alergenos": [],
+      "origen": []
+    },
+    {
+      "id": "crema_soja",
+      "nombre": "Crema de soja para cocinar",
+      "envase": 200,
+      "unidad": "ml",
+      "conservacion": "despensa",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 1.1,
+      "mercadona_id": "10376",
+      "precio_por": "envase",
+      "nombre_mercadona": "Crema de soja Hacendado",
+      "seccion": "Huevos, leche y mantequilla",
+      "foto": "https://prod-mercadona.imgix.net/images/457ad22a1ea8d4dbc300afa80e2f4a3b.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "soja"
+      ],
+      "origen": []
+    },
+    {
+      "id": "seitan",
+      "nombre": "Seitán en lonchas",
+      "envase": 300,
+      "unidad": "g",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 3.7,
+      "mercadona_id": "19974",
+      "precio_por": "envase",
+      "nombre_mercadona": "Seitán Soria Natural lonchas",
+      "seccion": "Pizzas y platos preparados",
+      "foto": "https://prod-mercadona.imgix.net/images/45dc57858278de570a04dfb48061644b.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "gluten",
+        "soja"
+      ],
+      "origen": []
     }
   ]
 }

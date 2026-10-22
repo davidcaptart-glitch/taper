@@ -1000,9 +1000,72 @@
       "anterior": null,
       "precio_kilo": 8.87,
       "fecha": "2026-10-22"
+    },
+    "tofu": {
+      "mercadona_id": "51097",
+      "nombre_mercadona": "Tofu firme Hacendado",
+      "formato": "Paquete 0.4 kg",
+      "precio": 1.75,
+      "anterior": null,
+      "precio_kilo": 4.38,
+      "fecha": "2026-10-22"
+    },
+    "soja_texturizada": {
+      "mercadona_id": "13926",
+      "nombre_mercadona": "Soja texturizada Luengo",
+      "formato": "Paquete 0.2 kg",
+      "precio": 2.7,
+      "anterior": null,
+      "precio_kilo": 13.5,
+      "fecha": "2026-10-22"
+    },
+    "caldo_verduras": {
+      "mercadona_id": "15592",
+      "nombre_mercadona": "Caldo de verduras Hacendado en pastillas",
+      "formato": "Caja 0.12 kg",
+      "precio": 0.85,
+      "anterior": null,
+      "precio_kilo": 7.08,
+      "fecha": "2026-10-22"
+    },
+    "salsa_soja": {
+      "mercadona_id": "17360",
+      "nombre_mercadona": "Salsa de Soja Hacendado",
+      "formato": "Botella 0.25 l",
+      "precio": 1.2,
+      "anterior": null,
+      "precio_kilo": 4.8,
+      "fecha": "2026-10-22"
+    },
+    "harina_garbanzo": {
+      "mercadona_id": "29373",
+      "nombre_mercadona": "Harina de garbanzo Hacendado",
+      "formato": "Paquete 0.5 kg",
+      "precio": 2.0,
+      "anterior": null,
+      "precio_kilo": 4.0,
+      "fecha": "2026-10-22"
+    },
+    "crema_soja": {
+      "mercadona_id": "10376",
+      "nombre_mercadona": "Crema de soja Hacendado",
+      "formato": "Brik 0.2 l",
+      "precio": 1.1,
+      "anterior": null,
+      "precio_kilo": 5.5,
+      "fecha": "2026-10-22"
+    },
+    "seitan": {
+      "mercadona_id": "19974",
+      "nombre_mercadona": "Seitán Soria Natural lonchas",
+      "formato": "Paquete 0.3 kg",
+      "precio": 3.7,
+      "anterior": null,
+      "precio_kilo": 12.33,
+      "fecha": "2026-10-22"
     }
   },
   "fallos_ultima_vez": [],
   "registro": [],
-  "ejecutado": "2026-10-22T14:35:22+00:00"
+  "ejecutado": "2026-10-22T15:39:08+00:00"
 }
