@@ -109,8 +109,12 @@ function renderWizard(){
 // Título con una parte en cursiva de acento: "¿Dónde haces *la compra?*"
 const accentTitle=t=>esc(t).replace(/\*(.+?)\*/g,"<em>$1</em>");
 function finishOnboarding(){
-  // Lo de antes de hoy no se planifica ni se compra: el plan empieza hoy (o el día que elegiste)
-  if(!S.home.start||S.home.start<todayISO())S.home.start=todayISO();
+  // Lo de antes de empezar no se planifica, no se compra y no se pregunta: el plan empieza el día elegido
+  {const pk=S.home.startPick,t=startToday();
+    if(pk==="manana")setPlanStart(addDays(todayISO(),1));
+    else if(pk==="lunes"){let d=addDays(todayISO(),1);while(dow(d)!==0)d=addDays(d,1);setPlanStart(d)}
+    else if(pk==="otro"&&S.home.startOther&&S.home.startOther>todayISO())setPlanStart(S.home.startOther);
+    else if(!S.home.start||S.home.start<=todayISO())setPlanStart(t.start,t.from);}
   const quick=!S.afinar;
   if(quick){
     // Lo que se supone hasta que se afine: comida y cena en casa cada día, se cocina cada día, compra en tienda, sin tope de presupuesto
@@ -221,6 +225,11 @@ function stepBody(fullId){
     return `<div class="field"><label for="wzCp">Tu código postal</label><input id="wzCp" type="text" inputmode="numeric" maxlength="5" value="${esc(H.cp)}" placeholder="Por ejemplo, 08784" autocomplete="postal-code">
       <div class="hint">${H.municipio&&H.cp===H.cpLooked?`📍 ${esc(H.municipio)} · tus precios y tus festivos`:"Con él sé tus precios, qué súper te lo lleva a casa y tus festivos."}</div></div>
     ${(H.cpPlaces||[]).length>1&&H.cp===H.cpLooked?`<div class="field"><label>¿Cuál es tu pueblo?</label><div class="chips">${H.cpPlaces.map(p=>chip("data-place",p,H.municipio===p,esc(p))).join("")}</div></div>`:""}
+    ${(()=>{const pk=H.startPick||"hoy",t=startToday(),mon=(()=>{let d=addDays(todayISO(),1);while(dow(d)!==0)d=addDays(d,1);return d})();
+      const txt=pk==="hoy"?(t.start>todayISO()?"Ya es tarde: empiezas mañana.":t.from==="cena"?"Empiezas hoy con la cena.":"Empiezas hoy con la comida."):pk==="manana"?"Empiezas mañana.":pk==="lunes"?"Empiezas el lunes "+Number(mon.slice(8))+".":H.startOther?"Empiezas el "+longDate(H.startOther).replace(/^\w+, /,"")+".":"Elige el día.";
+      return `<div class="field"><label>¿Cuándo empiezas con el menú?</label><div class="chips">${[["hoy","Hoy"],["manana","Mañana"],["lunes","El lunes"],["otro","Otro día"]].map(([k,t2])=>chip("data-startpick",k,pk===k,t2)).join("")}</div>
+        ${pk==="otro"?`<input type="date" id="wzStartO" min="${todayISO()}" value="${esc(H.startOther||"")}" style="margin-top:8px">`:""}
+        <div class="hint">${esc(txt)} Hasta entonces no preparo menú ni compra, y no te pregunto qué tal.</div></div>`})()}
     <h3 class="kith">Marca los supermercados que te vengan bien</h3><p class="small muted" style="margin:-4px 0 10px">Aunque solo vayas a la tienda: comparo sus precios cada semana.</p>
     <div class="supgrid">${SUPERS.filter(ok).map(tile).join("")}</div>
     <details class="more"><summary>Ver más supermercados</summary><div class="supgrid" style="margin-top:8px">${SUPERS.filter(x=>!ok(x)).map(tile).join("")}</div></details>`}
@@ -469,6 +478,8 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
   qa("[data-pdel]").forEach(b=>b.onclick=()=>{S.people=S.people.filter(p=>p.id!==b.dataset.pdel);if(wiz.editP===b.dataset.pdel)wiz.editP=null;rerender()});
   // Cómo coméis
   qa("[data-more]").forEach(b=>b.onclick=()=>{wiz.more={...(wiz.more||{}),[b.dataset.more]:true};render()});
+  qa("[data-startpick]").forEach(b=>b.onclick=()=>{H.startPick=b.dataset.startpick;rerender()});
+  q("#wzStartO")&&(q("#wzStartO").onchange=e=>{H.startOther=e.target.value;rerender()});
   qa("[data-trainp]").forEach(b=>b.onclick=()=>{const [pid,v]=b.dataset.trainp.split("|"),p=S.people.find(x=>x.id===pid);p.trains=v==="1";rerender()});
   bindFixedEditor(rerender);
 }
@@ -503,6 +514,7 @@ function validateStep(fullId){
     const sin=S.people.find(p=>p.name&&!p.ageRange&&!(p.kind==="nino"&&p.age));if(sin){toast("Falta la edad de "+sin.name+": tócalo para ponerla");return false}
     S.people=S.people.filter(p=>p.id==="yo"||p.name);
     if(!H.apps.filter(k=>k!=="ninguno").length){toast("Marca al menos un aparato de tu cocina");return false}}
+  if(id==="super"&&H.startPick==="otro"&&!(H.startOther&&H.startOther>=todayISO())){toast("Elige el día en que empiezas");return false}
   if(id==="super"){const cp=(v("#wzCp")||"").trim();if(!/^\d{5}$/.test(cp)){toast(cp?"El código postal tiene 5 números":"Pon tu código postal: lo necesito para tus precios");document.getElementById("wzCp")?.focus();return false}H.cp=cp}
   if(id==="aparatos"&&!H.apps.length){toast("Elige al menos uno");return false}
   if(id==="zona"){const cp=(v("#wzCp")||"").trim();if(!/^\d{5}$/.test(cp)){toast(cp?"El código postal tiene 5 números":"Pon tu código postal: lo necesito para tus precios");document.getElementById("wzCp")?.focus();return false}H.cp=cp;H.municipio=(v("#wzMun")||"").trim()}

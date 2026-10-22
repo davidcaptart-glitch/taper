@@ -954,3 +954,7 @@ input.switch:checked::after{transform:translateX(20px)}
 .afdet summary::after{content:"";width:9px;height:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin:0 6px 4px;transition:transform .2s}
 .afdet[open] summary::after{transform:rotate(-135deg);margin-bottom:-4px}
 .afdet p{margin-top:2px}
+
+/* Tira de días: hoy se marca con un punto rojo aunque no esté seleccionado */
+.dsd.today:not(.on) i{background:var(--accent)}
+.dsd.today:not(.on) b{color:var(--accent)}

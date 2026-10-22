@@ -184,6 +184,7 @@ function buildSlots(start){
   for(const d of weekDates(start)){
     if(S.home.start&&d<S.home.start)continue;   // antes de empezar el plan no se planifica
     for(const meal of ["comida","cena"]){
+      if(meal==="comida"&&S.home.startFrom==="cena"&&d===S.home.start)continue;   // empezó por la tarde: ese día solo la cena
       const st=mealState(d,meal);
       if(st!=="cocinar"&&st!=="solotaper")continue;
       const ks=st==="solotaper"?[]:kidsAt(d,meal);
@@ -462,6 +463,7 @@ function ensureSmall(start){
   const usedW={};for(const dd of Object.values(wk.small))for(const v of Object.values(dd))if(v&&v.recipe)usedW[v.recipe]=(usedW[v.recipe]||0)+1;
   for(const d of weekDates(start)){
     if(S.home.start&&d<S.home.start)continue;
+    if(S.home.startFrom==="cena"&&d===S.home.start)continue;
     for(const m of Object.keys(SMALL)){
       const eaters=smallEaters(d,m);const cur=(wk.small[d]||{})[m];
       if(!eaters.length){if(cur&&!cur.locked)delete wk.small[d][m];continue}
@@ -583,6 +585,12 @@ function balanceOf(wk){const c={};for(const v of Object.values(wk.slots)){const 
   return Math.min(c.legumbre||0,2)+Math.min(c.pescado||0,2)-Math.max(0,(c.carne||0)-3)-Math.max(0,(c.red||0)-1)-Math.max(0,(c.huevo||0)-2)}
 
 // Tras cambiar quién come cada comida: se recalculan las semanas desde esa fecha
+// Empezar hoy: si ya ha pasado la comida, hoy solo la cena; si es muy tarde, mañana
+function startToday(){
+  const n=new Date(),h=n.getHours()+n.getMinutes()/60,today=todayISO();
+  return h>=21.5?{start:addDays(today,1),from:null}:h>=15.5?{start:today,from:"cena"}:{start:today,from:null};
+}
+function setPlanStart(st,from){S.home.start=st;S.home.startFrom=from||null;S.home.startedAt=Date.now()}
 function replanFrom(d){for(const s of Object.keys(S.plans))if(addDays(s,6)>=d)ensureWeek(s)}
 // Rehace el menú desde hoy con lo que se sabe ahora (tras afinar): lo elegido a mano se respeta
 function redoFromToday(){

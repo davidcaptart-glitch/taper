@@ -147,6 +147,9 @@ function pendingMeals(){
       if(i===0&&mins<after(meal))continue;
       const key=d+"|"+meal;if(S.meals[key])continue;
       const wk=S.plans[weekStartFor(d)];if(!wk||d<(wk.createdAt||"9"))continue;
+      if(S.home.start&&d<S.home.start)continue;
+      if(S.home.startFrom==="cena"&&d===S.home.start&&meal!=="cena")continue;
+      if(new Date(d+"T"+(String(mealClock(meal)||"14:00").padStart(5,"0"))).getTime()<(S.home.startedAt||0))continue;
       if(SMALL[meal]){const v=smallOf(d)[meal],r=v&&RX[v.recipe];if(!r)continue;
         const who=smallEaters(d,meal).filter(p=>!ratedBefore(p,r.id));
         if(!who.length){S.meals[key]={status:"ok"};continue}
@@ -431,7 +434,7 @@ function todayCard(){
 function dayStrip(st){
   if(!st){const n=nextMeal();st=weekStartFor(n?n.d:todayISO())}const ds=weekDates(st);if(!S.plans[st])return "";
   return `<div class="dstrip">${ds.map(d=>{const has=["comida","cena"].some(m=>!["fuera","libre"].includes(mealState(d,m)));
-    return `<button class="dsd ${d===todayISO()?"on":""} ${d<todayISO()?"past":""}" data-goday="${d}"><small>${DSHORT[dow(d)]}</small><b>${Number(d.slice(8))}</b><i class="${has?"y":""}"></i></button>`}).join("")}</div>`;
+    return `<button class="dsd ${d===daySel?"on":""} ${d===todayISO()?"today":""} ${d<todayISO()||(S.home.start&&d<S.home.start)?"past":""}" data-goday="${d}" aria-pressed="${d===daySel}"><small>${DSHORT[dow(d)]}</small><b>${Number(d.slice(8))}</b><i class="${has?"y":""}"></i></button>`}).join("")}</div>`;
 }
 const SEC_ICO=[["frut","🥦"],["verdur","🥦"],["carne","🥩"],["pollo","🍗"],["pescad","🐟"],["marisc","🦐"],["huevo","🥚"],["leche","🥛"],["lácte","🥛"],["yogur","🥛"],["queso","🧀"],["charcut","🧀"],["congel","🧊"],["arroz","🍚"],["pasta","🍝"],["legumbre","🫘"],["conserv","🥫"],["caldo","🥫"],["aceite","🫒"],["especia","🧂"],["salsa","🫙"],["pan","🥖"],["cereal","🥣"],["fruto","🥜"]];
 const secIco=s=>{const l=String(s).toLowerCase();const m=SEC_ICO.find(([k])=>l.includes(k));return m?m[1]:"🛒"};
@@ -444,7 +447,11 @@ function menuWeeks(){
   for(let s=first;s<=last&&out.length<16;s=addDays(s,7))if(!(S.home.start&&addDays(s,6)<S.home.start))out.push(s);
   return out.length?out:[cur];
 }
-function defaultWeek(ws){const cur=weekStartFor(todayISO());return ws.includes(cur)?cur:ws.find(s=>s>=cur)||ws[0]}
+const firstDay=()=>S.home.start&&S.home.start>todayISO()?S.home.start:todayISO();
+function defaultWeek(ws){const cur=weekStartFor(firstDay());return ws.includes(cur)?cur:ws.find(s=>s>=cur)||ws[0]}
+// Día que se ve en el Menú: hoy (o el primero del plan) si cae en la semana; si no, el primero de la semana
+let daySel=null;
+function defaultDay(st){const ds=weekDates(st),f=firstDay();return ds.includes(f)?f:ds.find(d=>d>=f)||ds[0]}
 function weekPicker(ws,sel){
   const cur=weekStartFor(todayISO());
   return `<div class="wpick" role="tablist" aria-label="Semanas">${ws.map(s=>{const wk=S.plans[s];
@@ -457,7 +464,9 @@ function syncMenuWeek(){
   const ws=menuWeeks();if(!weekSel||!ws.includes(weekSel))weekSel=defaultWeek(ws);
   // Si el mes se ha cambiado desde fuera (flechas, preparar el mes…), se va a su primera semana
   if(menuMonth&&month!==menuMonth){const w=ws.find(s=>monthOfWeek(s)===month)||ws.find(s=>addDays(s,6).slice(0,7)===month);if(w)weekSel=w}
-  month=monthOfWeek(weekSel);menuMonth=month;return ws;
+  month=monthOfWeek(weekSel);menuMonth=month;
+  if(!daySel||!weekDates(weekSel).includes(daySel))daySel=defaultDay(weekSel);
+  return ws;
 }
 function renderMenu(){
   const ws=syncMenuWeek();
@@ -476,7 +485,7 @@ function renderMenu(){
     if(S.home.cookMode==="lote"){const cds=[...new Set(buildSlots(start).filter(s=>wk.slots[s.id]).map(s=>cookDayFor(s.date)))].sort();
       for(const cd of cds){const n=buildSlots(start).filter(s=>cookDayFor(s.date)===cd&&wk.slots[s.id]&&RX[wk.slots[s.id].recipe]).length;
         h+=`<div class="session"><b>Sesión de cocina: ${esc(longDate(cd))}</b><div class="small muted">${n} platos</div><button class="btn ghost small" data-session="${cd}">Ver la sesión</button></div>`}}
-    for(const d of dates){
+    for(const d of dates.filter(x=>x===daySel)){
       const ks=peopleAt(d).filter(p=>p.id!=="yo"), hol=isHoliday(d), a=me(), pt=a?dayProtein(a,d):null;
       const sess=sessionsOn(d);
       const empty=["comida","cena"].every(m=>["fuera","libre"].includes(mealState(d,m)));
@@ -491,11 +500,11 @@ function renderMenu(){
   main.innerHTML=h+`</section>`;
   main.querySelectorAll("[data-plan]").forEach(b=>b.onclick=()=>openWeekPlanner(b.dataset.plan));
   document.getElementById("printMenu")?.addEventListener("click",()=>printMenu(month));
-  main.querySelectorAll("[data-wsel]").forEach(b=>b.onclick=()=>{weekSel=b.dataset.wsel;render()});
+  main.querySelectorAll("[data-wsel]").forEach(b=>b.onclick=()=>{weekSel=b.dataset.wsel;daySel=defaultDay(weekSel);render()});
   {const on=main.querySelector(".wp.on");if(on)on.scrollIntoView({inline:"center",block:"nearest"})}
   main.querySelectorAll("[data-mprep]").forEach(b=>b.onclick=()=>openMonthPrep(b.dataset.mprep));
   main.querySelectorAll("[data-smre]").forEach(b=>b.onclick=()=>{const [d,m]=b.dataset.smre.split("|");rerollSmall(d,m);save();render();toast("Cambiado")});
-  main.querySelectorAll("[data-goday]").forEach(b=>b.onclick=()=>{const el=document.getElementById("d-"+b.dataset.goday);if(el){el.scrollIntoView({behavior:"smooth",block:"start"});el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash")}});
+  main.querySelectorAll("[data-goday]").forEach(b=>b.onclick=()=>{daySel=b.dataset.goday;const y=scrollY;render();scrollTo(0,y)});
   main.querySelectorAll("[data-cooknow]").forEach(b=>b.onclick=()=>{const [rid,p]=b.dataset.cooknow.split("|");const r=RX[rid];openCook(r,variantFor(r)||r.vars[0],Number(p)||2)});
   main.querySelectorAll("[data-regen]").forEach(b=>b.onclick=()=>{if(confirm("¿Rehacer los platos de esta semana? Se mantienen los que elegiste a mano.")){genWeekFromScratch(b.dataset.regen);save();render();toast("Platos rehechos")}});
   main.querySelectorAll("[data-swap]").forEach(b=>b.onclick=()=>openSwap(b.dataset.swap));
@@ -1219,7 +1228,7 @@ function openStartDay(){
   showDialog(`<div class="mod">${closeBtn}<h2>¿Cuándo empiezas?</h2><p class="small muted">Hasta ese día no preparo menú ni compra: te ayudo a gastar lo que ya tienes en casa.</p>
     <div class="field"><label for="sdIn">Empezar el plan el</label><input type="date" id="sdIn" min="${todayISO()}" value="${esc(S.home.start&&S.home.start>todayISO()?S.home.start:nextMonth)}"></div>
     <div class="actions"><button class="btn" id="sdOk">Guardar</button>${S.home.start&&S.home.start>todayISO()?`<button class="btn ghost" id="sdNow">Empezar ya</button>`:""}</div></div>`);
-  const apply=st=>{S.home.start=st&&st>todayISO()?st:null;
+  const apply=st=>{if(st&&st>todayISO())setPlanStart(st,null);else{const t=startToday();setPlanStart(t.start,t.from)}
     if(S.home.start)for(const s of Object.keys(S.plans))if(addDays(s,6)<S.home.start)delete S.plans[s];
     ensureHorizon();save();dlg.close();month=(S.home.start||todayISO()).slice(0,7);render();
     toast(S.home.start?"Tu plan empieza el "+longDate(S.home.start).replace(/^\w+, /,""):"Plan en marcha desde hoy")};

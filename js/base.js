@@ -2,7 +2,7 @@
 "use strict";
 
 // Versión de la app: súbela (y el ?v= de index.html y VERSION de sw.js) en cada mejora, y añade sus novedades a data/novedades.json
-const APP_VERSION = 69;
+const APP_VERSION = 70;
 
 /* ---------- Utilidades ---------- */
 const DAYS = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];   // índice 0 = lunes
@@ -135,6 +135,7 @@ function migrateV1(o){
   return s;
 }
 let S=load();
+if(S.onboarded&&!S.home.startedAt){S.home.startedAt=Date.now();try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}
 // v66 tomaba lo que costaba el primer menú como presupuesto sin que nadie lo pusiera: se quita
 if(S.afinar&&S.afinar.cost&&Number(S.home.budget.month)===S.afinar.cost&&!S.home.budgetConfirmed){S.home.budget.month=0;try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}
 function applyTheme(){const t=(S.home&&S.home.theme)||"light";if(t==="auto")delete document.documentElement.dataset.theme;else document.documentElement.dataset.theme=t;

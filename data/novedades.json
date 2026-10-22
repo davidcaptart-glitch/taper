@@ -657,6 +657,16 @@
         "Si no has puesto presupuesto, no te digo que te pasas: arriba ves lo previsto del mes y un botón para indicar tu presupuesto mensual.",
         "«¿Quieres afinarlo más?» sale plegado."
       ]
+    },
+    {
+      "version": 70,
+      "fecha": "2026-10-22",
+      "titulo": "Un día cada vez",
+      "cambios": [
+        "El Menú abre en la semana de hoy (o la primera de tu plan) y enseña solo el día de hoy. Toca otro día arriba para verlo.",
+        "Al empezar eliges cuándo: hoy, mañana, el lunes u otro día. Si empiezas por la tarde, ese día solo cuenta la cena.",
+        "«¿Qué tal?» solo pregunta por comidas desde que empezaste."
+      ]
     }
   ]
 }
