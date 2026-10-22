@@ -22,5 +22,9 @@
       "version": "entry.1514801170"
     },
     "tipoReceta": "Receta nueva"
+  },
+  "avisos": {
+    "url": "",
+    "vapidPublic": "BBt_pdF9LNXTil3nPVc_RX6itc-JIQw1fOF-1yiDgCNY097PNXKuci7kCSwlIW9mapPWuK6OixrUIRGlaivuIWE"
   }
 }

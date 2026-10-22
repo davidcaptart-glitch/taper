@@ -676,6 +676,7 @@ function renderPerfil(){
   <div class="card"><h2>Compartir Táper</h2><p class="small muted">Quien escanee este código con la cámara del móvil abre la app y la puede instalar. Cada persona tiene sus propios datos en su móvil.</p>
     <div id="qrBox" style="display:grid;place-items:center;margin:10px 0;background:#fff;border-radius:12px;padding:10px"></div>
     <div class="actions"><button class="btn" id="shareApp">Enviar el enlace</button><button class="btn ghost" id="copyApp">Copiar enlace</button></div></div>
+  ${avisosCard()}
   <div class="card"><h2>Sugerencias y privacidad</h2>
     ${suggestUrl()?`<p class="small muted">¿Se te ocurre una mejora, una receta o has visto un fallo? Cuéntamelo.</p><a class="btn" href="${esc(suggestUrl())}" target="_blank" rel="noopener">💡 Enviar una sugerencia</a>`:`<p class="small muted">Pronto podrás enviar sugerencias desde aquí.</p>`}
     ${recipeSuggestOn()?`<button class="btn ghost small" id="sugRec2" style="margin-top:8px">🍳 Sugerir una receta</button>`:""}
@@ -701,6 +702,7 @@ function renderPerfil(){
   document.getElementById("exp").onclick=exportBackup;
   const f=document.getElementById("impFile");document.getElementById("imp").onclick=()=>f.click();f.onchange=()=>{if(f.files[0])importBackup(f.files[0]);f.value=""};
   document.getElementById("newsAll").onclick=()=>openNews(true);
+  bindAvisos();
   document.getElementById("svProfile")?.addEventListener("click",openSurvey);
   document.getElementById("sugRec2")?.addEventListener("click",openSuggestRecipe);
   document.getElementById("noStats").onchange=e=>{S.noStats=!e.target.checked;save();toast(S.noStats?"No se contarán tus visitas":"Gracias: se contarán de forma anónima")};
@@ -883,6 +885,7 @@ async function boot(){
   else if(S.onboarded&&NEWS&&(S.seenVersion||0)<APP_VERSION)openNews(false);
   else if(!S.onboarded){S.seenVersion=APP_VERSION;save()}
   checkUpdate();startCounter();
+  if(avisosOn()&&S.notif&&S.notif.on){shareWithSW().catch(()=>{});queueSyncAvisos()}
 }
 boot();
 if("serviceWorker" in navigator&&location.protocol!=="file:")navigator.serviceWorker.register("sw.js").catch(()=>{});

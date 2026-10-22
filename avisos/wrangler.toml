@@ -1,0 +1,20 @@
+# Servidor de avisos de Táper (Cloudflare Workers, plan gratuito)
+name = "taper-avisos"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+# Cada 10 minutos busca los avisos que ya tocan
+[triggers]
+crons = ["*/10 * * * *"]
+
+[vars]
+VAPID_PUBLIC = "BBt_pdF9LNXTil3nPVc_RX6itc-JIQw1fOF-1yiDgCNY097PNXKuci7kCSwlIW9mapPWuK6OixrUIRGlaivuIWE"
+VAPID_SUBJECT = "https://davidcaptart-glitch.github.io/taper/"
+
+# El espacio de datos (KV) se crea al desplegar; su id se rellena entonces
+# [[kv_namespaces]]
+# binding = "TAPER"
+# id = ""
+
+# La clave privada VAPID NO va aquí: se guarda como secreto con
+#   npx wrangler secret put VAPID_PRIVATE_JWK

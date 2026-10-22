@@ -12,6 +12,7 @@ const SHELL = [
   "js/compra.js?v=9",
   "js/tickets.js?v=9",
   "js/congelador.js?v=9",
+  "js/avisos.js?v=9",
   "js/bienvenida.js?v=9",
   "js/ui.js?v=9",
   "manifest.webmanifest",
@@ -38,6 +39,31 @@ self.addEventListener("activate", e => {
       .then(keys => Promise.all(keys.filter(k => k !== VERSION).map(k => caches.delete(k))))
       .then(() => self.clients.claim())
   );
+});
+
+/* ---------- Avisos ---------- */
+// El servidor solo "despierta" al móvil; aquí se piden los avisos pendientes y se muestran
+self.addEventListener("push", e => {
+  e.waitUntil((async () => {
+    let list = [];
+    try {
+      const meta = await (await caches.open("taper-meta")).match("/__avisos");
+      const { uid, url } = await meta.json();
+      list = await (await fetch(url.replace(/\/$/, "") + "/pendientes?uid=" + encodeURIComponent(uid), { cache: "no-store" })).json();
+    } catch (err) { /* sin conexión: se muestra un aviso genérico */ }
+    if (!list.length) list = [{ title: "Táper", body: "Tienes avisos pendientes en Táper.", tag: "taper" }];
+    for (const a of list) {
+      await self.registration.showNotification(a.title, { body: a.body, tag: a.tag || undefined, icon: "icons/icon-192.png", badge: "icons/icon-192.png", data: { tag: a.tag } });
+    }
+  })());
+});
+self.addEventListener("notificationclick", e => {
+  e.notification.close();
+  e.waitUntil((async () => {
+    const all = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
+    for (const c of all) if ("focus" in c) return c.focus();
+    return self.clients.openWindow("./");
+  })());
 });
 
 // Red primero (con copia en caché) para los datos y la página; caché primero para el resto.
