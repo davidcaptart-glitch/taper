@@ -25,13 +25,43 @@ function openWizard(stepId){wiz={i:0,single:stepId||null};tab="wizard";render()}
 const stepPerson=id=>{const i=id.indexOf(":");return i<0?me():(S.people.find(p=>p.id===id.slice(i+1))||me())};
 const stepKind=id=>id.split(":")[0];
 
+/* ---------- Pantalla de bienvenida (antes de la primera pregunta) ---------- */
+function renderWelcome(){
+  const pick=["marmitako","padthai","tacospastor","salmorejo","curry"].map(id=>RX[id]).filter(r=>r&&hasPhoto(r)).slice(0,3);
+  const days=["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"];
+  const card=(r,dia,n)=>`<div class="mday">${dia} <small>${n} nov</small></div><div class="mcard"><span class="mimg" style="background-image:url('${esc(dishPhoto(r))}')"></span><span><span class="mtags"><i>${r.type==="c"?"Con hidratos":"Ligera"}</i>${(r.prot||0)>=30?"<i>Alto en proteína</i>":""}</span><b>${esc(r.name)}</b><small>Para 2 · ${recipeTime(r)} min</small></span><span class="mp">${eur(rationCost(r))}<small>/rac.</small></span></div>`;
+  const snap=snapshot();
+  main.innerHTML=`<section class="welcome">
+    <div class="wbrand"><span class="wlogo"></span>Táper</div>
+    <div class="wdrift" aria-hidden="true">${["🍗","🥕","🧀","🍤","🥚","🍞","🍝","🥬","🍓","🐟","🍚","🥔"].map((e,i)=>`<span style="left:${(i*8.3+3)%96}%;animation-duration:${9+(i*7)%8}s;animation-delay:-${(i*2.3)%9}s;font-size:${1.1+(i%3)*.35}rem">${e}</span>`).join("")}</div>
+    <div class="wstage" aria-hidden="true">
+      ${["🥦","🍅","🥑","🧄","🌽","🌶️","🫑","🍋"].map((e,i)=>`<span class="veg v${i}">${e}</span>`).join("")}
+      <div class="mphone"><div class="mnotch"></div>
+        <div class="mhead"><div class="mring"><b>28%</b><small>usado</small></div><div><b>La semana que viene</b><small>2 – 8 nov · 7 platos</small><small><b>22,53 €</b> de 80 € · 🛒 Mercadona</small></div></div>
+        <div class="mdays">${days.map((d,i)=>`<span class="${i===0?"on":""}"><small>${d}</small><b>${i+2}</b></span>`).join("")}</div>
+        <div class="mbtns"><span class="a">☰ Lista de la compra</span><span>↻ Rehacer</span></div>
+        ${pick.map((r,i)=>card(r,days[i]==="Lun"?"Lunes":days[i]==="Mar"?"Martes":"Miércoles",i+2)).join("")}
+      </div>
+    </div>
+    <h1 class="wtitle2">Deja que <em>Táper</em><br>organice tu semana.</h1>
+    <p class="wsub">Ahorra dinero, gana tiempo<br>y come más sano sin esfuerzo.</p>
+    <div class="wfoot"><button class="btn cta" id="wStart">Empezar <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      ${snap?`<button class="wlink" id="wRestore">Recuperar mis datos${snap.nombre?" ("+esc(snap.nombre)+")":""}</button>`:isStandalone()&&servidorOn()?`<button class="wlink" id="wSafari">Ya usaba Táper en Safari</button>`:`<label class="wlink">Tengo una copia de seguridad<input type="file" id="wImp" accept="application/json,.json" hidden></label>`}</div>
+  </section>`;
+  document.getElementById("wStart").onclick=()=>{wiz.started=true;render();scrollTo(0,0)};
+  document.getElementById("wRestore")?.addEventListener("click",()=>{if(restoreSnapshot()){tab="menu";render();toast("Datos recuperados")}});
+  document.getElementById("wSafari")?.addEventListener("click",openTransferCode);
+  document.getElementById("wImp")?.addEventListener("change",e=>{const f=e.target.files[0];if(f)importBackup(f)});
+}
+
 function renderWizard(){
+  if(!wiz.single&&!wiz.started&&wiz.i===0&&!S.onboarded)return renderWelcome();
   const steps=wizSteps();
   const single=wiz.single==="hijos"?"familia":wiz.single==="semana"?"cocina":wiz.single==="objetivos"||wiz.single==="entreno"?wiz.single+":yo":wiz.single;
   const step=single?steps.find(s=>s.id===single):steps[Math.min(wiz.i,steps.length-1)];
   if(!step){wiz.single=null;tab="perfil";render();return}
   const n=steps.indexOf(step), N=steps.length;
-  const back=wiz.single?"cancel":n>0?"back":null;
+  const back=wiz.single?"cancel":n>0?"back":!S.onboarded?"welcome":null;
   let h=`<section class="wiz"><div class="wtop">${back?`<button class="wback" data-wz="${back}" aria-label="Atrás"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>`:`<span class="wback ph"></span>`}
     ${wiz.single?`<span class="wtitle">Editar</span>`:`<div class="segs" role="progressbar" aria-valuemin="1" aria-valuemax="${N}" aria-valuenow="${n+1}">${steps.map((_,i)=>`<i class="${i<n?"done":i===n?"now":""}"></i>`).join("")}</div><span class="wcount">${n+1}/${N}</span>`}</div>
     <div class="eyebrow">${esc(step.eyebrow||"")}</div><h2 class="wh">${accentTitle(step.title)}</h2>`+stepBody(step.id)+`<div class="wcta">`;
@@ -40,6 +70,7 @@ function renderWizard(){
   main.innerHTML=h+`</div></section>`;
   bindStep(step.id);
   main.querySelector("[data-wz=back]")?.addEventListener("click",()=>{wiz.i--;render();scrollTo(0,0)});
+  main.querySelector("[data-wz=welcome]")?.addEventListener("click",()=>{wiz.started=false;render();scrollTo(0,0)});
   main.querySelector("[data-wz=next]")?.addEventListener("click",()=>{
     if(!validateStep(step.id))return;
     if(step.id==="listo"){finishOnboarding();return}

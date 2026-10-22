@@ -324,6 +324,14 @@
         "49 recetas nuevas, todas con foto: salmorejo, marmitako, fricandó, estofado, canelones, pad thai, oyakodon, ramen, pollo a la mantequilla, falafel, harira, tajine, tacos al pastor, cachopo, macarrones con queso y muchas más.",
         "Ya hay 245 recetas en tus menús."
       ]
+    },
+    {
+      "version": 34,
+      "fecha": "2026-10-22",
+      "titulo": "Pantalla de bienvenida",
+      "cambios": [
+        "Al abrir Táper por primera vez, una pantalla de bienvenida con comida flotando y una semana de ejemplo. Desde ahí también puedes recuperar tus datos o traer una copia."
+      ]
     }
   ]
 }
