@@ -343,7 +343,7 @@ function stepBody(fullId){
     <div class="field"><label for="wzStart">¿Desde cuándo empieza el plan?</label><input id="wzStart" type="date" value="${esc(H.start||todayISO())}">
       <div class="hint">Hasta ese día no hago compra: te ayudo a gastar lo que ya tienes en casa.</div></div>
     <div class="field"><label for="wzFreq">¿Cada cuánto?</label><select id="wzFreq">${[["diaria","Cada día"],["semanal","Cada semana"],["quincenal","Cada dos semanas"],["mensual","Cada mes"]].map(([v,t])=>`<option value="${v}" ${H.planFreq===v?"selected":""}>${t}</option>`).join("")}</select></div>
-    <div class="field"><label for="wzPDay">Día (la semana del menú empieza ese día)</label>${dowSelect("wzPDay",H.planDay)}</div>
+    <div class="field"><label for="wzPDay">Día en que planificas (la semana va de lunes a domingo)</label>${dowSelect("wzPDay",H.planDay)}</div>
     <div class="field"><label for="wzPTime">Hora</label><input id="wzPTime" type="time" value="${esc(H.planTime)}"></div>
     <div class="group"><h3>¿Cuándo preparamos el mes siguiente?</h3>
       <div class="field"><label for="wzMPD">Avísame el día de la última semana del mes</label>${dowSelect("wzMPD",H.monthPrepDay??1)}</div>

@@ -677,6 +677,15 @@
         "Filtro «Fáciles» en Recetas.",
         "En «Afinar mi menú» puedes pedir solo platos fáciles. Por defecto propongo fáciles y moderados."
       ]
+    },
+    {
+      "version": 74,
+      "fecha": "2026-10-22",
+      "titulo": "La semana va de lunes a domingo",
+      "cambios": [
+        "Las semanas del menú van de lunes a domingo. El día en que planificas sigue siendo el que tú elijas.",
+        "Tus menús ya hechos se han reagrupado sin perder nada."
+      ]
     }
   ]
 }

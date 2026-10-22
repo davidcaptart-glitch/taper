@@ -2,7 +2,7 @@
 "use strict";
 
 // Versión de la app: súbela (y el ?v= de index.html y VERSION de sw.js) en cada mejora, y añade sus novedades a data/novedades.json
-const APP_VERSION = 73;
+const APP_VERSION = 74;
 
 /* ---------- Utilidades ---------- */
 const DAYS = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];   // índice 0 = lunes
@@ -140,6 +140,14 @@ function migrateV1(o){
 }
 let S=load();
 if(S.onboarded&&!S.home.startedAt){S.home.startedAt=Date.now();try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}
+// Antes la semana empezaba el día de planificar (domingo por defecto): los menús se reagrupan de lunes a domingo
+if(!S.weekMon){const np={};
+  const get=d=>{const k=mondayOf(d);return np[k]=np[k]||{start:k,slots:{},small:{},training:null,confirmed:false,createdAt:d}};
+  for(const w of Object.values(S.plans||{})){
+    for(const [id,v] of Object.entries(w.slots||{})){const n=get(id.slice(0,10));n.slots[id]=v;if(w.confirmed)n.confirmed=true;if(w.createdAt&&w.createdAt<n.createdAt)n.createdAt=w.createdAt}
+    for(const [d,v] of Object.entries(w.small||{})){get(d).small[d]=v}
+    for(const [d,v] of Object.entries(w.training||{})){const n=get(d);n.training=n.training||{};n.training[d]=v}}
+  S.plans=np;S.weekMon=true;try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}
 // v66 tomaba lo que costaba el primer menú como presupuesto sin que nadie lo pusiera: se quita
 if(S.afinar&&S.afinar.cost&&Number(S.home.budget.month)===S.afinar.cost&&!S.home.budgetConfirmed){S.home.budget.month=0;try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}
 function applyTheme(){const t=(S.home&&S.home.theme)||"light";if(t==="auto")delete document.documentElement.dataset.theme;else document.documentElement.dataset.theme=t;

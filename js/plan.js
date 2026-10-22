@@ -3,7 +3,8 @@
 
 /* ---------- Semanas de planificación ---------- */
 // La semana empieza el día en que planificas (por defecto el domingo) y dura 7 días
-function weekStartFor(d){return addDays(d,-((dow(d)-S.home.planDay+7)%7))}
+// La semana del menú va siempre de lunes a domingo (el día en que se planifica es aparte: S.home.planDay)
+function weekStartFor(d){return mondayOf(d)}
 function weekDates(start){return [0,1,2,3,4,5,6].map(i=>addDays(start,i))}
 function weeksInMonth(m){
   const [y,mm]=m.split("-").map(Number);const out=[];
