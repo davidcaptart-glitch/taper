@@ -80,7 +80,8 @@ function stepBody(fullId){
   const H=S.home, a=stepPerson(fullId), id=stepKind(fullId)==="gustos"?fullId:stepKind(fullId), you=a.id==="yo";
   if(id==="hola")return `<p class="lead">Táper te prepara el menú, la lista de la compra y los tápers de la semana, a tu medida. Unas preguntas rápidas y empezamos. Todo se puede cambiar después.</p>
     <div class="field"><label for="wzName">¿Cómo te llamas?</label><input id="wzName" type="text" value="${esc(a.name)}" placeholder="Tu nombre"></div>
-    ${isStandalone()&&servidorOn()?`<button type="button" class="btn ghost small" id="wzTr">¿Ya usabas Táper en Safari? Trae tus datos</button>`:""}`;
+    ${isStandalone()&&servidorOn()?`<button type="button" class="btn ghost small" id="wzTr">¿Ya usabas Táper en Safari? Trae tus datos</button>`:""}
+    ${snapshot()?`<div class="okbox small" style="margin-top:14px">Tienes tus datos guardados del ${esc(new Date(snapshot().at).toLocaleString("es-ES",{day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"}))}${snapshot().nombre?" ("+esc(snapshot().nombre)+")":""}.<br><button type="button" class="btn small" id="wzRestore" style="margin-top:8px">Recuperar mis datos</button></div>`:""}`;
   if(id==="aparatos")return `<p class="lead">Solo te propondré recetas que puedas hacer.</p><div class="chips">${Object.entries(APP).filter(([k])=>k!=="ninguno").map(([k,v])=>chip("data-app",k,H.apps.includes(k),v)).join("")}</div>`;
   if(id==="zona"){const ch=H.supers&&H.supers.length?H.supers:[H.super||"mercadona"],ok=x=>superHasPrices(x.id);
     return `<p class="lead">¿Dónde te viene bien comprar? Marca todos los supermercados, aunque solo vayas a la tienda: comparo sus precios cada semana.</p>
@@ -166,6 +167,7 @@ function stepBody(fullId){
     <details class="more"><summary>Más ajustes del presupuesto</summary>
     <div class="field"><label for="wzBW">Presupuesto a la semana (€)</label><input id="wzBW" type="number" min="0" step="1" value="${b.week??""}" placeholder="Automático: el del mes entre las semanas"></div>
     <div class="field"><label for="wzBB">Básicos al mes: aceite, sal, especias (€)</label><input id="wzBB" type="number" min="0" step="1" value="${b.basics}"></div></details>
+    <p class="small muted" style="margin:18px 0 0">💡 Truco: la compra del mes (lo que pesa y aguanta) online y el fresco de cada semana en tienda suele salir más barato: un solo envío al mes. En la lista de la compra te comparo las opciones.</p>
     <div class="group"><h3>Compra del mes (despensa, carne para congelar y congelados)</h3><div class="chips">${modeChips("monthMode",sh.monthMode)}</div></div>
     <div class="group"><h3>Compra de cada semana (fresco)</h3><div class="chips">${modeChips("weekMode",sh.weekMode)}</div></div>
     <div class="field"><label for="wzDel">Día en que llega o haces la compra semanal</label>${dowSelect("wzDel",sh.delivery)}<div class="hint">Lo que cocines antes de ese día sale de lo que ya tienes en casa.</div></div>
@@ -213,6 +215,7 @@ function bindStep(fullId){
 USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean).join(" · "));fd.append(c.campos.version,String(APP_VERSION));
     try{await fetch(c.url,{method:"POST",mode:"no-cors",body:fd});S.zoneAsked=H.cp;save();rerender();toast("Pedido enviado")}catch(e){toast("Sin conexión: inténtalo más tarde")}});
   q("#wzTr")&&(q("#wzTr").onclick=openTransferCode);
+  q("#wzRestore")&&(q("#wzRestore").onclick=()=>{if(restoreSnapshot()){wiz={i:0,single:null};tab="menu";render();toast("Datos recuperados")}});
   q("#wzBM")&&(q("#wzBM").oninput=e=>{const v=Number(e.target.value);e.target.style.setProperty("--p",(v-40)/8.6+"%");q("#bVal").textContent=v;q("#bWeek").textContent=eur(v/4.3)});
   qa("[data-super]").forEach(b=>b.onclick=()=>{const sid=b.dataset.super;let ch=H.supers&&H.supers.length?[...H.supers]:[H.super||"mercadona"];
     if(ch.includes(sid)){if(ch.length===1){toast("Elige al menos un supermercado");return}ch=ch.filter(x=>x!==sid)}else ch.push(sid);

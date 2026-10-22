@@ -554,3 +554,14 @@ details.more summary{cursor:pointer;color:var(--muted);font-weight:550;padding:8
 .rsteps li{counter-increment:rs;position:relative;padding:4px 0 16px 46px;line-height:1.5}
 .rsteps li::before{content:counter(rs);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;display:grid;place-items:center}
 dialog:has(.mod.recipe){background:var(--bg)}
+
+/* ---------- Cómo comprar más barato ---------- */
+.shopplan summary{cursor:pointer;list-style:none}
+.shopplan summary::-webkit-details-marker{display:none}
+.spl{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center;padding:12px;border-radius:14px;background:var(--surface-2);margin:8px 0}
+.spl.best{background:var(--accent-soft);box-shadow:inset 0 0 0 2px var(--accent)}
+.spl small{display:block;color:var(--muted);font-size:.8rem;margin-top:2px}
+.spl .r{text-align:right}
+.spl .r b{font-variant-numeric:tabular-nums}
+.spl .okt{color:var(--accent);font-weight:650}
+.spl .btn{grid-column:1/-1;justify-self:start}

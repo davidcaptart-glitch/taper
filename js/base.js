@@ -2,7 +2,7 @@
 "use strict";
 
 // Versión de la app: súbela (y el ?v= de index.html y VERSION de sw.js) en cada mejora, y añade sus novedades a data/novedades.json
-const APP_VERSION = 25;
+const APP_VERSION = 26;
 
 /* ---------- Utilidades ---------- */
 const DAYS = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];   // índice 0 = lunes
@@ -124,6 +124,21 @@ const me=()=>S.people.find(p=>p.kind==="adulto");
 const adults=()=>S.people.filter(p=>p.kind==="adulto");
 const kids=()=>S.people.filter(p=>p.kind==="nino");
 const personName=p=>p.name||(p.kind==="adulto"?"Tú":"Hijo/a");
+
+/* ---------- Empezar de cero guardando los datos (para probar el inicio) ----------
+   La copia se queda en este móvil y se puede recuperar tantas veces como se quiera. */
+const SNAP_KEY="taper-guardado";
+function snapshot(){try{return JSON.parse(localStorage.getItem(SNAP_KEY)||"null")}catch(e){return null}}
+function startFresh(){
+  try{localStorage.setItem(SNAP_KEY,JSON.stringify({at:new Date().toISOString(),nombre:me().name||"",estado:S}))}
+  catch(e){toast("No he podido guardar la copia: no empiezo de cero");return false}
+  const keep={uid:S.uid,notif:S.notif,installSent:S.installSent,activeWeek:S.activeWeek,visited:S.visited,ref:S.ref,trCode:S.trCode,seenVersion:S.seenVersion};
+  S=mergeState({v:2,...keep});S.testFresh=true;save();return true;
+}
+function restoreSnapshot(){
+  const s=snapshot();if(!s||!s.estado){toast("No hay ninguna copia guardada");return false}
+  S=mergeState(s.estado);save();return true;
+}
 
 /* ---------- Copia de seguridad ---------- */
 function exportBackup(){

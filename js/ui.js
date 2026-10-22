@@ -592,6 +592,18 @@ function compareCard(l){
     <p class="small muted">Sin contar envíos. Precios de las webs de cada súper del ${esc(PS&&PS.ejecutado?longDate(PS.ejecutado.slice(0,10)).replace(/^\w+, /,""):"")}. Si el envase es distinto, se calcula el precio para la misma cantidad.</p>
     <div class="chips">${chip("data-strat","principal",!cheapestMode(),"Todo en "+esc(superById(mainSuper()).nombre))}${chip("data-strat","barato",cheapestMode(),"Cada cosa donde sea más barata")}</div></details>`;
 }
+// Tarjeta: qué forma de comprar sale más barata este mes
+function shopPlanCard(m){
+  const {plans,cur,best,cheapest}=shopPlans(m);if(plans.length<2)return "";
+  const curFees=cur?cur.fees:null, save=curFees!=null?curFees-best.fees:0;
+  const isBest=cur&&cur.id===best.id;
+  return `<details class="card shopplan" ${isBest?"":"open"}><summary><b>💡 Cómo comprar más barato</b> <span class="small muted">· ${isBest?"ya usas la mejor opción":save>0.01?`puedes ahorrar ${eur(save)} este mes`:"compara las opciones"}</span></summary>
+    <p class="small muted" style="margin:8px 0">La compra del mes (despensa y congelados) y la de cada semana (fresco) se pueden hacer de forma distinta. Envíos de ${esc(superInfo().nombre||"tu supermercado")} en todo el mes:</p>
+    ${plans.map(p=>`<div class="spl ${p.id===best.id?"best":""}"><span><b>${esc(p.t)}</b><small>${esc(p.d)}${p.orders?` · ${p.orders} ${p.orders===1?"pedido":"pedidos"}`:""}${p.trips?` · ${p.trips} ${p.trips===1?"viaje":"viajes"} a la tienda`:""}${p.below?` · <span class="up">${p.below} ${p.below===1?"no llega":"no llegan"} al mínimo</span>`:""}</small></span>
+      <span class="r"><b>${p.fees?eur(p.fees):"0 €"}</b>${p.id===best.id?`<small class="okt">Recomendada</small>`:p.id===cheapest.id?`<small class="okt">Lo más barato</small>`:""}${cur&&p.id===cur.id?`<small>La tuya</small>`:""}</span>
+      ${cur&&p.id===cur.id?"":`<button class="btn ${p.id===best.id?"":"ghost"} small" data-splan="${p.id}">Usar</button>`}</div>`).join("")}
+    <p class="small muted" style="margin:8px 0 0">Los precios de los productos son los mismos; cambia lo que pagas de envío.${chosenSupers().length>1?" Con varios supermercados se cuenta el envío de cada uno.":""}</p></details>`;
+}
 function renderCompra(){
   const sh=shopping(month);
   if(!sh.weeks.length||!sh.weeks.some(s=>S.plans[s])){main.innerHTML=`<section class="view"><div class="empty"><h2>Sin lista todavía</h2><p>Planifica alguna semana de este mes y aquí aparecerá la compra.</p><button class="btn" id="goMenu">Ir al menú</button></div></section>`;document.getElementById("goMenu").onclick=()=>{tab="menu";render()};return}
@@ -610,6 +622,7 @@ function renderCompra(){
   if(l.belowMin){const bg=l.groups.find(g=>g.belowMin);
     h+=`<div class="warnbox">${l.groups.length>1?esc(superById(bg.sup).nombre)+": n":"N"}o llegas al pedido mínimo (${eur(bg.min)}): faltan ${eur(bg.min-bg.cost)}.${wi!=null?` <button class="btn small" id="fillMin">Completar con cosas del mes</button>`:" Pásala a compra en tienda o junta compras."}</div>`;
   }
+  if(listSel==="mes")h+=shopPlanCard(month);
   if(l.items.length&&l.groups.length===1&&l.groups[0].sup==="mercadona")h+=orderBlock(l,listSel==="mes"?"mes":"semana");
   if(l.items.length&&chosenSupers().length>1)h+=compareCard(l);
   // Un bloque por supermercado; dentro, por secciones en el orden en que se recorre la tienda
@@ -643,6 +656,9 @@ function renderCompra(){
   h+=`<div class="card"><h2>Presupuesto por semana</h2><table class="wtable">${sh.weeks.map((s,i)=>`<tr><td>Semana del ${shortDate(s)}${i===0?" (con la compra del mes)":""}</td><td class="${sh.perWeek[i]>wb?"up":""}">${eur(sh.perWeek[i])} / ${eur(wb)}</td></tr>`).join("")}</table></div>`;
   main.innerHTML=h+`</section>`;
   main.querySelectorAll("[data-list]").forEach(b=>b.onclick=()=>{listSel=b.dataset.list;render()});
+  main.querySelectorAll("[data-splan]").forEach(b=>b.onclick=()=>{const p=SHOP_PLANS.find(x=>x.id===b.dataset.splan);
+    S.home.shop.monthMode=p.month;S.home.shop.weekMode=p.week;for(const k of Object.keys(S.modes))if(k.startsWith(month+"|"))delete S.modes[k];
+    save();render();toast("Hecho: "+p.t.toLowerCase())});
   main.querySelectorAll("[data-strat]").forEach(b=>b.onclick=()=>{S.home.shop.strategy=b.dataset.strat;save();render();toast(b.dataset.strat==="barato"?"Cada producto, donde sale más barato":"Todo en "+superById(mainSuper()).nombre)});
   main.querySelectorAll("[data-lm]").forEach(b=>b.onclick=()=>{S.modes[month+"|"+listSel]=b.dataset.lm;save();render()});
   main.querySelectorAll("[data-ck]").forEach(i=>i.onchange=()=>{S.checkedAt=S.checkedAt||{};if(i.checked){S.checks[i.dataset.ck]=true;S.checkedAt[i.dataset.ck]=todayISO()}else{delete S.checks[i.dataset.ck];delete S.checkedAt[i.dataset.ck]}i.closest(".item").classList.toggle("done",i.checked);save()});
@@ -784,6 +800,8 @@ function renderPerfil(){
   h+=acc("app","📦","Copia de seguridad y novedades",`Versión ${APP_VERSION} · tu código ${S.uid}`,`<p class="small muted">Todo se guarda solo en este móvil. Descarga una copia de vez en cuando y antes de cambiar de móvil.</p>
     ${needsTransfer()?`<div class="okbox"><b>¿Vas a instalar Táper?</b> Tus datos pasarán solos a la app. Si no te los reconoce, usa este código de traspaso: <b style="letter-spacing:.15em">${esc(transferCode())}</b></div>`:""}
     ${isStandalone()&&servidorOn()?`<button class="btn ghost small" id="trBring" style="margin-bottom:8px">Traer mis datos de Safari</button>`:""}
+    <div class="okbox small" style="margin-bottom:10px"><b>Probar el inicio de la app</b><br>Guardo tus datos en este móvil, empiezas de cero y, cuando quieras, los recuperas tal cual.
+      <div class="actions" style="margin-top:8px"><button class="btn small" id="fresh">Empezar de cero (guardando mis datos)</button>${snapshot()?`<button class="btn ghost small" id="restoreSnap">Recuperar mis datos del ${esc(new Date(snapshot().at).toLocaleString("es-ES",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}))}</button>`:""}</div></div>
     <div class="actions"><button class="btn" id="exp">Exportar copia</button><button class="btn ghost" id="imp">Importar copia</button></div><input type="file" id="impFile" accept="application/json,.json" hidden>
     <div class="field"><label>Aspecto</label><div class="chips">${[["light","Claro"],["dark","Oscuro"],["auto","Como el móvil"]].map(([k,t])=>chip("data-theme-set",k,(S.home.theme||"light")===k,t)).join("")}</div></div>
     <div class="actions"><button class="btn ghost small" id="newsAll">Ver todas las novedades</button><button class="btn ghost small" id="restartWiz">Repetir el asistente</button></div>`);
@@ -808,6 +826,12 @@ function renderPerfil(){
   document.getElementById("festAdd").onclick=()=>{const v=document.getElementById("festIn").value;if(v&&!S.home.festivosExtra.includes(v)){S.home.festivosExtra.push(v);S.home.festivosExtra.sort();save();refreshPlans();render()}};
   q("[data-price]").forEach(i=>i.onchange=()=>{const v=Number(i.value);if(v>=0){S.prices[i.dataset.price]=v;save();render()}});
   q("[data-reset]").forEach(b=>b.onclick=()=>{delete S.prices[b.dataset.reset];save();render()});
+  document.getElementById("fresh")?.addEventListener("click",()=>{
+    showDialog(`<div class="mod">${closeBtn}<h2>¿Empezar de cero?</h2><p>Guardo una copia de todo en este móvil (familia, gustos, menús, compra…) y la app vuelve a la primera pantalla, como si la abrieras por primera vez.</p>
+      <p class="small muted">Para volver a tus datos: botón «Recuperar mis datos» en la primera pantalla o aquí, en Perfil. Si ya había otra copia guardada, se sustituye por esta.</p>
+      <div class="actions"><button class="btn wide" id="freshOk">Guardar y empezar de cero</button></div></div>`);
+    dlg.querySelector("#freshOk").onclick=()=>{if(startFresh()){dlg.close();wiz={i:0,single:null};tab="wizard";render();scrollTo(0,0);toast("Tus datos están guardados. Empieza cuando quieras")}}});
+  document.getElementById("restoreSnap")?.addEventListener("click",()=>{if(confirm("¿Recuperar tus datos guardados? Lo que tienes ahora se sustituye.")&&restoreSnapshot()){tab="perfil";render();toast("Datos recuperados")}});
   document.getElementById("exp").onclick=exportBackup;document.getElementById("trBring")?.addEventListener("click",openTransferCode);
   const f=document.getElementById("impFile");document.getElementById("imp").onclick=()=>f.click();f.onchange=()=>{if(f.files[0])importBackup(f.files[0]);f.value=""};
   document.getElementById("newsAll").onclick=()=>openNews(true);

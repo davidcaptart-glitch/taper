@@ -248,6 +248,15 @@
         "Ficha de receta nueva: precio por ración, raciones, tiempo y calorías en tarjetas, barras de proteína, hidratos y grasas, y pestañas de ingredientes y preparación.",
         "137 platos ya tienen foto real (de Wikimedia Commons, con su autor y licencia). El resto llegará pronto."
       ]
+    },
+    {
+      "version": 26,
+      "fecha": "2026-10-22",
+      "titulo": "Compra más barata y empezar de cero",
+      "cambios": [
+        "«Cómo comprar más barato» en la lista de la compra: compara todo online, despensa online con el fresco en tienda, o todo en tienda, con los envíos de todo el mes. Lo aplicas con un toque.",
+        "Perfil › Copia y novedades › «Empezar de cero (guardando mis datos)»: pruebas el inicio de la app como nuevo y recuperas tus datos cuando quieras, desde la primera pantalla o desde Perfil."
+      ]
     }
   ]
 }

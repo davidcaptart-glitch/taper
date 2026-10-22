@@ -93,6 +93,36 @@ function compareSupers(l){
     return {sid,cost,miss}}).sort((a,b)=>a.cost-b.cost);
 }
 
+/* ---------- Cómo comprar más barato ----------
+   Compara formas de repartir la compra del mes (despensa, congelados) y la semanal (fresco):
+   envíos de todo el mes y si cada pedido online llega al mínimo. */
+const SHOP_PLANS=[
+  {id:"online",month:"online",week:"online",t:"Todo online",d:"Te lo traen todo: un envío por pedido"},
+  {id:"mixto",month:"online",week:"tienda",t:"Despensa online, fresco en tienda",d:"Un solo pedido grande al mes y el fresco lo compras tú"},
+  {id:"domicilio",month:"domicilio",week:"tienda",t:"Despensa en tienda con entrega, fresco en tienda",d:"Compras en la tienda y te llevan a casa lo que pesa"},
+  {id:"tienda",month:"tienda",week:"tienda",t:"Todo en tienda",d:"Sin envíos: lo llevas tú"}
+];
+function shopPlans(m){
+  const keep={month:S.home.shop.monthMode,week:S.home.shop.weekMode},keepModes={};
+  for(const k of Object.keys(S.modes))if(k.startsWith(m+"|")){keepModes[k]=S.modes[k];delete S.modes[k]}
+  const out=[];
+  try{
+    for(const p of SHOP_PLANS){
+      if(!Object.keys(superInfo().entrega||{}).includes(p.month==="domicilio"?"domicilio":p.month)&&p.month!=="tienda")continue;
+      S.home.shop.monthMode=p.month;S.home.shop.weekMode=p.week;
+      const sh=shopping(m),lists=Object.values(sh.lists).filter(l=>l.items.length);
+      const fees=lists.reduce((t,l)=>t+l.fee,0),orders=lists.filter(l=>l.mode!=="tienda").length;
+      const below=lists.filter(l=>l.belowMin).length,trips=lists.filter(l=>l.mode==="tienda").length;
+      out.push({...p,fees,orders,below,trips,total:sh.total})}
+  }finally{S.home.shop.monthMode=keep.month;S.home.shop.weekMode=keep.week;Object.assign(S.modes,keepModes)}
+  const cur=out.find(p=>p.month===keep.month&&p.week===keep.week&&!Object.keys(keepModes).length);
+  // Recomendada: la más barata que te lleva la despensa a casa sin pedidos por debajo del mínimo
+  const by=(a,b)=>a.fees-b.fees||a.trips-b.trips;
+  const ok=out.filter(p=>!p.below), deliv=ok.filter(p=>p.month!=="tienda");
+  const best=(deliv.length?deliv:ok.length?ok:out).slice().sort(by)[0], cheapest=(ok.length?ok:out).slice().sort(by)[0];
+  return {plans:out,cur,best,cheapest};
+}
+
 /* ---------- Resumen del mes ---------- */
 // Analiza un mes: presupuesto previsto y real, por qué se desvió, objetivos y propuesta para el siguiente
 function monthReview(m){
