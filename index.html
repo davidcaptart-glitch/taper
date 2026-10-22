@@ -211,7 +211,7 @@ dialog::backdrop{background:rgb(10 14 20 / .55)}
 /* ---------- Catálogo y recetas: se cargan de data/*.json ---------- */
 // P[id] = [nombre, tamaño envase, unidad, precio estimado €, conservación, pasillo]
 let P = {}, R = [], RX = {}, THAW = new Set(), MID = {};
-const APP = {air:"Air fryer",horno:"Horno",vitro:"Vitro",micro:"Microondas"};
+const APP = {air:"Air fryer",horno:"Horno",vitro:"Vitro o fogones",micro:"Microondas"};
 const GROUP = {carne:"Carne",pescado:"Pescado",legumbre:"Legumbre",huevo:"Huevo"};
 function setData(prods,recs){
   P={};THAW=new Set();MID={};
