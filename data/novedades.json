@@ -1,0 +1,49 @@
+{
+  "versiones": [
+    {
+      "version": 1,
+      "fecha": "2026-10-22",
+      "titulo": "Táper llega a tu móvil",
+      "cambios": [
+        "Se instala en el móvil y funciona sin conexión.",
+        "Precios de Mercadona de tu zona, actualizados cada domingo.",
+        "Copia de seguridad de tus datos."
+      ]
+    },
+    {
+      "version": 2,
+      "fecha": "2026-10-22",
+      "titulo": "Un menú a tu medida",
+      "cambios": [
+        "Asistente de bienvenida: aparatos, objetivos, entreno, semana tipo, compra y gustos.",
+        "120 recetas con paso a paso, modo cocina con temporizador y nutrición por ración.",
+        "Te pregunta qué tal cada comida y aprende lo que os gusta y lo que no.",
+        "Compra online o en tienda, pedido mínimo, envío y pedido guardado con los cambios."
+      ]
+    },
+    {
+      "version": 3,
+      "fecha": "2026-10-22",
+      "titulo": "Familia, entrenos y presupuesto",
+      "cambios": [
+        "Cualquier familia: pareja, hijos, familiares… cada uno con sus gustos, objetivos, ración y calendario.",
+        "Hora de cada entreno, pregunta si lo hiciste y reajusta las comidas que quedan.",
+        "220 recetas.",
+        "Se ajusta a tu presupuesto y, si no llega, te pregunta qué sacrificar.",
+        "Resumen de final de mes con una propuesta realista para el siguiente."
+      ]
+    },
+    {
+      "version": 4,
+      "fecha": "2026-10-22",
+      "titulo": "Tickets y compra por secciones",
+      "cambios": [
+        "Escanea tus tickets de Mercadona (foto o PDF): apunta lo que pagaste y te enseña en qué se va el dinero. Lo que no es comida se descarta solo.",
+        "La lista de la compra va por secciones de Mercadona, en el orden en que se recorre la tienda.",
+        "Comparte la app con un código QR desde Perfil.",
+        "Eliges tu supermercado: de momento Mercadona; otros llegarán más adelante.",
+        "La app se actualiza sola y te cuenta las novedades, como ahora."
+      ]
+    }
+  ]
+}

@@ -88,6 +88,8 @@ function monthReview(m){
   const stock=sh.total-fees-sh.extrasTotal-(Number(S.home.budget.basics)||0)-eaten;
   if(stock>5)reasons.push({eur:stock,txt:`Envases enteros: ${eur(stock)} de comida que queda en casa para otras semanas (arroz, aceite de los botes, congelados…)`});
   if(real&&realEntries.length>=listsWith&&real>sh.total+3)reasons.push({eur:real-sh.total,txt:`Pagaste ${eur(real-sh.total)} más de lo previsto en la lista: compras fuera de la lista o precios distintos`});
+  const sp=typeof spendingOf==="function"?spendingOf(m):null;
+  if(sp&&sp.off>3)reasons.push({eur:sp.off,txt:`Compraste ${eur(sp.off)} fuera de la lista (${sp.top.slice(0,3).map(t=>t.desc.toLowerCase()).join(", ")}…)`});
   reasons.sort((a,b)=>b.eur-a.eur);
   // Objetivos: proteína, entrenos y comidas fuera o cambiadas
   const days=[];const [y,mm]=m.split("-").map(Number);for(let d=1;d<=new Date(y,mm,0).getDate();d++)days.push(iso(new Date(y,mm-1,d)));

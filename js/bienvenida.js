@@ -63,7 +63,8 @@ function stepBody(fullId){
   if(id==="hola")return `<p class="lead">Táper te prepara el menú, la lista de la compra y los tápers de la semana, a tu medida. Unas preguntas rápidas y empezamos. Todo se puede cambiar después.</p>
     <div class="field"><label for="wzName">¿Cómo te llamas?</label><input id="wzName" type="text" value="${esc(a.name)}" placeholder="Tu nombre"></div>`;
   if(id==="aparatos")return `<p class="lead">Solo te propondré recetas que puedas hacer.</p><div class="chips">${Object.entries(APP).filter(([k])=>k!=="ninguno").map(([k,v])=>chip("data-app",k,H.apps.includes(k),v)).join("")}</div>`;
-  if(id==="zona")return `<p class="lead">Los precios de Mercadona cambian según la zona, y los festivos según el municipio.</p>
+  if(id==="zona")return `<p class="lead">¿En qué supermercado compras? Los precios cambian según la zona, y los festivos según el municipio.</p>
+    <div class="group">${SUPERS.map(x=>`<button type="button" class="alt" data-super="${x.id}" ${x.estado!=="activo"?"disabled":""} style="${H.super===x.id?"outline:2px solid var(--tomato)":""}${x.estado!=="activo"?";opacity:.55":""}"><b>${esc(x.nombre)}</b><small>${x.estado==="activo"?"Precios, lista con enlaces y tickets":x.estado==="proximamente"?"Próximamente":"Más adelante: no vende alimentación online, solo se podrán leer sus tickets"}</small></button>`).join("")}</div>
     <div class="field"><label for="wzCp">Código postal</label><input id="wzCp" type="text" inputmode="numeric" maxlength="5" value="${esc(H.cp)}" placeholder="08784"></div>
     <div class="field"><label for="wzMun">Municipio (para los festivos locales)</label><input id="wzMun" type="text" list="wzMunList" value="${esc(H.municipio)}" placeholder="Por ejemplo, Piera"><datalist id="wzMunList">${Object.keys((FEST||{}).locales||{}).map(m=>`<option value="${esc(m)}">`).join("")}</datalist>
     <div class="hint">Si tu municipio no sale en la lista, añade sus festivos locales en Perfil > Festivos.</div></div>`;
@@ -161,6 +162,7 @@ function fixedEditor(){
 function bindStep(fullId){
   const H=S.home,a=stepPerson(fullId),q=s=>main.querySelector(s),qa=s=>main.querySelectorAll(s);
   const rerender=()=>{save();render()};
+  qa("[data-super]").forEach(b=>b.onclick=()=>{H.super=b.dataset.super;rerender()});
   qa("[data-app]").forEach(b=>b.onclick=()=>{const k=b.dataset.app;H.apps=H.apps.includes(k)?H.apps.filter(x=>x!==k):[...H.apps,k];rerender()});
   q("#addKid")&&(q("#addKid").onclick=()=>{S.people.push({...defaultAdult(),id:uid("k"),kind:"nino",goals:["sano"],factor:0.6,presence:{type:"siempre"}});rerender()});
   q("#addAdult")&&(q("#addAdult").onclick=()=>{S.people.push({...defaultAdult(),id:uid("a"),kind:"adulto",goals:["sano"],factor:1,tupper:false,presence:{type:"siempre"}});rerender()});

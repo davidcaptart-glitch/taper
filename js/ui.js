@@ -559,14 +559,16 @@ function renderCompra(){
     if(l.belowMin)h+=`<div class="warnbox">No llegas al pedido mínimo online (${eur(S.home.shop.min)}): faltan ${eur(S.home.shop.min-l.cost)}.${wi!=null?` <button class="btn small" id="fillMin">Completar con cosas del mes</button>`:" Pásala a compra en tienda o junta compras."}</div>`;
   }
   if(l.items.length)h+=orderBlock(l,listSel==="mes"?"mes":"semana");
-  const bySec={};for(const it of l.items)(bySec[P[it.pid].aisle]=bySec[P[it.pid].aisle]||[]).push(it);
-  const order=["Carne y pescado","Congelados","Fruta y verdura","Huevos y lácteos","Despensa"];
-  for(const sec of [...order,...Object.keys(bySec).filter(s=>!order.includes(s))]){if(!bySec[sec])continue;
-    h+=`<div class="aisle"><h3>${esc(sec)}</h3>`;
+  // Por secciones de Mercadona, en el orden en que se recorre la tienda
+  const bySec={};for(const it of l.items)(bySec[P[it.pid].sec]=bySec[P[it.pid].sec]||[]).push(it);
+  const secs=[...STORE_ORDER,...Object.keys(bySec).filter(s=>!STORE_ORDER.includes(s))].filter(s=>bySec[s]);
+  if(l.mode==="tienda")h+=`<p class="shophint">Ordenado por secciones, en el orden en que se suele recorrer Mercadona: coges todo lo de cada sección de una vez y los congelados al final.</p>`;
+  secs.forEach((sec,si)=>{
+    h+=`<div class="aisle"><h3>${l.mode==="tienda"?`<span class="secn">${si+1}</span>`:""}${esc(sec)} <span class="muted small">· ${bySec[sec].length}</span></h3>`;
     for(const it of bySec[sec].sort((a,b)=>P[a.pid].name.localeCompare(P[b.pid].name))){
       const key=checkKey(month,listSel,it.pid),done=!!S.checks[key],moved=(S.assign[month]||{})[it.pid]!=null&&listSel!=="mes";
       h+=`<label class="item ${done?"done":""}"><input type="checkbox" data-ck="${key}" ${done?"checked":""}><span class="t">${it.packs} × ${esc(P[it.pid].name)}<small>Necesitas ${fmtQty(it.q,P[it.pid].unit)}${P[it.pid].keep==="congelar"?", para congelar":""}${moved?" · adelantado de la compra del mes":""}</small></span><span class="p">${eur(it.cost)}${upTag(it.pid)}</span>${l.mode==="online"&&P[it.pid].mid?`<a class="mlink" href="https://tienda.mercadona.es/product/${encodeURIComponent(P[it.pid].mid)}/" target="_blank" rel="noopener" aria-label="Abrir ${esc(P[it.pid].name)} en Mercadona">🛒</a>`:""}</label>`}
-    h+=`</div>`}
+    h+=`</div>`});
   const sk=month+"|"+listSel;
   h+=`<div class="card"><h2>Lo que he pagado</h2><div class="spend"><span class="small muted">Apunta el total del ticket o del pedido para comparar con lo previsto (${eur(l.cost+l.fee)}).</span><input type="number" min="0" step="0.01" id="spentIn" value="${S.spent[sk]??""}" placeholder="0,00"></div></div>`;
   if(listSel==="mes"){
@@ -576,7 +578,7 @@ function renderCompra(){
       for(const [pid,arr] of u)h+=`<li><b>${esc(P[pid].name)}</b>: `+arr.map(a=>`${fmtQty(a.q,P[pid].unit)} para ${a.label} (${esc(a.name)})`).join("; ")+`</li>`;
       h+=`</ul></div>`}
   }
-  if(listSel==="mes")h+=`<div class="card">${reviewHTML(monthReview(month),false)}</div>`;
+  if(listSel==="mes")h+=spendingHTML(month)+`<div class="card">${reviewHTML(monthReview(month),false)}</div>`;
   const wb=weekBudget(month);
   h+=`<div class="card"><h2>Presupuesto por semana</h2><table class="wtable">${sh.weeks.map((s,i)=>`<tr><td>Semana del ${shortDate(s)}${i===0?" (con la compra del mes)":""}</td><td class="${sh.perWeek[i]>wb?"up":""}">${eur(sh.perWeek[i])} / ${eur(wb)}</td></tr>`).join("")}</table></div>`;
   main.innerHTML=h+`</section>`;
@@ -585,7 +587,7 @@ function renderCompra(){
   main.querySelectorAll("[data-ck]").forEach(i=>i.onchange=()=>{if(i.checked)S.checks[i.dataset.ck]=true;else delete S.checks[i.dataset.ck];i.closest(".item").classList.toggle("done",i.checked);save()});
   document.getElementById("spentIn").onchange=e=>{const v=e.target.value;if(v==="")delete S.spent[sk];else S.spent[sk]=Number(v);save();renderHeader()};
   main.querySelectorAll("[data-saveorder]").forEach(b=>b.onclick=()=>{const items={};for(const it of l.items)items[it.pid]=it.packs;S.orders[b.dataset.saveorder]={items,savedAt:todayISO()};save();render();toast("Pedido guardado")});
-  bindReview(main);
+  bindReview(main);bindSpending();
   const fm=document.getElementById("fillMin");if(fm)fm.onclick=()=>{const r=fillToMinimum(month,wi);render();toast(r.moved.length?(r.ok?"Completado con: ":"No llega del todo. Añadido: ")+r.moved.join(", ").toLowerCase():"No hay nada del mes que se pueda adelantar")};
 }
 
@@ -663,7 +665,11 @@ function renderPerfil(){
       return `<div class="pr"><span>${esc(p.name)}${upTag(p.id)}<small>${fmtQty(p.env,p.unit)}${own?` · corregido a mano${m?` (Mercadona: ${eur(m.precio)})`:""} <button class="reset" data-reset="${p.id}">Usar el de Mercadona</button>`:m?" · Mercadona":" · estimado"}</small></span><input type="number" step="0.01" min="0" data-price="${p.id}" value="${price(p.id).toFixed(2)}" aria-label="Precio de ${esc(p.name)}"></div>`}).join("")}</div>
   <div class="card"><h2>Copia de seguridad</h2><div class="hint" style="color:var(--muted)">Todo se guarda solo en este móvil. Descarga una copia de vez en cuando y antes de cambiar de móvil.</div>
     <div class="actions"><button class="btn" id="exp">Exportar copia</button><button class="btn ghost" id="imp">Importar copia</button></div><input type="file" id="impFile" accept="application/json,.json" hidden>
-    <button class="btn ghost small" id="restartWiz">Repetir el asistente de bienvenida</button></div></section>`;
+    <button class="btn ghost small" id="restartWiz">Repetir el asistente de bienvenida</button></div>
+  <div class="card"><h2>Compartir Táper</h2><p class="small muted">Quien escanee este código con la cámara del móvil abre la app y la puede instalar. Cada persona tiene sus propios datos en su móvil.</p>
+    <div id="qrBox" style="display:grid;place-items:center;margin:10px 0;background:#fff;border-radius:12px;padding:10px"></div>
+    <div class="actions"><button class="btn" id="shareApp">Enviar el enlace</button><button class="btn ghost" id="copyApp">Copiar enlace</button></div></div>
+  <div class="card"><h2>Novedades</h2><p class="small muted">Versión ${APP_VERSION}. La app se actualiza sola y te cuenta qué ha mejorado.</p><button class="btn ghost small" id="newsAll">Ver todas las novedades</button></div></section>`;
   main.innerHTML=h;
   const q=s=>main.querySelectorAll(s), find=id=>S.people.find(p=>p.id===id);
   q("[data-edit]").forEach(b=>b.onclick=()=>{openWizard(b.dataset.edit);scrollTo(0,0)});
@@ -682,6 +688,11 @@ function renderPerfil(){
   q("[data-reset]").forEach(b=>b.onclick=()=>{delete S.prices[b.dataset.reset];save();render()});
   document.getElementById("exp").onclick=exportBackup;
   const f=document.getElementById("impFile");document.getElementById("imp").onclick=()=>f.click();f.onchange=()=>{if(f.files[0])importBackup(f.files[0]);f.value=""};
+  document.getElementById("newsAll").onclick=()=>openNews(true);
+  const url=location.origin+location.pathname.replace(/index\.html$/,"");
+  loadScript("https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js").then(()=>{const qr=qrcode(0,"M");qr.addData(url);qr.make();const b=document.getElementById("qrBox");if(b)b.innerHTML=qr.createSvgTag({cellSize:6,margin:2,scalable:true}).replace("<svg ",'<svg style="width:220px;height:220px" ')}).catch(()=>{const b=document.getElementById("qrBox");if(b)b.textContent=url});
+  document.getElementById("shareApp").onclick=async()=>{try{await navigator.share({title:"Táper",text:"Menú semanal, tápers y lista de la compra con precios de Mercadona",url})}catch(e){if(!navigator.share){navigator.clipboard?.writeText(url);toast("Enlace copiado")}}};
+  document.getElementById("copyApp").onclick=()=>{navigator.clipboard?.writeText(url).then(()=>toast("Enlace copiado"),()=>toast(url))};
   document.getElementById("restartWiz").onclick=()=>{S.onboarded=false;wiz={i:0,single:null};save();render()};
 }
 
@@ -692,6 +703,22 @@ document.getElementById("prevM").onclick=()=>shiftMonth(-1);
 document.getElementById("nextM").onclick=()=>shiftMonth(1);
 dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
 
+/* ---------- Novedades y actualización automática ---------- */
+let NEWS=null;
+function openNews(all){
+  const list=(NEWS||[]).filter(n=>all||n.version>(S.seenVersion||0)).sort((a,b)=>b.version-a.version);
+  if(!list.length)return;
+  showDialog(`<div class="mod">${closeBtn}<h2>${all?"Novedades":"🎉 Táper se ha actualizado"}</h2>
+    ${list.map(n=>`<h3 style="margin-top:12px">${esc(n.titulo)} <span class="small muted">· ${esc(longDate(n.fecha).replace(/^\w+, /,""))}</span></h3><ul class="small">${n.cambios.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>`).join("")}
+    <div class="actions"><button class="btn" data-x>¡Entendido!</button></div></div>`);
+  if(!all){S.seenVersion=APP_VERSION;save()}
+}
+// Al volver a la app comprueba si hay versión nueva y, si la hay, se recarga sola
+async function checkUpdate(){
+  try{const n=await getJSON("data/novedades.json",true);const last=Math.max(...n.versiones.map(v=>v.version));
+    if(last>APP_VERSION&&!sessionStorage.getItem("taper-reload-"+last)){sessionStorage.setItem("taper-reload-"+last,"1");location.reload()}}catch(e){}
+}
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")checkUpdate()});
 async function getJSON(url,fresh){const r=await fetch(url,{cache:fresh?"no-store":"no-cache"});if(!r.ok)throw new Error(url+": "+r.status);return r.json()}
 async function boot(){
   try{
@@ -699,13 +726,19 @@ async function boot(){
     setProducts(prods.productos);setRecipes(recs.recetas);
   }catch(e){main.innerHTML=`<section class="view"><div class="empty"><h2>No se han podido cargar las recetas</h2><p>Comprueba la conexión y vuelve a abrir la app.</p></div></section>`;return}
   try{FEST=await getJSON("data/festivos.json")}catch(e){FEST=null}
+  try{SUPERS=(await getJSON("data/supermercados.json")).supermercados}catch(e){SUPERS=[{id:"mercadona",nombre:"Mercadona",estado:"activo"}]}
   PR=loadSavedPrices();
   try{const fresh=await getJSON("data/precios.json?t="+Date.now(),true);
     if(fresh&&fresh.productos){PR=fresh;prOffline=false;try{localStorage.setItem("taper-precios",JSON.stringify(PR))}catch(e){}}}
   catch(e){prOffline=!!PR}
+  try{NEWS=(await getJSON("data/novedades.json",true)).versiones}catch(e){NEWS=null}
   // Al abrir, la semana actual y la siguiente tienen menú si ya se había planificado alguna
   if(S.onboarded){const s=weekStartFor(todayISO());if(!S.plans[s])genWeekFromScratch(s);save()}
   render();
+  // Tras actualizar: explica qué ha mejorado (no a quien acaba de empezar)
+  if(S.onboarded&&NEWS&&(S.seenVersion||0)<APP_VERSION)openNews(false);
+  else if(!S.onboarded){S.seenVersion=APP_VERSION;save()}
+  checkUpdate();
 }
 boot();
 if("serviceWorker" in navigator&&location.protocol!=="file:")navigator.serviceWorker.register("sw.js").catch(()=>{});

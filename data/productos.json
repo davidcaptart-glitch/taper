@@ -12,7 +12,8 @@
       "precio_estimado": 1.15,
       "mercadona_id": "5044",
       "precio_por": "envase",
-      "nombre_mercadona": "Arroz redondo Hacendado"
+      "nombre_mercadona": "Arroz redondo Hacendado",
+      "seccion": "Arroz, legumbres y pasta"
     },
     {
       "id": "pasta",
@@ -25,7 +26,8 @@
       "precio_estimado": 1.15,
       "mercadona_id": "6250",
       "precio_por": "envase",
-      "nombre_mercadona": "Macarrón Hacendado"
+      "nombre_mercadona": "Macarrón Hacendado",
+      "seccion": "Arroz, legumbres y pasta"
     },
     {
       "id": "espaguetis",
@@ -38,7 +40,8 @@
       "precio_estimado": 1.15,
       "mercadona_id": "6245",
       "precio_por": "envase",
-      "nombre_mercadona": "Spaghetti Hacendado"
+      "nombre_mercadona": "Spaghetti Hacendado",
+      "seccion": "Arroz, legumbres y pasta"
     },
     {
       "id": "cuscus",
@@ -51,7 +54,8 @@
       "precio_estimado": 1.95,
       "mercadona_id": "9395",
       "precio_por": "envase",
-      "nombre_mercadona": "Cous cous mediano Hacendado"
+      "nombre_mercadona": "Cous cous mediano Hacendado",
+      "seccion": "Arroz, legumbres y pasta"
     },
     {
       "id": "lentejas",
@@ -64,7 +68,8 @@
       "precio_estimado": 0.9,
       "mercadona_id": "26030",
       "precio_por": "envase",
-      "nombre_mercadona": "Lenteja cocida Hacendado"
+      "nombre_mercadona": "Lenteja cocida Hacendado",
+      "seccion": "Arroz, legumbres y pasta"
     },
     {
       "id": "garbanzos",
@@ -77,7 +82,8 @@
       "precio_estimado": 0.8,
       "mercadona_id": "26029",
       "precio_por": "envase",
-      "nombre_mercadona": "Garbanzo cocido Hacendado"
+      "nombre_mercadona": "Garbanzo cocido Hacendado",
+      "seccion": "Arroz, legumbres y pasta"
     },
     {
       "id": "alubias",
@@ -90,7 +96,8 @@
       "precio_estimado": 0.75,
       "mercadona_id": "26019",
       "precio_por": "envase",
-      "nombre_mercadona": "Alubia cocida blanca Hacendado"
+      "nombre_mercadona": "Alubia cocida blanca Hacendado",
+      "seccion": "Arroz, legumbres y pasta"
     },
     {
       "id": "tomate_tri",
@@ -100,10 +107,11 @@
       "conservacion": "despensa",
       "pasillo": "Despensa",
       "descongelar": false,
-      "precio_estimado": 1.0,
+      "precio_estimado": 1,
       "mercadona_id": "16043",
       "precio_por": "envase",
-      "nombre_mercadona": "Tomate triturado Hacendado"
+      "nombre_mercadona": "Tomate triturado Hacendado",
+      "seccion": "Conservas, caldos y cremas"
     },
     {
       "id": "tomate_frito",
@@ -116,7 +124,8 @@
       "precio_estimado": 0.9,
       "mercadona_id": "17108",
       "precio_por": "envase",
-      "nombre_mercadona": "Tomate frito Hacendado"
+      "nombre_mercadona": "Tomate frito Hacendado",
+      "seccion": "Aceite, especias y salsas"
     },
     {
       "id": "atun",
@@ -129,7 +138,8 @@
       "precio_estimado": 2.7,
       "mercadona_id": "18092",
       "precio_por": "envase",
-      "nombre_mercadona": "Atún claro en aceite de girasol Hacendado"
+      "nombre_mercadona": "Atún claro en aceite de girasol Hacendado",
+      "seccion": "Conservas, caldos y cremas"
     },
     {
       "id": "coco",
@@ -142,7 +152,8 @@
       "precio_estimado": 1.3,
       "mercadona_id": "17174",
       "precio_por": "envase",
-      "nombre_mercadona": "Preparado de coco Hacendado"
+      "nombre_mercadona": "Preparado de coco Hacendado",
+      "seccion": "Huevos, leche y mantequilla"
     },
     {
       "id": "maiz",
@@ -155,7 +166,8 @@
       "precio_estimado": 1.55,
       "mercadona_id": "16712",
       "precio_por": "envase",
-      "nombre_mercadona": "Maíz dulce Hacendado"
+      "nombre_mercadona": "Maíz dulce Hacendado",
+      "seccion": "Conservas, caldos y cremas"
     },
     {
       "id": "tortillas",
@@ -168,7 +180,8 @@
       "precio_estimado": 1.15,
       "mercadona_id": "80859",
       "precio_por": "envase",
-      "nombre_mercadona": "Tortillas de trigo Hacendado"
+      "nombre_mercadona": "Tortillas de trigo Hacendado",
+      "seccion": "Panadería y pastelería"
     },
     {
       "id": "cebolla",
@@ -181,7 +194,8 @@
       "precio_estimado": 1.5,
       "mercadona_id": "69089",
       "precio_por": "envase",
-      "nombre_mercadona": "Cebollas"
+      "nombre_mercadona": "Cebollas",
+      "seccion": "Fruta y verdura"
     },
     {
       "id": "patata",
@@ -194,7 +208,8 @@
       "precio_estimado": 4.65,
       "mercadona_id": "69166",
       "precio_por": "envase",
-      "nombre_mercadona": "Patatas"
+      "nombre_mercadona": "Patatas",
+      "seccion": "Fruta y verdura"
     },
     {
       "id": "boniato",
@@ -207,7 +222,8 @@
       "precio_estimado": 1.08,
       "mercadona_id": "69239",
       "precio_por": "kilo",
-      "nombre_mercadona": "Batata"
+      "nombre_mercadona": "Batata",
+      "seccion": "Fruta y verdura"
     },
     {
       "id": "ajo",
@@ -220,7 +236,8 @@
       "precio_estimado": 1.85,
       "mercadona_id": "69297",
       "precio_por": "envase",
-      "nombre_mercadona": "Ajos morados"
+      "nombre_mercadona": "Ajos morados",
+      "seccion": "Fruta y verdura"
     },
     {
       "id": "pechuga",
@@ -230,10 +247,11 @@
       "conservacion": "congelar",
       "pasillo": "Carne y pescado",
       "descongelar": true,
-      "precio_estimado": 5.0,
+      "precio_estimado": 5,
       "mercadona_id": "2787",
       "precio_por": "kilo",
-      "nombre_mercadona": "Filetes pechuga de pollo"
+      "nombre_mercadona": "Filetes pechuga de pollo",
+      "seccion": "Carne"
     },
     {
       "id": "muslos",
@@ -246,7 +264,8 @@
       "precio_estimado": 3.74,
       "mercadona_id": "2789",
       "precio_por": "kilo",
-      "nombre_mercadona": "Contramuslos de pollo deshuesados y sin piel"
+      "nombre_mercadona": "Contramuslos de pollo deshuesados y sin piel",
+      "seccion": "Carne"
     },
     {
       "id": "picada",
@@ -259,7 +278,8 @@
       "precio_estimado": 4.1,
       "mercadona_id": "2869",
       "precio_por": "kilo",
-      "nombre_mercadona": "Preparado de carne picada vacuno y cerdo"
+      "nombre_mercadona": "Preparado de carne picada vacuno y cerdo",
+      "seccion": "Carne"
     },
     {
       "id": "picada_pollo",
@@ -272,7 +292,8 @@
       "precio_estimado": 3.95,
       "mercadona_id": "35774",
       "precio_por": "kilo",
-      "nombre_mercadona": "Preparado de carne picada pollo"
+      "nombre_mercadona": "Preparado de carne picada pollo",
+      "seccion": "Carne"
     },
     {
       "id": "lomo",
@@ -285,7 +306,8 @@
       "precio_estimado": 3.9,
       "mercadona_id": "86395",
       "precio_por": "kilo",
-      "nombre_mercadona": "Filetes lomo de cerdo corte fino"
+      "nombre_mercadona": "Filetes lomo de cerdo corte fino",
+      "seccion": "Carne"
     },
     {
       "id": "burger",
@@ -298,7 +320,8 @@
       "precio_estimado": 3.8,
       "mercadona_id": "2622",
       "precio_por": "envase",
-      "nombre_mercadona": "Burger de pollo"
+      "nombre_mercadona": "Burger de pollo",
+      "seccion": "Carne"
     },
     {
       "id": "salmon",
@@ -311,7 +334,8 @@
       "precio_estimado": 5.95,
       "mercadona_id": "24511",
       "precio_por": "envase",
-      "nombre_mercadona": "Lomos de salmón sin piel Hacendado congelado"
+      "nombre_mercadona": "Lomos de salmón sin piel Hacendado congelado",
+      "seccion": "Congelados"
     },
     {
       "id": "merluza",
@@ -324,7 +348,8 @@
       "precio_estimado": 5.6,
       "mercadona_id": "62228",
       "precio_por": "envase",
-      "nombre_mercadona": "Filetes de merluza del Cabo sin piel Hacendado ultracongelados"
+      "nombre_mercadona": "Filetes de merluza del Cabo sin piel Hacendado ultracongelados",
+      "seccion": "Congelados"
     },
     {
       "id": "gambas",
@@ -337,7 +362,8 @@
       "precio_estimado": 4.9,
       "mercadona_id": "24181",
       "precio_por": "envase",
-      "nombre_mercadona": "Gamba pelada cruda tamaño mediano Hacendado ultracongelada"
+      "nombre_mercadona": "Gamba pelada cruda tamaño mediano Hacendado ultracongelada",
+      "seccion": "Congelados"
     },
     {
       "id": "calamar",
@@ -350,7 +376,8 @@
       "precio_estimado": 5.9,
       "mercadona_id": "24242",
       "precio_por": "envase",
-      "nombre_mercadona": "Calamar troceado limpio Hacendado congelado"
+      "nombre_mercadona": "Calamar troceado limpio Hacendado congelado",
+      "seccion": "Congelados"
     },
     {
       "id": "brocoli",
@@ -363,7 +390,8 @@
       "precio_estimado": 1.8,
       "mercadona_id": "61261",
       "precio_por": "envase",
-      "nombre_mercadona": "Brócoli Hacendado ultracongelado"
+      "nombre_mercadona": "Brócoli Hacendado ultracongelado",
+      "seccion": "Congelados"
     },
     {
       "id": "espinacas",
@@ -376,7 +404,8 @@
       "precio_estimado": 0.95,
       "mercadona_id": "61279",
       "precio_por": "envase",
-      "nombre_mercadona": "Espinaca en porciones Hacendado ultracongelada"
+      "nombre_mercadona": "Espinaca en porciones Hacendado ultracongelada",
+      "seccion": "Congelados"
     },
     {
       "id": "judias",
@@ -389,7 +418,8 @@
       "precio_estimado": 1.3,
       "mercadona_id": "61282",
       "precio_por": "envase",
-      "nombre_mercadona": "Judía verde redonda Hacendado ultracongelada"
+      "nombre_mercadona": "Judía verde redonda Hacendado ultracongelada",
+      "seccion": "Congelados"
     },
     {
       "id": "salteado",
@@ -402,7 +432,8 @@
       "precio_estimado": 1.55,
       "mercadona_id": "61065",
       "precio_por": "envase",
-      "nombre_mercadona": "Salteado de verduras Hacendado ultracongelado"
+      "nombre_mercadona": "Salteado de verduras Hacendado ultracongelado",
+      "seccion": "Congelados"
     },
     {
       "id": "guisantes",
@@ -415,7 +446,8 @@
       "precio_estimado": 1.55,
       "mercadona_id": "61215",
       "precio_por": "envase",
-      "nombre_mercadona": "Guisante fino Hacendado ultracongelado"
+      "nombre_mercadona": "Guisante fino Hacendado ultracongelado",
+      "seccion": "Congelados"
     },
     {
       "id": "huevos",
@@ -428,7 +460,8 @@
       "precio_estimado": 3.05,
       "mercadona_id": "31504",
       "precio_por": "envase",
-      "nombre_mercadona": "Huevos grandes L"
+      "nombre_mercadona": "Huevos grandes L",
+      "seccion": "Huevos, leche y mantequilla"
     },
     {
       "id": "queso",
@@ -441,7 +474,8 @@
       "precio_estimado": 1.6,
       "mercadona_id": "51110",
       "precio_por": "envase",
-      "nombre_mercadona": "Queso rallado mozzarella pizza-Roma de vaca Hacendado"
+      "nombre_mercadona": "Queso rallado mozzarella pizza-Roma de vaca Hacendado",
+      "seccion": "Charcutería y quesos"
     },
     {
       "id": "pimiento",
@@ -454,7 +488,8 @@
       "precio_estimado": 0.58,
       "mercadona_id": "69310",
       "precio_por": "kilo",
-      "nombre_mercadona": "Pimiento rojo"
+      "nombre_mercadona": "Pimiento rojo",
+      "seccion": "Fruta y verdura"
     },
     {
       "id": "calabacin",
@@ -467,7 +502,8 @@
       "precio_estimado": 0.56,
       "mercadona_id": "69338",
       "precio_por": "kilo",
-      "nombre_mercadona": "Calabacín verde"
+      "nombre_mercadona": "Calabacín verde",
+      "seccion": "Fruta y verdura"
     },
     {
       "id": "zanahoria",
@@ -477,10 +513,11 @@
       "conservacion": "fresco",
       "pasillo": "Fruta y verdura",
       "descongelar": false,
-      "precio_estimado": 1.0,
+      "precio_estimado": 1,
       "mercadona_id": "69586",
       "precio_por": "envase",
-      "nombre_mercadona": "Zanahorias"
+      "nombre_mercadona": "Zanahorias",
+      "seccion": "Fruta y verdura"
     },
     {
       "id": "tomate",
@@ -493,7 +530,8 @@
       "precio_estimado": 2.3,
       "mercadona_id": "69975",
       "precio_por": "envase",
-      "nombre_mercadona": "Tomates pera"
+      "nombre_mercadona": "Tomates pera",
+      "seccion": "Fruta y verdura"
     },
     {
       "id": "ensalada",
@@ -506,7 +544,8 @@
       "precio_estimado": 0.85,
       "mercadona_id": "69706",
       "precio_por": "envase",
-      "nombre_mercadona": "Ensalada mezcla 4 estaciones lavada"
+      "nombre_mercadona": "Ensalada mezcla 4 estaciones lavada",
+      "seccion": "Fruta y verdura"
     },
     {
       "id": "champi",
@@ -519,7 +558,8 @@
       "precio_estimado": 2.11,
       "mercadona_id": "69519",
       "precio_por": "envase",
-      "nombre_mercadona": "Champiñones laminados limpios"
+      "nombre_mercadona": "Champiñones laminados limpios",
+      "seccion": "Fruta y verdura"
     },
     {
       "id": "limon",
@@ -532,7 +572,8 @@
       "precio_estimado": 0.44,
       "mercadona_id": "3210",
       "precio_por": "kilo",
-      "nombre_mercadona": "Limón"
+      "nombre_mercadona": "Limón",
+      "seccion": "Fruta y verdura"
     },
     {
       "id": "yogur",
@@ -542,10 +583,11 @@
       "conservacion": "fresco",
       "pasillo": "Huevos y lácteos",
       "descongelar": false,
-      "precio_estimado": 1.0,
+      "precio_estimado": 1,
       "mercadona_id": "22313",
       "precio_por": "envase",
-      "nombre_mercadona": "Yogur natural Hacendado"
+      "nombre_mercadona": "Yogur natural Hacendado",
+      "seccion": "Postres y yogures"
     },
     {
       "id": "pan_rallado",
@@ -558,7 +600,8 @@
       "precio_estimado": 0.85,
       "mercadona_id": "82219",
       "precio_por": "envase",
-      "nombre_mercadona": "Pan rallado Hacendado"
+      "nombre_mercadona": "Pan rallado Hacendado",
+      "seccion": "Panadería y pastelería"
     },
     {
       "id": "jamon",
@@ -568,10 +611,11 @@
       "conservacion": "fresco",
       "pasillo": "Huevos y lácteos",
       "descongelar": false,
-      "precio_estimado": 2.0,
+      "precio_estimado": 2,
       "mercadona_id": "60329",
       "precio_por": "envase",
-      "nombre_mercadona": "Jamón cocido extra Hacendado finas lonchas"
+      "nombre_mercadona": "Jamón cocido extra Hacendado finas lonchas",
+      "seccion": "Charcutería y quesos"
     },
     {
       "id": "fideos",
@@ -584,7 +628,8 @@
       "precio_estimado": 0.85,
       "mercadona_id": "6261",
       "precio_por": "envase",
-      "nombre_mercadona": "Fideo grueso Hacendado"
+      "nombre_mercadona": "Fideo grueso Hacendado",
+      "seccion": "Arroz, legumbres y pasta"
     },
     {
       "id": "caldo_pollo",
@@ -597,7 +642,8 @@
       "precio_estimado": 0.75,
       "mercadona_id": "7313",
       "precio_por": "envase",
-      "nombre_mercadona": "Caldo de pollo Hacendado"
+      "nombre_mercadona": "Caldo de pollo Hacendado",
+      "seccion": "Conservas, caldos y cremas"
     },
     {
       "id": "caldo_pescado",
@@ -610,7 +656,8 @@
       "precio_estimado": 0.95,
       "mercadona_id": "7325",
       "precio_por": "envase",
-      "nombre_mercadona": "Caldo de pescado Hacendado"
+      "nombre_mercadona": "Caldo de pescado Hacendado",
+      "seccion": "Conservas, caldos y cremas"
     },
     {
       "id": "pavo",
@@ -623,7 +670,8 @@
       "precio_estimado": 5.69,
       "mercadona_id": "2794",
       "precio_por": "kilo",
-      "nombre_mercadona": "Filetes pechuga de pavo"
+      "nombre_mercadona": "Filetes pechuga de pavo",
+      "seccion": "Carne"
     },
     {
       "id": "burger_pavo",
@@ -636,7 +684,8 @@
       "precio_estimado": 2.4,
       "mercadona_id": "3976",
       "precio_por": "envase",
-      "nombre_mercadona": "Burger de pavo y espinacas"
+      "nombre_mercadona": "Burger de pavo y espinacas",
+      "seccion": "Carne"
     },
     {
       "id": "fideos_arroz",
@@ -649,7 +698,8 @@
       "precio_estimado": 1.45,
       "mercadona_id": "35981",
       "precio_por": "envase",
-      "nombre_mercadona": "Noodles de arroz Hacendado"
+      "nombre_mercadona": "Noodles de arroz Hacendado",
+      "seccion": "Arroz, legumbres y pasta"
     },
     {
       "id": "solomillo",
@@ -662,7 +712,8 @@
       "precio_estimado": 3.9,
       "mercadona_id": "4570",
       "precio_por": "kilo",
-      "nombre_mercadona": "Solomillo de cerdo"
+      "nombre_mercadona": "Solomillo de cerdo",
+      "seccion": "Carne"
     },
     {
       "id": "ternera",
@@ -675,7 +726,8 @@
       "precio_estimado": 9.1,
       "mercadona_id": "2900",
       "precio_por": "kilo",
-      "nombre_mercadona": "Filetes de vacuno añojo para plancha"
+      "nombre_mercadona": "Filetes de vacuno añojo para plancha",
+      "seccion": "Carne"
     },
     {
       "id": "alubias_rojas",
@@ -688,7 +740,8 @@
       "precio_estimado": 1.2,
       "mercadona_id": "26000",
       "precio_por": "envase",
-      "nombre_mercadona": "Alubia cocida roja Hacendado"
+      "nombre_mercadona": "Alubia cocida roja Hacendado",
+      "seccion": "Arroz, legumbres y pasta"
     },
     {
       "id": "lasana",
@@ -701,7 +754,8 @@
       "precio_estimado": 1.65,
       "mercadona_id": "6856",
       "precio_por": "envase",
-      "nombre_mercadona": "Placas para lasaña precocidas El Pavo"
+      "nombre_mercadona": "Placas para lasaña precocidas El Pavo",
+      "seccion": "Arroz, legumbres y pasta"
     },
     {
       "id": "bacalao",
@@ -714,7 +768,8 @@
       "precio_estimado": 7.7,
       "mercadona_id": "62049",
       "precio_por": "envase",
-      "nombre_mercadona": "Porciones de bacalao sin piel MareDeus ultracongeladas"
+      "nombre_mercadona": "Porciones de bacalao sin piel MareDeus ultracongeladas",
+      "seccion": "Congelados"
     },
     {
       "id": "emperador",
@@ -727,7 +782,8 @@
       "precio_estimado": 4.47,
       "mercadona_id": "24345",
       "precio_por": "envase",
-      "nombre_mercadona": "Rodaja de emperador Hacendado ultracongelado"
+      "nombre_mercadona": "Rodaja de emperador Hacendado ultracongelado",
+      "seccion": "Congelados"
     },
     {
       "id": "teriyaki",
@@ -740,7 +796,8 @@
       "precio_estimado": 1.7,
       "mercadona_id": "17362",
       "precio_por": "envase",
-      "nombre_mercadona": "Salsa Teriyaki Hacendado"
+      "nombre_mercadona": "Salsa Teriyaki Hacendado",
+      "seccion": "Aceite, especias y salsas"
     },
     {
       "id": "nata",
@@ -753,7 +810,8 @@
       "precio_estimado": 1.85,
       "mercadona_id": "10199",
       "precio_por": "envase",
-      "nombre_mercadona": "Nata ligera para cocinar Hacendado"
+      "nombre_mercadona": "Nata ligera para cocinar Hacendado",
+      "seccion": "Huevos, leche y mantequilla"
     },
     {
       "id": "mostaza",
@@ -766,7 +824,8 @@
       "precio_estimado": 1.25,
       "mercadona_id": "17228",
       "precio_por": "envase",
-      "nombre_mercadona": "Mostaza de Dijon Hacendado"
+      "nombre_mercadona": "Mostaza de Dijon Hacendado",
+      "seccion": "Aceite, especias y salsas"
     },
     {
       "id": "edamame",
@@ -779,7 +838,8 @@
       "precio_estimado": 1.75,
       "mercadona_id": "70740",
       "precio_por": "envase",
-      "nombre_mercadona": "Edamame soja verde Hacendado ultracongelada"
+      "nombre_mercadona": "Edamame soja verde Hacendado ultracongelada",
+      "seccion": "Congelados"
     },
     {
       "id": "esparragos",
@@ -792,7 +852,8 @@
       "precio_estimado": 2.95,
       "mercadona_id": "69656",
       "precio_por": "envase",
-      "nombre_mercadona": "Espárragos verdes finos"
+      "nombre_mercadona": "Espárragos verdes finos",
+      "seccion": "Fruta y verdura"
     },
     {
       "id": "bonito",
@@ -805,7 +866,8 @@
       "precio_estimado": 2.9,
       "mercadona_id": "16812",
       "precio_por": "envase",
-      "nombre_mercadona": "Migas de bonito del norte en aceite de oliva Hacendado"
+      "nombre_mercadona": "Migas de bonito del norte en aceite de oliva Hacendado",
+      "seccion": "Conservas, caldos y cremas"
     },
     {
       "id": "caballa",
@@ -818,7 +880,8 @@
       "precio_estimado": 2.95,
       "mercadona_id": "13628",
       "precio_por": "envase",
-      "nombre_mercadona": "Filetes de caballa del sur en aceite de oliva Hacendado"
+      "nombre_mercadona": "Filetes de caballa del sur en aceite de oliva Hacendado",
+      "seccion": "Conservas, caldos y cremas"
     },
     {
       "id": "sardinas",
@@ -831,7 +894,8 @@
       "precio_estimado": 2.25,
       "mercadona_id": "18225",
       "precio_por": "envase",
-      "nombre_mercadona": "Sardinas en aceite de oliva Hacendado"
+      "nombre_mercadona": "Sardinas en aceite de oliva Hacendado",
+      "seccion": "Conservas, caldos y cremas"
     },
     {
       "id": "pan_integral",
@@ -844,7 +908,8 @@
       "precio_estimado": 0.9,
       "mercadona_id": "82328",
       "precio_por": "envase",
-      "nombre_mercadona": "Pan de molde 100% integral Hacendado"
+      "nombre_mercadona": "Pan de molde 100% integral Hacendado",
+      "seccion": "Panadería y pastelería"
     },
     {
       "id": "langostinos",
@@ -857,7 +922,8 @@
       "precio_estimado": 3.95,
       "mercadona_id": "24486",
       "precio_por": "envase",
-      "nombre_mercadona": "Langostino crudo y pelado Hacendado ultracongelado"
+      "nombre_mercadona": "Langostino crudo y pelado Hacendado ultracongelado",
+      "seccion": "Congelados"
     },
     {
       "id": "masa_empanadilla",
@@ -870,7 +936,8 @@
       "precio_estimado": 1.25,
       "mercadona_id": "63440",
       "precio_por": "envase",
-      "nombre_mercadona": "Masa para empanadillas y postres Buitoni"
+      "nombre_mercadona": "Masa para empanadillas y postres Buitoni",
+      "seccion": "Panadería y pastelería"
     },
     {
       "id": "pasta_lentejas",
@@ -883,7 +950,8 @@
       "precio_estimado": 1.65,
       "mercadona_id": "6106",
       "precio_por": "envase",
-      "nombre_mercadona": "Pasta fusilli 100% lentejas rojas Felicia"
+      "nombre_mercadona": "Pasta fusilli 100% lentejas rojas Felicia",
+      "seccion": "Arroz, legumbres y pasta"
     },
     {
       "id": "hummus",
@@ -896,7 +964,8 @@
       "precio_estimado": 1.05,
       "mercadona_id": "80858",
       "precio_por": "envase",
-      "nombre_mercadona": "Hummus de garbanzos Hacendado receta clásica"
+      "nombre_mercadona": "Hummus de garbanzos Hacendado receta clásica",
+      "seccion": "Pizzas y platos preparados"
     },
     {
       "id": "noquis",
@@ -906,10 +975,11 @@
       "conservacion": "fresco",
       "pasillo": "Huevos y lácteos",
       "descongelar": false,
-      "precio_estimado": 1.0,
+      "precio_estimado": 1,
       "mercadona_id": "6175",
       "precio_por": "envase",
-      "nombre_mercadona": "Pasta fresca gnocchi Hacendado"
+      "nombre_mercadona": "Pasta fresca gnocchi Hacendado",
+      "seccion": "Arroz, legumbres y pasta"
     },
     {
       "id": "berenjena",
@@ -922,7 +992,8 @@
       "precio_estimado": 0.81,
       "mercadona_id": "69326",
       "precio_por": "kilo",
-      "nombre_mercadona": "Berenjena"
+      "nombre_mercadona": "Berenjena",
+      "seccion": "Fruta y verdura"
     },
     {
       "id": "quinoa",
@@ -935,7 +1006,8 @@
       "precio_estimado": 1.45,
       "mercadona_id": "22278",
       "precio_por": "envase",
-      "nombre_mercadona": "Quinoa cocida blanca y roja Sabroz"
+      "nombre_mercadona": "Quinoa cocida blanca y roja Sabroz",
+      "seccion": "Arroz, legumbres y pasta"
     },
     {
       "id": "dorada",
@@ -948,7 +1020,8 @@
       "precio_estimado": 4.5,
       "mercadona_id": "87302",
       "precio_por": "kilo",
-      "nombre_mercadona": "Filetes de dorada"
+      "nombre_mercadona": "Filetes de dorada",
+      "seccion": "Marisco y pescado"
     },
     {
       "id": "copos_maiz",
@@ -961,7 +1034,8 @@
       "precio_estimado": 1.5,
       "mercadona_id": "22966",
       "precio_por": "envase",
-      "nombre_mercadona": "Cereales copos de maíz Corn Flakes Hacendado 0% azúcares añadidos"
+      "nombre_mercadona": "Cereales copos de maíz Corn Flakes Hacendado 0% azúcares añadidos",
+      "seccion": "Cereales y galletas"
     },
     {
       "id": "pesto",
@@ -974,7 +1048,8 @@
       "precio_estimado": 1.95,
       "mercadona_id": "35438",
       "precio_por": "envase",
-      "nombre_mercadona": "Salsa Pesto con albahaca Hacendado"
+      "nombre_mercadona": "Salsa Pesto con albahaca Hacendado",
+      "seccion": "Aceite, especias y salsas"
     },
     {
       "id": "salchichas",
@@ -987,7 +1062,8 @@
       "precio_estimado": 1.5,
       "mercadona_id": "53056",
       "precio_por": "envase",
-      "nombre_mercadona": "Salchichas cocidas Hacendado de pollo y pavo sabor ahumado"
+      "nombre_mercadona": "Salchichas cocidas Hacendado de pollo y pavo sabor ahumado",
+      "seccion": "Charcutería y quesos"
     },
     {
       "id": "pina",
@@ -1000,7 +1076,8 @@
       "precio_estimado": 2.1,
       "mercadona_id": "15203",
       "precio_por": "envase",
-      "nombre_mercadona": "Piña en su jugo Hacendado rodajas"
+      "nombre_mercadona": "Piña en su jugo Hacendado rodajas",
+      "seccion": "Conservas, caldos y cremas"
     },
     {
       "id": "leche",
@@ -1013,7 +1090,8 @@
       "precio_estimado": 0.83,
       "mercadona_id": "10382",
       "precio_por": "envase",
-      "nombre_mercadona": "Leche semidesnatada Hacendado"
+      "nombre_mercadona": "Leche semidesnatada Hacendado",
+      "seccion": "Huevos, leche y mantequilla"
     },
     {
       "id": "calabaza",
@@ -1026,7 +1104,8 @@
       "precio_estimado": 1.58,
       "mercadona_id": "3527",
       "precio_por": "kilo",
-      "nombre_mercadona": "Calabaza cacahuete cortada a trozos"
+      "nombre_mercadona": "Calabaza cacahuete cortada a trozos",
+      "seccion": "Fruta y verdura"
     },
     {
       "id": "gazpacho",
@@ -1039,7 +1118,8 @@
       "precio_estimado": 1.6,
       "mercadona_id": "15604",
       "precio_por": "envase",
-      "nombre_mercadona": "Gazpacho tradicional Hacendado"
+      "nombre_mercadona": "Gazpacho tradicional Hacendado",
+      "seccion": "Conservas, caldos y cremas"
     },
     {
       "id": "tinta",
@@ -1052,7 +1132,8 @@
       "precio_estimado": 2.75,
       "mercadona_id": "24256",
       "precio_por": "envase",
-      "nombre_mercadona": "Tinta de sepia Nortindal congelada"
+      "nombre_mercadona": "Tinta de sepia Nortindal congelada",
+      "seccion": "Congelados"
     },
     {
       "id": "anacardos",
@@ -1065,7 +1146,8 @@
       "precio_estimado": 2.7,
       "mercadona_id": "23365",
       "precio_por": "envase",
-      "nombre_mercadona": "Anacardo natural Hacendado"
+      "nombre_mercadona": "Anacardo natural Hacendado",
+      "seccion": "Aperitivos"
     },
     {
       "id": "feta",
@@ -1078,7 +1160,8 @@
       "precio_estimado": 2.4,
       "mercadona_id": "51197",
       "precio_por": "envase",
-      "nombre_mercadona": "Queso feta mezcla Hacendado en dados"
+      "nombre_mercadona": "Queso feta mezcla Hacendado en dados",
+      "seccion": "Charcutería y quesos"
     },
     {
       "id": "manzana",
@@ -1091,7 +1174,8 @@
       "precio_estimado": 0.38,
       "mercadona_id": "3028",
       "precio_por": "kilo",
-      "nombre_mercadona": "Manzana Golden"
+      "nombre_mercadona": "Manzana Golden",
+      "seccion": "Fruta y verdura"
     },
     {
       "id": "pan_burger",
@@ -1104,7 +1188,8 @@
       "precio_estimado": 0.95,
       "mercadona_id": "17665",
       "precio_por": "envase",
-      "nombre_mercadona": "Pan de burger Hacendado Rústico"
+      "nombre_mercadona": "Pan de burger Hacendado Rústico",
+      "seccion": "Panadería y pastelería"
     }
   ]
 }

@@ -1,0 +1,18 @@
+{
+  "nota": "Supermercados con los que puede trabajar Táper. 'activo': precios, lista con enlaces y tickets. 'proximamente': tienen tienda online de alimentación con catálogo y precios por zona, así que se podrían añadir igual que Mercadona (hay que comprobar cada uno). 'dificil': sin tienda online de alimentación en España; como mucho, tickets.",
+  "supermercados": [
+    { "id": "mercadona", "nombre": "Mercadona", "estado": "activo", "web": "https://tienda.mercadona.es" },
+    { "id": "carrefour", "nombre": "Carrefour", "estado": "proximamente", "web": "https://www.carrefour.es/supermercado" },
+    { "id": "dia", "nombre": "DIA", "estado": "proximamente", "web": "https://www.dia.es" },
+    { "id": "alcampo", "nombre": "Alcampo", "estado": "proximamente", "web": "https://www.compraonline.alcampo.es" },
+    { "id": "eroski", "nombre": "Eroski", "estado": "proximamente", "web": "https://supermercado.eroski.es" },
+    { "id": "consum", "nombre": "Consum", "estado": "proximamente", "web": "https://tienda.consum.es" },
+    { "id": "bonpreu", "nombre": "Bonpreu / Esclat", "estado": "proximamente", "web": "https://www.compraonline.bonpreuesclat.cat" },
+    { "id": "caprabo", "nombre": "Caprabo", "estado": "proximamente", "web": "https://www.capraboacasa.com" },
+    { "id": "condis", "nombre": "Condis", "estado": "proximamente", "web": "https://compraonline.condis.es" },
+    { "id": "elcorteingles", "nombre": "El Corte Inglés / Hipercor", "estado": "proximamente", "web": "https://www.elcorteingles.es/supermercado" },
+    { "id": "ahorramas", "nombre": "Ahorramas", "estado": "proximamente", "web": "https://www.ahorramas.com" },
+    { "id": "lidl", "nombre": "Lidl", "estado": "dificil", "web": "https://www.lidl.es" },
+    { "id": "aldi", "nombre": "Aldi", "estado": "dificil", "web": "https://www.aldi.es" }
+  ]
+}

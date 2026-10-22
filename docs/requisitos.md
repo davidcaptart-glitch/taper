@@ -57,7 +57,19 @@ aprende se ve y se corrige en una pantalla "Lo que sé de ti" (por persona: adul
   no llegaban, envases enteros, compras fuera de lista), proteína, entrenos y comidas fuera. Propone un
   presupuesto realista o medidas para mantener el actual, con botones para aplicarlo.
 
-### Escanear tickets (pendiente)
+### Supermercados
+- Lista estática en `data/supermercados.json`: Mercadona activo; "próximamente" los que tienen tienda online de
+  alimentación con catálogo y precios por zona (Carrefour, DIA, Alcampo, Eroski, Consum, Bonpreu/Esclat,
+  Caprabo, Condis, El Corte Inglés/Hipercor, Ahorramas); "difícil" Lidl y Aldi (sin tienda online de
+  alimentación: solo tickets). Cada uno hay que comprobarlo al añadirlo.
+- Lista de la compra por secciones del supermercado, en el orden de recorrido de la tienda.
+
+### Compartir, usuarios y sugerencias
+- Hecho: QR y enlace para compartir desde Perfil. La app se actualiza sola y enseña las novedades.
+- Pendiente (necesita cuentas de David): contador de usuarios (propuesta: GoatCounter, sin cookies) y botón
+  "Enviar sugerencia" (propuesta: formulario de Google que avisa por correo y guarda en una hoja).
+
+### Escanear tickets (hecho)
 - Leer el ticket digital de Mercadona (PDF) o una foto del de papel (reconocimiento de texto en el móvil).
 - Lo que no es comida (limpieza, droguería, higiene, mascotas, hogar…) se descarta directamente del gasto y de
   los cálculos; se reconoce por la sección de Mercadona de cada producto.
