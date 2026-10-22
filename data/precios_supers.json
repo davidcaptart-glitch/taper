@@ -1255,14 +1255,1362 @@
    "fallos": []
   },
   "consum": {
-   "fallos": [
-    "No se ha podido actualizar: No module named 'supers.consum'"
-   ]
+   "nombre": "Consum",
+   "fecha": "2026-10-22",
+   "productos": {
+    "arroz": {
+     "precio": 1.15,
+     "envase": 1000,
+     "nombre": "Arroz Redondo Extra Origen España 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pasta": {
+     "precio": 1.15,
+     "envase": 1000,
+     "nombre": "Macarrones Paquete 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "espaguetis": {
+     "precio": 1.15,
+     "envase": 1000,
+     "nombre": "Spaghetti Paquete 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "cuscus": {
+     "precio": 1.99,
+     "envase": 1000,
+     "nombre": "Cous Cous 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "lentejas": {
+     "precio": 0.89,
+     "envase": 400,
+     "nombre": "Lenteja Pardina Cocida Frasco 400 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "garbanzos": {
+     "precio": 0.8,
+     "envase": 400,
+     "nombre": "Garbanzo Cocido Frasco 400 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "alubias": {
+     "precio": 0.75,
+     "envase": 400,
+     "nombre": "Alubia Blanca Cocida Frasco 400 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tomate_tri": {
+     "precio": 1.0,
+     "envase": 800,
+     "nombre": "Tomate Triturado Lata 800 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tomate_frito": {
+     "precio": 0.9,
+     "envase": 550,
+     "nombre": "Tomate Frito Frasco 550 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "atun": {
+     "precio": 2.7,
+     "envase": 156,
+     "nombre": "Atún Claro Aceite Girasol Pack de 3 3 x 52 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "coco": {
+     "precio": 1.4,
+     "envase": 400,
+     "nombre": "Jugo de Coco para Cocinar Lata 400 ml",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "maiz": {
+     "precio": 1.55,
+     "envase": 420,
+     "nombre": "Maíz Dulce Lata Pack de 3 3 x 140 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tortillas": {
+     "precio": 1.5,
+     "envase": 6,
+     "nombre": "Tortillas Wrap de Trigo 6 Unidades 360 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "cebolla": {
+     "precio": 1.8,
+     "envase": 1000,
+     "nombre": "Cebolla Seca Malla 1 kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "patata": {
+     "precio": 4.65,
+     "envase": 3000,
+     "nombre": "Patata España Aptas Todo Uso Culinario 3 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "boniato": {
+     "precio": 2.55,
+     "envase": 1000,
+     "nombre": "Boniato Rojo",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "ajo": {
+     "precio": 1.85,
+     "envase": 250,
+     "nombre": "Ajos Secos Malla 250 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pechuga": {
+     "precio": 8.15,
+     "envase": 1000,
+     "nombre": "Filetes Pechuga de Pollo",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "muslos": {
+     "precio": 7.39,
+     "envase": 1000,
+     "nombre": "Contramuslos de Pollo Deshuesados",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "picada": {
+     "precio": 3.29,
+     "envase": 400,
+     "nombre": "Preparado Picada Mixta 400 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "picada_pollo": {
+     "precio": 3.35,
+     "envase": 400,
+     "nombre": "Preparado Picada Pollo 400 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "lomo": {
+     "precio": 7.39,
+     "envase": 1000,
+     "nombre": "Filetes de Lomo Extrafinos",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "burger": {
+     "precio": 2.65,
+     "envase": 4,
+     "nombre": "Burger Meat Pollo 4 Unidades 360 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "salmon": {
+     "precio": 21.9,
+     "envase": 1000,
+     "nombre": "Porciones de Salmón Rosado",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "merluza": {
+     "precio": 5.39,
+     "envase": 400,
+     "nombre": "Filete Merluza Cabo MSC Sin piel 400 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "gambas": {
+     "precio": 5.99,
+     "envase": 360,
+     "nombre": "Gambas Peladas Mediana 360 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "calamar": {
+     "precio": 5.59,
+     "envase": 450,
+     "nombre": "Calamar Troceado 450 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "brocoli": {
+     "precio": 2.03,
+     "envase": 900,
+     "nombre": "Brócoli 900 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "espinacas": {
+     "precio": 1.05,
+     "envase": 400,
+     "nombre": "Espinacas Cortadas 400 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "judias": {
+     "precio": 1.49,
+     "envase": 1000,
+     "nombre": "Judía Fina Troceada 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "salteado": {
+     "precio": 1.19,
+     "envase": 450,
+     "nombre": "Salteado Tradicional 450 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "guisantes": {
+     "precio": 1.78,
+     "envase": 1000,
+     "nombre": "Guisantes Finos 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "huevos": {
+     "precio": 3.05,
+     "envase": 12,
+     "nombre": "Huevos L Grandes Docena 1 Dc",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "queso": {
+     "precio": 1.6,
+     "envase": 200,
+     "nombre": "Mozzarella Rallada Especial Pizza 200 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pimiento": {
+     "precio": 2.99,
+     "envase": 1000,
+     "nombre": "Pimiento Rojo",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "calabacin": {
+     "precio": 1.4,
+     "envase": 1000,
+     "nombre": "Calabacín Verde",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "zanahoria": {
+     "precio": 1.0,
+     "envase": 1000,
+     "nombre": "Zanahoria de Mesa Bolsa 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tomate": {
+     "precio": 2.4,
+     "envase": 1000,
+     "nombre": "Tomate Pera",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "ensalada": {
+     "precio": 0.85,
+     "envase": 250,
+     "nombre": "Ensalada 4 Estaciones Bolsa 250 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "champi": {
+     "precio": 6.6,
+     "envase": 1000,
+     "nombre": "Champiñón Laminado Peso Variable",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "limon": {
+     "precio": 2.3,
+     "envase": 1000,
+     "nombre": "Limón Malla 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "yogur": {
+     "precio": 0.75,
+     "envase": 4,
+     "nombre": "Yogur Natural Pack de 4 Unidades 4 x 125 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pan_rallado": {
+     "precio": 0.6,
+     "envase": 500,
+     "nombre": "Pan Rallado Clasico Paquete 500 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "jamon": {
+     "precio": 1.6,
+     "envase": 160,
+     "nombre": "Jamón Cocido Extra Finas Lonchas 160 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "fideos": {
+     "precio": 1.2,
+     "envase": 450,
+     "nombre": "Fideo 4 Paquete 450 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "caldo_pollo": {
+     "precio": 0.75,
+     "envase": 1000,
+     "nombre": "Caldo Líquido Casero de Pollo  Brik 1 L",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "caldo_pescado": {
+     "precio": 0.95,
+     "envase": 1000,
+     "nombre": "Caldo Líquido Pescado Brik 1 L",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pavo": {
+     "precio": 8.99,
+     "envase": 1000,
+     "nombre": "Pechuga de Pavo Fileteada",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "burger_pavo": {
+     "precio": 2.75,
+     "envase": 2,
+     "nombre": "Burger Meat Pollo y Pavo 240 Gr",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "fideos_arroz": {
+     "precio": 1.75,
+     "envase": 250,
+     "nombre": "Tallarines de Arroz 250 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "solomillo": {
+     "precio": 8.19,
+     "envase": 1000,
+     "nombre": "Solomillo de Cerdo",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "ternera": {
+     "precio": 18.5,
+     "envase": 1000,
+     "nombre": "Filete 1ª de Añojo Plancha- Freír",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "alubias_rojas": {
+     "precio": 1.59,
+     "envase": 400,
+     "nombre": "Alubia Roja Cocida Frasco 400 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "lasana": {
+     "precio": 1.65,
+     "envase": 200,
+     "nombre": "Lasaña Fácil Precocida Caja 18 Placas 200 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "bacalao": {
+     "precio": 7.99,
+     "envase": 400,
+     "nombre": "Porciones de Bacalao S/piel en su punto de sal 400 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "emperador": {
+     "precio": 16.55,
+     "envase": 1000,
+     "nombre": "Rodaja Emperador",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "teriyaki": {
+     "precio": 2.79,
+     "envase": 300,
+     "nombre": "Salsa Teriyaki Botella 300 ml",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "nata": {
+     "precio": 1.85,
+     "envase": 600,
+     "nombre": "Nata para Cocinar Minibrik Pack de 3 3 x 200 ml",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "mostaza": {
+     "precio": 3.69,
+     "envase": 215,
+     "nombre": "Mostaza Dijón Originale Frasco 215 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "edamame": {
+     "precio": 1.72,
+     "envase": 250,
+     "nombre": "Edamame en Grano 250 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "esparragos": {
+     "precio": 4.64,
+     "envase": 300,
+     "nombre": "Espárrago Verde 300 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "bonito": {
+     "precio": 1.85,
+     "envase": 80,
+     "nombre": "Bonito del Norte en Aceite de Oliva 80 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "caballa": {
+     "precio": 1.6,
+     "envase": 84,
+     "nombre": "Filetes de Caballa en Aceite de Oliva 84 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "sardinas": {
+     "precio": 2.15,
+     "envase": 130,
+     "nombre": "Sardinillas en Aceite de Oliva Pack 2 2 x 65 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pan_integral": {
+     "precio": 0.9,
+     "envase": 16,
+     "nombre": "Pan Molde 100% Integral 0% Azúcares Añadidos 460 Gr",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "langostinos": {
+     "precio": 4.4,
+     "envase": 180,
+     "nombre": "Cola de Langostino Pelada y Cruda 180 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "masa_empanadilla": {
+     "precio": 1.19,
+     "envase": 16,
+     "nombre": "Masa Empanadillas 215 Gr",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pasta_lentejas": {
+     "precio": 1.65,
+     "envase": 250,
+     "nombre": "Pasta de Lenteja Roja 250 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "hummus": {
+     "precio": 1.05,
+     "envase": 220,
+     "nombre": "Hummus Clásico 220 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "noquis": {
+     "precio": 1.0,
+     "envase": 500,
+     "nombre": "Gnocchis Patatas 500 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "berenjena": {
+     "precio": 2.3,
+     "envase": 1000,
+     "nombre": "Berenjena Negra",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "quinoa": {
+     "precio": 1.55,
+     "envase": 250,
+     "nombre": "Quinoa Roja y Blanca Vasitos 2 x 125 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "dorada": {
+     "precio": 24.75,
+     "envase": 1000,
+     "nombre": "Filete de Dorada Crianza de España",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "copos_maiz": {
+     "precio": 2.15,
+     "envase": 300,
+     "nombre": "Corn Flakes Classic sin Azúcar y sin Gluten 300 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pesto": {
+     "precio": 1.95,
+     "envase": 185,
+     "nombre": "Salsa Pesto 185 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "salchichas": {
+     "precio": 1.65,
+     "envase": 420,
+     "nombre": "Salchichas de Pavo 7 Unidades 3 x 140 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pina": {
+     "precio": 2.1,
+     "envase": 420,
+     "nombre": "Piña en su Jugo Pack de 3 3 x 140 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "leche": {
+     "precio": 0.83,
+     "envase": 1000,
+     "nombre": "Leche Semidesnatada Brik 1 L",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "calabaza": {
+     "precio": 1.82,
+     "envase": 400,
+     "nombre": "Calabaza Troceada Bandeja 400 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "gazpacho": {
+     "precio": 1.6,
+     "envase": 1000,
+     "nombre": "Gazpacho Tradicional 1 L",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tinta": {
+     "precio": 2.15,
+     "envase": 8,
+     "nombre": "Tinta de Sepia 8 bolsitas 32 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "anacardos": {
+     "precio": 2.7,
+     "envase": 200,
+     "nombre": "Anacardos Crudos 200 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "feta": {
+     "precio": 3.15,
+     "envase": 150,
+     "nombre": "Queso Feta D.O.P 150 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "manzana": {
+     "precio": 2.69,
+     "envase": 1500,
+     "nombre": "Manzana Golden Bolsa 1,5 Kg",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pan_burger": {
+     "precio": 0.85,
+     "envase": 4,
+     "nombre": "Pan Maxi Burger 4 Unidades 300 Gr",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    }
+   },
+   "fallos": []
   },
   "eroski": {
-   "fallos": [
-    "No se ha podido actualizar: No module named 'supers.eroski'"
-   ]
+   "nombre": "Eroski",
+   "fecha": "2026-10-22",
+   "productos": {
+    "arroz": {
+     "precio": 1.15,
+     "envase": 1000,
+     "nombre": "Arroz extra EROSKI basic, paquete 1 kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pasta": {
+     "precio": 1.15,
+     "envase": 1000,
+     "nombre": "Macarrones EROSKI basic, paquete 1 kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "espaguetis": {
+     "precio": 0.8,
+     "envase": 500,
+     "nombre": "Spaghetti EROSKI basic, paquete 500 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "cuscus": {
+     "precio": 1.46,
+     "envase": 500,
+     "nombre": "Cous cous bio EROSKI BIO/ECO, caja 500 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "lentejas": {
+     "precio": 0.9,
+     "envase": 400,
+     "nombre": "Lentejas cocidas EROSKI, frasco 400 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "garbanzos": {
+     "precio": 0.8,
+     "envase": 400,
+     "nombre": "Garbanzo cocido EROSKI, frasco 400 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "alubias": {
+     "precio": 0.75,
+     "envase": 400,
+     "nombre": "Alubia blanca cocida EROSKI, frasco 400 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tomate_tri": {
+     "precio": 1.0,
+     "envase": 800,
+     "nombre": "Tomate triturado EROSKI basic, lata 800 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tomate_frito": {
+     "precio": 0.9,
+     "envase": 550,
+     "nombre": "Tomate frito EROSKI, frasco 550 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "atun": {
+     "precio": 2.7,
+     "envase": 210,
+     "nombre": "Atún claro en aceite de girasol EROSKI, pack 3x70 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "coco": {
+     "precio": 2.75,
+     "envase": 400,
+     "nombre": "Leche de coco baja en grasa TIGER KHAN, lata 400 ml",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "maiz": {
+     "precio": 1.55,
+     "envase": 420,
+     "nombre": "Maíz dulce EROSKI, pack 3x140 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tortillas": {
+     "precio": 1.02,
+     "envase": 8,
+     "nombre": "Tortillas de trigo EROSKI, paquete 320 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "cebolla": {
+     "precio": 1.7,
+     "envase": 1000,
+     "nombre": "Cebolla blanca Buti EROSKI, malla 1 kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "patata": {
+     "precio": 4.99,
+     "envase": 3000,
+     "nombre": "Patata EUSKO LABEL EROSKI NATUR, malla 3 kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "boniato": {
+     "precio": 2.55,
+     "envase": 1000,
+     "nombre": "Boniato, al peso, compra mínima 1 kg",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "ajo": {
+     "precio": 1.99,
+     "envase": 250,
+     "nombre": "Ajo, malla 250 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pechuga": {
+     "precio": 4.31,
+     "envase": 560,
+     "nombre": "Filetes de pechuga de pollo EROSKI, bandeja aprox. 560 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "muslos": {
+     "precio": 5.0,
+     "envase": 500,
+     "nombre": "Contramuslo deshuesado pollo s/piel EROSKI NATUR, bandeja aprox. 500 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "picada": {
+     "precio": 7.99,
+     "envase": 1000,
+     "nombre": "Picada mixta cerdo-vacuno burger meat XXL EROSKI, bandeja 1 kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "picada_pollo": {
+     "precio": 3.95,
+     "envase": 500,
+     "nombre": "Picada de pollo EROSKI, bandeja 500 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "lomo": {
+     "precio": 4.48,
+     "envase": 500,
+     "nombre": "Filete de lomo de cerdo, al corte, compra mínima 500 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "burger": {
+     "precio": 2.75,
+     "envase": 4,
+     "nombre": "Hamburguesa de pollo EROSKI, bandeja 360 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "salmon": {
+     "precio": 6.75,
+     "envase": 250,
+     "nombre": "Supremas de salmón ASC apto consumo crudo KOLD FIN, sobre 250 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "merluza": {
+     "precio": 8.99,
+     "envase": 900,
+     "nombre": "Filete de merluza sin piel EROSKI BASIC, bolsa 900 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "gambas": {
+     "precio": 4.36,
+     "envase": 320,
+     "nombre": "Gamba pelada mediana EROSKI BASIC, bolsa 320 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "calamar": {
+     "precio": 5.58,
+     "envase": 450,
+     "nombre": "Calamar troceado EROSKI, bolsa 450 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "espinacas": {
+     "precio": 2.6,
+     "envase": 1000,
+     "nombre": "Espinacas cortadas EROSKI, bolsa 1 kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "judias": {
+     "precio": 1.3,
+     "envase": 1000,
+     "nombre": "Judías verdes redondas EROSKI, bolsa 1 kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "salteado": {
+     "precio": 1.16,
+     "envase": 450,
+     "nombre": "Salteado de judía-berenjena-zanahoria EROSKI, bolsa 450 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "guisantes": {
+     "precio": 1.55,
+     "envase": 1000,
+     "nombre": "Guisante EROSKI, bolsa 1 kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "huevos": {
+     "precio": 3.23,
+     "envase": 12,
+     "nombre": "Huevo fresco L suelo EROSKI, cartón 1 docena",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "queso": {
+     "precio": 1.6,
+     "envase": 200,
+     "nombre": "Queso rallado Mozzarella para pizza EROSKI, bolsa 200 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pimiento": {
+     "precio": 1.45,
+     "envase": 500,
+     "nombre": "Pimiento rojo, al peso, compra mínima 500 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "calabacin": {
+     "precio": 0.95,
+     "envase": 500,
+     "nombre": "Calabacín verde, al peso, compra mínima 500 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "zanahoria": {
+     "precio": 1.0,
+     "envase": 1000,
+     "nombre": "Zanahoria EROSKI, bolsa 1 kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tomate": {
+     "precio": 1.1,
+     "envase": 500,
+     "nombre": "Tomate de Pera, al peso, compra mínima 500 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "ensalada": {
+     "precio": 0.85,
+     "envase": 250,
+     "nombre": "Ensalada 4 estaciones EROSKI, bolsa 250 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "champi": {
+     "precio": 2.11,
+     "envase": 250,
+     "nombre": "Champiñón laminado EROSKI, bandeja 250 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "limon": {
+     "precio": 2.3,
+     "envase": 1000,
+     "nombre": "Limón, malla 1 kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "yogur": {
+     "precio": 1.33,
+     "envase": 8,
+     "nombre": "Yogur natural EROSKI BASIC, pack 8x125 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pan_rallado": {
+     "precio": 0.85,
+     "envase": 750,
+     "nombre": "Pan rallado EROSKI BASIC, paquete 750 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "jamon": {
+     "precio": 2.25,
+     "envase": 200,
+     "nombre": "Jamón cocido extra EROSKI MAESTRO MAESTRO, sobre 200 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "fideos": {
+     "precio": 0.8,
+     "envase": 500,
+     "nombre": "Fideo grueso EROSKI, paquete 500 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "caldo_pollo": {
+     "precio": 0.75,
+     "envase": 1000,
+     "nombre": "Caldo de pollo EROSKI, brik 1 litro",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "caldo_pescado": {
+     "precio": 0.95,
+     "envase": 1000,
+     "nombre": "Caldo de pescado EROSKI, brik 1 litro",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pavo": {
+     "precio": 5.93,
+     "envase": 600,
+     "nombre": "Pechuga fileteada de pavo al vacío EROSKI, bandeja peso aprox. 600 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "burger_pavo": {
+     "precio": 3.39,
+     "envase": 4,
+     "nombre": "Hamburguesa de pavo EROSKI, 4 uds., bandeja 360 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "fideos_arroz": {
+     "precio": 2.95,
+     "envase": 250,
+     "nombre": "Fideos de arroz GO-TAN, paquete 250 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "solomillo": {
+     "precio": 4.25,
+     "envase": 500,
+     "nombre": "Solomillo de cerdo al vacío, sobre aprox. 500 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "ternera": {
+     "precio": 8.0,
+     "envase": 390,
+     "nombre": "Filete de ternera 1A al vacío, bandeja aprox. 390 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "alubias_rojas": {
+     "precio": 1.69,
+     "envase": 400,
+     "nombre": "Alubia roja cocida LUENGO, frasco 400 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "lasana": {
+     "precio": 1.09,
+     "envase": 250,
+     "nombre": "Placas precocidas para lasaña EROSKI, caja 250 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "bacalao": {
+     "precio": 7.29,
+     "envase": 360,
+     "nombre": "Filete de bacalao congelado EROSKI, bandeja 360 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "emperador": {
+     "precio": 4.3,
+     "envase": 200,
+     "nombre": "Rodaja de emperador SAN MARCO, bandeja aprox. 200 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "teriyaki": {
+     "precio": 2.5,
+     "envase": 355,
+     "nombre": "Salsa teriyaki MAGGI, frasco 355 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "nata": {
+     "precio": 2.49,
+     "envase": 500,
+     "nombre": "Nata ligera para cocinar ASTURIANA, brik 500 ml",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "mostaza": {
+     "precio": 3.69,
+     "envase": 215,
+     "nombre": "Mostaza de Dijon MAILLE, frasco 215 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "esparragos": {
+     "precio": 2.95,
+     "envase": 250,
+     "nombre": "Espárrago verde fino, manojo 250 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "bonito": {
+     "precio": 8.45,
+     "envase": 400,
+     "nombre": "Bonito del norte en aceite de oliva EROSKI, frasco 400 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "caballa": {
+     "precio": 4.49,
+     "envase": 260,
+     "nombre": "Caballa en aceite de oliva ALBO, 3+1 ud, pack 260 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "sardinas": {
+     "precio": 1.08,
+     "envase": 115,
+     "nombre": "Sardina en aceite de oliva 3/5 piezas EROSKI, lata 115 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pan_integral": {
+     "precio": 0.9,
+     "envase": 16,
+     "nombre": "Pan de molde integral con corteza EROSKI, paquete 460 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "langostinos": {
+     "precio": 5.29,
+     "envase": 180,
+     "nombre": "Langostino vannamei pelado crudo PESCANOVA, bandeja 180 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "masa_empanadilla": {
+     "precio": 1.9,
+     "envase": 20,
+     "nombre": "Oblea para empanadilla BUITONI, paquete 280 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pasta_lentejas": {
+     "precio": 1.75,
+     "envase": 250,
+     "nombre": "Pasta Strozzapreti de lentejas DALLA COSTA, paquete 250 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "hummus": {
+     "precio": 1.05,
+     "envase": 240,
+     "nombre": "Hummus EROSKI BASIC, tarrina 240 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "noquis": {
+     "precio": 1.99,
+     "envase": 500,
+     "nombre": "Gnocchi di patate LA MOLISANA, paquete 500 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "berenjena": {
+     "precio": 1.2,
+     "envase": 500,
+     "nombre": "Berenjena negra, al peso, compra mínima 500 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "quinoa": {
+     "precio": 1.56,
+     "envase": 250,
+     "nombre": "Vasito de quinoa 100% BRILLANTE, pack 2x125 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "dorada": {
+     "precio": 5.95,
+     "envase": 180,
+     "nombre": "Dorada en filete con piel y sin espinas EROSKI, sobre 180 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "copos_maiz": {
+     "precio": 2.65,
+     "envase": 300,
+     "nombre": "Corn Flakes classic sin azúcar ESGIR, paquete 300 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pesto": {
+     "precio": 1.95,
+     "envase": 190,
+     "nombre": "Pesto genovese EROSKI, frasco 190 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "salchichas": {
+     "precio": 1.29,
+     "envase": 300,
+     "nombre": "Salchichas de pollo y pavo WUDY, sobre 300 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pina": {
+     "precio": 2.1,
+     "envase": 411,
+     "nombre": "Piña en rodaja en su jugo EROSKI, pack 3x137 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "leche": {
+     "precio": 0.83,
+     "envase": 1000,
+     "nombre": "Leche semidesnatada BOMILK, brik 1 litro",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "calabaza": {
+     "precio": 3.15,
+     "envase": 750,
+     "nombre": "Calabaza limpia en trozos EROSKI, bolsa 750 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "gazpacho": {
+     "precio": 2.19,
+     "envase": 1000,
+     "nombre": "Gazpacho tradicional EROSKI, brik 1 litro",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tinta": {
+     "precio": 1.15,
+     "envase": 4,
+     "nombre": "Tinta de sepia MARNATURA, pack 4x4 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "anacardos": {
+     "precio": 2.49,
+     "envase": 200,
+     "nombre": "Anacardo crudo EROSKI, bolsa 200 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "feta": {
+     "precio": 3.88,
+     "envase": 150,
+     "nombre": "Queso feta D.O.P. ISLOS, tarrina 150 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "manzana": {
+     "precio": 2.7,
+     "envase": 1500,
+     "nombre": "Manzana Golden, bolsa 1,5 kg",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pan_burger": {
+     "precio": 0.85,
+     "envase": 4,
+     "nombre": "Pan hamburguesa Maxiburguers EROSKI, 4 unid., paquete 300 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    }
+   },
+   "fallos": []
   }
  },
  "codigo_postal": "08784",
