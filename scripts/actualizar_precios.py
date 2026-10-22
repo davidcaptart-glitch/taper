@@ -143,8 +143,23 @@ def actualizar_zona(wh, ruta, productos, hoy):
     return aciertos
 
 
+def zonas_pedidas():
+    """Códigos postales que han pedido los usuarios desde la app (servidor de avisos)."""
+    url = os.environ.get("ZONAS_URL", "").strip()
+    if not url:
+        return []
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url, headers=CABECERAS), timeout=20) as r:
+            return [str(c) for c in json.load(r).get("cps", [])]
+    except Exception as e:  # noqa: BLE001 - sin servidor se sigue con los de siempre
+        print(f"  ! no se han podido leer las zonas pedidas: {e}")
+        return []
+
+
 def main():
     lista = os.environ.get("CODIGOS_POSTALES", "") or os.environ.get("CODIGO_POSTAL", "")
+    lista += "," + ",".join(zonas_pedidas())
+    solo_nuevas = os.environ.get("SOLO_NUEVAS") == "1"   # cada día: solo los códigos postales que aún no tienen almacén
     cps = []
     for cp in lista.replace(";", ",").replace(" ", ",").split(","):
         cp = cp.strip()
@@ -162,6 +177,12 @@ def main():
     # Código postal -> almacén (si Mercadona no responde, se conserva lo que ya se sabía)
     zonas = json.loads(ZONAS.read_text(encoding="utf-8")) if ZONAS.exists() else {"cp": {}}
     mapa = dict(zonas.get("cp", {}))
+    conocidos = set(mapa.values())
+    if solo_nuevas:
+        cps = [cps[0]] + [cp for cp in cps[1:] if cp not in mapa]
+        if len(cps) == 1:
+            print("No hay zonas nuevas")
+            return
     for cp in cps:
         try:
             mapa[cp] = almacen_para(cp)
@@ -178,18 +199,22 @@ def main():
         wh = mapa.get(cp)
         if wh and wh not in almacenes:
             almacenes.append(wh)
+    if solo_nuevas:   # solo se descargan almacenes que aún no tenían precios
+        almacenes = [wh for wh in almacenes if wh not in conocidos]
     total = 0
     for wh in almacenes:
         ruta = PRECIOS if wh == principal else ZONAS_DIR / f"{wh}.json"
         total += actualizar_zona(wh, ruta, productos, hoy)
 
+    # Se conservan todos los códigos postales y almacenes conocidos
+    todos = sorted(set(zonas.get("almacenes", [])) | set(almacenes) | {principal})
     ZONAS.write_text(json.dumps({
         "principal": principal,
-        "cp": {cp: mapa[cp] for cp in cps if cp in mapa},
-        "almacenes": almacenes,
+        "cp": dict(sorted(mapa.items())),
+        "almacenes": todos,
         "actualizado": hoy,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    if not total:
+    if almacenes and not total:
         sys.exit(1)
 
 

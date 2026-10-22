@@ -1336,6 +1336,10 @@ async function boot(){
   zoneMissing=!!(ZONES&&S.home.cp&&!wh);
   const prUrl=wh&&wh!==ZONES.principal?`data/precios/${wh}.json`:"data/precios.json";
   if(PR&&PR.codigo_postal_almacen&&wh&&PR.codigo_postal_almacen!==wh)PR=null;
+  // Código postal sin precios propios: se pide solo al servidor (una vez por código postal)
+  if(zoneMissing&&/^\d{5}$/.test(S.home.cp)&&S.zoneAsked!==S.home.cp){
+    getJSON("data/config.json",true).then(c=>{if(c&&c.avisos&&c.avisos.url)return fetch(c.avisos.url.replace(/\/$/,"")+"/zona",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({cp:S.home.cp})})})
+      .then(r=>{if(r&&r.ok){S.zoneAsked=S.home.cp;save()}}).catch(()=>{})}
   try{const fresh=await getJSON(prUrl+"?t="+Date.now(),true);
     if(fresh&&fresh.productos){PR=fresh;prOffline=false;try{localStorage.setItem("taper-precios",JSON.stringify(PR))}catch(e){}}}
   catch(e){prOffline=!!PR}

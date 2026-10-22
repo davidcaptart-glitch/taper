@@ -462,6 +462,14 @@
         "Al escribirlo, rellena el municipio solo (si hay varias poblaciones, eliges la tuya con un toque).",
         "Si ya usabas Táper sin código postal, la campana te lo pide."
       ]
+    },
+    {
+      "version": 49,
+      "fecha": "2026-10-22",
+      "titulo": "Precios de tu zona, solos",
+      "cambios": [
+        "Si tu código postal aún no tiene precios propios, la app los pide sola y los tendrás en uno o dos días. Mientras, ves los de la zona más cercana."
+      ]
     }
   ]
 }

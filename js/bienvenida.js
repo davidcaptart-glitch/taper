@@ -174,7 +174,7 @@ function stepBody(fullId){
     ${(H.cpPlaces||[]).length>1?`<div class="field"><label>¿Cuál es tu municipio?</label><div class="chips">${H.cpPlaces.map(p=>chip("data-place",p,H.municipio===p,esc(p))).join("")}</div></div>`:""}
     <div class="field"><label for="wzMun">Municipio (para los festivos locales)</label><input id="wzMun" type="text" list="wzMunList" value="${esc(H.municipio)}" placeholder="Por ejemplo, Piera"><datalist id="wzMunList">${Object.keys((FEST||{}).locales||{}).map(m=>`<option value="${esc(m)}">`).join("")}</datalist>
     <div class="hint">Si tu municipio no sale en la lista, añade sus festivos locales en Perfil > Festivos.</div></div>
-    ${zoneMissing?`<div class="warnbox">Tu código postal aún no tiene precios propios: de momento verás los de otra zona (pueden variar unos céntimos). ${S.zoneAsked===H.cp?"Ya lo has pedido; se añadirá en la próxima actualización.":`<button class="btn small" id="askZone">Pedir mi zona</button>`}</div>`:""}`;}
+    ${zoneMissing&&H.cp?`<div class="okbox small">Tu zona aún no tiene precios propios: ya los he pedido y los tendrás en uno o dos días. Mientras, verás los de la zona más cercana (suelen variar unos céntimos).</div>`:""}`;}
   if(id==="familia"){
     const ptypes=[["siempre","Siempre"],["alternas","Semanas alternas"],["findes","Fines de semana alternos"],["dias","Días concretos de la semana"],["manual","Lo marco cada semana"]];
     let h=`<p class="lead">Añade a quien come contigo: pareja, hijos, otros familiares, compañeros de piso… Cada uno con cuándo está, su ración y sus propios gustos.</p>

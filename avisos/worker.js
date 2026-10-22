@@ -84,6 +84,20 @@ export default {
         await env.TAPER.put("sub:" + b.uid, JSON.stringify({ ...d, plan: limpiaPlan(plan) }));
         return json(req, { ok: true });
       }
+      // Zonas sin precios: la app apunta el código postal y la actualización de precios lo recoge
+      if (req.method === "POST" && url.pathname === "/zona") {
+        const b = await req.json();
+        const cp = String(b.cp || "");
+        if (!/^\d{5}$/.test(cp)) return json(req, { error: "código postal no válido" }, 400);
+        const prev = (await env.TAPER.get("zp:" + cp, "json")) || { primera: Date.now(), veces: 0 };
+        await env.TAPER.put("zp:" + cp, JSON.stringify({ ...prev, ultima: Date.now(), veces: prev.veces + 1 }));
+        return json(req, { ok: true });
+      }
+      if (req.method === "GET" && url.pathname === "/zonas") {
+        const cps = []; let cursor;
+        do { const l = await env.TAPER.list({ prefix: "zp:", cursor }); cursor = l.list_complete ? null : l.cursor; for (const k of l.keys) cps.push(k.name.slice(3)); } while (cursor);
+        return json(req, { cps });
+      }
       if (req.method === "POST" && url.pathname === "/baja") {
         const b = await req.json();
         if (uidOk(b.uid)) { await env.TAPER.delete("sub:" + b.uid); await env.TAPER.delete("pend:" + b.uid); }

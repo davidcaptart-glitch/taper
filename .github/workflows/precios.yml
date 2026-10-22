@@ -8,6 +8,8 @@ on:
     # así que se programan las dos y el paso "Comprobar hora" deja seguir solo la que toca.
     - cron: "0 3 * * 0"
     - cron: "0 4 * * 0"
+    # Cada día a las 06:30 UTC: solo las zonas nuevas que han pedido los usuarios
+    - cron: "30 6 * * *"
   workflow_dispatch:
 
 permissions:
@@ -27,7 +29,10 @@ jobs:
         run: |
           offset=$(TZ=Europe/Madrid date +%z)   # +0200 en verano, +0100 en invierno
           seguir=true
-          if [ "${{ github.event_name }}" = "schedule" ]; then
+          solo_nuevas=0
+          if [ "${{ github.event.schedule }}" = "30 6 * * *" ]; then solo_nuevas=1; fi
+          echo "solo_nuevas=$solo_nuevas" >> "$GITHUB_OUTPUT"
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$solo_nuevas" = "0" ]; then
             if [ "${{ github.event.schedule }}" = "0 3 * * 0" ] && [ "$offset" != "+0200" ]; then seguir=false; fi
             if [ "${{ github.event.schedule }}" = "0 4 * * 0" ] && [ "$offset" != "+0100" ]; then seguir=false; fi
           fi
@@ -47,10 +52,12 @@ jobs:
         env:
           # Lista de códigos postales separados por comas; el primero es la zona principal
           CODIGOS_POSTALES: ${{ vars.CODIGOS_POSTALES || vars.CODIGO_POSTAL }}
+          ZONAS_URL: https://taper-avisos.taper-david.workers.dev/zonas
+          SOLO_NUEVAS: ${{ steps.hora.outputs.solo_nuevas }}
         run: python scripts/actualizar_precios.py
 
       - name: Consultar precios en otros supermercados
-        if: steps.hora.outputs.seguir == 'true'
+        if: steps.hora.outputs.seguir == 'true' && steps.hora.outputs.solo_nuevas != '1'
         # Si alguno falla (la web cambia o nos bloquea), se conservan sus últimos precios y se sigue
         continue-on-error: true
         env:
