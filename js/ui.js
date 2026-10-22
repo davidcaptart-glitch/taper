@@ -1204,8 +1204,9 @@ function renderPerfil(){
     <details class="more"><summary>${ico("share")} Invitar a usar Táper (tu QR y tu enlace)</summary><div id="qrBox" style="display:grid;place-items:center;margin:10px 0;background:#fff;border-radius:12px;padding:10px"></div>
       <div class="actions">${servidorOn()?`<button class="btn small" id="shareApp">${ico("share")} Enviar el enlace</button>`:""}<button class="btn ghost small" id="copyApp">Copiar enlace</button></div></details>
     <div class="field"><label>Tema</label><div class="chips">${[["light","Claro"],["dark","Oscuro"],["auto","Como el móvil"]].map(([k,t])=>chip("data-theme-set",k,(S.home.theme||"light")===k,t)).join("")}</div></div>
-    <div class="field"><label>Color</label><div class="chips">${chip("data-accent","rojo",!S.accent||S.accent==="rojo","🍅 Rojo")}${Object.keys(ACCENTS).filter(k=>k!=="rojo"&&owns("tema_"+k)).map(k=>chip("data-accent",k,S.accent===k,SHOP["tema_"+k].ico+" "+SHOP["tema_"+k].t.replace("Tema ",""))).join("")}<button class="chip" id="moreColors">🛍️ Más colores</button></div></div>
-    <div class="field"><label>Estética</label><div class="chips">${chip("data-skin","",!S.skin,"✨ Normal")}${Object.keys(SHOP).filter(k=>k.startsWith("skin_")&&owns(k)).map(k=>chip("data-skin",k.slice(5),S.skin===k.slice(5),SHOP[k].ico+" "+SHOP[k].t)).join("")}<button class="chip" id="moreSkins">🛍️ Más estéticas</button></div>
+    <div class="field"><label>Color</label><div class="colgrid">${Object.keys(ACCENTS).map(k=>{const own=k==="rojo"||owns("tema_"+k),on=(S.accent||"rojo")===k,t=k==="rojo"?"Rojo":SHOP["tema_"+k].t.replace("Tema ","");
+      return `<button class="colsw ${on?"on":""} ${own?"":"lock"}" ${own?`data-accent="${k}"`:`data-buyk="tema_${k}"`} aria-label="${esc(t)}${own?"":" · "+SHOP["tema_"+k].c+" coins"}"><span class="dot" style="background:${ACCENTS[k][0]}"></span><small>${esc(t)}</small>${own?"":`<em>🪙 ${SHOP["tema_"+k].c}</em>`}</button>`}).join("")}</div></div>
+    <div class="field"><label>Estética</label><div class="chips">${chip("data-skin","",!S.skin,"✨ Normal")}${Object.keys(SHOP).filter(k=>k.startsWith("skin_")).map(k=>owns(k)?chip("data-skin",k.slice(5),S.skin===k.slice(5),SHOP[k].ico+" "+SHOP[k].t):`<button class="chip lockchip" data-buyk="${k}">${SHOP[k].ico} ${esc(SHOP[k].t)} <em>🪙 ${SHOP[k].c}</em></button>`).join("")}</div>
       <div class="hint">Las estéticas cambian el fondo, las letras y las tarjetas. Con una estética puesta, manda su color. Toca tu inicial arriba para cambiar el avatar.</div></div>`);
   // 5. Avisos
   h+=acc("avisos","bell","Avisos en el móvil",S.notif&&S.notif.on?"Activados":"Desactivados",avisosCard().replace('<div class="card"><h2>Avisos en el móvil</h2>','<div>'));
@@ -1253,8 +1254,7 @@ function renderPerfil(){
       <button class="btn wide" id="avShop" style="margin-top:12px">🛍️ Más avatares en la tienda</button></div>`);
     dlg.querySelectorAll("[data-av]").forEach(b=>b.onclick=()=>{S.avatar=b.dataset.av||null;save();dlg.close();render()});dlg.querySelector("#avShop").onclick=openShop});
   q("[data-accent]").forEach(b=>b.onclick=()=>{S.accent=b.dataset.accent;save();applyAccent();render()});
-  document.getElementById("moreColors")?.addEventListener("click",openShop);
-  document.getElementById("moreSkins")?.addEventListener("click",openShop);
+  q("[data-buyk]").forEach(b=>b.onclick=()=>servidorOn()?askBuy(b.dataset.buyk):toast("Para comprar hace falta conexión"));
   q("[data-skin]").forEach(b=>b.onclick=()=>{S.skin=b.dataset.skin||null;save();applySkin();render()});
   bindAvisos();
   document.getElementById("svProfile")?.addEventListener("click",openSurvey);

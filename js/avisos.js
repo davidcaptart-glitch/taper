@@ -278,6 +278,7 @@ const SHOP={
   av_chef:{t:"Avatar Chef",c:10,ico:"🧑‍🍳",g:"Avatares"},av_aguacate:{t:"Avatar Aguacate",c:10,ico:"🥑",g:"Avatares"},av_pizza:{t:"Avatar Pizza",c:10,ico:"🍕",g:"Avatares"},av_zorro:{t:"Avatar Zorro",c:10,ico:"🦊",g:"Avatares"},av_panda:{t:"Avatar Panda",c:10,ico:"🐼",g:"Avatares"},av_pulpo:{t:"Avatar Pulpo",c:10,ico:"🐙",g:"Avatares"},av_taco:{t:"Avatar Taco",c:10,ico:"🌮",g:"Avatares"},av_tomate:{t:"Avatar Tomate",c:10,ico:"🍅",g:"Avatares"},
   tema_oliva:{t:"Tema verde oliva",c:20,ico:"🫒",g:"Temas"},tema_marino:{t:"Tema azul marino",c:20,ico:"🌊",g:"Temas"},
   tema_mostaza:{t:"Tema mostaza",c:20,ico:"🌻",g:"Temas"},tema_berenjena:{t:"Tema berenjena",c:20,ico:"🍆",g:"Temas"},
+  tema_naranja:{t:"Tema naranja",c:20,ico:"🍊",g:"Temas"},tema_turquesa:{t:"Tema turquesa",c:20,ico:"🐬",g:"Temas"},tema_rosa:{t:"Tema frambuesa",c:20,ico:"🍓",g:"Temas"},tema_lavanda:{t:"Tema lavanda",c:20,ico:"💜",g:"Temas"},tema_grafito:{t:"Tema grafito",c:20,ico:"🖤",g:"Temas"},
   pack_navidad:{t:"Pack Navidad",c:30,ico:"🎄",g:"Packs de recetas",d:"Platos de fiesta que se pueden hacer en casa"},
   pack_oficina:{t:"Pack Tápers de oficina",c:30,ico:"💼",g:"Packs de recetas",d:"Platos que viajan bien y se comen fríos o recalentados"},
   pack_deportistas:{t:"Pack Deportistas",c:30,ico:"💪",g:"Packs de recetas",d:"Mucha proteína y energía para entrenar"},
@@ -308,16 +309,7 @@ async function openShop(){
     else if(k.startsWith("tema_")){S.skin=null;S.accent=k.slice(5);applySkin();applyAccent()}
     else if(k.startsWith("av_"))S.avatar=k;
     save();render();toast(`${SHOP[k].ico} Ahora usas: ${SHOP[k].t}`);openShop()});
-  dlg.querySelectorAll("[data-buy]").forEach(b=>b.onclick=async()=>{const k=b.dataset.buy;b.disabled=true;
-    try{const r=await fetch(CFG.avisos.url.replace(/\/$/,"")+"/canjear",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({uid:S.uid,clave:S.secret,item:k})});const j=await r.json();
-      if(!r.ok){toast(j.error||"No se ha podido canjear");b.disabled=false;return}
-      S.owned=j.compras;coinsNow=j.coins;save();
-      if(k.startsWith("tema_")){S.accent=k.slice(5);applyAccent()}
-      if(k.startsWith("av_"))S.avatar=k;
-      if(k.startsWith("skin_")){S.skin=k.slice(5);applySkin()}
-      if(k.startsWith("pack_"))refreshPlansForPacks();
-      toast(`${SHOP[k].ico} ${SHOP[k].t}: ¡es tuyo!`);openShop();render()}
-    catch(e){toast("Sin conexión: inténtalo luego");b.disabled=false}});
+  dlg.querySelectorAll("[data-buy]").forEach(b=>b.onclick=async()=>{b.disabled=true;const ok=await buyItem(b.dataset.buy);if(ok)openShop();else b.disabled=false});
 }
 // Estéticas compradas: clase en <body>; sus tipografías se cargan solo cuando hacen falta
 const SKIN_FONTS="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Playfair+Display:ital,wght@0,700;1,500&display=swap";
@@ -329,7 +321,26 @@ function applySkin(){
   else applyAccent();
 }
 // Temas de color comprados
-const ACCENTS={rojo:["#D22F2A","#B42520","#FBE8E7"],oliva:["#5B7F2A","#4A6A20","#EEF4E3"],marino:["#1F4E8C","#173E70","#E6EEF9"],mostaza:["#B97F0F","#9C6A0B","#FBF1DC"],berenjena:["#6B2D5C","#56234A","#F4E6F0"]};
+// Canjear algo de la tienda (el precio lo pone el servidor); se usa enseguida
+async function buyItem(k){
+  try{const r=await fetch(CFG.avisos.url.replace(/\/$/,"")+"/canjear",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({uid:S.uid,clave:S.secret,item:k})});const j=await r.json();
+    if(!r.ok){toast(j.error||"No se ha podido canjear");return false}
+    S.owned=j.compras;if(typeof coinsNow!=="undefined")coinsNow=j.coins;save();
+    if(k.startsWith("tema_")){S.accent=k.slice(5);applyAccent()}
+    if(k.startsWith("av_"))S.avatar=k;
+    if(k.startsWith("skin_")){S.skin=k.slice(5);applySkin()}
+    if(k.startsWith("pack_"))refreshPlansForPacks();
+    toast(`${SHOP[k].ico} ${SHOP[k].t}: ¡es tuyo!`);render();return true}
+  catch(e){toast("Sin conexión: inténtalo luego");return false}
+}
+// Comprar desde Perfil: se pregunta antes
+function askBuy(k){const v=SHOP[k];if(!v)return;
+  showDialog(`<div class="mod">${closeBtn}<h2>${v.ico} ${esc(v.t)}</h2><p>Cuesta <b>🪙 ${v.c} coins</b>.${v.d?" "+esc(v.d)+".":""}</p>
+    ${k.startsWith("tema_")?`<div class="swbig" style="background:${ACCENTS[k.slice(5)][0]}"></div>`:""}
+    <div class="actions"><button class="btn wide" id="bkOk">Comprar y usar</button><button class="btn ghost wide" data-x>Ahora no</button></div></div>`);
+  dlg.querySelector("#bkOk").onclick=async e=>{e.target.disabled=true;if(await buyItem(k))dlg.close();else e.target.disabled=false};
+}
+const ACCENTS={rojo:["#D22F2A","#B42520","#FBE8E7"],oliva:["#5B7F2A","#4A6A20","#EEF4E3"],marino:["#1F4E8C","#173E70","#E6EEF9"],mostaza:["#B97F0F","#9C6A0B","#FBF1DC"],berenjena:["#6B2D5C","#56234A","#F4E6F0"],naranja:["#D2601A","#B04E12","#FCEBDD"],turquesa:["#0E8A8A","#0A6F6F","#E0F3F3"],rosa:["#C2366E","#A12A5B","#FBE6EE"],lavanda:["#6B55B5","#574497","#EEEAF9"],grafito:["#3D4552","#2C333D","#E9EBEE"]};
 function applyAccent(){const a=ACCENTS[S.accent]&&(S.accent==="rojo"||owns("tema_"+S.accent))?ACCENTS[S.accent]:null,st=document.documentElement.style;
   if(!a){["--accent","--accent-2","--accent-soft"].forEach(v=>st.removeProperty(v));return}
   st.setProperty("--accent",a[0]);st.setProperty("--accent-2",a[1]);st.setProperty("--accent-soft",a[2]);

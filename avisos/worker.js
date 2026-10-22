@@ -320,6 +320,7 @@ const COINS = { visita: 1, instalacion: 10, activoInvitado: 2, activoPropio: 1, 
 const MAX_TICKETS_SEMANA = 3;
 // Tienda de coins: el precio lo pone el servidor (la app no puede cambiarlo)
 const TIENDA = { tema_oliva: 20, tema_marino: 20, tema_mostaza: 20, tema_berenjena: 20,
+  tema_naranja: 20, tema_turquesa: 20, tema_rosa: 20, tema_lavanda: 20, tema_grafito: 20,
   av_chef: 10, av_aguacate: 10, av_pizza: 10, av_zorro: 10, av_panda: 10, av_pulpo: 10, av_taco: 10, av_tomate: 10,
   skin_libreta: 50, skin_trattoria: 50, skin_mediterranea: 50, skin_otono: 40, skin_neon: 60, skin_pop: 40, skin_japon: 40, skin_navidad: 40,
   pack_navidad: 30, pack_oficina: 30, pack_deportistas: 30, pack_aprovechamiento: 30, imprimible: 40 };
