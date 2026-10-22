@@ -23,7 +23,8 @@
       "tarifas": {
         "comprobadas": "2026-10-22",
         "fuente": "https://ayuda.tienda.mercadona.es/hc/en-us/articles/360000841092-Minimum-order"
-      }
+      },
+      "color": "#00843D"
     },
     {
       "id": "carrefour",
@@ -45,7 +46,8 @@
       "tarifas": {
         "comprobadas": "2026-10-22",
         "fuente": "https://www.carrefour.es/supermercado"
-      }
+      },
+      "color": "#1E4A9E"
     },
     {
       "id": "dia",
@@ -67,7 +69,8 @@
       "tarifas": {
         "comprobadas": "2026-10-22",
         "fuente": "https://www.dia.es/"
-      }
+      },
+      "color": "#E30613"
     },
     {
       "id": "alcampo",
@@ -90,7 +93,8 @@
       "tarifas": {
         "comprobadas": "2026-10-22",
         "fuente": "https://www.compraonline.alcampo.es/content/servicios-entrega-recogida"
-      }
+      },
+      "color": "#D2232A"
     },
     {
       "id": "eroski",
@@ -113,7 +117,8 @@
       "tarifas": {
         "comprobadas": "2026-10-22",
         "fuente": "https://supermercado.eroski.es/es/supermercado/envio/"
-      }
+      },
+      "color": "#E2001A"
     },
     {
       "id": "consum",
@@ -136,7 +141,8 @@
       "tarifas": {
         "comprobadas": "2026-10-22",
         "fuente": "https://tienda.consum.es/site/es/nota-legal"
-      }
+      },
+      "color": "#F18A00"
     },
     {
       "id": "bonpreu",
@@ -157,13 +163,15 @@
       "tarifas": {
         "comprobadas": "2026-10-22",
         "fuente": "https://www.compraonline.bonpreuesclat.cat/content/preguntes-frequents"
-      }
+      },
+      "color": "#E8A317"
     },
     {
       "id": "caprabo",
       "nombre": "Caprabo",
       "estado": "proximamente",
-      "web": "https://www.capraboacasa.com"
+      "web": "https://www.capraboacasa.com",
+      "color": "#D7141A"
     },
     {
       "id": "condis",
@@ -187,31 +195,36 @@
       "tarifas": {
         "comprobadas": "2026-10-22",
         "fuente": "https://compraonline.condis.es/condiciones-generales/l/es_ES"
-      }
+      },
+      "color": "#C8102E"
     },
     {
       "id": "elcorteingles",
       "nombre": "El Corte Inglés / Hipercor",
       "estado": "proximamente",
-      "web": "https://www.elcorteingles.es/supermercado"
+      "web": "https://www.elcorteingles.es/supermercado",
+      "color": "#008B40"
     },
     {
       "id": "ahorramas",
       "nombre": "Ahorramas",
       "estado": "proximamente",
-      "web": "https://www.ahorramas.com"
+      "web": "https://www.ahorramas.com",
+      "color": "#E2231A"
     },
     {
       "id": "lidl",
       "nombre": "Lidl",
       "estado": "dificil",
-      "web": "https://www.lidl.es"
+      "web": "https://www.lidl.es",
+      "color": "#0050AA"
     },
     {
       "id": "aldi",
       "nombre": "Aldi",
       "estado": "dificil",
-      "web": "https://www.aldi.es"
+      "web": "https://www.aldi.es",
+      "color": "#00005F"
     }
   ]
 }

@@ -237,6 +237,17 @@
         "No doy nada por hecho: al añadir a alguien hay que marcar sus comidas, y si ya estaba, la campana te pide que lo revises.",
         "El menú, las raciones, la compra y los avisos solo cuentan a quien come en casa en cada comida. Los festivos come en casa, salvo que lo desmarques."
       ]
+    },
+    {
+      "version": 25,
+      "fecha": "2026-10-22",
+      "titulo": "Nuevo diseño y fotos de verdad",
+      "cambios": [
+        "Asistente renovado: una pregunta por pantalla, con barra de progreso y botón grande abajo.",
+        "Presupuesto con número grande y deslizador, días de cocina en pastillas y supermercados en tarjetas.",
+        "Ficha de receta nueva: precio por ración, raciones, tiempo y calorías en tarjetas, barras de proteína, hidratos y grasas, y pestañas de ingredientes y preparación.",
+        "137 platos ya tienen foto real (de Wikimedia Commons, con su autor y licencia). El resto llegará pronto."
+      ]
     }
   ]
 }

@@ -2,7 +2,7 @@
 "use strict";
 
 // Versión de la app: súbela (y el ?v= de index.html y VERSION de sw.js) en cada mejora, y añade sus novedades a data/novedades.json
-const APP_VERSION = 24;
+const APP_VERSION = 25;
 
 /* ---------- Utilidades ---------- */
 const DAYS = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];   // índice 0 = lunes
@@ -39,6 +39,7 @@ const SACRIFICES = {
 const ALLERGENS = {gluten:"Gluten",lacteos:"Lácteos y lactosa",huevo:"Huevo",pescado:"Pescado",crustaceos:"Crustáceos (gambas, langostinos)",
   moluscos:"Moluscos (calamar, sepia)",frutos_cascara:"Frutos de cáscara",cacahuete:"Cacahuete",soja:"Soja",sesamo:"Sésamo",
   apio:"Apio",mostaza:"Mostaza",sulfitos:"Sulfitos",altramuces:"Altramuces"};
+const ALLERGEN_ICO = {gluten:"🌾",lacteos:"🥛",huevo:"🥚",pescado:"🐟",crustaceos:"🦐",moluscos:"🦑",frutos_cascara:"🌰",cacahuete:"🥜",soja:"🫘",sesamo:"🌱",apio:"🥬",mostaza:"🫙",sulfitos:"🍷",altramuces:"🌼"};
 const MEALSTATE = {cocinar:"Cocino",taper:"Táper",fuera:"Fuera",libre:"Libre"};
 const EXTRA_MEALS = {desayuno:"Desayuno",mediamanana:"Media mañana",merienda:"Merienda",pre:"Antes de entrenar",post:"Después de entrenar",recena:"Recena"};
 

@@ -5,18 +5,19 @@ let wiz={i:0,single:null};   // single = id del paso cuando se edita uno suelto 
 
 function wizSteps(){
   const st=[
-    {id:"hola",title:"Hola 👋"},
-    {id:"aparatos",title:"¿Con qué cocinas?"},
-    {id:"zona",title:"¿Dónde compras?"},
-    {id:"familia",title:"¿Quién come en casa?"},
-    ...adults().flatMap(a=>[{id:"objetivos:"+a.id,title:a.id==="yo"?"¿Cuál es tu objetivo?":"Objetivos de "+personName(a)},
-      {id:"entreno:"+a.id,title:a.id==="yo"?"¿Entrenas?":"¿"+personName(a)+" entrena?"}]),
-    {id:"semana",title:"Tu semana tipo"},
-    {id:"cocina",title:"¿Cuándo cocinas?"},
-    {id:"plan",title:"¿Cuándo planificas?"},
-    {id:"compra",title:"Compra y presupuesto"},
-    ...S.people.map(p=>({id:"gustos:"+p.id,title:p.id==="yo"?"Tus gustos":"Gustos de "+personName(p)})),
-    {id:"listo",title:"¡Listo!"}
+    // title: lo que va entre *asteriscos* sale en cursiva de acento
+    {id:"hola",eyebrow:"Bienvenida",title:"Hola, *empezamos*"},
+    {id:"aparatos",eyebrow:"Tu cocina",title:"¿Qué hay en tu *cocina?*"},
+    {id:"zona",eyebrow:"Tu súper",title:"¿Dónde haces *la compra?*"},
+    {id:"familia",eyebrow:"Tu casa",title:"¿Quién come *en casa?*"},
+    ...adults().flatMap(a=>[{id:"objetivos:"+a.id,eyebrow:"Objetivos",title:a.id==="yo"?"¿Qué te *importa?*":"¿Qué le importa a *"+personName(a)+"?*"},
+      {id:"entreno:"+a.id,eyebrow:"Deporte",title:a.id==="yo"?"¿*Entrenas?*":"¿"+personName(a)+" *entrena?*"}]),
+    {id:"semana",eyebrow:"Tu semana",title:"Tu semana *tipo*"},
+    {id:"cocina",eyebrow:"Días de cocina",title:"¿Cuándo *cocinas?*"},
+    {id:"plan",eyebrow:"Planificación",title:"¿Cuándo *planificas?*"},
+    {id:"compra",eyebrow:"Presupuesto",title:"Fija tu *presupuesto*"},
+    ...S.people.map(p=>({id:"gustos:"+p.id,eyebrow:"Dieta y gustos",title:p.id==="yo"?"¿Cómo *comes?*":"¿Cómo come *"+personName(p)+"?*"})),
+    {id:"listo",eyebrow:"Todo listo",title:"¡A *cocinar!*"}
   ];
   return st;
 }
@@ -30,12 +31,13 @@ function renderWizard(){
   const single=wiz.single==="hijos"?"familia":wiz.single==="objetivos"||wiz.single==="entreno"?wiz.single+":yo":wiz.single;
   const step=single?steps.find(s=>s.id===single):steps[Math.min(wiz.i,steps.length-1)];
   if(!step){wiz.single=null;tab="perfil";render();return}
-  const n=steps.indexOf(step);
-  let h=`<section class="wiz">`;
-  if(!wiz.single)h+=`<div class="step">Paso ${n+1} de ${steps.length}</div><div class="progress"><i style="width:${(n+1)/steps.length*100}%"></i></div>`;
-  h+=`<h2>${esc(step.title)}</h2>`+stepBody(step.id)+`<div class="nav">`;
-  if(wiz.single)h+=`<button class="btn ghost" data-wz="cancel">Volver</button><button class="btn" data-wz="save">Guardar</button>`;
-  else h+=`${n>0?`<button class="btn ghost" data-wz="back">Atrás</button>`:"<span></span>"}<button class="btn" data-wz="next">${step.id==="listo"?"Generar mi menú":"Siguiente"}</button>`;
+  const n=steps.indexOf(step), N=steps.length;
+  const back=wiz.single?"cancel":n>0?"back":null;
+  let h=`<section class="wiz"><div class="wtop">${back?`<button class="wback" data-wz="${back}" aria-label="Atrás"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>`:`<span class="wback ph"></span>`}
+    ${wiz.single?`<span class="wtitle">Editar</span>`:`<div class="segs" role="progressbar" aria-valuemin="1" aria-valuemax="${N}" aria-valuenow="${n+1}">${steps.map((_,i)=>`<i class="${i<n?"done":i===n?"now":""}"></i>`).join("")}</div><span class="wcount">${n+1}/${N}</span>`}</div>
+    <div class="eyebrow">${esc(step.eyebrow||"")}</div><h2 class="wh">${accentTitle(step.title)}</h2>`+stepBody(step.id)+`<div class="wcta">`;
+  if(wiz.single)h+=`<button class="btn cta" data-wz="save">Guardar</button>`;
+  else h+=`<button class="btn cta" data-wz="next">${step.id==="listo"?"Crear mi menú":"Continuar"} <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>`;
   main.innerHTML=h+`</div></section>`;
   bindStep(step.id);
   main.querySelector("[data-wz=back]")?.addEventListener("click",()=>{wiz.i--;render();scrollTo(0,0)});
@@ -46,11 +48,28 @@ function renderWizard(){
   main.querySelector("[data-wz=save]")?.addEventListener("click",()=>{if(!validateStep(step.id))return;save();refreshPlans();wiz.single=null;tab="perfil";render();toast("Guardado")});
   main.querySelector("[data-wz=cancel]")?.addEventListener("click",()=>{wiz.single=null;tab="perfil";render()});
 }
+// Título con una parte en cursiva de acento: "¿Dónde haces *la compra?*"
+const accentTitle=t=>esc(t).replace(/\*(.+?)\*/g,"<em>$1</em>");
 function finishOnboarding(){
   S.onboarded=true;save();
   if(typeof trackOnBoot==="function")trackOnBoot();
-  ensureHorizon();save();tab="menu";if(S.home.start&&S.home.start>todayISO())month=S.home.start.slice(0,7);render();toast("Menú generado. Puedes cambiar lo que quieras");
+  preparingScreen(()=>{ensureHorizon();save()},()=>{tab="menu";if(S.home.start&&S.home.start>todayISO())month=S.home.start.slice(0,7);render();toast("Menú generado. Puedes cambiar lo que quieras")});
 }
+// Pantalla "Preparando tu semana": hace el trabajo y enseña lo que va haciendo
+function preparingScreen(work,done){
+  const b=Number(S.home.budget.week)||Math.round((Number(S.home.budget.month)||0)/4.3);
+  const msgs=["Ajustando a vuestros gustos…","Teniendo en cuenta quién come cada día…",b?`Manteniendo la compra por debajo de ${b} € a la semana…`:"Buscando lo más barato…","Preparando tu lista de la compra…"];
+  const ov=document.createElement("div");ov.className="prep";
+  ov.innerHTML=`<div class="prepin"><h2 class="wh">Preparando <em>tu semana</em></h2><p>Un momento, nos encargamos.</p>
+    <div class="prepart" aria-hidden="true"><span>🍲</span><span>🥗</span><span>🍝</span><span>🐟</span><span>🥘</span><div class="pot">🍳</div></div>
+    <div class="prepbar"><i></i></div><p class="prepmsg"><span class="dot"></span><span id="prepTxt">${msgs[0]}</span></p></div>`;
+  document.body.appendChild(ov);
+  let i=0;const t=setInterval(()=>{i++;if(i<msgs.length)ov.querySelector("#prepTxt").textContent=msgs[i]},750);
+  setTimeout(()=>{try{work()}catch(e){console.error(e)}},60);
+  setTimeout(()=>{clearInterval(t);ov.classList.add("out");done();setTimeout(()=>ov.remove(),350)},3100);
+}
+// Días como pastillas verticales (L M X J V S D)
+const dayPills=(attr,sel)=>`<div class="daypills">${["L","M","X","J","V","S","D"].map((d,i)=>`<button type="button" class="dp" ${attr}="${i}" aria-pressed="${sel.includes(i)}" aria-label="${DAYS[i]}"><b>${d}</b><i></i></button>`).join("")}</div><p class="dpcount">${sel.length} ${sel.length===1?"día":"días"} a la semana</p>`;
 // Tras cambiar ajustes: rellena los huecos nuevos sin tocar los platos ya elegidos
 function refreshPlans(){for(const s of Object.keys(S.plans))if(s>=weekStartFor(todayISO()))ensureWeek(s);save()}
 
@@ -65,8 +84,8 @@ function stepBody(fullId){
   if(id==="aparatos")return `<p class="lead">Solo te propondré recetas que puedas hacer.</p><div class="chips">${Object.entries(APP).filter(([k])=>k!=="ninguno").map(([k,v])=>chip("data-app",k,H.apps.includes(k),v)).join("")}</div>`;
   if(id==="zona"){const ch=H.supers&&H.supers.length?H.supers:[H.super||"mercadona"],ok=x=>superHasPrices(x.id);
     return `<p class="lead">¿Dónde te viene bien comprar? Marca todos los supermercados, aunque solo vayas a la tienda: comparo sus precios cada semana.</p>
-    <div class="group">${SUPERS.map(x=>{const on=ch.includes(x.id),sin=(x.sin_reparto||[]).includes(H.cp);
-      return `<button type="button" class="alt supopt" data-super="${x.id}" aria-pressed="${on}" ${ok(x)?"":"disabled"} style="${ok(x)?"":"opacity:.55"}"><span class="tick">${on?"✓":""}</span><span><b>${esc(x.nombre)}${H.super===x.id&&ch.length>1?` <span class="badge ok">Principal</span>`:""}</b><small>${ok(x)?(x.id==="mercadona"?"Precios de tu zona, lista con enlaces y tickets":"Precios de su web, cada semana")+(sin?" · no reparte en tu zona, solo en tienda":""):"Próximamente"}</small></span></button>`}).join("")}</div>
+    <div class="supgrid">${SUPERS.slice().sort((a,b)=>ok(b)-ok(a)).map(x=>{const on=ch.includes(x.id),sin=(x.sin_reparto||[]).includes(H.cp);
+      return `<button type="button" class="suptile" data-super="${x.id}" aria-pressed="${on}" ${ok(x)?"":"disabled"} style="--brand:${x.color||"var(--ink)"}"><span class="tick">✓</span><b class="wm">${esc(x.nombre)}</b><small>${ok(x)?(H.super===x.id&&ch.length>1?"Principal":sin?"Solo en tienda":x.id==="mercadona"?"Precios de tu zona":"Precios semanales"):"Próximamente"}</small></button>`}).join("")}</div>
     ${ch.length>1?`<div class="field"><label>Tu supermercado principal</label><div class="chips">${ch.map(s=>chip("data-mainsup",s,H.super===s,esc(superById(s).nombre))).join("")}</div></div>
     <div class="field"><label>¿Cómo hago la lista?</label><div class="chips">${chip("data-strat","barato",H.shop.strategy==="barato","Cada cosa donde sea más barata")}${chip("data-strat","principal",H.shop.strategy!=="barato","Todo en el principal")}</div>
       <div class="hint">Puedes cambiarlo cuando quieras desde la lista de la compra.</div></div>`:""}
@@ -88,7 +107,7 @@ function stepBody(fullId){
         <div class="row"><div class="field" style="flex:1"><label>Ese día llega para</label><select data-kf="arrive"><option value="comida" ${t.arrive==="comida"?"selected":""}>la comida</option><option value="cena" ${t.arrive==="cena"?"selected":""}>la cena</option></select></div>
         <div class="field" style="flex:1"><label>El último día se va</label><select data-kf="leave"><option value="cena" ${t.leave==="cena"?"selected":""}>después de cenar</option><option value="comida" ${t.leave==="comida"?"selected":""}>después de comer</option></select></div></div>
         <div class="okbox small">${esc(turnText(k))}</div>`})():""}
-      ${pr.type==="dias"?`<div class="chips">${DSHORT.map((d,i)=>chip("data-kday",i,(pr.days||[]).includes(i),d)).join("")}</div>`:""}
+      ${pr.type==="dias"?dayPills("data-kday",pr.days||[]):""}
       ${pr.type!=="manual"?(()=>{const aw=k.away||{};return `<div class="field"><label>Cuando está contigo, ¿qué comidas hace en casa?</label>
         <div class="hint" style="margin:0 0 6px">Cada persona es distinta: marca solo las que hace en casa. Las que haga fuera (comedor del cole, trabajo…), déjalas sin marcar.</div>
         ${k.mealsSet?"":`<div class="warnbox small" style="margin:0 0 8px">Sin confirmar: marca sus comidas${k.away?"":" (ahora cuento que hace todas en casa)"}.</div>`}
@@ -130,7 +149,7 @@ function stepBody(fullId){
     return h;
   }
   if(id==="cocina")return `<div>${[["diario","Cada día","Cocinas la cena y haces doble para el táper del día siguiente"],["lote","Uno o varios días por semana","Cocinas varios platos de una vez (batch cooking) y los guardas en tápers"]].map(([k,t,d])=>`<button type="button" class="alt" data-cook="${k}" style="${H.cookMode===k?"outline:2px solid var(--tomato)":""}"><b>${t}</b><small>${d}</small></button>`).join("")}</div>
-    ${H.cookMode==="lote"?`<div class="group"><h3>¿Qué días cocinas?</h3><div class="chips">${DAYS.map((d,i)=>chip("data-cday",i,H.cookDays.includes(i),d)).join("")}</div><div class="hint" style="color:var(--muted)">Elegiré platos que aguanten en la nevera hasta que te los comas; si no aguantan, te diré cuáles congelar.</div></div>`:""}`;
+    ${H.cookMode==="lote"?`<div class="group"><h3>¿Qué días cocinas?</h3>${dayPills("data-cday",H.cookDays)}<div class="hint" style="color:var(--muted)">Elegiré platos que aguanten en la nevera hasta que te los comas; si no aguantan, te diré cuáles congelar.</div></div>`:""}`;
   if(id==="plan")return `<p class="lead">Te avisaré para preparar el menú y la compra.</p>
     <div class="field"><label for="wzStart">¿Desde cuándo empieza el plan?</label><input id="wzStart" type="date" value="${esc(H.start||todayISO())}">
       <div class="hint">Hasta ese día no hago compra: te ayudo a gastar lo que ya tienes en casa.</div></div>
@@ -140,13 +159,18 @@ function stepBody(fullId){
   if(id==="compra"){const sh=H.shop,b=H.budget;
     const modeChips=(k,v)=>Object.entries(SHOP_MODES).map(([m,t])=>chip("data-mode",k+":"+m,v===m,t)).join("");
     const tf=Object.entries(SHOP_MODES).map(([m,t])=>{const x=tarifa(m);return `${t}: ${x.envio?eur(x.envio)+" de envío":"sin envío"}${x.minimo?", pedido mínimo "+eur(x.minimo):""}`}).join(" · ");
-    return `<div class="group"><h3>Compra del mes (despensa, carne para congelar y congelados)</h3><div class="chips">${modeChips("monthMode",sh.monthMode)}</div></div>
+    return `<div class="budget"><div class="bnum"><span id="bVal">${Math.round(b.month)}</span><sup>€</sup></div><div class="bsub">al mes · unos <b id="bWeek">${eur((Number(b.month)||0)/4.3)}</b> a la semana</div>
+      <input type="range" id="wzBM" min="40" max="900" step="5" value="${Math.min(900,Math.max(40,Number(b.month)||150))}" style="--p:${(Math.min(900,Math.max(40,Number(b.month)||150))-40)/8.6}%" aria-label="Presupuesto al mes">
+      <div class="brange"><span>40 €</span><span>900 €</span></div>
+      <div class="bcount"><span class="ico">👥</span><span><b>Cocinas para</b><small>${S.people.length===1?"Solo tú":S.people.map(personName).join(", ")}</small></span><span class="bn">${S.people.length}</span></div></div>
+    <details class="more"><summary>Más ajustes del presupuesto</summary>
+    <div class="field"><label for="wzBW">Presupuesto a la semana (€)</label><input id="wzBW" type="number" min="0" step="1" value="${b.week??""}" placeholder="Automático: el del mes entre las semanas"></div>
+    <div class="field"><label for="wzBB">Básicos al mes: aceite, sal, especias (€)</label><input id="wzBB" type="number" min="0" step="1" value="${b.basics}"></div></details>
+    <div class="group"><h3>Compra del mes (despensa, carne para congelar y congelados)</h3><div class="chips">${modeChips("monthMode",sh.monthMode)}</div></div>
     <div class="group"><h3>Compra de cada semana (fresco)</h3><div class="chips">${modeChips("weekMode",sh.weekMode)}</div></div>
     <div class="field"><label for="wzDel">Día en que llega o haces la compra semanal</label>${dowSelect("wzDel",sh.delivery)}<div class="hint">Lo que cocines antes de ese día sale de lo que ya tienes en casa.</div></div>
     <p class="small muted">Tarifas de ${esc(superInfo().nombre||"tu supermercado")}: ${esc(tf)}. Las pone la app y se actualizan si cambian.</p>
-    <div class="field"><label for="wzBM">Presupuesto al mes (€)</label><input id="wzBM" type="number" min="0" step="5" value="${b.month}"></div>
-    <div class="field"><label for="wzBW">Presupuesto a la semana (€)</label><input id="wzBW" type="number" min="0" step="1" value="${b.week??""}" placeholder="Automático: el del mes entre las semanas"></div>
-    <div class="field"><label for="wzBB">Básicos al mes: aceite, sal, especias (€)</label><input id="wzBB" type="number" min="0" step="1" value="${b.basics}"></div>
+
     <div class="group"><h3>¿Te importa repetir platos para ahorrar?</h3><div>${Object.entries(REPEAT).map(([k,[t,d]])=>`<button type="button" class="alt" data-rep="${k}" style="${(H.repeat||"no")===k?"outline:2px solid var(--tomato)":""}"><b>${t}</b><small>${d}</small></button>`).join("")}</div></div>
     <div class="group"><h3>Si no llega el presupuesto, acepto…</h3><p class="muted small" style="margin:0 0 8px">Siempre intento acercarme al máximo. Si no llego, te preguntaré; puedes dejarlo decidido aquí.</p>
     <div class="chips">${Object.entries(SACRIFICES).map(([k,[t]])=>chip("data-sac",k,(H.sacrifice||{})[k],t)).join("")}</div></div>`;
@@ -161,7 +185,7 @@ function tastesEditor(p){
   const groups={};for(const x of Object.values(P))(groups[x.aisle]=groups[x.aisle]||[]).push(x);
   const al=p.allergies||[];
   let h=`<div class="group"><h3>¿Alguna alergia o intolerancia?</h3><p class="small muted" style="margin:0 0 8px">Nunca propondré platos con estos alérgenos${p.id==="yo"?"":" a "+esc(personName(p))}. Es orientativo: revisa siempre la etiqueta.</p>
-    <div class="chips">${chip("data-alg-none",p.id,!al.length,"Ninguna")}${Object.entries(ALLERGENS).map(([k,t])=>chip("data-alg",p.id+"|"+k,al.includes(k),esc(t))).join("")}</div></div>
+    <div class="chips">${chip("data-alg-none",p.id,!al.length,"🍽️ Ninguna")}${Object.entries(ALLERGENS).map(([k,t])=>chip("data-alg",p.id+"|"+k,al.includes(k),ALLERGEN_ICO[k]+" "+esc(t))).join("")}</div></div>
   <p class="lead">Toca cada ingrediente para cambiarlo. Lo que dejes sin marcar lo iré aprendiendo.</p>
   <div class="legend"><span>1 toque: ❤️ me encanta</span><span>2: 👍 me gusta</span><span>3: 👎 no me gusta</span><span>4: 🚫 no puede comerlo</span></div>`;
   for(const [g,list] of Object.entries(groups)){
@@ -189,6 +213,7 @@ function bindStep(fullId){
 USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean).join(" · "));fd.append(c.campos.version,String(APP_VERSION));
     try{await fetch(c.url,{method:"POST",mode:"no-cors",body:fd});S.zoneAsked=H.cp;save();rerender();toast("Pedido enviado")}catch(e){toast("Sin conexión: inténtalo más tarde")}});
   q("#wzTr")&&(q("#wzTr").onclick=openTransferCode);
+  q("#wzBM")&&(q("#wzBM").oninput=e=>{const v=Number(e.target.value);e.target.style.setProperty("--p",(v-40)/8.6+"%");q("#bVal").textContent=v;q("#bWeek").textContent=eur(v/4.3)});
   qa("[data-super]").forEach(b=>b.onclick=()=>{const sid=b.dataset.super;let ch=H.supers&&H.supers.length?[...H.supers]:[H.super||"mercadona"];
     if(ch.includes(sid)){if(ch.length===1){toast("Elige al menos un supermercado");return}ch=ch.filter(x=>x!==sid)}else ch.push(sid);
     H.supers=ch;if(!ch.includes(H.super))H.super=ch[0];rerender()});

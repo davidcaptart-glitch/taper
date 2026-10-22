@@ -37,6 +37,7 @@ function render(){
   const vk=tab+"|"+(tab==="wizard"?(wiz.single||wiz.i):"")+"|"+month;
   main.classList.toggle("anim",vk!==lastView);lastView=vk;
   renderHeader();
+  document.body.classList.toggle("wizmode",tab==="wizard");
   if(tab==="wizard")return renderWizard();
   if(tab==="menu")renderMenu();
   if(tab==="compra")renderCompra();
@@ -407,37 +408,49 @@ function openDislike(rid,who,sid){
   };
 }
 function bindOpen(){main.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>openRecipe(b.dataset.open,b.dataset.slot))}
+let recTab="ing";
 function openRecipe(id,sid){
   const r=RX[id];let serv=2;let vi=Math.max(0,r.vars.indexOf(variantFor(r)));
   const sl=sid?slotFor(sid.slice(0,10),sid.slice(11)):null;if(sl)serv=sl.portions;
   const draw=()=>{
     const v=r.vars[vi], ok=new Set([...S.home.apps,"ninguno"]);
     const cost=rationCost(r);
-    showDialog(`<div class="mod">${closeBtn}
-      <span class="pill ${r.type==="c"?"carga":"ligera"}">${r.type==="c"?"⚡ Con hidratos":"🥗 Ligera"}</span>${r.kid?` <span class="pill kid">Gusta a niños</span>`:""}${r.heavy?` <span class="pill fixed">Pesada</span>`:""}
-      ${dishImg(r,"l")}${photoCredit(r)}
-      <div class="row" style="margin-top:6px"><label class="btn ghost small">📷 ${MYPHOTOS[r.id]?"Cambiar mi foto":"Foto de mi plato"}<input type="file" accept="image/*" capture="environment" id="myPh" hidden></label>${MYPHOTOS[r.id]?`<button class="btn ghost small" id="myPhDel">Quitar mi foto</button>`:""}</div>
-      <h2>${esc(r.name)}</h2>${recipeAllergens(r).length?`<div class="chips" style="margin:4px 0">${recipeAllergens(r).map(a=>`<span class="pill carga">⚠️ ${esc(ALLERGENS[a].split(" (")[0])}</span>`).join("")}</div>`:`<div class="small muted">Sin alérgenos principales</div>`}${r.sug?`<div class="small muted">💡 ${r.author?"Sugerida por "+esc(r.author):"Sugerida por la comunidad"}</div>`:""}
-      <div class="stats"><div><b>${v.time} min</b><small>${v.active} de trabajo</small></div><div><b>${r.prot||"?"} g</b><small>proteína</small></div><div><b>${r.kcal?r.kcal+" kcal":eur(cost)}</b><small>${r.kcal?eur(cost)+"/ración":"por ración"}</small></div></div>
-      ${r.carb!=null?`<div class="small muted">Por ración: ${r.carb} g hidratos · ${r.fat} g grasa · aguanta ${r.fridge} días en la nevera${r.freeze?" · se puede congelar":""}</div>`:""}
+    const fav=dishPref(me(),r.id)>=1.5;
+    const tags=[v.time<=25?"⚡ Rápido":null,(r.prot||0)>=30?"💪 Alto en proteína":null,r.type==="l"?"🥗 Ligera":"🍝 Con hidratos",r.kid?"🧒 Gusta a niños":null,r.freeze?"❄️ Se congela":null].filter(Boolean);
+    const bar=(lab,val,max,cls)=>`<div class="mbar"><span>${lab}</span><div><i class="${cls}" style="width:${Math.min(100,Math.round((val||0)/max*100))}%"></i></div><b>${val!=null?val+" g":"–"}</b></div>`;
+    showDialog(`<div class="mod recipe">
+      <div class="rhero">${dishImg(r,"l")}<button class="rbtn rclose" data-x aria-label="Cerrar"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="rright"><button class="rbtn ${fav?"on":""}" data-love aria-label="Me encanta"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button><span class="rprice">${eur(cost)}<small>/ración</small></span></div></div>
+      ${photoCredit(r)}
+      <div class="rtags">${tags.map(t=>`<span>${t}</span>`).join("")}</div>
+      <h2 class="rtitle">${esc(r.name)}</h2>
+      ${recipeAllergens(r).length?`<div class="chips" style="margin:2px 0 4px">${recipeAllergens(r).map(a=>`<span class="pill carga">⚠️ ${esc(ALLERGENS[a].split(" (")[0])}</span>`).join("")}</div>`:`<div class="small muted">Sin alérgenos principales</div>`}${r.sug?`<div class="small muted">💡 ${r.author?"Sugerida por "+esc(r.author):"Sugerida por la comunidad"}</div>`:""}
+      <div class="scards">
+        <div><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg><span class="sv"><button data-s="-0.5" aria-label="Menos raciones">−</button><b>${String(serv).replace(".",",")}</b><button data-s="0.5" aria-label="Más raciones">+</button></span><small>Raciones</small></div>
+        <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><b>${v.time} min</b><small>${v.active} min de trabajo</small></div>
+        <div><svg viewBox="0 0 24 24"><path d="M12 3c2 4 6 6 6 11a6 6 0 0 1-12 0c0-3 2-4 2-7 2 1 3 3 3 3s1-4 1-7z"/></svg><b>${r.kcal||"–"}</b><small>kcal/ración</small></div>
+      </div>
+      ${r.prot!=null?`<div class="macros">${bar("Proteína",r.prot,60,"p")}${bar("Hidratos",r.carb,110,"c")}${bar("Grasas",r.fat,45,"f")}</div>`:""}
+      ${r.fridge?`<p class="small muted" style="margin:6px 2px">Aguanta ${r.fridge} días en la nevera${r.freeze?" · se puede congelar":""}.</p>`:""}
       ${sl?`<div class="nutr" style="margin-top:6px">${(sl.eaters.length?sl.eaters:sl.tupper).concat(sl.kids).map(p=>`<div>${p.id==="yo"?"Tu plato":esc(personName(p))}: ${nutrTxt(portionNutr(r,factorOf(p)))}</div>`).join("")}</div>`:""}
       ${r.vars.length>1?`<div class="vtabs">${r.vars.map((x,i)=>`<button class="chip" data-vi="${i}" aria-pressed="${i===vi}" ${ok.has(x.app)?"":"disabled"}>${APP[x.app]}</button>`).join("")}</div>`:""}
-      <div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0"><h3>Ingredientes</h3>
-        <div><button class="btn ghost small" data-s="-0.5" aria-label="Menos raciones">−</button> <b>${String(serv).replace(".",",")}</b> rac. <button class="btn ghost small" data-s="0.5" aria-label="Más raciones">+</button></div></div>
-      <table>${r.ing.map(([p,q])=>`<tr><td>${esc(P[p].name)}</td><td>${fmtQty(q*serv,P[p].unit)}</td></tr>`).join("")}<tr><td>Aceite, sal y especias</td><td>al gusto</td></tr></table>
-      <h3 style="margin-top:14px">Paso a paso (${APP[v.app].toLowerCase()})</h3>
-      <ol>${v.steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol>
-      <div class="actions"><button class="btn" data-cook>👩‍🍳 Cocinar paso a paso</button></div>
+      <div class="segtab" role="tablist"><button role="tab" data-rt="ing" aria-selected="${recTab==="ing"}">Ingredientes</button><button role="tab" data-rt="prep" aria-selected="${recTab==="prep"}">Preparación</button></div>
+      ${recTab==="ing"?`<table class="ingt">${r.ing.map(([p,q])=>`<tr><td>${prodImg(p)}${esc(P[p].name)}</td><td>${fmtQty(q*serv,P[p].unit)}</td></tr>`).join("")}<tr><td><span class="pimg ph">🧂</span>Aceite, sal y especias</td><td>al gusto</td></tr></table>`
+      :`<button class="cookrow" data-cook><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg></span><b>Cocinar paso a paso</b><svg class="chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+        <ol class="rsteps">${v.steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol>`}
+      <div class="row" style="margin-top:8px"><label class="btn ghost small">📷 ${MYPHOTOS[r.id]?"Cambiar mi foto":"Foto de mi plato"}<input type="file" accept="image/*" capture="environment" id="myPh" hidden></label>${MYPHOTOS[r.id]?`<button class="btn ghost small" id="myPhDel">Quitar mi foto</button>`:""}</div>
       <div class="actions"><select id="rWho" style="width:auto">${S.people.map(p=>`<option value="${p.id}">${esc(personName(p))}</option>`).join("")}</select>
-        <button class="btn ghost small" data-love>❤️ Me encanta</button><button class="btn ghost small" data-hate>👎 No me gusta</button></div>
+        <button class="btn ghost small" data-love2>❤️ Me encanta</button><button class="btn ghost small" data-hate>👎 No me gusta</button></div>
       <h3 style="margin-top:10px">Más como esta</h3><div>${similar(r).map(x=>`<button class="alt" data-sim="${x.id}"><b>${esc(x.name)}</b><small>${recipeTime(x)} min · ${x.prot||"?"} g proteína</small></button>`).join("")}</div></div>`);
     dlg.querySelectorAll("[data-vi]").forEach(b=>b.onclick=()=>{vi=Number(b.dataset.vi);draw()});
     dlg.querySelector("#myPh").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{await saveMyPhoto(r.id,f);draw();render();toast("¡Qué buena pinta! Foto guardada")}catch(x){toast("No se ha podido guardar la foto")}};
     dlg.querySelector("#myPhDel")?.addEventListener("click",async()=>{await deleteMyPhoto(r.id);draw();render()});
     dlg.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{serv=Math.max(0.5,serv+Number(b.dataset.s));draw()});
-    dlg.querySelector("[data-cook]").onclick=()=>openCook(r,r.vars[vi],serv);
+    dlg.querySelector("[data-cook]")?.addEventListener("click",()=>openCook(r,r.vars[vi],serv));
+    dlg.querySelectorAll("[data-rt]").forEach(b=>b.onclick=()=>{recTab=b.dataset.rt;const y=dlg.scrollTop;draw();dlg.scrollTop=y});
     const who=()=>S.people.find(p=>p.id===dlg.querySelector("#rWho").value);
-    dlg.querySelector("[data-love]").onclick=()=>{setDish(who(),r.id,2,"Lo marcaste como favorito");toast("❤️ Apuntado para "+personName(who()))};
+    dlg.querySelector("[data-love]").onclick=()=>{if(fav){setDish(me(),r.id,null);toast("Quitado de favoritos")}else{setDish(me(),r.id,2,"Lo marcaste como favorito");toast("❤️ Guardado en tus favoritos")}draw()};
+    dlg.querySelector("[data-love2]").onclick=()=>{setDish(who(),r.id,2,"Lo marcaste como favorito");toast("❤️ Apuntado para "+personName(who()))};
     dlg.querySelector("[data-hate]").onclick=()=>openDislike(r.id,who().id,null);
     dlg.querySelectorAll("[data-sim]").forEach(b=>b.onclick=()=>openRecipe(b.dataset.sim));
   };
