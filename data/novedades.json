@@ -425,6 +425,16 @@
       "cambios": [
         "Arreglado un fallo de la versión anterior que impedía abrir la lista de la compra y el asistente."
       ]
+    },
+    {
+      "version": 45,
+      "fecha": "2026-10-22",
+      "titulo": "Custodia del mes y bolsas para congelar",
+      "cambios": [
+        "Al preparar el mes, te enseño qué días estarán tus hijos contigo (según sus turnos y los cambios apuntados). Tocas los días que no cuadren y lo apruebas; el menú y la compra se hacen con eso.",
+        "En la compra, arriba: «🧊 Al llegar: N bolsas para congelar», cada una con la foto del plato, la cantidad y la etiqueta del día. Las vas marcando a medida que las haces.",
+        "El día de la compra te aviso por la noche hasta que estén todas."
+      ]
     }
   ]
 }

@@ -50,6 +50,12 @@ function buildSchedule(){
     if(T.congelador&&dow(d)===5){try{const old=freezerState().filter(e=>e.days>FREEZER_MONTHS*30);
       if(old.length)push(at(d,"11:00"),"🧊 Gasta esto pronto",`Lleva más de 3 meses congelado: ${old.map(e=>P[e.pid].name.toLowerCase()).join(", ")}.`,"freezer|"+d)}catch(e){}}
   }
+  if(T.compra!==false||T.descongelar){try{
+    for(const m of [today.slice(0,7),nextMonthOf(today.slice(0,7))]){const sh=shopping(m);
+      for(const [key,bg] of Object.entries(sh.bags||{})){const pend=bagsPending(sh,key);if(!pend.length)continue;
+        const ws=sh.weeks[key==="mes"?0:Number(key)];if(!ws)continue;const day=deliveryDate(ws);
+        for(let i=0;i<2;i++)push(at(addDays(day,i),"20:00"),`🧊 Reparte y congela: ${pend.length} ${pend.length===1?"bolsa":"bolsas"}`,`Una bolsa por plato con su día (${[...new Set(pend.map(b=>P[b.pid].name.toLowerCase()))].slice(0,3).join(", ")}…). Márcalas en la compra.`,"frz|"+m+"|"+key)}}
+  }catch(e){}}
   if(T.compra!==false){try{
     for(const r of shopReminders()){
       const snooze=((S.shopSnooze||{})[shopKey(r.m,r.key)])||"";

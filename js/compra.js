@@ -41,7 +41,7 @@ function monthUses(m,exceptId){
 function shopping(m){
   const weeks=weeksInMonth(m), uses=monthUses(m);
   const lists={mes:{}};weeks.forEach((_,i)=>lists[i]={});
-  const first={}, freezeGuide={}, extras=weeks.map(()=>0);
+  const first={}, freezeGuide={}, bags={}, extras=weeks.map(()=>0);
   const assign=S.assign[m]||{};
   for(const u of uses){
     if(u.extra!=null){extras[u.wi]+=u.extra;continue}
@@ -49,9 +49,12 @@ function shopping(m){
     let key=keep==="fresco"?String(u.freshWi):"mes";
     if(key==="mes"){if(!first[u.pid]||u.date<first[u.pid])first[u.pid]=u.date;if(assign[u.pid]!=null)key=String(assign[u.pid])}
     lists[key][u.pid]=(lists[key][u.pid]||0)+u.q;
-    if(keep==="congelar")(freezeGuide[u.pid]=freezeGuide[u.pid]||[]).push({q:u.q,label:DSHORT[dow(u.slot.date)]+" "+shortDate(u.slot.date),name:u.r.name});
+    if(keep==="congelar"){(freezeGuide[u.pid]=freezeGuide[u.pid]||[]).push({q:u.q,label:DSHORT[dow(u.slot.date)]+" "+shortDate(u.slot.date),name:u.r.name});
+      // Bolsas para congelar de esta lista: una por producto, día y plato
+      const id=m+"|"+key+"|"+u.pid+"|"+u.slot.date+"|"+u.r.id, b=(bags[key]=bags[key]||{});
+      if(b[id])b[id].q+=u.q;else b[id]={id,pid:u.pid,q:u.q,date:u.slot.date,rid:u.r.id}}
   }
-  const out={weeks,lists:{},first,freezeGuide,extras};
+  const out={weeks,lists:{},first,freezeGuide,extras,bags:Object.fromEntries(Object.entries(bags).map(([k,v])=>[k,Object.values(v).sort((a,b)=>a.date.localeCompare(b.date))]))};
   for(const key of Object.keys(lists)){
     const items=Object.entries(lists[key]).map(([pid,q])=>({pid,q,packs:packsFor(pid,q),cost:packsFor(pid,q)*price(pid),sup:superFor(pid)}));
     const cost=items.reduce((t,i)=>t+i.cost,0);
@@ -103,6 +106,8 @@ function shopReminders(){
 }
 // Las que ya tocan (y no se han pospuesto)
 const shopDueNow=()=>shopReminders().filter(r=>r.due<=todayISO()&&!(((S.shopSnooze||{})[shopKey(r.m,r.key)]||"")>todayISO()));
+// Bolsas para congelar pendientes de una lista
+const bagsPending=(sh,key)=>(sh.bags[key]||[]).filter(b=>!(S.bags||{})[b.id]);
 function markShopDone(m,key){S.shopDone=S.shopDone||{};S.shopDone[shopKey(m,key)]=todayISO();save()}
 // Lo que tienes en casa: lo comprado (marcado) menos lo que necesitan los demás platos del mes
 function inventory(m,exceptId){

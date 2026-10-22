@@ -225,10 +225,26 @@ function monthPrepCard(){
   const nx=monthPrepDue();if(!nx)return "";
   return `<div class="prepcard"><div><div class="veb">Queda menos de una semana</div><h2>Prepara <em>${esc(mName(nx))}</em></h2><p>5 preguntas rápidas y te dejo el menú y el pedido del mes listos.</p></div><button class="btn" data-mprep="${nx}">Empezar</button></div>`;
 }
+// Previsión de los días con cada hijo con custodia o turnos: se calcula con lo que ya se sabe y se aprueba
+const custodyKids=()=>others().filter(k=>["alternas","findes","dias","manual"].includes((k.presence||{}).type));
+function daysWith(k,m){const [y,mm]=m.split("-").map(Number),n=new Date(y,mm,0).getDate(),out=[];
+  for(let i=1;i<=n;i++){const d=`${m}-${String(i).padStart(2,"0")}`;if(peopleAt(d).includes(k))out.push(d)}return out}
+function rangesText(ds){
+  if(!ds.length)return "ningún día";const rs=[];let a=ds[0],b=ds[0];
+  for(const d of ds.slice(1)){if(d===addDays(b,1)){b=d;continue}rs.push([a,b]);a=b=d}rs.push([a,b]);
+  return rs.map(([x,y])=>x===y?`el ${Number(x.slice(8))}`:`del ${Number(x.slice(8))} al ${Number(y.slice(8))}`).join(", ").replace(/, ([^,]*)$/," y $1");
+}
+function custodyCal(k,m){
+  const [y,mm]=m.split("-").map(Number),first=`${m}-01`,n=new Date(y,mm,0).getDate();
+  let h=`<div class="cal">${DSHORT.map(d=>`<span class="cal-h">${d.slice(0,1)}</span>`).join("")}${"<span></span>".repeat(dow(first))}`;
+  for(let i=0;i<n;i++){const d=addDays(first,i),on=peopleAt(d).includes(k),ov=((S.days[d]||{}).kids||{})[k.id]!=null;
+    h+=`<button class="cal-d ${on?"on":""} ${isHoliday(d)?"hol":""} ${ov?"ov":""}" data-mpk="${k.id}|${d}">${i+1}</button>`}
+  return h+`</div>`;
+}
 function openMonthPrep(nx){
   const cur=todayISO().slice(0,7)<nx?todayISO().slice(0,7):iso(new Date(Number(nx.slice(0,4)),Number(nx.slice(5))-2,1)).slice(0,7);
   const prev=(S.monthPrep||{})[nx]||{};
-  const st={mood:prev.mood||null,more:[...(prev.more||[])],less:[...(prev.less||[])],favs:[...(prev.favs||[])],budget:prev.budget||"",away:[],guests:[]};
+  const st={mood:prev.mood||null,more:[...(prev.more||[])],less:[...(prev.less||[])],favs:[...(prev.favs||[])],budget:prev.budget||"",away:[],guests:[],kidsOk:{...(prev.kidsOk||{})}};
   // Los mejor valorados del mes que acaba (o de siempre si aún no hay)
   const rated=S.ratings.filter(x=>x.who===me().id&&x.v>=1&&RX[x.rid]);
   const thisM=rated.filter(x=>String(x.at||"").startsWith(cur));
@@ -242,6 +258,10 @@ function openMonthPrep(nx){
       <h3 class="mq">En ${esc(mName(nx))} quiero <b>más</b>…</h3><div class="chips">${Object.entries(PREF_OPTS).map(([k,t])=>chip("data-more",k,st.more.includes(k),t)).join("")}</div>
       <h3 class="mq">…y <b>menos</b></h3><div class="chips">${Object.entries(PREF_OPTS).map(([k,t])=>chip("data-less",k,st.less.includes(k),t)).join("")}</div>
       ${favIds.length?`<h3 class="mq">¿Qué platos repetimos?</h3><div class="favpick">${favIds.map(id=>{const r=RX[id];return `<button class="fp" data-fav="${id}" aria-pressed="${st.favs.includes(id)}">${dishImg(r,"s")}<span>${esc(r.name)}</span></button>`}).join("")}</div>`:""}
+      ${custodyKids().map(k=>{const ds=daysWith(k,nx),ok=st.kidsOk[k.id];return `<h3 class="mq">📅 ¿Cuándo está ${esc(personName(k))} contigo en ${esc(mName(nx))}?</h3>
+        <p class="small muted" style="margin:0 0 8px">${(k.presence||{}).type==="manual"?`Marca los días que estará contigo.`:`Según sus turnos y los cambios que tienes apuntados, está contigo <b>${ds.length} días</b>: ${esc(rangesText(ds))}. Toca un día si no es así.`}</p>
+        ${custodyCal(k,nx)}
+        <div class="row" style="margin-top:8px">${ok?`<span class="okt" style="color:var(--ok);font-weight:650">✓ Aprobado</span><button class="btn ghost small" data-kok="${k.id}">Volver a revisar</button>`:`<button class="btn small" data-kok="${k.id}">✓ Así está bien</button>`}<button class="btn ghost small" data-mchg="${k.id}">Vacaciones o cambio de turno</button></div>`}).join("")}
       <h3 class="mq">¿Algo especial en ${esc(mName(nx))}?</h3>
       <details class="more" ${st.away.length?"open":""}><summary>✈️ Días fuera de casa${st.away.length?` (${st.away.length})`:""}</summary>
         ${st.away.map((a,i)=>`<div class="fixed"><span>Del ${esc(shortDate(a.from))} al ${esc(shortDate(a.to))}</span><button class="btn ghost small" data-delaway="${i}">Quitar</button></div>`).join("")}
@@ -253,7 +273,7 @@ function openMonthPrep(nx){
         <button class="btn ghost small" id="gAdd" style="margin:8px 0">+ Añadir visita</button></details>
       <details class="more" ${st.budget?"open":""}><summary>💶 Presupuesto distinto${st.budget?` (${eur(Number(st.budget))})`:""}</summary>
         <div class="field"><label for="mpB">Presupuesto de ${esc(mName(nx))} (€)</label><input type="number" id="mpB" min="0" step="5" value="${esc(st.budget)}" placeholder="${eur(Number(S.home.budget.month)||0)} (el de siempre)"></div></details>
-      ${kids().length?`<details class="more"><summary>🧒 Cambios en los turnos</summary>${kids().map(k=>`<button class="btn ghost small" data-mchg="${k.id}" style="margin:6px 6px 6px 0">Planificar un cambio de ${esc(personName(k))}</button>`).join("")}</details>`:""}
+
       <div class="actions sticky"><button class="btn wide" id="mpGo">Preparar ${esc(mName(nx))}</button></div></div>`,true);
     const q=s=>dlg.querySelectorAll(s);
     q("[data-mood]").forEach(b=>b.onclick=()=>{st.mood=b.dataset.mood;draw()});
@@ -266,9 +286,14 @@ function openMonthPrep(nx){
     dlg.querySelector("#gAdd").onclick=()=>{const d=dlg.querySelector("#gD").value,n=Number(dlg.querySelector("#gN").value);if(!d||!(n>0)){toast("Pon el día y cuántos vienen");return}st.guests.push({d,meal:dlg.querySelector("#gM").value,n});draw()};
     q("[data-delg]").forEach(b=>b.onclick=()=>{st.guests.splice(Number(b.dataset.delg),1);draw()});
     dlg.querySelector("#mpB").oninput=e=>{st.budget=e.target.value};
-    q("[data-mchg]").forEach(b=>b.onclick=()=>openChange(b.dataset.mchg));
+    q("[data-mchg]").forEach(b=>b.onclick=()=>{const y=dlg.scrollTop;openChange(b.dataset.mchg);dlg.addEventListener("close",()=>{draw();dlg.scrollTop=y},{once:true})});
+    q("[data-mpk]").forEach(b=>b.onclick=()=>{const [kid,d]=b.dataset.mpk.split("|"),k=S.people.find(p=>p.id===kid);S.days[d]=S.days[d]||{};const o=S.days[d].kids=S.days[d].kids||{};
+      const ruleOn=presentByRule(k,d),nowOn=peopleAt(d).includes(k);if(!nowOn===ruleOn)delete o[kid];else o[kid]=!nowOn;delete st.kidsOk[kid];save();const y=dlg.scrollTop;draw();dlg.scrollTop=y});
+    q("[data-kok]").forEach(b=>b.onclick=()=>{const kid=b.dataset.kok;st.kidsOk[kid]=!st.kidsOk[kid];const y=dlg.scrollTop;draw();dlg.scrollTop=y});
     dlg.querySelector("#mpGo").onclick=()=>{
-      S.monthPrep=S.monthPrep||{};S.monthPrep[nx]={mood:st.mood,more:st.more,less:st.less,favs:st.favs,budget:Number(st.budget)||null,done:todayISO()};
+      const pend=custodyKids().find(k=>!st.kidsOk[k.id]);
+      if(pend){toast(`Revisa y aprueba los días de ${personName(pend)}`);return}
+      S.monthPrep=S.monthPrep||{};S.monthPrep[nx]={mood:st.mood,more:st.more,less:st.less,favs:st.favs,budget:Number(st.budget)||null,kidsOk:st.kidsOk,done:todayISO()};
       for(const a of st.away)for(let d=a.from;d<=a.to;d=addDays(d,1)){S.days[d]=S.days[d]||{};S.days[d].comida="fuera";S.days[d].cena="fuera"}
       for(const g of st.guests){S.days[g.d]=S.days[g.d]||{};S.days[g.d].guests={...(S.days[g.d].guests||{}),[g.meal]:g.n}}
       dlg.close();
@@ -794,6 +819,10 @@ function renderCompra(){
   if(l.belowMin){const bg=l.groups.find(g=>g.belowMin);
     h+=`<div class="warnbox">${l.groups.length>1?esc(superById(bg.sup).nombre)+": n":"N"}o llegas al pedido mínimo (${eur(bg.min)}): faltan ${eur(bg.min-bg.cost)}.${wi!=null?` <button class="btn small" id="fillMin">Completar con cosas del mes</button>`:" Pásala a compra en tienda o junta compras."}</div>`;
   }
+  {const bg=sh.bags[listSel]||[];if(bg.length){const done=bg.filter(b=>(S.bags||{})[b.id]).length;
+    h+=`<details class="frzcard" ${done<bg.length?"open":""}><summary><span class="fzi">🧊</span><span><b>Al llegar: ${bg.length} ${bg.length===1?"bolsa":"bolsas"} para congelar</b><small>${done===bg.length?"✓ Todas hechas":`${done} de ${bg.length} hechas · una bolsa por plato, con su día`}</small></span></summary>
+      ${bg.map(b=>{const r=RX[b.rid],on=!!(S.bags||{})[b.id];return `<label class="bag ${on?"done":""}"><input type="checkbox" data-bag="${esc(b.id)}" ${on?"checked":""}>${r?dishImg(r,"s"):prodImg(b.pid)}<span><b>${esc(P[b.pid].name)} · ${fmtQty(b.q,P[b.pid].unit)}</b><small>Etiqueta: ${esc(DAYS[dow(b.date)])} ${esc(shortDate(b.date))}${r?" · "+esc(r.name):""}</small></span></label>`}).join("")}
+      <p class="small muted" style="margin:8px 2px 0">Aplana las bolsas para que se congelen y descongelen antes. La noche antes de cada día te aviso de pasarla a la nevera.</p></details>`}}
   if(l.items.length&&!shopIsDone(month,l))h+=`<div class="row" style="margin:4px 0 8px"><button class="btn ghost small" id="shopDone">✓ Ya he hecho esta compra</button></div>`;
   else if(l.items.length)h+=`<p class="small okt" style="margin:4px 0 8px;color:var(--ok);font-weight:600">✓ Compra hecha</p>`;
   if(listSel==="mes")h+=shopPlanCard(month);
@@ -820,10 +849,7 @@ function renderCompra(){
   h+=`<div class="card"><h2>Lo que he pagado</h2><div class="spend"><span class="small muted">Apunta el total del ticket o del pedido para comparar con lo previsto (${eur(l.cost+l.fee)}).</span><input type="number" min="0" step="0.01" id="spentIn" value="${S.spent[sk]??""}" placeholder="0,00"></div></div>`;
   if(listSel==="mes"){
     h+=`<p class="small muted">Básicos (aceite, sal, especias): ${eur(Number(S.home.budget.basics))}.${sh.extrasTotal?` Platos fijos sin receta: ${eur(sh.extrasTotal)}.`:""}</p>`;
-    const u=Object.entries(sh.freezeGuide);
-    if(u.length){h+=`<div class="guide"><h3>Al llegar a casa: reparte y congela</h3><p>Una bolsa por plato, con la etiqueta del día.</p><ul>`;
-      for(const [pid,arr] of u)h+=`<li><b>${esc(P[pid].name)}</b>: `+arr.map(a=>`${fmtQty(a.q,P[pid].unit)} para ${a.label} (${esc(a.name)})`).join("; ")+`</li>`;
-      h+=`</ul></div>`}
+
   }
   if(listSel==="mes")h+=spendingHTML(month)+`<div class="card">${reviewHTML(monthReview(month),false)}</div>`;
   const wb=weekBudget(month);
@@ -831,6 +857,7 @@ function renderCompra(){
   main.innerHTML=h+`</section>`;
   main.querySelectorAll("[data-list]").forEach(b=>b.onclick=()=>{listSel=b.dataset.list;render()});
   document.getElementById("shopDone")?.addEventListener("click",()=>{markShopDone(month,listSel);render();toast("Hecho: no te lo recuerdo más")});
+  main.querySelectorAll("[data-bag]").forEach(i=>i.onchange=()=>{S.bags=S.bags||{};if(i.checked)S.bags[i.dataset.bag]=todayISO();else delete S.bags[i.dataset.bag];save();render()});
   main.querySelectorAll("[data-splan]").forEach(b=>b.onclick=()=>{const p=SHOP_PLANS.find(x=>x.id===b.dataset.splan);
     S.home.shop.monthMode=p.month;S.home.shop.weekMode=p.week;for(const k of Object.keys(S.modes))if(k.startsWith(month+"|"))delete S.modes[k];
     save();render();toast("Hecho: "+p.t.toLowerCase())});
