@@ -10,6 +10,7 @@ function wizSteps(){
     {id:"aparatos",eyebrow:"Tu cocina",title:"¿Qué hay en tu *cocina?*"},
     {id:"zona",eyebrow:"Tu súper",title:"¿Dónde haces *la compra?*"},
     {id:"familia",eyebrow:"Tu casa",title:"¿Quién come *en casa?*"},
+    {id:"dieta",eyebrow:"Dieta y alergias",title:"¿Cómo *coméis?*"},
     ...adults().flatMap(a=>[{id:"objetivos:"+a.id,eyebrow:"Objetivos",title:a.id==="yo"?"¿Qué te *importa?*":"¿Qué le importa a *"+personName(a)+"?*"},
       {id:"entreno:"+a.id,eyebrow:"Deporte",title:a.id==="yo"?"¿*Entrenas?*":"¿"+personName(a)+" *entrena?*"}]),
     ...kids().map(k=>({id:"entreno:"+k.id,eyebrow:"Deporte",title:"¿"+personName(k)+" hace *deporte?*"})),
@@ -175,6 +176,16 @@ function stepBody(fullId){
     <div class="field"><label for="wzMun">Municipio (para los festivos locales)</label><input id="wzMun" type="text" list="wzMunList" value="${esc(H.municipio)}" placeholder="Por ejemplo, Piera"><datalist id="wzMunList">${Object.keys((FEST||{}).locales||{}).map(m=>`<option value="${esc(m)}">`).join("")}</datalist>
     <div class="hint">Si tu municipio no sale en la lista, añade sus festivos locales en Perfil > Festivos.</div></div>
     ${zoneMissing&&H.cp?`<div class="okbox small">Tu zona aún no tiene precios propios: ya los he pedido y los tendrás en uno o dos días. Mientras, verás los de la zona más cercana (suelen variar unos céntimos).</div>`:""}`;}
+  if(id==="dieta"){
+    let h=`<p class="lead">Elige la forma de comer de cada persona y sus alergias. Solo planificaré platos que encajen y no os preguntaré por ingredientes que no tomáis.</p>`;
+    for(const p of S.people){const dt=dietOf(p),al=p.allergies||[];
+      h+=`<div class="kidcard"><div class="row"><b>${esc(p.id==="yo"?(p.name||"Tú"):personName(p))}</b><span class="small muted">${p.id==="yo"?"tú":p.kind==="nino"?"niño o niña":"adulto"}</span></div>
+        <div class="field"><label>Forma de comer</label><div class="chips">${Object.entries(DIETS).map(([k,[e,t]])=>chip("data-diet",p.id+"|"+k,dt===k,e+" "+esc(t))).join("")}</div>
+        ${dt==="halal"?`<div class="hint">Quito el cerdo y lo que lleva alcohol. Compra la carne con sello halal: los supermercados no lo indican en su web.</div>`:dt==="flexi"?`<div class="hint">Más platos vegetales y menos carne, sin prohibir nada.</div>`:DIETS[dt][2].length?`<div class="hint">Sin ${DIETS[dt][2].map(x=>({carne:"carne",pescado:"pescado",marisco:"marisco",huevo:"huevo",lacteo:"lácteos",miel:"miel",cerdo:"cerdo"})[x]).join(", ")}.</div>`:""}</div>
+        <div class="field"><label>Alergias o intolerancias</label><div class="chips">${chip("data-alg-none",p.id,!al.length,"🍽️ Ninguna")}${Object.entries(ALLERGENS).map(([k,t])=>chip("data-alg",p.id+"|"+k,al.includes(k),ALLERGEN_ICO[k]+" "+esc(t))).join("")}</div>
+          <div class="hint">Es orientativo: revisa siempre la etiqueta.</div></div></div>`}
+    return h+`<p class="small muted">Si en casa coméis el mismo plato, buscaré platos que encajen con todos.</p>`;
+  }
   if(id==="familia"){
     const ptypes=[["siempre","Siempre"],["alternas","Semanas alternas"],["findes","Fines de semana alternos"],["dias","Días concretos de la semana"],["manual","Lo marco cada semana"]];
     let h=`<p class="lead">Añade a quien come contigo: pareja, hijos, otros familiares, compañeros de piso… Cada uno con cuándo está, su ración y sus propios gustos.</p>
@@ -273,11 +284,9 @@ function stepBody(fullId){
 }
 
 function tastesEditor(p){
-  const groups={};for(const x of Object.values(P))(groups[x.aisle]=groups[x.aisle]||[]).push(x);
-  const al=p.allergies||[];
-  let h=`<div class="group"><h3>¿Alguna alergia o intolerancia?</h3><p class="small muted" style="margin:0 0 8px">Nunca propondré platos con estos alérgenos${p.id==="yo"?"":" a "+esc(personName(p))}. Es orientativo: revisa siempre la etiqueta.</p>
-    <div class="chips">${chip("data-alg-none",p.id,!al.length,"🍽️ Ninguna")}${Object.entries(ALLERGENS).map(([k,t])=>chip("data-alg",p.id+"|"+k,al.includes(k),ALLERGEN_ICO[k]+" "+esc(t))).join("")}</div></div>
-  <p class="lead">Toca cada ingrediente para cambiarlo. Lo que dejes sin marcar lo iré aprendiendo.</p>
+  const groups={};for(const x of Object.values(P))if(dietAllows(p,x.id))(groups[x.aisle]=groups[x.aisle]||[]).push(x);
+  const al=p.allergies||[], dt=dietOf(p);
+  let h=`<p class="lead">Toca cada ingrediente para cambiarlo. Lo que dejes sin marcar lo iré aprendiendo.</p>
   <div class="legend"><span>1 toque: ❤️ me encanta</span><span>2: 👍 me gusta</span><span>3: 👎 no me gusta</span><span>4: 🚫 no puede comerlo</span></div>`;
   for(const [g,list] of Object.entries(groups)){
     h+=`<div class="group"><h3>${esc(g)}</h3><div class="chips">${list.sort((a,b)=>a.name.localeCompare(b.name)).map(x=>{const v=ingPref(p,x.id);
@@ -368,8 +377,9 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
   qa("[data-rep]").forEach(b=>b.onclick=()=>{H.repeat=b.dataset.rep;rerender()});
   qa("[data-sac]").forEach(b=>b.onclick=()=>{const sc=H.sacrifice=H.sacrifice||{},k=b.dataset.sac;if(sc[k])delete sc[k];else sc[k]=true;rerender()});
   qa("[data-mode]").forEach(b=>b.onclick=()=>{const [k,v]=b.dataset.mode.split(":");H.shop[k]=v;rerender()});
+  qa("[data-diet]").forEach(b=>b.onclick=()=>{const [pid,k]=b.dataset.diet.split("|");const p=S.people.find(x=>x.id===pid);p.diet=k;replanIncompatible();rerender()});
   qa("[data-alg]").forEach(b=>b.onclick=()=>{const [pid,k]=b.dataset.alg.split("|");const p=S.people.find(x=>x.id===pid);const al=p.allergies=p.allergies||[];
-    if(al.includes(k))p.allergies=al.filter(x=>x!==k);else al.push(k);rerender()});
+    if(al.includes(k))p.allergies=al.filter(x=>x!==k);else al.push(k);replanIncompatible();rerender()});
   qa("[data-alg-none]").forEach(b=>b.onclick=()=>{const p=S.people.find(x=>x.id===b.dataset.algNone);p.allergies=[];rerender()});
   qa("[data-ing]").forEach(b=>b.onclick=()=>{const p=S.people.find(x=>x.id===b.dataset.person),pid=b.dataset.ing;
     const v=ingPref(p,pid),nv=ING_CYCLE[(ING_CYCLE.indexOf(v)+1)%ING_CYCLE.length];

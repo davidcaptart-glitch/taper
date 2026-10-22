@@ -15,7 +15,8 @@
       "nombre_mercadona": "Arroz redondo Hacendado",
       "seccion": "Arroz, legumbres y pasta",
       "foto": "https://prod-mercadona.imgix.net/images/0daf43fb5761b823ce83c985930c97c9.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "pasta",
@@ -33,7 +34,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/fb1aa0c038c08e68b8d2c7ac8900b9db.jpeg?fit=crop&h=200&w=200",
       "alergenos": [
         "gluten"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "espaguetis",
@@ -51,7 +53,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/a88886e2672bdbcf24be02cb8ecddf2f.jpeg?fit=crop&h=200&w=200",
       "alergenos": [
         "gluten"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "cuscus",
@@ -69,7 +72,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/ab155e76bb3242671ee34c6e11d4fd78.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "gluten"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "lentejas",
@@ -85,7 +89,8 @@
       "nombre_mercadona": "Lenteja cocida Hacendado",
       "seccion": "Arroz, legumbres y pasta",
       "foto": "https://prod-mercadona.imgix.net/images/50b071c4bae7230b8de346b495a7981b.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "garbanzos",
@@ -101,7 +106,8 @@
       "nombre_mercadona": "Garbanzo cocido Hacendado",
       "seccion": "Arroz, legumbres y pasta",
       "foto": "https://prod-mercadona.imgix.net/images/b8b807948038c4b64791632f799e9bd8.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "alubias",
@@ -117,7 +123,8 @@
       "nombre_mercadona": "Alubia cocida blanca Hacendado",
       "seccion": "Arroz, legumbres y pasta",
       "foto": "https://prod-mercadona.imgix.net/images/f3797bcd3c8ed58804490159df581279.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "tomate_tri",
@@ -133,7 +140,8 @@
       "nombre_mercadona": "Tomate triturado Hacendado",
       "seccion": "Conservas, caldos y cremas",
       "foto": "https://prod-mercadona.imgix.net/images/117a2a2230b103f17b50e07a73a8fc38.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "tomate_frito",
@@ -149,7 +157,8 @@
       "nombre_mercadona": "Tomate frito Hacendado",
       "seccion": "Aceite, especias y salsas",
       "foto": "https://prod-mercadona.imgix.net/images/18fcaf49c55e224bb2bd9774dec259fa.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "atun",
@@ -167,6 +176,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/05c67043e6c2918b27b0d79ebfb99a7a.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "pescado"
+      ],
+      "origen": [
+        "pescado"
       ]
     },
     {
@@ -183,7 +195,8 @@
       "nombre_mercadona": "Preparado de coco Hacendado",
       "seccion": "Huevos, leche y mantequilla",
       "foto": "https://prod-mercadona.imgix.net/images/ec235bb4be1a71c37f32247b8da4400a.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "maiz",
@@ -199,7 +212,8 @@
       "nombre_mercadona": "Maíz dulce Hacendado",
       "seccion": "Conservas, caldos y cremas",
       "foto": "https://prod-mercadona.imgix.net/images/e31eda506e9dd39ca6def9bc2e2356b7.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "tortillas",
@@ -217,7 +231,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/7a9d2b32b6c45163169f9b65fff244aa.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "gluten"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "cebolla",
@@ -233,7 +248,8 @@
       "nombre_mercadona": "Cebollas",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/d950590e426dca5e9531e1ff2809edb4.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "patata",
@@ -249,7 +265,8 @@
       "nombre_mercadona": "Patatas",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/9a13af8fac3aa3f71d6b8098d7e9b176.jpeg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "boniato",
@@ -265,7 +282,8 @@
       "nombre_mercadona": "Batata",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/d6ce6c208e5da752ee3a7f6f1ccb2066.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "ajo",
@@ -281,7 +299,8 @@
       "nombre_mercadona": "Ajos morados",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/3e754d795d63e6a75070fb672c24d773.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "pechuga",
@@ -297,7 +316,10 @@
       "nombre_mercadona": "Filetes pechuga de pollo",
       "seccion": "Carne",
       "foto": "https://prod-mercadona.imgix.net/images/cfbe3b741d3a64cc637efe0c7bf0bb93.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": [
+        "carne"
+      ]
     },
     {
       "id": "muslos",
@@ -313,7 +335,10 @@
       "nombre_mercadona": "Contramuslos de pollo deshuesados y sin piel",
       "seccion": "Carne",
       "foto": "https://prod-mercadona.imgix.net/images/6f014202bb9ed41e5125106c87ef1c74.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": [
+        "carne"
+      ]
     },
     {
       "id": "picada",
@@ -331,6 +356,10 @@
       "foto": "https://prod-mercadona.imgix.net/images/3ff4619c75302a2ae20831ae3ffe6c1c.jpeg?fit=crop&h=200&w=200",
       "alergenos": [
         "sulfitos"
+      ],
+      "origen": [
+        "carne",
+        "cerdo"
       ]
     },
     {
@@ -349,6 +378,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/50a22eff94bcd78d616ede310499a235.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "sulfitos"
+      ],
+      "origen": [
+        "carne"
       ]
     },
     {
@@ -365,7 +397,11 @@
       "nombre_mercadona": "Filetes lomo de cerdo corte fino",
       "seccion": "Carne",
       "foto": "https://prod-mercadona.imgix.net/images/a3ba20f5b4816bc681f38f82aae566cd.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": [
+        "carne",
+        "cerdo"
+      ]
     },
     {
       "id": "burger",
@@ -383,6 +419,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/bf1bd3c34696dbcfc3c3b608ca0f0c4d.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "sulfitos"
+      ],
+      "origen": [
+        "carne"
       ]
     },
     {
@@ -400,6 +439,9 @@
       "seccion": "Congelados",
       "foto": "https://prod-mercadona.imgix.net/images/d276498ce484c1c8c3b247d77589e49d.jpg?fit=crop&h=200&w=200",
       "alergenos": [
+        "pescado"
+      ],
+      "origen": [
         "pescado"
       ]
     },
@@ -419,6 +461,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/8169558ae5888d1de5b676bef2853d9d.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "pescado"
+      ],
+      "origen": [
+        "pescado"
       ]
     },
     {
@@ -437,6 +482,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/d30570f6f373cc3362b6175e3d7ddd4a.jpeg?fit=crop&h=200&w=200",
       "alergenos": [
         "crustaceos"
+      ],
+      "origen": [
+        "marisco"
       ]
     },
     {
@@ -455,6 +503,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/2c316c4572b58be6a109d7f3375ffa40.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "moluscos"
+      ],
+      "origen": [
+        "marisco"
       ]
     },
     {
@@ -471,7 +522,8 @@
       "nombre_mercadona": "Brócoli Hacendado ultracongelado",
       "seccion": "Congelados",
       "foto": "https://prod-mercadona.imgix.net/images/4137c2c4c17cd4cc22e3161b5d9b50d9.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "espinacas",
@@ -487,7 +539,8 @@
       "nombre_mercadona": "Espinaca en porciones Hacendado ultracongelada",
       "seccion": "Congelados",
       "foto": "https://prod-mercadona.imgix.net/images/708f8d553aec26d56e2e09daf447df4b.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "judias",
@@ -503,7 +556,8 @@
       "nombre_mercadona": "Judía verde redonda Hacendado ultracongelada",
       "seccion": "Congelados",
       "foto": "https://prod-mercadona.imgix.net/images/6f64b307b3a4062e866cd985ce389994.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "salteado",
@@ -519,7 +573,8 @@
       "nombre_mercadona": "Salteado de verduras Hacendado ultracongelado",
       "seccion": "Congelados",
       "foto": "https://prod-mercadona.imgix.net/images/fefbdd4a6323c54a3421311053edd8a7.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "guisantes",
@@ -535,7 +590,8 @@
       "nombre_mercadona": "Guisante fino Hacendado ultracongelado",
       "seccion": "Congelados",
       "foto": "https://prod-mercadona.imgix.net/images/1cfc769270faf8a5f58a20cdc8b0ef5b.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "huevos",
@@ -552,6 +608,9 @@
       "seccion": "Huevos, leche y mantequilla",
       "foto": "https://prod-mercadona.imgix.net/images/707625e3e76b36f1834d56c1ed8aa8df.jpg?fit=crop&h=200&w=200",
       "alergenos": [
+        "huevo"
+      ],
+      "origen": [
         "huevo"
       ]
     },
@@ -571,6 +630,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/0697e560e6a01d260447f0d5aa8ae1a2.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "lacteos"
+      ],
+      "origen": [
+        "lacteo"
       ]
     },
     {
@@ -587,7 +649,8 @@
       "nombre_mercadona": "Pimiento rojo",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/6a280610f9bfadf9b78b2197c21acfae.jpeg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "calabacin",
@@ -603,7 +666,8 @@
       "nombre_mercadona": "Calabacín verde",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/ebbfb6a904fe02ba5a88b02f2be911fd.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "zanahoria",
@@ -619,7 +683,8 @@
       "nombre_mercadona": "Zanahorias",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/b862d3c846b5dd18edc52e0913e9ecc3.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "tomate",
@@ -635,7 +700,8 @@
       "nombre_mercadona": "Tomates pera",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/40027e42b9ec9f0693e8f6eb09e1e213.jpeg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "ensalada",
@@ -651,7 +717,8 @@
       "nombre_mercadona": "Ensalada mezcla 4 estaciones lavada",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/521b7ea477692d5b5ae5835f2aea842c.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "champi",
@@ -667,7 +734,8 @@
       "nombre_mercadona": "Champiñones laminados limpios",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/e21080cc55a15010c14121eb55f9d2a1.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "limon",
@@ -683,7 +751,8 @@
       "nombre_mercadona": "Limón",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/dde3a9f03e3b8abc1ebf690a29c9631d.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "yogur",
@@ -701,6 +770,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/0689561ce98dba5c0b3ad43e69be0f5f.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "lacteos"
+      ],
+      "origen": [
+        "lacteo"
       ]
     },
     {
@@ -719,7 +791,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/fe031df985de4909241d4503364df110.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "gluten"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "jamon",
@@ -735,7 +808,11 @@
       "nombre_mercadona": "Jamón cocido extra Hacendado finas lonchas",
       "seccion": "Charcutería y quesos",
       "foto": "https://prod-mercadona.imgix.net/images/d070e4c58948dba0b36098e312bb401b.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": [
+        "carne",
+        "cerdo"
+      ]
     },
     {
       "id": "fideos",
@@ -753,7 +830,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/0778f8e6272f1c743d1da88f16c4d978.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "gluten"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "caldo_pollo",
@@ -771,6 +849,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/6c57497fe4619d585d742041fcc9436e.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "apio"
+      ],
+      "origen": [
+        "carne"
       ]
     },
     {
@@ -791,6 +872,10 @@
         "pescado",
         "crustaceos",
         "apio"
+      ],
+      "origen": [
+        "marisco",
+        "pescado"
       ]
     },
     {
@@ -807,7 +892,10 @@
       "nombre_mercadona": "Filetes pechuga de pavo",
       "seccion": "Carne",
       "foto": "https://prod-mercadona.imgix.net/images/c91b2f7aa5a6c53a62e40318e876dc06.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": [
+        "carne"
+      ]
     },
     {
       "id": "burger_pavo",
@@ -825,6 +913,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/1d1f1d7f7d3f0498b4d958f493612fdd.jpeg?fit=crop&h=200&w=200",
       "alergenos": [
         "sulfitos"
+      ],
+      "origen": [
+        "carne"
       ]
     },
     {
@@ -841,7 +932,8 @@
       "nombre_mercadona": "Noodles de arroz Hacendado",
       "seccion": "Arroz, legumbres y pasta",
       "foto": "https://prod-mercadona.imgix.net/images/d1fcf8864631d627cdb7218ad91744d1.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "solomillo",
@@ -857,7 +949,11 @@
       "nombre_mercadona": "Solomillo de cerdo",
       "seccion": "Carne",
       "foto": "https://prod-mercadona.imgix.net/images/0504638a2f1bac483d0b58a3017fb59e.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": [
+        "carne",
+        "cerdo"
+      ]
     },
     {
       "id": "ternera",
@@ -873,7 +969,10 @@
       "nombre_mercadona": "Filetes de vacuno añojo para plancha",
       "seccion": "Carne",
       "foto": "https://prod-mercadona.imgix.net/images/ca0c8c633e43b0e51ac882279b8ad4da.jpeg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": [
+        "carne"
+      ]
     },
     {
       "id": "alubias_rojas",
@@ -889,7 +988,8 @@
       "nombre_mercadona": "Alubia cocida roja Hacendado",
       "seccion": "Arroz, legumbres y pasta",
       "foto": "https://prod-mercadona.imgix.net/images/231e70f1833a97babe9b0ecab3bfee2c.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "lasana",
@@ -907,7 +1007,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/96cc14f684c1d79e23f394f2ce293c7a.jpeg?fit=crop&h=200&w=200",
       "alergenos": [
         "gluten"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "bacalao",
@@ -924,6 +1025,9 @@
       "seccion": "Congelados",
       "foto": "https://prod-mercadona.imgix.net/images/6c5cff018c59d7f8938badf11d0f896b.jpg?fit=crop&h=200&w=200",
       "alergenos": [
+        "pescado"
+      ],
+      "origen": [
         "pescado"
       ]
     },
@@ -942,6 +1046,9 @@
       "seccion": "Congelados",
       "foto": "https://prod-mercadona.imgix.net/images/9b313b8406d0805cab22b0e1ff0c4d61.jpg?fit=crop&h=200&w=200",
       "alergenos": [
+        "pescado"
+      ],
+      "origen": [
         "pescado"
       ]
     },
@@ -962,6 +1069,9 @@
       "alergenos": [
         "soja",
         "gluten"
+      ],
+      "origen": [
+        "alcohol"
       ]
     },
     {
@@ -980,6 +1090,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/a6cdade0714ab23e58433866c28b32a5.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "lacteos"
+      ],
+      "origen": [
+        "lacteo"
       ]
     },
     {
@@ -999,7 +1112,8 @@
       "alergenos": [
         "mostaza",
         "sulfitos"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "edamame",
@@ -1017,7 +1131,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/27f612682e80ebb45cef1f645911e827.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "soja"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "esparragos",
@@ -1033,7 +1148,8 @@
       "nombre_mercadona": "Espárragos verdes finos",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/065bc28929758f496bd5e60660d44728.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "bonito",
@@ -1050,6 +1166,9 @@
       "seccion": "Conservas, caldos y cremas",
       "foto": "https://prod-mercadona.imgix.net/images/3b949ee5f292d0a72a9e4ecdf293499a.jpeg?fit=crop&h=200&w=200",
       "alergenos": [
+        "pescado"
+      ],
+      "origen": [
         "pescado"
       ]
     },
@@ -1069,6 +1188,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/a092a30536edf17460eace014bbfdfcf.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "pescado"
+      ],
+      "origen": [
+        "pescado"
       ]
     },
     {
@@ -1086,6 +1208,9 @@
       "seccion": "Conservas, caldos y cremas",
       "foto": "https://prod-mercadona.imgix.net/images/f0d751ea73bcb6ce3505fdc191fce5c8.jpg?fit=crop&h=200&w=200",
       "alergenos": [
+        "pescado"
+      ],
+      "origen": [
         "pescado"
       ]
     },
@@ -1105,7 +1230,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/4257949726923aaa0bbdef3e1e90f753.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "gluten"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "langostinos",
@@ -1123,6 +1249,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/3c4f9bc7137074762a6f460207b53311.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "crustaceos"
+      ],
+      "origen": [
+        "marisco"
       ]
     },
     {
@@ -1141,7 +1270,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/e3fb42812aad0e4fc3fd87524c5b4333.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "gluten"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "pasta_lentejas",
@@ -1157,7 +1287,8 @@
       "nombre_mercadona": "Pasta fusilli 100% lentejas rojas Felicia",
       "seccion": "Arroz, legumbres y pasta",
       "foto": "https://prod-mercadona.imgix.net/images/b82394e08ac387522c2286fb9c234b5f.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "hummus",
@@ -1175,7 +1306,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/b7e088db663b6315a397f75514dc4d61.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "sesamo"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "noquis",
@@ -1193,7 +1325,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/cba9ea825acfc6789572d4088ac61392.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "gluten"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "berenjena",
@@ -1209,7 +1342,8 @@
       "nombre_mercadona": "Berenjena",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/cbd784174d4dfee4fedee9f32d3ad0ab.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "quinoa",
@@ -1225,7 +1359,8 @@
       "nombre_mercadona": "Quinoa cocida blanca y roja Sabroz",
       "seccion": "Arroz, legumbres y pasta",
       "foto": "https://prod-mercadona.imgix.net/images/cccf4ae8ce7152534fba1cd7c2689433.jpeg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "dorada",
@@ -1242,6 +1377,9 @@
       "seccion": "Marisco y pescado",
       "foto": "https://prod-mercadona.imgix.net/images/3280796f6d931b64ee082213adb0b7a9.jpg?fit=crop&h=200&w=200",
       "alergenos": [
+        "pescado"
+      ],
+      "origen": [
         "pescado"
       ]
     },
@@ -1261,7 +1399,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/413f941aa57b4903cc693d93171b87f7.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "gluten"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "pesto",
@@ -1280,6 +1419,9 @@
       "alergenos": [
         "lacteos",
         "frutos_cascara"
+      ],
+      "origen": [
+        "lacteo"
       ]
     },
     {
@@ -1299,6 +1441,10 @@
       "alergenos": [
         "sulfitos",
         "lacteos"
+      ],
+      "origen": [
+        "carne",
+        "lacteo"
       ]
     },
     {
@@ -1315,7 +1461,8 @@
       "nombre_mercadona": "Piña en su jugo Hacendado rodajas",
       "seccion": "Conservas, caldos y cremas",
       "foto": "https://prod-mercadona.imgix.net/images/4d8bf0206b1f578973cd80fdf7d85179.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "leche",
@@ -1333,6 +1480,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/d8607e633d99f51031fe8751643ae7e2.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "lacteos"
+      ],
+      "origen": [
+        "lacteo"
       ]
     },
     {
@@ -1349,7 +1499,8 @@
       "nombre_mercadona": "Calabaza cacahuete cortada a trozos",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/40540d250d1043c03dbddb123e77c5b2.jpeg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "gazpacho",
@@ -1367,7 +1518,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/58afbb31db0d9537a8f94fb81f5da25d.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "sulfitos"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "tinta",
@@ -1385,6 +1537,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/f79ea5c38c9b67475afbea2b10e718a4.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "moluscos"
+      ],
+      "origen": [
+        "marisco"
       ]
     },
     {
@@ -1403,7 +1558,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/2ae6ffebda4166b4a4a860bf81c47378.jpeg?fit=crop&h=200&w=200",
       "alergenos": [
         "frutos_cascara"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "feta",
@@ -1421,6 +1577,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/32a48eaa259c9728b5f4e60333eb2fea.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "lacteos"
+      ],
+      "origen": [
+        "lacteo"
       ]
     },
     {
@@ -1437,7 +1596,8 @@
       "nombre_mercadona": "Manzana Golden",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/12cc1ef38a5b781f364ca22e46a25ad7.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "pan_burger",
@@ -1456,7 +1616,8 @@
       "alergenos": [
         "gluten",
         "sesamo"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "pan_barra",
@@ -1474,7 +1635,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/b0382f15d4c53669852e014255bdc714.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "gluten"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "avena",
@@ -1492,7 +1654,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/98910a7833008eddea7deffc843ffac7.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "gluten"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "platano",
@@ -1508,7 +1671,8 @@
       "nombre_mercadona": "Banana",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/69edef3541bbf3f4b7173c9d617a5698.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "naranja",
@@ -1524,7 +1688,8 @@
       "nombre_mercadona": "Naranja de mesa",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/e9ff28c3b115649df7138f0f51dd1f9f.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "mandarina",
@@ -1540,7 +1705,8 @@
       "nombre_mercadona": "Mandarina",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/7fde4546900f0fbd38e02be6cc4ea6ed.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "kiwi",
@@ -1556,7 +1722,8 @@
       "nombre_mercadona": "Kiwi verde",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/49e3e74a455daf4169248dfb52ae9a6d.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "pera",
@@ -1572,7 +1739,8 @@
       "nombre_mercadona": "Pera Conferencia",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/debea7dc78060cb9cab5c608e7f9eb27.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "aguacate",
@@ -1588,7 +1756,8 @@
       "nombre_mercadona": "Aguacate",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/b1dee7e254871996d81c69a656fa4304.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "pepino",
@@ -1604,7 +1773,8 @@
       "nombre_mercadona": "Pepino",
       "seccion": "Fruta y verdura",
       "foto": "https://prod-mercadona.imgix.net/images/a1e854648225054f10d2bac80ca7ca98.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "fresas",
@@ -1620,7 +1790,8 @@
       "nombre_mercadona": "Fresas enteras Hacendado ultracongeladas",
       "seccion": "Congelados",
       "foto": "https://prod-mercadona.imgix.net/images/82271348f4c89b9ee829c7a42f81412f.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "frutos_rojos",
@@ -1636,7 +1807,8 @@
       "nombre_mercadona": "Mix frutos rojos Hacendado ultracongeladas",
       "seccion": "Congelados",
       "foto": "https://prod-mercadona.imgix.net/images/9226d0c69488fd575c374293d5538ad6.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "queso_batido",
@@ -1654,6 +1826,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/d2f12f4f6b2de080b5aeebc8aa1a5e46.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "lacteos"
+      ],
+      "origen": [
+        "lacteo"
       ]
     },
     {
@@ -1672,6 +1847,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/3824dc695ca20c37b11efce2c2a2f8cc.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "lacteos"
+      ],
+      "origen": [
+        "lacteo"
       ]
     },
     {
@@ -1690,6 +1868,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/7fd31869c4e06d13baac0bdc8970e2e5.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "lacteos"
+      ],
+      "origen": [
+        "lacteo"
       ]
     },
     {
@@ -1708,6 +1889,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/2458f24e9a065c2a16a09cae37257260.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "soja"
+      ],
+      "origen": [
+        "carne"
       ]
     },
     {
@@ -1724,7 +1908,11 @@
       "nombre_mercadona": "Jamón serrano gran reserva Hacendado sin aditivos lonchas",
       "seccion": "Charcutería y quesos",
       "foto": "https://prod-mercadona.imgix.net/images/397ce752ca6a9b01f9829674a3d5876a.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": [
+        "carne",
+        "cerdo"
+      ]
     },
     {
       "id": "kefir",
@@ -1742,6 +1930,9 @@
       "foto": "https://prod-mercadona.imgix.net/images/700d23ea10748add9c31d5cfdb308633.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "lacteos"
+      ],
+      "origen": [
+        "lacteo"
       ]
     },
     {
@@ -1760,7 +1951,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/ecac26182b20af3cb009a9b33cac5693.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "cacahuete"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "cacao",
@@ -1776,7 +1968,8 @@
       "nombre_mercadona": "Cacao puro en polvo La Chocolatera",
       "seccion": "Cacao, café e infusiones",
       "foto": "https://prod-mercadona.imgix.net/images/94188bdf66094f6583107e3bbbb1f22c.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "miel",
@@ -1792,7 +1985,10 @@
       "nombre_mercadona": "Miel de flores Hacendado",
       "seccion": "Azúcar, caramelos y chocolate",
       "foto": "https://prod-mercadona.imgix.net/images/bcbdcf7e353f8eb71ac73be9eeb8fd50.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": [
+        "miel"
+      ]
     },
     {
       "id": "mermelada",
@@ -1808,7 +2004,8 @@
       "nombre_mercadona": "Confitura de fresa Hacendado 0% azúcares añadidos",
       "seccion": "Azúcar, caramelos y chocolate",
       "foto": "https://prod-mercadona.imgix.net/images/61d7e70d6c4f3ff537231caafc94d1aa.jpeg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "nueces",
@@ -1826,7 +2023,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/de768af5358346867a912d57ec96b69c.jpeg?fit=crop&h=200&w=200",
       "alergenos": [
         "frutos_cascara"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "almendras",
@@ -1844,7 +2042,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/b0be61b365cd2b6090deafd0a6ad9e41.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "frutos_cascara"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "pasas",
@@ -1862,7 +2061,8 @@
       "foto": "https://prod-mercadona.imgix.net/images/95d65ccd270215a2364fb14f07fd87be.jpg?fit=crop&h=200&w=200",
       "alergenos": [
         "sulfitos"
-      ]
+      ],
+      "origen": []
     },
     {
       "id": "chia",
@@ -1878,7 +2078,8 @@
       "nombre_mercadona": "Semillas de chía Hacendado",
       "seccion": "Aperitivos",
       "foto": "https://prod-mercadona.imgix.net/images/64ad122635e33b2109174eccd023d722.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     },
     {
       "id": "tortitas_arroz",
@@ -1894,7 +2095,8 @@
       "nombre_mercadona": "Tortitas de arroz Hacendado",
       "seccion": "Cereales y galletas",
       "foto": "https://prod-mercadona.imgix.net/images/a202828b49681aeceaa281bc820c1a18.jpg?fit=crop&h=200&w=200",
-      "alergenos": []
+      "alergenos": [],
+      "origen": []
     }
   ]
 }

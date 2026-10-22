@@ -294,9 +294,16 @@ async function openShop(){
     <div class="coinbig">🪙 <b>${coinsNow??"…"}</b> coins</div>
     <p class="small muted">Gánalas invitando a gente, usando Táper cada semana y subiendo los tickets de la compra. Lo que canjeas es para siempre.</p>
     ${Object.entries(groups).map(([g,its])=>`<h3 class="mq">${esc(g)}</h3>${its.map(([k,v])=>`<div class="shopit ${owns(k)?"own":""}"><span class="si">${v.ico}</span><span><b>${esc(v.t)}</b>${v.d?`<small>${esc(v.d)}</small>`:""}</span>
-      ${owns(k)?`<span class="okt">✓ Tuyo</span>`:`<button class="btn small" data-buy="${k}" ${coinsNow!=null&&coinsNow<v.c?"disabled":""}>🪙 ${v.c}</button>`}</div>
+      ${owns(k)?(()=>{const inUse=k.startsWith("skin_")?S.skin===k.slice(5):k.startsWith("tema_")?S.accent===k.slice(5)&&!S.skin:k.startsWith("av_")?S.avatar===k:null;
+        return inUse===null?`<span class="okt">✓ Tuyo</span>`:inUse?`<span class="okt">✓ En uso</span>`:`<button class="btn ghost small" data-use="${k}">Usar</button>`})():`<button class="btn small" data-buy="${k}" ${coinsNow!=null&&coinsNow<v.c?"disabled":""}>🪙 ${v.c}</button>`}</div>
       ${k.startsWith("skin_")?`<div class="skinprev skin-${k.slice(5)}"><div class="pv-t">Qué <em>comemos</em></div><div class="pv-c"><span>🍝 Pasta al pesto</span><i>Hoy</i></div></div>`:""}`).join("")}`).join("")}</div>`);
   loadSkinFonts();
+  // Cambiar entre lo que ya es tuyo
+  dlg.querySelectorAll("[data-use]").forEach(b=>b.onclick=()=>{const k=b.dataset.use;
+    if(k.startsWith("skin_")){S.skin=k.slice(5);applySkin()}
+    else if(k.startsWith("tema_")){S.skin=null;S.accent=k.slice(5);applySkin();applyAccent()}
+    else if(k.startsWith("av_"))S.avatar=k;
+    save();render();toast(`${SHOP[k].ico} Ahora usas: ${SHOP[k].t}`);openShop()});
   dlg.querySelectorAll("[data-buy]").forEach(b=>b.onclick=async()=>{const k=b.dataset.buy;b.disabled=true;
     try{const r=await fetch(CFG.avisos.url.replace(/\/$/,"")+"/canjear",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({uid:S.uid,clave:S.secret,item:k})});const j=await r.json();
       if(!r.ok){toast(j.error||"No se ha podido canjear");b.disabled=false;return}

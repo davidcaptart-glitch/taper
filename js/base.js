@@ -2,7 +2,7 @@
 "use strict";
 
 // Versión de la app: súbela (y el ?v= de index.html y VERSION de sw.js) en cada mejora, y añade sus novedades a data/novedades.json
-const APP_VERSION = 54;
+const APP_VERSION = 55;
 
 /* ---------- Utilidades ---------- */
 const DAYS = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];   // índice 0 = lunes
@@ -41,6 +41,18 @@ const SACRIFICES = {
 const ALLERGENS = {gluten:"Gluten",lacteos:"Lácteos y lactosa",huevo:"Huevo",pescado:"Pescado",crustaceos:"Crustáceos (gambas, langostinos)",
   moluscos:"Moluscos (calamar, sepia)",frutos_cascara:"Frutos de cáscara",cacahuete:"Cacahuete",soja:"Soja",sesamo:"Sésamo",
   apio:"Apio",mostaza:"Mostaza",sulfitos:"Sulfitos",altramuces:"Altramuces"};
+// Tipos de alimentación: qué orígenes no se comen (se miran en el campo "origen" de cada producto)
+const DIETS = {
+  omni:["🍽️","Sin restricciones",[]],
+  flexi:["🥗","Flexitariano",[]],
+  pesce:["🐟","Pescetariano",["carne"]],
+  vege:["🥚","Vegetariano (ovolácteo)",["carne","pescado","marisco"]],
+  ovo:["🍳","Ovovegetariano",["carne","pescado","marisco","lacteo"]],
+  lacto:["🧀","Lactovegetariano",["carne","pescado","marisco","huevo"]],
+  vegano:["🌱","Vegano",["carne","pescado","marisco","huevo","lacteo","miel"]],
+  halal:["☪️","Halal",["cerdo","alcohol"]],
+  sincerdo:["🐷","Sin cerdo",["cerdo"]]
+};
 const ALLERGEN_ICO = {gluten:"🌾",lacteos:"🥛",huevo:"🥚",pescado:"🐟",crustaceos:"🦐",moluscos:"🦑",frutos_cascara:"🌰",cacahuete:"🥜",soja:"🫘",sesamo:"🌱",apio:"🥬",mostaza:"🫙",sulfitos:"🍷",altramuces:"🌼"};
 const WT_ICO = {cocinar:"🍳",taper:"🥡",fuera:"🍴",libre:"–"};
 const MEALSTATE = {cocinar:"Cocino",taper:"Táper",fuera:"Fuera",libre:"Libre"};

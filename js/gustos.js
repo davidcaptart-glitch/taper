@@ -38,14 +38,22 @@ function learnedMap(p){return Object.fromEntries(learned(p).map(x=>[x.pid,x.v*0.
 // Puntuación de gusto de una receta para una persona (positivo = le gusta)
 function tasteScore(p,r,lm){
   let s=dishPref(p,r.id)*1.6;
+  // Flexitariano: más platos vegetales, menos carne (sin prohibirla)
+  if(dietOf(p)==="flexi"){const d=recipeDiet(r);s+=d==="vegano"||d==="vege"?1.4:d==="omni"?-0.8:0}
   let ing=0;for(const [pid] of r.ing){const v=ingPref(p,pid);ing+=v===-9?-20:v!==0?v:(lm&&lm[pid])||0}
   s+=ing/Math.max(2,r.ing.length)*2.2;
   return s;
 }
+// Tipo de alimentación: ¿puede comer este producto?
+const dietOf=p=>DIETS[p.diet]?p.diet:"omni";
+const dietAllows=(p,pid)=>{const bl=DIETS[dietOf(p)][2];return !bl.length||!((P[pid]&&P[pid].org)||[]).some(o=>bl.includes(o))};
+// Lo que es una receta según sus ingredientes (vegana, vegetariana…)
+function recipeDiet(r){const o=new Set(r.ing.flatMap(([pid])=>(P[pid]&&P[pid].org)||[]));
+  if(!o.size)return "vegano";if(!o.has("carne")&&!o.has("pescado")&&!o.has("marisco"))return "vege";if(!o.has("carne"))return "pesce";return "omni"}
 // Alérgenos de una receta (de sus ingredientes)
 const recipeAllergens=r=>[...new Set(r.ing.flatMap(([pid])=>(P[pid]&&P[pid].alg)||[]))];
 // ¿Puede comerlo? (alergias e intolerancias de la persona e ingredientes marcados como "no puede")
-const canEat=(p,r)=>{const al=p.allergies||[];return !r.ing.some(([pid])=>ingPref(p,pid)===-9||(al.length&&((P[pid]&&P[pid].alg)||[]).some(a=>al.includes(a))))};
+const canEat=(p,r)=>{const al=p.allergies||[];return !r.ing.some(([pid])=>ingPref(p,pid)===-9||!dietAllows(p,pid)||(al.length&&((P[pid]&&P[pid].alg)||[]).some(a=>al.includes(a))))};
 
 /* ---------- Valoraciones ---------- */
 function addRating(o){

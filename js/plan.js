@@ -372,7 +372,10 @@ function makeCtx(start,exceptId){
 function pickFor(slot,ctx){
   let c=candidates(slot);
   if(!c.length)c=candidates({...slot,need:{...slot.need,noHeavy:false}});
-  if(!c.length)c=R.filter(r=>variantFor(r));
+  // Si nada encaja, se relaja todo (gustos de los niños, pesado, nevera…) menos la dieta y las alergias, que no se saltan nunca
+  const all=slot.eaters.concat(slot.kids,slot.tupper);
+  if(!c.length)c=R.filter(r=>!r.small&&variantFor(r)&&hasPhoto(r)&&hasPack(r)&&all.every(p=>canEat(p,r)));
+  if(!c.length)return null;
   let best=null,bs=-1e9;for(const r of c){const s=scoreRecipe(r,slot,ctx);if(s>bs){bs=s;best=r}}
   return best;
 }
@@ -459,6 +462,14 @@ function monthPrepDate(m){
   // Si cae en festivo, el día laborable anterior (sin saltar a fin de semana si el día elegido era entre semana)
   const wk=dow(d)<5;for(let i=0;i<10&&(isHoliday(d)||(wk&&dow(d)>=5));i++)d=addDays(d,-1);
   return d;
+}
+// Tras cambiar la dieta o las alergias de alguien: fuera los platos que ya no puede comer (salvo los elegidos a mano)
+function replanIncompatible(){
+  for(const s of Object.keys(S.plans)){if(addDays(s,6)<todayISO())continue;const wk=S.plans[s];
+    for(const sl of buildSlots(s)){const v=wk.slots[sl.id],r=v&&RX[v.recipe];if(r&&!v.locked&&!sl.eaters.concat(sl.kids,sl.tupper).every(p=>canEat(p,r)))delete wk.slots[sl.id]}
+    for(const [d,dd] of Object.entries(wk.small||{}))for(const [m,v] of Object.entries(dd)){const r=RX[v.recipe];if(r&&!v.locked&&!smallEaters(d,m).every(p=>canEat(p,r)))delete dd[m]}
+    ensureWeek(s)}
+  save();
 }
 function refreshSmall(){for(const s of Object.keys(S.plans))if(addDays(s,6)>=todayISO()){const sm=S.plans[s].small||{};
   for(const d of Object.keys(sm))for(const m of Object.keys(sm[d]))if(!smallEaters(d,m).length)delete sm[d][m];ensureSmall(s)}}

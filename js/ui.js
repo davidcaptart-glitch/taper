@@ -621,7 +621,7 @@ function openRecipe(id,sid){
     const v=r.vars[vi], ok=new Set([...S.home.apps,"ninguno"]);
     const cost=rationCost(r);
     const fav=dishPref(me(),r.id)>=1.5;
-    const tags=[v.time<=25?"⚡ Rápido":null,(r.prot||0)>=30?"💪 Alto en proteína":null,r.type==="l"?"🥗 Ligera":"🍝 Con hidratos",r.kid?"🧒 Gusta a niños":null,r.freeze?"❄️ Se congela":null].filter(Boolean);
+    const tags=[recipeDiet(r)==="vegano"?"🌱 Vegano":recipeDiet(r)==="vege"?"🥚 Vegetariano":null,v.time<=25?"⚡ Rápido":null,(r.prot||0)>=30?"💪 Alto en proteína":null,r.type==="l"?"🥗 Ligera":"🍝 Con hidratos",r.kid?"🧒 Gusta a niños":null,r.freeze?"❄️ Se congela":null].filter(Boolean);
     const bar=(lab,val,max,cls)=>`<div class="mbar"><span>${lab}</span><div><i class="${cls}" style="width:${Math.min(100,Math.round((val||0)/max*100))}%"></i></div><b>${val!=null?val+" g":"–"}</b></div>`;
     showDialog(`<div class="mod recipe">
       <div class="rhero">${dishImg(r,"l")}<button class="rbtn rclose" data-x aria-label="Cerrar"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -921,6 +921,7 @@ function renderCompra(){
 function renderRecetas(){
   const a=me();
   const fl={todas:"Todas",fav:"Favoritas",nuevas:"Sin probar",no:"Descartadas",c:"⚡ Hidratos",l:"🥗 Ligeras",kid:"Gustan a niños"};
+  fl.d_vegano="🌱 Veganas";fl.d_vege="🥚 Vegetarianas";
   if(R.some(r=>r.small))fl.pequenas="🥐 Desayunos y meriendas";
   for(const pk of [...new Set(R.filter(r=>r.pack).map(r=>r.pack))])if(SHOP["pack_"+pk])fl["pack_"+pk]=SHOP["pack_"+pk].ico+" "+SHOP["pack_"+pk].t.replace("Pack ","");
   if(R.some(r=>r.sug))fl.comunidad="💡 De la comunidad";
@@ -935,6 +936,8 @@ function renderRecetas(){
     if(qn&&!(r.name.toLowerCase().includes(qn)||r.ing.some(([p])=>P[p].name.toLowerCase().includes(qn))))return false;
     const dp=dishPref(a,r.id);
     if(recFilter.startsWith("pack_"))return r.pack===recFilter.slice(5);
+    if(recFilter==="d_vegano")return recipeDiet(r)==="vegano";
+    if(recFilter==="d_vege")return ["vegano","vege"].includes(recipeDiet(r));
     switch(recFilter){case "pequenas":return r.small;case "comunidad":return !!r.sug;case "fav":return dp>=1.5;case "nuevas":return !tried.has(r.id);case "no":return dp<=-1;case "c":return r.type==="c";case "l":return r.type==="l";case "kid":return r.kid;case "todas":return true;default:return r.vars.some(v=>v.app===recFilter)}
   });
   h+=`<p class="small muted">${list.length} recetas</p><div class="rgrid">`;
@@ -1008,6 +1011,7 @@ function knowHTML(p){
   const le=y?"te":"le", Le=y?"Te":"Le", puede=y?"puedes":"puede";
   const al=p.allergies||[];
   return `<div class="know">
+    <h3>${DIETS[dietOf(p)][0]} ${esc(DIETS[dietOf(p)][1])}</h3>
     <h3>⚠️ Alergias e intolerancias</h3>${al.length?`<div class="chips">${al.map(a=>`<span class="pill carga">${esc(ALLERGENS[a])}</span>`).join("")}</div>`:`<p class="small muted">Ninguna indicada.</p>`}
     <h3>🚫 No ${puede} comer</h3>${ichips(by(-9))}
     <h3>👎 Ingredientes que no ${le} gustan</h3>${ichips(by(-1))}
@@ -1039,7 +1043,7 @@ function renderPerfil(){
     else fam+=acc(p.id,p.kind==="nino"?"🧒":"🧑",esc(personName(p)),sub,body);
   }
   if(fam)h+=acc("familia","👨‍👩‍👧","Tu familia",others().map(personName).join(", "),fam);
-  const items=[["aparatos","Aparatos",Object.entries(APP).filter(([k])=>S.home.apps.includes(k)).map(([,v])=>v).join(", ")],["zona","Supermercados y zona",[chosenSupers().map(s=>superById(s).nombre).join(", ")+(cheapestMode()?" (lo más barato)":""),S.home.cp,S.home.municipio].filter(Boolean).join(" · ")||"Sin indicar"],["familia","Quién come en casa",others().map(personName).join(", ")||"Solo tú"],
+  const items=[["aparatos","Aparatos",Object.entries(APP).filter(([k])=>S.home.apps.includes(k)).map(([,v])=>v).join(", ")],["zona","Supermercados y zona",[chosenSupers().map(s=>superById(s).nombre).join(", ")+(cheapestMode()?" (lo más barato)":""),S.home.cp,S.home.municipio].filter(Boolean).join(" · ")||"Sin indicar"],["dieta","Dieta y alergias",S.people.map(p=>(p.id==="yo"?"Tú":personName(p))+": "+DIETS[dietOf(p)][1].toLowerCase()+((p.allergies||[]).length?" · "+p.allergies.length+" alergias":"")).join(" · ")],["familia","Quién come en casa",others().map(personName).join(", ")||"Solo tú"],
     ...kids().map(k=>["entreno:"+k.id,"Deporte de "+personName(k),k.trains?k.sports.map(s=>SPORTS[s]).join(", "):"No hace deporte"]),
     ...adults().flatMap(a=>[["objetivos:"+a.id,a.id==="yo"?"Tus objetivos":"Objetivos de "+personName(a),a.goals.map(g=>GOALS[g][0]).join(", ")],["entreno:"+a.id,a.id==="yo"?"Tu entrenamiento":"Entrenamiento de "+personName(a),a.trains?a.sports.map(s=>SPORTS[s]).join(", "):"No entrena"]]),["cocina","Tu semana, caprichos y horario",(S.home.cookMode==="lote"?"Por lotes":"Cada día")+" · "+S.fixed.length+" platos fijos"],
     ["plan","Planificación",(S.home.start&&S.home.start>todayISO()?"Empieza el "+shortDate(S.home.start)+" · ":"")+{diaria:"Cada día",semanal:"Cada semana",quincenal:"Cada dos semanas",mensual:"Cada mes"}[S.home.planFreq]+", "+DAYS[S.home.planDay].toLowerCase()+" a las "+S.home.planTime],

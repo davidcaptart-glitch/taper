@@ -519,6 +519,16 @@
         "Nuevas estéticas en la tienda de coins, que cambian toda la app (fondo, letras, tarjetas y adornos): 📓 Libreta de la abuela, 🇮🇹 Trattoria, 🌊 Mediterránea, 🍂 Otoño acogedor, 🌙 Noche neón, 🧒 Pop infantil, 🍣 Minimal japonés y 🎄 Navidad.",
         "En la tienda ves una vista previa de cada una. Se eligen en Perfil › Aspecto › Estética."
       ]
+    },
+    {
+      "version": 55,
+      "fecha": "2026-10-22",
+      "titulo": "Tu forma de comer",
+      "cambios": [
+        "Nueva pantalla «¿Cómo coméis?» (Perfil › Ajustes › Dieta y alergias): para cada persona eliges sin restricciones, flexitariano, pescetariano, vegetariano, ovovegetariano, lactovegetariano, vegano, halal o sin cerdo, y sus alergias.",
+        "Solo planifico platos que encajan con todos, y la dieta y las alergias no se saltan nunca. En gustos ya no salen los ingredientes que no tomas.",
+        "En Recetas, filtros de veganas y vegetarianas. En la tienda, botón «Usar» para cambiar entre las estéticas, colores y avatares que ya tienes."
+      ]
     }
   ]
 }
