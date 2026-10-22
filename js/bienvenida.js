@@ -510,11 +510,11 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
 // Código postal -> pueblo (y, si hay varios, se elige); de ahí salen los festivos locales
 async function lookupCp(cp){
   const H=S.home;H.cpLooked=cp;const r=await fetch("https://api.zippopotam.us/es/"+cp);if(!r.ok)throw 0;const d=await r.json();
-  const places=[...new Set((d.places||[]).map(p=>p["place name"]))],known=Object.keys((FEST||{}).locales||{});
+  const places=[...new Set((d.places||[]).map(p=>p["place name"]))],known=new Set(Object.keys((FEST||{}).locales||{}).map(normMun));
   H.cp=cp;H.cpPlaces=places;H.cpRegion=(d.places||[])[0]?.state||"";
   // Un código postal puede tener varios núcleos (El Badorc, La Fortesa… son de Piera): se prefiere el que no es un barrio o masía
   const main=places.filter(p=>!/^(El|La|Els|Les|Los|Las|L'|Sant|Santa|Can|Ca l|Mas)\b/i.test(p));
-  if(!H.municipio||!places.includes(H.municipio))H.municipio=places.find(p=>known.includes(p))||main[0]||places[0]||"";
+  if(!H.municipio||!places.includes(H.municipio))H.municipio=places.find(p=>known.has(normMun(p)))||main[0]||places[0]||"";
 }
 function bindFixedEditor(after){
   const q=s=>document.querySelector(s);if(!q("#addfx"))return;

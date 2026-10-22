@@ -91,12 +91,17 @@ function stepTags(x){
 const rationCost=r=>r.ing.reduce((t,[p,q])=>t+q/P[p].env*price(p),0);
 
 /* ---------- Festivos ---------- */
+// Los nombres oficiales llevan el artículo al final ("Hospitalet de Llobregat, l'"): se comparan sin artículos ni acentos
+const normMun=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/^(l'|el |la |els |les |los |las )/,"").replace(/,\s*(l'|el|la|els|les)$/,"").replace(/[^a-z0-9]+/g," ").trim();
+let _munFor=null,_munKey=null;
+function munKey(){const m=S.home.municipio;if(_munFor===m)return _munKey;_munFor=m;const n=normMun(m);
+  _munKey=FEST&&FEST.locales&&m?(FEST.locales[m]?m:Object.keys(FEST.locales).find(k=>normMun(k)===n)||null):null;return _munKey}
 function isHoliday(d){
   if(S.home.festivosExtra.includes(d))return true;
   if(!FEST)return false;
   const y=d.slice(0,4);
   if((FEST.cataluna[y]||[]).includes(d))return true;
-  const loc=FEST.locales[S.home.municipio];
+  const loc=FEST.locales[munKey()];
   return !!(loc&&(loc[y]||[]).includes(d));
 }
 function holidayName(d){

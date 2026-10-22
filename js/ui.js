@@ -1186,7 +1186,7 @@ function renderPerfil(){
     ${rated||fav?`<p class="small muted" style="margin:2px 0 0">${rated} ${rated===1?"plato valorado":"platos valorados"} · ${fav} ${fav===1?"favorito":"favoritos"}</p>`:""}</div></div>`;
   // 1. Personas: una tarjeta por persona; al tocarla, su ficha
   h+=acc("personas","users-group","Personas",S.people.map(p=>isMe(p)?"tú":personName(p)).join(", "),
-    `<div class="plist">${S.people.map(p=>`<button class="prow" data-person="${esc(p.id)}"><span class="pav">${esc((p.name||"?").trim().charAt(0).toUpperCase())}</span><span class="pt"><b>${esc(isMe(p)?(p.name||"Tú")+" (tú)":personName(p))}</b><small>${esc(personLine(p))}</small></span>${ico("chevron-right")||"›"}</button>`).join("")}</div>
+    `<div class="plist">${S.people.map(p=>`<button class="prow" data-person="${esc(p.id)}"><span class="pav">${esc((p.name||"?").trim().charAt(0).toUpperCase())}</span><span class="pt"><b>${esc(isMe(p)?(p.name||"Tú")+" (tú)":personName(p))}</b><small>${esc(personLine(p))}</small>${!isMe(p)&&p.kind==="adulto"&&servidorOn()?`<em class="pinv ${p.joined?"ok":""}">${p.joined?"✓ Rellena lo suyo en su móvil":ico("mail-forward")+" Invítale a rellenar sus preferencias"}</em>`:""}</span>${ico("chevron-right")||"›"}</button>`).join("")}</div>
     <button class="btn ghost small" data-edit="familia" style="margin-top:8px">${ico("plus")||"+"} Añadir o quitar personas</button>`);
   // 2. Tu casa y tu menú
   const items=[["aparatos","Aparatos",Object.entries(APP).filter(([k])=>S.home.apps.includes(k)).map(([,v])=>v).join(", ")],
@@ -1195,21 +1195,14 @@ function renderPerfil(){
     ["plan","Planificación",(S.home.start&&S.home.start>todayISO()?"Empieza el "+shortDate(S.home.start)+" · ":"")+{diaria:"Cada día",semanal:"Cada semana",quincenal:"Cada dos semanas",mensual:"Cada mes"}[S.home.planFreq]+", "+DAYS[S.home.planDay].toLowerCase()+" a las "+S.home.planTime],
     ["zona","Supermercados y código postal",[chosenSupers().map(s=>superById(s).nombre).join(", ")+(cheapestMode()?" (lo más barato)":""),S.home.cp,S.home.municipio].filter(Boolean).join(" · ")||"Sin indicar"],
     ["compra","Compra y presupuesto",budgetSet()?eur(S.home.budget.month)+" al mes":"Sin presupuesto"]];
-  h+=acc("casamenu","home","Tu casa y tu menú","Cocina, planificación, súper, presupuesto y festivos",
+  h+=acc("casamenu","home","Tu casa y tu menú","Cocina, planificación, súper y presupuesto",
     `<button class="btn small" id="afinarOpen" style="margin-bottom:8px">${ico("sparkles")} Afinar mi menú</button>
     <div class="settingslist">${items.map(([id,t,d])=>`<button data-edit="${id}">${t}<small>${esc(d)}</small></button>`).join("")}</div>
-    <details class="more" style="margin-top:10px"><summary>${ico("calendar-event")} Festivos <span class="small muted">· Cataluña${S.home.municipio?" y "+esc(S.home.municipio):""}${S.home.festivosExtra.length?" · "+S.home.festivosExtra.length+" añadidos":""}</span></summary>
-      <p class="small muted">Se usan los de Cataluña${S.home.municipio&&FEST&&FEST.locales[S.home.municipio]?" y los locales de "+esc(S.home.municipio):""}. Añade los locales de tu municipio u otros días especiales.</p>
-      ${S.home.festivosExtra.map(d=>`<div class="fixed"><span>${esc(longDate(d))}</span><button class="btn ghost small" data-delfest="${d}">Quitar</button></div>`).join("")}
-      <div class="row"><input type="date" id="festIn" style="flex:1"><button class="btn small" id="festAdd">Añadir</button></div></details>`);
-  // 3. Compartir
-  if(servidorOn())h+=acc("compartir","share","Compartir",S.casa?"Casa compartida activa":"Casa compartida, menú compartido e invitar",
-    casaCard().replace('<div class="card">','<div>')+`<div class="actions" style="margin-top:10px"><button class="btn ghost small" id="shareMenuP">${ico("users")} Que alguien vea el menú (solo ver)</button><button class="btn ghost small" id="shareApp">${ico("share")} Recomendar Táper</button></div>`);
+    <p class="small muted" style="margin:10px 2px 0">${ico("calendar-event")} Festivos: los de Cataluña${munKey()?" y los locales de "+esc(S.home.municipio):""}, solos.</p>`);
   // 4. Coins y aspecto
   h+=acc("coins","coins","Coins y aspecto","Tus coins, la tienda, colores y estéticas",`<div id="coinsBox">${servidorOn()?`<p class="small muted">Cargando tus coins…</p>`:""}</div>
-    <p class="small muted">Ganas coins cuando alguien abre tu enlace (+1), empieza a usar Táper (+10), cada semana que la sigue usando (+2) y por cada ticket que subes (+3).</p>
-    <details class="more"><summary>${ico("share")} Tu QR y tu enlace para invitar</summary><div id="qrBox" style="display:grid;place-items:center;margin:10px 0;background:#fff;border-radius:12px;padding:10px"></div>
-      <div class="actions"><button class="btn ghost small" id="copyApp">Copiar enlace</button></div></details>
+    <details class="more"><summary>${ico("share")} Invitar a usar Táper (tu QR y tu enlace)</summary><div id="qrBox" style="display:grid;place-items:center;margin:10px 0;background:#fff;border-radius:12px;padding:10px"></div>
+      <div class="actions">${servidorOn()?`<button class="btn small" id="shareApp">${ico("share")} Enviar el enlace</button>`:""}<button class="btn ghost small" id="copyApp">Copiar enlace</button></div></details>
     <div class="field"><label>Tema</label><div class="chips">${[["light","Claro"],["dark","Oscuro"],["auto","Como el móvil"]].map(([k,t])=>chip("data-theme-set",k,(S.home.theme||"light")===k,t)).join("")}</div></div>
     <div class="field"><label>Color</label><div class="chips">${chip("data-accent","rojo",!S.accent||S.accent==="rojo","🍅 Rojo")}${Object.keys(ACCENTS).filter(k=>k!=="rojo"&&owns("tema_"+k)).map(k=>chip("data-accent",k,S.accent===k,SHOP["tema_"+k].ico+" "+SHOP["tema_"+k].t.replace("Tema ",""))).join("")}<button class="chip" id="moreColors">🛍️ Más colores</button></div></div>
     <div class="field"><label>Estética</label><div class="chips">${chip("data-skin","",!S.skin,"✨ Normal")}${Object.keys(SHOP).filter(k=>k.startsWith("skin_")&&owns(k)).map(k=>chip("data-skin",k.slice(5),S.skin===k.slice(5),SHOP[k].ico+" "+SHOP[k].t)).join("")}<button class="chip" id="moreSkins">🛍️ Más estéticas</button></div>
@@ -1223,6 +1216,7 @@ function renderPerfil(){
     <div class="actions"><button class="btn" id="exp">Exportar copia</button><button class="btn ghost" id="imp">Importar copia</button></div><input type="file" id="impFile" accept="application/json,.json" hidden>
     <details class="more"><summary>Empezar de cero</summary><p class="small muted">Guardo tus datos en este móvil, la app vuelve a la primera pantalla y, cuando quieras, los recuperas tal cual.</p>
       <div class="actions"><button class="btn small" id="fresh">Empezar de cero (guardando mis datos)</button>${snapshot()?`<button class="btn ghost small" id="restoreSnap">Recuperar mis datos del ${esc(new Date(snapshot().at).toLocaleString("es-ES",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}))}</button>`:""}</div></details>
+    ${S.casa?`<p class="small" style="margin-top:12px">${ico("home")} Estás en una casa compartida: menú, familia y compra se comparten con quien invitaste.</p><button class="btn ghost small" id="casaLeave">Salir de la casa compartida</button>`:""}
     <h3 style="margin-top:14px">Privacidad</h3>
     <p class="small">Tu familia, gustos, menús y compra se quedan en tu móvil: no hay cuenta ni contraseña. Solo sale lo necesario para lo que uses (avisos, precios de tu zona, tickets, compartir) a un servidor propio de Táper, y no se vende ni se comparte.</p>
     <details class="more"><summary>Ver el detalle</summary><ul class="small" style="margin:6px 0 6px 18px;padding:0">
@@ -1244,9 +1238,6 @@ function renderPerfil(){
   q("[data-person]").forEach(b=>b.onclick=()=>{personTab="comida";openPerson(b.dataset.person)});
   bindPersonStuff(main,render);
   bindAfinar(main);
-  document.getElementById("shareMenuP")?.addEventListener("click",openShareMenu);
-  q("[data-delfest]").forEach(b=>b.onclick=()=>{S.home.festivosExtra=S.home.festivosExtra.filter(d=>d!==b.dataset.delfest);save();refreshPlans();render()});
-  document.getElementById("festAdd").onclick=()=>{const v=document.getElementById("festIn").value;if(v&&!S.home.festivosExtra.includes(v)){S.home.festivosExtra.push(v);S.home.festivosExtra.sort();save();refreshPlans();render()}};
   document.getElementById("fresh")?.addEventListener("click",()=>{
     showDialog(`<div class="mod">${closeBtn}<h2>¿Empezar de cero?</h2><p>Guardo una copia de todo en este móvil (familia, gustos, menús, compra…) y la app vuelve a la primera pantalla, como si la abrieras por primera vez.</p>
       <p class="small muted">Para volver a tus datos: botón «Recuperar mis datos» en la primera pantalla o aquí, en Perfil › Tus datos. Si ya había otra copia guardada, se sustituye por esta.</p>

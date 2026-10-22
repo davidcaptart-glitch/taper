@@ -1008,3 +1008,7 @@ details.aisle{margin-top:10px}
 .pfoot a,.linkbtn{color:var(--muted);text-decoration:none;border:0;background:none;font:inherit;cursor:pointer;display:inline-flex;gap:5px;align-items:center}
 .prow{box-sizing:border-box;max-width:100%}.prow .ic{flex:none;color:var(--muted)}
 .plist{grid-template-columns:minmax(0,1fr)}.plist>.prow{min-width:0;width:auto}.prow .pt{overflow:hidden}
+
+.btn.wide{box-sizing:border-box;max-width:100%}
+.prow .pinv{display:inline-flex;align-items:center;gap:4px;font-style:normal;font-size:.78rem;color:var(--accent);margin-top:3px;font-weight:600}
+.prow .pinv.ok{color:var(--ok,#2f8a4a)}

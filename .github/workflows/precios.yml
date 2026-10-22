@@ -64,11 +64,17 @@ jobs:
           CODIGOS_POSTALES: ${{ vars.CODIGOS_POSTALES || vars.CODIGO_POSTAL }}
         run: python scripts/actualizar_supers.py
 
+      - name: Festivos locales de Cataluña
+        if: steps.hora.outputs.seguir == 'true' && steps.hora.outputs.solo_nuevas != '1'
+        continue-on-error: true
+        run: python scripts/actualizar_festivos.py
+
       - name: Guardar los precios si han cambiado
         if: steps.hora.outputs.seguir == 'true'
         run: |
           git add data/precios.json data/zonas.json
           if [ -f data/precios_supers.json ]; then git add data/precios_supers.json; fi
+          git add data/festivos.json
           if [ -d data/precios ]; then git add data/precios; fi
           if git diff --cached --quiet; then
             echo "Sin cambios en los precios"

@@ -758,6 +758,16 @@
         "Festivos y «Afinar mi menú» están ahora en Tu casa y tu menú; colores y estéticas, en Coins y aspecto; la privacidad, en Tus datos.",
         "Las sugerencias y la encuesta, como enlaces al final."
       ]
+    },
+    {
+      "version": 85,
+      "fecha": "2026-10-23",
+      "titulo": "Festivos de tu pueblo, solos",
+      "cambios": [
+        "Los festivos locales de todos los municipios de Cataluña se cogen solos de tu código postal (datos de la Generalitat).",
+        "Perfil, más corto: fuera «Compartir». Para que tu pareja u otro adulto rellene sus preferencias, toca su nombre en Personas.",
+        "Arreglado el botón de la tienda de coins, que se salía de la pantalla."
+      ]
     }
   ]
 }
