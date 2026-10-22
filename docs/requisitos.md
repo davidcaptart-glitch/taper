@@ -55,9 +55,28 @@ aprende se ve y se corrige en una pantalla "Lo que sé de ti" (por persona: adul
 - Favoritas con variedad (no dos semanas seguidas).
 
 ### Recetas
-- Unas 120 recetas: máx. 30 min en total y 15 de trabajo, máx. 6 ingredientes (sin contar aceite, sal y
-  especias), con calorías, proteína, hidratos y grasa estimados por ración. Antes, aprobar la lista de nombres.
-- Catálogo de productos a ~70, todos de Mercadona, con ingredientes compartidos entre recetas.
+- Catálogo grande y variado. Primera tanda: 120 recetas (lista aprobada en `docs/recetas-propuestas.md`).
+  Segunda tanda: ~100 más (objetivo ~220), y seguir ampliando con el tiempo según los gustos.
+- Reglas: máx. 30 min en total y 15 de trabajo, máx. 6 ingredientes (sin contar aceite, sal y especias),
+  con calorías, proteína, hidratos y grasa por ración, variantes por aparato, y cuánto aguanta en la nevera
+  y si se puede congelar.
+- Catálogo de productos de Mercadona, con ingredientes compartidos entre recetas.
+- **Modo cocina paso a paso**: pantalla grande con un paso cada vez, temporizadores detectados en el texto
+  ("10 min") y pantalla siempre encendida mientras cocinas.
+
+### Cambiar un plato
+- Al cambiar un plato, las sugerencias van primero con **lo que ya tienes comprado** (compras marcadas y lo
+  que sobra en despensa y congelador), con la etiqueta "Tienes todo" o "Te falta: X, Y".
+- Si eliges uno al que le falta algo, lo dice y permite añadirlo a la lista de la compra.
+
+### Cuándo cocinas (en el asistente de bienvenida y editable)
+- **Cada día**: como ahora, cada cena se cocina doble y la otra ración es el táper.
+- **Todo en un día** (batch cooking, por ejemplo el domingo): la app elige platos que aguanten en la nevera
+  los días necesarios (o se congelan y se pasan a la nevera a tiempo), y crea una **sesión de cocina** con los
+  platos ordenados para aprovechar el tiempo (horno primero, mientras tanto la vitro…), y cuántos tápers
+  salen de cada plato y para qué día.
+- **En varios días** (por ejemplo domingo y miércoles): igual, en dos sesiones.
+- Lo que no aguanta (pescado, huevo) se coloca en los primeros días tras cocinar o se cocina al momento.
 
 ### Compra y presupuesto
 - Presupuesto mensual y semanal (semanal propio o mensual / semanas). Gasto real apuntado tras cada compra,
