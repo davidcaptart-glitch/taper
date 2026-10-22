@@ -435,6 +435,15 @@
         "En la compra, arriba: «🧊 Al llegar: N bolsas para congelar», cada una con la foto del plato, la cantidad y la etiqueta del día. Las vas marcando a medida que las haces.",
         "El día de la compra te aviso por la noche hasta que estén todas."
       ]
+    },
+    {
+      "version": 46,
+      "fecha": "2026-10-22",
+      "titulo": "Tú eliges cuándo preparar el mes",
+      "cambios": [
+        "En Perfil › Ajustes › Planificación eliges qué día de la última semana del mes te aviso para preparar el siguiente (por defecto, el martes).",
+        "Si esa semana ya cambia de mes, te aviso antes, el día que elijas de la semana anterior (por defecto, el viernes). Ves los próximos avisos al momento."
+      ]
     }
   ]
 }

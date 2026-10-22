@@ -447,6 +447,17 @@ function ensureSmall(start){
 }
 // Raciones de una comida pequeña: la ración normal de cada uno
 const smallPortions=(d,m)=>Math.round(smallEaters(d,m).reduce((t,p)=>t+(p.kind==="nino"?(Number(p.factor)||0.6):(Number(p.factor)||1)),0)*100)/100;
+/* ---------- Cuándo preparar el mes siguiente ----------
+   S.home.monthPrepDay: día de la semana de la última semana del mes (0 lunes … 6 domingo; por defecto martes)
+   S.home.monthPrepAlt: si esa semana ya incluye el día 1 del mes siguiente, este día de la semana anterior (por defecto viernes) */
+function monthPrepDate(m){
+  const W=S.home.monthPrepDay??1, F=S.home.monthPrepAlt??4, [y,mm]=m.split("-").map(Number);
+  const last=iso(new Date(y,mm,0));
+  let d=last;while(dow(d)!==W)d=addDays(d,-1);           // último "martes" del mes
+  const sunday=addDays(d,6-dow(d));                       // domingo de esa semana
+  if(sunday>last){const mon=addDays(d,-dow(d)-7);return addDays(mon,F)}   // esa semana ya cambia de mes: la anterior
+  return d;
+}
 function refreshSmall(){for(const s of Object.keys(S.plans))if(addDays(s,6)>=todayISO()){const sm=S.plans[s].small||{};
   for(const d of Object.keys(sm))for(const m of Object.keys(sm[d]))if(!smallEaters(d,m).length)delete sm[d][m];ensureSmall(s)}}
 function smallOf(d){const wk=S.plans[weekStartFor(d)];return (wk&&wk.small&&wk.small[d])||{}}

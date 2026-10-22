@@ -126,6 +126,12 @@ function kitchenSVG(apps){
   </svg></div>`;
 }
 
+// Próximos avisos de "prepara el mes", para ver cómo queda la regla
+function monthPrepPreview(H){
+  const out=[];let m=todayISO().slice(0,7);
+  for(let i=0;i<3;i++){const d=monthPrepDate(m);out.push(`${monthName(m).split(" ")[0]}: ${DAYS[dow(d)].toLowerCase()} ${Number(d.slice(8))}`);m=nextMonthOf(m)}
+  return "Próximos avisos · "+out.join(" · ");
+}
 // Desayuno, almuerzo y merienda de una persona: cada casilla pasa por – (no) → 🏠 (en casa) → 🎒 (se lo lleva)
 const SMALL_ICO={no:"–",casa:"🏠",llevar:"🎒"};
 function smallGrid(k){
@@ -233,7 +239,11 @@ function stepBody(fullId){
       <div class="hint">Hasta ese día no hago compra: te ayudo a gastar lo que ya tienes en casa.</div></div>
     <div class="field"><label for="wzFreq">¿Cada cuánto?</label><select id="wzFreq">${[["diaria","Cada día"],["semanal","Cada semana"],["quincenal","Cada dos semanas"],["mensual","Cada mes"]].map(([v,t])=>`<option value="${v}" ${H.planFreq===v?"selected":""}>${t}</option>`).join("")}</select></div>
     <div class="field"><label for="wzPDay">Día (la semana del menú empieza ese día)</label>${dowSelect("wzPDay",H.planDay)}</div>
-    <div class="field"><label for="wzPTime">Hora</label><input id="wzPTime" type="time" value="${esc(H.planTime)}"></div>`;
+    <div class="field"><label for="wzPTime">Hora</label><input id="wzPTime" type="time" value="${esc(H.planTime)}"></div>
+    <div class="group"><h3>¿Cuándo preparamos el mes siguiente?</h3>
+      <div class="field"><label for="wzMPD">Avísame el día de la última semana del mes</label>${dowSelect("wzMPD",H.monthPrepDay??1)}</div>
+      <div class="field"><label for="wzMPA">Si en esa semana ya cambia el mes, avísame antes, el día de la semana anterior</label>${dowSelect("wzMPA",H.monthPrepAlt??4)}</div>
+      <div class="okbox small" id="mpPrev">${monthPrepPreview(H)}</div></div>`;
   if(id==="compra"){const sh=H.shop,b=H.budget;
     const modeChips=(k,v)=>Object.entries(SHOP_MODES).map(([m,t])=>chip("data-mode",k+":"+m,v===m,t)).join("");
     const tf=Object.entries(SHOP_MODES).map(([m,t])=>{const x=tarifa(m);return `${t}: ${x.envio?eur(x.envio)+" de envío":"sin envío"}${x.minimo?", pedido mínimo "+eur(x.minimo):""}`}).join(" · ");
@@ -293,6 +303,7 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
     try{await fetch(c.url,{method:"POST",mode:"no-cors",body:fd});S.zoneAsked=H.cp;save();rerender();toast("Pedido enviado")}catch(e){toast("Sin conexión: inténtalo más tarde")}});
   q("#wzTr")&&(q("#wzTr").onclick=openTransferCode);
   q("#wzRestore")&&(q("#wzRestore").onclick=()=>{if(restoreSnapshot()){wiz={i:0,single:null};tab="menu";render();toast("Datos recuperados")}});
+  ["#wzMPD","#wzMPA"].forEach(sel=>q(sel)&&(q(sel).onchange=()=>{H.monthPrepDay=Number(q("#wzMPD").value);H.monthPrepAlt=Number(q("#wzMPA").value);save();q("#mpPrev").textContent=monthPrepPreview(H)}));
   q("#wzBM")&&(q("#wzBM").oninput=e=>{const v=Number(e.target.value);e.target.style.setProperty("--p",(v-40)/8.6+"%");q("#bVal").textContent=v;q("#bWeek").textContent=eur(v/4.3)});
   qa("[data-super]").forEach(b=>b.onclick=()=>{const sid=b.dataset.super;let ch=H.supers&&H.supers.length?[...H.supers]:[H.super||"mercadona"];
     if(ch.includes(sid)){if(ch.length===1){toast("Elige al menos un supermercado");return}ch=ch.filter(x=>x!==sid)}else ch.push(sid);

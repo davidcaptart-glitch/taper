@@ -44,7 +44,7 @@ function buildSchedule(){
       if(pl.length)push(at(d,"10:30"),`🍳 Hoy toca cocinar: ${pl.length} ${pl.length===1?"plato":"platos"}`,`Para ${cv.days} ${cv.days===1?"día":"días"}. Abre la sesión y te digo en cuántos tápers repartir cada uno.`,"sess|"+d)}
     if(T.entreno)plannedSessions(d).forEach((s,j)=>push(at(d,sessTime(s),60),`🏃 ¿Hiciste ${(SPORTS[s.type]||s.type).toLowerCase()}?`,"Si no, recalculo lo que te conviene comer.","sport|"+d+"|"+j));
     {const [y,mm]=d.split("-").map(Number),last=iso(new Date(y,mm,0)),nx=mm===12?`${y+1}-01`:`${y}-${String(mm+1).padStart(2,"0")}`;
-      if(T.planificar&&daysBetween(d,last)===7&&!((S.monthPrep||{})[nx]||{}).done){const nm=new Date(nx+"-01T12:00").toLocaleDateString("es-ES",{month:"long"});
+      if(T.planificar&&d===monthPrepDate(d.slice(0,7))&&!((S.monthPrep||{})[nx]||{}).done){const nm=new Date(nx+"-01T12:00").toLocaleDateString("es-ES",{month:"long"});
         push(at(d,S.home.planTime),`📋 Prepara ${nm}`,"5 preguntas rápidas y te dejo el menú y el pedido del mes listos.","mprep|"+nx)}}
     if(T.planificar&&dow(d)===S.home.planDay)push(at(d,S.home.planTime),"🗓️ Toca planificar la semana","Entrenos, quién está, platos y compra: 5 minutos.","plan|"+d);
     if(T.congelador&&dow(d)===5){try{const old=freezerState().filter(e=>e.days>FREEZER_MONTHS*30);

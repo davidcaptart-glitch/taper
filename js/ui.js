@@ -217,13 +217,13 @@ function moveToNext(rid,from){
 const nextMonthOf=m=>{const [y,mm]=m.split("-").map(Number);return mm===12?`${y+1}-01`:`${y}-${String(mm+1).padStart(2,"0")}`};
 const mName=m=>monthName(m).split(" ")[0].toLowerCase();
 function monthPrepDue(){
-  if(!S.onboarded)return null;const t=todayISO(),cur=t.slice(0,7),[y,mm]=cur.split("-").map(Number);
-  const last=iso(new Date(y,mm,0));if(daysBetween(t,last)>7)return null;
+  if(!S.onboarded)return null;const t=todayISO(),cur=t.slice(0,7);
+  if(t<monthPrepDate(cur))return null;   // a partir del día elegido y hasta fin de mes
   const nx=nextMonthOf(cur);return ((S.monthPrep||{})[nx]||{}).done?null:nx;
 }
 function monthPrepCard(){
   const nx=monthPrepDue();if(!nx)return "";
-  return `<div class="prepcard"><div><div class="veb">Queda menos de una semana</div><h2>Prepara <em>${esc(mName(nx))}</em></h2><p>5 preguntas rápidas y te dejo el menú y el pedido del mes listos.</p></div><button class="btn" data-mprep="${nx}">Empezar</button></div>`;
+  return `<div class="prepcard"><div><div class="veb">Se acaba ${esc(mName(todayISO().slice(0,7)))}</div><h2>Prepara <em>${esc(mName(nx))}</em></h2><p>5 preguntas rápidas y te dejo el menú y el pedido del mes listos.</p></div><button class="btn" data-mprep="${nx}">Empezar</button></div>`;
 }
 // Previsión de los días con cada hijo con custodia o turnos: se calcula con lo que ya se sabe y se aprueba
 const custodyKids=()=>others().filter(k=>["alternas","findes","dias","manual"].includes((k.presence||{}).type));
