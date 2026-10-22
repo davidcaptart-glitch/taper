@@ -408,6 +408,23 @@ function openWeekPlanner(start){
 }
 
 /* ---------- Compra ---------- */
+// Pedido guardado: la próxima vez solo hay que repetirlo en Mercadona y cambiar lo que difiere
+function orderBlock(l,kind){
+  S.orders=S.orders||{};
+  const now={};for(const it of l.items)now[it.pid]=it.packs;
+  const b=S.orders[kind], name=kind==="mes"?"pedido del mes":"pedido semanal";
+  if(!b)return `<div class="guide"><h3>Guarda tu ${name}</h3><p>Hazlo una vez en Mercadona y guárdalo aquí. Las próximas veces repites ese pedido desde "Mis pedidos" de Mercadona y la app te dice solo lo que tienes que cambiar.</p><button class="btn small" data-saveorder="${kind}">Guardar como mi ${name}</button></div>`;
+  const add=[],del=[],chg=[];
+  for(const [pid,n] of Object.entries(now)){const o=b.items[pid]||0;if(!o)add.push([pid,n]);else if(o!==n)chg.push([pid,o,n])}
+  for(const [pid,o] of Object.entries(b.items))if(!now[pid]&&P[pid])del.push([pid,o]);
+  const when=longDate(b.savedAt).replace(/^\w+, /,"");
+  if(!add.length&&!del.length&&!chg.length)return `<div class="okbox"><b>Igual que tu ${name}</b> del ${esc(when)}. Repítelo tal cual desde "Mis pedidos" en Mercadona.</div>`;
+  let h=`<div class="guide"><h3>Repite tu ${name} y cambia esto</h3><p>Abre en Mercadona el pedido del ${esc(when)}, pásalo al carro y haz solo estos ${add.length+del.length+chg.length} cambios:</p><ul>`;
+  for(const [pid,n] of add)h+=`<li><span class="add">Añadir</span> ${n} × ${esc(P[pid].name)}</li>`;
+  for(const [pid,o,n] of chg)h+=`<li><span class="chg">${n>o?"Subir":"Bajar"}</span> ${esc(P[pid].name)}: de ${o} a ${n}</li>`;
+  for(const [pid,o] of del)h+=`<li><span class="del">Quitar</span> ${esc(P[pid].name)} (tenías ${o})</li>`;
+  return h+`</ul><button class="btn small" data-saveorder="${kind}">Hecho: guardar este como mi ${name}</button></div>`;
+}
 function renderCompra(){
   const sh=shopping(month);
   if(!sh.weeks.length||!sh.weeks.some(s=>S.plans[s])){main.innerHTML=`<section class="view"><div class="empty"><h2>Sin lista todavía</h2><p>Planifica alguna semana de este mes y aquí aparecerá la compra.</p><button class="btn" id="goMenu">Ir al menú</button></div></section>`;document.getElementById("goMenu").onclick=()=>{tab="menu";render()};return}
@@ -422,6 +439,7 @@ function renderCompra(){
     h+=`<p class="shophint">Toca 🛒 para abrir el producto en Mercadona y añadirlo al carro. Incluye ${eur(l.fee)} de envío.</p>`;
     if(l.belowMin)h+=`<div class="warnbox">No llegas al pedido mínimo online (${eur(S.home.shop.min)}): faltan ${eur(S.home.shop.min-l.cost)}.${wi!=null?` <button class="btn small" id="fillMin">Completar con cosas del mes</button>`:" Pásala a compra en tienda o junta compras."}</div>`;
   }
+  if(l.items.length)h+=orderBlock(l,listSel==="mes"?"mes":"semana");
   const bySec={};for(const it of l.items)(bySec[P[it.pid].aisle]=bySec[P[it.pid].aisle]||[]).push(it);
   const order=["Carne y pescado","Congelados","Fruta y verdura","Huevos y lácteos","Despensa"];
   for(const sec of [...order,...Object.keys(bySec).filter(s=>!order.includes(s))]){if(!bySec[sec])continue;
@@ -446,6 +464,7 @@ function renderCompra(){
   main.querySelectorAll("[data-lm]").forEach(b=>b.onclick=()=>{S.modes[month+"|"+listSel]=b.dataset.lm;save();render()});
   main.querySelectorAll("[data-ck]").forEach(i=>i.onchange=()=>{if(i.checked)S.checks[i.dataset.ck]=true;else delete S.checks[i.dataset.ck];i.closest(".item").classList.toggle("done",i.checked);save()});
   document.getElementById("spentIn").onchange=e=>{const v=e.target.value;if(v==="")delete S.spent[sk];else S.spent[sk]=Number(v);save();renderHeader()};
+  main.querySelectorAll("[data-saveorder]").forEach(b=>b.onclick=()=>{const items={};for(const it of l.items)items[it.pid]=it.packs;S.orders[b.dataset.saveorder]={items,savedAt:todayISO()};save();render();toast("Pedido guardado")});
   const fm=document.getElementById("fillMin");if(fm)fm.onclick=()=>{const r=fillToMinimum(month,wi);render();toast(r.moved.length?(r.ok?"Completado con: ":"No llega del todo. Añadido: ")+r.moved.join(", ").toLowerCase():"No hay nada del mes que se pueda adelantar")};
 }
 
@@ -494,7 +513,11 @@ function knowHTML(p){
 }
 function renderPerfil(){
   let h=`<section class="view">`;
-  for(const p of S.people)h+=`<div class="person"><h2>Lo que sé de ${p.kind==="adulto"?"ti":esc(personName(p))}</h2>${p.kind==="nino"?`<div class="small muted">${p.age?p.age+" años · ":""}ración ${String(p.factor).replace(".",",")}</div>`:""}${knowHTML(p)}</div>`;
+  const RV={2:"❤️",1:"👍",rare:"🙂","-1":"👎"};
+  for(const p of S.people){const hist=historyOf(p,20);
+    h+=`<div class="person"><h2>Lo que sé de ${p.kind==="adulto"?"ti":esc(personName(p))}</h2>${p.kind==="nino"?`<div class="small muted">${p.age?p.age+" años · ":""}ración ${String(p.factor).replace(".",",")}</div>`:""}${knowHTML(p)}
+    <details style="margin-top:10px"><summary><b>Historial</b> <span class="small muted">(${hist.length} ${hist.length===1?"comida reciente":"comidas recientes"})</span></summary>
+    ${hist.length?`<table class="wtable">${hist.map(x=>`<tr><td>${DSHORT[dow(x.date)]} ${shortDate(x.date)} · ${x.meal}</td><td style="text-align:left;padding-left:8px">${esc(x.name)}${x.note?` <span class="small muted">${esc(x.note)}</span>`:""}</td><td>${x.v!=null?RV[x.v]:""}</td></tr>`).join("")}</table>`:`<p class="small muted">Aún no hay comidas pasadas.</p>`}</details></div>`}
   const items=[["aparatos","Aparatos",Object.entries(APP).filter(([k])=>S.home.apps.includes(k)).map(([,v])=>v).join(", ")],["zona","Código postal y municipio",[S.home.cp,S.home.municipio].filter(Boolean).join(" · ")||"Sin indicar"],["hijos","Quién come contigo",kids().map(personName).join(", ")||"Solo tú"],
     ["objetivos","Objetivos",me().goals.map(g=>GOALS[g][0]).join(", ")],["entreno","Entrenamiento",me().trains?me().sports.map(s=>SPORTS[s]).join(", "):"No entrenas"],["semana","Semana tipo y caprichos",S.fixed.length+" platos fijos"],
     ["cocina","Cuándo cocinas",S.home.cookMode==="lote"?"Por lotes: "+S.home.cookDays.map(d=>DAYS[d].toLowerCase()).join(" y "):"Cada día"],["plan","Planificación",{diaria:"Cada día",semanal:"Cada semana",quincenal:"Cada dos semanas",mensual:"Cada mes"}[S.home.planFreq]+", "+DAYS[S.home.planDay].toLowerCase()+" a las "+S.home.planTime],

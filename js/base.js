@@ -56,7 +56,7 @@ function defaultState(){
       shop:{monthMode:"online",weekMode:"online",delivery:1,min:50,fee:8.2},
       budget:{month:180,week:null,basics:6},festivosExtra:[]},
     people:[defaultAdult("")],
-    fixed:[], plans:{}, days:{}, ratings:[], prices:{}, checks:{}, assign:{}, modes:{}, spent:{}, base:null
+    fixed:[], plans:{}, days:{}, ratings:[], prices:{}, checks:{}, assign:{}, modes:{}, spent:{}, orders:{}, base:null
   };
 }
 function mergeState(o){
@@ -78,6 +78,7 @@ function migrateV1(o){
     presence:{type:"alternas",anchor:st.kidAnchor},tastes:{ing:{},dish:{},ignore:{},src:{}}});
   for(const r of o.dislikes||[]){me.tastes.dish[r]=-1;me.tastes.src["d:"+r]="Lo marcaste antes"}
   s.prices=o.prices||{}; s.base=o.base||null;
+  if(o.base&&o.base.items)s.orders={mes:{items:o.base.items,savedAt:o.base.savedAt||todayISO()}};
   s.fixed=(o.fixed||[]).map(f=>({id:f.id,recipe:f.recipe,name:f.name,cost:f.cost,dow:f.day,meal:f.meal,who:f.weeks==="hijo"?"con":f.weeks==="solo"?"sin":"todas",capricho:false}));
   return s;
 }

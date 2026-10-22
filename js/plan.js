@@ -307,3 +307,28 @@ function dayProtein(a,d){
   for(const meal of ["comida","cena"]){const x=dishOfMeal(d,meal);if(x.recipe&&!x.capricho)got+=(x.recipe.prot||0)*adultFactor(a);else unknown=true}
   return {got:Math.round(got),target:t,unknown};
 }
+
+/* ---------- Historial ---------- */
+// Lo que ha comido cada persona (de los menús ya pasados), con su valoración si la dio
+function historyOf(p,limit=30){
+  const today=todayISO(), out=[];S.meals=S.meals||{};
+  for(const start of Object.keys(S.plans).sort().reverse()){
+    if(start>today)continue;const wk=S.plans[start];
+    for(const sl of buildSlots(start).reverse()){
+      if(sl.date>=today||sl.date<(wk.createdAt||"9"))continue;
+      const inSlot=sl.eaters.concat(sl.kids).includes(p);
+      const tupperNext=p.kind==="adulto"&&sl.tupper.includes(p)&&addDays(sl.date,1)<today;
+      const v=wk.slots[sl.id],r=v&&RX[v.recipe];if(!r)continue;
+      const m=S.meals[sl.id];
+      if(inSlot){
+        if(m&&m.status==="otro")out.push({date:sl.date,meal:sl.meal,name:m.rid&&RX[m.rid]?RX[m.rid].name:(m.text||"Otra cosa"),note:"en vez de lo previsto",rid:m.rid});
+        else if(m&&m.status!=="ok")out.push({date:sl.date,meal:sl.meal,name:m.status==="fuera"?"Fuera de casa":"No se cocinó",note:""});
+        else{const rt=S.ratings.find(x=>x.slot===sl.id&&x.who===p.id);out.push({date:sl.date,meal:sl.meal,name:r.name,rid:r.id,v:rt?(rt.rare?"rare":rt.v):null})}
+      }
+      if(tupperNext){const k=addDays(sl.date,1)+"|comida",mm=S.meals[k];
+        out.push({date:addDays(sl.date,1),meal:"comida",name:mm&&mm.status!=="ok"?(mm.status==="otro"?(mm.rid&&RX[mm.rid]?RX[mm.rid].name:mm.text||"Otra cosa"):"Fuera de casa"):"Táper de "+r.name.toLowerCase(),rid:r.id})}
+      if(out.length>=limit*2)break;
+    }
+  }
+  return out.sort((a,b)=>(b.date+b.meal).localeCompare(a.date+a.meal)).slice(0,limit);
+}

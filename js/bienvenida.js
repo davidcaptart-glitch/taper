@@ -67,7 +67,7 @@ function stepBody(id){
     let h=`<p class="lead">Si tienes hijos o hijas que comen contigo, añádelos. Cada uno con su edad, cuándo está y sus gustos.</p>`;
     for(const k of kids()){const pr=k.presence||{type:"siempre"};
       h+=`<div class="kidcard" data-kid="${k.id}"><div class="row"><b>${esc(personName(k))}</b><span class="spacer"></span><button class="btn ghost small" data-delkid="${k.id}">Quitar</button></div>
-      <div class="field"><label>Nombre</label><input type="text" data-kf="name" value="${esc(k.name)}"></div>
+      <div class="field"><label>¿Cómo se llama?</label><input type="text" data-kf="name" value="${esc(k.name)}" placeholder="Nombre"></div>
       <div class="field"><label>Edad</label><input type="number" min="1" max="25" data-kf="age" value="${esc(k.age||"")}"><div class="hint">Su ración: ${String(k.factor).replace(".",",")} de la tuya (se calcula con la edad).</div></div>
       <div class="field"><label>¿Cuándo está contigo?</label><select data-kf="ptype">${[["siempre","Siempre"],["alternas","Semanas alternas"],["findes","Fines de semana alternos"],["dias","Días concretos de la semana"],["manual","Lo marco cada semana"]].map(([v,t])=>`<option value="${v}" ${pr.type===v?"selected":""}>${t}</option>`).join("")}</select></div>
       ${pr.type==="alternas"||pr.type==="findes"?`<div class="field"><label>Un lunes de una semana en que está contigo</label><input type="date" data-kf="anchor" value="${esc(pr.anchor||mondayOf(todayISO()))}"></div>`:""}
@@ -200,6 +200,8 @@ function validateStep(id){
   if(id==="hola"){a.name=(v("#wzName")||"").trim()}
   if(id==="aparatos"&&!H.apps.length){toast("Elige al menos uno");return false}
   if(id==="zona"){const cp=(v("#wzCp")||"").trim();if(cp&&!/^\d{5}$/.test(cp)){toast("El código postal tiene 5 números");return false}H.cp=cp;H.municipio=(v("#wzMun")||"").trim()}
+  if(id==="hijos"){main.querySelectorAll(".kidcard [data-kf=name]").forEach(i=>{const k=S.people.find(p=>p.id===i.closest(".kidcard").dataset.kid);k.name=i.value.trim()});
+    if(kids().some(k=>!k.name)){toast("Escribe el nombre de cada hijo o hija");return false}}
   if(id==="objetivos"){if(!a.goals.length){toast("Elige al menos un objetivo");return false}a.weight=Number(v("#wzW"))||null}
   if(id==="cocina"&&H.cookMode==="lote"&&!H.cookDays.length){toast("Elige al menos un día para cocinar");return false}
   if(id==="plan"){H.planFreq=v("#wzFreq");H.planDay=Number(v("#wzPDay"));H.planTime=v("#wzPTime")||"17:00"}
