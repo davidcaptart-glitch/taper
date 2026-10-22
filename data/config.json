@@ -1,0 +1,16 @@
+{
+  "nota": "goatcounter: dirección de tu contador (https://TU-CODIGO.goatcounter.com/count). sugerencias: enlace del formulario de Google rellenado previamente con la versión 0 (la app la cambia por la suya). encuesta: dirección formResponse del formulario de la encuesta mensual y el número 'entry' de cada pregunta.",
+  "goatcounter": "",
+  "sugerencias": "",
+  "encuesta": {
+    "url": "",
+    "campos": {
+      "estrellas": "",
+      "gusta": "",
+      "disgusta": "",
+      "pagaria": "",
+      "comentario": "",
+      "version": ""
+    }
+  }
+}

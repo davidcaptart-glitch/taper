@@ -202,7 +202,7 @@ function moveToNext(rid,from){
 }
 function renderMenu(){
   const weeks=weeksInMonth(month);
-  let h=`<section class="view">`+reviewCard()+sportCard()+rateCard();
+  let h=`<section class="view">`+reviewCard()+surveyCard()+sportCard()+rateCard();
   if(!weeks.length)h+=`<div class="empty"><p>No hay semanas que empiecen este mes.</p></div>`;
   for(const start of weeks){
     const wk=S.plans[start], dates=weekDates(start);
@@ -235,7 +235,7 @@ function renderMenu(){
   main.querySelectorAll("[data-regen]").forEach(b=>b.onclick=()=>{if(confirm("¿Rehacer los platos de esta semana? Se mantienen los que elegiste a mano.")){genWeekFromScratch(b.dataset.regen);save();render();toast("Platos rehechos")}});
   main.querySelectorAll("[data-swap]").forEach(b=>b.onclick=()=>openSwap(b.dataset.swap));
   main.querySelectorAll("[data-sacr]").forEach(b=>b.onclick=()=>openSacrifice(b.dataset.sacr));
-  bindReview(main);
+  bindReview(main);bindSurvey();
   main.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>openDay(b.dataset.day));
   main.querySelectorAll("[data-session]").forEach(b=>b.onclick=()=>openSession(b.dataset.session));
   main.querySelectorAll("[data-rate]").forEach(b=>b.onclick=()=>{const [sid,rid,who,v]=b.dataset.rate.split("~");
@@ -669,6 +669,10 @@ function renderPerfil(){
   <div class="card"><h2>Compartir Táper</h2><p class="small muted">Quien escanee este código con la cámara del móvil abre la app y la puede instalar. Cada persona tiene sus propios datos en su móvil.</p>
     <div id="qrBox" style="display:grid;place-items:center;margin:10px 0;background:#fff;border-radius:12px;padding:10px"></div>
     <div class="actions"><button class="btn" id="shareApp">Enviar el enlace</button><button class="btn ghost" id="copyApp">Copiar enlace</button></div></div>
+  <div class="card"><h2>Sugerencias y privacidad</h2>
+    ${suggestUrl()?`<p class="small muted">¿Se te ocurre una mejora, una receta o has visto un fallo? Cuéntamelo.</p><a class="btn" href="${esc(suggestUrl())}" target="_blank" rel="noopener">💡 Enviar una sugerencia</a>`:`<p class="small muted">Pronto podrás enviar sugerencias desde aquí.</p>`}
+    ${surveyOn()?`<button class="btn ghost small" id="svProfile" style="margin-top:8px">📋 Responder la encuesta del mes</button>`:""}
+    <label class="row small" style="margin-top:12px"><input type="checkbox" id="noStats" ${S.noStats?"":"checked"} style="width:auto"> Contar mis visitas de forma anónima (sin cookies ni datos personales) para saber cuánta gente usa Táper</label></div>
   <div class="card"><h2>Novedades</h2><p class="small muted">Versión ${APP_VERSION}. La app se actualiza sola y te cuenta qué ha mejorado.</p><button class="btn ghost small" id="newsAll">Ver todas las novedades</button></div></section>`;
   main.innerHTML=h;
   const q=s=>main.querySelectorAll(s), find=id=>S.people.find(p=>p.id===id);
@@ -689,6 +693,8 @@ function renderPerfil(){
   document.getElementById("exp").onclick=exportBackup;
   const f=document.getElementById("impFile");document.getElementById("imp").onclick=()=>f.click();f.onchange=()=>{if(f.files[0])importBackup(f.files[0]);f.value=""};
   document.getElementById("newsAll").onclick=()=>openNews(true);
+  document.getElementById("svProfile")?.addEventListener("click",openSurvey);
+  document.getElementById("noStats").onchange=e=>{S.noStats=!e.target.checked;save();toast(S.noStats?"No se contarán tus visitas":"Gracias: se contarán de forma anónima")};
   const url=location.origin+location.pathname.replace(/index\.html$/,"");
   loadScript("https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js").then(()=>{const qr=qrcode(0,"M");qr.addData(url);qr.make();const b=document.getElementById("qrBox");if(b)b.innerHTML=qr.createSvgTag({cellSize:6,margin:2,scalable:true}).replace("<svg ",'<svg style="width:220px;height:220px" ')}).catch(()=>{const b=document.getElementById("qrBox");if(b)b.textContent=url});
   document.getElementById("shareApp").onclick=async()=>{try{await navigator.share({title:"Táper",text:"Menú semanal, tápers y lista de la compra con precios de Mercadona",url})}catch(e){if(!navigator.share){navigator.clipboard?.writeText(url);toast("Enlace copiado")}}};
@@ -702,6 +708,69 @@ function shiftMonth(n){const [y,m]=month.split("-").map(Number);const d=new Date
 document.getElementById("prevM").onclick=()=>shiftMonth(-1);
 document.getElementById("nextM").onclick=()=>shiftMonth(1);
 dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
+
+/* ---------- Contador anónimo de uso y sugerencias ---------- */
+let CFG={};
+// GoatCounter: cuenta aperturas de la app sin cookies ni datos personales (se puede desactivar en Perfil)
+function startCounter(){
+  if(!CFG.goatcounter||S.noStats||location.hostname==="localhost"||location.hostname==="127.0.0.1")return;
+  window.goatcounter={path:"/app",title:"Táper v"+APP_VERSION,no_onload:false};
+  const s=document.createElement("script");s.async=true;s.dataset.goatcounter=CFG.goatcounter;s.src="https://gc.zgo.at/count.js";document.head.appendChild(s);
+  if(!S.installCounted&&matchMedia("(display-mode: standalone)").matches){S.installCounted=true;save();
+    setTimeout(()=>{try{window.goatcounter.count&&window.goatcounter.count({path:"instalada",title:"App instalada",event:true})}catch(e){}},3000)}
+}
+// Enlace al formulario de sugerencias con la versión de la app ya rellenada
+function suggestUrl(){if(!CFG.sugerencias)return null;return CFG.sugerencias.replace(/(entry\.\d+=)0(&|$)/,"$1"+APP_VERSION+"$2")}
+
+/* ---------- Encuesta de satisfacción mensual ---------- */
+// Las opciones deben coincidir exactamente con las del formulario de Google
+const SURVEY_FEATURES=["Menú semanal automático","Recetas y modo cocina","Lista de la compra y enlaces a Mercadona","Precios actualizados",
+  "Presupuesto y resumen del mes","Escáner de tickets","Adaptación a mis entrenos","Gustos y valoraciones","Planificación con la familia","Tápers y cocina por lotes"];
+const SURVEY_PAY=["Nada, solo la usaría gratis","De 1 a 3 €","De 4 a 6 €","De 7 a 9 €"];
+const surveyOn=()=>!!(CFG.encuesta&&CFG.encuesta.url&&CFG.encuesta.campos&&CFG.encuesta.campos.estrellas);
+function surveyCard(){
+  if(!surveyOn()||!S.onboarded||S.noSurvey)return "";
+  const m=todayISO().slice(0,7);S.surveys=S.surveys||{};
+  if(S.surveys[m]||new Date().getDate()>12||(S.surveyLater&&S.surveyLater>todayISO()))return "";
+  // Solo a quien lleva al menos una semana usándola
+  const first=Object.keys(S.plans).sort()[0];if(!first||daysBetween(first,todayISO())<7)return "";
+  return `<div class="rate"><h3>📋 Encuesta del mes · 1 minuto</h3><p class="small muted">Nos ayuda a mejorar Táper. Es anónima.</p>
+    <div class="actions"><button class="btn small" id="svGo">Responder</button><button class="btn ghost small" id="svLater">Ahora no</button><button class="btn ghost small" id="svNever">No volver a preguntar</button></div></div>`;
+}
+function openSurvey(){
+  const a={stars:0,like:new Set(),dislike:new Set(),pay:null,text:""};
+  const keep=()=>{const t=dlg.querySelector("#svTxt");if(t)a.text=t.value};
+  const draw=()=>{
+    showDialog(`<div class="mod">${closeBtn}<h2>Encuesta del mes</h2>
+      <h3 style="margin-top:12px">¿Cuántas estrellas le darías a Táper?</h3>
+      <div class="chips">${[1,2,3,4,5].map(n=>`<button class="chip" data-st="${n}" style="font-size:1.3rem" aria-label="${n} estrellas">${n<=a.stars?"★":"☆"}</button>`).join("")}</div>
+      <h3 style="margin-top:14px">¿Qué es lo que más te gusta?</h3><div class="chips">${SURVEY_FEATURES.map((f,i)=>chip("data-lk",i,a.like.has(f),esc(f))).join("")}</div>
+      <h3 style="margin-top:14px">¿Y lo que menos?</h3><div class="chips">${SURVEY_FEATURES.map((f,i)=>chip("data-dk2",i,a.dislike.has(f),esc(f))).join("")}</div>
+      <h3 style="margin-top:14px">Si tuvieras que pagar cada mes, ¿cuánto pagarías como máximo?</h3><div class="chips">${SURVEY_PAY.map((p,i)=>chip("data-py",i,a.pay===p,esc(p))).join("")}</div>
+      <div class="field" style="margin-top:14px"><label for="svTxt">¿Algo más? (opcional)</label><input type="text" id="svTxt" value="${esc(a.text)}"></div>
+      <div class="actions"><button class="btn" id="svSend">Enviar</button></div></div>`);
+    dlg.querySelectorAll("[data-st]").forEach(b=>b.onclick=()=>{keep();a.stars=Number(b.dataset.st);draw()});
+    const tog=(set,f)=>{if(set.has(f))set.delete(f);else set.add(f)};
+    dlg.querySelectorAll("[data-lk]").forEach(b=>b.onclick=()=>{keep();tog(a.like,SURVEY_FEATURES[b.dataset.lk]);draw()});
+    dlg.querySelectorAll("[data-dk2]").forEach(b=>b.onclick=()=>{keep();tog(a.dislike,SURVEY_FEATURES[b.dataset.dk2]);draw()});
+    dlg.querySelectorAll("[data-py]").forEach(b=>b.onclick=()=>{keep();a.pay=SURVEY_PAY[b.dataset.py];draw()});
+    dlg.querySelector("#svSend").onclick=async()=>{
+      keep();a.text=a.text.trim();
+      if(!a.stars){toast("Elige las estrellas");return}
+      const c=CFG.encuesta.campos, fd=new URLSearchParams();
+      fd.append(c.estrellas,String(a.stars));for(const f of a.like)fd.append(c.gusta,f);for(const f of a.dislike)fd.append(c.disgusta,f);
+      if(a.pay&&c.pagaria)fd.append(c.pagaria,a.pay);if(a.text&&c.comentario)fd.append(c.comentario,a.text);if(c.version)fd.append(c.version,String(APP_VERSION));
+      // Google Forms no deja leer la respuesta (no-cors): si no hay error de red, se da por enviada
+      try{await fetch(CFG.encuesta.url,{method:"POST",mode:"no-cors",body:fd})}catch(e){toast("Sin conexión: vuelve a intentarlo más tarde");return}
+      S.surveys=S.surveys||{};S.surveys[todayISO().slice(0,7)]={stars:a.stars,at:todayISO()};save();dlg.close();render();toast("¡Gracias por responder!")};
+  };
+  draw();
+}
+function bindSurvey(){
+  document.getElementById("svGo")?.addEventListener("click",openSurvey);
+  document.getElementById("svLater")?.addEventListener("click",()=>{S.surveyLater=addDays(todayISO(),3);save();render()});
+  document.getElementById("svNever")?.addEventListener("click",()=>{S.noSurvey=true;save();render();toast("No volveré a preguntar. Puedes responder desde Perfil")});
+}
 
 /* ---------- Novedades y actualización automática ---------- */
 let NEWS=null;
@@ -732,13 +801,14 @@ async function boot(){
     if(fresh&&fresh.productos){PR=fresh;prOffline=false;try{localStorage.setItem("taper-precios",JSON.stringify(PR))}catch(e){}}}
   catch(e){prOffline=!!PR}
   try{NEWS=(await getJSON("data/novedades.json",true)).versiones}catch(e){NEWS=null}
+  try{CFG=await getJSON("data/config.json",true)}catch(e){CFG={}}
   // Al abrir, la semana actual y la siguiente tienen menú si ya se había planificado alguna
   if(S.onboarded){const s=weekStartFor(todayISO());if(!S.plans[s])genWeekFromScratch(s);save()}
   render();
   // Tras actualizar: explica qué ha mejorado (no a quien acaba de empezar)
   if(S.onboarded&&NEWS&&(S.seenVersion||0)<APP_VERSION)openNews(false);
   else if(!S.onboarded){S.seenVersion=APP_VERSION;save()}
-  checkUpdate();
+  checkUpdate();startCounter();
 }
 boot();
 if("serviceWorker" in navigator&&location.protocol!=="file:")navigator.serviceWorker.register("sw.js").catch(()=>{});
