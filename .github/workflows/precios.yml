@@ -61,4 +61,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "Precios de Mercadona del $(TZ=Europe/Madrid date +%Y-%m-%d)"
-          git push
+          # Si mientras tanto se ha subido otra cosa al repositorio, se pone al día y vuelve a intentarlo
+          for intento in 1 2 3; do
+            git pull --rebase && git push && exit 0
+            sleep $((intento * 10))
+          done
+          exit 1
