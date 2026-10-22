@@ -332,6 +332,14 @@
       "cambios": [
         "Al abrir Táper por primera vez, una pantalla de bienvenida con comida flotando y una semana de ejemplo. Desde ahí también puedes recuperar tus datos o traer una copia."
       ]
+    },
+    {
+      "version": 35,
+      "fecha": "2026-10-22",
+      "titulo": "Arreglo: logo de bienvenida",
+      "cambios": [
+        "El logo de Táper ya se ve en la pantalla de bienvenida, más grande."
+      ]
     }
   ]
 }

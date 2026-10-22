@@ -32,7 +32,7 @@ function renderWelcome(){
   const card=(r,dia,n)=>`<div class="mday">${dia} <small>${n} nov</small></div><div class="mcard"><span class="mimg" style="background-image:url('${esc(dishPhoto(r))}')"></span><span><span class="mtags"><i>${r.type==="c"?"Con hidratos":"Ligera"}</i>${(r.prot||0)>=30?"<i>Alto en proteína</i>":""}</span><b>${esc(r.name)}</b><small>Para 2 · ${recipeTime(r)} min</small></span><span class="mp">${eur(rationCost(r))}<small>/rac.</small></span></div>`;
   const snap=snapshot();
   main.innerHTML=`<section class="welcome">
-    <div class="wbrand"><span class="wlogo"></span>Táper</div>
+    <div class="wbrand"><svg class="wlogo" viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="#D22F2A"/><rect x="72" y="176" width="368" height="52" rx="22" fill="#fff"/><rect x="92" y="244" width="328" height="112" rx="34" fill="#fff"/><rect x="140" y="276" width="232" height="14" rx="7" fill="#D22F2A" opacity=".35"/></svg>Táper</div>
     <div class="wdrift" aria-hidden="true">${["🍗","🥕","🧀","🍤","🥚","🍞","🍝","🥬","🍓","🐟","🍚","🥔"].map((e,i)=>`<span style="left:${(i*8.3+3)%96}%;animation-duration:${9+(i*7)%8}s;animation-delay:-${(i*2.3)%9}s;font-size:${1.1+(i%3)*.35}rem">${e}</span>`).join("")}</div>
     <div class="wstage" aria-hidden="true">
       ${["🥦","🍅","🥑","🧄","🌽","🌶️","🫑","🍋"].map((e,i)=>`<span class="veg v${i}">${e}</span>`).join("")}

@@ -748,7 +748,7 @@ details.more summary{padding:12px 0;color:var(--ink);font-weight:600}
 .welcome{min-height:calc(100dvh - 20px);display:flex;flex-direction:column;align-items:center;text-align:center;padding:8px 0 0;
   background:radial-gradient(90% 55% at 50% 30%,var(--accent-soft),transparent 70%);margin:0 -16px;padding-left:16px;padding-right:16px;animation:enter .5s var(--ease) both}
 .wbrand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-style:italic;font-size:2.6rem;color:var(--accent);margin:14px 0 4px;letter-spacing:-.01em}
-.wlogo{width:40px;height:40px;border-radius:12px;background:var(--accent) url("../icons/icon.svg") center/cover;box-shadow:0 10px 22px -10px var(--accent)}
+.wlogo{width:56px;height:56px;flex:none;border-radius:16px;filter:drop-shadow(0 10px 14px color-mix(in srgb,var(--accent) 45%,transparent))}
 .wstage{position:relative;width:100%;max-width:400px;height:430px;margin:6px 0 4px}
 .veg{position:absolute;font-size:2.6rem;filter:drop-shadow(0 10px 12px rgba(0,0,0,.18));animation:vfloat 4s ease-in-out infinite;z-index:3}
 .veg.v0{left:30%;top:-6px;font-size:3.4rem}.veg.v1{right:2%;top:40px;font-size:3.6rem;animation-delay:.5s}.veg.v2{left:0;top:90px;font-size:3.2rem;animation-delay:1s}
@@ -793,4 +793,4 @@ details.more summary{padding:12px 0;color:var(--ink);font-weight:600}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0) rotate(-1deg)}50%{transform:translateX(-50%) translateY(-8px) rotate(1deg)}}
 .veg.v1,.veg.v4,.veg.v7{animation-duration:5.2s}.veg.v2,.veg.v5{animation-duration:3.4s}
 .wbrand .wlogo{animation:pop .6s var(--ease) both .1s}
-@keyframes pop{from{transform:scale(.4) rotate(-20deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes pop{from{transform:scale(.6) rotate(-14deg)}to{transform:none}}
