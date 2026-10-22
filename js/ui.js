@@ -673,7 +673,7 @@ function openRecipe(id,sid){
     const v=r.vars[vi], ok=new Set([...S.home.apps,"ninguno"]);
     const cost=rationCost(r);
     const fav=dishPref(me(),r.id)>=1.5;
-    const tags=[recipeDiet(r)==="vegano"?"🌱 Vegano":recipeDiet(r)==="vege"?"🥚 Vegetariano":null,v.time<=25?"⚡ Rápido":null,(r.prot||0)>=30?"💪 Alto en proteína":null,r.type==="l"?"🥗 Ligera":"🍝 Con hidratos",r.kid?"🧒 Gusta a niños":null,r.freeze?"❄️ Se congela":null].filter(Boolean);
+    const tags=[DIFF[r.diff]?DIFF[r.diff].join(" "):null,recipeDiet(r)==="vegano"?"🌱 Vegano":recipeDiet(r)==="vege"?"🥚 Vegetariano":null,v.time<=25?"⚡ Rápido":null,(r.prot||0)>=30?"💪 Alto en proteína":null,r.type==="l"?"🥗 Ligera":"🍝 Con hidratos",r.kid?"🧒 Gusta a niños":null,r.freeze?"❄️ Se congela":null].filter(Boolean);
     const bar=(lab,val,max,cls)=>`<div class="mbar"><span>${lab}</span><div><i class="${cls}" style="width:${Math.min(100,Math.round((val||0)/max*100))}%"></i></div><b>${val!=null?val+" g":"–"}</b></div>`;
     showDialog(`<div class="mod recipe">
       <div class="rhero">${dishImg(r,"l")}<button class="rbtn rclose" data-x aria-label="Cerrar"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -989,6 +989,7 @@ function renderRecetas(){
   const a=me();
   const fl={todas:"Todas",fav:"Favoritas",nuevas:"Sin probar",no:"Descartadas",c:"⚡ Hidratos",l:"🥗 Ligeras",kid:"Gustan a niños"};
   if(R.some(r=>r.cap))fl.guarreo="🍔 Guarreo";
+  fl.faciles="👌 Fáciles";
   fl.d_vegano="🌱 Veganas";fl.d_vege="🥚 Vegetarianas";
   if(R.some(r=>r.small))fl.pequenas="🥐 Desayunos y meriendas";
   for(const pk of [...new Set(R.filter(r=>r.pack).map(r=>r.pack))])if(SHOP["pack_"+pk])fl["pack_"+pk]=SHOP["pack_"+pk].ico+" "+SHOP["pack_"+pk].t.replace("Pack ","");
@@ -1005,6 +1006,7 @@ function renderRecetas(){
     const dp=dishPref(a,r.id);
     if(recFilter.startsWith("pack_"))return r.pack===recFilter.slice(5);
     if(recFilter==="guarreo")return r.cap;
+    if(recFilter==="faciles")return r.diff==="facil";
     if(recFilter==="d_vegano")return recipeDiet(r)==="vegano";
     if(recFilter==="d_vege")return ["vegano","vege"].includes(recipeDiet(r));
     switch(recFilter){case "pequenas":return r.small;case "comunidad":return !!r.sug;case "fav":return dp>=1.5;case "nuevas":return !tried.has(r.id);case "no":return dp<=-1;case "c":return r.type==="c";case "l":return r.type==="l";case "kid":return r.kid;case "todas":return true;default:return r.vars.some(v=>v.app===recFilter)}
@@ -1116,6 +1118,7 @@ function renderPerfil(){
     ...kids().map(k=>["entreno:"+k.id,"Deporte de "+personName(k),k.trains?k.sports.map(s=>SPORTS[s]).join(", "):"No hace deporte"]),
     ...adults().flatMap(a=>[["objetivos:"+a.id,isMe(a)?"Tus objetivos":"Objetivos de "+personName(a),a.goals.map(g=>GOALS[g][0]).join(", ")],["entreno:"+a.id,isMe(a)?"Tu entrenamiento":"Entrenamiento de "+personName(a),a.trains?a.sports.map(s=>SPORTS[s]).join(", "):"No entrena"]]),["cocina","Tu semana, caprichos y horario",(S.home.cookMode==="lote"?"Por lotes":"Cada día")+" · "+S.fixed.length+" platos fijos"],
     ["plan","Planificación",(S.home.start&&S.home.start>todayISO()?"Empieza el "+shortDate(S.home.start)+" · ":"")+{diaria:"Cada día",semanal:"Cada semana",quincenal:"Cada dos semanas",mensual:"Cada mes"}[S.home.planFreq]+", "+DAYS[S.home.planDay].toLowerCase()+" a las "+S.home.planTime],
+    ["dificultad","Dificultad de los platos",{facil:"Solo fáciles",moderada:"Fáciles y moderados",dificil:"Todas"}[maxDiff()]],
     ["compra","Compra y presupuesto",budgetSet()?eur(S.home.budget.month)+" al mes":"Sin presupuesto"]];
   h+=acc("ajustes","⚙️","Ajustes","Familia, objetivos, entrenos, compra…",`<div class="settingslist">${items.map(([id,t,d])=>`<button data-edit="${id}">${t}<small>${esc(d)}</small></button>`).join("")}</div>`);
   if(servidorOn())h+=acc("casa","🏠","Casa compartida",S.casa?adults().filter(a=>a.joined&&!isMe(a)).map(personName).concat(["tú"]).join(", ")+" · mismo menú y compra":"Invita a tu pareja a ver y cambiar el menú",casaCard());

@@ -667,6 +667,16 @@
         "Al empezar eliges cuándo: hoy, mañana, el lunes u otro día. Si empiezas por la tarde, ese día solo cuenta la cena.",
         "«¿Qué tal?» solo pregunta por comidas desde que empezaste."
       ]
+    },
+    {
+      "version": 73,
+      "fecha": "2026-10-22",
+      "titulo": "Dificultad de cada plato",
+      "cambios": [
+        "Cada receta dice si es 👌 fácil, 🧑‍🍳 moderada o 🔥 difícil.",
+        "Filtro «Fáciles» en Recetas.",
+        "En «Afinar mi menú» puedes pedir solo platos fáciles. Por defecto propongo fáciles y moderados."
+      ]
     }
   ]
 }

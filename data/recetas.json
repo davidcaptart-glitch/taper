@@ -80,7 +80,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "lentejas",
@@ -158,7 +159,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "wraps",
@@ -235,7 +237,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "cuscus",
@@ -311,7 +314,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pollohorno",
@@ -410,7 +414,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pollosalt",
@@ -470,7 +475,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "albond",
@@ -584,7 +590,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "champipollo",
@@ -647,7 +654,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "muslosair",
@@ -734,7 +742,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pollomicro",
@@ -800,7 +809,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "burger",
@@ -904,7 +914,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "teriyaki",
@@ -986,7 +997,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "fajitas",
@@ -1091,7 +1103,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "nuggets",
@@ -1198,7 +1211,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "pollolimon",
@@ -1284,7 +1298,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "brochetas",
@@ -1384,7 +1399,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pollotomate",
@@ -1465,7 +1481,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pastapollo",
@@ -1543,7 +1560,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cesar",
@@ -1646,7 +1664,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "tikka",
@@ -1755,7 +1774,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "quesadillas",
@@ -1829,7 +1849,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pecharellena",
@@ -1927,7 +1948,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "sopa",
@@ -2005,7 +2027,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "lomobroc",
@@ -2094,7 +2117,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pavopisto",
@@ -2173,7 +2197,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "burgerpavo",
@@ -2273,7 +2298,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "albpavo",
@@ -2351,7 +2377,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "wokpavo",
@@ -2426,7 +2453,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "lomopanadera",
@@ -2503,7 +2531,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "solomostaza",
@@ -2592,7 +2621,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "lomopimientos",
@@ -2662,7 +2692,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "arrozfrito",
@@ -2747,7 +2778,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "lomoadobado",
@@ -2846,7 +2878,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "tacoscerdo",
@@ -2924,7 +2957,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "solochampi",
@@ -3004,7 +3038,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "bolo",
@@ -3093,7 +3128,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pastel",
@@ -3174,7 +3210,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "hamburguesa",
@@ -3279,7 +3316,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "chili",
@@ -3370,7 +3408,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "espalbond",
@@ -3448,7 +3487,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "lasana",
@@ -3536,7 +3576,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pimcarne",
@@ -3641,7 +3682,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "ternerabroc",
@@ -3724,7 +3766,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "calabrelleno",
@@ -3841,7 +3884,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "pastelcarne",
@@ -3922,7 +3966,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "merlpat",
@@ -3999,7 +4044,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "merlverd",
@@ -4100,7 +4146,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "merlmicro",
@@ -4171,7 +4218,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "salsaverde",
@@ -4250,7 +4298,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "bacatomate",
@@ -4322,7 +4371,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "merlempanada",
@@ -4424,7 +4474,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "tacospescado",
@@ -4530,7 +4581,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "gallega",
@@ -4604,7 +4656,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "papillote",
@@ -4697,7 +4750,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "bacagarbanzos",
@@ -4779,7 +4833,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "palitos",
@@ -4888,7 +4943,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "merltomate",
@@ -4964,7 +5020,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pezespada",
@@ -5028,7 +5085,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "abadejo",
@@ -5129,7 +5187,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "croquetas",
@@ -5242,7 +5301,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "salmonbon",
@@ -5340,7 +5400,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "salmonjud",
@@ -5432,7 +5493,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "salmonteri",
@@ -5544,7 +5606,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "salmonpatata",
@@ -5651,7 +5714,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pastasalmon",
@@ -5725,7 +5789,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "bolsalmon",
@@ -5802,7 +5867,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "salmonesparr",
@@ -5890,7 +5956,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "enspatata",
@@ -5963,7 +6030,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "arrozbonito",
@@ -6038,7 +6106,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "sardinas",
@@ -6106,7 +6175,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "arrozgam",
@@ -6185,7 +6255,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "tresdel",
@@ -6270,7 +6341,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "espag",
@@ -6343,7 +6415,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "revuelto",
@@ -6414,7 +6487,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "calamar",
@@ -6492,7 +6566,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "gambasjud",
@@ -6563,7 +6638,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "paella",
@@ -6658,7 +6734,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "fideua",
@@ -6744,7 +6821,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "gambascurry",
@@ -6827,7 +6905,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "langostinos",
@@ -6901,7 +6980,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "macatun",
@@ -6965,7 +7045,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "patatamic",
@@ -7034,7 +7115,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "pimientos",
@@ -7106,7 +7188,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "enspasta",
@@ -7179,7 +7262,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "empanadillas",
@@ -7284,7 +7368,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "pastalentejas",
@@ -7350,7 +7435,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "tortilla",
@@ -7430,7 +7516,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "huevosplato",
@@ -7499,7 +7586,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "francesa",
@@ -7564,7 +7652,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "tortpatata",
@@ -7634,7 +7723,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "huevosrotos",
@@ -7703,7 +7793,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "shakshuka",
@@ -7785,7 +7876,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "frittata",
@@ -7861,7 +7953,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "revchampi",
@@ -7932,7 +8025,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "carbonara",
@@ -8007,7 +8101,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cubana",
@@ -8078,7 +8173,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "huevosrellenos",
@@ -8151,7 +8247,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "garbanzos",
@@ -8226,7 +8323,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "alubias",
@@ -8298,7 +8396,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "ensgarb",
@@ -8363,7 +8462,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "alubsalt",
@@ -8431,7 +8531,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "lentcurry",
@@ -8514,7 +8615,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "garbgambas",
@@ -8592,7 +8694,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "bolhummus",
@@ -8669,7 +8772,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "enslentejas",
@@ -8738,7 +8842,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "potaje",
@@ -8824,7 +8929,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "alubrojas",
@@ -8907,7 +9013,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "burritos",
@@ -8997,7 +9104,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "lentestofadas",
@@ -9083,7 +9191,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "ensgarbhuevo",
@@ -9152,7 +9261,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "burgergarb",
@@ -9258,7 +9368,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "pizza",
@@ -9361,7 +9472,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "noquis",
@@ -9432,7 +9544,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "arrozverd",
@@ -9511,7 +9624,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "patatabroc",
@@ -9583,7 +9697,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cuscusverd",
@@ -9662,7 +9777,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "berenjena",
@@ -9777,7 +9893,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "wraphummus",
@@ -9850,7 +9967,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "quinoa",
@@ -9926,7 +10044,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cremacalab",
@@ -10012,7 +10131,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "polloromero",
@@ -10116,7 +10236,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pollosoja",
@@ -10179,7 +10300,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pollocopos",
@@ -10286,7 +10408,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pastapesto",
@@ -10361,7 +10484,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "polloyogur",
@@ -10436,7 +10560,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "tandoori",
@@ -10544,7 +10669,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "polloajillo",
@@ -10619,7 +10745,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "arrozchampi",
@@ -10698,7 +10825,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "kebab",
@@ -10808,7 +10936,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "polloagridulce",
@@ -10887,7 +11016,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "fideospollo",
@@ -10966,7 +11096,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "polloboniato",
@@ -11057,7 +11188,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "muslitos",
@@ -11152,7 +11284,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "arrozpollo",
@@ -11234,7 +11367,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "chilindron",
@@ -11312,7 +11446,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pechugaempanada",
@@ -11414,7 +11549,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "enspastapollo",
@@ -11492,7 +11628,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "bolpollo",
@@ -11571,7 +11708,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pavocurry",
@@ -11650,7 +11788,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "rollitospavo",
@@ -11739,7 +11878,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pavoquinoa",
@@ -11807,7 +11947,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "burgerpavopan",
@@ -11903,7 +12044,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pavopure",
@@ -11970,7 +12112,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cerdoagridulce",
@@ -12049,7 +12192,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "solomanzana",
@@ -12151,7 +12295,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "cerdobroc",
@@ -12220,7 +12365,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "lomochampi",
@@ -12303,7 +12449,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "fajitascerdo",
@@ -12403,7 +12550,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "albondpure",
@@ -12480,7 +12628,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "tacoscarne",
@@ -12561,7 +12710,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "ternerapimientos",
@@ -12632,7 +12782,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "bolopollo",
@@ -12721,7 +12872,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "burritocarne",
@@ -12807,7 +12959,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "musaca",
@@ -12927,7 +13080,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "hamburpan",
@@ -13038,7 +13192,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "ternerawok",
@@ -13113,7 +13268,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "fajitasternera",
@@ -13213,7 +13369,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "macasalchichas",
@@ -13288,7 +13445,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "merltomatepim",
@@ -13360,7 +13518,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "merllimon",
@@ -13463,7 +13622,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "vizcaina",
@@ -13535,7 +13695,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "bacapisto",
@@ -13613,7 +13774,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "pescadopure",
@@ -13725,7 +13887,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "merlcurry",
@@ -13789,7 +13952,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "burgermerluza",
@@ -13892,7 +14056,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "sopapescado",
@@ -13973,7 +14138,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "salmonyogur",
@@ -14076,7 +14242,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "salmonpapillote",
@@ -14173,7 +14340,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "poke",
@@ -14260,7 +14428,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "caballagarb",
@@ -14329,7 +14498,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pastasardinas",
@@ -14408,7 +14578,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "salmonpesto",
@@ -14507,7 +14678,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "arrozmeloso",
@@ -14589,7 +14761,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pastagambas",
@@ -14660,7 +14833,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "calamarencebollado",
@@ -14735,7 +14909,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "gambasesparr",
@@ -14803,7 +14978,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "tallarines",
@@ -14877,7 +15053,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "arroznegro",
@@ -14956,7 +15133,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "tortespinacas",
@@ -15021,7 +15199,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "tortpatatahorno",
@@ -15122,7 +15301,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "flamenca",
@@ -15229,7 +15409,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "quiche",
@@ -15328,7 +15509,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "wraphuevo",
@@ -15401,7 +15583,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "tortatun",
@@ -15469,7 +15652,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "huevospisto",
@@ -15547,7 +15731,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "enspatatahuevo",
@@ -15620,7 +15805,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "mujaddara",
@@ -15695,7 +15881,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "garbcurry",
@@ -15778,7 +15965,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "chiliveg",
@@ -15863,7 +16051,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "ensalubias",
@@ -15936,7 +16125,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "lentejashuevo",
@@ -16019,7 +16209,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "potajebacalao",
@@ -16101,7 +16292,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "alubiasgambas",
@@ -16177,7 +16369,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "enslentejasqueso",
@@ -16246,7 +16439,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "garbpollo",
@@ -16324,7 +16518,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "burgerlentejas",
@@ -16429,7 +16624,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "ensquinoa",
@@ -16499,7 +16695,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "bolmexicano",
@@ -16578,7 +16775,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "enslentsalmon",
@@ -16685,7 +16883,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pastamozza",
@@ -16753,7 +16952,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "arroztomatehuevo",
@@ -16829,7 +17029,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cremaverd",
@@ -16915,7 +17116,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pizzapan",
@@ -17009,7 +17211,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "lasanaverd",
@@ -17120,7 +17323,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "enspastamed",
@@ -17193,7 +17397,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "fideosarrozverd",
@@ -17268,7 +17473,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "wokanacardos",
@@ -17347,7 +17553,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "risotto",
@@ -17427,7 +17634,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "calabatun",
@@ -17546,7 +17754,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "patatasguisadas",
@@ -17631,7 +17840,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "sopapollofideos",
@@ -17709,7 +17919,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cremacalabaza",
@@ -17785,7 +17996,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "caldogarbanzos",
@@ -17859,7 +18071,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "minestrone",
@@ -17945,7 +18158,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "gazpachohuevo",
@@ -18011,7 +18225,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "espagalbpollo",
@@ -18083,7 +18298,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "nuggetspescado",
@@ -18187,7 +18403,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "minipizzas",
@@ -18281,7 +18498,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "arrozsalchichas",
@@ -18356,7 +18574,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "croquetaspollo",
@@ -18471,7 +18690,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "salmorejo",
@@ -18544,7 +18764,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "escalivada",
@@ -18655,7 +18876,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "marmitako",
@@ -18748,7 +18970,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "bacalaobras",
@@ -18859,7 +19082,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "polloguisado",
@@ -18955,7 +19179,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "fricando",
@@ -19042,7 +19267,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "estofado",
@@ -19138,7 +19364,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "canelones",
@@ -19259,7 +19486,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "enchiladas",
@@ -19372,7 +19600,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "rancheros",
@@ -19465,7 +19694,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "padthai",
@@ -19558,7 +19788,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "oyakodon",
@@ -19649,7 +19880,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "gyudon",
@@ -19735,7 +19967,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "polloanacardos",
@@ -19824,7 +20057,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "ramen",
@@ -19913,7 +20147,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "bibimbap",
@@ -20002,7 +20237,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "butterchicken",
@@ -20088,7 +20324,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "noquispesto",
@@ -20182,7 +20419,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "parmigiana",
@@ -20296,7 +20534,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "pastagenovesa",
@@ -20372,7 +20611,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pastacalabaza",
@@ -20480,7 +20720,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "berenparmigiana",
@@ -20588,7 +20829,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "falafel",
@@ -20705,7 +20947,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "kofta",
@@ -20814,7 +21057,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "tabule",
@@ -20896,7 +21140,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "huevosturcos",
@@ -21019,7 +21264,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "brocoligratinado",
@@ -21126,7 +21372,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "judiaspatata",
@@ -21230,7 +21477,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "sopaajo",
@@ -21313,7 +21561,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "ensaladilla",
@@ -21426,7 +21675,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "satay",
@@ -21544,7 +21794,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "flamenquin",
@@ -21654,7 +21905,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "cachopo",
@@ -21767,7 +22019,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "stroganoff",
@@ -21860,7 +22113,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "calamaresromana",
@@ -21962,7 +22216,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "pastelatun",
@@ -22068,7 +22323,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "empedrat",
@@ -22142,7 +22398,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "mongetes",
@@ -22240,7 +22497,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "croque",
@@ -22335,7 +22593,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "griega",
@@ -22411,7 +22670,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "souvlaki",
@@ -22517,7 +22777,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "burgersalmon",
@@ -22618,7 +22879,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "harira",
@@ -22714,7 +22976,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "tajine",
@@ -22822,7 +23085,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "macqueso",
@@ -22931,7 +23195,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "boniatorelleno",
@@ -23063,7 +23328,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "tacospastor",
@@ -23175,7 +23441,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "brochemperador",
@@ -23282,7 +23549,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "llauna",
@@ -23396,7 +23664,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "tostatomate",
@@ -23459,7 +23728,8 @@
         "desayuno",
         "almuerzo"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "tostaserrano",
@@ -23526,7 +23796,8 @@
         "desayuno",
         "almuerzo"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "tostaguacate",
@@ -23597,7 +23868,8 @@
       "momentos": [
         "desayuno"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "tostapavo",
@@ -23667,7 +23939,8 @@
         "desayuno",
         "almuerzo"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "tostacacahuete",
@@ -23734,7 +24007,8 @@
         "desayuno",
         "merienda"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "tostamermelada",
@@ -23800,7 +24074,8 @@
         "merienda",
         "desayuno"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "porridge",
@@ -23891,7 +24166,8 @@
       "momentos": [
         "desayuno"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "porridgecacao",
@@ -23990,7 +24266,8 @@
       "momentos": [
         "desayuno"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "overnight",
@@ -24061,7 +24338,8 @@
       "momentos": [
         "desayuno"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "tortitasavena",
@@ -24139,7 +24417,8 @@
         "desayuno",
         "merienda"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "moderada"
     },
     {
       "id": "revueltodes",
@@ -24208,7 +24487,8 @@
       "momentos": [
         "desayuno"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "yogurfruta",
@@ -24282,7 +24562,8 @@
         "desayuno",
         "merienda"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "quesobatido",
@@ -24355,7 +24636,8 @@
         "merienda",
         "desayuno"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "kefirbol",
@@ -24423,7 +24705,8 @@
         "desayuno",
         "merienda"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "batidoplatano",
@@ -24491,7 +24774,8 @@
         "desayuno",
         "merienda"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "batidofresa",
@@ -24562,7 +24846,8 @@
         "merienda",
         "desayuno"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "bocatortilla",
@@ -24629,7 +24914,8 @@
         "almuerzo",
         "merienda"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "bocaserrano",
@@ -24692,7 +24978,8 @@
         "almuerzo",
         "merienda"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "moderada"
     },
     {
       "id": "bocapavo",
@@ -24755,7 +25042,8 @@
         "almuerzo",
         "merienda"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "moderada"
     },
     {
       "id": "bocatun",
@@ -24820,7 +25108,8 @@
         "almuerzo",
         "merienda"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "bocayork",
@@ -24883,7 +25172,8 @@
         "almuerzo",
         "merienda"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "moderada"
     },
     {
       "id": "sandpavo",
@@ -24954,7 +25244,8 @@
         "almuerzo",
         "merienda"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "sandpbj",
@@ -25017,7 +25308,8 @@
         "merienda",
         "almuerzo"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "sandhummus",
@@ -25084,7 +25376,8 @@
       "momentos": [
         "almuerzo"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "wrappavo",
@@ -25155,7 +25448,8 @@
         "almuerzo",
         "merienda"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "moderada"
     },
     {
       "id": "mixto",
@@ -25244,7 +25538,8 @@
         "desayuno",
         "merienda"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "manzanacacahuete",
@@ -25301,7 +25596,8 @@
         "merienda",
         "almuerzo"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "tortitascacahuete",
@@ -25364,7 +25660,8 @@
         "merienda",
         "almuerzo"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "tortitasqueso",
@@ -25427,7 +25724,8 @@
       "momentos": [
         "merienda"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "hummuszanahoria",
@@ -25493,7 +25791,8 @@
         "almuerzo",
         "merienda"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "macedonia",
@@ -25562,7 +25861,8 @@
         "merienda",
         "almuerzo"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "brochetasfruta",
@@ -25627,7 +25927,8 @@
       "momentos": [
         "merienda"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "yogurmanzana",
@@ -25695,7 +25996,8 @@
         "desayuno",
         "merienda"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "mandarinasnueces",
@@ -25749,7 +26051,8 @@
         "almuerzo",
         "merienda"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "melimato",
@@ -25810,7 +26113,8 @@
       "momentos": [
         "merienda"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "muffinsavena",
@@ -25916,7 +26220,8 @@
         "almuerzo",
         "desayuno"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "galletasavena",
@@ -25992,7 +26297,8 @@
         "merienda",
         "almuerzo"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "batidokefir",
@@ -26057,7 +26363,8 @@
         "merienda",
         "almuerzo"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "puddingchia",
@@ -26125,7 +26432,8 @@
         "merienda",
         "desayuno"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "moderada"
     },
     {
       "id": "manzanaasada",
@@ -26212,7 +26520,8 @@
       "momentos": [
         "merienda"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "tostaqueso",
@@ -26277,7 +26586,8 @@
       "momentos": [
         "desayuno"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "peraqueso",
@@ -26334,7 +26644,8 @@
         "merienda",
         "almuerzo"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "tortillayork",
@@ -26402,7 +26713,8 @@
       "momentos": [
         "desayuno"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "platanonueces",
@@ -26456,7 +26768,8 @@
         "almuerzo",
         "merienda"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "frutafrutos",
@@ -26517,7 +26830,8 @@
         "almuerzo",
         "merienda"
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "huevopasado",
@@ -26583,7 +26897,8 @@
       "momentos": [
         "desayuno"
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "canelonesnadal",
@@ -26727,7 +27042,8 @@
           ]
         }
       ],
-      "pack": "navidad"
+      "pack": "navidad",
+      "dificultad": "moderada"
     },
     {
       "id": "escudella",
@@ -26821,7 +27137,8 @@
           ]
         }
       ],
-      "pack": "navidad"
+      "pack": "navidad",
+      "dificultad": "moderada"
     },
     {
       "id": "pollomanzana",
@@ -26927,7 +27244,8 @@
           ]
         }
       ],
-      "pack": "navidad"
+      "pack": "navidad",
+      "dificultad": "facil"
     },
     {
       "id": "cremamarisco",
@@ -27024,7 +27342,8 @@
           ]
         }
       ],
-      "pack": "navidad"
+      "pack": "navidad",
+      "dificultad": "facil"
     },
     {
       "id": "solomillopasas",
@@ -27119,7 +27438,8 @@
           ]
         }
       ],
-      "pack": "navidad"
+      "pack": "navidad",
+      "dificultad": "facil"
     },
     {
       "id": "pavoasado",
@@ -27223,7 +27543,8 @@
           ]
         }
       ],
-      "pack": "navidad"
+      "pack": "navidad",
+      "dificultad": "facil"
     },
     {
       "id": "pepitoria",
@@ -27320,7 +27641,8 @@
           ]
         }
       ],
-      "pack": "navidad"
+      "pack": "navidad",
+      "dificultad": "facil"
     },
     {
       "id": "langostinoshorno",
@@ -27429,7 +27751,8 @@
           ]
         }
       ],
-      "pack": "navidad"
+      "pack": "navidad",
+      "dificultad": "facil"
     },
     {
       "id": "pastelpescado",
@@ -27551,7 +27874,8 @@
           ]
         }
       ],
-      "pack": "navidad"
+      "pack": "navidad",
+      "dificultad": "facil"
     },
     {
       "id": "marimuntanya",
@@ -27643,7 +27967,8 @@
           ]
         }
       ],
-      "pack": "navidad"
+      "pack": "navidad",
+      "dificultad": "facil"
     },
     {
       "id": "ensarroz",
@@ -27727,7 +28052,8 @@
           ]
         }
       ],
-      "pack": "oficina"
+      "pack": "oficina",
+      "dificultad": "facil"
     },
     {
       "id": "wrapcesar",
@@ -27833,7 +28159,8 @@
           ]
         }
       ],
-      "pack": "oficina"
+      "pack": "oficina",
+      "dificultad": "facil"
     },
     {
       "id": "muffinshuevo",
@@ -27937,7 +28264,8 @@
           ]
         }
       ],
-      "pack": "oficina"
+      "pack": "oficina",
+      "dificultad": "facil"
     },
     {
       "id": "bolquinoapollo",
@@ -28041,7 +28369,8 @@
           ]
         }
       ],
-      "pack": "oficina"
+      "pack": "oficina",
+      "dificultad": "facil"
     },
     {
       "id": "enspatsalchichas",
@@ -28155,7 +28484,8 @@
           ]
         }
       ],
-      "pack": "oficina"
+      "pack": "oficina",
+      "dificultad": "facil"
     },
     {
       "id": "waldorf",
@@ -28263,7 +28593,8 @@
           ]
         }
       ],
-      "pack": "oficina"
+      "pack": "oficina",
+      "dificultad": "facil"
     },
     {
       "id": "wrapsalmon",
@@ -28362,7 +28693,8 @@
           ]
         }
       ],
-      "pack": "oficina"
+      "pack": "oficina",
+      "dificultad": "facil"
     },
     {
       "id": "empanadillaspollo",
@@ -28492,7 +28824,8 @@
           ]
         }
       ],
-      "pack": "oficina"
+      "pack": "oficina",
+      "dificultad": "moderada"
     },
     {
       "id": "enscuscusfeta",
@@ -28602,7 +28935,8 @@
           ]
         }
       ],
-      "pack": "oficina"
+      "pack": "oficina",
+      "dificultad": "moderada"
     },
     {
       "id": "enspastajamon",
@@ -28710,7 +29044,8 @@
           ]
         }
       ],
-      "pack": "oficina"
+      "pack": "oficina",
+      "dificultad": "facil"
     },
     {
       "id": "tortclaras",
@@ -28819,7 +29154,8 @@
           ]
         }
       ],
-      "pack": "deportistas"
+      "pack": "deportistas",
+      "dificultad": "facil"
     },
     {
       "id": "pecharellenaesp",
@@ -28934,7 +29270,8 @@
           ]
         }
       ],
-      "pack": "deportistas"
+      "pack": "deportistas",
+      "dificultad": "facil"
     },
     {
       "id": "burritopollo",
@@ -29026,7 +29363,8 @@
           ]
         }
       ],
-      "pack": "deportistas"
+      "pack": "deportistas",
+      "dificultad": "moderada"
     },
     {
       "id": "shawarmabol",
@@ -29144,7 +29482,8 @@
           ]
         }
       ],
-      "pack": "deportistas"
+      "pack": "deportistas",
+      "dificultad": "facil"
     },
     {
       "id": "mealprep",
@@ -29260,7 +29599,8 @@
           ]
         }
       ],
-      "pack": "deportistas"
+      "pack": "deportistas",
+      "dificultad": "facil"
     },
     {
       "id": "pavogarbanzos",
@@ -29339,7 +29679,8 @@
           ]
         }
       ],
-      "pack": "deportistas"
+      "pack": "deportistas",
+      "dificultad": "facil"
     },
     {
       "id": "emperadorquinoa",
@@ -29458,7 +29799,8 @@
           ]
         }
       ],
-      "pack": "deportistas"
+      "pack": "deportistas",
+      "dificultad": "facil"
     },
     {
       "id": "filetehuevo",
@@ -29567,7 +29909,8 @@
           ]
         }
       ],
-      "pack": "deportistas"
+      "pack": "deportistas",
+      "dificultad": "facil"
     },
     {
       "id": "espagpavo",
@@ -29649,7 +29992,8 @@
           ]
         }
       ],
-      "pack": "deportistas"
+      "pack": "deportistas",
+      "dificultad": "facil"
     },
     {
       "id": "pastapolloesp",
@@ -29735,7 +30079,8 @@
           ]
         }
       ],
-      "pack": "deportistas"
+      "pack": "deportistas",
+      "dificultad": "facil"
     },
     {
       "id": "ropavieja",
@@ -29815,7 +30160,8 @@
           ]
         }
       ],
-      "pack": "aprovechamiento"
+      "pack": "aprovechamiento",
+      "dificultad": "facil"
     },
     {
       "id": "arrozhorno",
@@ -29902,7 +30248,8 @@
           ]
         }
       ],
-      "pack": "aprovechamiento"
+      "pack": "aprovechamiento",
+      "dificultad": "moderada"
     },
     {
       "id": "revuelverd",
@@ -29985,7 +30332,8 @@
           ]
         }
       ],
-      "pack": "aprovechamiento"
+      "pack": "aprovechamiento",
+      "dificultad": "facil"
     },
     {
       "id": "sopacebolla",
@@ -30108,7 +30456,8 @@
           ]
         }
       ],
-      "pack": "aprovechamiento"
+      "pack": "aprovechamiento",
+      "dificultad": "facil"
     },
     {
       "id": "croqjamon",
@@ -30225,7 +30574,8 @@
           ]
         }
       ],
-      "pack": "aprovechamiento"
+      "pack": "aprovechamiento",
+      "dificultad": "moderada"
     },
     {
       "id": "migas",
@@ -30307,7 +30657,8 @@
           ]
         }
       ],
-      "pack": "aprovechamiento"
+      "pack": "aprovechamiento",
+      "dificultad": "facil"
     },
     {
       "id": "frittatapasta",
@@ -30418,7 +30769,8 @@
           ]
         }
       ],
-      "pack": "aprovechamiento"
+      "pack": "aprovechamiento",
+      "dificultad": "facil"
     },
     {
       "id": "panzanella",
@@ -30526,7 +30878,8 @@
           ]
         }
       ],
-      "pack": "aprovechamiento"
+      "pack": "aprovechamiento",
+      "dificultad": "moderada"
     },
     {
       "id": "tortitaspure",
@@ -30640,7 +30993,8 @@
           ]
         }
       ],
-      "pack": "aprovechamiento"
+      "pack": "aprovechamiento",
+      "dificultad": "moderada"
     },
     {
       "id": "n_bacalhau",
@@ -30757,7 +31111,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_nicoise",
@@ -30867,7 +31222,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_chowder",
@@ -30950,7 +31306,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_fishpie",
@@ -31077,7 +31434,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_calamartinta",
@@ -31161,7 +31519,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_langaguacate",
@@ -31264,7 +31623,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_brochlang",
@@ -31378,7 +31738,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_salmonmiel",
@@ -31484,7 +31845,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_pilpil",
@@ -31560,7 +31922,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_moqueca",
@@ -31644,7 +32007,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_suquet",
@@ -31735,7 +32099,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_samfaina",
@@ -31849,7 +32214,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_biryani",
@@ -31931,7 +32297,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "n_jambalaya",
@@ -32021,7 +32388,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_lomosaltado",
@@ -32142,7 +32510,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_goulash",
@@ -32225,7 +32594,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_pavochampis",
@@ -32309,7 +32679,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_pollosatay",
@@ -32433,7 +32804,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_tinga",
@@ -32521,7 +32893,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_koftacurry",
@@ -32643,7 +33016,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "n_moruno",
@@ -32754,7 +33128,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_cacciatore",
@@ -32882,7 +33257,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_pollonaranja",
@@ -32991,7 +33367,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_bangers",
@@ -33117,7 +33494,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_cordonbleu",
@@ -33256,7 +33634,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "n_carbonarapavo",
@@ -33332,7 +33711,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_tsukune",
@@ -33454,7 +33834,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "n_sloppyjoe",
@@ -33550,7 +33931,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "n_omurice",
@@ -33641,7 +34023,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_sincronizadas",
@@ -33742,7 +34125,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "n_pastaceci",
@@ -33824,7 +34208,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_pastabroc",
@@ -33899,7 +34284,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_tortang",
@@ -33980,7 +34366,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_huevosmex",
@@ -34060,7 +34447,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_chilaquiles",
@@ -34185,7 +34573,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_pastaguisantes",
@@ -34268,7 +34657,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_quesadillachampi",
@@ -34370,7 +34760,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_curryhuevo",
@@ -34453,7 +34844,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "n_espagatun",
@@ -34533,7 +34925,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "n_kedgeree",
@@ -34618,7 +35011,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "tofusalteado",
@@ -34743,7 +35137,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "currytofu",
@@ -34827,7 +35222,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "bolosoja",
@@ -34914,7 +35310,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "tacossoja",
@@ -35011,7 +35408,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "tortvegana",
@@ -35127,7 +35525,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "fajitasseitan",
@@ -35245,7 +35644,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "paellaverd",
@@ -35347,7 +35747,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "alubiasestofadas",
@@ -35436,7 +35837,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "padthaitofu",
@@ -35526,7 +35928,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "tofucrujiente",
@@ -35649,7 +36052,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "cremacalabgarb",
@@ -35769,7 +36173,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pastachampi",
@@ -35859,7 +36264,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pimrellenossoja",
@@ -35989,7 +36395,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "berenlentejas",
@@ -36123,7 +36530,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "tajineveg",
@@ -36226,7 +36634,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "bolbuda",
@@ -36315,7 +36724,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "arrozfritotofu",
@@ -36409,7 +36819,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "revueltotofu",
@@ -36491,7 +36902,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "canelonesespinacas",
@@ -36575,7 +36987,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "pastahornoveg",
@@ -36709,7 +37122,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "quesadillasveg",
@@ -36816,7 +37230,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "calabquinoa",
@@ -36945,7 +37360,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "empanadillasespinacas",
@@ -37072,7 +37488,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "musacaveg",
@@ -37169,7 +37586,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "risottocalabaza",
@@ -37255,7 +37673,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "noquisgratinados",
@@ -37371,7 +37790,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pastanorma",
@@ -37496,7 +37916,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pastellentejas",
@@ -37588,7 +38009,8 @@
             }
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "tortitascalab",
@@ -37698,7 +38120,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "ensgarbcruda",
@@ -37777,7 +38200,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "gazpachocasero",
@@ -37852,7 +38276,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "zoodlespesto",
@@ -37928,7 +38353,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "pokevegano",
@@ -38007,7 +38433,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "enslentmed",
@@ -38085,7 +38512,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "ensmexicana",
@@ -38163,7 +38591,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "enstofupepino",
@@ -38241,7 +38670,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "alubiasperejil",
@@ -38315,7 +38745,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "ajoblanco",
@@ -38386,7 +38817,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "vg_fabada",
@@ -38484,7 +38916,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "moderada"
     },
     {
       "id": "vg_pisto",
@@ -38626,7 +39059,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_escalivada",
@@ -38743,7 +39177,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_fideua",
@@ -38890,7 +39325,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_lasana",
@@ -39041,7 +39477,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "moderada"
     },
     {
       "id": "vg_estofado",
@@ -39139,7 +39576,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_burger",
@@ -39265,7 +39703,8 @@
           ]
         }
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "vg_stroganoff",
@@ -39360,7 +39799,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_mapotofu",
@@ -39454,7 +39894,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_teriyaki",
@@ -39571,7 +40012,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_bibimbap",
@@ -39669,7 +40111,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_pho",
@@ -39765,7 +40208,8 @@
           ]
         }
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "vg_burrito",
@@ -39905,7 +40349,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_currythai",
@@ -40008,7 +40453,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_aloogobi",
@@ -40120,7 +40566,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_biryani",
@@ -40219,7 +40666,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "moderada"
     },
     {
       "id": "vg_koshari",
@@ -40315,7 +40763,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_buddha",
@@ -40449,7 +40898,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_shawarma",
@@ -40568,7 +41018,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_lomosaltado",
@@ -40707,7 +41158,8 @@
           ]
         }
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "vg_sloppy",
@@ -40802,7 +41254,8 @@
           ]
         }
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "facil"
     },
     {
       "id": "vg_ribollita",
@@ -40900,7 +41353,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_macqueso",
@@ -41026,7 +41480,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_noquis",
@@ -41153,7 +41608,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_nuggets",
@@ -41266,7 +41722,8 @@
           ]
         }
       ],
-      "para_llevar": false
+      "para_llevar": false,
+      "dificultad": "moderada"
     },
     {
       "id": "vg_gadogado",
@@ -41392,7 +41849,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_ollagitana",
@@ -41500,7 +41958,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_seitanempanado",
@@ -41619,7 +42078,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "moderada"
     },
     {
       "id": "vg_enchiladas",
@@ -41716,7 +42176,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "moderada"
     },
     {
       "id": "vg_romesco",
@@ -41839,7 +42300,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_jambalaya",
@@ -41935,7 +42397,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "moderada"
     },
     {
       "id": "vg_pastafagioli",
@@ -42024,7 +42487,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_farinata",
@@ -42144,7 +42608,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "moderada"
     },
     {
       "id": "vg_croquetas",
@@ -42283,7 +42748,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "dificil"
     },
     {
       "id": "vg_mafe",
@@ -42387,7 +42853,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_puttanesca",
@@ -42476,7 +42943,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_kungpao",
@@ -42613,7 +43081,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "facil"
     },
     {
       "id": "vg_tikka",
@@ -42752,7 +43221,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "moderada"
     },
     {
       "id": "vg_empanada",
@@ -42846,7 +43316,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "dificil"
     },
     {
       "id": "vg_katsu",
@@ -42943,7 +43414,8 @@
           ]
         }
       ],
-      "para_llevar": true
+      "para_llevar": true,
+      "dificultad": "moderada"
     },
     {
       "id": "cr_hummusbol",
@@ -43026,7 +43498,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cr_hummusalubias",
@@ -43105,7 +43578,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cr_hummusremolacha",
@@ -43188,7 +43662,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cr_cevichetofu",
@@ -43262,7 +43737,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cr_cevichechampi",
@@ -43336,7 +43812,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cr_tomatesrellenos",
@@ -43411,7 +43888,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "cr_ensremolacha",
@@ -43490,7 +43968,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cr_tabule",
@@ -43564,7 +44043,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "cr_pipirrana",
@@ -43643,7 +44123,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cr_hiyayakko",
@@ -43718,7 +44199,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cr_carpaccio",
@@ -43793,7 +44275,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cr_gazpachoverde",
@@ -43876,7 +44359,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cr_zanahoria",
@@ -43951,7 +44435,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cr_griega",
@@ -44030,7 +44515,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cr_caprese",
@@ -44097,7 +44583,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cr_naranja",
@@ -44167,7 +44654,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "cr_tropical",
@@ -44246,7 +44734,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cr_piquillos",
@@ -44321,7 +44810,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cr_barquitas",
@@ -44400,7 +44890,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "cr_tacoscrudos",
@@ -44487,7 +44978,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "cr_trempo",
@@ -44561,7 +45053,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "moderada"
     },
     {
       "id": "cr_rucula",
@@ -44640,7 +45133,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cr_mangolentejas",
@@ -44718,7 +45212,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cr_garbtahini",
@@ -44793,7 +45288,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cr_garbalcachofa",
@@ -44867,7 +45363,8 @@
             null
           ]
         }
-      ]
+      ],
+      "dificultad": "facil"
     },
     {
       "id": "cap_pizzasuper",
@@ -44947,7 +45444,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "facil"
     },
     {
       "id": "cap_pizzacasera",
@@ -45052,7 +45550,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "moderada"
     },
     {
       "id": "cap_burgercompleta",
@@ -45202,7 +45701,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "facil"
     },
     {
       "id": "cap_smash",
@@ -45344,7 +45844,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "moderada"
     },
     {
       "id": "cap_perritos",
@@ -45459,7 +45960,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "facil"
     },
     {
       "id": "cap_nachos",
@@ -45590,7 +46092,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "facil"
     },
     {
       "id": "cap_fajitas",
@@ -45686,7 +46189,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "moderada"
     },
     {
       "id": "cap_quesadillas",
@@ -45808,7 +46312,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "facil"
     },
     {
       "id": "cap_durum",
@@ -45935,7 +46440,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "facil"
     },
     {
       "id": "cap_sanjacobos",
@@ -46076,7 +46582,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "facil"
     },
     {
       "id": "cap_bravas",
@@ -46190,7 +46697,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "facil"
     },
     {
       "id": "cap_croquetas",
@@ -46337,7 +46845,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "dificil"
     },
     {
       "id": "cap_calamares",
@@ -46427,7 +46936,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "moderada"
     },
     {
       "id": "cap_bikini",
@@ -46536,7 +47046,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "facil"
     },
     {
       "id": "cap_carbonara",
@@ -46618,7 +47129,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "facil"
     },
     {
       "id": "cap_macarrones",
@@ -46751,7 +47263,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "facil"
     },
     {
       "id": "cap_lasana",
@@ -46859,7 +47372,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "dificil"
     },
     {
       "id": "cap_sopafideos",
@@ -46944,7 +47458,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "facil"
     },
     {
       "id": "cap_alitas",
@@ -47051,7 +47566,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "moderada"
     },
     {
       "id": "cap_fingers",
@@ -47167,7 +47683,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "moderada"
     },
     {
       "id": "cap_pollofrito",
@@ -47279,7 +47796,8 @@
           ]
         }
       ],
-      "capricho": true
+      "capricho": true,
+      "dificultad": "moderada"
     }
   ]
 }

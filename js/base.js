@@ -2,7 +2,7 @@
 "use strict";
 
 // Versión de la app: súbela (y el ?v= de index.html y VERSION de sw.js) en cada mejora, y añade sus novedades a data/novedades.json
-const APP_VERSION = 72;
+const APP_VERSION = 73;
 
 /* ---------- Utilidades ---------- */
 const DAYS = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];   // índice 0 = lunes
@@ -90,6 +90,10 @@ function factorForAge(a){a=Number(a);if(!a)return 0.6;if(a<=5)return 0.5;if(a<=9
 function defaultWeekTpl(){
   return [0,1,2,3,4,5,6].map(d=>({comida:d<=4?"taper":"libre",cena:(d<=3||d===6)?"cocinar":"libre"}));
 }
+// Dificultad de cocinar cada receta (calculada por pasos, tiempo de trabajo y técnicas: rebozar, masa, bechamel…)
+const DIFF={facil:["👌","Fácil"],moderada:["🧑‍🍳","Moderada"],dificil:["🔥","Difícil"]};
+const diffRank=d=>({facil:0,moderada:1,dificil:2})[d]??0;
+const maxDiff=()=>S.home.maxDiff||"moderada";
 // Rangos de edad (obligatorios en el alta): dicen si es adulto o niño y la ración
 const AGE_RANGES=[["0-2","0–2",1],["3-5","3–5",4],["6-9","6–9",8],["10-13","10–13",12],["14-17","14–17",15],["18-30","18–30",25],["31-50","31–50",40],["51-65","51–65",58],["65+","65+",70]];
 const ageOf=r=>(AGE_RANGES.find(x=>x[0]===r)||[])[2]||null;

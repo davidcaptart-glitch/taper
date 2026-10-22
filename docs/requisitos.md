@@ -11,6 +11,12 @@ A partir de la auditoría de Robert: llegar al primer menú enseguida y afinar d
 Después, **primer menú** (desde hoy, sin tope de presupuesto, diciendo lo que cuesta al mes y lo que se ha supuesto: comida y cena en casa, compra en tienda). De base solo se planifican **comida y cena**: desayunos, almuerzos y meriendas no se planifican hasta que alguien los active en «Afinar › Cuántas comidas hace cada uno».
 Encima: **«¿Quieres afinarlo más?»** → lista para marcar: presupuesto mensual, gustos, quién come y cuándo (custodias), cuántas comidas hace cada uno, cuándo planificas y compras, cómo cocinas (cada día o por lotes), deporte (días y horas) y objetivos, platos fijos y caprichos, festivos locales (si no se conocen), invitar a un familiar. Se pregunta solo lo marcado y al final se rehace el menú. Lo no marcado queda en el Menú como «Mejora tu menú».
 
+### Versión Plus (de pago, en el futuro)
+De momento todo está incluido para probarlo, pero **afinar el menú** (todo lo de «¿Quieres afinarlo más?») y **el presupuesto mensual** serán de la versión Plus. La versión gratuita: alta en 3 pantallas, menú, compra, recetas y «¿Qué tal?».
+
+### Dificultad de las recetas
+Cada receta tiene `dificultad` (fácil, moderada, difícil), calculada por pasos, minutos de trabajo y técnicas (rebozar, freír en abundante aceite, masa, bechamel, croquetas…). Por defecto el menú propone fáciles y moderadas; en «Afinar › Dificultad» se puede elegir solo fáciles o todas. A mano se puede elegir cualquiera.
+
 ### A desarrollar: necesidades según la edad
 Con el rango de edad de cada persona (bebés, niños, adolescentes, adultos, mayores), ajustar raciones y necesidades: proteína, calcio, hierro, fibra, sal, texturas para los pequeños, platos que gustan a cada edad… Hoy solo se usa la edad de los niños para la ración.
 

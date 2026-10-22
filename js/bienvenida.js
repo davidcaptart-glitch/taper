@@ -13,6 +13,7 @@ const AFINAR=[
   ["planificar","📅 Cuándo planificas y compras",()=>["plan","compra"]],
   ["cocinar","🍳 Cómo cocinas (cada día o tápers)",()=>["cocina"]],
   ["deporte","🏃 Deporte y objetivos",()=>adults().map(a=>"objetivos:"+a.id).concat(S.people.filter(p=>p.trains).map(p=>"entreno:"+p.id))],
+  ["dificultad","👌 Dificultad de los platos",()=>["dificultad"]],
   ["fijos","🍕 Platos fijos y caprichos",()=>["cocina"]],
   ["invitar","📩 Que alguien de casa rellene sus preferencias",()=>[]]];
 
@@ -42,6 +43,7 @@ function fullSteps(){
     {id:"plan",eyebrow:"Planificación",title:"¿Cuándo *planificas?*"},
     {id:"compra",eyebrow:"Presupuesto",title:"Fija tu *presupuesto*"},
     ...S.people.map(p=>({id:"gustos:"+p.id,eyebrow:"Dieta y gustos",title:isMe(p)?"¿Cómo *comes?*":"¿Cómo come *"+personName(p)+"?*"})),
+    {id:"dificultad",eyebrow:"Dificultad",title:"¿Qué platos te *propongo?*"},
     {id:"listo",eyebrow:"Todo listo",title:"¡A *cocinar!*"}
   ];
   return st;
@@ -241,6 +243,9 @@ function stepBody(fullId){
     <h3 class="kith">Marca los supermercados que te vengan bien</h3><p class="small muted" style="margin:-4px 0 10px">Aunque solo vayas a la tienda: comparo sus precios cada semana.</p>
     <div class="supgrid">${SUPERS.filter(ok).map(tile).join("")}</div>
     <details class="more"><summary>Ver más supermercados</summary><div class="supgrid" style="margin-top:8px">${SUPERS.filter(x=>!ok(x)).map(tile).join("")}</div></details>`}
+  if(id==="dificultad"){const cur=maxDiff(),n=k=>R.filter(r=>!r.small&&!r.cap&&diffRank(r.diff)<=diffRank(k)&&S.people.every(p=>canEat(p,r))).length;
+    return `<p class="lead">Elige hasta dónde quieres complicarte. Siempre podrás elegir a mano cualquier receta.</p>
+    <div>${[["facil","👌 Solo fáciles","Pocos pasos y nada de rebozar, masas ni bechamel"],["moderada","🧑‍🍳 Fáciles y moderados","Algún plato con más pasos de vez en cuando"],["dificil","🔥 Me atrevo con todo","También croquetas, masas y bechamel caseras"]].map(([k,t,d])=>`<button type="button" class="alt" data-maxd="${k}" style="${cur===k?"outline:2px solid var(--tomato)":""}"><b>${t}</b><small>${d} · ${n(k)} platos</small></button>`).join("")}</div>`}
   if(id==="hola")return `<p class="lead">Táper te prepara el menú, la lista de la compra y los tápers de la semana, a tu medida. Unas preguntas rápidas y empezamos. Todo se puede cambiar después.</p>
     <div class="field"><label for="wzName">¿Cómo te llamas?</label><input id="wzName" type="text" value="${esc(a.name)}" placeholder="Tu nombre"></div>
     ${isStandalone()&&servidorOn()?`<button type="button" class="btn ghost small" id="wzTr">¿Ya usabas Táper en Safari? Trae tus datos</button>`:""}
@@ -486,6 +491,7 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
   qa("[data-pdel]").forEach(b=>b.onclick=()=>{S.people=S.people.filter(p=>p.id!==b.dataset.pdel);if(wiz.editP===b.dataset.pdel)wiz.editP=null;rerender()});
   // Cómo coméis
   qa("[data-more]").forEach(b=>b.onclick=()=>{wiz.more={...(wiz.more||{}),[b.dataset.more]:true};render()});
+  qa("[data-maxd]").forEach(b=>b.onclick=()=>{H.maxDiff=b.dataset.maxd;rerender()});
   qa("[data-startpick]").forEach(b=>b.onclick=()=>{H.startPick=b.dataset.startpick;rerender()});
   q("#wzStartO")&&(q("#wzStartO").onchange=e=>{H.startOther=e.target.value;rerender()});
   qa("[data-copen]").forEach(b=>b.onclick=()=>{wiz.comerOpen=b.dataset.copen;render()});
