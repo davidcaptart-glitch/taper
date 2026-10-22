@@ -645,6 +645,39 @@ function renderRecetas(){
   bindOpen();
 }
 
+/* ---------- Cambios planificados (vacaciones, cambios de turno, imprevistos) ---------- */
+const CHANGE_TYPES={vacaciones:"Vacaciones",turno:"Cambio de turno",imprevisto:"Imprevisto",otro:"Otro"};
+function changesHTML(p){
+  const list=(p.changes||[]).filter(c=>c.to>=todayISO()).sort((a,b)=>a.from.localeCompare(b.from));
+  const past=(p.changes||[]).length-list.length;
+  return `<h3 style="margin-top:14px">Cambios planificados</h3>
+    ${list.length?list.map(c=>`<div class="fixed"><span><b>${esc(CHANGE_TYPES[c.type]||"Cambio")}: ${c.with?"está contigo":"no está"}</b><small>Del ${esc(shortDate(c.from))} (${c.fromMeal==="cena"?"cena":"comida"}) al ${esc(shortDate(c.to))} (${c.toMeal==="comida"?"comida":"cena"})${c.note?" · "+esc(c.note):""}</small></span><button class="btn ghost small" data-delch="${p.id}|${c.id}">Quitar</button></div>`).join(""):`<p class="small muted">Ninguno. Úsalos para vacaciones, cambios de turno o imprevistos.</p>`}
+    ${past?`<p class="small muted">${past} ${past===1?"cambio pasado":"cambios pasados"} guardados.</p>`:""}
+    <button class="btn ghost small" data-addch="${p.id}">+ Planificar un cambio</button>`;
+}
+function openChange(pid){
+  const p=S.people.find(x=>x.id===pid);
+  showDialog(`<div class="mod">${closeBtn}<h2>Planificar un cambio</h2><p class="small muted">${esc(personName(p))} · manda sobre su turno normal durante esas fechas.</p>
+    <div class="field"><label>¿Qué es?</label><div class="chips">${Object.entries(CHANGE_TYPES).map(([k,t],i)=>chip("data-cht",k,i===0,t)).join("")}</div></div>
+    <div class="field"><label>Durante esas fechas</label><div class="chips">${chip("data-chw","1",true,"Está conmigo")}${chip("data-chw","0",false,"No está conmigo")}</div></div>
+    <div class="row"><div class="field" style="flex:1.3"><label for="chF">Desde</label><input type="date" id="chF" value="${todayISO()}"></div>
+      <div class="field" style="flex:1"><label for="chFm">Empieza con</label><select id="chFm"><option value="comida">la comida</option><option value="cena">la cena</option></select></div></div>
+    <div class="row"><div class="field" style="flex:1.3"><label for="chT">Hasta</label><input type="date" id="chT" value="${addDays(todayISO(),6)}"></div>
+      <div class="field" style="flex:1"><label for="chTm">Termina después de</label><select id="chTm"><option value="cena">cenar</option><option value="comida">comer</option></select></div></div>
+    <div class="field"><label for="chN">Nota (opcional)</label><input type="text" id="chN" placeholder="Por ejemplo, vacaciones de verano"></div>
+    <div class="actions"><button class="btn wide" id="chOk">Guardar cambio</button></div></div>`);
+  let type="vacaciones",withMe=true;
+  dlg.querySelectorAll("[data-cht]").forEach(b=>b.onclick=()=>{type=b.dataset.cht;dlg.querySelectorAll("[data-cht]").forEach(x=>x.setAttribute("aria-pressed",x===b))});
+  dlg.querySelectorAll("[data-chw]").forEach(b=>b.onclick=()=>{withMe=b.dataset.chw==="1";dlg.querySelectorAll("[data-chw]").forEach(x=>x.setAttribute("aria-pressed",x===b))});
+  dlg.querySelector("#chOk").onclick=()=>{
+    const from=dlg.querySelector("#chF").value,to=dlg.querySelector("#chT").value;
+    if(!from||!to||to<from){toast("Revisa las fechas: el final no puede ser antes del inicio");return}
+    p.changes=p.changes||[];p.changes.push({id:uid("c"),type,with:withMe,from,to,fromMeal:dlg.querySelector("#chFm").value,toMeal:dlg.querySelector("#chTm").value,note:dlg.querySelector("#chN").value.trim()});
+    save();for(const s of Object.keys(S.plans))if(addDays(s,6)>=from&&s<=to)ensureWeek(s);save();
+    dlg.close();render();toast("Cambio guardado: el menú y la compra ya lo tienen en cuenta");
+  };
+}
+
 /* ---------- Perfil ---------- */
 let calMonth=null;
 // Calendario del mes con los días que cada hijo está contigo (tocar un día lo cambia)
@@ -653,7 +686,7 @@ function kidCalendar(k){
   const first=iso(new Date(y,mm-1,1)), n=new Date(y,mm,0).getDate();
   let days=0,h=`<div class="row" style="margin-top:12px"><b>Calendario de ${esc(personName(k))}</b><span class="spacer"></span><button class="btn ghost small" data-cal="-1" aria-label="Mes anterior">‹</button><span class="small" style="text-transform:capitalize">${monthName(m)}</span><button class="btn ghost small" data-cal="1" aria-label="Mes siguiente">›</button></div>
   <div class="cal">${DSHORT.map(d=>`<span class="cal-h">${d.slice(0,1)}</span>`).join("")}${"<span></span>".repeat(dow(first))}`;
-  for(let i=0;i<n;i++){const d=addDays(first,i),on=peopleAt(d).includes(k),ov=((S.days[d]||{}).kids||{})[k.id]!=null;if(on)days++;
+  for(let i=0;i<n;i++){const d=addDays(first,i),on=peopleAt(d).includes(k),ov=((S.days[d]||{}).kids||{})[k.id]!=null||!!changeFor(k,d);if(on)days++;
     h+=`<button class="cal-d ${on?"on":""} ${isHoliday(d)?"hol":""} ${ov?"ov":""}" data-kcal="${k.id}|${d}" title="${esc(longDate(d))}${isHoliday(d)?" · "+esc(holidayName(d)):""}">${i+1}</button>`}
   return h+`</div><div class="small muted">${days} días este mes · toca un día para cambiarlo${Object.keys(S.days).some(d=>d.startsWith(m)&&((S.days[d].kids||{})[k.id]!=null))?" · los días con borde los has cambiado tú":""}</div>`;
 }
@@ -685,7 +718,7 @@ function renderPerfil(){
   let h=`<section class="view"><div class="hero"><div class="eyebrow">Tu perfil</div><h2>${me().name?"Hola, "+esc(me().name):"Hola"}</h2><p>${S.people.length>1?`${S.people.length} personas en casa · `:""}${eur(S.home.budget.month)} al mes · ${esc(superInfo().nombre||"")}</p></div>`;
   let fam="";
   for(const p of S.people){const hist=historyOf(p,20);
-    const body=`${p.id!=="yo"?`<div class="small muted">${p.kind==="nino"?(p.age?p.age+" años · ":"")+"niño o niña":"adulto"} · ración ${String(p.factor).replace(".",",")}${p.tupper?" · se lleva táper":""}</div>${turnText(p)?`<div class="small" style="margin-top:6px">${esc(turnText(p))}</div>`:""}${kidCalendar(p)}`:""}${knowHTML(p)}
+    const body=`${p.id!=="yo"?`<div class="small muted">${p.kind==="nino"?(p.age?p.age+" años · ":"")+"niño o niña":"adulto"} · ración ${String(p.factor).replace(".",",")}${p.tupper?" · se lleva táper":""}</div>${turnText(p)?`<div class="small" style="margin-top:6px">${esc(turnText(p))}</div>`:""}${kidCalendar(p)}${changesHTML(p)}`:""}${knowHTML(p)}
       <details style="margin-top:12px"><summary class="small"><b>Historial</b> <span class="muted">(${hist.length} ${hist.length===1?"comida reciente":"comidas recientes"})</span></summary>
       ${hist.length?`<table class="wtable">${hist.map(x=>`<tr><td>${DSHORT[dow(x.date)]} ${shortDate(x.date)} · ${x.meal}</td><td style="text-align:left;padding-left:8px">${esc(x.name)}${x.note?` <span class="small muted">${esc(x.note)}</span>`:""}</td><td>${x.v!=null?RV[x.v]:""}</td></tr>`).join("")}</table>`:`<p class="small muted">Aún no hay comidas pasadas.</p>`}</details>`;
     const likes=Object.values(p.tastes.dish).filter(v=>v>=1).length, nos=Object.values(p.tastes.ing).filter(v=>v<0).length;
@@ -722,6 +755,9 @@ function renderPerfil(){
   const q=s=>main.querySelectorAll(s), find=id=>S.people.find(p=>p.id===id);
   q("details.acc").forEach(d=>d.addEventListener("toggle",()=>{if(d.open)accOpen.add(d.dataset.acc);else accOpen.delete(d.dataset.acc)}));
   q("[data-edit]").forEach(b=>b.onclick=()=>{openWizard(b.dataset.edit);scrollTo(0,0)});
+  q("[data-addch]").forEach(b=>b.onclick=()=>openChange(b.dataset.addch));
+  q("[data-delch]").forEach(b=>b.onclick=()=>{const [pp,cid]=b.dataset.delch.split("|");const p=find(pp);const c=(p.changes||[]).find(x=>x.id===cid);p.changes=p.changes.filter(x=>x.id!==cid);save();
+    if(c)for(const s of Object.keys(S.plans))if(addDays(s,6)>=c.from&&s<=c.to)ensureWeek(s);save();render();toast("Cambio quitado")});
   q("[data-cal]").forEach(b=>b.onclick=()=>{const [y,m]=(calMonth||month).split("-").map(Number);calMonth=iso(new Date(y,m-1+Number(b.dataset.cal),1)).slice(0,7);render()});
   q("[data-kcal]").forEach(b=>b.onclick=()=>{const [id,d]=b.dataset.kcal.split("|"),k=find(id);const o=S.days[d]=S.days[d]||{};o.kids=o.kids||{};
     const ruleOn=presentByRule(k,d), nowOn=peopleAt(d).includes(k);

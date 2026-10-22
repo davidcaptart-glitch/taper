@@ -24,8 +24,19 @@ function turnInfo(pr){
   return {anchor,len:pr.type==="findes"?3:7,arrive:arrive||"comida",leave:leave||"cena"};
 }
 // Cuándo está cada miembro de la familia (tú estás siempre). Sin comida indicada: si está en algún momento del día
+// Cambios planificados (vacaciones, cambios de turno, imprevistos): mandan sobre el turno normal
+function changeFor(k,d,meal){
+  for(const c of (k.changes||[])){
+    if(d<c.from||d>c.to)continue;
+    if(meal&&d===c.from&&c.fromMeal==="cena"&&meal==="comida")continue;
+    if(meal&&d===c.to&&c.toMeal==="comida"&&meal==="cena")continue;
+    return c;
+  }
+  return null;
+}
 function presentByRule(k,d,meal){
   if(k.id==="yo")return true;
+  const ch=changeFor(k,d,meal);if(ch)return ch.with;
   const pr=k.presence||{type:"siempre"}, w=dow(d);
   if(pr.type==="siempre")return true;
   if(pr.type==="manual")return false;

@@ -106,6 +106,8 @@ aprende se ve y se corrige en una pantalla "Lo que sé de ti" (por persona: adul
 - Si dejas de cocinar un plato: cocinar solo el táper, pasarlo al día siguiente o no cocinarlo.
 - Cada hijo con su propio horario (uno siempre, otro fines de semana alternos…). Turnos alternos con día del
   cambio, comida de llegada y de salida (p. ej. Lukas: de viernes cena a jueves cena); presencia comida a comida.
+  Cambios planificados por persona (vacaciones, cambio de turno, imprevisto): rango de fechas con comida de
+  inicio y de fin, mandan sobre el turno normal.
 
 ### Después de cada comida
 - Se pregunta "¿qué tal?" hora y media después de la hora de cada comida: valoración por persona, o

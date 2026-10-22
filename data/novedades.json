@@ -160,6 +160,14 @@
         "Semanas o fines de semana alternos con el día del cambio que tengáis (por ejemplo, de viernes noche a jueves noche).",
         "Indicas si ese día llega para comer o para cenar, y si el último día se va después de comer o de cenar: el menú y la compra se ajustan comida a comida."
       ]
+    },
+    {
+      "version": 17,
+      "fecha": "2026-10-22",
+      "titulo": "Cambios planificados",
+      "cambios": [
+        "En Perfil › Tu familia puedes planificar vacaciones, cambios de turno o imprevistos: periodos en que esa persona está contigo (o no) aunque no le toque. El menú y la compra se recalculan solos."
+      ]
     }
   ]
 }
