@@ -13,7 +13,8 @@ se guardan solo en tu móvil: usa **Ajustes > Copia de seguridad** de vez en cua
 | `data/productos.json` | Productos, con su id de Mercadona |
 | `data/recetas.json` | Recetas: variantes por aparato, nutrición y cuánto aguantan |
 | `data/festivos.json` | Festivos de Cataluña y locales |
-| `docs/` | Requisitos acordados y lista de recetas |
+| `docs/` | Requisitos acordados y listas de recetas |
+| `data/zonas.json`, `data/precios/` | Precios de otras zonas (los añade la tarea del domingo) |
 | `data/precios.json` | Precios de Mercadona. Lo actualiza GitHub solo cada domingo |
 | `scripts/actualizar_precios.py` | El programa que consulta los precios |
 | `.github/workflows/precios.yml` | La tarea programada de GitHub que lanza ese programa |
