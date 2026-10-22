@@ -1,5 +1,20 @@
 # Requisitos pendientes de Táper
 
+## Alta nueva en 3 pantallas (acordado con David el 22 de octubre, pendiente de maqueta)
+
+A partir de la auditoría de Robert: llegar al primer menú enseguida y afinar después solo lo que cada uno quiera.
+
+1. **Casa.** Una fila para añadir a cada persona: nombre y **rango de edad obligatorio** (la edad dice si es adulto o niño). Cada persona queda como un globito debajo (la primera eres tú). El resto de la pantalla: «Selecciona con qué cocinas» (dibujo de los aparatos).
+2. **Cómo coméis.** Por persona: forma de comer, alergias y si hace deporte (sí/no). Igual que ahora.
+3. **Tu súper.** Código postal y supermercados. El pueblo y los festivos salen del código postal (si el CP tiene varios pueblos, se elige con globitos). Solo los supermercados con precios; los demás en «Ver más».
+
+Después, **primer menú** (desde hoy, sin tope de presupuesto, diciendo lo que cuesta al mes y lo que se ha supuesto: comida y cena en casa, compra en tienda).
+Encima: **«¿Quieres afinarlo más?»** → lista para marcar: presupuesto mensual, gustos, quién come y cuándo (custodias), cuántas comidas hace cada uno, cuándo planificas y compras, cómo cocinas (cada día o por lotes), deporte (días y horas) y objetivos, platos fijos y caprichos, festivos locales (si no se conocen), invitar a un familiar. Se pregunta solo lo marcado y al final se rehace el menú. Lo no marcado queda en el Menú como «Mejora tu menú».
+
+### A desarrollar: necesidades según la edad
+Con el rango de edad de cada persona (bebés, niños, adolescentes, adultos, mayores), ajustar raciones y necesidades: proteína, calcio, hierro, fibra, sal, texturas para los pequeños, platos que gustan a cada edad… Hoy solo se usa la edad de los niños para la ración.
+
+
 Lista viva de lo acordado para las próximas fases. La fase 1 (base, precios semanales, publicación) está hecha.
 
 **Principio general: cuanto más personalizada, mejor.** La app aprende continuamente de los gustos,
