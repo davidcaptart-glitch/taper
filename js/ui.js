@@ -454,7 +454,7 @@ function syncMenuWeek(){
 function renderMenu(){
   const ws=syncMenuWeek();
   const weeks=[weekSel];
-  let h=`<section class="view">`+viewHead(monthName(month),"Qué *comemos*",`${servidorOn()?`<button class="btn ghost small" id="shareMenu" title="Compartir el menú con alguien de casa">👥</button>`:""}<button class="btn ghost small" id="printMenu" title="Menú imprimible">🖨️</button>`)+followChips()+safetyCard()+monthPrepCard()+((n=>n&&weekStartFor(n.d)===weekSel)(nextMeal())?todayCard():"")+weekPicker(ws,weekSel)+dayStrip(weekSel)+useUpCard()+`<div class="row" style="justify-content:flex-end;margin:4px 0 -4px"><button class="btn ghost small" id="startDay">📅 ${S.home.start&&S.home.start>todayISO()?"Cambiar el día de inicio":"Empezar el plan otro día"}</button></div>`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
+  let h=`<section class="view">`+viewHead(monthName(month),"Qué *comemos*",`${servidorOn()?`<button class="btn ghost small" id="shareMenu" title="Compartir el menú con alguien de casa">👥</button>`:""}<button class="btn ghost small" id="printMenu" title="Menú imprimible">🖨️</button>`)+followChips()+safetyCard()+afinarCard()+monthPrepCard()+((n=>n&&weekStartFor(n.d)===weekSel)(nextMeal())?todayCard():"")+weekPicker(ws,weekSel)+dayStrip(weekSel)+useUpCard()+`<div class="row" style="justify-content:flex-end;margin:4px 0 -4px"><button class="btn ghost small" id="startDay">📅 ${S.home.start&&S.home.start>todayISO()?"Cambiar el día de inicio":"Empezar el plan otro día"}</button></div>`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
   for(const start of weeks){
     const wk=S.plans[start], dates=weekDates(start);
     h+=`<div class="week"><div class="weekhead"><h2>${shortDate(start)} – ${shortDate(dates[6])}</h2>${wk&&wk.confirmed?`<span class="badge ok">Planificada</span>`:wk?`<span class="badge">Previsión</span>`:""}</div>`;
@@ -498,6 +498,7 @@ function renderMenu(){
   main.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>openDay(b.dataset.day));
   main.querySelectorAll("[data-session]").forEach(b=>b.onclick=()=>openSession(b.dataset.session));
   bindRate(main,render);
+  bindAfinar(main);
   document.getElementById("safetyOk")?.addEventListener("click",()=>{safetyNotes=[];render()});
   document.getElementById("shareMenu")?.addEventListener("click",openShareMenu);
   main.querySelectorAll("[data-follow]").forEach(b=>b.onclick=()=>openFollowed(b.dataset.follow));

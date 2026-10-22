@@ -47,7 +47,7 @@ function parseTicket(text){
   // Supermercado y tienda: el nombre de la cadena y la dirección están en las primeras líneas
   const head=raw.slice(0,6), up=normTxt(head.join(" "));
   const sp=(SUPERS||[]).find(x=>x.nombre.split("/").some(n=>up.includes(normTxt(n))));out.super=sp?sp.id:null;
-  const addr=head.find(l=>/(C\/|CL\.?|CALLE|AV\.?|AVDA|AVENIDA|PZA|PLAZA|CTRA|PASEO|PG|RAMBLA|CARRER)/i.test(l))||head.find((l,i)=>i>0&&!/S\.A\.|\d{2}\/\d{2}\/\d{4}|TEL|FACTURA|NIF|CIF/i.test(l));
+  const addr=head.find(l=>/\b(C\/|CL\.?|CALLE|AV\.?|AVDA|AVENIDA|PZA|PLAZA|CTRA|PASEO|PG|RAMBLA|CARRER)\b/i.test(l))||head.find((l,i)=>i>0&&!/S\.A\.|\d{2}\/\d{2}\/\d{4}|TEL|FACTURA|NIF|CIF/i.test(l));
   out.store=addr?addr.replace(/\s+/g," ").trim():"";
   const dm=text.match(/(\d{2})\/(\d{2})\/(\d{4})/);if(dm)out.date=`${dm[3]}-${dm[2]}-${dm[1]}`;
   const money="(\\d{1,4}[,.]\\d{2})";

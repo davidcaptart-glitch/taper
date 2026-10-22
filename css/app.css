@@ -932,3 +932,19 @@ input.switch:checked::after{transform:translateX(20px)}
   nav.tabs{left:50%;right:auto;width:min(640px,calc(100% - 32px));transform:translateX(-50%);bottom:14px;border-radius:22px;border:1px solid var(--line);box-shadow:var(--sh-2);padding-bottom:6px}
 }
 .infobox{background:var(--surface-2);border-radius:14px;padding:10px 12px;margin:8px 0;font-size:.9rem;line-height:1.4}
+
+/* Alta nueva: personas en una fila y globitos */
+.addp{display:grid;grid-template-columns:minmax(0,1fr) 96px 48px;gap:8px;align-items:center}
+.addp .btn{height:44px;padding:0;font-size:1.3rem}
+.pchips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+.pchip{display:inline-flex;align-items:center;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:.92rem}
+.pchip.on{outline:2px solid var(--accent)}
+.pchip button{border:0;background:transparent;color:inherit;font:inherit;padding:7px 4px 7px 14px}
+.pchip button small{font-weight:500;opacity:.8}
+.pchip .px{padding:7px 12px 7px 6px;font-size:.85rem}
+.kith{margin:22px 0 10px;font-size:1.05rem}
+.afcard{background:var(--surface);border-radius:var(--r-l,18px);padding:14px 16px;margin:10px 0;box-shadow:var(--sh-1)}
+.afcard .aft{font-size:1.05rem}
+.aflist{display:grid;gap:2px;margin:4px 0 8px}
+.afi{display:flex;gap:10px;align-items:center;padding:8px 2px;border-bottom:1px solid var(--line);font-size:.92rem}
+.afi input{width:auto;margin:0}

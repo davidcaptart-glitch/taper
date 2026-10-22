@@ -636,6 +636,18 @@
         "El presupuesto semanal es el mismo en todas partes.",
         "Nuevo apartado en Perfil: Tus datos y privacidad."
       ]
+    },
+    {
+      "version": 66,
+      "fecha": "2026-10-22",
+      "titulo": "Empezar es mucho más rápido",
+      "cambios": [
+        "Quien empieza ahora contesta solo 3 pantallas: quién vive en casa (con su edad) y con qué cocinas; dieta, alergias y deporte; y código postal y supermercados.",
+        "Enseguida sale el primer menú, desde hoy, con lo que cuesta al mes.",
+        "Después puedes afinarlo marcando solo lo que te interese: presupuesto, gustos, custodias, desayunos y meriendas, cuándo cocinas o planificas, deporte, platos fijos o invitar a un familiar. Está en «✨ Afinar mi menú».",
+        "El pueblo y los festivos salen del código postal.",
+        "Arreglada la detección de la tienda al escanear tickets."
+      ]
     }
   ]
 }

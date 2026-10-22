@@ -546,6 +546,8 @@ function weekCost(start,slotsIn){
 // Lo que se puede gastar en comida esa semana: presupuesto semanal menos envío y la parte de básicos
 function weekFoodTarget(start){
   const m=monthOfWeek(start), n=Math.max(1,weeksInMonth(m).length);
+  // Sin presupuesto fijado (alta nueva): sin tope; se propone lo razonable y luego se dice lo que cuesta
+  if(!Number(S.home.budget.month)&&!Number(S.home.budget.week)&&!Number(((S.monthPrep||{})[m]||{}).budget))return Infinity;
   const fee=tarifa(S.home.shop.weekMode).envio, monthFee=tarifa(S.home.shop.monthMode).envio/n;
   return weekBudget(m)-fee-monthFee-(Number(S.home.budget.basics)||0)/n;
 }
@@ -582,6 +584,24 @@ function balanceOf(wk){const c={};for(const v of Object.values(wk.slots)){const 
 
 // Tras cambiar quién come cada comida: se recalculan las semanas desde esa fecha
 function replanFrom(d){for(const s of Object.keys(S.plans))if(addDays(s,6)>=d)ensureWeek(s)}
+// Rehace el menú desde hoy con lo que se sabe ahora (tras afinar): lo elegido a mano se respeta
+function redoFromToday(){
+  const today=todayISO(),cur=weekStartFor(today);
+  for(const s of Object.keys(S.plans).sort()){if(addDays(s,6)<today)continue;const wk=S.plans[s];
+    if(s>cur){genWeekFromScratch(s);continue}
+    for(const [id,v] of Object.entries(wk.slots))if(id.slice(0,10)>=today&&!v.locked)delete wk.slots[id];
+    for(const [d,dd] of Object.entries(wk.small||{}))if(d>=today)for(const [m,v] of Object.entries(dd))if(!v.locked)delete dd[m];
+    ensureWeek(s)}
+  ensureHorizon();save();
+}
+// Lo que cuesta al mes el menú que hay (para proponer el presupuesto cuando aún no se ha fijado)
+function estimateMonthBudget(){
+  const today=todayISO(),ws=Object.keys(S.plans).filter(s=>addDays(s,6)>=today).sort();
+  const full=ws.slice(1,4).length?ws.slice(1,4):ws.slice(0,1);const c=full.map(s=>weekCost(s)).filter(x=>x>0);
+  if(!c.length)return 150;
+  const avg=c.reduce((a,b)=>a+b,0)/c.length;
+  return Math.ceil((avg*52/12+(Number(S.home.budget.basics)||0))/10)*10;
+}
 
 /* ---------- Previsión ---------- */
 // Siempre hay menú preparado hasta el final del mes siguiente (o del mes en que empieza el plan, si es más tarde)

@@ -1,9 +1,29 @@
 /* Táper · asistente de bienvenida (y edición de cada apartado desde Perfil) */
 "use strict";
 
-let wiz={i:0,single:null};   // single = id del paso cuando se edita uno suelto desde Perfil
+let wiz={i:0,single:null};   // single = id del paso cuando se edita uno suelto desde Perfil; afinar = lista de pasos elegidos al afinar
+
+// Alta: 3 pantallas y el primer menú. Lo demás se pregunta después, solo si se quiere afinar
+const ONBOARD=[{id:"casa",eyebrow:"Casa",title:"¿Quién vive *en casa?*"},{id:"comer",eyebrow:"Cómo coméis",title:"¿Algo que *tener en cuenta?*"},{id:"super",eyebrow:"Tu súper",title:"¿Dónde haces *la compra?*"}];
+// Lo que se puede afinar después del primer menú: id, texto, pasos del asistente que lo preguntan
+const AFINAR=[
+  ["presupuesto","💶 Presupuesto mensual",()=>["compra"]],
+  ["quien","🗓️ Quién come y cuándo (custodias, días fuera)",()=>["familia"]],
+  ["comidas","🥐 Desayunos, almuerzos y meriendas",()=>["familia"]],
+  ["gustos","😋 Gustos de cada uno",()=>S.people.map(p=>"gustos:"+p.id)],
+  ["planificar","📅 Cuándo planificas y compras",()=>["plan","compra"]],
+  ["cocinar","🍳 Cómo cocinas (cada día o tápers)",()=>["cocina"]],
+  ["deporte","🏃 Deporte y objetivos",()=>adults().map(a=>"objetivos:"+a.id).concat(S.people.filter(p=>p.trains).map(p=>"entreno:"+p.id))],
+  ["fijos","🍕 Platos fijos y caprichos",()=>["cocina"]],
+  ["invitar","🏠 Invitar a un familiar",()=>[]]];
 
 function wizSteps(){
+  // Afinar: solo los pasos de lo que se ha marcado
+  if(wiz.afinar){const all=fullSteps();return wiz.afinar.map(id=>all.find(s=>s.id===id)).filter(Boolean)}
+  if(!S.onboarded&&!S.joining&&!wiz.single)return ONBOARD;
+  return fullSteps();
+}
+function fullSteps(){
   // Quien entra en una casa compartida solo contesta lo suyo
   if(S.joining){const a=me();return [{id:"unirse",eyebrow:"Bienvenida",title:"Hola, *"+(a.name||"bienvenido")+"*"},
     {id:"objetivos:"+a.id,eyebrow:"Objetivos",title:"¿Qué te *importa?*"},{id:"entreno:"+a.id,eyebrow:"Deporte",title:"¿*Entrenas?*"},
@@ -68,31 +88,41 @@ function renderWizard(){
   const step=single?steps.find(s=>s.id===single):steps[Math.min(wiz.i,steps.length-1)];
   if(!step){wiz.single=null;tab="perfil";render();return}
   const n=steps.indexOf(step), N=steps.length;
-  const back=wiz.single?"cancel":n>0?"back":!S.onboarded?"welcome":null;
+  const back=wiz.single||(wiz.afinar&&n===0)?"cancel":n>0?"back":!S.onboarded?"welcome":null;
   let h=`<section class="wiz"><div class="wtop">${back?`<button class="wback" data-wz="${back}" aria-label="Atrás"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>`:`<span class="wback ph"></span>`}
     ${wiz.single?`<span class="wtitle">Editar</span>`:`<div class="segs" role="progressbar" aria-valuemin="1" aria-valuemax="${N}" aria-valuenow="${n+1}">${steps.map((_,i)=>`<i class="${i<n?"done":i===n?"now":""}"></i>`).join("")}</div><span class="wcount">${n+1}/${N}</span>`}</div>
     <div class="eyebrow">${esc(step.eyebrow||"")}</div><h2 class="wh">${accentTitle(step.title)}</h2>`+stepBody(step.id)+`<div class="wcta">`;
   if(wiz.single)h+=`<button class="btn cta" data-wz="save">Guardar</button>`;
-  else h+=`<button class="btn cta" data-wz="next">${step.id==="listo"?(S.joining?"Ver nuestro menú":"Crear mi menú"):"Continuar"} <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>`;
+  else h+=`<button class="btn cta" data-wz="next">${wiz.afinar&&n===N-1?"Rehacer mi menú":!S.onboarded&&!S.joining&&step.id==="super"?"Ver mi menú":step.id==="listo"?(S.joining?"Ver nuestro menú":"Crear mi menú"):"Continuar"} <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>`;
   main.innerHTML=h+`</div></section>`;
   bindStep(step.id);
   main.querySelector("[data-wz=back]")?.addEventListener("click",()=>{wiz.i--;render();scrollTo(0,0)});
   main.querySelector("[data-wz=welcome]")?.addEventListener("click",()=>{wiz.started=false;render();scrollTo(0,0)});
   main.querySelector("[data-wz=next]")?.addEventListener("click",()=>{
     if(!validateStep(step.id))return;
+    if(wiz.afinar&&n===N-1){finishAfinar();return}
+    if(!S.onboarded&&!S.joining&&step.id==="super"){finishOnboarding();return}
     if(step.id==="listo"){if(S.joining)finishJoin();else finishOnboarding();return}
     wiz.i++;save();render();scrollTo(0,0)});
   main.querySelector("[data-wz=save]")?.addEventListener("click",()=>{if(!validateStep(step.id))return;save();refreshPlans();wiz.single=null;tab="perfil";render();toast("Guardado")});
-  main.querySelector("[data-wz=cancel]")?.addEventListener("click",()=>{wiz.single=null;tab="perfil";render()});
+  main.querySelector("[data-wz=cancel]")?.addEventListener("click",()=>{const af=!!wiz.afinar;wiz={i:0,single:null};tab=af?"menu":"perfil";render()});
 }
 // Título con una parte en cursiva de acento: "¿Dónde haces *la compra?*"
 const accentTitle=t=>esc(t).replace(/\*(.+?)\*/g,"<em>$1</em>");
 function finishOnboarding(){
   // Lo de antes de hoy no se planifica ni se compra: el plan empieza hoy (o el día que elegiste)
   if(!S.home.start||S.home.start<todayISO())S.home.start=todayISO();
+  const quick=!S.afinar;
+  if(quick){
+    // Lo que se supone hasta que se afine: comida y cena en casa cada día, se cocina cada día, compra en tienda, sin tope de presupuesto
+    S.home.weekTpl=[0,1,2,3,4,5,6].map(()=>({comida:"cocinar",cena:"cocinar"}));S.home.cookMode="diario";
+    S.home.shop.monthMode="tienda";S.home.shop.weekMode="tienda";S.home.budget.month=0;S.home.budget.week=null;
+    S.afinar={state:"ask"};
+  }
   S.onboarded=true;save();
   if(typeof trackOnBoot==="function")trackOnBoot();
-  preparingScreen(()=>{ensureHorizon();save()},()=>{tab="menu";if(S.home.start&&S.home.start>todayISO())month=S.home.start.slice(0,7);render();toast("Menú generado. Puedes cambiar lo que quieras")});
+  if(S.home.cp&&S.home.cp!==S.home.cpLooked)lookupCp(S.home.cp).then(()=>save()).catch(()=>{});
+  preparingScreen(()=>{ensureHorizon();if(quick&&!Number(S.home.budget.month)){S.home.budget.month=estimateMonthBudget();S.afinar.cost=S.home.budget.month}save()},()=>{tab="menu";if(S.home.start&&S.home.start>todayISO())month=S.home.start.slice(0,7);render();toast("Menú generado. Puedes cambiar lo que quieras")});
 }
 // Pantalla "Preparando tu semana": hace el trabajo y enseña lo que va haciendo
 function preparingScreen(work,done){
@@ -165,6 +195,36 @@ function stepBody(fullId){
   if(id==="unirse"){const o=S.people.find(x=>x.id==="yo");return `<p class="lead">${o&&o.name&&!isMe(o)?esc(o.name)+" te ha añadido a su casa en Táper.":"Te han añadido a una casa en Táper."} Tendréis el mismo menú y la misma lista de la compra, y los dos podréis cambiar cosas.</p>
     <p>Te hago unas preguntas rápidas sobre <b>ti</b>: qué te importa, si entrenas, cómo comes y qué te gusta. Así el menú también será a tu medida.</p>
     <div class="field"><label for="wzName">¿Cómo te llamas?</label><input id="wzName" type="text" value="${esc(a.name)}" placeholder="Tu nombre"></div>`}
+  if(id==="casa"){const named=S.people.filter(p=>p.name),ed=wiz.editP&&S.people.find(p=>p.id===wiz.editP),first=!named.length;
+    const n=H.apps.filter(k=>k!=="ninguno").length;
+    return `<p class="lead">${first?"Empieza por ti y luego añade a cada persona.":"Añade a cada persona."} La edad me dice cuánto come cada uno.</p>
+    <div class="addp"><input id="cName" type="text" placeholder="${first?"Tu nombre":"Nombre"}" value="${esc(ed?ed.name:"")}" autocomplete="${first?"given-name":"off"}">
+      <select id="cAge" aria-label="Edad"><option value="">Edad</option>${AGE_RANGES.filter(r=>!(first||(ed&&ed.id==="yo"))||ageOf(r[0])>=18).map(([k,t])=>`<option value="${k}" ${ed&&ed.ageRange===k?"selected":""}>${t}</option>`).join("")}</select>
+      <button type="button" class="btn" id="cAdd" aria-label="${ed?"Guardar":"Añadir"}">${ed?"✓":"+"}</button></div>
+    ${named.length?`<div class="pchips">${named.map(p=>`<span class="pchip ${wiz.editP===p.id?"on":""}"><button type="button" data-pedit="${p.id}">${esc(p.name)} <small>${p.id==="yo"?"tú · ":""}${esc(ageLabel(p.ageRange)||(p.kind==="nino"&&p.age?p.age+" años":""))}</small></button>${p.id==="yo"?"":`<button type="button" class="px" data-pdel="${p.id}" aria-label="Quitar a ${esc(p.name)}">✕</button>`}</span>`).join("")}</div>`:""}
+    <h3 class="kith">Selecciona con qué cocinas</h3>${kitchenSVG(H.apps)}
+    <p class="kitcount">${n?`${n} ${n===1?"aparato":"aparatos"}: ${H.apps.filter(k=>APP[k]&&k!=="ninguno").map(k=>APP[k].toLowerCase()).join(", ")}`:"Toca los aparatos de tu cocina"}</p>`}
+  if(id==="comer"){
+    const mainDiets=["omni","vege","vegano","halal"],mainAlg=["gluten","lacteos","huevo","frutos_cascara","pescado"];
+    let h=`<p class="lead">Solo planificaré platos que encajen con cada uno.</p>`;
+    for(const p of S.people){const dt=dietOf(p),al=p.allergies||[],more=(wiz.more||{})[p.id];
+      const ds=more?Object.keys(DIETS):[...new Set(mainDiets.concat(dt))],as=more?Object.keys(ALLERGENS):[...new Set(mainAlg.concat(al))];
+      h+=`<div class="kidcard"><div class="row"><b>${esc(isMe(p)?(p.name||"Tú"):personName(p))}</b><span class="small muted">${isMe(p)?"tú":esc(ageLabel(p.ageRange))}</span></div>
+        <div class="field"><label>Forma de comer</label><div class="chips">${ds.map(k=>chip("data-diet",p.id+"|"+k,dt===k,DIETS[k][0]+" "+esc(DIETS[k][1]))).join("")}</div></div>
+        <div class="field"><label>Alergias o intolerancias</label><div class="chips">${chip("data-alg-none",p.id,!al.length,"🍽️ Ninguna")}${as.map(k=>chip("data-alg",p.id+"|"+k,al.includes(k),ALLERGEN_ICO[k]+" "+esc(ALLERGENS[k].split(" (")[0]))).join("")}</div></div>
+        ${more?"":`<button type="button" class="btn ghost small" data-more="${p.id}">Más formas de comer y alergias</button>`}
+        <div class="field"><label>¿Hace deporte?</label><div class="chips">${chip("data-trainp",p.id+"|1",p.trains,"Sí")}${chip("data-trainp",p.id+"|0",!p.trains,"No")}</div>${p.trains?`<div class="hint">Los días y horas, cuando afines el menú.</div>`:""}</div></div>`}
+    const n=R.filter(r=>!r.small&&!r.pack&&S.people.every(p=>canEat(p,r))).length;
+    return h+`<div class="okbox small">${n<10?"⚠️ ":"✓ "}<b>${n}</b> ${n===1?"plato encaja":"platos encajan"} con vuestra casa.</div><div class="hint">Es orientativo: revisa siempre la etiqueta.</div>`;
+  }
+  if(id==="super"){const ch=H.supers&&H.supers.length?H.supers:[H.super||"mercadona"],ok=x=>superHasPrices(x.id);
+    const tile=x=>{const on=ch.includes(x.id);return `<button type="button" class="suptile" data-super="${x.id}" aria-pressed="${on}" ${ok(x)?"":"disabled"} style="--brand:${x.color||"var(--ink)"}"><span class="tick">✓</span>${x.logo?`<img class="slogo" src="${esc(x.logo)}" alt="${esc(x.nombre)}">`:`<b class="wm">${esc(x.nombre)}</b>`}<small>${ok(x)?(x.id==="mercadona"?"Precios de tu zona":"Precios semanales"):"Próximamente"}</small></button>`};
+    return `<div class="field"><label for="wzCp">Tu código postal</label><input id="wzCp" type="text" inputmode="numeric" maxlength="5" value="${esc(H.cp)}" placeholder="Por ejemplo, 08784" autocomplete="postal-code">
+      <div class="hint">${H.municipio&&H.cp===H.cpLooked?`📍 ${esc(H.municipio)} · tus precios y tus festivos`:"Con él sé tus precios, qué súper te lo lleva a casa y tus festivos."}</div></div>
+    ${(H.cpPlaces||[]).length>1&&H.cp===H.cpLooked?`<div class="field"><label>¿Cuál es tu pueblo?</label><div class="chips">${H.cpPlaces.map(p=>chip("data-place",p,H.municipio===p,esc(p))).join("")}</div></div>`:""}
+    <h3 class="kith">Marca los supermercados que te vengan bien</h3><p class="small muted" style="margin:-4px 0 10px">Aunque solo vayas a la tienda: comparo sus precios cada semana.</p>
+    <div class="supgrid">${SUPERS.filter(ok).map(tile).join("")}</div>
+    <details class="more"><summary>Ver más supermercados</summary><div class="supgrid" style="margin-top:8px">${SUPERS.filter(x=>!ok(x)).map(tile).join("")}</div></details>`}
   if(id==="hola")return `<p class="lead">Táper te prepara el menú, la lista de la compra y los tápers de la semana, a tu medida. Unas preguntas rápidas y empezamos. Todo se puede cambiar después.</p>
     <div class="field"><label for="wzName">¿Cómo te llamas?</label><input id="wzName" type="text" value="${esc(a.name)}" placeholder="Tu nombre"></div>
     ${isStandalone()&&servidorOn()?`<button type="button" class="btn ghost small" id="wzTr">¿Ya usabas Táper en Safari? Trae tus datos</button>`:""}
@@ -329,12 +389,8 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
   ["#wzMPD","#wzMPA"].forEach(sel=>q(sel)&&(q(sel).onchange=()=>{H.monthPrepDay=Number(q("#wzMPD").value);H.monthPrepAlt=Number(q("#wzMPA").value);save();q("#mpPrev").textContent=monthPrepPreview(H)}));
   q("#wzBM")&&(q("#wzBM").oninput=e=>{const v=Number(e.target.value);e.target.style.setProperty("--p",(v-40)/8.6+"%");q("#bVal").textContent=v;q("#bWeek").textContent=eur(v/weeksInMonth(todayISO().slice(0,7)).length)});
   // Código postal: al escribir los 5 números, busco el municipio (y, si hay varios, los ofrezco)
-  q("#wzCp")&&(q("#wzCp").oninput=async e=>{const cp=e.target.value.trim();if(!/^\d{5}$/.test(cp)||cp===H.cpLooked)return;H.cpLooked=cp;
-    try{const r=await fetch("https://api.zippopotam.us/es/"+cp);if(!r.ok)throw 0;const d=await r.json();
-      const places=[...new Set((d.places||[]).map(p=>p["place name"]))];const known=Object.keys((FEST||{}).locales||{});
-      H.cp=cp;H.cpPlaces=places;H.cpRegion=(d.places||[])[0]?.state||"";
-      if(!H.municipio||!places.includes(H.municipio))H.municipio=places.find(p=>known.includes(p))||(places.length===1?places[0]:"");
-      rerender();setTimeout(()=>{const i=document.getElementById("wzCp");if(i){i.focus();i.setSelectionRange(5,5)}},0)}
+  q("#wzCp")&&(q("#wzCp").oninput=async e=>{const cp=e.target.value.trim();if(!/^\d{5}$/.test(cp)||cp===H.cpLooked)return;
+    try{await lookupCp(cp);rerender();setTimeout(()=>{const i=document.getElementById("wzCp");if(i){i.focus();i.setSelectionRange(5,5)}},0)}
     catch(err){H.cp=cp;H.cpPlaces=[]}});
   qa("[data-place]").forEach(b=>b.onclick=()=>{H.municipio=b.dataset.place;rerender()});
   qa("[data-super]").forEach(b=>b.onclick=()=>{const sid=b.dataset.super;let ch=H.supers&&H.supers.length?[...H.supers]:[H.super||"mercadona"];
@@ -397,7 +453,34 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
     const v=ingPref(p,pid),nv=ING_CYCLE[(ING_CYCLE.indexOf(v)+1)%ING_CYCLE.length];
     setIng(p,pid,nv,"Lo indicaste tú");
     b.className="chip t"+nv;b.textContent=(nv===2?"❤️ ":nv===1?"👍 ":nv===-1?"👎 ":nv===-9?"🚫 ":"")+P[pid].name});
+  // Casa: añadir, editar y quitar personas
+  const addP=()=>{const name=(q("#cName").value||"").trim(),rg=q("#cAge").value,ed=wiz.editP&&S.people.find(p=>p.id===wiz.editP);
+    if(!name){toast("Escribe el nombre");q("#cName").focus();return}
+    if(!rg){toast("Elige su edad");q("#cAge").focus();return}
+    const yo=S.people.find(p=>p.id==="yo");
+    const set=p=>{p.name=name;p.ageRange=rg;const ad=isAdultRange(rg);
+      if(p.id!=="yo"){p.kind=ad?"adulto":"nino";p.age=ad?null:ageOf(rg);p.factor=ad?1:factorForAge(p.age)}};
+    if(ed)set(ed);
+    else if(yo&&!yo.name){if(!isAdultRange(rg)){toast("La primera persona eres tú: elige una edad de adulto");return}set(yo)}
+    else{const ad=isAdultRange(rg);const p={...defaultAdult(),id:uid(ad?"a":"k"),kind:ad?"adulto":"nino",goals:["sano"],factor:1,tupper:false,presence:{type:"siempre"},away:{},mealsSet:true};set(p);S.people.push(p)}
+    wiz.editP=null;rerender();setTimeout(()=>document.getElementById("cName")?.focus(),0)};
+  q("#cAdd")&&(q("#cAdd").onclick=addP);
+  q("#cName")&&(q("#cName").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();addP()}});
+  qa("[data-pedit]").forEach(b=>b.onclick=()=>{wiz.editP=wiz.editP===b.dataset.pedit?null:b.dataset.pedit;render()});
+  qa("[data-pdel]").forEach(b=>b.onclick=()=>{S.people=S.people.filter(p=>p.id!==b.dataset.pdel);if(wiz.editP===b.dataset.pdel)wiz.editP=null;rerender()});
+  // Cómo coméis
+  qa("[data-more]").forEach(b=>b.onclick=()=>{wiz.more={...(wiz.more||{}),[b.dataset.more]:true};render()});
+  qa("[data-trainp]").forEach(b=>b.onclick=()=>{const [pid,v]=b.dataset.trainp.split("|"),p=S.people.find(x=>x.id===pid);p.trains=v==="1";rerender()});
   bindFixedEditor(rerender);
+}
+// Código postal -> pueblo (y, si hay varios, se elige); de ahí salen los festivos locales
+async function lookupCp(cp){
+  const H=S.home;H.cpLooked=cp;const r=await fetch("https://api.zippopotam.us/es/"+cp);if(!r.ok)throw 0;const d=await r.json();
+  const places=[...new Set((d.places||[]).map(p=>p["place name"]))],known=Object.keys((FEST||{}).locales||{});
+  H.cp=cp;H.cpPlaces=places;H.cpRegion=(d.places||[])[0]?.state||"";
+  // Un código postal puede tener varios núcleos (El Badorc, La Fortesa… son de Piera): se prefiere el que no es un barrio o masía
+  const main=places.filter(p=>!/^(El|La|Els|Les|Los|Las|L'|Sant|Santa|Can|Ca l|Mas)\b/i.test(p));
+  if(!H.municipio||!places.includes(H.municipio))H.municipio=places.find(p=>known.includes(p))||main[0]||places[0]||"";
 }
 function bindFixedEditor(after){
   const q=s=>document.querySelector(s);if(!q("#addfx"))return;
@@ -414,6 +497,14 @@ function bindFixedEditor(after){
 function validateStep(fullId){
   const H=S.home,a=stepPerson(fullId),id=stepKind(fullId),v=s=>{const e=main.querySelector(s);return e?e.value:null};
   if(id==="hola"||id==="unirse"){a.name=(v("#wzName")||"").trim()}
+  if(id==="casa"){const yo=S.people.find(p=>p.id==="yo");
+    // Si ha escrito a alguien y no ha tocado "+", se añade igual
+    if((v("#cName")||"").trim()&&v("#cAge")){main.querySelector("#cAdd").click();return false}
+    if(!yo||!yo.name){toast("Empieza por ti: tu nombre y tu edad");document.getElementById("cName")?.focus();return false}
+    const sin=S.people.find(p=>p.name&&!p.ageRange&&!(p.kind==="nino"&&p.age));if(sin){toast("Falta la edad de "+sin.name+": tócalo para ponerla");return false}
+    S.people=S.people.filter(p=>p.id==="yo"||p.name);
+    if(!H.apps.filter(k=>k!=="ninguno").length){toast("Marca al menos un aparato de tu cocina");return false}}
+  if(id==="super"){const cp=(v("#wzCp")||"").trim();if(!/^\d{5}$/.test(cp)){toast(cp?"El código postal tiene 5 números":"Pon tu código postal: lo necesito para tus precios");document.getElementById("wzCp")?.focus();return false}H.cp=cp}
   if(id==="aparatos"&&!H.apps.length){toast("Elige al menos uno");return false}
   if(id==="zona"){const cp=(v("#wzCp")||"").trim();if(!/^\d{5}$/.test(cp)){toast(cp?"El código postal tiene 5 números":"Pon tu código postal: lo necesito para tus precios");document.getElementById("wzCp")?.focus();return false}H.cp=cp;H.municipio=(v("#wzMun")||"").trim()}
   if(id==="familia"){main.querySelectorAll(".kidcard [data-kf=name]").forEach(i=>{const k=S.people.find(p=>p.id===i.closest(".kidcard").dataset.kid);k.name=i.value.trim()});
@@ -422,11 +513,46 @@ function validateStep(fullId){
     if(sin){toast(`Marca qué comidas hace ${personName(sin)} en casa`);return false}}
   if(id==="objetivos"){if(!a.goals.length){toast("Elige al menos un objetivo");return false}a.weight=Number(v("#wzW"))||null}
   if(id==="cocina"&&H.cookMode==="lote"&&!H.cookDays.length){toast("Elige al menos un día para cocinar");return false}
-  if(id==="plan"){const st=v("#wzStart");H.start=st&&st>todayISO()?st:null;
+  if(id==="plan"){const st=v("#wzStart");H.start=st&&st>todayISO()?st:(H.start&&H.start<=todayISO()?H.start:null);
     // Los menús de semanas que ya no cuentan (antes del inicio) se borran
     if(H.start)for(const s of Object.keys(S.plans))if(addDays(s,6)<H.start)delete S.plans[s];
     H.planFreq=v("#wzFreq");H.planDay=Number(v("#wzPDay"));H.planTime=v("#wzPTime")||"17:00"}
   if(id==="compra"){H.shop.delivery=Number(v("#wzDel"));
     H.budget.month=Number(v("#wzBM"))||0;H.budget.week=v("#wzBW")===""?null:Number(v("#wzBW"));H.budget.basics=Number(v("#wzBB"))||0}
   return true;
+}
+
+/* ---------- Afinar el menú: se pregunta solo lo que se marca ---------- */
+function startAfinar(keys){
+  const ids=[];for(const k of keys){const a=AFINAR.find(x=>x[0]===k);if(a)for(const id of a[2]())if(!ids.includes(id))ids.push(id)}
+  S.afinar={...(S.afinar||{}),state:"done",invite:keys.includes("invitar"),last:keys};save();
+  if(!ids.length){finishAfinar();return}
+  wiz={i:0,single:null,afinar:ids,started:true};tab="wizard";render();scrollTo(0,0);
+}
+function finishAfinar(){
+  const inv=S.afinar&&S.afinar.invite;wiz={i:0,single:null};
+  preparingScreen(()=>{redoFromToday()},()=>{
+    if(inv){S.afinar.invite=false;tab="perfil";accOpen.add("casa");render();toast("Invita desde aquí a tu familiar")}
+    else{tab="menu";render();toast("Menú rehecho con lo que me has contado")}});
+}
+// En el Menú: después del primer menú, "¿Quieres afinarlo más?" (y luego, siempre a mano)
+function afinarCard(){
+  const A=S.afinar;
+  if(!A||A.state!=="ask")return `<div class="row" style="justify-content:flex-start;margin:6px 0"><button class="btn ghost small" id="afinarOpen">✨ Afinar mi menú</button></div>`;
+  return `<div class="afcard"><b class="aft">Tu menú está listo</b>
+    <p class="small" style="margin:4px 0 8px">${A.cost?`Sale por unos <b>${eur(A.cost)} al mes</b>. `:""}He supuesto <b>comida y cena en casa todos los días</b>, que cocinas cada día y que compras en tienda.</p>
+    ${afinarList()}</div>`;
+}
+function afinarList(){
+  return `<h3 style="margin:6px 0 2px">¿Quieres afinarlo más?</h3><p class="small muted" style="margin:0 0 6px">Marca lo que quieras ajustar y te pregunto solo eso.</p>
+    <div class="aflist">${AFINAR.filter(([k])=>k!=="invitar"||servidorOn()).map(([k,t])=>`<label class="afi"><input type="checkbox" data-af="${k}"> ${esc(t)}</label>`).join("")}</div>
+    <div class="actions"><button class="btn" id="afGo">Afinar</button>${S.afinar&&S.afinar.state==="ask"?`<button class="btn ghost" id="afNo">Así está bien</button>`:""}</div>`;
+}
+function bindAfinar(root){
+  const go=r=>{const ks=[...r.querySelectorAll("[data-af]:checked")].map(i=>i.dataset.af);if(!ks.length){toast("Marca al menos una cosa");return}if(dlg.open)dlg.close();startAfinar(ks)};
+  const upd=r=>{const b=r.querySelector("#afGo");if(b){const n=r.querySelectorAll("[data-af]:checked").length;b.textContent=n?`Afinar (${n})`:"Afinar"}};
+  root.querySelectorAll("[data-af]").forEach(i=>i.onchange=()=>upd(root));
+  root.querySelector("#afGo")?.addEventListener("click",()=>go(root));
+  root.querySelector("#afNo")?.addEventListener("click",()=>{S.afinar.state="done";save();render();toast("Perfecto. Cuando quieras, toca «Afinar mi menú»")});
+  root.querySelector("#afinarOpen")?.addEventListener("click",()=>{showDialog(`<div class="mod">${closeBtn}${afinarList()}</div>`);bindAfinar(dlg)});
 }
