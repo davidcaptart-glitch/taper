@@ -15,7 +15,7 @@ const AFINAR=[
   ["cocinar","🍳 Cómo cocinas (cada día o tápers)",()=>["cocina"]],
   ["deporte","🏃 Deporte y objetivos",()=>adults().map(a=>"objetivos:"+a.id).concat(S.people.filter(p=>p.trains).map(p=>"entreno:"+p.id))],
   ["fijos","🍕 Platos fijos y caprichos",()=>["cocina"]],
-  ["invitar","🏠 Invitar a un familiar",()=>[]]];
+  ["invitar","📩 Que alguien de casa rellene sus preferencias",()=>[]]];
 
 function wizSteps(){
   // Afinar: solo los pasos de lo que se ha marcado
