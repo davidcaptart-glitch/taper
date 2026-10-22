@@ -478,6 +478,16 @@
       "cambios": [
         "El Menú enseña una semana cada vez. Cambias de semana con el selector horizontal de arriba (deslízalo a los lados); cada una te dice si está planificada o es previsión."
       ]
+    },
+    {
+      "version": 51,
+      "fecha": "2026-10-22",
+      "titulo": "Resumen del día y aviso a cada comida",
+      "cambios": [
+        "☀️ Cada mañana, un resumen con todo lo que coméis hoy (eliges la hora).",
+        "🍽️ A la hora de cada comida (desayuno, almuerzo, comida, merienda y cena), qué toca y para quién. Si alguien se lleva el almuerzo, te recuerdo prepararlo a la hora del desayuno.",
+        "Todos los avisos se pueden quitar uno a uno en Perfil › Avisos, y cada notificación te lo recuerda."
+      ]
     }
   ]
 }

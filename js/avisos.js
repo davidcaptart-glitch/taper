@@ -3,6 +3,8 @@
 "use strict";
 
 const NOTIF_TYPES={
+  resumen:["☀️ Resumen del día","Por la mañana, todo lo que coméis hoy"],
+  horas:["🍽️ A la hora de comer","En cada comida (también desayuno, almuerzo y merienda): qué toca y para quién"],
   descongelar:["❄️ Descongelar","La noche antes, para pasar la carne o el pescado a la nevera"],
   cocinar:["🍳 Qué cocinas hoy","Una hora antes de la comida o la cena que toca cocinar"],
   valorar:["⭐ ¿Qué tal?","Después de cada comida, para valorarla"],
@@ -13,6 +15,7 @@ const NOTIF_TYPES={
 };
 const avisosOn=()=>!!(CFG.avisos&&CFG.avisos.url&&CFG.avisos.vapidPublic&&"serviceWorker" in navigator&&"PushManager" in window);
 const notifCfg=()=>{S.notif=S.notif||{on:false,types:Object.fromEntries(Object.keys(NOTIF_TYPES).map(k=>[k,true])),thaw:"21:30"};
+  if(!S.notif.summary)S.notif.summary="08:00";
   for(const k of Object.keys(NOTIF_TYPES))if(S.notif.types[k]==null)S.notif.types[k]=true;return S.notif};
 
 // Fecha y hora local -> milisegundos
@@ -21,9 +24,25 @@ const at=(d,hhmm,addMin=0)=>{const [h,m]=String(hhmm).split(":").map(Number);con
 // Los avisos de los próximos 7 días, calculados con el menú, los entrenos y los ajustes
 function buildSchedule(){
   const n=notifCfg(),T=n.types,now=Date.now(),today=todayISO(),out=[];
-  const push=(t,title,body,tag)=>{if(t>now)out.push({t,title,body,tag})};
+  // Todos los avisos recuerdan que se pueden quitar
+  const push=(t,title,body,tag)=>{if(t>now)out.push({t,title,body:String(body||"").replace(/\.?$/,".")+" Puedes quitarlo en Perfil › Avisos.",tag})};
+  // Horas de las comidas pequeñas: las que haya puesto (comidas extra) o unas por defecto
+  const smallTime=m=>(S.home.extraMeals||{})[m==="almuerzo"?"mediamanana":m]||{desayuno:"08:00",almuerzo:"11:00",merienda:"17:30"}[m];
+  const names=ps=>{const n=ps.map(p=>p.id==="yo"?"ti":personName(p));return n.length>1?n.slice(0,-1).join(", ")+" y "+n.slice(-1):n[0]||""};
   for(let i=0;i<8;i++){
     const d=addDays(today,i),start=weekStartFor(d),wk=S.plans[start];
+    // Resumen de la mañana: todo lo que se come hoy
+    if(T.resumen&&wk){const parts=[],sm=smallOf(d);
+      for(const m of ["desayuno","almuerzo"])if(sm[m]&&RX[sm[m].recipe])parts.push(`${SMALL[m][0]} ${RX[sm[m].recipe].name}`);
+      {const x=dishOfMeal(d,"comida");if(x.recipe)parts.push(`🍽️ ${x.recipe.name}${x.state==="taper"?" (táper)":""}`);else if(x.state==="fuera")parts.push("🍽️ comes fuera")}
+      if(sm.merienda&&RX[sm.merienda.recipe])parts.push(`${SMALL.merienda[0]} ${RX[sm.merienda.recipe].name}`);
+      {const x=dishOfMeal(d,"cena");if(x.recipe)parts.push(`🌙 ${x.recipe.name}`);else if(x.state==="fuera")parts.push("🌙 cenas fuera")}
+      if(parts.length)push(at(d,n.summary||"08:00"),i===0?"☀️ Hoy coméis":"☀️ Hoy coméis",parts.join(" · "),"day|"+d)}
+    // A la hora de cada comida pequeña
+    if(T.horas&&wk)for(const [m,v] of Object.entries(smallOf(d))){const r=RX[v.recipe];if(!r)continue;
+      const ps=smallEaters(d,m),casa=ps.filter(p=>smallState(p,m,d)==="casa"),llevar=ps.filter(p=>smallState(p,m,d)==="llevar");
+      if(llevar.length)push(at(d,smallTime("desayuno"),-15),`🎒 Prepara el ${m} para llevar`,`${r.name} para ${names(llevar)}.`,"pack|"+d+"|"+m);
+      if(casa.length)push(at(d,smallTime(m)),`${SMALL[m][0]} ${SMALL[m][1]}: ${r.name}`,`Para ${names(casa)}.`,"eat|"+d+"|"+m)}
     if(wk)for(const sl of buildSlots(start)){
       if(sl.date!==d)continue;const v=wk.slots[sl.id],r=v&&RX[v.recipe];if(!r)continue;
       const mt=S.home.mealTimes[sl.meal]||"14:00";
@@ -36,6 +55,7 @@ function buildSchedule(){
         if(T.cocinar)push(at(d,mt,-30),`🥡 Saca el táper: ${r.name}`,`Lo cocinaste el ${DAYS[dow(k.cook)].toLowerCase()}. Caliéntalo y a comer.`,"cook|"+sl.id);
       }else if(S.home.cookMode==="lote"){/* se avisa una vez al día de cocinar (abajo) */
       }else if(T.cocinar)push(at(d,mt,-60),`🍳 Hoy: ${r.name}`,`${recipeTime(r)} min · ${String(sl.portions).replace(".",",")} raciones${sl.tupper.length?" · haz el táper de mañana":""}.`,"cook|"+sl.id);
+      if(T.horas){const who=sl.eaters.concat(sl.kids);if(who.length)push(at(d,mt),`${sl.meal==="comida"?"🍽️ A comer":"🌙 A cenar"}: ${r.name}`,`Para ${names(who)}${sl.guests?` y ${sl.guests} invitados`:""}.`,"eat|"+sl.id)}
       if(T.valorar&&sl.eaters.length)push(at(d,mt,90),`¿Qué tal ${r.name.toLowerCase()}?`,"Toca para valorarlo y que aprenda lo que te gusta.","rate|"+sl.id);
     }
     // Por lotes: el día de cocinar, un solo aviso con cuántos platos y para cuántos días
@@ -62,7 +82,7 @@ function buildSchedule(){
       for(let i=0;i<4;i++){const d=addDays(r.due>today?r.due:today,i);if(d<snooze)continue;
         push(at(d,r.online?"19:30":"09:30"),r.title,r.body+(i?" · ¿Ya está? Márcala como hecha":""),"shop|"+r.m+"|"+r.key)}
     }}catch(e){}}
-  return out.sort((a,b)=>a.t-b.t).slice(0,80);
+  return out.sort((a,b)=>a.t-b.t).slice(0,150);
 }
 
 async function postAvisos(path,body){
@@ -151,7 +171,8 @@ function avisosCard(){
     ${n.on?`<p class="small okbox">✅ Activados. Próximos: ${next.length?next.map(a=>`${esc(new Date(a.t).toLocaleString("es-ES",{weekday:"short",hour:"2-digit",minute:"2-digit"}))} · ${esc(a.title)}`).join("<br>"):"ninguno esta semana"}</p>`
       :`<p class="small muted">Te avisa a su hora de lo que hay que hacer. Funciona aunque no tengas la app abierta.</p><button class="btn" id="avOn">🔔 Activar avisos</button>`}
     <div class="group"><h3>¿De qué te aviso?</h3>${Object.entries(NOTIF_TYPES).map(([k,[t,d]])=>`<label class="ntrow"><span class="ntt"><b>${t}</b><small>${d}</small></span><input type="checkbox" class="switch" data-nt="${k}" ${n.types[k]?"checked":""} aria-label="${esc(t)}"></label>`).join("")}
-    <div class="row small"><label>Hora del aviso de descongelar</label><input type="time" id="avThaw" value="${esc(n.thaw)}" style="width:auto"></div></div>
+    <div class="row small" style="margin-top:10px"><label style="flex:1">Hora del resumen de la mañana</label><input type="time" id="avSum" value="${esc(n.summary||"08:00")}" style="width:auto"></div>
+    <div class="row small"><label style="flex:1">Hora del aviso de descongelar</label><input type="time" id="avThaw" value="${esc(n.thaw)}" style="width:auto"></div></div>
     ${n.on?`<div class="actions"><button class="btn ghost small" id="avTest">Enviarme un aviso de prueba</button><button class="btn ghost small" id="avOff">Desactivar avisos</button></div>`:""}</div>`;
 }
 function bindAvisos(){
@@ -161,6 +182,7 @@ function bindAvisos(){
   document.getElementById("avPerm")?.addEventListener("click",openPermHelp);
   document.querySelectorAll("[data-nt]").forEach(c=>c.onchange=()=>{n.types[c.dataset.nt]=c.checked;save()});
   const th=document.getElementById("avThaw");if(th)th.onchange=()=>{n.thaw=th.value||"21:30";save()};
+  const su=document.getElementById("avSum");if(su)su.onchange=()=>{n.summary=su.value||"08:00";save()};
   document.getElementById("avTest")?.addEventListener("click",async()=>{
     try{if(Notification.permission!=="granted"){openPermHelp();return}
       await subscribeHere();

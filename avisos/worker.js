@@ -11,7 +11,7 @@
 */
 
 const ORIGENES = ["https://davidcaptart-glitch.github.io", "http://localhost:8765"];
-const MAX_AVISOS = 80;           // por usuario (una semana de avisos sobra)
+const MAX_AVISOS = 150;          // por usuario (una semana de avisos sobra)
 const CADUCA = 1000 * 60 * 60 * 24 * 30;   // suscripciones sin actualizar en 30 días se borran
 
 function cors(req) {
@@ -31,7 +31,7 @@ function limpiaPlan(plan) {
   const ahora = Date.now();
   return (Array.isArray(plan) ? plan : [])
     .filter((a) => a && Number(a.t) > ahora - 600000 && typeof a.title === "string")
-    .map((a) => ({ t: Number(a.t), title: String(a.title).slice(0, 80), body: String(a.body || "").slice(0, 200), tag: String(a.tag || "").slice(0, 60) }))
+    .map((a) => ({ t: Number(a.t), title: String(a.title).slice(0, 80), body: String(a.body || "").slice(0, 320), tag: String(a.tag || "").slice(0, 60) }))
     .sort((a, b) => a.t - b.t)
     .slice(0, MAX_AVISOS);
 }
@@ -80,7 +80,7 @@ export default {
         const d = await env.TAPER.get("sub:" + b.uid, "json");
         if (!d) return json(req, { error: "no suscrito" }, 404);
         const mins = Math.min(24 * 60, Math.max(10, Number(b.mins) || 180));
-        const plan = d.plan.concat([{ t: Date.now() + mins * 60000, title: b.aviso.title.slice(0, 80), body: String(b.aviso.body || "").slice(0, 200), tag: String(b.aviso.tag || "").slice(0, 60) }]);
+        const plan = d.plan.concat([{ t: Date.now() + mins * 60000, title: b.aviso.title.slice(0, 80), body: String(b.aviso.body || "").slice(0, 320), tag: String(b.aviso.tag || "").slice(0, 60) }]);
         await env.TAPER.put("sub:" + b.uid, JSON.stringify({ ...d, plan: limpiaPlan(plan) }));
         return json(req, { ok: true });
       }
