@@ -2,7 +2,7 @@
 "use strict";
 
 // Versión de la app: súbela (y el ?v= de index.html y VERSION de sw.js) en cada mejora, y añade sus novedades a data/novedades.json
-const APP_VERSION = 36;
+const APP_VERSION = 37;
 
 /* ---------- Utilidades ---------- */
 const DAYS = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];   // índice 0 = lunes
@@ -15,11 +15,13 @@ const SPORTS = {
   crossfit:"CrossFit",hiit:"HIIT o funcional",boxeo:"Boxeo",artes:"Artes marciales",
   correr:"Correr",bici:"Bici",spinning:"Spinning",natacion:"Natación",montana:"Senderismo o montaña",triatlon:"Triatlón",remo:"Remo",
   futbol:"Fútbol",baloncesto:"Baloncesto",padel:"Pádel",tenis:"Tenis",equipo:"Otro deporte de equipo",baile:"Baile",
-  yoga:"Yoga",pilates:"Pilates",otro:"Otro"
+  yoga:"Yoga",pilates:"Pilates",gimnasia:"Gimnasia",patinaje:"Patinaje",atletismo:"Atletismo",otro:"Otro"
 };
+// Los deportes más habituales en niños (se enseñan primero en su pantalla)
+const KID_SPORTS = ["futbol","baloncesto","natacion","artes","baile","gimnasia","patinaje","atletismo","tenis","padel","equipo","bici","otro"];
 const SPORT_GROUPS = {"Fuerza":["fuerza","calistenia","escalada"],"Mixtos":["crossfit","hiit","boxeo","artes"],
   "Resistencia":["correr","bici","spinning","natacion","montana","triatlon","remo"],"Equipo y raqueta":["futbol","baloncesto","padel","tenis","equipo","baile"],"Suaves":["yoga","pilates","otro"]};
-const ENDURANCE = new Set(["correr","bici","spinning","natacion","montana","triatlon","remo","futbol","baloncesto","padel","tenis","equipo","baile","crossfit","hiit","boxeo","artes"]);
+const ENDURANCE = new Set(["gimnasia","patinaje","atletismo","correr","bici","spinning","natacion","montana","triatlon","remo","futbol","baloncesto","padel","tenis","equipo","baile","crossfit","hiit","boxeo","artes"]);
 const STRENGTH = new Set(["fuerza","calistenia","escalada","crossfit","hiit","boxeo","artes"]);
 const GOALS = {
   rendimiento:["Rendimiento deportivo","Hidratos antes de entrenar y recuperación después"],

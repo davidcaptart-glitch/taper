@@ -119,8 +119,21 @@ const whenOf=s=>s.time?(toMin(s.time)<toMin(S.home.mealTimes.comida)?"manana":"t
 const sessWho=s=>{const p=s.who&&s.who!=="yo"&&S.people.find(x=>x.id===s.who);return p?personName(p)+": ":""};
 const sessLabel=s=>sessWho(s)+(SPORTS[s.type]||s.type).toLowerCase()+" a las "+sessTime(s);
 // Qué necesita un plato según los entrenos de alrededor
+// Deporte de los niños: sus sesiones del día (solo si ese día está contigo)
+const kidSessions=(k,d)=>k.trains?(k.train[dow(d)]||[]):[];
+// Ración del niño: algo más los días que entrena (cena después del entreno, o comida si entrena por la tarde)
+function kidFactor(k,slot){
+  let f=Number(k.factor)||0.6;
+  const ss=slot?kidSessions(k,slot.date):[];
+  if(ss.length&&(slot.meal==="cena"||ss.some(s=>whenOf(s)==="tarde")))f*=1.15;
+  return Math.round(f*100)/100;
+}
 function needsFor(slot){
   const d=slot.date, out={carbs:false,prot:false,noHeavy:false,why:[]};
+  // Los niños que entrenan también cuentan: energía antes y recuperación después
+  for(const k of slot.kids||[]){const ss=kidSessions(k,d);if(!ss.length)continue;
+    if(slot.meal==="comida"&&ss.some(s=>whenOf(s)==="tarde")){out.carbs=true;out.why.push(personName(k)+" tiene "+ss.map(s=>SPORTS[s.type].toLowerCase()).join(" y ")+" esta tarde")}
+    if(slot.meal==="cena"){out.prot=true;out.why.push("recuperación de "+personName(k)+" ("+ss.map(s=>SPORTS[s.type].toLowerCase()).join(" y ")+")")}}
   if(slot.meal==="cena"){
     const sD=sessionsOn(d), sN=slot.tupper.length?sessionsOn(addDays(d,1)):[];
     if(sN.length){out.carbs=true;out.why.push("mañana se entrena: "+sN.map(sessLabel).join(" y "))}
@@ -182,7 +195,7 @@ function buildSlots(start){
       const slot={id:d+"|"+meal,date:d,meal,eaters:as,kids:ks,tupper,fixed:f};
       slot.need=f&&f.capricho?{carbs:false,prot:false,noHeavy:false,why:[]}:needsFor(slot);
       slot.guests=st==="solotaper"?0:guestsAt(d,meal);
-      slot.portions=Math.round((as.concat(tupper).reduce((t,a)=>t+adultFactor(a,slot),0)+ks.reduce((t,k)=>t+(Number(k.factor)||0.6),0)+slot.guests)*100)/100;
+      slot.portions=Math.round((as.concat(tupper).reduce((t,a)=>t+adultFactor(a,slot),0)+ks.reduce((t,k)=>t+kidFactor(k,slot),0)+slot.guests)*100)/100;
       slots.push(slot);
     }
   }
@@ -449,7 +462,7 @@ function portionNutr(r,f){
   const k=x=>x==null?null:Math.round(x*f);
   return {kcal:k(r.kcal),prot:k(r.prot),carb:k(r.carb),fat:k(r.fat)};
 }
-const factorOf=p=>p.kind==="adulto"?adultFactor(p):(Number(p.factor)||0.6);
+const factorOf=(p,slot)=>p.kind==="adulto"?adultFactor(p,slot):kidFactor(p,slot);
 // Total de comida y cena de una persona en un día (los caprichos y comidas fuera no se cuentan)
 function dayTotals(p,d){
   const t={kcal:0,prot:0,carb:0,fat:0,meals:0,skipped:[]};

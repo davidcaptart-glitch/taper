@@ -351,6 +351,15 @@
         "Desde la notificación: «✓ Ya está» o «⏰ En 3 horas». En la campana: «Ya la he hecho» o «Mañana». También se da por hecha al marcar toda la lista o escanear el ticket.",
         "Las visitas suman raciones en esa comida y salen en el menú."
       ]
+    },
+    {
+      "version": 37,
+      "fecha": "2026-10-22",
+      "titulo": "El deporte de los niños",
+      "cambios": [
+        "Cada niño puede tener su deporte (fútbol, natación, baloncesto, artes marciales, baile, gimnasia…) con sus días y horas. Está en Perfil › Ajustes › Deporte de cada niño.",
+        "Los días que entrena le pongo algo más de ración, platos con energía antes del entreno y con buena proteína para recuperar después. Sin dietas de adulto."
+      ]
     }
   ]
 }

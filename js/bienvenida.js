@@ -12,6 +12,7 @@ function wizSteps(){
     {id:"familia",eyebrow:"Tu casa",title:"¿Quién come *en casa?*"},
     ...adults().flatMap(a=>[{id:"objetivos:"+a.id,eyebrow:"Objetivos",title:a.id==="yo"?"¿Qué te *importa?*":"¿Qué le importa a *"+personName(a)+"?*"},
       {id:"entreno:"+a.id,eyebrow:"Deporte",title:a.id==="yo"?"¿*Entrenas?*":"¿"+personName(a)+" *entrena?*"}]),
+    ...kids().map(k=>({id:"entreno:"+k.id,eyebrow:"Deporte",title:"¿"+personName(k)+" hace *deporte?*"})),
     {id:"cocina",eyebrow:"Tu semana",title:"¿Cuándo *cocinas?*"},
     {id:"plan",eyebrow:"Planificación",title:"¿Cuándo *planificas?*"},
     {id:"compra",eyebrow:"Presupuesto",title:"Fija tu *presupuesto*"},
@@ -187,9 +188,10 @@ function stepBody(fullId){
     <div class="hint" style="color:var(--muted)">Son pautas generales, no un plan de un nutricionista.</div>`;
   }
   if(id==="entreno"){
-    let h=`<div class="chips">${chip("data-trains","1",a.trains,you?"Sí, entreno":"Sí, entrena")}${chip("data-trains","0",!a.trains,"No")}</div>`;
+    const kid=a.kind==="nino";
+    let h=`${kid?`<p class="lead">Los días que entrena le pongo algo más de ración y platos que le den energía antes y le ayuden a recuperar después. Nada de dietas de adulto.</p>`:""}<div class="chips">${chip("data-trains","1",a.trains,you?"Sí, entreno":kid?"Sí, hace deporte":"Sí, entrena")}${chip("data-trains","0",!a.trains,"No")}</div>`;
     if(!a.trains)return h;
-    h+=`<div class="group"><h3>¿Qué ${you?"haces":"hace"}? (puedes elegir varios)</h3>${Object.entries(SPORT_GROUPS).map(([g,ks])=>`<div class="small muted" style="margin:8px 0 4px">${g}</div><div class="chips">${ks.map(k=>chip("data-sport",k,a.sports.includes(k),SPORTS[k])).join("")}</div>`).join("")}</div>
+    h+=`<div class="group"><h3>¿Qué ${you?"haces":"hace"}? (puedes elegir varios)</h3>${Object.entries(kid?{"Los más habituales":KID_SPORTS}:SPORT_GROUPS).map(([g,ks])=>`<div class="small muted" style="margin:8px 0 4px">${g}</div><div class="chips">${ks.map(k=>chip("data-sport",k,a.sports.includes(k),SPORTS[k])).join("")}</div>`).join("")}</div>
     <div class="group"><h3>${you?"Tu":"Su"} semana habitual</h3><p class="muted small" style="margin:0 0 8px">Con la hora de cada sesión sé si se entrena antes o después de comer. Cada semana te la propondré ya rellena y solo cambiarás lo que varíe.</p>`;
     for(let d=0;d<7;d++){const ss=a.train[d]||[];
       h+=`<div class="daycard"><div class="row"><b>${DAYS[d]}</b><span class="spacer"></span>${ss.length<2?`<button class="btn ghost small" data-addsess="${d}">+ Sesión</button>`:""}</div>

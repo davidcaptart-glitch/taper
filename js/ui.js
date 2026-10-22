@@ -918,6 +918,7 @@ function renderPerfil(){
   }
   if(fam)h+=acc("familia","👨‍👩‍👧","Tu familia",others().map(personName).join(", "),fam);
   const items=[["aparatos","Aparatos",Object.entries(APP).filter(([k])=>S.home.apps.includes(k)).map(([,v])=>v).join(", ")],["zona","Supermercados y zona",[chosenSupers().map(s=>superById(s).nombre).join(", ")+(cheapestMode()?" (lo más barato)":""),S.home.cp,S.home.municipio].filter(Boolean).join(" · ")||"Sin indicar"],["familia","Quién come en casa",others().map(personName).join(", ")||"Solo tú"],
+    ...kids().map(k=>["entreno:"+k.id,"Deporte de "+personName(k),k.trains?k.sports.map(s=>SPORTS[s]).join(", "):"No hace deporte"]),
     ...adults().flatMap(a=>[["objetivos:"+a.id,a.id==="yo"?"Tus objetivos":"Objetivos de "+personName(a),a.goals.map(g=>GOALS[g][0]).join(", ")],["entreno:"+a.id,a.id==="yo"?"Tu entrenamiento":"Entrenamiento de "+personName(a),a.trains?a.sports.map(s=>SPORTS[s]).join(", "):"No entrena"]]),["cocina","Tu semana, caprichos y horario",(S.home.cookMode==="lote"?"Por lotes":"Cada día")+" · "+S.fixed.length+" platos fijos"],
     ["plan","Planificación",(S.home.start&&S.home.start>todayISO()?"Empieza el "+shortDate(S.home.start)+" · ":"")+{diaria:"Cada día",semanal:"Cada semana",quincenal:"Cada dos semanas",mensual:"Cada mes"}[S.home.planFreq]+", "+DAYS[S.home.planDay].toLowerCase()+" a las "+S.home.planTime],
     ["compra","Compra y presupuesto",eur(S.home.budget.month)+" al mes"]];
