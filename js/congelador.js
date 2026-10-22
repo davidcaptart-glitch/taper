@@ -51,13 +51,14 @@ function nextUses(pid){
 
 function renderCongelador(){
   const st=freezerState();
-  let h=`<section class="view"><div class="listtotal"><h2>Congelador</h2><b>${st.length} ${st.length===1?"cosa":"cosas"}</b></div>
+  let h=`<section class="view">${viewHead(st.length+" "+(st.length===1?"cosa":"cosas")+" dentro","Tu *congelador*")}
     <p class="small muted">Se llena solo al marcar como comprado lo que va al congelador y se vacía al cocinar los platos que lo usan. Si algo no cuadra, corrígelo aquí.</p>`;
   const old=st.filter(e=>e.days>FREEZER_MONTHS*30);
   if(old.length)h+=`<div class="warnbox">🕒 ${old.length===1?"Esto lleva":"Estas cosas llevan"} más de ${FREEZER_MONTHS} meses congelado: ${old.map(e=>esc(P[e.pid].name.toLowerCase())).join(", ")}. Mejor gastarlo pronto; te lo propondré en los próximos menús.</div>`;
   if(!st.length)h+=`<div class="empty"><p>El congelador está vacío (o aún no has marcado compras de congelar).</p></div>`;
   for(const e of st){const p=P[e.pid],nx=nextUses(e.pid);
-    h+=`<div class="item">${prodImg(e.pid)}<span class="t"><b>${esc(p.name)}</b><small>${fmtQty(e.left,p.unit)} · desde el ${esc(shortDate(e.at))} (${e.days} días)${e.days>FREEZER_MONTHS*30?" · ⚠️ gastar pronto":""}${e.src==="mano"?" · añadido a mano":""}</small>
+    const age=Math.min(100,Math.round(e.days/(FREEZER_MONTHS*30)*100));
+    h+=`<div class="item fz" style="--age:${age}%">${prodImg(e.pid)}<span class="t"><b>${esc(p.name)}</b><small>${fmtQty(e.left,p.unit)} · desde el ${esc(shortDate(e.at))} (${e.days} días)${e.days>FREEZER_MONTHS*30?" · ⚠️ gastar pronto":""}${e.src==="mano"?" · añadido a mano":""}</small>
       ${nx.length?`<small>Para: ${nx.map(u=>esc(DSHORT[dow(u.slot.date)]+" "+shortDate(u.slot.date)+" ("+u.r.name.toLowerCase()+")")).join("; ")}</small>`:""}</span>
       <button class="btn ghost small" data-fzout="${e.pid}|${Math.round(e.left)}">Ya no está</button></div>`}
   const prods=Object.values(P).filter(p=>p.keep==="congelar"||p.keep==="congelado").sort((a,b)=>a.name.localeCompare(b.name));

@@ -274,6 +274,18 @@
       "cambios": [
         "Ya son 196 platos con foto real (de Wikimedia Commons, con su autor y licencia). Los demás muestran sus ingredientes, y siempre puedes poner la foto de tu propio plato."
       ]
+    },
+    {
+      "version": 29,
+      "fecha": "2026-10-22",
+      "titulo": "Táper, con otra cara",
+      "cambios": [
+        "Menú: tarjeta grande con la foto del próximo plato, botón para cocinarlo y tira de días para saltar a cada uno.",
+        "Recetas en cuadrícula de fotos, con el tiempo y las calorías a la vista.",
+        "Compra con el total en grande, secciones con su icono y casillas redondas.",
+        "Perfil con tu inicial y tus números; congelador con una barra que avisa de lo que lleva más tiempo.",
+        "Barra inferior flotante y títulos con estilo en todas las pantallas."
+      ]
     }
   ]
 }

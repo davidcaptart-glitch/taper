@@ -211,9 +211,45 @@ function moveToNext(rid,from){
   }
   return null;
 }
+/* ---------- Piezas de diseño comunes ---------- */
+// Cabecera de cada pantalla: etiqueta pequeña + título grande con *acento* en cursiva
+const viewHead=(eyebrow,title,side)=>`<div class="vhead"><div><div class="veb">${esc(eyebrow)}</div><h1 class="vh">${esc(title).replace(/\*(.+?)\*/g,"<em>$1</em>")}</h1></div>${side||""}</div>`;
+const dishPhoto=r=>MYPHOTOS[r.id]||(DISHPHOTOS[r.id]&&DISHPHOTOS[r.id].archivo)||null;
+// El próximo plato que toca cocinar o comer (hoy, mañana…)
+function nextMeal(){
+  const now=new Date(),h=now.getHours()+now.getMinutes()/60;
+  const lead=S.home.start&&S.home.start>todayISO()?daysBetween(todayISO(),S.home.start):0;
+  for(let i=0;i<lead+8;i++){const d=addDays(todayISO(),i),wk=S.plans[weekStartFor(d)];if(!wk)continue;
+    for(const meal of ["comida","cena"]){
+      if(i===0&&meal==="comida"&&h>=16)continue;
+      if(i===0&&meal==="cena"&&h>=22)continue;
+      if(["fuera","libre"].includes(mealState(d,meal)))continue;
+      const sl=slotFor(d,meal),v=sl&&wk.slots[sl.id],r=v&&RX[v.recipe];if(r)return {d,meal,sl,r,i}}}
+  return null;
+}
+function todayCard(){
+  const n=nextMeal();if(!n)return "";
+  const ph=dishPhoto(n.r), when=n.i===0?"Hoy":n.i===1?"Mañana":n.i<7?DAYS[dow(n.d)]:DAYS[dow(n.d)]+" "+shortDate(n.d);
+  const k=n.r.kcal?` · ${n.r.kcal} kcal`:"";
+  return `<div class="todaycard ${ph?"":"nophoto"}" ${ph?`style="background-image:linear-gradient(180deg,rgba(0,0,0,0) 25%,rgba(10,10,12,.82) 100%),url('${esc(ph)}')"`:""}>
+    ${ph?"":`<div class="tcart">${dishImg(n.r,"l")}</div>`}
+    <div class="tcin"><span class="tclab">${when} · ${n.meal==="comida"?"comida":"cena"}</span>
+      <h2>${esc(n.r.name)}</h2>
+      <div class="tcmeta"><span>⏱ ${recipeTime(n.r)} min</span><span>👥 ${String(n.sl.portions).replace(".",",")} rac.</span>${n.r.kcal?`<span>🔥 ${n.r.kcal} kcal</span>`:""}</div>
+      <div class="tcbtns"><button class="btn" data-open="${n.r.id}" data-slot="${n.sl.id}">Ver receta</button><button class="btn glass" data-cooknow="${n.r.id}|${n.sl.portions}">▶ Cocinar</button></div></div></div>`;
+}
+// Tira de días de la semana actual: toca uno para ir a él
+function dayStrip(){
+  const n=nextMeal(),st=weekStartFor(n?n.d:todayISO()),ds=weekDates(st);if(!S.plans[st])return "";
+  return `<div class="dstrip">${ds.map(d=>{const has=["comida","cena"].some(m=>!["fuera","libre"].includes(mealState(d,m)));
+    return `<button class="dsd ${d===todayISO()?"on":""} ${d<todayISO()?"past":""}" data-goday="${d}"><small>${DSHORT[dow(d)]}</small><b>${Number(d.slice(8))}</b><i class="${has?"y":""}"></i></button>`}).join("")}</div>`;
+}
+const SEC_ICO=[["frut","🥦"],["verdur","🥦"],["carne","🥩"],["pollo","🍗"],["pescad","🐟"],["marisc","🦐"],["huevo","🥚"],["leche","🥛"],["lácte","🥛"],["yogur","🥛"],["queso","🧀"],["charcut","🧀"],["congel","🧊"],["arroz","🍚"],["pasta","🍝"],["legumbre","🫘"],["conserv","🥫"],["caldo","🥫"],["aceite","🫒"],["especia","🧂"],["salsa","🫙"],["pan","🥖"],["cereal","🥣"],["fruto","🥜"]];
+const secIco=s=>{const l=String(s).toLowerCase();const m=SEC_ICO.find(([k])=>l.includes(k));return m?m[1]:"🛒"};
+
 function renderMenu(){
   const weeks=weeksInMonth(month);
-  let h=`<section class="view">`+useUpCard()+`<div class="row" style="justify-content:flex-end;margin:4px 0 -4px"><button class="btn ghost small" id="startDay">📅 ${S.home.start&&S.home.start>todayISO()?"Cambiar el día de inicio":"Empezar el plan otro día"}</button></div>`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
+  let h=`<section class="view">`+viewHead(monthName(month),"Qué *comemos*")+((n=>n&&weeks.includes(weekStartFor(n.d)))(nextMeal())?todayCard()+dayStrip():"")+useUpCard()+`<div class="row" style="justify-content:flex-end;margin:4px 0 -4px"><button class="btn ghost small" id="startDay">📅 ${S.home.start&&S.home.start>todayISO()?"Cambiar el día de inicio":"Empezar el plan otro día"}</button></div>`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
   if(!weeks.length)h+=`<div class="empty"><p>No hay semanas que empiecen este mes.</p></div>`;
   for(const start of weeks){
     const wk=S.plans[start], dates=weekDates(start);
@@ -234,7 +270,7 @@ function renderMenu(){
       const ks=peopleAt(d).filter(p=>p.id!=="yo"), hol=isHoliday(d), a=me(), pt=a?dayProtein(a,d):null;
       const sess=sessionsOn(d);
       const empty=["comida","cena"].every(m=>["fuera","libre"].includes(mealState(d,m)));
-      h+=`<div class="slot ${empty?"extra":""}"><div class="day">${DSHORT[dow(d)]}<small>${shortDate(d)}</small></div><div>
+      h+=`<div class="slot ${empty?"extra":""} ${d===todayISO()?"today":""}" id="d-${d}"><div class="day"><small>${DSHORT[dow(d)]}</small><b>${Number(d.slice(8))}</b><small>${esc(shortDate(d).split(" ")[1]||"")}</small></div><div>
         <div class="tags">${hol?`<span class="pill carga">${esc(holidayName(d))}</span>`:""}${ks.map(k=>{const c=peopleAt(d,"comida").includes(k),n=peopleAt(d,"cena").includes(k);return `<span class="pill kid">${esc(personName(k))}${c&&!n?" · solo comida":!c&&n?" · solo cena":""}</span>`}).join("")}${sess.map(s=>`<span class="pill ligera">${esc(SPORTS[s.type])} ${esc(sessTime(s))}</span>`).join("")}</div>
         ${mealLine(d,"comida",wk)}${mealLine(d,"cena",wk)}
         ${dayCounter(d,pt)}
@@ -244,6 +280,8 @@ function renderMenu(){
   }
   main.innerHTML=h+`</section>`;
   main.querySelectorAll("[data-plan]").forEach(b=>b.onclick=()=>openWeekPlanner(b.dataset.plan));
+  main.querySelectorAll("[data-goday]").forEach(b=>b.onclick=()=>{const el=document.getElementById("d-"+b.dataset.goday);if(el){el.scrollIntoView({behavior:"smooth",block:"start"});el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash")}});
+  main.querySelectorAll("[data-cooknow]").forEach(b=>b.onclick=()=>{const [rid,p]=b.dataset.cooknow.split("|");const r=RX[rid];openCook(r,variantFor(r)||r.vars[0],Number(p)||2)});
   main.querySelectorAll("[data-regen]").forEach(b=>b.onclick=()=>{if(confirm("¿Rehacer los platos de esta semana? Se mantienen los que elegiste a mano.")){genWeekFromScratch(b.dataset.regen);save();render();toast("Platos rehechos")}});
   main.querySelectorAll("[data-swap]").forEach(b=>b.onclick=()=>openSwap(b.dataset.swap));
   main.querySelectorAll("[data-sacr]").forEach(b=>b.onclick=()=>openSacrifice(b.dataset.sacr));
@@ -609,7 +647,7 @@ function renderCompra(){
   if(!sh.weeks.length||!sh.weeks.some(s=>S.plans[s])){main.innerHTML=`<section class="view"><div class="empty"><h2>Sin lista todavía</h2><p>Planifica alguna semana de este mes y aquí aparecerá la compra.</p><button class="btn" id="goMenu">Ir al menú</button></div></section>`;document.getElementById("goMenu").onclick=()=>{tab="menu";render()};return}
   if(listSel!=="mes"&&!sh.lists[listSel])listSel="mes";
   const l=sh.lists[listSel], wi=listSel==="mes"?null:Number(listSel);
-  let h=`<section class="view"><div class="seg" role="group" aria-label="Lista"><button aria-pressed="${listSel==="mes"}" data-list="mes">Compra del mes</button>`;
+  let h=`<section class="view">${viewHead(monthName(month),"Tu *compra*")}<div class="seg" role="group" aria-label="Lista"><button aria-pressed="${listSel==="mes"}" data-list="mes">Compra del mes</button>`;
   sh.weeks.forEach((s,i)=>h+=`<button aria-pressed="${listSel===String(i)}" data-list="${i}">Semana ${shortDate(s)}</button>`);
   h+=`</div><div class="listtotal"><h2>${listSel==="mes"?"Despensa, congelados y carne":"Fresco de la semana"}</h2><b>${eur(l.cost+l.fee)}</b></div>
   <div class="modes chips">${Object.entries(SHOP_MODES).map(([m,t])=>chip("data-lm",m,l.mode===m,t)).join("")}</div>
@@ -635,7 +673,7 @@ function renderCompra(){
     const bySec={};for(const it of g.items)(bySec[P[it.pid].sec]=bySec[P[it.pid].sec]||[]).push(it);
     const secs=[...STORE_ORDER,...Object.keys(bySec).filter(s=>!STORE_ORDER.includes(s))].filter(s=>bySec[s]);
     secs.forEach((sec,si)=>{
-      h+=`<div class="aisle"><h3>${l.mode!=="online"?`<span class="secn">${si+1}</span>`:""}${esc(sec)} <span class="muted small">· ${bySec[sec].length}</span></h3>`;
+      h+=`<div class="aisle"><h3><span class="secico">${secIco(sec)}</span>${l.mode!=="online"?`<span class="secn">${si+1}</span>`:""}${esc(sec)} <span class="muted small">· ${bySec[sec].length}</span></h3>`;
       for(const it of bySec[sec].sort((a,b)=>P[a.pid].name.localeCompare(P[b.pid].name))){
         const key=checkKey(month,listSel,it.pid),done=!!S.checks[key],moved=(S.assign[month]||{})[it.pid]!=null&&listSel!=="mes";
         const sx=it.sup!=="mercadona"&&PS&&PS.supers[it.sup]?PS.supers[it.sup].productos[it.pid]:null;
@@ -674,7 +712,7 @@ function renderRecetas(){
   const fl={todas:"Todas",fav:"Favoritas",nuevas:"Sin probar",no:"Descartadas",c:"⚡ Hidratos",l:"🥗 Ligeras",kid:"Gustan a niños"};
   if(R.some(r=>r.sug))fl.comunidad="💡 De la comunidad";
   for(const k of S.home.apps)fl[k]=APP[k];
-  let h=`<section class="view">${recipeSuggestOn()?`<button class="btn ghost small" id="sugRec" style="margin:4px 0 10px">💡 Sugerir una receta</button>`:""}<div class="field"><input type="text" id="rq" placeholder="Buscar receta o ingrediente" value="${esc(recSearch)}"></div><div class="filters">`+Object.entries(fl).map(([k,v])=>`<button class="btn ${recFilter===k?"":"ghost"} small" data-f="${k}">${v}</button>`).join("")+`</div>`;
+  let h=`<section class="view">${viewHead(R.length+" recetas","Tus *recetas*")}${recipeSuggestOn()?`<button class="btn ghost small" id="sugRec" style="margin:4px 0 10px">💡 Sugerir una receta</button>`:""}<div class="field"><input type="text" id="rq" placeholder="Buscar receta o ingrediente" value="${esc(recSearch)}"></div><div class="filters">`+Object.entries(fl).map(([k,v])=>`<button class="btn ${recFilter===k?"":"ghost"} small" data-f="${k}">${v}</button>`).join("")+`</div>`;
   const ms=S.mySug||[];
   if(ms.length)h+=`<details class="card" style="margin-top:0"><summary><b>Mis recetas sugeridas</b> <span class="small muted">(${ms.length})</span></summary>${ms.slice().reverse().map(x=>`<div class="fixed"><span><b>${esc(x.name)}</b><small>${x.code} · ${x.status==="aprobada"?"✅ Aprobada y publicada":"⏳ Enviada el "+esc(shortDate(x.at))+", pendiente de revisar"}</small></span>${x.status==="aprobada"&&x.rid&&RX[x.rid]?`<button class="btn ghost small" data-open="${x.rid}">Ver</button>`:""}</div>`).join("")}</details>`;
   const qn=recSearch.toLowerCase();
@@ -684,10 +722,12 @@ function renderRecetas(){
     const dp=dishPref(a,r.id);
     switch(recFilter){case "comunidad":return !!r.sug;case "fav":return dp>=1.5;case "nuevas":return !tried.has(r.id);case "no":return dp<=-1;case "c":return r.type==="c";case "l":return r.type==="l";case "kid":return r.kid;case "todas":return true;default:return r.vars.some(v=>v.app===recFilter)}
   });
-  h+=`<p class="small muted">${list.length} recetas</p>`;
+  h+=`<p class="small muted">${list.length} recetas</p><div class="rgrid">`;
   for(const r of list){const dp=dishPref(a,r.id),can=!!variantFor(r);
+    h+=`<button class="rtile ${dp<=-1||!can?"no":""}" data-open="${r.id}"><span class="rtimg">${dishImg(r,"m")}${dp>=1.5?`<span class="rtfav">❤️</span>`:""}<span class="rtbad"><span>⏱ ${recipeTime(r)}′</span>${r.kcal?`<span>🔥 ${r.kcal}</span>`:""}</span></span>
+      <span class="rtt"><b>${r.sug?"💡 ":""}${esc(r.name)}</b><small>${r.prot||"?"} g proteína · ${r.type==="c"?"con hidratos":"ligera"}${!can?" · no tienes el aparato":""}${dp<=-1?" · descartada":""}</small></span></button>`;continue;
     h+=`<button class="rcard ${dp<=-1||!can?"no":""}" data-open="${r.id}">${dishImg(r,"s")}<span class="t"><b>${dp>=1.5?"❤️ ":""}${r.sug?"💡 ":""}${esc(r.name)}</b><small>${recipeTime(r)} min · ${r.prot||"?"} g proteína${r.kcal?" · "+r.kcal+" kcal":""}${!can?" · no tienes el aparato":""}${dp<=-1?" · descartada":""}</small></span><span class="pill ${r.type==="c"?"carga":"ligera"}">${r.type==="c"?"⚡":"🥗"}</span></button>`}
-  main.innerHTML=h+"</section>";
+  main.innerHTML=h+"</div></section>";
   main.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{recFilter=b.dataset.f;render()});
   document.getElementById("sugRec")?.addEventListener("click",openSuggestRecipe);
   const rq=document.getElementById("rq");rq.oninput=()=>{recSearch=rq.value;clearTimeout(rq._t);rq._t=setTimeout(()=>{render();const x=document.getElementById("rq");x.focus();x.setSelectionRange(x.value.length,x.value.length)},250)};
@@ -766,7 +806,11 @@ let accOpen=new Set(["yo"]);
 const acc=(id,ico,title,sub,body)=>`<details class="acc" data-acc="${id}" ${accOpen.has(id)?"open":""}><summary><span class="ico">${ico}</span><span class="tx">${title}${sub?`<small>${esc(sub)}</small>`:""}</span></summary><div class="accbody">${body}</div></details>`;
 function renderPerfil(){
   const RV={2:"❤️",1:"👍",rare:"🙂","-1":"👎"};
-  let h=`<section class="view"><div class="hero"><div class="eyebrow">Tu perfil</div><h2>${me().name?"Hola, "+esc(me().name):"Hola"}</h2><p>${S.people.length>1?`${S.people.length} personas en casa · `:""}${eur(S.home.budget.month)} al mes · ${esc(chosenSupers().map(s=>superById(s).nombre).join(", "))}</p></div>`;
+  const fav=Object.values(me().tastes.dish).filter(v=>v>=1.5).length, rated=S.ratings.filter(x=>x.who===me().id).length, wks=Object.values(S.plans).filter(w=>w.confirmed).length;
+  let h=`<section class="view"><div class="phero"><div class="avatar">${esc((me().name||"T").trim().charAt(0).toUpperCase())}</div>
+    <div><div class="veb">Tu perfil</div><h1 class="vh">Hola, <em>${esc(me().name||"tú")}</em></h1>
+    <p>${S.people.length>1?`${S.people.length} en casa · `:""}${eur(S.home.budget.month)} al mes · ${esc(chosenSupers().map(s=>superById(s).nombre).join(", "))}</p></div></div>
+    <div class="pstats"><div><b>${rated}</b><small>platos valorados</small></div><div><b>${fav}</b><small>favoritos</small></div><div><b>${wks}</b><small>semanas planificadas</small></div></div>`;
   let fam="";
   for(const p of S.people){const hist=historyOf(p,20);
     const body=`${p.id!=="yo"?`<div class="small muted">${p.kind==="nino"?(p.age?p.age+" años · ":"")+"niño o niña":"adulto"} · ración ${String(p.factor).replace(".",",")}${p.tupper?" · se lleva táper":""}</div>${turnText(p)?`<div class="small" style="margin-top:6px">${esc(turnText(p))}</div>`:""}${mealsAwayText(p)?`<div class="small" style="margin-top:4px">🍽️ ${esc(mealsAwayText(p))}</div>`:""}${kidCalendar(p)}${changesHTML(p)}`:""}${knowHTML(p)}
