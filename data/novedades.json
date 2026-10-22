@@ -417,6 +417,14 @@
         "Nuevo «Cocinar todo paso a paso»: junta todos los platos de la sesión en una sola lista, en el orden más práctico. Lo que se hace solo (horno, air fryer, lo que hierve) va primero y, mientras, te doy los pasos de los otros platos.",
         "Cada paso te dice de qué plato es (con su foto), el utensilio, el fuego o la temperatura y su temporizador. Al acabar cada plato, te dice en cuántos tápers repartirlo."
       ]
+    },
+    {
+      "version": 44,
+      "fecha": "2026-10-22",
+      "titulo": "Arreglo urgente",
+      "cambios": [
+        "Arreglado un fallo de la versión anterior que impedía abrir la lista de la compra y el asistente."
+      ]
     }
   ]
 }

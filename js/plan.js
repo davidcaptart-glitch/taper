@@ -241,7 +241,7 @@ function tupperSplit(sl){
    lo que se hace solo (horno, air fryer, microondas, algo que cuece o hierve un rato) se arranca cuanto antes
    y, mientras, se avanza con los pasos que piden estar encima. Cada aparato solo hace una cosa a la vez
    (fuegos: hasta 4). Al acabar cada plato, se reparte en sus tápers. */
-function stepKind(x){
+function cookStepKind(x){
   if(!x)return {passive:false,dur:3,res:null};
   const u=String(x.utensilio||"").toLowerCase(), m=Math.max(1,Number(x.min)||1);
   if(u.includes("horno"))return {passive:true,dur:m,res:"horno"};
@@ -252,7 +252,7 @@ function stepKind(x){
 }
 function batchPlan(items){
   // items: [{r, v, sl}]
-  const st=items.map((o,i)=>({o,i,next:0,ready:0,left:o.v.steps.reduce((t,_,j)=>t+stepKind((o.v.info||[])[j]).dur,0)}));
+  const st=items.map((o,i)=>({o,i,next:0,ready:0,left:o.v.steps.reduce((t,_,j)=>t+cookStepKind((o.v.info||[])[j]).dur,0)}));
   const busy={horno:0,air:0,micro:0}, fuegos=[0,0,0,0], out=[];let t=0,guard=0;
   const free=(res,at)=>res==="fuego"?fuegos.some(f=>f<=at):res&&busy[res]!=null?busy[res]<=at:true;
   const take=(res,until,at)=>{if(res==="fuego"){const i=fuegos.findIndex(f=>f<=at);if(i>=0)fuegos[i]=until}else if(res&&busy[res]!=null)busy[res]=until};
@@ -262,7 +262,7 @@ function batchPlan(items){
     // Paso final de cada plato: repartirlo en tápers
     const done=cand.find(s=>s.next===s.o.v.steps.length);
     if(done){out.push({o:done.o,at:t,tupper:true});done.next++;t+=2;continue}
-    const opts=cand.map(s=>{const x=(s.o.v.info||[])[s.next],k=stepKind(x);return {s,x,k,ok:free(k.res,t)}});
+    const opts=cand.map(s=>{const x=(s.o.v.info||[])[s.next],k=cookStepKind(x);return {s,x,k,ok:free(k.res,t)}});
     const usable=opts.filter(c=>c.ok);
     if(!usable.length){t=Math.min(...Object.values(busy).filter(v=>v>t).concat(fuegos.filter(f=>f>t)),t+1);continue}
     usable.sort((a,b)=>(b.k.passive-a.k.passive)||(b.s.left-a.s.left));
