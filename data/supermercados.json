@@ -238,7 +238,13 @@
         "comprobadas": "2026-10-22",
         "fuente": "https://compraonline.condis.es/condiciones-generales/l/es_ES"
       },
-      "color": "#C8102E"
+      "color": "#C8102E",
+      "logo": "images/supers/condis.svg",
+      "logo_credito": {
+        "licencia": "Marca de Condis, usada solo para identificar el supermercado",
+        "autor": "Condis",
+        "fuente": "https://www.condis.es/"
+      }
     },
     {
       "id": "elcorteingles",
