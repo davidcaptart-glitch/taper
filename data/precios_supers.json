@@ -595,11 +595,17 @@
      "aprox": false,
      "anterior": null,
      "fecha": "2026-10-22"
+    },
+    "tomate_frito": {
+     "precio": 0.99,
+     "envase": 559,
+     "nombre": "Tomate Condis Frito Vidrio 560 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
     }
    },
-   "fallos": [
-    "tomate_frito: HTTP Error 503: Service Unavailable"
-   ]
+   "fallos": []
   },
   "dia": {
    "nombre": "DIA",
@@ -1247,8 +1253,18 @@
     }
    },
    "fallos": []
+  },
+  "consum": {
+   "fallos": [
+    "No se ha podido actualizar: No module named 'supers.consum'"
+   ]
+  },
+  "eroski": {
+   "fallos": [
+    "No se ha podido actualizar: No module named 'supers.eroski'"
+   ]
   }
  },
  "codigo_postal": "08784",
- "ejecutado": "2026-10-22T10:14:13+00:00"
+ "ejecutado": "2026-10-22T10:25:31+00:00"
 }
