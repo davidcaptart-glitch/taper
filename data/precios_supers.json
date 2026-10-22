@@ -2610,9 +2610,17 @@
      "fecha": "2026-10-22"
     }
    },
-   "fallos": []
+   "fallos": [
+    "arroz: HTTP Error 403: Forbidden",
+    "pasta: HTTP Error 403: Forbidden",
+    "espaguetis: HTTP Error 403: Forbidden",
+    "cuscus: HTTP Error 403: Forbidden",
+    "lentejas: HTTP Error 403: Forbidden",
+    "garbanzos: HTTP Error 403: Forbidden",
+    "Demasiados fallos seguidos: se para este supermercado hasta la semana que viene"
+   ]
   }
  },
  "codigo_postal": "08784",
- "ejecutado": "2026-10-22T10:25:31+00:00"
+ "ejecutado": "2026-10-22T14:43:03+00:00"
 }
