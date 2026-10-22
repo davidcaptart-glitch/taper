@@ -9,6 +9,9 @@ let DISHPHOTOS={}; // id de receta -> {archivo, autor, licencia, fuente}: fotos 
 const prodImg=(pid,cls="pimg")=>{const p=P[pid];return p&&p.img?`<img class="${cls}" src="${esc(p.img)}" alt="" loading="lazy" decoding="async">`:`<span class="${cls} noimg">🥫</span>`};
 // Ingredientes principales de un plato: los de más cantidad, sin los que apenas se ven (cebolla, ajo…)
 function mainIngs(r,n=3){return r.ing.filter(([p])=>P[p]&&P[p].img&&!PHOTO_SKIP.has(p)).sort((a,b)=>b[1]*(P[b[0]].unit==="ud"?80:1)-a[1]*(P[a[0]].unit==="ud"?80:1)).slice(0,n).map(([p])=>p)}
+// Regla: una receta solo se usa si tiene foto (la real del plato o la tuya).
+// Si las fotos no se han podido cargar, no se bloquea nada.
+const hasPhoto=r=>!!(MYPHOTOS[r.id]||DISHPHOTOS[r.id]||!Object.keys(DISHPHOTOS||{}).length);
 function dishImg(r,size="s"){
   if(MYPHOTOS[r.id])return `<span class="dish ${size}"><img src="${MYPHOTOS[r.id]}" alt="${esc(r.name)}" class="mine"></span>`;
   const f=DISHPHOTOS[r.id];if(f)return `<span class="dish ${size} photo"><img src="${esc(f.archivo)}" alt="${esc(r.name)}" class="mine" loading="lazy" decoding="async"></span>`;

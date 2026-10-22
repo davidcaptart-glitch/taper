@@ -718,6 +718,7 @@ function renderRecetas(){
   const qn=recSearch.toLowerCase();
   const tried=new Set(S.ratings.map(x=>x.rid));
   const list=R.filter(r=>{
+    if(!hasPhoto(r))return false;
     if(qn&&!(r.name.toLowerCase().includes(qn)||r.ing.some(([p])=>P[p].name.toLowerCase().includes(qn))))return false;
     const dp=dishPref(a,r.id);
     switch(recFilter){case "comunidad":return !!r.sug;case "fav":return dp>=1.5;case "nuevas":return !tried.has(r.id);case "no":return dp<=-1;case "c":return r.type==="c";case "l":return r.type==="l";case "kid":return r.kid;case "todas":return true;default:return r.vars.some(v=>v.app===recFilter)}
@@ -1163,10 +1164,15 @@ async function boot(){
   catch(e){prOffline=!!PR}
   try{PS=JSON.parse(localStorage.getItem("taper-precios-supers")||"null")}catch(e){PS=null}
   try{const f=await getJSON("data/precios_supers.json?t="+Date.now(),true);if(f&&f.supers){PS=f;try{localStorage.setItem("taper-precios-supers",JSON.stringify(PS))}catch(e){}}}catch(e){}
+  try{AJ=JSON.parse(localStorage.getItem("taper-ajustes")||"null")}catch(e){AJ=null}
   try{NEWS=(await getJSON("data/novedades.json",true)).versiones}catch(e){NEWS=null}
   try{CFG=await getJSON("data/config.json",true)}catch(e){CFG={}}
+  try{if(CFG.avisos&&CFG.avisos.url){const a=await (await fetch(CFG.avisos.url.replace(/\/$/,"")+"/ajustes",{cache:"no-store"})).json();if(a&&a.productos){AJ=a;try{localStorage.setItem("taper-ajustes",JSON.stringify(AJ))}catch(e){}}}}catch(e){}
   // Al abrir, la semana actual y la siguiente tienen menú si ya se había planificado alguna
-  if(S.onboarded){ensureHorizon();save();
+  if(S.onboarded){
+    // Platos ya planificados sin foto (y no elegidos a mano): se cambian por otros
+    for(const [s,wk] of Object.entries(S.plans))if(addDays(s,6)>=todayISO())for(const [id,v] of Object.entries(wk.slots||{}))if(v.recipe&&RX[v.recipe]&&!hasPhoto(RX[v.recipe])&&!v.locked)delete wk.slots[id];
+    ensureHorizon();for(const s of Object.keys(S.plans))if(addDays(s,6)>=todayISO())ensureWeek(s);save();
     // Si el plan aún no ha empezado, el Menú abre directamente en el mes en que empieza
     if(S.home.start&&S.home.start>todayISO()&&!weeksInMonth(month).some(s=>addDays(s,6)>=S.home.start))month=S.home.start.slice(0,7)}
   render();

@@ -5,6 +5,7 @@
 let P = {}, R = [], RX = {}, FEST = null;
 let PR = null, prOffline = false, SUPERS = [], ZONES = null, zoneMissing = false;
 let PS = null;   // precios de los demás supermercados (data/precios_supers.json)
+let AJ = null;   // correcciones automáticas sacadas de los tickets de todos (servidor /ajustes)
 
 function setProducts(list){
   P={};
@@ -50,10 +51,13 @@ const chosenSupers=()=>{const c=(S.home.supers||[]).filter(superHasPrices);retur
 const cheapestMode=()=>S.home.shop.strategy==="barato"&&chosenSupers().length>1;
 // Precio del envase de Táper en un supermercado (se escala por tamaño si su envase es distinto)
 function superPrice(sid,pid){
-  if(sid==="mercadona"){const m=mprice(pid);return m?m.precio:null}
+  const aj=AJ&&AJ.productos&&AJ.productos[sid]&&AJ.productos[sid][pid];
+  if(aj&&aj.excluir&&sid!=="mercadona")return null;
+  const f=aj&&aj.factor||1;
+  if(sid==="mercadona"){const m=mprice(pid);return m?Math.round(m.precio*f*100)/100:null}
   const x=PS&&PS.supers&&PS.supers[sid]&&PS.supers[sid].productos[pid];
   if(!x||!(x.precio>0)||!(x.envase>0)||!P[pid])return null;
-  return Math.round(x.precio/x.envase*P[pid].env*100)/100;
+  return Math.round(x.precio/x.envase*P[pid].env*f*100)/100;
 }
 // Dónde se compra cada producto
 function superFor(pid){

@@ -204,7 +204,7 @@ function weekRecipes(start,exceptId){
 function candidates(slot,opts={}){
   const out=[];
   for(const r of R){
-    if(!variantFor(r))continue;
+    if(!variantFor(r)||!hasPhoto(r))continue;
     const people=slot.eaters.concat(slot.kids,slot.tupper);
     if(!people.every(p=>canEat(p,r)))continue;
     if(slot.eaters.concat(slot.tupper).some(a=>dishPref(a,r.id)<=-1))continue;

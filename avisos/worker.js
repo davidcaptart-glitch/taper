@@ -127,7 +127,12 @@ export default {
         const limpio = { at: Date.now(), cp: String(b.cp || "").slice(0, 5), super: String(b.super || "").slice(0, 20), tienda: String(b.tienda || "").slice(0, 60), fecha: String(b.fecha || "").slice(0, 10),
           items: b.items.slice(0, 40).map((x) => ({ pid: String(x.pid).slice(0, 30), desc: String(x.desc || "").slice(0, 60), pagado: Number(x.pagado) || 0, app: Number(x.app) || 0, dif: Number(x.dif) || 0 })) };
         await env.TAPER.put(clave, JSON.stringify(limpio), { expirationTtl: 60 * 60 * 24 * 120 });
+        await recalcularAjustes(env, { clave, t: limpio });
         return json(req, { ok: true });
+      }
+      // Correcciones automáticas de precios que aplican todas las apps
+      if (req.method === "GET" && url.pathname === "/ajustes") {
+        return json(req, (await env.TAPER.get("ajustes", "json")) || { productos: {} });
       }
       if (req.method === "GET" && url.pathname === "/admin/precios") {
         if (!env.ADMIN_KEY || url.searchParams.get("clave") !== env.ADMIN_KEY) return json(req, { error: "clave no válida" }, 403);
@@ -155,6 +160,8 @@ export default {
   // Tarea programada: cada 10 minutos
   async scheduled(event, env, ctx) {
     ctx.waitUntil(enviarPendientes(env));
+    const d = new Date(event.scheduledTime || Date.now());
+    if (d.getUTCHours() === 4 && d.getUTCMinutes() < 10) ctx.waitUntil(recalcularAjustes(env));
   },
 };
 
@@ -194,6 +201,35 @@ async function envia(env, uid, d) {
 // Pulsar "compartir" se cuenta, pero no da coins.
 const COINS = { visita: 1, instalacion: 10, activoInvitado: 2, activoPropio: 1, bienvenida: 5 };
 const MAX_VISITAS_DIA = 10;
+/* ---------- Corrección automática de precios con los tickets ----------
+   Con los tickets de los últimos 60 días, por supermercado y producto:
+   - al menos 2 tickets y la mediana de (pagado / precio de la app) se aleja más de un 4 % -> se corrige con ese factor;
+   - si se aleja más de un 60 %, el producto estaba mal emparejado en ese súper -> se deja de usar ese súper para él. */
+const AJ_DIAS = 60, AJ_MIN = 2, AJ_UMBRAL = 0.04, AJ_MAL = 0.6;
+// nuevo: el ticket recién guardado (la lista de KV tarda unos segundos en incluirlo)
+async function recalcularAjustes(env, nuevo) {
+  const desde = Date.now() - AJ_DIAS * 864e5, grupos = {}, vistos = new Set();
+  const suma = (t) => { for (const x of t.items) if (x.app > 0 && x.pagado > 0) (grupos[t.super + "|" + x.pid] = grupos[t.super + "|" + x.pid] || []).push(x.pagado / x.app); };
+  if (nuevo) { suma(nuevo.t); vistos.add(nuevo.clave); }
+  let cursor;
+  do {
+    const l = await env.TAPER.list({ prefix: "tp:", cursor }); cursor = l.list_complete ? null : l.cursor;
+    for (const k of l.keys) {
+      if (vistos.has(k.name)) continue;
+      const t = await env.TAPER.get(k.name, "json"); if (!t || t.at < desde) continue;
+      suma(t);
+    }
+  } while (cursor);
+  const productos = {};
+  for (const [k, rs] of Object.entries(grupos)) {
+    if (rs.length < AJ_MIN) continue;
+    rs.sort((a, b) => a - b); const med = rs[Math.floor(rs.length / 2)];
+    const [sup, pid] = k.split("|");
+    if (Math.abs(med - 1) > AJ_MAL) (productos[sup] = productos[sup] || {})[pid] = { excluir: true, n: rs.length };
+    else if (Math.abs(med - 1) > AJ_UMBRAL) (productos[sup] = productos[sup] || {})[pid] = { factor: Math.round(med * 1000) / 1000, n: rs.length };
+  }
+  await env.TAPER.put("ajustes", JSON.stringify({ calculado: new Date().toISOString(), productos }));
+}
 const TRASPASO_TTL = 60 * 60 * 24 * 30;
 const codigoOk = (c) => typeof c === "string" && /^[A-Z2-9]{6}$/.test(c);
 // Huella del móvil: conexión + modelo/sistema. Safari y la app instalada del mismo iPhone dan la misma.
