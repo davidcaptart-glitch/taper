@@ -40,14 +40,12 @@ Es un programa con botones para subir los archivos sin usar comandos.
 
 ## Paso 3. Crear el repositorio y subir la app
 
+La carpeta ya está preparada como repositorio, con la primera versión guardada.
+
 1. En GitHub Desktop: menú **File > Add local repository…**
-2. Pulsa **Choose…** y selecciona la carpeta `C:\Proyectos\Taper`.
-3. Saldrá un aviso: *"This directory does not appear to be a Git repository"*. Pulsa el enlace **create a repository**.
-4. En la ventana que se abre:
+2. Pulsa **Choose…**, selecciona la carpeta `C:\Proyectos\Taper` y pulsa **Add repository**.
+3. Arriba pulsa **Publish repository**:
    - **Name**: `taper` (en minúsculas, sin tilde)
-   - Lo demás, tal cual. Pulsa **Create repository**.
-5. Abajo a la izquierda, en **Summary**, escribe `Primera versión` y pulsa **Commit to main**.
-6. Arriba pulsa **Publish repository**:
    - **Desmarca** la casilla *Keep this code private* (GitHub Pages gratis solo funciona con repositorios públicos;
      tus datos personales no se suben, se quedan en tu móvil).
    - Pulsa **Publish repository**.
