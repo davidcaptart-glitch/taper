@@ -4,11 +4,11 @@
 
 A partir de la auditoría de Robert: llegar al primer menú enseguida y afinar después solo lo que cada uno quiera.
 
-1. **Casa.** Una fila para añadir a cada persona: nombre y **rango de edad obligatorio** (la edad dice si es adulto o niño). Cada persona queda como un globito debajo (la primera eres tú). El resto de la pantalla: «Selecciona con qué cocinas» (dibujo de los aparatos).
+1. **Casa.** Una fila para añadir a cada persona: nombre y **rango de edad obligatorio** (0–2, 3–5, 6–9, 10–13, 14–17, 18–30, 31–50, 51–65, 65+; la edad dice si es adulto o niño). Cada persona queda como un globito debajo (la primera eres tú). El resto de la pantalla: «Selecciona con qué cocinas» (dibujo de los aparatos).
 2. **Cómo coméis.** Por persona: forma de comer, alergias y si hace deporte (sí/no). Igual que ahora.
 3. **Tu súper.** Código postal y supermercados. El pueblo y los festivos salen del código postal (si el CP tiene varios pueblos, se elige con globitos). Solo los supermercados con precios; los demás en «Ver más».
 
-Después, **primer menú** (desde hoy, sin tope de presupuesto, diciendo lo que cuesta al mes y lo que se ha supuesto: comida y cena en casa, compra en tienda).
+Después, **primer menú** (desde hoy, sin tope de presupuesto, diciendo lo que cuesta al mes y lo que se ha supuesto: comida y cena en casa, compra en tienda). De base solo se planifican **comida y cena**: desayunos, almuerzos y meriendas no se planifican hasta que alguien los active en «Afinar › Cuántas comidas hace cada uno».
 Encima: **«¿Quieres afinarlo más?»** → lista para marcar: presupuesto mensual, gustos, quién come y cuándo (custodias), cuántas comidas hace cada uno, cuándo planificas y compras, cómo cocinas (cada día o por lotes), deporte (días y horas) y objetivos, platos fijos y caprichos, festivos locales (si no se conocen), invitar a un familiar. Se pregunta solo lo marcado y al final se rehace el menú. Lo no marcado queda en el Menú como «Mejora tu menú».
 
 ### A desarrollar: necesidades según la edad
