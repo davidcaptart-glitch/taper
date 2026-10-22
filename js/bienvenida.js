@@ -49,7 +49,7 @@ function renderWizard(){
 function finishOnboarding(){
   S.onboarded=true;save();
   if(typeof trackOnBoot==="function")trackOnBoot();
-  const start=weekStartFor(todayISO());
+  const start=weekStartFor(S.home.start&&S.home.start>todayISO()?S.home.start:todayISO());
   for(const s of [start,addDays(start,7)])if(!S.plans[s]||!Object.keys(S.plans[s].slots).length)genWeekFromScratch(s);
   save();tab="menu";render();toast("Menú generado. Puedes cambiar lo que quieras");
 }
@@ -118,6 +118,8 @@ function stepBody(fullId){
   if(id==="cocina")return `<div>${[["diario","Cada día","Cocinas la cena y haces doble para el táper del día siguiente"],["lote","Uno o varios días por semana","Cocinas varios platos de una vez (batch cooking) y los guardas en tápers"]].map(([k,t,d])=>`<button type="button" class="alt" data-cook="${k}" style="${H.cookMode===k?"outline:2px solid var(--tomato)":""}"><b>${t}</b><small>${d}</small></button>`).join("")}</div>
     ${H.cookMode==="lote"?`<div class="group"><h3>¿Qué días cocinas?</h3><div class="chips">${DAYS.map((d,i)=>chip("data-cday",i,H.cookDays.includes(i),d)).join("")}</div><div class="hint" style="color:var(--muted)">Elegiré platos que aguanten en la nevera hasta que te los comas; si no aguantan, te diré cuáles congelar.</div></div>`:""}`;
   if(id==="plan")return `<p class="lead">Te avisaré para preparar el menú y la compra.</p>
+    <div class="field"><label for="wzStart">¿Desde cuándo empieza el plan?</label><input id="wzStart" type="date" value="${esc(H.start||todayISO())}">
+      <div class="hint">Hasta ese día no hago compra: te ayudo a gastar lo que ya tienes en casa.</div></div>
     <div class="field"><label for="wzFreq">¿Cada cuánto?</label><select id="wzFreq">${[["diaria","Cada día"],["semanal","Cada semana"],["quincenal","Cada dos semanas"],["mensual","Cada mes"]].map(([v,t])=>`<option value="${v}" ${H.planFreq===v?"selected":""}>${t}</option>`).join("")}</select></div>
     <div class="field"><label for="wzPDay">Día (la semana del menú empieza ese día)</label>${dowSelect("wzPDay",H.planDay)}</div>
     <div class="field"><label for="wzPTime">Hora</label><input id="wzPTime" type="time" value="${esc(H.planTime)}"></div>`;
@@ -227,7 +229,10 @@ function validateStep(fullId){
     if(others().some(k=>!k.name)){toast("Escribe el nombre de cada persona");return false}}
   if(id==="objetivos"){if(!a.goals.length){toast("Elige al menos un objetivo");return false}a.weight=Number(v("#wzW"))||null}
   if(id==="cocina"&&H.cookMode==="lote"&&!H.cookDays.length){toast("Elige al menos un día para cocinar");return false}
-  if(id==="plan"){H.planFreq=v("#wzFreq");H.planDay=Number(v("#wzPDay"));H.planTime=v("#wzPTime")||"17:00"}
+  if(id==="plan"){const st=v("#wzStart");H.start=st&&st>todayISO()?st:null;
+    // Los menús de semanas que ya no cuentan (antes del inicio) se borran
+    if(H.start)for(const s of Object.keys(S.plans))if(addDays(s,6)<H.start)delete S.plans[s];
+    H.planFreq=v("#wzFreq");H.planDay=Number(v("#wzPDay"));H.planTime=v("#wzPTime")||"17:00"}
   if(id==="compra"){H.shop.delivery=Number(v("#wzDel"));
     H.budget.month=Number(v("#wzBM"))||0;H.budget.week=v("#wzBW")===""?null:Number(v("#wzBW"));H.budget.basics=Number(v("#wzBB"))||0}
   return true;

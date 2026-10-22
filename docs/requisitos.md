@@ -170,6 +170,14 @@ aprende se ve y se corrige en una pantalla "Lo que sé de ti" (por persona: adul
   descongelar (21:30), qué cocinar hoy (18:30), valorar el plato de ayer (14:00), planificar (según usuario),
   subidas de precio (domingo), presupuesto, congelador. Varios usuarios: una suscripción por móvil.
 
+### Inicio del plan (hecho)
+- Fecha de inicio en "¿Cuándo planificas?". Antes de esa fecha no hay menú ni compra: "Mientras, gasta lo que
+  tienes" pregunta qué hay en casa y propone recetas, primero las que no necesitan comprar nada.
+
+### Diseño (hecho, versión 13)
+- Geist, un solo acento, grises cálidos, tarjetas sin bordes, barra inferior con iconos e indicador animado,
+  transiciones entre pestañas, hojas que suben desde abajo, Perfil en apartados desplegables.
+
 ### Notificaciones (hecho, Cloudflare)
 - Servidor `avisos/` (Cloudflare Worker `taper-avisos`, https://taper-avisos.taper-david.workers.dev): cada móvil
   manda sus próximos avisos (descongelar, cocinar hoy, ¿qué tal?, ¿entrenaste?, planificar, congelador); cada

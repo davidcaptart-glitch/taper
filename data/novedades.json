@@ -122,6 +122,16 @@
       "cambios": [
         "Si abres Táper en el navegador, te aparece un botón para instalarla como app (o los pasos según tu navegador)."
       ]
+    },
+    {
+      "version": 13,
+      "fecha": "2026-10-22",
+      "titulo": "Nuevo diseño",
+      "cambios": [
+        "Diseño renovado: más limpio, con iconos, transiciones y ventanas que suben desde abajo.",
+        "Perfil ordenado en apartados desplegables.",
+        "Puedes elegir cuándo empieza tu plan y, mientras, la app te ayuda a gastar lo que tienes en casa."
+      ]
     }
   ]
 }

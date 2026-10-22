@@ -10,7 +10,7 @@ function renderHeader(){
   const onb=S.onboarded&&tab!=="wizard";
   document.querySelector(".top .ticket").hidden=!onb;
   document.querySelector(".monthnav").style.visibility=onb&&(tab==="menu"||tab==="compra")?"visible":"hidden";
-  document.querySelector(".top .ticket").hidden=!onb||tab==="congelador";
+  document.querySelector(".top .ticket").hidden=!onb||!(tab==="menu"||tab==="compra");
   document.querySelector("nav.tabs").hidden=!onb;
   document.getElementById("monthLabel").textContent=monthName(month);
   document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-current",b.dataset.tab===tab?"page":"false"));
@@ -43,6 +43,8 @@ function render(){
 /* ---------- Menú ---------- */
 function slotFor(d,meal){const start=weekStartFor(d);return buildSlots(start).find(s=>s.id===d+"|"+meal)}
 const nutrTxt=n=>n.kcal==null?`${n.prot} g proteína`:`${n.kcal.toLocaleString("es-ES")} kcal · ${n.prot} g proteína · ${n.carb} g hidratos · ${n.fat} g grasa`;
+// Versión corta para el menú: P = proteína, H = hidratos, G = grasa
+const nutrShort=n=>n.kcal==null?`${n.prot} g proteína`:`${n.kcal.toLocaleString("es-ES")} kcal · P ${n.prot} · H ${n.carb} · G ${n.fat}`;
 const company=sl=>sl.eaters.filter(a=>a.id!=="yo").concat(sl.kids);
 function needLine(sl,r){
   if(sl.fixed&&sl.fixed.capricho)return `<div class="need muted">🍕 Capricho: no cuenta para tus objetivos</div>`;
@@ -53,7 +55,7 @@ function mealLine(d,meal,wk){
   const st=mealState(d,meal);
   const label=meal==="comida"?"Comida":"Cena";
   if(st==="taper"){const prev=dishOfMeal(d,"comida");
-    return `<div class="meta"><b>${label}:</b> táper${prev.recipe?" de "+esc(prev.recipe.name.toLowerCase()):""}</div>${prev.recipe&&!prev.capricho?`<div class="nutr">Tu táper: ${nutrTxt(portionNutr(prev.recipe,adultFactor(me())))}</div>`:""}`}
+    return `<div class="meta"><b>${label}:</b> táper${prev.recipe?" de "+esc(prev.recipe.name.toLowerCase()):""}</div>${prev.recipe&&!prev.capricho?`<div class="nutr">${nutrShort(portionNutr(prev.recipe,adultFactor(me())))}</div>`:""}`}
   if(st==="fuera"||st==="libre")return `<div class="meta"><b>${label}:</b> ${MEALSTATE[st].toLowerCase()}</div>`;
   const sl=slotFor(d,meal);if(!sl)return "";
   const v=wk&&wk.slots[sl.id], r=v&&RX[v.recipe];
@@ -64,7 +66,7 @@ function mealLine(d,meal,wk){
   else if(sl.fixed)h+=`<b>${esc(sl.fixed.name)}</b>`;
   h+=`<div class="meta">${r?`${recipeTime(r)} min · ${r.prot||"?"} g proteína · ${String(sl.portions).replace(".",",")} raciones`:sl.fixed?"Plato fijo":""}</div>`;
   if(r){const ps=(st==="solotaper"?[]:sl.eaters).concat(sl.kids);
-    h+=ps.map(p=>`<div class="nutr">${p.id==="yo"?"Tu plato":esc(personName(p))}: ${nutrTxt(portionNutr(r,factorOf(p)))}</div>`).join("")}
+    const who=ps.find(p=>p.id==="yo")||ps[0];if(who)h+=`<div class="nutr">${who.id==="yo"?"Tu plato":esc(personName(who))}: ${nutrShort(portionNutr(r,factorOf(who)))}</div>`}
   h+=needLine(sl,r);
   if(r){
     if(S.home.cookMode==="lote"){const k=keepPlan(r,sl);
@@ -205,11 +207,12 @@ function moveToNext(rid,from){
 }
 function renderMenu(){
   const weeks=weeksInMonth(month);
-  let h=`<section class="view">`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
+  let h=`<section class="view">`+useUpCard()+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
   if(!weeks.length)h+=`<div class="empty"><p>No hay semanas que empiecen este mes.</p></div>`;
   for(const start of weeks){
     const wk=S.plans[start], dates=weekDates(start);
     if(dates[6]<todayISO()&&!wk)continue;   // semanas pasadas sin menú: nada que enseñar
+    if(S.home.start&&dates[6]<S.home.start)continue;   // antes de que empiece el plan
     h+=`<div class="week"><div class="weekhead"><h2>${shortDate(start)} – ${shortDate(dates[6])}</h2>${wk&&wk.confirmed?`<span class="badge ok">Planificada</span>`:""}</div>`;
     if(!wk||!Object.keys(wk.slots||{}).length){h+=`<div class="empty"><p>Aún no hay menú para esta semana.</p><button class="btn" data-plan="${start}">Planificar la semana</button></div></div>`;continue}
     const {changed}=ensureWeek(start);if(changed)save();
@@ -239,6 +242,7 @@ function renderMenu(){
   main.querySelectorAll("[data-swap]").forEach(b=>b.onclick=()=>openSwap(b.dataset.swap));
   main.querySelectorAll("[data-sacr]").forEach(b=>b.onclick=()=>openSacrifice(b.dataset.sacr));
   bindReview(main);bindSurvey();bindThaw();bindInstall();
+  document.getElementById("useUp")?.addEventListener("click",openUseUp);
   main.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>openDay(b.dataset.day));
   main.querySelectorAll("[data-session]").forEach(b=>b.onclick=()=>openSession(b.dataset.session));
   main.querySelectorAll("[data-rate]").forEach(b=>b.onclick=()=>{const [sid,rid,who,v]=b.dataset.rate.split("~");
@@ -668,40 +672,49 @@ function knowHTML(p){
     <p class="small muted">${S.ratings.filter(x=>x.who===p.id).length} valoraciones hasta ahora.</p>
     <button class="btn ghost small" data-edit="gustos:${p.id}">Editar ingredientes</button></div>`;
 }
+let accOpen=new Set(["yo"]);
+// Apartado desplegable del Perfil (recuerda si estaba abierto)
+const acc=(id,ico,title,sub,body)=>`<details class="acc" data-acc="${id}" ${accOpen.has(id)?"open":""}><summary><span class="ico">${ico}</span><span class="tx">${title}${sub?`<small>${esc(sub)}</small>`:""}</span></summary><div class="accbody">${body}</div></details>`;
 function renderPerfil(){
-  let h=`<section class="view">`;
   const RV={2:"❤️",1:"👍",rare:"🙂","-1":"👎"};
+  let h=`<section class="view"><div class="hero"><div class="eyebrow">Tu perfil</div><h2>${me().name?"Hola, "+esc(me().name):"Hola"}</h2><p>${S.people.length>1?`${S.people.length} personas en casa · `:""}${eur(S.home.budget.month)} al mes · ${esc(superInfo().nombre||"")}</p></div>`;
+  let fam="";
   for(const p of S.people){const hist=historyOf(p,20);
-    h+=`<div class="person"><h2>${p.id==="yo"?"Lo que sé de ti":esc(personName(p))}</h2>${p.id!=="yo"?`<div class="small muted">${p.kind==="nino"?(p.age?p.age+" años · ":"")+"niño o niña":"adulto"} · ración ${String(p.factor).replace(".",",")}${p.tupper?" · se lleva táper":""}</div>${kidCalendar(p)}<h3 style="margin-top:14px">Lo que sé de ${esc(personName(p))}</h3>`:""}${knowHTML(p)}
-    <details style="margin-top:10px"><summary><b>Historial</b> <span class="small muted">(${hist.length} ${hist.length===1?"comida reciente":"comidas recientes"})</span></summary>
-    ${hist.length?`<table class="wtable">${hist.map(x=>`<tr><td>${DSHORT[dow(x.date)]} ${shortDate(x.date)} · ${x.meal}</td><td style="text-align:left;padding-left:8px">${esc(x.name)}${x.note?` <span class="small muted">${esc(x.note)}</span>`:""}</td><td>${x.v!=null?RV[x.v]:""}</td></tr>`).join("")}</table>`:`<p class="small muted">Aún no hay comidas pasadas.</p>`}</details></div>`}
-  const items=[["aparatos","Aparatos",Object.entries(APP).filter(([k])=>S.home.apps.includes(k)).map(([,v])=>v).join(", ")],["zona","Código postal y municipio",[S.home.cp,S.home.municipio].filter(Boolean).join(" · ")||"Sin indicar"],["familia","Quién come en casa",others().map(personName).join(", ")||"Solo tú"],
+    const body=`${p.id!=="yo"?`<div class="small muted">${p.kind==="nino"?(p.age?p.age+" años · ":"")+"niño o niña":"adulto"} · ración ${String(p.factor).replace(".",",")}${p.tupper?" · se lleva táper":""}</div>${kidCalendar(p)}`:""}${knowHTML(p)}
+      <details style="margin-top:12px"><summary class="small"><b>Historial</b> <span class="muted">(${hist.length} ${hist.length===1?"comida reciente":"comidas recientes"})</span></summary>
+      ${hist.length?`<table class="wtable">${hist.map(x=>`<tr><td>${DSHORT[dow(x.date)]} ${shortDate(x.date)} · ${x.meal}</td><td style="text-align:left;padding-left:8px">${esc(x.name)}${x.note?` <span class="small muted">${esc(x.note)}</span>`:""}</td><td>${x.v!=null?RV[x.v]:""}</td></tr>`).join("")}</table>`:`<p class="small muted">Aún no hay comidas pasadas.</p>`}</details>`;
+    const likes=Object.values(p.tastes.dish).filter(v=>v>=1).length, nos=Object.values(p.tastes.ing).filter(v=>v<0).length;
+    const sub=`${likes} ${likes===1?"plato favorito":"platos favoritos"} · ${nos} ${nos===1?"cosa":"cosas"} que no ${p.id==="yo"?"te":"le"} ${nos===1?"gusta":"gustan"}`;
+    if(p.id==="yo")h+=acc(p.id,"🙂","Lo que sé de ti",sub,body);
+    else fam+=acc(p.id,p.kind==="nino"?"🧒":"🧑",esc(personName(p)),sub,body);
+  }
+  if(fam)h+=acc("familia","👨‍👩‍👧","Tu familia",others().map(personName).join(", "),fam);
+  const items=[["aparatos","Aparatos",Object.entries(APP).filter(([k])=>S.home.apps.includes(k)).map(([,v])=>v).join(", ")],["zona","Supermercado y zona",[superInfo().nombre,S.home.cp,S.home.municipio].filter(Boolean).join(" · ")||"Sin indicar"],["familia","Quién come en casa",others().map(personName).join(", ")||"Solo tú"],
     ...adults().flatMap(a=>[["objetivos:"+a.id,a.id==="yo"?"Tus objetivos":"Objetivos de "+personName(a),a.goals.map(g=>GOALS[g][0]).join(", ")],["entreno:"+a.id,a.id==="yo"?"Tu entrenamiento":"Entrenamiento de "+personName(a),a.trains?a.sports.map(s=>SPORTS[s]).join(", "):"No entrena"]]),["semana","Semana tipo y caprichos",S.fixed.length+" platos fijos"],
-    ["cocina","Cuándo cocinas",S.home.cookMode==="lote"?"Por lotes: "+S.home.cookDays.map(d=>DAYS[d].toLowerCase()).join(" y "):"Cada día"],["plan","Planificación",{diaria:"Cada día",semanal:"Cada semana",quincenal:"Cada dos semanas",mensual:"Cada mes"}[S.home.planFreq]+", "+DAYS[S.home.planDay].toLowerCase()+" a las "+S.home.planTime],
+    ["cocina","Cuándo cocinas",S.home.cookMode==="lote"?"Por lotes: "+S.home.cookDays.map(d=>DAYS[d].toLowerCase()).join(" y "):"Cada día"],["plan","Planificación",(S.home.start&&S.home.start>todayISO()?"Empieza el "+shortDate(S.home.start)+" · ":"")+{diaria:"Cada día",semanal:"Cada semana",quincenal:"Cada dos semanas",mensual:"Cada mes"}[S.home.planFreq]+", "+DAYS[S.home.planDay].toLowerCase()+" a las "+S.home.planTime],
     ["compra","Compra y presupuesto",eur(S.home.budget.month)+" al mes"]];
-  h+=`<div class="card settingslist"><h2>Ajustes</h2>${items.map(([id,t,d])=>`<button data-edit="${id}">${t}<small>${esc(d)}</small></button>`).join("")}</div>`;
-  h+=`<div class="card"><h2>Festivos</h2><p class="small muted">Se usan los de Cataluña${S.home.municipio&&FEST&&FEST.locales[S.home.municipio]?" y los locales de "+esc(S.home.municipio):""}. Añade los locales de tu municipio u otros días especiales.</p>
-    ${S.home.festivosExtra.map(d=>`<div class="fixed"><span>${esc(longDate(d))}</span><button class="btn ghost small" data-delfest="${d}">Quitar</button></div>`).join("")}
-    <div class="row"><input type="date" id="festIn" style="flex:1"><button class="btn small" id="festAdd">Añadir</button></div></div>`;
-  h+=`<div class="card prices"><h2>Precios</h2><div class="hint" style="color:var(--muted);margin-bottom:8px">Se actualizan solos cada domingo con los de Mercadona. Si corriges uno, manda tu precio hasta que vuelvas al de Mercadona.</div>
-    ${Object.values(P).sort((a,b)=>a.name.localeCompare(b.name)).map(p=>{const m=mprice(p.id),own=S.prices[p.id]!=null;
-      return `<div class="pr"><span>${esc(p.name)}${upTag(p.id)}<small>${fmtQty(p.env,p.unit)}${own?` · corregido a mano${m?` (Mercadona: ${eur(m.precio)})`:""} <button class="reset" data-reset="${p.id}">Usar el de Mercadona</button>`:m?" · Mercadona":" · estimado"}</small></span><input type="number" step="0.01" min="0" data-price="${p.id}" value="${price(p.id).toFixed(2)}" aria-label="Precio de ${esc(p.name)}"></div>`}).join("")}</div>
-  <div class="card"><h2>Copia de seguridad</h2><div class="hint" style="color:var(--muted)">Todo se guarda solo en este móvil. Descarga una copia de vez en cuando y antes de cambiar de móvil.</div>
-    <div class="actions"><button class="btn" id="exp">Exportar copia</button><button class="btn ghost" id="imp">Importar copia</button></div><input type="file" id="impFile" accept="application/json,.json" hidden>
-    <button class="btn ghost small" id="restartWiz">Repetir el asistente de bienvenida</button></div>
-  <div class="card"><h2>Invita y gana coins</h2><p class="small muted">Este es <b>tu</b> código: quien lo escanee con la cámara del móvil abre Táper y queda como invitado tuyo. Ganas coins cuando compartes, cuando alguien empieza a usarla y cada semana que la sigue usando.</p>
+  h+=acc("ajustes","⚙️","Ajustes","Familia, objetivos, entrenos, compra…",`<div class="settingslist">${items.map(([id,t,d])=>`<button data-edit="${id}">${t}<small>${esc(d)}</small></button>`).join("")}</div>`);
+  h+=acc("avisos","🔔","Avisos en el móvil",S.notif&&S.notif.on?"Activados":"Desactivados",avisosCard().replace('<div class="card"><h2>Avisos en el móvil</h2>','<div>'));
+  h+=acc("coins","🪙","Invita y gana coins","Tu QR personal y tus coins",`<p class="small muted">Este es <b>tu</b> código: quien lo escanee con la cámara del móvil abre Táper y queda como invitado tuyo. Ganas coins cuando compartes, cuando alguien empieza a usarla y cada semana que la sigue usando.</p>
     <div id="coinsBox">${servidorOn()?`<p class="small muted">Cargando tus coins…</p>`:""}</div>
     <div id="qrBox" style="display:grid;place-items:center;margin:10px 0;background:#fff;border-radius:12px;padding:10px"></div>
-    <div class="actions"><button class="btn" id="shareApp">Enviar el enlace</button><button class="btn ghost" id="copyApp">Copiar enlace</button></div></div>
-  ${avisosCard()}
-  <div class="card"><h2>Sugerencias y privacidad</h2>
-    ${suggestUrl()?`<p class="small muted">¿Se te ocurre una mejora, una receta o has visto un fallo? Cuéntamelo.</p><a class="btn" href="${esc(suggestUrl())}" target="_blank" rel="noopener">💡 Enviar una sugerencia</a>`:`<p class="small muted">Pronto podrás enviar sugerencias desde aquí.</p>`}
-    ${recipeSuggestOn()?`<button class="btn ghost small" id="sugRec2" style="margin-top:8px">🍳 Sugerir una receta</button>`:""}
-    ${surveyOn()?`<button class="btn ghost small" id="svProfile" style="margin-top:8px">📋 Responder la encuesta del mes</button>`:""}
-    <label class="row small" style="margin-top:12px"><input type="checkbox" id="noStats" ${S.noStats?"":"checked"} style="width:auto"> Contar mis visitas de forma anónima (sin cookies ni datos personales) para saber cuánta gente usa Táper</label></div>
-  <div class="card"><h2>Novedades</h2><p class="small muted">Versión ${APP_VERSION}. La app se actualiza sola y te cuenta qué ha mejorado. Tu código de usuario: <b>${esc(S.uid)}</b>.</p><button class="btn ghost small" id="newsAll">Ver todas las novedades</button></div></section>`;
+    <div class="actions"><button class="btn" id="shareApp">Enviar el enlace</button><button class="btn ghost" id="copyApp">Copiar enlace</button></div>`);
+  h+=acc("opinion","💡","Sugerencias y opinión","Ideas, recetas, encuesta y privacidad",`${suggestUrl()?`<p class="small muted">¿Se te ocurre una mejora, una receta o has visto un fallo? Cuéntamelo.</p><a class="btn" href="${esc(suggestUrl())}" target="_blank" rel="noopener">Enviar una sugerencia</a>`:`<p class="small muted">Pronto podrás enviar sugerencias desde aquí.</p>`}
+    <div class="actions">${recipeSuggestOn()?`<button class="btn ghost small" id="sugRec2">🍳 Sugerir una receta</button>`:""}${surveyOn()?`<button class="btn ghost small" id="svProfile">📋 Encuesta del mes</button>`:""}</div>
+    <label class="row small"><input type="checkbox" id="noStats" ${S.noStats?"":"checked"} style="width:auto"> Contar mis visitas de forma anónima (sin cookies ni datos personales) para saber cuánta gente usa Táper</label>`);
+  h+=acc("festivos","📅","Festivos",`Cataluña${S.home.municipio?" y "+S.home.municipio:""}${S.home.festivosExtra.length?" · "+S.home.festivosExtra.length+" añadidos":""}`,`<p class="small muted">Se usan los de Cataluña${S.home.municipio&&FEST&&FEST.locales[S.home.municipio]?" y los locales de "+esc(S.home.municipio):""}. Añade los locales de tu municipio u otros días especiales.</p>
+    ${S.home.festivosExtra.map(d=>`<div class="fixed"><span>${esc(longDate(d))}</span><button class="btn ghost small" data-delfest="${d}">Quitar</button></div>`).join("")}
+    <div class="row"><input type="date" id="festIn" style="flex:1"><button class="btn small" id="festAdd">Añadir</button></div>`);
+  h+=acc("precios","💶","Precios",`${Object.keys(S.prices).length?Object.keys(S.prices).length+" corregidos a mano · ":""}se actualizan cada domingo`,`<div class="prices"><div class="hint" style="margin-bottom:8px">Si corriges uno, manda tu precio hasta que vuelvas al del supermercado.</div>
+    ${Object.values(P).sort((a,b)=>a.name.localeCompare(b.name)).map(p=>{const m=mprice(p.id),own=S.prices[p.id]!=null;
+      return `<div class="pr"><span>${esc(p.name)}${upTag(p.id)}<small>${fmtQty(p.env,p.unit)}${own?` · corregido a mano${m?` (Mercadona: ${eur(m.precio)})`:""} <button class="reset" data-reset="${p.id}">Usar el de Mercadona</button>`:m?" · Mercadona":" · estimado"}</small></span><input type="number" step="0.01" min="0" data-price="${p.id}" value="${price(p.id).toFixed(2)}" aria-label="Precio de ${esc(p.name)}"></div>`}).join("")}</div>`);
+  h+=acc("app","📦","Copia de seguridad y novedades",`Versión ${APP_VERSION} · tu código ${S.uid}`,`<p class="small muted">Todo se guarda solo en este móvil. Descarga una copia de vez en cuando y antes de cambiar de móvil.</p>
+    <div class="actions"><button class="btn" id="exp">Exportar copia</button><button class="btn ghost" id="imp">Importar copia</button></div><input type="file" id="impFile" accept="application/json,.json" hidden>
+    <div class="actions"><button class="btn ghost small" id="newsAll">Ver todas las novedades</button><button class="btn ghost small" id="restartWiz">Repetir el asistente</button></div>`);
+  h+=`</section>`;
   main.innerHTML=h;
   const q=s=>main.querySelectorAll(s), find=id=>S.people.find(p=>p.id===id);
+  q("details.acc").forEach(d=>d.addEventListener("toggle",()=>{if(d.open)accOpen.add(d.dataset.acc);else accOpen.delete(d.dataset.acc)}));
   q("[data-edit]").forEach(b=>b.onclick=()=>{openWizard(b.dataset.edit);scrollTo(0,0)});
   q("[data-cal]").forEach(b=>b.onclick=()=>{const [y,m]=(calMonth||month).split("-").map(Number);calMonth=iso(new Date(y,m-1+Number(b.dataset.cal),1)).slice(0,7);render()});
   q("[data-kcal]").forEach(b=>b.onclick=()=>{const [id,d]=b.dataset.kcal.split("|"),k=find(id);const o=S.days[d]=S.days[d]||{};o.kids=o.kids||{};
@@ -731,11 +744,51 @@ function renderPerfil(){
 }
 
 /* ---------- Navegación y arranque ---------- */
-document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>{tab=b.dataset.tab;render();scrollTo(0,0)});
+// Cambio de pestaña con transición suave (si el navegador la admite) y vibración breve
+document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>{
+  if(tab===b.dataset.tab){scrollTo({top:0,behavior:"smooth"});return}
+  try{navigator.vibrate&&navigator.vibrate(8)}catch(e){}
+  const go=()=>{tab=b.dataset.tab;render();scrollTo(0,0)};
+  if(document.startViewTransition&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.startViewTransition(go);else go();
+});
 function shiftMonth(n){const [y,m]=month.split("-").map(Number);const d=new Date(y,m-1+n,1);month=iso(d).slice(0,7);listSel="mes";render()}
 document.getElementById("prevM").onclick=()=>shiftMonth(-1);
 document.getElementById("nextM").onclick=()=>shiftMonth(1);
 dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
+
+/* ---------- Antes de empezar: gastar lo que hay en casa ---------- */
+function useUpCard(){
+  if(!S.home.start||S.home.start<=todayISO())return "";
+  const n=(S.pantry||[]).length;
+  return `<div class="hero"><div class="eyebrow">Tu plan empieza el ${esc(longDate(S.home.start).replace(/^\w+, /,""))}</div><h2>Mientras, gasta lo que tienes</h2>
+    <p>Dime qué hay en tu despensa, nevera y congelador y te propongo recetas para aprovecharlo, sin comprar casi nada.</p>
+    <button class="btn" id="useUp">${n?`Ver ideas con mis ${n} productos`:"¿Qué tengo en casa?"}</button></div>`;
+}
+function openUseUp(){
+  const have=new Set(S.pantry||[]);let step=have.size?1:0;
+  const draw=()=>{
+    if(step===0){
+      const groups={};for(const p of Object.values(P))(groups[p.sec]=groups[p.sec]||[]).push(p);
+      showDialog(`<div class="mod">${closeBtn}<h2>¿Qué tienes en casa?</h2><p class="small muted">Toca lo que tengas, aunque sea poco.</p>
+        ${[...STORE_ORDER,...Object.keys(groups).filter(g=>!STORE_ORDER.includes(g))].filter(g=>groups[g]).map(g=>`<div class="group"><h3>${esc(g)}</h3><div class="chips">${groups[g].sort((a,b)=>a.name.localeCompare(b.name)).map(p=>chip("data-hv",p.id,have.has(p.id),esc(p.name))).join("")}</div></div>`).join("")}
+        <div class="actions sticky"><button class="btn wide" id="hvOk">Ver ideas (${have.size})</button></div></div>`);
+      dlg.querySelectorAll("[data-hv]").forEach(b=>b.onclick=()=>{const id=b.dataset.hv;if(have.has(id))have.delete(id);else have.add(id);b.setAttribute("aria-pressed",have.has(id));dlg.querySelector("#hvOk").textContent=`Ver ideas (${have.size})`});
+      dlg.querySelector("#hvOk").onclick=()=>{S.pantry=[...have];save();step=1;draw()};
+      return;
+    }
+    // Recetas que más aprovechan lo que hay (sin contar lo básico); primero las que no necesitan nada más
+    const ideas=R.filter(r=>variantFor(r)&&canEat(me(),r)&&dishPref(me(),r.id)>-1).map(r=>{
+      const main=r.ing.filter(([p])=>!COMMON.has(p)), got=main.filter(([p])=>have.has(p)), miss=main.filter(([p])=>!have.has(p));
+      return {r,got:got.length,miss:miss.map(([p])=>p),score:got.length-miss.length*3};
+    }).filter(x=>x.got>0).sort((a,b)=>b.score-a.score).slice(0,15);
+    showDialog(`<div class="mod">${closeBtn}<h2>Ideas para gastar lo que tienes</h2>
+      ${ideas.length?ideas.map(x=>`<button class="alt altimg" data-open3="${x.r.id}">${dishImg(x.r,"s")}<span><b>${esc(x.r.name)}</b><small>${recipeTime(x.r)} min · ${x.miss.length?"te falta: "+esc(x.miss.map(p=>P[p].name.toLowerCase()).join(", ")):"tienes todo"}</small></span></button>`).join(""):`<p class="muted">Con eso aún no sale ningún plato. Añade algo más.</p>`}
+      <div class="actions"><button class="btn ghost" id="hvEdit">Cambiar lo que tengo</button></div></div>`);
+    dlg.querySelectorAll("[data-open3]").forEach(b=>b.onclick=()=>openRecipe(b.dataset.open3));
+    dlg.querySelector("#hvEdit").onclick=()=>{step=0;draw()};
+  };
+  draw();
+}
 
 /* ---------- Instalar la app ---------- */
 let installPrompt=null;
@@ -917,7 +970,7 @@ async function boot(){
   try{NEWS=(await getJSON("data/novedades.json",true)).versiones}catch(e){NEWS=null}
   try{CFG=await getJSON("data/config.json",true)}catch(e){CFG={}}
   // Al abrir, la semana actual y la siguiente tienen menú si ya se había planificado alguna
-  if(S.onboarded){const s=weekStartFor(todayISO());if(!S.plans[s])genWeekFromScratch(s);save()}
+  if(S.onboarded){const s=weekStartFor(S.home.start&&S.home.start>todayISO()?S.home.start:todayISO());if(!S.plans[s])genWeekFromScratch(s);save()}
   render();
   // Tras actualizar: explica qué ha mejorado (no a quien acaba de empezar); y avisa si su receta sugerida ya está
   const approved=checkApprovedSuggestions();

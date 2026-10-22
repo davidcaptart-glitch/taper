@@ -105,6 +105,7 @@ function adultFactor(a,slot){
 function buildSlots(start){
   const slots=[];
   for(const d of weekDates(start)){
+    if(S.home.start&&d<S.home.start)continue;   // antes de empezar el plan no se planifica
     for(const meal of ["comida","cena"]){
       const st=mealState(d,meal);
       if(st!=="cocinar"&&st!=="solotaper")continue;
