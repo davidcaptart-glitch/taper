@@ -148,6 +148,23 @@ function adultFactor(a,slot){
   if(slot&&slot.need&&slot.need.why.includes("día doble"))f+=0.1;
   return Math.round(f*100)/100;
 }
+/* ---------- Preparar el mes ----------
+   S.monthPrep["2026-12"] = {mood, more:[], less:[], favs:[rid], budget, done}
+   Lo que se pide "más" o "menos" cambia la puntuación de las recetas de ese mes. */
+const PREF_OPTS={rapido:"⚡ Rápido",ligero:"🥗 Ligero",proteina:"💪 Proteína",legumbre:"🫘 Legumbre",pescado:"🐟 Pescado",verdura:"🥦 Verdura",ninos:"🧒 Para niños",nuevo:"✨ Platos nuevos",barato:"💶 Barato",horno:"🔥 Horno"};
+const prefMatch={rapido:r=>recipeTime(r)<=20,ligero:r=>r.type==="l",proteina:r=>(r.prot||0)>=35,legumbre:r=>r.group==="legumbre",pescado:r=>r.group==="pescado",
+  verdura:r=>r.group==="vegetal",ninos:r=>!!r.kid,nuevo:r=>!S.ratings.some(x=>x.rid===r.id),barato:r=>rationCost(r)<=2,horno:r=>r.vars.some(v=>v.app==="horno")};
+const monthPrefs=d=>(S.monthPrep||{})[String(d).slice(0,7)]||null;
+function monthPrefScore(r,slot,ctx){
+  const mp=monthPrefs(slot.date);if(!mp)return 0;let s=0;
+  for(const k of mp.more||[])if(prefMatch[k]&&prefMatch[k](r))s+=3.6;
+  for(const k of mp.less||[])if(prefMatch[k]&&prefMatch[k](r))s-=2.2;
+  if((mp.favs||[]).includes(r.id)&&!ctx.used.has(r.id))s+=4.5;
+  return s;
+}
+// Visitas: raciones de más en una comida (S.days[d].guests = {comida:n, cena:n})
+const guestsAt=(d,meal)=>Number((((S.days[d]||{}).guests)||{})[meal])||0;
+
 // Calcula los huecos (comidas que se cocinan) de una semana a partir de la semana tipo y los cambios
 function buildSlots(start){
   const slots=[];
@@ -164,7 +181,8 @@ function buildSlots(start){
       const f=st==="solotaper"?null:fixedFor(d,meal);
       const slot={id:d+"|"+meal,date:d,meal,eaters:as,kids:ks,tupper,fixed:f};
       slot.need=f&&f.capricho?{carbs:false,prot:false,noHeavy:false,why:[]}:needsFor(slot);
-      slot.portions=Math.round((as.concat(tupper).reduce((t,a)=>t+adultFactor(a,slot),0)+ks.reduce((t,k)=>t+(Number(k.factor)||0.6),0))*100)/100;
+      slot.guests=st==="solotaper"?0:guestsAt(d,meal);
+      slot.portions=Math.round((as.concat(tupper).reduce((t,a)=>t+adultFactor(a,slot),0)+ks.reduce((t,k)=>t+(Number(k.factor)||0.6),0)+slot.guests)*100)/100;
       slots.push(slot);
     }
   }
@@ -253,11 +271,12 @@ function scoreRecipe(r,slot,ctx){
   if(rep!=="no"&&ctx.ingUsed){const sh=r.ing.filter(([p])=>ctx.ingUsed.has(p)&&!COMMON.has(p)).length;s+=sh*(rep==="semana"?0.9:0.5)}
   if(slot.eaters.some(a=>isRare(a,r.id))&&ago!=null)s-=5;
   // Equilibrio semanal: algo de legumbre y pescado, sin pasarse, y variando la proteína principal
-  const c=ctx.counts;
+  const c=ctx.counts, wantMore=k=>((monthPrefs(slot.date)||{}).more||[]).includes(k);
   if(sacrifice("proteina")){if(r.group==="legumbre"||r.group==="huevo")s+=1.2;if(r.main==="pescado_azul"||r.main==="marisco"||r.main==="ternera")s-=1.5}
   else if((r.group==="legumbre"&&(c.legumbre||0)<1)||(r.group==="pescado"&&(c.pescado||0)<2))s+=1.6;
-  if(r.group==="legumbre"&&(c.legumbre||0)>=2)s-=2.5;
-  if(r.group==="pescado"&&(c.pescado||0)>=3)s-=2.5;
+  // Si para este mes se ha pedido más legumbre o pescado, el límite semanal sube
+  if(r.group==="legumbre"&&(c.legumbre||0)>=(wantMore("legumbre")?4:2))s-=2.5;
+  if(r.group==="pescado"&&(c.pescado||0)>=(wantMore("pescado")?5:3))s-=2.5;
   if(!c[r.group])s+=0.8;
   s-=1.4*(ctx.mains[r.main]||0);
   if(r.group==="carne"&&(c.carne||0)>=3)s-=3;
@@ -268,6 +287,7 @@ function scoreRecipe(r,slot,ctx){
   // Facilidad: lo que te resultó complicado sale menos; lo fácil, algo más
   const mineR=S.ratings.filter(x=>x.rid===r.id&&x.ease&&slot.eaters.concat(slot.tupper).some(a=>a.id===x.who));
   if(mineR.some(x=>x.ease==="dificil"))s-=2.5;else if(mineR.some(x=>x.ease==="facil"))s+=0.6;
+  s+=monthPrefScore(r,slot,ctx);
   return s;
 }
 function makeCtx(start,exceptId){
@@ -350,6 +370,8 @@ function fitBudget(start){
     let best=null;
     for(const sl of slots){
       if(sl.fixed)continue;const v=wk.slots[sl.id];if(!v||v.locked)continue;const cur=RX[v.recipe];if(!cur)continue;
+      // Lo que se ha pedido para este mes (más de algo, o repetir un plato) no se cambia por ahorrar
+      {const mp=monthPrefs(sl.date);if(mp&&((mp.favs||[]).includes(cur.id)||(mp.more||[]).some(k=>prefMatch[k]&&prefMatch[k](cur))))continue}
       const ctx=makeCtx(start,sl.id);ctx.noise=0;
       const curS=scoreRecipe(cur,sl,ctx);
       const sameWeekOk=(S.home.repeat||"no")==="semana";

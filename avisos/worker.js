@@ -73,6 +73,17 @@ export default {
         const status = await envia(env, b.uid, d);
         return json(req, { status });
       }
+      // Posponer un aviso desde la notificación: vuelve a sonar dentro de un rato
+      if (req.method === "POST" && url.pathname === "/posponer") {
+        const b = await req.json();
+        if (!uidOk(b.uid) || !b.aviso || typeof b.aviso.title !== "string") return json(req, { error: "datos no válidos" }, 400);
+        const d = await env.TAPER.get("sub:" + b.uid, "json");
+        if (!d) return json(req, { error: "no suscrito" }, 404);
+        const mins = Math.min(24 * 60, Math.max(10, Number(b.mins) || 180));
+        const plan = d.plan.concat([{ t: Date.now() + mins * 60000, title: b.aviso.title.slice(0, 80), body: String(b.aviso.body || "").slice(0, 200), tag: String(b.aviso.tag || "").slice(0, 60) }]);
+        await env.TAPER.put("sub:" + b.uid, JSON.stringify({ ...d, plan: limpiaPlan(plan) }));
+        return json(req, { ok: true });
+      }
       if (req.method === "POST" && url.pathname === "/baja") {
         const b = await req.json();
         if (uidOk(b.uid)) { await env.TAPER.delete("sub:" + b.uid); await env.TAPER.delete("pend:" + b.uid); }

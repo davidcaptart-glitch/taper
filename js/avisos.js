@@ -8,10 +8,12 @@ const NOTIF_TYPES={
   valorar:["⭐ ¿Qué tal?","Después de cada comida, para valorarla"],
   entreno:["🏃 ¿Entrenaste?","Una hora después de cada entreno"],
   planificar:["🗓️ Planificar","El día y la hora en que planificas"],
+  compra:["🛒 Compra","Cuándo hacer el pedido o ir a comprar, cada día hasta que lo hagas"],
   congelador:["🧊 Congelador","Si algo lleva más de 3 meses congelado (sábado por la mañana)"]
 };
 const avisosOn=()=>!!(CFG.avisos&&CFG.avisos.url&&CFG.avisos.vapidPublic&&"serviceWorker" in navigator&&"PushManager" in window);
-const notifCfg=()=>{S.notif=S.notif||{on:false,types:Object.fromEntries(Object.keys(NOTIF_TYPES).map(k=>[k,true])),thaw:"21:30"};return S.notif};
+const notifCfg=()=>{S.notif=S.notif||{on:false,types:Object.fromEntries(Object.keys(NOTIF_TYPES).map(k=>[k,true])),thaw:"21:30"};
+  for(const k of Object.keys(NOTIF_TYPES))if(S.notif.types[k]==null)S.notif.types[k]=true;return S.notif};
 
 // Fecha y hora local -> milisegundos
 const at=(d,hhmm,addMin=0)=>{const [h,m]=String(hhmm).split(":").map(Number);const x=parseISO(d);x.setHours(h,m+addMin,0,0);return x.getTime()};
@@ -31,10 +33,19 @@ function buildSchedule(){
       if(T.valorar&&sl.eaters.length)push(at(d,mt,90),`¿Qué tal ${r.name.toLowerCase()}?`,"Toca para valorarlo y que aprenda lo que te gusta.","rate|"+sl.id);
     }
     if(T.entreno)plannedSessions(d).forEach((s,j)=>push(at(d,sessTime(s),60),`🏃 ¿Hiciste ${(SPORTS[s.type]||s.type).toLowerCase()}?`,"Si no, recalculo lo que te conviene comer.","sport|"+d+"|"+j));
+    {const [y,mm]=d.split("-").map(Number),last=iso(new Date(y,mm,0)),nx=mm===12?`${y+1}-01`:`${y}-${String(mm+1).padStart(2,"0")}`;
+      if(T.planificar&&daysBetween(d,last)===7&&!((S.monthPrep||{})[nx]||{}).done){const nm=new Date(nx+"-01T12:00").toLocaleDateString("es-ES",{month:"long"});
+        push(at(d,S.home.planTime),`📋 Prepara ${nm}`,"5 preguntas rápidas y te dejo el menú y el pedido del mes listos.","mprep|"+nx)}}
     if(T.planificar&&dow(d)===S.home.planDay)push(at(d,S.home.planTime),"🗓️ Toca planificar la semana","Entrenos, quién está, platos y compra: 5 minutos.","plan|"+d);
     if(T.congelador&&dow(d)===5){try{const old=freezerState().filter(e=>e.days>FREEZER_MONTHS*30);
       if(old.length)push(at(d,"11:00"),"🧊 Gasta esto pronto",`Lleva más de 3 meses congelado: ${old.map(e=>P[e.pid].name.toLowerCase()).join(", ")}.`,"freezer|"+d)}catch(e){}}
   }
+  if(T.compra!==false){try{
+    for(const r of shopReminders()){
+      const snooze=((S.shopSnooze||{})[shopKey(r.m,r.key)])||"";
+      for(let i=0;i<4;i++){const d=addDays(r.due>today?r.due:today,i);if(d<snooze)continue;
+        push(at(d,r.online?"19:30":"09:30"),r.title,r.body+(i?" · ¿Ya está? Márcala como hecha":""),"shop|"+r.m+"|"+r.key)}
+    }}catch(e){}}
   return out.sort((a,b)=>a.t-b.t).slice(0,80);
 }
 

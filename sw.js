@@ -1,21 +1,21 @@
 // Service worker de Táper: guarda la app para usarla sin conexión.
 // Al cambiar cualquier archivo de la app, sube VERSION aquí y el ?v= de index.html para que los móviles descarguen la nueva.
-const VERSION = "taper-v35";
+const VERSION = "taper-v36";
 const SHELL = [
   "./",
   "index.html",
-  "css/app.css?v=35",
-  "js/base.js?v=35",
-  "js/datos.js?v=35",
-  "js/fotos.js?v=35",
-  "js/gustos.js?v=35",
-  "js/plan.js?v=35",
-  "js/compra.js?v=35",
-  "js/tickets.js?v=35",
-  "js/congelador.js?v=35",
-  "js/avisos.js?v=35",
-  "js/bienvenida.js?v=35",
-  "js/ui.js?v=35",
+  "css/app.css?v=36",
+  "js/base.js?v=36",
+  "js/datos.js?v=36",
+  "js/fotos.js?v=36",
+  "js/gustos.js?v=36",
+  "js/plan.js?v=36",
+  "js/compra.js?v=36",
+  "js/tickets.js?v=36",
+  "js/congelador.js?v=36",
+  "js/avisos.js?v=36",
+  "js/bienvenida.js?v=36",
+  "js/ui.js?v=36",
   "manifest.webmanifest",
   "data/festivos.json",
   "data/supermercados.json",
@@ -55,7 +55,10 @@ self.addEventListener("push", e => {
     } catch (err) { /* sin conexión: se muestra un aviso genérico */ }
     if (!list.length) list = [{ title: "Táper", body: "Tienes avisos pendientes en Táper.", tag: "taper" }];
     for (const a of list) {
-      await self.registration.showNotification(a.title, { body: a.body, tag: a.tag || undefined, icon: "icons/icon-192.png", badge: "icons/icon-192.png", data: { tag: a.tag } });
+      const shop = String(a.tag || "").startsWith("shop|");
+      await self.registration.showNotification(a.title, { body: a.body, tag: a.tag || undefined, icon: "icons/icon-192.png", badge: "icons/icon-192.png",
+        data: { tag: a.tag, title: a.title, body: a.body }, requireInteraction: shop,
+        actions: shop ? [{ action: "hecho", title: "✓ Ya está" }, { action: "luego", title: "⏰ En 3 horas" }] : [] });
     }
     // Número en el icono donde el sistema lo permite (en Android sale el puntito de la notificación)
     try { const n = (await self.registration.getNotifications()).length; if (self.navigator.setAppBadge) await self.navigator.setAppBadge(n); } catch (err) {}
@@ -63,6 +66,24 @@ self.addEventListener("push", e => {
 });
 self.addEventListener("notificationclick", e => {
   e.notification.close();
+  const d = e.notification.data || {};
+  // Posponer: el servidor lo vuelve a mandar dentro de 3 horas
+  if (e.action === "luego") {
+    e.waitUntil((async () => { try {
+      const { uid, url } = await (await (await caches.open("taper-meta")).match("/__avisos")).json();
+      await fetch(url.replace(/\/$/, "") + "/posponer", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ uid, mins: 180, aviso: { title: d.title, body: d.body, tag: d.tag } }) });
+    } catch (err) {} })());
+    return;
+  }
+  const tipo = e.action === "hecho" ? "hecho" : "abrir";
+  if (d.tag && String(d.tag).startsWith("shop|")) {
+    e.waitUntil((async () => {
+      const all = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
+      if (all.length) { all[0].postMessage({ tipo, tag: d.tag }); if ("focus" in all[0]) return all[0].focus(); }
+      return self.clients.openWindow("./?" + tipo + "=" + encodeURIComponent(d.tag));
+    })());
+    return;
+  }
   e.waitUntil((async () => { try { const n = (await self.registration.getNotifications()).length; if (self.navigator.setAppBadge) n ? await self.navigator.setAppBadge(n) : await self.navigator.clearAppBadge(); } catch (err) {} })());
   e.waitUntil((async () => {
     const all = await self.clients.matchAll({ type: "window", includeUncontrolled: true });

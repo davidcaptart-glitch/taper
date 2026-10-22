@@ -20,7 +20,7 @@ function renderHeader(){
   else pd.textContent="Precios estimados: aún no se han descargado los de Mercadona";
   if(zoneMissing)pd.innerHTML+=` · <span class="up">precios de otra zona (tu código postal aún no está)</span>`;
   if(!onb)return;
-  const sh=shopping(month), budget=Number(S.home.budget.month)||0, spent=sh.total;
+  const sh=shopping(month), budget=monthBudget(month), spent=sh.total;
   const real=Object.entries(S.spent).filter(([k])=>k.startsWith(month+"|")).reduce((t,[,v])=>t+(Number(v)||0),0);
   document.getElementById("spent").textContent=eur(spent);
   document.getElementById("budgetOf").textContent="de "+eur(budget);
@@ -67,7 +67,7 @@ function mealLine(d,meal,wk){
   const v=wk&&wk.slots[sl.id], r=v&&RX[v.recipe];
   const who=[...(st==="solotaper"?[]:["tú"]),...sl.kids.map(k=>personName(k))];
   const comp=company(sl);
-  let h=`<div style="margin-top:6px"><div class="small muted">${label}${st==="solotaper"?" (solo el táper de mañana)":""}${sl.tupper.length&&st!=="solotaper"?" + táper de mañana":""}${comp.length?" · con "+esc(comp.map(personName).join(" y ")):""}</div>`;
+  let h=`<div style="margin-top:6px"><div class="small muted">${label}${st==="solotaper"?" (solo el táper de mañana)":""}${sl.tupper.length&&st!=="solotaper"?" + táper de mañana":""}${comp.length?" · con "+esc(comp.map(personName).join(" y ")):""}${sl.guests?` · <b>+${sl.guests} ${sl.guests===1?"invitado":"invitados"}</b>`:""}</div>`;
   if(r)h+=`<div class="dishrow">${dishImg(r,"s")}<button class="name" data-open="${r.id}" data-slot="${sl.id}">${esc(r.name)}</button></div>`;
   else if(sl.fixed)h+=`<b>${esc(sl.fixed.name)}</b>`;
   h+=`<div class="meta">${r?`${recipeTime(r)} min · ${r.prot||"?"} g proteína · ${String(sl.portions).replace(".",",")} raciones`:sl.fixed?"Plato fijo":""}</div>`;
@@ -211,6 +211,96 @@ function moveToNext(rid,from){
   }
   return null;
 }
+/* ---------- Preparar el mes que viene ----------
+   La última semana del mes: unas preguntas rápidas, se rehace el menú del mes siguiente y queda listo su pedido. */
+const nextMonthOf=m=>{const [y,mm]=m.split("-").map(Number);return mm===12?`${y+1}-01`:`${y}-${String(mm+1).padStart(2,"0")}`};
+const mName=m=>monthName(m).split(" ")[0].toLowerCase();
+function monthPrepDue(){
+  if(!S.onboarded)return null;const t=todayISO(),cur=t.slice(0,7),[y,mm]=cur.split("-").map(Number);
+  const last=iso(new Date(y,mm,0));if(daysBetween(t,last)>7)return null;
+  const nx=nextMonthOf(cur);return ((S.monthPrep||{})[nx]||{}).done?null:nx;
+}
+function monthPrepCard(){
+  const nx=monthPrepDue();if(!nx)return "";
+  return `<div class="prepcard"><div><div class="veb">Queda menos de una semana</div><h2>Prepara <em>${esc(mName(nx))}</em></h2><p>5 preguntas rápidas y te dejo el menú y el pedido del mes listos.</p></div><button class="btn" data-mprep="${nx}">Empezar</button></div>`;
+}
+function openMonthPrep(nx){
+  const cur=todayISO().slice(0,7)<nx?todayISO().slice(0,7):iso(new Date(Number(nx.slice(0,4)),Number(nx.slice(5))-2,1)).slice(0,7);
+  const prev=(S.monthPrep||{})[nx]||{};
+  const st={mood:prev.mood||null,more:[...(prev.more||[])],less:[...(prev.less||[])],favs:[...(prev.favs||[])],budget:prev.budget||"",away:[],guests:[]};
+  // Los mejor valorados del mes que acaba (o de siempre si aún no hay)
+  const rated=S.ratings.filter(x=>x.who===me().id&&x.v>=1&&RX[x.rid]);
+  const thisM=rated.filter(x=>String(x.at||"").startsWith(cur));
+  const favIds=[...new Set((thisM.length?thisM:rated).sort((a,b)=>b.v-a.v).map(x=>x.rid))].concat(Object.entries(me().tastes.dish).filter(([,v])=>v>=1.5).map(([k])=>k)).filter((v,i,a)=>RX[v]&&a.indexOf(v)===i).slice(0,10);
+  const rv=(()=>{try{return monthReview(cur)}catch(e){return null}})();
+  const draw=()=>{
+    showDialog(`<div class="mod mprep">${closeBtn}
+      <div class="veb">Prepara ${esc(mName(nx))}</div><h2 class="vh" style="font-size:1.9rem">¿Qué tal <em>${esc(mName(cur))}</em>?</h2>
+      ${rv&&rv.budget?`<p class="small muted" style="margin:6px 0 10px">Previsto ${eur(rv.spent)} de ${eur(rv.budget)}${rv.ok?" · dentro del presupuesto":" · te pasaste "+eur(rv.spent-rv.budget)}.</p>`:""}
+      <div class="moods">${[["bien","😀","Bien"],["regular","😐","Regular"],["mal","😞","Mal"]].map(([k,e,t])=>`<button class="mood" data-mood="${k}" aria-pressed="${st.mood===k}"><span>${e}</span>${t}</button>`).join("")}</div>
+      <h3 class="mq">En ${esc(mName(nx))} quiero <b>más</b>…</h3><div class="chips">${Object.entries(PREF_OPTS).map(([k,t])=>chip("data-more",k,st.more.includes(k),t)).join("")}</div>
+      <h3 class="mq">…y <b>menos</b></h3><div class="chips">${Object.entries(PREF_OPTS).map(([k,t])=>chip("data-less",k,st.less.includes(k),t)).join("")}</div>
+      ${favIds.length?`<h3 class="mq">¿Qué platos repetimos?</h3><div class="favpick">${favIds.map(id=>{const r=RX[id];return `<button class="fp" data-fav="${id}" aria-pressed="${st.favs.includes(id)}">${dishImg(r,"s")}<span>${esc(r.name)}</span></button>`}).join("")}</div>`:""}
+      <h3 class="mq">¿Algo especial en ${esc(mName(nx))}?</h3>
+      <details class="more" ${st.away.length?"open":""}><summary>✈️ Días fuera de casa${st.away.length?` (${st.away.length})`:""}</summary>
+        ${st.away.map((a,i)=>`<div class="fixed"><span>Del ${esc(shortDate(a.from))} al ${esc(shortDate(a.to))}</span><button class="btn ghost small" data-delaway="${i}">Quitar</button></div>`).join("")}
+        <div class="row"><input type="date" id="awF" value="${nx}-01" style="flex:1"><input type="date" id="awT" value="${nx}-07" style="flex:1"></div>
+        <button class="btn ghost small" id="awAdd" style="margin:8px 0">+ Añadir días fuera</button></details>
+      <details class="more" ${st.guests.length?"open":""}><summary>👥 Visitas${st.guests.length?` (${st.guests.length})`:""}</summary>
+        ${st.guests.map((g,i)=>`<div class="fixed"><span>${esc(longDate(g.d))} · ${g.meal} · +${g.n}</span><button class="btn ghost small" data-delg="${i}">Quitar</button></div>`).join("")}
+        <div class="row"><input type="date" id="gD" value="${nx}-01" style="flex:2"><select id="gM" style="flex:1"><option value="comida">comida</option><option value="cena">cena</option></select><input type="number" id="gN" min="1" max="20" value="2" style="flex:.8"></div>
+        <button class="btn ghost small" id="gAdd" style="margin:8px 0">+ Añadir visita</button></details>
+      <details class="more" ${st.budget?"open":""}><summary>💶 Presupuesto distinto${st.budget?` (${eur(Number(st.budget))})`:""}</summary>
+        <div class="field"><label for="mpB">Presupuesto de ${esc(mName(nx))} (€)</label><input type="number" id="mpB" min="0" step="5" value="${esc(st.budget)}" placeholder="${eur(Number(S.home.budget.month)||0)} (el de siempre)"></div></details>
+      ${kids().length?`<details class="more"><summary>🧒 Cambios en los turnos</summary>${kids().map(k=>`<button class="btn ghost small" data-mchg="${k.id}" style="margin:6px 6px 6px 0">Planificar un cambio de ${esc(personName(k))}</button>`).join("")}</details>`:""}
+      <div class="actions sticky"><button class="btn wide" id="mpGo">Preparar ${esc(mName(nx))}</button></div></div>`,true);
+    const q=s=>dlg.querySelectorAll(s);
+    q("[data-mood]").forEach(b=>b.onclick=()=>{st.mood=b.dataset.mood;draw()});
+    const tog=(arr,k)=>arr.includes(k)?arr.splice(arr.indexOf(k),1):arr.push(k);
+    q("[data-more]").forEach(b=>b.onclick=()=>{tog(st.more,b.dataset.more);if(st.less.includes(b.dataset.more))tog(st.less,b.dataset.more);draw()});
+    q("[data-less]").forEach(b=>b.onclick=()=>{tog(st.less,b.dataset.less);if(st.more.includes(b.dataset.less))tog(st.more,b.dataset.less);draw()});
+    q("[data-fav]").forEach(b=>b.onclick=()=>{tog(st.favs,b.dataset.fav);draw()});
+    dlg.querySelector("#awAdd").onclick=()=>{const f=dlg.querySelector("#awF").value,t=dlg.querySelector("#awT").value;if(!f||!t||t<f){toast("Revisa las fechas");return}st.away.push({from:f,to:t});draw()};
+    q("[data-delaway]").forEach(b=>b.onclick=()=>{st.away.splice(Number(b.dataset.delaway),1);draw()});
+    dlg.querySelector("#gAdd").onclick=()=>{const d=dlg.querySelector("#gD").value,n=Number(dlg.querySelector("#gN").value);if(!d||!(n>0)){toast("Pon el día y cuántos vienen");return}st.guests.push({d,meal:dlg.querySelector("#gM").value,n});draw()};
+    q("[data-delg]").forEach(b=>b.onclick=()=>{st.guests.splice(Number(b.dataset.delg),1);draw()});
+    dlg.querySelector("#mpB").oninput=e=>{st.budget=e.target.value};
+    q("[data-mchg]").forEach(b=>b.onclick=()=>openChange(b.dataset.mchg));
+    dlg.querySelector("#mpGo").onclick=()=>{
+      S.monthPrep=S.monthPrep||{};S.monthPrep[nx]={mood:st.mood,more:st.more,less:st.less,favs:st.favs,budget:Number(st.budget)||null,done:todayISO()};
+      for(const a of st.away)for(let d=a.from;d<=a.to;d=addDays(d,1)){S.days[d]=S.days[d]||{};S.days[d].comida="fuera";S.days[d].cena="fuera"}
+      for(const g of st.guests){S.days[g.d]=S.days[g.d]||{};S.days[g.d].guests={...(S.days[g.d].guests||{}),[g.meal]:g.n}}
+      dlg.close();
+      preparingScreen(()=>{for(const s of weeksInMonth(nx))if(!(S.plans[s]&&S.plans[s].confirmed))genWeekFromScratch(s);save()},()=>{
+        const l=shopping(nx).lists.mes;month=nx;tab="menu";render();
+        showDialog(`<div class="mod">${closeBtn}<div class="veb">Listo</div><h2 class="vh" style="font-size:1.8rem">${esc(monthName(nx).split(" ")[0])}, <em>preparado</em></h2>
+          <p>He rehecho el menú con lo que me has dicho${st.favs.length?` y he metido ${st.favs.length} ${st.favs.length===1?"plato que te gustó":"platos que te gustaron"}`:""}.</p>
+          <div class="okbox"><b>Pedido del mes:</b> ${l.items.length} productos · ${eur(l.cost+l.fee)}${l.fee?` (con ${eur(l.fee)} de envío)`:""}</div>
+          <div class="actions"><button class="btn wide" id="mpShop">Ver el pedido del mes</button></div></div>`);
+        dlg.querySelector("#mpShop").onclick=()=>{dlg.close();month=nx;tab="compra";listSel="mes";render();scrollTo(0,0)};
+      });
+    };
+  };
+  draw();
+}
+
+function openShopReminder(r){
+  showDialog(`<div class="mod">${closeBtn}<div class="veb">${r.key==="mes"?"Compra del mes":"Compra de la semana"}</div><h2 class="vh" style="font-size:1.8rem">${r.online?"Haz el <em>pedido</em>":"Toca <em>comprar</em>"}</h2>
+    <p>${esc(r.body)}.</p>
+    <div class="actions"><button class="btn wide" id="srList">Ver la lista</button></div>
+    <div class="actions"><button class="btn ghost" id="srDone">✓ Ya la he hecho</button><button class="btn ghost" id="srLater">⏰ Mañana</button></div></div>`);
+  dlg.querySelector("#srList").onclick=()=>{dlg.close();month=r.m;tab="compra";listSel=r.key;render();scrollTo(0,0)};
+  dlg.querySelector("#srDone").onclick=()=>{markShopDone(r.m,r.key);dlg.close();render();toast("Hecho. ¡Buena compra!")};
+  dlg.querySelector("#srLater").onclick=()=>{S.shopSnooze=S.shopSnooze||{};S.shopSnooze[shopKey(r.m,r.key)]=addDays(todayISO(),1);save();dlg.close();render();toast("Te lo recuerdo mañana")};
+}
+// Acciones que llegan desde una notificación ("Ya está" o tocarla)
+function notifAction(tipo,tag){
+  if(!tag||!tag.startsWith("shop|"))return;
+  const [,m,key]=tag.split("|");
+  if(tipo==="hecho"){markShopDone(m,key);render();toast("Compra marcada como hecha")}
+  else {month=m;tab="compra";listSel=key;render();scrollTo(0,0)}
+}
+
 /* ---------- Piezas de diseño comunes ---------- */
 // Cabecera de cada pantalla: etiqueta pequeña + título grande con *acento* en cursiva
 const viewHead=(eyebrow,title,side)=>`<div class="vhead"><div><div class="veb">${esc(eyebrow)}</div><h1 class="vh">${esc(title).replace(/\*(.+?)\*/g,"<em>$1</em>")}</h1></div>${side||""}</div>`;
@@ -249,7 +339,7 @@ const secIco=s=>{const l=String(s).toLowerCase();const m=SEC_ICO.find(([k])=>l.i
 
 function renderMenu(){
   const weeks=weeksInMonth(month);
-  let h=`<section class="view">`+viewHead(monthName(month),"Qué *comemos*")+((n=>n&&weeks.includes(weekStartFor(n.d)))(nextMeal())?todayCard()+dayStrip():"")+useUpCard()+`<div class="row" style="justify-content:flex-end;margin:4px 0 -4px"><button class="btn ghost small" id="startDay">📅 ${S.home.start&&S.home.start>todayISO()?"Cambiar el día de inicio":"Empezar el plan otro día"}</button></div>`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
+  let h=`<section class="view">`+viewHead(monthName(month),"Qué *comemos*")+monthPrepCard()+((n=>n&&weeks.includes(weekStartFor(n.d)))(nextMeal())?todayCard()+dayStrip():"")+useUpCard()+`<div class="row" style="justify-content:flex-end;margin:4px 0 -4px"><button class="btn ghost small" id="startDay">📅 ${S.home.start&&S.home.start>todayISO()?"Cambiar el día de inicio":"Empezar el plan otro día"}</button></div>`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
   if(!weeks.length)h+=`<div class="empty"><p>No hay semanas que empiecen este mes.</p></div>`;
   for(const start of weeks){
     const wk=S.plans[start], dates=weekDates(start);
@@ -280,6 +370,7 @@ function renderMenu(){
   }
   main.innerHTML=h+`</section>`;
   main.querySelectorAll("[data-plan]").forEach(b=>b.onclick=()=>openWeekPlanner(b.dataset.plan));
+  main.querySelectorAll("[data-mprep]").forEach(b=>b.onclick=()=>openMonthPrep(b.dataset.mprep));
   main.querySelectorAll("[data-goday]").forEach(b=>b.onclick=()=>{const el=document.getElementById("d-"+b.dataset.goday);if(el){el.scrollIntoView({behavior:"smooth",block:"start"});el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash")}});
   main.querySelectorAll("[data-cooknow]").forEach(b=>b.onclick=()=>{const [rid,p]=b.dataset.cooknow.split("|");const r=RX[rid];openCook(r,variantFor(r)||r.vars[0],Number(p)||2)});
   main.querySelectorAll("[data-regen]").forEach(b=>b.onclick=()=>{if(confirm("¿Rehacer los platos de esta semana? Se mantienen los que elegiste a mano.")){genWeekFromScratch(b.dataset.regen);save();render();toast("Platos rehechos")}});
@@ -660,6 +751,8 @@ function renderCompra(){
   if(l.belowMin){const bg=l.groups.find(g=>g.belowMin);
     h+=`<div class="warnbox">${l.groups.length>1?esc(superById(bg.sup).nombre)+": n":"N"}o llegas al pedido mínimo (${eur(bg.min)}): faltan ${eur(bg.min-bg.cost)}.${wi!=null?` <button class="btn small" id="fillMin">Completar con cosas del mes</button>`:" Pásala a compra en tienda o junta compras."}</div>`;
   }
+  if(l.items.length&&!shopIsDone(month,l))h+=`<div class="row" style="margin:4px 0 8px"><button class="btn ghost small" id="shopDone">✓ Ya he hecho esta compra</button></div>`;
+  else if(l.items.length)h+=`<p class="small okt" style="margin:4px 0 8px;color:var(--ok);font-weight:600">✓ Compra hecha</p>`;
   if(listSel==="mes")h+=shopPlanCard(month);
   if(l.items.length&&l.groups.length===1&&l.groups[0].sup==="mercadona")h+=orderBlock(l,listSel==="mes"?"mes":"semana");
   if(l.items.length&&chosenSupers().length>1)h+=compareCard(l);
@@ -694,6 +787,7 @@ function renderCompra(){
   h+=`<div class="card"><h2>Presupuesto por semana</h2><table class="wtable">${sh.weeks.map((s,i)=>`<tr><td>Semana del ${shortDate(s)}${i===0?" (con la compra del mes)":""}</td><td class="${sh.perWeek[i]>wb?"up":""}">${eur(sh.perWeek[i])} / ${eur(wb)}</td></tr>`).join("")}</table></div>`;
   main.innerHTML=h+`</section>`;
   main.querySelectorAll("[data-list]").forEach(b=>b.onclick=()=>{listSel=b.dataset.list;render()});
+  document.getElementById("shopDone")?.addEventListener("click",()=>{markShopDone(month,listSel);render();toast("Hecho: no te lo recuerdo más")});
   main.querySelectorAll("[data-splan]").forEach(b=>b.onclick=()=>{const p=SHOP_PLANS.find(x=>x.id===b.dataset.splan);
     S.home.shop.monthMode=p.month;S.home.shop.weekMode=p.week;for(const k of Object.keys(S.modes))if(k.startsWith(month+"|"))delete S.modes[k];
     save();render();toast("Hecho: "+p.t.toLowerCase())});
@@ -961,6 +1055,8 @@ function inboxItems(){
     else if(!avisosOn()&&!isIOS())out.push({ico:"🔕",t:"Este navegador no recibe avisos",s:"Abre Táper con Chrome e instálala para recibirlos",go:()=>{dlg.close();tab="perfil";render()}});
   }catch(e){}
   try{for(const k of others())if(!k.mealsSet&&(k.presence||{}).type!=="manual")out.push({ico:"🍽️",t:`¿Qué comidas hace ${personName(k)} en casa?`,s:"Comida y cena de cada día: así no cocino de más",go:()=>{dlg.close();openWizard("familia");scrollTo(0,0)}})}catch(e){}
+  try{for(const r of shopDueNow())out.push({ico:"🛒",t:r.title.replace("🛒 ",""),s:r.body,go:()=>openShopReminder(r)})}catch(e){}
+  try{const nx=monthPrepDue();if(nx)out.push({ico:"📋",t:`Prepara ${mName(nx)}`,s:"5 preguntas y te dejo el menú y el pedido del mes listos",go:()=>{dlg.close();openMonthPrep(nx)}})}catch(e){}
   try{const n=pendingMeals().length;if(n)out.push({ico:"⭐",t:n===1?"1 comida por valorar":`${n} comidas por valorar`,s:"Así aprendo lo que os gusta",go:go("menu")})}catch(e){}
   try{const n=pendingSports().length;if(n)out.push({ico:"🏃",t:n===1?"¿Hiciste el entreno?":`${n} entrenos por confirmar`,s:"Para recalcular lo que te conviene comer",go:go("menu")})}catch(e){}
   try{if(thawCard())out.push({ico:"❄️",t:"¿Descongelaste lo de hoy?",s:"Si se te olvidó, tienes un plan B",go:go("menu")})}catch(e){}
@@ -1190,7 +1286,9 @@ async function boot(){
   else if(!S.onboarded){S.seenVersion=APP_VERSION;save()}
   checkUpdate();startCounter();
   if(avisosOn()&&S.notif&&S.notif.on){shareWithSW().catch(()=>{});queueSyncAvisos()}
-  trackOnBoot();checkAvisos();watchPermission();checkTransferOnBoot();queueTransfer();
+  trackOnBoot();checkAvisos();
+  {const u=new URLSearchParams(location.search),t=u.get("hecho")||u.get("abrir");if(t){notifAction(u.get("hecho")?"hecho":"abrir",t);history.replaceState(null,"",location.pathname)}}
+  navigator.serviceWorker&&navigator.serviceWorker.addEventListener("message",e=>{if(e.data&&e.data.tipo)notifAction(e.data.tipo,e.data.tag)});watchPermission();checkTransferOnBoot();queueTransfer();
 }
 boot();
 if("serviceWorker" in navigator&&location.protocol!=="file:")navigator.serviceWorker.register("sw.js").catch(()=>{});

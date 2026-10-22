@@ -11,7 +11,9 @@ const tarifa=(mode,sid)=>{const sp=sid?superById(sid):superInfo();if(mode!=="tie
   const ent=sp.entrega||{},e=ent[mode]||(mode==="domicilio"?ent.online:null);
   return {envio:Number(e&&e.envio)||0,minimo:Number(e&&e.minimo)||0,gratisDesde:Number(e&&e.gratis_desde)||0}};
 const listMode=(m,key)=>S.modes[m+"|"+key]||(key==="mes"?S.home.shop.monthMode:S.home.shop.weekMode);
-const weekBudget=m=>Number(S.home.budget.week)||Math.round((Number(S.home.budget.month)||0)/Math.max(1,weeksInMonth(m).length)*100)/100;
+// Presupuesto de un mes: el que se puso al prepararlo (Navidad, vacaciones…) o el normal
+const monthBudget=m=>Number(((S.monthPrep||{})[m]||{}).budget)||Number(S.home.budget.month)||0;
+const weekBudget=m=>(((S.monthPrep||{})[m]||{}).budget?0:Number(S.home.budget.week))||Math.round(monthBudget(m)/Math.max(1,weeksInMonth(m).length)*100)/100;
 
 // Recorre los platos del mes: qué ingredientes hacen falta, en qué lista y cuándo
 function monthUses(m,exceptId){
@@ -65,6 +67,38 @@ function shopping(m){
   return out;
 }
 const checkKey=(m,key,pid)=>m+"|"+key+"|"+pid;
+
+/* ---------- Recordatorios de compra ----------
+   Cada lista (la del mes y la de cada semana) tiene su día: en tienda, el mismo día; online o con entrega,
+   el día antes (hay que hacer el pedido). Se recuerda cada día hasta que se hace o se pospone. */
+const shopKey=(m,key)=>m+"|"+key;
+function shopIsDone(m,l){
+  if((S.shopDone||{})[shopKey(m,l.key)])return true;
+  if((S.tickets||[]).some(t=>t.m===m&&t.list===l.key))return true;
+  return l.items.length>0&&l.items.every(it=>S.checks[checkKey(m,l.key,it.pid)]);
+}
+function shopReminders(){
+  const out=[],today=todayISO();
+  for(const m of [today.slice(0,7),nextMonthOf(today.slice(0,7))]){
+    let sh;try{sh=shopping(m)}catch(e){continue}
+    for(const l of Object.values(sh.lists)){
+      if(!l.items.length)continue;
+      const wi=l.key==="mes"?0:Number(l.key), ws=sh.weeks[wi];if(!ws)continue;
+      if(S.home.start&&addDays(ws,6)<S.home.start)continue;
+      const buyDay=deliveryDate(ws), online=l.mode!=="tienda";
+      if(buyDay<addDays(today,-3))continue;   // compras ya pasadas: no se recuerdan
+      const due=online?addDays(buyDay,l.key==="mes"?-2:-1):buyDay;
+      if(shopIsDone(m,l))continue;
+      out.push({m,key:l.key,due,online,buyDay,cost:l.cost+l.fee,n:l.items.length,
+        title:l.key==="mes"?(online?"🛒 Haz el pedido del mes":"🛒 Hoy toca la compra del mes"):(online?"🛒 Haz el pedido de la semana":"🛒 Hoy toca la compra de la semana"),
+        body:`${l.items.length} productos · unos ${eur(l.cost+l.fee)}${online?` · llega el ${DAYS[dow(buyDay)].toLowerCase()}`:""}`});
+    }
+  }
+  return out;
+}
+// Las que ya tocan (y no se han pospuesto)
+const shopDueNow=()=>shopReminders().filter(r=>r.due<=todayISO()&&!(((S.shopSnooze||{})[shopKey(r.m,r.key)]||"")>todayISO()));
+function markShopDone(m,key){S.shopDone=S.shopDone||{};S.shopDone[shopKey(m,key)]=todayISO();save()}
 // Lo que tienes en casa: lo comprado (marcado) menos lo que necesitan los demás platos del mes
 function inventory(m,exceptId){
   const sh=shopping(m);let any=false;const bought={};
@@ -126,7 +160,7 @@ function shopPlans(m){
 /* ---------- Resumen del mes ---------- */
 // Analiza un mes: presupuesto previsto y real, por qué se desvió, objetivos y propuesta para el siguiente
 function monthReview(m){
-  const sh=shopping(m), budget=Number(S.home.budget.month)||0, weeks=sh.weeks;
+  const sh=shopping(m), budget=monthBudget(m), weeks=sh.weeks;
   const realEntries=Object.entries(S.spent).filter(([k])=>k.startsWith(m+"|"));
   const real=realEntries.reduce((t,[,v])=>t+(Number(v)||0),0);
   const listsWith=Object.values(sh.lists).filter(l=>l.items.length).length;

@@ -340,6 +340,17 @@
       "cambios": [
         "El logo de Táper ya se ve en la pantalla de bienvenida, más grande."
       ]
+    },
+    {
+      "version": 36,
+      "fecha": "2026-10-22",
+      "titulo": "Prepara el mes y no se te pasa la compra",
+      "cambios": [
+        "La última semana de cada mes: «Prepara el mes que viene». Cuéntame qué tal ha ido, qué quieres más o menos, qué platos repetir y si habrá vacaciones, visitas o un presupuesto distinto. Te dejo el menú y el pedido del mes listos.",
+        "Recordatorio de cada compra (la del mes y la de cada semana): el día antes si es online, o ese mismo día si vas a la tienda. Se repite hasta que la hagas.",
+        "Desde la notificación: «✓ Ya está» o «⏰ En 3 horas». En la campana: «Ya la he hecho» o «Mañana». También se da por hecha al marcar toda la lista o escanear el ticket.",
+        "Las visitas suman raciones en esa comida y salen en el menú."
+      ]
     }
   ]
 }

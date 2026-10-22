@@ -794,3 +794,20 @@ details.more summary{padding:12px 0;color:var(--ink);font-weight:600}
 .veg.v1,.veg.v4,.veg.v7{animation-duration:5.2s}.veg.v2,.veg.v5{animation-duration:3.4s}
 .wbrand .wlogo{animation:pop .6s var(--ease) both .1s}
 @keyframes pop{from{transform:scale(.6) rotate(-14deg)}to{transform:none}}
+
+/* ---------- Preparar el mes ---------- */
+.prepcard{display:flex;gap:14px;align-items:center;justify-content:space-between;border-radius:24px;padding:18px 18px;margin:0 0 14px;color:#fff;
+  background:radial-gradient(120% 140% at 100% 0%,#ff7a6f,var(--accent) 45%,#7d1712);box-shadow:0 18px 36px -20px color-mix(in srgb,var(--accent) 80%,transparent)}
+.prepcard .veb{color:rgba(255,255,255,.8)}
+.prepcard h2{font-size:1.6rem;letter-spacing:-.03em;margin:4px 0}.prepcard h2 em{font-family:var(--serif);font-weight:400;font-style:italic}
+.prepcard p{margin:0;font-size:.86rem;opacity:.9}
+.prepcard .btn{background:#fff;color:var(--accent);box-shadow:none;flex:none}
+.mprep .mq{font-size:1.05rem;margin:20px 0 10px}
+.moods{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.mood{border:0;background:var(--surface);border-radius:18px;padding:12px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;font-weight:600;box-shadow:inset 0 0 0 1.5px var(--line)}
+.mood span{font-size:2rem}
+.mood[aria-pressed="true"]{background:var(--accent-soft);box-shadow:inset 0 0 0 2.5px var(--accent)}
+.favpick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fp{border:0;background:var(--surface);border-radius:16px;padding:8px;display:flex;gap:8px;align-items:center;text-align:left;font-size:.82rem;font-weight:600;box-shadow:inset 0 0 0 1.5px var(--line)}
+.fp .dish.s{width:42px;height:42px;border-radius:10px}
+.fp[aria-pressed="true"]{background:var(--accent-soft);box-shadow:inset 0 0 0 2.5px var(--accent)}
