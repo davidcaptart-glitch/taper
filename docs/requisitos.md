@@ -17,7 +17,12 @@ aprende se ve y se corrige en una pantalla "Lo que sé de ti" (por persona: adul
 - **Aparatos**: horno, vitro o fogones, microondas, air fryer. Solo se proponen recetas que se puedan hacer;
   las recetas tendrán variantes por aparato cuando tenga sentido.
 - **Código postal**: para usar los precios de su zona (ver "Precios por zona").
-- **Quién come en casa**: adultos y niños; semanas alternas, fines de semana, siempre…
+- **Quién come en casa**: adultos y, si los hay, cada hijo o hija con:
+  - nombre y **edad** (la ración se calcula sola: 3–5 años ≈ 0,5; 6–9 ≈ 0,6; 10–13 ≈ 0,75; 14+ ≈ 1; editable),
+  - **cuándo está**: siempre, semanas alternas (con un lunes de referencia), fines de semana alternos,
+    días concretos de la semana, o "lo marco cada semana",
+  - **sus gustos** (cuestionario propio y valoraciones propias).
+  Con niños menores, se evitan platos picantes y se priorizan los que gustan a niños de su edad.
   Textos neutros ("con mis hijos", "con mi pareja"…), no "tu hijo".
 - **Objetivos**: de 1 a 3, ordenados por prioridad (el primero manda si chocan):
   rendimiento deportivo, ganar músculo, adelgazar, comer sano y equilibrado, ahorrar, ir rápido.
