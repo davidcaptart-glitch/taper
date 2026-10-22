@@ -266,6 +266,14 @@
         "Si habías marcado a mano que alguien estaba contigo un día, ahora también se respeta qué comidas hace en casa (por ejemplo, solo la cena).",
         "En el menú, la etiqueta de cada día dice «solo cena» o «solo comida» cuando toca."
       ]
+    },
+    {
+      "version": 28,
+      "fecha": "2026-10-22",
+      "titulo": "Más fotos de platos",
+      "cambios": [
+        "Ya son 196 platos con foto real (de Wikimedia Commons, con su autor y licencia). Los demás muestran sus ingredientes, y siempre puedes poner la foto de tu propio plato."
+      ]
     }
   ]
 }

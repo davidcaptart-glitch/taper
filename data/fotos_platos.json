@@ -1094,5 +1094,477 @@
   "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
   "fuente": "https://commons.wikimedia.org/wiki/File:%D0%91%D1%80%D0%BE%D0%B4%D1%87%D0%B8%D1%9A%D0%B0_%D0%BE%D0%B4_%D1%82%D0%B8%D0%BA%D0%B2%D0%B8%D1%87%D0%BA%D0%B8.jpg",
   "titulo": "File:Бродчиња од тиквички.jpg"
+ },
+ "curry": {
+  "archivo": "images/platos/curry.jpg",
+  "autor": "Rafax",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pollo_al_curry_con_arroz.jpg",
+  "titulo": "File:Pollo al curry con arroz.jpg"
+ },
+ "lentejas": {
+  "archivo": "images/platos/lentejas.jpg",
+  "autor": "Horacio Cambeiro",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Preparaci%C3%B3n_de_guiso_de_lentejas_con_verduras_y_caldo_de_carne_en_cocina_dom%C3%A9stica_argentina.jpg",
+  "titulo": "File:Preparación de guiso de lentejas con verduras y caldo de carne en cocina doméstica argentina.jpg"
+ },
+ "wraps": {
+  "archivo": "images/platos/wraps.jpg",
+  "autor": "Andy Li",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Handmade_Chicken_Shawarma_Wrap_-_Lavash.jpg",
+  "titulo": "File:Handmade Chicken Shawarma Wrap - Lavash.jpg"
+ },
+ "cuscus": {
+  "archivo": "images/platos/cuscus.jpg",
+  "autor": "David Pursehouse from Kawasaki, Japan",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Couscous_with_chicken_and_beef_(3789093036).jpg",
+  "titulo": "File:Couscous with chicken and beef (3789093036).jpg"
+ },
+ "pollohorno": {
+  "archivo": "images/platos/pollohorno.jpg",
+  "autor": "Juan Emilio Prades Bel",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pollo_cocinado_al_horno_con_patatas,_rodajas_de_tomate,_vino_blanco_y_vinagre_(Espa%C3%B1a).jpg",
+  "titulo": "File:Pollo cocinado al horno con patatas, rodajas de tomate, vino blanco y vinagre (España).jpg"
+ },
+ "pollosalt": {
+  "archivo": "images/platos/pollosalt.jpg",
+  "autor": "Ovruni",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pollo_a_la_Plancha.jpg",
+  "titulo": "File:Pollo a la Plancha.jpg"
+ },
+ "albond": {
+  "archivo": "images/platos/albond.jpg",
+  "autor": "Carmelfak",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Keto_Chicken_Meatballs.png",
+  "titulo": "File:Keto Chicken Meatballs.png"
+ },
+ "champipollo": {
+  "archivo": "images/platos/champipollo.jpg",
+  "autor": "Juan Emilio Prades Bel",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pollo_al_ajillo.jpg",
+  "titulo": "File:Pollo al ajillo.jpg"
+ },
+ "muslosair": {
+  "archivo": "images/platos/muslosair.jpg",
+  "autor": "HaJunkiyada",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Grilled_chicken_thighs_with_ptitim_and_Israeli_salad.jpg",
+  "titulo": "File:Liat Portal for Foodie Disorder - Grilled chicken thighs with ptitim and Israeli salad.jpg"
+ },
+ "burger": {
+  "archivo": "images/platos/burger.jpg",
+  "autor": "Pete",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Chicken_burger_with_salt_and_pepper_chips.jpg",
+  "titulo": "File:Chicken burger with salt and pepper chips.jpg"
+ },
+ "teriyaki": {
+  "archivo": "images/platos/teriyaki.jpg",
+  "autor": "TwainNeverSaidThat",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pollo_teriyaki_de_Sarku_Japan_(Colombia).jpg",
+  "titulo": "File:Pollo teriyaki de Sarku Japan (Colombia).jpg"
+ },
+ "fajitas": {
+  "archivo": "images/platos/fajitas.jpg",
+  "autor": "Missvain",
+  "licencia": "CC BY 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Chicken_fajitas_-_La_Hacienda_-_Sarah_Stierch.jpg",
+  "titulo": "File:Chicken fajitas - La Hacienda - Sarah Stierch.jpg"
+ },
+ "nuggets": {
+  "archivo": "images/platos/nuggets.jpg",
+  "autor": "Horacio Cambeiro",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Papas_fritas_caseras_y_nuggets_de_pollo_en_platos_con_papel_madera.jpg",
+  "titulo": "File:Papas fritas caseras y nuggets de pollo en platos con papel madera.jpg"
+ },
+ "pollolimon": {
+  "archivo": "images/platos/pollolimon.jpg",
+  "autor": "Alpha from Melbourne, Australia",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Lemon_Chicken_on_Rice.jpg",
+  "titulo": "File:Lemon Chicken on Rice.jpg"
+ },
+ "brochetas": {
+  "archivo": "images/platos/brochetas.jpg",
+  "autor": "Tiia Monto",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Chicken_vegetable_skewers.jpg",
+  "titulo": "File:Chicken vegetable skewers.jpg"
+ },
+ "pastapollo": {
+  "archivo": "images/platos/pastapollo.jpg",
+  "autor": "Famartin",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:2020-08-30_06_01_03_Close_view_of_Healthy_Choice_Cafe_Steamers_Grilled_Chicken_Marinara_with_Parmesan_(Grilled_Chicken_Breast_with_Penne_Pasta_%26_Broccoli)_in_the_Dulles_section_of_Sterling,_Loudoun_County,_Virginia.jpg",
+  "titulo": "File:2020-08-30 06 01 03 Close view of Healthy Choice Cafe Steamers Grilled Chicken Marinara with Parmesan (Grilled Chicken Breast with Penne Pasta & Broccoli) in the Dulles section of Sterling, Loudoun County, Virginia.jpg"
+ },
+ "cesar": {
+  "archivo": "images/platos/cesar.jpg",
+  "autor": "Daderot",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Chicken_Caesar_salad_-_Auckland,_New_Zealand.jpg",
+  "titulo": "File:Chicken Caesar salad - Auckland, New Zealand.jpg"
+ },
+ "tikka": {
+  "archivo": "images/platos/tikka.jpg",
+  "autor": "Kelly Sue",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Chicken_Tikka_Masala_KellySue.JPG",
+  "titulo": "File:Chicken Tikka Masala KellySue.JPG"
+ },
+ "quesadillas": {
+  "archivo": "images/platos/quesadillas.jpg",
+  "autor": "Missvain",
+  "licencia": "CC BY 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Chicken_quesadilla_-_La_Casa_Restaurant_-_August_2023_-_Sarah_Stierch.jpg",
+  "titulo": "File:Chicken quesadilla - La Casa Restaurant - August 2023 - Sarah Stierch.jpg"
+ },
+ "pecharellena": {
+  "archivo": "images/platos/pecharellena.jpg",
+  "autor": "PapiPijuan",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pollo_estilo_Cordon_Bleu.jpg",
+  "titulo": "File:Pollo estilo Cordon Bleu.jpg"
+ },
+ "sopa": {
+  "archivo": "images/platos/sopa.jpg",
+  "autor": "Hoyabird8",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Chicken_Noodle_Soup.jpg",
+  "titulo": "File:Chicken Noodle Soup.jpg"
+ },
+ "lomobroc": {
+  "archivo": "images/platos/lomobroc.jpg",
+  "autor": "Bonnachoven",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Longhorn_Cowboy_Pork_Chops_.jpg",
+  "titulo": "File:Longhorn Cowboy Pork Chops .jpg"
+ },
+ "burgerpavo": {
+  "archivo": "images/platos/burgerpavo.jpg",
+  "autor": "Ruth Hartnup from Vancouver, Canada",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Turkey_and_cranberry_burger_from_Ingrid%27s_in_Whistler_(12209834745).jpg",
+  "titulo": "File:Turkey and cranberry burger from Ingrid's in Whistler (12209834745).jpg"
+ },
+ "wokpavo": {
+  "archivo": "images/platos/wokpavo.jpg",
+  "autor": "Dr.Francostein1975",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Fried_flat_rice_noodles_(_Kueh_Teow_Goreng).jpg",
+  "titulo": "File:Fried flat rice noodles ( Kueh Teow Goreng).jpg"
+ },
+ "lomopanadera": {
+  "archivo": "images/platos/lomopanadera.jpg",
+  "autor": "Juan Emilio Prades Bel",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Lomo_a_la_brasa.jpg",
+  "titulo": "File:Lomo a la brasa.jpg"
+ },
+ "solomostaza": {
+  "archivo": "images/platos/solomostaza.jpg",
+  "autor": "https://www.flickr.com/photos/jlastras/",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Solomillo_de_Cerdo_a_la_pimienta.jpg",
+  "titulo": "File:Solomillo de Cerdo a la pimienta.jpg"
+ },
+ "lomopimientos": {
+  "archivo": "images/platos/lomopimientos.jpg",
+  "autor": "Juan Emilio Prades Bel",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Lomo_de_cerdo_a_la_brasa.jpg",
+  "titulo": "File:Lomo de cerdo a la brasa.jpg"
+ },
+ "arrozfrito": {
+  "archivo": "images/platos/arrozfrito.jpg",
+  "autor": "Ralff Nestor Nacor",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pork_%26_Vegetable_Fried_Rice,_Nov_2024.jpg",
+  "titulo": "File:Pork & Vegetable Fried Rice, Nov 2024.jpg"
+ },
+ "lomoadobado": {
+  "archivo": "images/platos/lomoadobado.jpg",
+  "autor": "CharmaineZoe's Marvelous Melange from England",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pork_Chop_with_sweet_potato_mash_and_mushrooms_in_a_demerara_sauce._(36249946845).jpg",
+  "titulo": "File:Pork Chop with sweet potato mash and mushrooms in a demerara sauce. (36249946845).jpg"
+ },
+ "tacoscerdo": {
+  "archivo": "images/platos/tacoscerdo.jpg",
+  "autor": "Jj saezdeo",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pork_carnitas_tacos_(cropped).jpg",
+  "titulo": "File:Pork carnitas tacos (cropped).jpg"
+ },
+ "bolo": {
+  "archivo": "images/platos/bolo.jpg",
+  "autor": "JIP",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pasta_Bolognese_at_Antell_Martintalo.jpg",
+  "titulo": "File:Pasta Bolognese at Antell Martintalo.jpg"
+ },
+ "pastel": {
+  "archivo": "images/platos/pastel.jpg",
+  "autor": "CNEcija12345",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Cottage_pie_pot.jpg",
+  "titulo": "File:Cottage pie pot.jpg"
+ },
+ "hamburguesa": {
+  "archivo": "images/platos/hamburguesa.jpg",
+  "autor": "Horacio Cambeiro",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Homemade_hamburger_with_french_fries_in_Argentina.jpg",
+  "titulo": "File:Homemade hamburger with french fries in Argentina.jpg"
+ },
+ "chili": {
+  "archivo": "images/platos/chili.jpg",
+  "autor": "Carstor",
+  "licencia": "CC BY-SA 2.5",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.5",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Bowl_of_chili.jpg",
+  "titulo": "File:Bowl of chili.jpg"
+ },
+ "espalbond": {
+  "archivo": "images/platos/espalbond.jpg",
+  "autor": "jeffreyw",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Spaghetti_and_meatballs_1.jpg",
+  "titulo": "File:Spaghetti and meatballs 1.jpg"
+ },
+ "lasana": {
+  "archivo": "images/platos/lasana.jpg",
+  "autor": "Breville USA",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Meaty_Lasagna_8of8_(8736299782).jpg",
+  "titulo": "File:Meaty Lasagna 8of8 (8736299782).jpg"
+ },
+ "ternerabroc": {
+  "archivo": "images/platos/ternerabroc.jpg",
+  "autor": "jeffreyw",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Broccoli_beef_(5457397534).jpg",
+  "titulo": "File:Broccoli beef (5457397534).jpg"
+ },
+ "pastelcarne": {
+  "archivo": "images/platos/pastelcarne.jpg",
+  "autor": "Andy Li",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Shepherds_pie_-_The_Kew_Greenhouse_Cafe_2025-05-14.jpg",
+  "titulo": "File:Shepherds pie - The Kew Greenhouse Cafe 2025-05-14.jpg"
+ },
+ "salsaverde": {
+  "archivo": "images/platos/salsaverde.jpg",
+  "autor": "Zarateman",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Hernani_-_merluza_en_salsa_verde.jpg",
+  "titulo": "File:Hernani - merluza en salsa verde.jpg"
+ },
+ "bacatomate": {
+  "archivo": "images/platos/bacatomate.jpg",
+  "autor": "Juan Emilio Prades Bel",
+  "licencia": "CC BY 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Bacalao_con_salsa_de_tomate_(Espa%C3%B1a).jpg",
+  "titulo": "File:Bacalao con salsa de tomate (España).jpg"
+ },
+ "tacospescado": {
+  "archivo": "images/platos/tacospescado.jpg",
+  "autor": "Jmao13",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tacos_de_pescado_Ensenada..jpg",
+  "titulo": "File:Tacos de pescado Ensenada..jpg"
+ },
+ "gallega": {
+  "archivo": "images/platos/gallega.jpg",
+  "autor": "Javier Lastras",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pescada_%C3%A1_galega.jpg",
+  "titulo": "File:Pescada á galega.jpg"
+ },
+ "papillote": {
+  "archivo": "images/platos/papillote.jpg",
+  "autor": "edseloh",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Black_Cod_en_Papillot.jpg",
+  "titulo": "File:Black Cod en Papillot.jpg"
+ },
+ "bacagarbanzos": {
+  "archivo": "images/platos/bacagarbanzos.jpg",
+  "autor": "Toniher",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Potaje_de_vigilia.jpg",
+  "titulo": "File:Potaje de vigilia.jpg"
+ },
+ "palitos": {
+  "archivo": "images/platos/palitos.jpg",
+  "autor": "Andy Li",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Fish_Fingers_-_RYBKA_2024-01-25.jpg",
+  "titulo": "File:Fish Fingers - RYBKA 2024-01-25.jpg"
+ },
+ "pezespada": {
+  "archivo": "images/platos/pezespada.jpg",
+  "autor": "Ralph Daily from Birmingham, United States",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Simple_Grilled_Swordfish_(6952240417).jpg",
+  "titulo": "File:Simple Grilled Swordfish (6952240417).jpg"
+ },
+ "croquetas": {
+  "archivo": "images/platos/croquetas.jpg",
+  "autor": "ChristianCelestial",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Delicious_Crunchy_Fish_Croquettes.jpg",
+  "titulo": "File:Delicious Crunchy Fish Croquettes.jpg"
+ },
+ "salmonbon": {
+  "archivo": "images/platos/salmonbon.jpg",
+  "autor": "Ella Olsson from Stockholm, Sweden",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Salmon_%2B_Veggies_(44493005854).jpg",
+  "titulo": "File:Salmon + Veggies (44493005854).jpg"
+ },
+ "salmonjud": {
+  "archivo": "images/platos/salmonjud.jpg",
+  "autor": "Daderot",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Salmon,_corn,_green_beans_-_Massachusetts.jpg",
+  "titulo": "File:Salmon, corn, green beans - Massachusetts.jpg"
+ },
+ "salmonteri": {
+  "archivo": "images/platos/salmonteri.jpg",
+  "autor": "Prayitno",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Grilled_Teriyaki_Salmon_(10900376705).jpg",
+  "titulo": "File:Grilled Teriyaki Salmon (10900376705).jpg"
+ },
+ "salmonpatata": {
+  "archivo": "images/platos/salmonpatata.jpg",
+  "autor": "Prayitno",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Grilled_Salmon_(15950616571).jpg",
+  "titulo": "File:Grilled Salmon (15950616571).jpg"
+ },
+ "pastasalmon": {
+  "archivo": "images/platos/pastasalmon.jpg",
+  "autor": "JIP",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pasta_with_cold-smoked_salmon_and_peas_in_Loviisa.jpg",
+  "titulo": "File:Pasta with cold-smoked salmon and peas in Loviisa.jpg"
+ },
+ "bolsalmon": {
+  "archivo": "images/platos/bolsalmon.jpg",
+  "autor": "Andy Li",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Salmon_Poke_Bowl_(S)_with_Spicy_mayo_sauce_-_Kitokito.jpg",
+  "titulo": "File:Salmon Poke Bowl (S) with Spicy mayo sauce - Kitokito.jpg"
+ },
+ "salmonesparr": {
+  "archivo": "images/platos/salmonesparr.jpg",
+  "autor": "Famartin",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:2021-02-23_20_32_58_Herb-grilled_salmon,_asparagus_and_broccoli_at_the_Olive_Garden_in_Fair_Lakes,_Fairfax_County,_Virginia.jpg",
+  "titulo": "File:2021-02-23 20 32 58 Herb-grilled salmon, asparagus and broccoli at the Olive Garden in Fair Lakes, Fairfax County, Virginia.jpg"
+ },
+ "enspatata": {
+  "archivo": "images/platos/enspatata.jpg",
+  "autor": "sunny mama",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Mackerel_and_apple_salad_(16525967483).jpg",
+  "titulo": "File:Mackerel and apple salad (16525967483).jpg"
+ },
+ "arrozgam": {
+  "archivo": "images/platos/arrozgam.jpg",
+  "autor": "Lagambadeoro",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Arroz_con_marisco_plato_La_Gamba_de_ORO.jpg",
+  "titulo": "File:Arroz con marisco plato La Gamba de ORO.jpg"
+ },
+ "tresdel": {
+  "archivo": "images/platos/tresdel.jpg",
+  "autor": "Juan Emilio Prades Bel",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Arroz_tres_delicias.jpg",
+  "titulo": "File:Arroz tres delicias.jpg"
+ },
+ "espag": {
+  "archivo": "images/platos/espag.jpg",
+  "autor": "naotakem",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Spaghetti_with_shrimp_and_broccoli_in_a_lemon_garlic_sauce_with_lots_of_homegrown_Italian_parsley_%E8%87%AA%E5%AE%B6%E6%A0%BD%E5%9F%B9%E3%81%AE%E3%82%A4%E3%82%BF%E3%83%AA%E3%82%A2%E3%83%B3%E3%83%91%E3%82%BB%E3%83%AA%E3%82%92%E3%81%9F%E3%81%A3%E3%81%B7%E3%82%8A%E6%95%A3%E3%82%89%E3%81%97%E3%81%9F%E3%82%A8%E3%83%93%E3%81%A8%E3%83%96%E3%83%AD%E3%83%83%E3%82%B3%E3%83%AA%E3%83%BC%E3%81%AE%E3%82%B9%E3%83%91%E3%82%B2%E3%83%86%E3%82%A3.jpg",
+  "titulo": "File:Spaghetti with shrimp and broccoli in a lemon garlic sauce with lots of homegrown Italian parsley 自家栽培のイタリアンパセリをたっぷり散らしたエビとブロッコリーのスパゲティ.jpg"
+ },
+ "revuelto": {
+  "archivo": "images/platos/revuelto.jpg",
+  "autor": "Juan Emilio Prades Bel",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Revuelto_de_setas_y_gambas,_gastronom%C3%ADa_de_Espa%C3%B1a.jpg",
+  "titulo": "File:Revuelto de setas y gambas, gastronomía de España.jpg"
  }
 }
