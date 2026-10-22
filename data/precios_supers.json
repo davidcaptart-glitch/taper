@@ -1,0 +1,1254 @@
+{
+ "supers": {
+  "condis": {
+   "nombre": "Condis",
+   "fecha": "2026-10-22",
+   "productos": {
+    "arroz": {
+     "precio": 1.3,
+     "envase": 1000,
+     "nombre": "Arroz Condis Extra 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pasta": {
+     "precio": 0.8,
+     "envase": 500,
+     "nombre": "Pasta Condis Macarrones 500 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "espaguetis": {
+     "precio": 0.8,
+     "envase": 500,
+     "nombre": "Pasta Condis Spagueti 500 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "cuscus": {
+     "precio": 1.99,
+     "envase": 500,
+     "nombre": "Cous Cous Gallo 500 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "lentejas": {
+     "precio": 0.85,
+     "envase": 399,
+     "nombre": "Lentejas Extra Condis Cocidas 400 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "garbanzos": {
+     "precio": 0.75,
+     "envase": 399,
+     "nombre": "Garbanzos Extra Condis Cocidos 400 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "alubias": {
+     "precio": 0.79,
+     "envase": 399,
+     "nombre": "Alubias Extra Condis Cocidas Blanca 400 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tomate_tri": {
+     "precio": 1.01,
+     "envase": 802,
+     "nombre": "Tomate Condis Triturado 800 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "atun": {
+     "precio": 2.39,
+     "envase": 156,
+     "nombre": "Atún Claro Condis En Aceite Girasol 3 X 52 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "maiz": {
+     "precio": 1.59,
+     "envase": 420,
+     "nombre": "Maiz Condis Dulce 140Grs X 3 Unidades",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tortillas": {
+     "precio": 1.0,
+     "envase": 6,
+     "nombre": "Tortillas Dulcesol Trigo 6 Unidad",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "cebolla": {
+     "precio": 1.39,
+     "envase": 1000,
+     "nombre": "Cebolla Condis Bolsa 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "patata": {
+     "precio": 4.65,
+     "envase": 3000,
+     "nombre": "Patata Condis Versátil Bolsa 3 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "boniato": {
+     "precio": 1.23,
+     "envase": 699,
+     "nombre": "Boniato 2 Unidades 700G Aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "ajo": {
+     "precio": 1.99,
+     "envase": 220,
+     "nombre": "Ajos Condis Morados 220 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pechuga": {
+     "precio": 3.98,
+     "envase": 400,
+     "nombre": "Pechuga De Pollo Fileteada 400 G Aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "muslos": {
+     "precio": 3.7,
+     "envase": 400,
+     "nombre": "Muslo De Pollo Deshuesado 400 G",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "picada": {
+     "precio": 4.75,
+     "envase": 400,
+     "nombre": "Preparado Cal Mallafré De Carne Picada Mixta 400 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "lomo": {
+     "precio": 5.36,
+     "envase": 420,
+     "nombre": "Lomo De Cerdo Duroc 50% Condis Fileteado 420 G Aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "burger": {
+     "precio": 1.95,
+     "envase": 2,
+     "nombre": "Burger De Pollo Tradicional 200 G",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "salmon": {
+     "precio": 7.99,
+     "envase": 250,
+     "nombre": "Lomos Condis Salmon Con Piel 250 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "merluza": {
+     "precio": 5.69,
+     "envase": 640,
+     "nombre": "Tronquito Condis Merluza 640 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "gambas": {
+     "precio": 14.95,
+     "envase": 650,
+     "nombre": "Gamba Pelada Gr Bolsa",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "calamar": {
+     "precio": 5.49,
+     "envase": 360,
+     "nombre": "Anilla Condis De Pota 360 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "brocoli": {
+     "precio": 2.99,
+     "envase": 360,
+     "nombre": "Brócoli Findus 360 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "espinacas": {
+     "precio": 2.89,
+     "envase": 400,
+     "nombre": "Espinacas Findus Hojas 400 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "judias": {
+     "precio": 1.79,
+     "envase": 1000,
+     "nombre": "Judías Verdes Condis Redondas Troceadas 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "salteado": {
+     "precio": 1.17,
+     "envase": 450,
+     "nombre": "Salteado Condis Tradicional 450 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "guisantes": {
+     "precio": 1.89,
+     "envase": 1000,
+     "nombre": "Guisantes Condis 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "huevos": {
+     "precio": 4.09,
+     "envase": 12,
+     "nombre": "Huevos Condis Gallina Criada En Suelo L 12 Unidades",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "queso": {
+     "precio": 1.99,
+     "envase": 200,
+     "nombre": "Queso Rallado Condis Mozzarella 200 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pimiento": {
+     "precio": 3.24,
+     "envase": 651,
+     "nombre": "Pimiento Rojo 2 Unidades 650G Aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "calabacin": {
+     "precio": 1.37,
+     "envase": 601,
+     "nombre": "Calabacín 2 Unidades 600G Aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "zanahoria": {
+     "precio": 0.99,
+     "envase": 500,
+     "nombre": "Zanahoria Condis Bolsa 500 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tomate": {
+     "precio": 2.77,
+     "envase": 699,
+     "nombre": "Tomate De Pera 6 Unidades 700G Aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "ensalada": {
+     "precio": 2.75,
+     "envase": 300,
+     "nombre": "Ensalada Hc Maxi Gourmet 300 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "champi": {
+     "precio": 1.95,
+     "envase": 250,
+     "nombre": "Champiñón Condis Laminado Bandeja 250 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "limon": {
+     "precio": 0.7,
+     "envase": 250,
+     "nombre": "Limón 2 Unidades 250G Aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "yogur": {
+     "precio": 0.88,
+     "envase": 4,
+     "nombre": "Yogur Alteza Natural 4 X 125 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pan_rallado": {
+     "precio": 0.59,
+     "envase": 500,
+     "nombre": "Pan Condis Rallado 500 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "jamon": {
+     "precio": 2.39,
+     "envase": 150,
+     "nombre": "Jamon Cocido Condis 90% Carne 150 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "fideos": {
+     "precio": 0.8,
+     "envase": 500,
+     "nombre": "Pasta Condis Fideo Cazuela N 4 500 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "caldo_pollo": {
+     "precio": 0.8,
+     "envase": 1000,
+     "nombre": "Caldo Condis Pollo Brik 1 L",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "caldo_pescado": {
+     "precio": 1.39,
+     "envase": 1000,
+     "nombre": "Caldo Condis Pescado 1 L",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pavo": {
+     "precio": 5.48,
+     "envase": 500,
+     "nombre": "Filete Extrafino Pechuga Pavo 500G Aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "burger_pavo": {
+     "precio": 2.25,
+     "envase": 2,
+     "nombre": "Burger Pavo Y Espinacas 240G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "ternera": {
+     "precio": 10.33,
+     "envase": 450,
+     "nombre": "Bistec 1ªb Ternera Cortado 450 G",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "lasana": {
+     "precio": 1.75,
+     "envase": 224,
+     "nombre": "Lasaña Gallo Placas Horno 224 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "bacalao": {
+     "precio": 8.69,
+     "envase": 300,
+     "nombre": "Filetes Condis Bacalao 300 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "nata": {
+     "precio": 1.8,
+     "envase": 600,
+     "nombre": "Nata Cocina Condis 15% 200 Ml 3 Unidades",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "mostaza": {
+     "precio": 3.65,
+     "envase": 215,
+     "nombre": "Mostaza Maille Dijon Original 215 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "edamame": {
+     "precio": 2.6,
+     "envase": 400,
+     "nombre": "Edamame Sushi King Bolsa 400 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "esparragos": {
+     "precio": 4.49,
+     "envase": 250,
+     "nombre": "Espárragos Trigueros 250 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "bonito": {
+     "precio": 5.25,
+     "envase": 140,
+     "nombre": "Bonito Condis Aceite Oliva 140 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "caballa": {
+     "precio": 1.65,
+     "envase": 65,
+     "nombre": "Filete Caballa Alteza Aceite Oliva 65 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "sardinas": {
+     "precio": 1.59,
+     "envase": 84,
+     "nombre": "Sardina Alteza Aceite Oliva 84 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pan_integral": {
+     "precio": 0.9,
+     "envase": 16,
+     "nombre": "Pan Molde Condis Integral 460 G",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "langostinos": {
+     "precio": 5.29,
+     "envase": 280,
+     "nombre": "Colas Royal De Langostinos 280 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "masa_empanadilla": {
+     "precio": 1.25,
+     "envase": 16,
+     "nombre": "Obleas Buitoni 16 Unidades 160 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "hummus": {
+     "precio": 1.35,
+     "envase": 200,
+     "nombre": "Hummus Condis Receta Clásica 200 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "noquis": {
+     "precio": 1.09,
+     "envase": 500,
+     "nombre": "Gnocchi Condis Patata 500 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "berenjena": {
+     "precio": 1.6,
+     "envase": 699,
+     "nombre": "Berenjena 2 Unidades 700G Aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "quinoa": {
+     "precio": 1.56,
+     "envase": 250,
+     "nombre": "Quinoa Blanca Y Roja Brillante 250 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "copos_maiz": {
+     "precio": 1.55,
+     "envase": 500,
+     "nombre": "Cereales Condis Corn Flakes 500 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pesto": {
+     "precio": 2.53,
+     "envase": 190,
+     "nombre": "Salsa Gallo Pesto 190 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "salchichas": {
+     "precio": 0.79,
+     "envase": 140,
+     "nombre": "Salchichas Campofrio Frankfurt 140 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pina": {
+     "precio": 2.59,
+     "envase": 420,
+     "nombre": "Piña Condis En Su Jugo 3 Unidades",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "leche": {
+     "precio": 0.87,
+     "envase": 1000,
+     "nombre": "Leche Condis Semidesnatada 1 L",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "calabaza": {
+     "precio": 2.99,
+     "envase": 600,
+     "nombre": "Calabaza Pelada Trozos 600 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "gazpacho": {
+     "precio": 3.99,
+     "envase": 1000,
+     "nombre": "Alvalle Gazpacho Original 1L",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "anacardos": {
+     "precio": 3.38,
+     "envase": 200,
+     "nombre": "Anacardo Crudo 200G",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "feta": {
+     "precio": 3.35,
+     "envase": 150,
+     "nombre": "Queso Feta Patros Griego 150 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "manzana": {
+     "precio": 1.8,
+     "envase": 800,
+     "nombre": "Manzana Golden 4 Unidades 800G Aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pan_burger": {
+     "precio": 0.85,
+     "envase": 4,
+     "nombre": "Bocatas Condis Burger 4 Unidades 300 G",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    }
+   },
+   "fallos": [
+    "tomate_frito: HTTP Error 503: Service Unavailable"
+   ]
+  },
+  "dia": {
+   "nombre": "DIA",
+   "fecha": "2026-10-22",
+   "productos": {
+    "arroz": {
+     "precio": 1.15,
+     "envase": 1000,
+     "nombre": "Arroz extra Dia Arrozona 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pasta": {
+     "precio": 1.15,
+     "envase": 1000,
+     "nombre": "Macarrones Dia Al Diante 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "espaguetis": {
+     "precio": 1.15,
+     "envase": 1000,
+     "nombre": "Espagueti Dia Al Diante 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "cuscus": {
+     "precio": 1.19,
+     "envase": 500,
+     "nombre": "Cous Cous Dia Al Diante 500 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "lentejas": {
+     "precio": 0.68,
+     "envase": 400,
+     "nombre": "Lentejas cocidas Dia Vegecampo 400 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "garbanzos": {
+     "precio": 0.6,
+     "envase": 400,
+     "nombre": "Garbanzos cocidos Dia Vegecampo 400 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "alubias": {
+     "precio": 0.75,
+     "envase": 400,
+     "nombre": "Alubias blancas cocidas Dia Vegecampo 400 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tomate_tri": {
+     "precio": 1.0,
+     "envase": 800,
+     "nombre": "Tomate triturado Dia Vegecampo 800 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tomate_frito": {
+     "precio": 0.89,
+     "envase": 550,
+     "nombre": "Tomate frito Dia Vegecampo 550 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "atun": {
+     "precio": 2.95,
+     "envase": 180,
+     "nombre": "Atún claro en aceite de oliva Dia Mari Marinera 3 x 60 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "maiz": {
+     "precio": 1.55,
+     "envase": 420,
+     "nombre": "Maíz dulce Dia Vegecampo 3 x 140 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tortillas": {
+     "precio": 1.02,
+     "envase": 8,
+     "nombre": "Tortillas de trigo Dia Al Punto 320 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "cebolla": {
+     "precio": 1.5,
+     "envase": 1000,
+     "nombre": "Cebolla malla 1 kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "patata": {
+     "precio": 1.89,
+     "envase": 2000,
+     "nombre": "Patatas para freir 2 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "boniato": {
+     "precio": 2.04,
+     "envase": 800,
+     "nombre": "Batata unidad 800 g aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "ajo": {
+     "precio": 1.85,
+     "envase": 250,
+     "nombre": "Ajos malla 250 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pechuga": {
+     "precio": 4.39,
+     "envase": 550,
+     "nombre": "Filetes de pechuga de pollo amarillo Selección de Dia 550 g aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "muslos": {
+     "precio": 5.24,
+     "envase": 750,
+     "nombre": "Filetes de contramuslo de pollo Selección de Dia 750 g aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "picada": {
+     "precio": 4.19,
+     "envase": 500,
+     "nombre": "Carne picada de vacuno y cerdo Selección de Dia 500 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "picada_pollo": {
+     "precio": 2.99,
+     "envase": 365,
+     "nombre": "Carne picada de pollo Selección de Dia 365 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "lomo": {
+     "precio": 3.6,
+     "envase": 500,
+     "nombre": "Filete de cinta de lomo Selección de Dia 500 g aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "burger": {
+     "precio": 3.99,
+     "envase": 6,
+     "nombre": "Burger de pollo 6 unidades Gremlins Selección de Dia 540 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "salmon": {
+     "precio": 5.89,
+     "envase": 250,
+     "nombre": "Lomos de salmón Dia Selección Mundial 250 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "merluza": {
+     "precio": 5.6,
+     "envase": 600,
+     "nombre": "Filetes de merluza del cabo sin piel MSC Dia Mari Marinera 600 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "gambas": {
+     "precio": 4.76,
+     "envase": 350,
+     "nombre": "Gambas peladas y crudas medianas Dia Mari Marinera 350 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "calamar": {
+     "precio": 5.49,
+     "envase": 450,
+     "nombre": "Calamar troceado Dia Mari Marinera 450 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "brocoli": {
+     "precio": 1.79,
+     "envase": 900,
+     "nombre": "Brócoli Dia Vegecampo 900 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "espinacas": {
+     "precio": 0.95,
+     "envase": 450,
+     "nombre": "Espinacas cortadas Dia Vegecampo 450 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "judias": {
+     "precio": 1.3,
+     "envase": 1000,
+     "nombre": "Judías verdes redondas Dia Vegecampo 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "salteado": {
+     "precio": 0.99,
+     "envase": 400,
+     "nombre": "Salteado de verduras Dia Al Punto 400 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "guisantes": {
+     "precio": 1.55,
+     "envase": 1000,
+     "nombre": "Guisantes finos Dia Vegecampo 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "huevos": {
+     "precio": 3.05,
+     "envase": 12,
+     "nombre": "Huevos grandes L de gallinas criadas en suelo Dia 12 unidades",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "queso": {
+     "precio": 1.6,
+     "envase": 200,
+     "nombre": "Queso mozzarella rallado Dia Láctea 200 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pimiento": {
+     "precio": 1.33,
+     "envase": 350,
+     "nombre": "Pimiento rojo unidad 350 g aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "calabacin": {
+     "precio": 1.16,
+     "envase": 650,
+     "nombre": "Calabacín unidad 650 g aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "zanahoria": {
+     "precio": 1.19,
+     "envase": 1000,
+     "nombre": "Zanahoria 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tomate": {
+     "precio": 2.96,
+     "envase": 900,
+     "nombre": "Tomate pera granel 900 g aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "ensalada": {
+     "precio": 0.99,
+     "envase": 200,
+     "nombre": "Ensalada 4 estaciones Dia Vegecampo 200 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "champi": {
+     "precio": 1.69,
+     "envase": 250,
+     "nombre": "Champiñón laminado bandeja 250 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "limon": {
+     "precio": 1.79,
+     "envase": 750,
+     "nombre": "Limones malla 750 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "yogur": {
+     "precio": 1.0,
+     "envase": 6,
+     "nombre": "Yogur natural Dia Láctea 6 x 125 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pan_rallado": {
+     "precio": 0.85,
+     "envase": 750,
+     "nombre": "Pan rallado El Molino de Dia 750 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "jamon": {
+     "precio": 2.5,
+     "envase": 250,
+     "nombre": "Jamón cocido extra Dia Nuestra Alacena 250 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "fideos": {
+     "precio": 0.8,
+     "envase": 500,
+     "nombre": "Fideo grueso Dia Al Diante 500 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "caldo_pollo": {
+     "precio": 0.75,
+     "envase": 1000,
+     "nombre": "Caldo de pollo Dia Al Punto 1 L",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "caldo_pescado": {
+     "precio": 0.95,
+     "envase": 1000,
+     "nombre": "Caldo de pescado Dia Al Punto 1 L",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pavo": {
+     "precio": 6.29,
+     "envase": 700,
+     "nombre": "Filetes de pechuga de pavo Selección de Dia 700 g aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "fideos_arroz": {
+     "precio": 1.45,
+     "envase": 200,
+     "nombre": "Noodles de arroz Dia Selección Mundial 200 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "solomillo": {
+     "precio": 5.8,
+     "envase": 700,
+     "nombre": "Solomillo de cerdo Selección de Dia 700 g aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "ternera": {
+     "precio": 9.21,
+     "envase": 480,
+     "nombre": "Filete 1º de vacuno Selección de Dia 480 g aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "alubias_rojas": {
+     "precio": 0.96,
+     "envase": 400,
+     "nombre": "Alubias rojas cocidas Dia Vegecampo 400 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "lasana": {
+     "precio": 1.65,
+     "envase": 200,
+     "nombre": "Placas para lasaña El pavo 200 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "bacalao": {
+     "precio": 7.1,
+     "envase": 360,
+     "nombre": "Filetes de bacalao MSC Dia Mari Marinera 360 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "teriyaki": {
+     "precio": 2.0,
+     "envase": 300,
+     "nombre": "Salsa teriyaki Maggi 355 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "nata": {
+     "precio": 1.89,
+     "envase": 600,
+     "nombre": "Nata para cocinar 15% M.G. Dia Láctea 3 x 200 ml",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "mostaza": {
+     "precio": 3.77,
+     "envase": 215,
+     "nombre": "Mostaza Dijon original Maille 215 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "esparragos": {
+     "precio": 3.49,
+     "envase": 250,
+     "nombre": "Espárrago verde fino manojo aprox. 250 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "bonito": {
+     "precio": 2.89,
+     "envase": 156,
+     "nombre": "Bonito del norte en trozos Dia Mari Marinera 3 x 52 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "caballa": {
+     "precio": 1.69,
+     "envase": 85,
+     "nombre": "Filetes de caballa del sur en aceite de oliva Dia Mari Marinera 85 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "sardinas": {
+     "precio": 2.15,
+     "envase": 130,
+     "nombre": "Sardinillas en aceite de oliva Dia Mari Marinera 2 x 65 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pan_integral": {
+     "precio": 1.29,
+     "envase": 28,
+     "nombre": "Pan de molde trigo integral El Molino de Dia 820 g",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "langostinos": {
+     "precio": 4.92,
+     "envase": 200,
+     "nombre": "Colas de gambón pelado crudo Dia Mari Marinera 200 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "masa_empanadilla": {
+     "precio": 1.28,
+     "envase": 16,
+     "nombre": "Masa para empanadillas y postres Buitoni 160 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pasta_lentejas": {
+     "precio": 1.65,
+     "envase": 250,
+     "nombre": "Espirales 100% de lenteja roja Dia Al Diante 250 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "hummus": {
+     "precio": 1.29,
+     "envase": 220,
+     "nombre": "Hummus clásico Dia Al Punto 220 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "noquis": {
+     "precio": 1.0,
+     "envase": 500,
+     "nombre": "Gnocchi de patata Dia Selección Mundial 500 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "berenjena": {
+     "precio": 0.5,
+     "envase": 300,
+     "nombre": "Berenjena unidad",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "quinoa": {
+     "precio": 1.67,
+     "envase": 250,
+     "nombre": "Vasos de quinoa blanca y roja Brillante 2 x 125 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "dorada": {
+     "precio": 7.12,
+     "envase": 300,
+     "nombre": "Filetes de dorada Selección de Dia 300 g aprox.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "copos_maiz": {
+     "precio": 1.49,
+     "envase": 500,
+     "nombre": "Cereales copos de maíz corn flakes Gran Dia 500 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pesto": {
+     "precio": 1.95,
+     "envase": 185,
+     "nombre": "Pesto verde Dia Salseo 185 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "salchichas": {
+     "precio": 1.95,
+     "envase": 560,
+     "nombre": "Salchichas Frankfurt de pavo Dia Funky Frank 4 x 140 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pina": {
+     "precio": 2.49,
+     "envase": 411,
+     "nombre": "Piña en su jugo en rodajas Dia Fruticampo 3 x 137 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "leche": {
+     "precio": 0.83,
+     "envase": 1000,
+     "nombre": "Leche semidesnatada Dia Láctea 1 L",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "calabaza": {
+     "precio": 1.99,
+     "envase": 500,
+     "nombre": "Calabaza cortada a trozos al vacío 500 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "gazpacho": {
+     "precio": 1.59,
+     "envase": 1000,
+     "nombre": "Gazpacho Dia Al Punto 1 L",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "anacardos": {
+     "precio": 2.7,
+     "envase": 200,
+     "nombre": "Anacardos al natural Dia Naturmundo 200 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "feta": {
+     "precio": 2.65,
+     "envase": 150,
+     "nombre": "Queso feta D.O.P. en dados Dia Selección Mundial 150 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "manzana": {
+     "precio": 1.89,
+     "envase": 1000,
+     "nombre": "Manzana Golden 1 Kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pan_burger": {
+     "precio": 0.99,
+     "envase": 4,
+     "nombre": "Pan de hamburguesa maxi Gremlins El Molino de Dia 300 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    }
+   },
+   "fallos": []
+  }
+ },
+ "codigo_postal": "08784",
+ "ejecutado": "2026-10-22T10:14:13+00:00"
+}

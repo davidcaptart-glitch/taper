@@ -1,0 +1,483 @@
+{
+ "super": "condis",
+ "comprobado": "2026-10-22",
+ "productos": {
+  "arroz": {
+   "ref": "103009",
+   "nombre": "Arroz Condis Extra 1 Kg",
+   "envase": 1000,
+   "url": "https://compraonline.condis.es/arroz-condis-extra-1-kg/p/103009/es_ES"
+  },
+  "pasta": {
+   "ref": "121147",
+   "nombre": "Pasta Condis Macarrones 500 G",
+   "envase": 500,
+   "url": "https://compraonline.condis.es/pasta-condis-macarrones-500-g/p/121147/es_ES"
+  },
+  "espaguetis": {
+   "ref": "121146",
+   "nombre": "Pasta Condis Spagueti 500 G",
+   "envase": 500,
+   "url": "https://compraonline.condis.es/pasta-condis-spagueti-500-g/p/121146/es_ES"
+  },
+  "cuscus": {
+   "ref": "123090",
+   "nombre": "Cous Cous Gallo 500 G",
+   "envase": 500,
+   "url": "https://compraonline.condis.es/cous-cous-gallo--500-g/p/123090/es_ES"
+  },
+  "lentejas": {
+   "ref": "511046",
+   "nombre": "Lentejas Extra Condis Cocidas 400 G",
+   "envase": 400,
+   "url": "https://compraonline.condis.es/lentejas-extra-condis-cocidas-400-g/p/511046/es_ES"
+  },
+  "garbanzos": {
+   "ref": "511045",
+   "nombre": "Garbanzos Extra Condis Cocidos 400 G",
+   "envase": 400,
+   "url": "https://compraonline.condis.es/garbanzos-extra-condis-cocidos-400-g/p/511045/es_ES"
+  },
+  "alubias": {
+   "ref": "511044",
+   "nombre": "Alubias Extra Condis Cocidas Blanca 400 G",
+   "envase": 400,
+   "url": "https://compraonline.condis.es/alubias-extra-condis-cocidas-blanca-400-g/p/511044/es_ES"
+  },
+  "tomate_tri": {
+   "ref": "524000",
+   "nombre": "Tomate Condis Triturado 800 G",
+   "envase": 800,
+   "url": "https://compraonline.condis.es/tomate-condis-triturado-800-g/p/524000/es_ES"
+  },
+  "tomate_frito": {
+   "ref": "524086",
+   "nombre": "Tomate Condis Frito Vidrio 560 G",
+   "envase": 560,
+   "url": "https://compraonline.condis.es/tomate-condis-frito-vidrio-560-g/p/524086/es_ES"
+  },
+  "atun": {
+   "ref": "536029",
+   "nombre": "Atún Claro Condis En Aceite Girasol 3 X 52 G",
+   "envase": 156,
+   "url": "https://compraonline.condis.es/atún-claro-condis-en-aceite-girasol--3-x-52-g/p/536029/es_ES"
+  },
+  "maiz": {
+   "ref": "518012",
+   "nombre": "Maiz Condis Dulce 140Grs X 3 Unidades",
+   "envase": 420,
+   "url": "https://compraonline.condis.es/maiz-condis-dulce-140grs-x-3-unidades/p/518012/es_ES"
+  },
+  "tortillas": {
+   "ref": "116388",
+   "nombre": "Tortillas Dulcesol Trigo 6 Unidad",
+   "envase": 6,
+   "url": "https://compraonline.condis.es/tortillas-dulcesol-trigo-6-unidad/p/116388/es_ES"
+  },
+  "cebolla": {
+   "ref": "191095",
+   "nombre": "Cebolla Condis Bolsa 1 Kg",
+   "envase": 1000,
+   "url": "https://compraonline.condis.es/cebolla-condis-bolsa-1-kg/p/191095/es_ES"
+  },
+  "patata": {
+   "ref": "191640",
+   "nombre": "Patata Condis Versátil Bolsa 3 Kg",
+   "envase": 3000,
+   "url": "https://compraonline.condis.es/patata-condis-versátil-bolsa-3-kg/p/191640/es_ES"
+  },
+  "boniato": {
+   "ref": "190060",
+   "nombre": "Boniato 2 Unidades 700G Aprox.",
+   "envase": 700,
+   "url": "https://compraonline.condis.es/boniato-2-unidades-700g-aprox./p/190060/es_ES",
+   "aprox": true
+  },
+  "ajo": {
+   "ref": "191203",
+   "nombre": "Ajos Condis Morados 220 G",
+   "envase": 220,
+   "url": "https://compraonline.condis.es/ajos-condis-morados-220-g/p/191203/es_ES"
+  },
+  "pechuga": {
+   "ref": "15064",
+   "nombre": "Pechuga De Pollo Fileteada 400 G Aprox.",
+   "envase": 400,
+   "url": "https://compraonline.condis.es/pechuga-de-pollo-fileteada-400-g-aprox./p/15064/es_ES",
+   "aprox": true
+  },
+  "muslos": {
+   "ref": "15218",
+   "nombre": "Muslo De Pollo Deshuesado 400 G",
+   "envase": 400,
+   "url": "https://compraonline.condis.es/muslo-de--pollo-deshuesado-400-g/p/15218/es_ES",
+   "aprox": true
+  },
+  "picada": {
+   "ref": "12155",
+   "nombre": "Preparado Cal Mallafré De Carne Picada Mixta 400 G",
+   "envase": 400,
+   "url": "https://compraonline.condis.es/preparado-cal-mallafré-de-carne-picada-mixta-400-g/p/12155/es_ES"
+  },
+  "lomo": {
+   "ref": "12559",
+   "nombre": "Lomo De Cerdo Duroc 50% Condis Fileteado 420 G Aprox.",
+   "envase": 420,
+   "url": "https://compraonline.condis.es/lomo-de-cerdo-duroc-50%-condis-fileteado-420-g-aprox./p/12559/es_ES",
+   "aprox": true
+  },
+  "burger": {
+   "ref": "15532",
+   "nombre": "Burger De Pollo Tradicional 200 G",
+   "envase": 2,
+   "url": "https://compraonline.condis.es/burger-de-pollo-tradicional-200-g/p/15532/es_ES",
+   "aprox": true
+  },
+  "salmon": {
+   "ref": "182871",
+   "nombre": "Lomos Condis Salmon Con Piel 250 G",
+   "envase": 250,
+   "url": "https://compraonline.condis.es/lomos-condis-salmon-con-piel-250-g/p/182871/es_ES"
+  },
+  "merluza": {
+   "ref": "182759",
+   "nombre": "Tronquito Condis Merluza 640 G",
+   "envase": 640,
+   "url": "https://compraonline.condis.es/tronquito-condis-merluza-640-g/p/182759/es_ES"
+  },
+  "gambas": {
+   "ref": "492089",
+   "nombre": "Gamba Pelada Gr Bolsa",
+   "envase": 650,
+   "url": "https://compraonline.condis.es/gamba-pelada-gr-bolsa/p/492089/es_ES"
+  },
+  "calamar": {
+   "ref": "182762",
+   "nombre": "Anilla Condis De Pota 360 G",
+   "envase": 360,
+   "url": "https://compraonline.condis.es/anilla-condis-de-pota-360-g/p/182762/es_ES"
+  },
+  "brocoli": {
+   "ref": "180114",
+   "nombre": "Brócoli Findus 360 G",
+   "envase": 360,
+   "url": "https://compraonline.condis.es/brócoli-findus-360-g/p/180114/es_ES"
+  },
+  "espinacas": {
+   "ref": "180216",
+   "nombre": "Espinacas Findus Hojas 400 G",
+   "envase": 400,
+   "url": "https://compraonline.condis.es/espinacas-findus-hojas-400-g/p/180216/es_ES"
+  },
+  "judias": {
+   "ref": "180091",
+   "nombre": "Judías Verdes Condis Redondas Troceadas 1 Kg",
+   "envase": 1000,
+   "url": "https://compraonline.condis.es/judías-verdes-condis-redondas-troceadas-1-kg/p/180091/es_ES"
+  },
+  "salteado": {
+   "ref": "180110",
+   "nombre": "Salteado Condis Tradicional 450 G",
+   "envase": 450,
+   "url": "https://compraonline.condis.es/salteado-condis-tradicional-450-g/p/180110/es_ES"
+  },
+  "guisantes": {
+   "ref": "180072",
+   "nombre": "Guisantes Condis 1 Kg",
+   "envase": 1000,
+   "url": "https://compraonline.condis.es/guisantes-condis--1-kg/p/180072/es_ES"
+  },
+  "huevos": {
+   "ref": "170606",
+   "nombre": "Huevos Condis Gallina Criada En Suelo L 12 Unidades",
+   "envase": 12,
+   "url": "https://compraonline.condis.es/huevos-condis-gallina-criada-en-suelo-l-12-unidades/p/170606/es_ES"
+  },
+  "queso": {
+   "ref": "345019",
+   "nombre": "Queso Rallado Condis Mozzarella 200 G",
+   "envase": 200,
+   "url": "https://compraonline.condis.es/queso-rallado-condis-mozzarella-200-g/p/345019/es_ES"
+  },
+  "pimiento": {
+   "ref": "191688",
+   "nombre": "Pimiento Rojo 2 Unidades 650G Aprox.",
+   "envase": 650,
+   "url": "https://compraonline.condis.es/pimiento-rojo-2-unidades-650g-aprox./p/191688/es_ES",
+   "aprox": true
+  },
+  "calabacin": {
+   "ref": "191089",
+   "nombre": "Calabacín 2 Unidades 600G Aprox.",
+   "envase": 600,
+   "url": "https://compraonline.condis.es/calabacín-2-unidades-600g-aprox./p/191089/es_ES",
+   "aprox": true
+  },
+  "zanahoria": {
+   "ref": "191086",
+   "nombre": "Zanahoria Condis Bolsa 500 G",
+   "envase": 500,
+   "url": "https://compraonline.condis.es/zanahoria-condis-bolsa-500-g/p/191086/es_ES"
+  },
+  "tomate": {
+   "ref": "191825",
+   "nombre": "Tomate De Pera 6 Unidades 700G Aprox.",
+   "envase": 700,
+   "url": "https://compraonline.condis.es/tomate-de-pera-6-unidades-700g-aprox./p/191825/es_ES",
+   "aprox": true
+  },
+  "ensalada": {
+   "ref": "194454",
+   "nombre": "Ensalada Hc Maxi Gourmet 300 G",
+   "envase": 300,
+   "url": "https://compraonline.condis.es/ensalada-hc-maxi-gourmet-300-g/p/194454/es_ES"
+  },
+  "champi": {
+   "ref": "191083",
+   "nombre": "Champiñón Condis Laminado Bandeja 250 G",
+   "envase": 250,
+   "url": "https://compraonline.condis.es/champiñón-condis-laminado-bandeja-250-g/p/191083/es_ES"
+  },
+  "limon": {
+   "ref": "190485",
+   "nombre": "Limón 2 Unidades 250G Aprox.",
+   "envase": 250,
+   "url": "https://compraonline.condis.es/limón-2-unidades-250g-aprox./p/190485/es_ES",
+   "aprox": true
+  },
+  "yogur": {
+   "ref": "782162",
+   "nombre": "Yogur Alteza Natural 4 X 125 G",
+   "envase": 4,
+   "url": "https://compraonline.condis.es/yogur-alteza-natural-4-x-125-g/p/782162/es_ES"
+  },
+  "pan_rallado": {
+   "ref": "119007",
+   "nombre": "Pan Condis Rallado 500 G",
+   "envase": 500,
+   "url": "https://compraonline.condis.es/pan-condis-rallado-500-g/p/119007/es_ES"
+  },
+  "jamon": {
+   "ref": "355563",
+   "nombre": "Jamon Cocido Condis 90% Carne 150 G",
+   "envase": 150,
+   "url": "https://compraonline.condis.es/jamon-cocido-condis-90%-carne-150-g/p/355563/es_ES"
+  },
+  "fideos": {
+   "ref": "121148",
+   "nombre": "Pasta Condis Fideo Cazuela N 4 500 G",
+   "envase": 500,
+   "url": "https://compraonline.condis.es/pasta-condis-fideo-cazuela-n-4-500-g/p/121148/es_ES"
+  },
+  "caldo_pollo": {
+   "ref": "116056",
+   "nombre": "Caldo Condis Pollo Brik 1 L",
+   "envase": 1000,
+   "url": "https://compraonline.condis.es/caldo-condis-pollo-brik-1-l/p/116056/es_ES"
+  },
+  "caldo_pescado": {
+   "ref": "116371",
+   "nombre": "Caldo Condis Pescado 1 L",
+   "envase": 1000,
+   "url": "https://compraonline.condis.es/caldo-condis-pescado-1-l/p/116371/es_ES"
+  },
+  "pavo": {
+   "ref": "15676",
+   "nombre": "Filete Extrafino Pechuga Pavo 500G Aprox.",
+   "envase": 500,
+   "url": "https://compraonline.condis.es/filete-extrafino-pechuga-pavo-500g-aprox./p/15676/es_ES",
+   "aprox": true
+  },
+  "burger_pavo": {
+   "ref": "15549",
+   "nombre": "Burger Pavo Y Espinacas 240G",
+   "envase": 2,
+   "url": "https://compraonline.condis.es/burger-pavo-y-espinacas-240g/p/15549/es_ES"
+  },
+  "ternera": {
+   "ref": "11434",
+   "nombre": "Bistec 1ªb Ternera Cortado 450 G",
+   "envase": 450,
+   "url": "https://compraonline.condis.es/bistec-1ªb--ternera-cortado-450-g/p/11434/es_ES",
+   "aprox": true
+  },
+  "lasana": {
+   "ref": "121985",
+   "nombre": "Lasaña Gallo Placas Horno 224 G",
+   "envase": 224,
+   "url": "https://compraonline.condis.es/lasaña-gallo-placas-horno-224-g/p/121985/es_ES"
+  },
+  "bacalao": {
+   "ref": "182869",
+   "nombre": "Filetes Condis Bacalao 300 G",
+   "envase": 300,
+   "url": "https://compraonline.condis.es/filetes-condis-bacalao-300-g/p/182869/es_ES"
+  },
+  "nata": {
+   "ref": "304018",
+   "nombre": "Nata Cocina Condis 15% 200 Ml 3 Unidades",
+   "envase": 600,
+   "url": "https://compraonline.condis.es/nata-cocina-condis-15%-200-ml-3-unidades/p/304018/es_ES"
+  },
+  "mostaza": {
+   "ref": "110015",
+   "nombre": "Mostaza Maille Dijon Original 215 G",
+   "envase": 215,
+   "url": "https://compraonline.condis.es/mostaza-maille-dijon-original-215-g/p/110015/es_ES"
+  },
+  "edamame": {
+   "ref": "781951",
+   "nombre": "Edamame Sushi King Bolsa 400 G",
+   "envase": 400,
+   "url": "https://compraonline.condis.es/edamame-sushi-king-bolsa-400-g/p/781951/es_ES"
+  },
+  "esparragos": {
+   "ref": "191149",
+   "nombre": "Espárragos Trigueros 250 G",
+   "envase": 250,
+   "url": "https://compraonline.condis.es/espárragos--trigueros-250-g/p/191149/es_ES"
+  },
+  "bonito": {
+   "ref": "536167",
+   "nombre": "Bonito Condis Aceite Oliva 140 G",
+   "envase": 140,
+   "url": "https://compraonline.condis.es/bonito-condis-aceite-oliva-140-g/p/536167/es_ES"
+  },
+  "caballa": {
+   "ref": "545087",
+   "nombre": "Filete Caballa Alteza Aceite Oliva 65 G",
+   "envase": 65,
+   "url": "https://compraonline.condis.es/filete-caballa-alteza-aceite-oliva-65-g/p/545087/es_ES"
+  },
+  "sardinas": {
+   "ref": "545088",
+   "nombre": "Sardina Alteza Aceite Oliva 84 G",
+   "envase": 84,
+   "url": "https://compraonline.condis.es/sardina-alteza-aceite-oliva-84-g/p/545088/es_ES"
+  },
+  "pan_integral": {
+   "ref": "213154",
+   "nombre": "Pan Molde Condis Integral 460 G",
+   "envase": 16,
+   "url": "https://compraonline.condis.es/pan-molde-condis-integral-460-g/p/213154/es_ES",
+   "aprox": true
+  },
+  "langostinos": {
+   "ref": "182552",
+   "nombre": "Colas Royal De Langostinos 280 G",
+   "envase": 280,
+   "url": "https://compraonline.condis.es/colas-royal-de-langostinos-280-g/p/182552/es_ES"
+  },
+  "masa_empanadilla": {
+   "ref": "181450",
+   "nombre": "Obleas Buitoni 16 Unidades 160 G",
+   "envase": 16,
+   "url": "https://compraonline.condis.es/obleas-buitoni-16-unidades-160-g/p/181450/es_ES"
+  },
+  "hummus": {
+   "ref": "122218",
+   "nombre": "Hummus Condis Receta Clásica 200 G",
+   "envase": 200,
+   "url": "https://compraonline.condis.es/hummus-condis-receta-clásica-200-g/p/122218/es_ES"
+  },
+  "noquis": {
+   "ref": "121847",
+   "nombre": "Gnocchi Condis Patata 500 G",
+   "envase": 500,
+   "url": "https://compraonline.condis.es/gnocchi-condis-patata-500-g/p/121847/es_ES"
+  },
+  "berenjena": {
+   "ref": "191050",
+   "nombre": "Berenjena 2 Unidades 700G Aprox.",
+   "envase": 700,
+   "url": "https://compraonline.condis.es/berenjena-2-unidades-700g-aprox./p/191050/es_ES",
+   "aprox": true
+  },
+  "quinoa": {
+   "ref": "103051",
+   "nombre": "Quinoa Blanca Y Roja Brillante 250 G",
+   "envase": 250,
+   "url": "https://compraonline.condis.es/quinoa-blanca-y-roja-brillante-250-g/p/103051/es_ES"
+  },
+  "copos_maiz": {
+   "ref": "121466",
+   "nombre": "Cereales Condis Corn Flakes 500 G",
+   "envase": 500,
+   "url": "https://compraonline.condis.es/cereales-condis-corn-flakes-500-g/p/121466/es_ES"
+  },
+  "pesto": {
+   "ref": "110265",
+   "nombre": "Salsa Gallo Pesto 190 G",
+   "envase": 190,
+   "url": "https://compraonline.condis.es/salsa-gallo-pesto-190-g/p/110265/es_ES"
+  },
+  "salchichas": {
+   "ref": "370075",
+   "nombre": "Salchichas Campofrio Frankfurt 140 G",
+   "envase": 140,
+   "url": "https://compraonline.condis.es/salchichas-campofrio-frankfurt-140-g/p/370075/es_ES"
+  },
+  "pina": {
+   "ref": "509076",
+   "nombre": "Piña Condis En Su Jugo 3 Unidades",
+   "envase": 420,
+   "url": "https://compraonline.condis.es/piña-condis-en-su-jugo-3-unidades/p/509076/es_ES"
+  },
+  "leche": {
+   "ref": "704048",
+   "nombre": "Leche Condis Semidesnatada 1 L",
+   "envase": 1000,
+   "url": "https://compraonline.condis.es/leche-condis-semidesnatada-1-l/p/704048/es_ES"
+  },
+  "calabaza": {
+   "ref": "190292",
+   "nombre": "Calabaza Pelada Trozos 600 G",
+   "envase": 600,
+   "url": "https://compraonline.condis.es/calabaza-pelada-trozos-600-g/p/190292/es_ES"
+  },
+  "gazpacho": {
+   "ref": "117109",
+   "nombre": "Alvalle Gazpacho Original 1L",
+   "envase": 1000,
+   "url": "https://compraonline.condis.es/alvalle-gazpacho-original-1l/p/117109/es_ES"
+  },
+  "anacardos": {
+   "ref": "190303",
+   "nombre": "Anacardo Crudo 200G",
+   "envase": 200,
+   "url": "https://compraonline.condis.es/anacardo-crudo-200g/p/190303/es_ES",
+   "aprox": true
+  },
+  "feta": {
+   "ref": "320032",
+   "nombre": "Queso Feta Patros Griego 150 G",
+   "envase": 150,
+   "url": "https://compraonline.condis.es/queso-feta-patros-griego-150-g/p/320032/es_ES"
+  },
+  "manzana": {
+   "ref": "190530",
+   "nombre": "Manzana Golden 4 Unidades 800G Aprox.",
+   "envase": 800,
+   "url": "https://compraonline.condis.es/manzana-golden-4-unidades-800g-aprox./p/190530/es_ES",
+   "aprox": true
+  },
+  "pan_burger": {
+   "ref": "211096",
+   "nombre": "Bocatas Condis Burger 4 Unidades 300 G",
+   "envase": 4,
+   "url": "https://compraonline.condis.es/bocatas-condis-burger-4-unidades-300-g/p/211096/es_ES"
+  }
+ },
+ "sin_equivalente": [
+  "coco",
+  "picada_pollo",
+  "fideos_arroz",
+  "alubias_rojas",
+  "emperador",
+  "teriyaki",
+  "pasta_lentejas",
+  "tinta",
+  "solomillo",
+  "dorada"
+ ]
+}

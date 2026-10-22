@@ -1,0 +1,508 @@
+{
+  "super": "dia",
+  "comprobado": "2026-10-22",
+  "productos": {
+    "arroz": {
+      "ref": "151",
+      "nombre": "Arroz extra Dia Arrozona 1 Kg",
+      "envase": 1000,
+      "url": "https://www.dia.es/arroz-pastas-y-legumbres/arroz/p/151"
+    },
+    "pasta": {
+      "ref": "50973",
+      "nombre": "Macarrones Dia Al Diante 1 Kg",
+      "envase": 1000,
+      "url": "https://www.dia.es/arroz-pastas-y-legumbres/macarrones-espaguetis-y-pastas-secas/p/50973"
+    },
+    "espaguetis": {
+      "ref": "52208",
+      "nombre": "Espagueti Dia Al Diante 1 Kg",
+      "envase": 1000,
+      "url": "https://www.dia.es/arroz-pastas-y-legumbres/macarrones-espaguetis-y-pastas-secas/p/52208"
+    },
+    "cuscus": {
+      "ref": "310270",
+      "nombre": "Cous Cous Dia Al Diante 500 g",
+      "envase": 500,
+      "url": "https://www.dia.es/arroz-pastas-y-legumbres/quinoa-couscous-y-soja/p/310270"
+    },
+    "lentejas": {
+      "ref": "58809",
+      "nombre": "Lentejas cocidas Dia Vegecampo 400 g",
+      "envase": 400,
+      "url": "https://www.dia.es/arroz-pastas-y-legumbres/lentejas/p/58809"
+    },
+    "garbanzos": {
+      "ref": "1232",
+      "nombre": "Garbanzos cocidos Dia Vegecampo 400 g",
+      "envase": 400,
+      "url": "https://www.dia.es/arroz-pastas-y-legumbres/garbanzos-y-alubias/p/1232"
+    },
+    "alubias": {
+      "ref": "1233",
+      "nombre": "Alubias blancas cocidas Dia Vegecampo 400 g",
+      "envase": 400,
+      "url": "https://www.dia.es/arroz-pastas-y-legumbres/garbanzos-y-alubias/p/1233"
+    },
+    "tomate_tri": {
+      "ref": "13105",
+      "nombre": "Tomate triturado Dia Vegecampo 800 g",
+      "envase": 800,
+      "url": "https://www.dia.es/aceites-salsas-y-especias/salsas-de-tomate-y-pasta/p/13105"
+    },
+    "tomate_frito": {
+      "ref": "10677",
+      "nombre": "Tomate frito Dia Vegecampo 550 g",
+      "envase": 550,
+      "url": "https://www.dia.es/aceites-salsas-y-especias/salsas-de-tomate-y-pasta/p/10677"
+    },
+    "atun": {
+      "ref": "262434",
+      "nombre": "Atún claro en aceite de oliva Dia Mari Marinera 3 x 60 g",
+      "envase": 180,
+      "url": "https://www.dia.es/conservas-caldos-y-cremas/atun-y-bonito/p/262434"
+    },
+    "maiz": {
+      "ref": "47592",
+      "nombre": "Maíz dulce Dia Vegecampo 3 x 140 g",
+      "envase": 420,
+      "url": "https://www.dia.es/conservas-caldos-y-cremas/conservas-de-verdura/p/47592"
+    },
+    "tortillas": {
+      "ref": "13356",
+      "nombre": "Tortillas de trigo Dia Al Punto 320 g",
+      "envase": 8,
+      "url": "https://www.dia.es/panaderia/tortillas-de-trigo-y-pitas/p/13356"
+    },
+    "cebolla": {
+      "ref": "11459",
+      "nombre": "Cebolla malla 1 kg",
+      "envase": 1000,
+      "url": "https://www.dia.es/verduras/ajos-cebollas-y-puerros/p/11459"
+    },
+    "patata": {
+      "ref": "248458",
+      "nombre": "Patatas para freir 2 Kg",
+      "envase": 2000,
+      "url": "https://www.dia.es/verduras/patatas-y-zanahorias/p/248458"
+    },
+    "boniato": {
+      "ref": "60753",
+      "nombre": "Batata unidad 800 g aprox.",
+      "envase": 800,
+      "url": "https://www.dia.es/verduras/patatas-y-zanahorias/p/60753",
+      "aprox": true
+    },
+    "ajo": {
+      "ref": "17653",
+      "nombre": "Ajos malla 250 g",
+      "envase": 250,
+      "url": "https://www.dia.es/verduras/ajos-cebollas-y-puerros/p/17653"
+    },
+    "pechuga": {
+      "ref": "43225",
+      "nombre": "Filetes de pechuga de pollo amarillo Selección de Dia 550 g aprox.",
+      "envase": 550,
+      "url": "https://www.dia.es/carnes/pollo/p/43225",
+      "aprox": true
+    },
+    "muslos": {
+      "ref": "261364",
+      "nombre": "Filetes de contramuslo de pollo Selección de Dia 750 g aprox.",
+      "envase": 750,
+      "url": "https://www.dia.es/carnes/pollo/p/261364",
+      "aprox": true
+    },
+    "picada": {
+      "ref": "261241",
+      "nombre": "Carne picada de vacuno y cerdo Selección de Dia 500 g",
+      "envase": 500,
+      "url": "https://www.dia.es/carnes/hamburguesas-carne-picada-y-albondigas/p/261241"
+    },
+    "picada_pollo": {
+      "ref": "291140",
+      "nombre": "Carne picada de pollo Selección de Dia 365 g",
+      "envase": 365,
+      "url": "https://www.dia.es/carnes/hamburguesas-carne-picada-y-albondigas/p/291140"
+    },
+    "lomo": {
+      "ref": "290994",
+      "nombre": "Filete de cinta de lomo Selección de Dia 500 g aprox.",
+      "envase": 500,
+      "url": "https://www.dia.es/carnes/cerdo/p/290994",
+      "aprox": true
+    },
+    "burger": {
+      "ref": "313131",
+      "nombre": "Burger de pollo 6 unidades Gremlins Selección de Dia 540 g",
+      "envase": 6,
+      "url": "https://www.dia.es/carnes/hamburguesas-carne-picada-y-albondigas/p/313131"
+    },
+    "salmon": {
+      "ref": "274390",
+      "nombre": "Lomos de salmón Dia Selección Mundial 250 g",
+      "envase": 250,
+      "url": "https://www.dia.es/pescados-y-mariscos/congelado/p/274390"
+    },
+    "merluza": {
+      "ref": "72170",
+      "nombre": "Filetes de merluza del cabo sin piel MSC Dia Mari Marinera 600 g",
+      "envase": 600,
+      "url": "https://www.dia.es/congelados-y-helados/pescado-y-marisco/p/72170"
+    },
+    "gambas": {
+      "ref": "269059",
+      "nombre": "Gambas peladas y crudas medianas Dia Mari Marinera 350 g",
+      "envase": 350,
+      "url": "https://www.dia.es/pescados-y-mariscos/marisco-gamba-y-calamar/p/269059"
+    },
+    "calamar": {
+      "ref": "286539",
+      "nombre": "Calamar troceado Dia Mari Marinera 450 g",
+      "envase": 450,
+      "url": "https://www.dia.es/pescados-y-mariscos/marisco-gamba-y-calamar/p/286539"
+    },
+    "brocoli": {
+      "ref": "264185",
+      "nombre": "Brócoli Dia Vegecampo 900 g",
+      "envase": 900,
+      "url": "https://www.dia.es/congelados-y-helados/verduras-y-patatas/p/264185"
+    },
+    "espinacas": {
+      "ref": "263820",
+      "nombre": "Espinacas cortadas Dia Vegecampo 450 g",
+      "envase": 450,
+      "url": "https://www.dia.es/congelados-y-helados/verduras-y-patatas/p/263820"
+    },
+    "judias": {
+      "ref": "264698",
+      "nombre": "Judías verdes redondas Dia Vegecampo 1 Kg",
+      "envase": 1000,
+      "url": "https://www.dia.es/congelados-y-helados/verduras-y-patatas/p/264698"
+    },
+    "salteado": {
+      "ref": "267132",
+      "nombre": "Salteado de verduras Dia Al Punto 400 g",
+      "envase": 400,
+      "url": "https://www.dia.es/congelados-y-helados/verduras-y-patatas/p/267132"
+    },
+    "guisantes": {
+      "ref": "263266",
+      "nombre": "Guisantes finos Dia Vegecampo 1 Kg",
+      "envase": 1000,
+      "url": "https://www.dia.es/congelados-y-helados/verduras-y-patatas/p/263266"
+    },
+    "huevos": {
+      "ref": "306230",
+      "nombre": "Huevos grandes L de gallinas criadas en suelo Dia 12 unidades",
+      "envase": 12,
+      "url": "https://www.dia.es/huevos-leche-y-mantequilla/huevos/p/306230"
+    },
+    "queso": {
+      "ref": "13096",
+      "nombre": "Queso mozzarella rallado Dia Láctea 200 g",
+      "envase": 200,
+      "url": "https://www.dia.es/quesos/rallado/p/13096"
+    },
+    "pimiento": {
+      "ref": "74",
+      "nombre": "Pimiento rojo unidad 350 g aprox.",
+      "envase": 350,
+      "url": "https://www.dia.es/verduras/tomates-pimientos-y-pepinos/p/74",
+      "aprox": true
+    },
+    "calabacin": {
+      "ref": "93",
+      "nombre": "Calabacín unidad 650 g aprox.",
+      "envase": 650,
+      "url": "https://www.dia.es/verduras/calabacin-calabaza-y-berenjena/p/93",
+      "aprox": true
+    },
+    "zanahoria": {
+      "ref": "11421",
+      "nombre": "Zanahoria 1 Kg",
+      "envase": 1000,
+      "url": "https://www.dia.es/verduras/patatas-y-zanahorias/p/11421"
+    },
+    "tomate": {
+      "ref": "45863",
+      "nombre": "Tomate pera granel 900 g aprox.",
+      "envase": 900,
+      "url": "https://www.dia.es/verduras/tomates-pimientos-y-pepinos/p/45863",
+      "aprox": true
+    },
+    "ensalada": {
+      "ref": "105299",
+      "nombre": "Ensalada 4 estaciones Dia Vegecampo 200 g",
+      "envase": 200,
+      "url": "https://www.dia.es/verduras/lechugas-y-hojas-verdes/p/105299"
+    },
+    "champi": {
+      "ref": "25857",
+      "nombre": "Champiñón laminado bandeja 250 g",
+      "envase": 250,
+      "url": "https://www.dia.es/verduras/setas-y-champinones/p/25857"
+    },
+    "limon": {
+      "ref": "11463",
+      "nombre": "Limones malla 750 g",
+      "envase": 750,
+      "url": "https://www.dia.es/frutas/naranjas-mandarinas-y-limones/p/11463"
+    },
+    "yogur": {
+      "ref": "310847",
+      "nombre": "Yogur natural Dia Láctea 6 x 125 g",
+      "envase": 6,
+      "url": "https://www.dia.es/yogures-y-postres/yogures-naturales-y-desnatados/p/310847"
+    },
+    "pan_rallado": {
+      "ref": "56050",
+      "nombre": "Pan rallado El Molino de Dia 750 g",
+      "envase": 750,
+      "url": "https://www.dia.es/panaderia/pan-rallado-tostado-y-picos/p/56050"
+    },
+    "jamon": {
+      "ref": "300419",
+      "nombre": "Jamón cocido extra Dia Nuestra Alacena 250 g",
+      "envase": 250,
+      "url": "https://www.dia.es/charcuteria/jamon-cocido/p/300419"
+    },
+    "fideos": {
+      "ref": "290665",
+      "nombre": "Fideo grueso Dia Al Diante 500 g",
+      "envase": 500,
+      "url": "https://www.dia.es/arroz-pastas-y-legumbres/fideos/p/290665"
+    },
+    "caldo_pollo": {
+      "ref": "54127",
+      "nombre": "Caldo de pollo Dia Al Punto 1 L",
+      "envase": 1000,
+      "url": "https://www.dia.es/conservas-caldos-y-cremas/caldos-y-sopas/p/54127"
+    },
+    "caldo_pescado": {
+      "ref": "27865",
+      "nombre": "Caldo de pescado Dia Al Punto 1 L",
+      "envase": 1000,
+      "url": "https://www.dia.es/conservas-caldos-y-cremas/caldos-y-sopas/p/27865"
+    },
+    "pavo": {
+      "ref": "261349",
+      "nombre": "Filetes de pechuga de pavo Selección de Dia 700 g aprox.",
+      "envase": 700,
+      "url": "https://www.dia.es/carnes/pavo-y-conejo/p/261349",
+      "aprox": true
+    },
+    "fideos_arroz": {
+      "ref": "258837",
+      "nombre": "Noodles de arroz Dia Selección Mundial 200 g",
+      "envase": 200,
+      "url": "https://www.dia.es/arroz-pastas-y-legumbres/noodles/p/258837"
+    },
+    "solomillo": {
+      "ref": "11077",
+      "nombre": "Solomillo de cerdo Selección de Dia 700 g aprox.",
+      "envase": 700,
+      "url": "https://www.dia.es/carnes/cerdo/p/11077",
+      "aprox": true
+    },
+    "ternera": {
+      "ref": "181288",
+      "nombre": "Filete 1º de vacuno Selección de Dia 480 g aprox.",
+      "envase": 480,
+      "url": "https://www.dia.es/carnes/vacuno/p/181288",
+      "aprox": true
+    },
+    "alubias_rojas": {
+      "ref": "210523",
+      "nombre": "Alubias rojas cocidas Dia Vegecampo 400 g",
+      "envase": 400,
+      "url": "https://www.dia.es/arroz-pastas-y-legumbres/garbanzos-y-alubias/p/210523"
+    },
+    "lasana": {
+      "ref": "39200",
+      "nombre": "Placas para lasaña El pavo 200 g",
+      "envase": 200,
+      "url": "https://www.dia.es/arroz-pastas-y-legumbres/lasana-y-canelones/p/39200"
+    },
+    "bacalao": {
+      "ref": "4542",
+      "nombre": "Filetes de bacalao MSC Dia Mari Marinera 360 g",
+      "envase": 360,
+      "url": "https://www.dia.es/pescados-y-mariscos/congelado/p/4542"
+    },
+    "teriyaki": {
+      "ref": "308326",
+      "nombre": "Salsa teriyaki Maggi 355 g",
+      "envase": 300,
+      "url": "https://www.dia.es/aceites-salsas-y-especias/salsas-especiales-y-picantes/p/308326",
+      "aprox": true
+    },
+    "nata": {
+      "ref": "310686",
+      "nombre": "Nata para cocinar 15% M.G. Dia Láctea 3 x 200 ml",
+      "envase": 600,
+      "url": "https://www.dia.es/huevos-leche-y-mantequilla/nata/p/310686"
+    },
+    "mostaza": {
+      "ref": "139856",
+      "nombre": "Mostaza Dijon original Maille 215 g",
+      "envase": 215,
+      "url": "https://www.dia.es/aceites-salsas-y-especias/ketchup-mayonesa-y-mostaza/p/139856"
+    },
+    "esparragos": {
+      "ref": "181571",
+      "nombre": "Espárrago verde fino manojo aprox. 250 g",
+      "envase": 250,
+      "url": "https://www.dia.es/verduras/lechugas-y-hojas-verdes/p/181571",
+      "aprox": true
+    },
+    "bonito": {
+      "ref": "296414",
+      "nombre": "Bonito del norte en trozos Dia Mari Marinera 3 x 52 g",
+      "envase": 156,
+      "url": "https://www.dia.es/conservas-caldos-y-cremas/atun-y-bonito/p/296414"
+    },
+    "caballa": {
+      "ref": "284386",
+      "nombre": "Filetes de caballa del sur en aceite de oliva Dia Mari Marinera 85 g",
+      "envase": 85,
+      "url": "https://www.dia.es/conservas-caldos-y-cremas/caballa-y-sardinas/p/284386"
+    },
+    "sardinas": {
+      "ref": "182509",
+      "nombre": "Sardinillas en aceite de oliva Dia Mari Marinera 2 x 65 g",
+      "envase": 130,
+      "url": "https://www.dia.es/conservas-caldos-y-cremas/caballa-y-sardinas/p/182509"
+    },
+    "pan_integral": {
+      "ref": "266075",
+      "nombre": "Pan de molde trigo integral El Molino de Dia 820 g",
+      "envase": 28,
+      "url": "https://www.dia.es/panaderia/pan-de-molde-y-especiales/p/266075",
+      "aprox": true
+    },
+    "langostinos": {
+      "ref": "148888",
+      "nombre": "Colas de gambón pelado crudo Dia Mari Marinera 200 g",
+      "envase": 200,
+      "url": "https://www.dia.es/pescados-y-mariscos/marisco-gamba-y-calamar/p/148888"
+    },
+    "masa_empanadilla": {
+      "ref": "545",
+      "nombre": "Masa para empanadillas y postres Buitoni 160 g",
+      "envase": 16,
+      "url": "https://www.dia.es/panaderia/masas-y-hojaldres/p/545"
+    },
+    "pasta_lentejas": {
+      "ref": "305754",
+      "nombre": "Espirales 100% de lenteja roja Dia Al Diante 250 g",
+      "envase": 250,
+      "url": "https://www.dia.es/arroz-pastas-y-legumbres/macarrones-espaguetis-y-pastas-secas/p/305754"
+    },
+    "hummus": {
+      "ref": "278849",
+      "nombre": "Hummus clásico Dia Al Punto 220 g",
+      "envase": 220,
+      "url": "https://www.dia.es/platos-preparados-y-pizzas/hummus-y-guacamoles/p/278849"
+    },
+    "noquis": {
+      "ref": "304384",
+      "nombre": "Gnocchi de patata Dia Selección Mundial 500 g",
+      "envase": 500,
+      "url": "https://www.dia.es/arroz-pastas-y-legumbres/pastas-rellenas-y-en-salsa/p/304384"
+    },
+    "berenjena": {
+      "ref": "190830",
+      "nombre": "Berenjena unidad",
+      "envase": 300,
+      "url": "https://www.dia.es/verduras/calabacin-calabaza-y-berenjena/p/190830",
+      "aprox": true
+    },
+    "quinoa": {
+      "ref": "222177",
+      "nombre": "Vasos de quinoa blanca y roja Brillante 2 x 125 g",
+      "envase": 250,
+      "url": "https://www.dia.es/arroz-pastas-y-legumbres/quinoa-couscous-y-soja/p/222177"
+    },
+    "dorada": {
+      "ref": "298039",
+      "nombre": "Filetes de dorada Selección de Dia 300 g aprox.",
+      "envase": 300,
+      "url": "https://www.dia.es/pescados-y-mariscos/fresco/p/298039",
+      "aprox": true
+    },
+    "copos_maiz": {
+      "ref": "66956",
+      "nombre": "Cereales copos de maíz corn flakes Gran Dia 500 g",
+      "envase": 500,
+      "url": "https://www.dia.es/galletas-cereales-y-mermeladas/cereales/p/66956"
+    },
+    "pesto": {
+      "ref": "285506",
+      "nombre": "Pesto verde Dia Salseo 185 g",
+      "envase": 185,
+      "url": "https://www.dia.es/aceites-salsas-y-especias/salsas-de-tomate-y-pasta/p/285506"
+    },
+    "salchichas": {
+      "ref": "312797",
+      "nombre": "Salchichas Frankfurt de pavo Dia Funky Frank 4 x 140 g",
+      "envase": 560,
+      "url": "https://www.dia.es/charcuteria/salchichas/p/312797"
+    },
+    "pina": {
+      "ref": "1807",
+      "nombre": "Piña en su jugo en rodajas Dia Fruticampo 3 x 137 g",
+      "envase": 411,
+      "url": "https://www.dia.es/conservas-caldos-y-cremas/conservas-de-fruta/p/1807"
+    },
+    "leche": {
+      "ref": "504",
+      "nombre": "Leche semidesnatada Dia Láctea 1 L",
+      "envase": 1000,
+      "url": "https://www.dia.es/huevos-leche-y-mantequilla/leche/p/504"
+    },
+    "calabaza": {
+      "ref": "278899",
+      "nombre": "Calabaza cortada a trozos al vacío 500 g",
+      "envase": 500,
+      "url": "https://www.dia.es/verduras/calabacin-calabaza-y-berenjena/p/278899"
+    },
+    "gazpacho": {
+      "ref": "43231",
+      "nombre": "Gazpacho Dia Al Punto 1 L",
+      "envase": 1000,
+      "url": "https://www.dia.es/platos-preparados-y-pizzas/gazpachos-y-salmorejos/p/43231"
+    },
+    "anacardos": {
+      "ref": "271641",
+      "nombre": "Anacardos al natural Dia Naturmundo 200 g",
+      "envase": 200,
+      "url": "https://www.dia.es/aperitivos-y-frutos-secos/frutos-secos/p/271641"
+    },
+    "feta": {
+      "ref": "309064",
+      "nombre": "Queso feta D.O.P. en dados Dia Selección Mundial 150 g",
+      "envase": 150,
+      "url": "https://www.dia.es/quesos/fresco/p/309064"
+    },
+    "manzana": {
+      "ref": "171233",
+      "nombre": "Manzana Golden 1 Kg",
+      "envase": 1000,
+      "url": "https://www.dia.es/frutas/manzanas-y-peras/p/171233"
+    },
+    "pan_burger": {
+      "ref": "313069",
+      "nombre": "Pan de hamburguesa maxi Gremlins El Molino de Dia 300 g",
+      "envase": 4,
+      "url": "https://www.dia.es/panaderia/pan-para-hamburguesas-y-perritos/p/313069"
+    }
+  },
+  "sin_equivalente": [
+    "coco",
+    "burger_pavo",
+    "emperador",
+    "edamame",
+    "tinta"
+  ]
+}

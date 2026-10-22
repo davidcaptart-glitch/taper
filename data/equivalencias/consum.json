@@ -1,0 +1,551 @@
+{
+  "super": "consum",
+  "comprobado": "2026-10-22",
+  "productos": {
+    "arroz": {
+      "ref": "7022762",
+      "nombre": "Arroz Redondo Extra Origen España 1 Kg",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/arroz-redondo-extra-origen-espana/7022762"
+    },
+    "pasta": {
+      "ref": "7259104",
+      "nombre": "Macarrones Paquete 1 Kg",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/macarrones-paquete/7259104"
+    },
+    "espaguetis": {
+      "ref": "7262488",
+      "nombre": "Spaghetti Paquete 1 Kg",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/spaghetti-paquete/7262488"
+    },
+    "cuscus": {
+      "ref": "7427672",
+      "nombre": "Cous Cous 1 Kg",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/cous-cous/7427672"
+    },
+    "lentejas": {
+      "ref": "7043982",
+      "nombre": "Lenteja Pardina Cocida Frasco 400 Gr",
+      "envase": 400,
+      "url": "https://tienda.consum.es/es/p/lenteja-pardina-cocida-frasco/7043982"
+    },
+    "garbanzos": {
+      "ref": "7043987",
+      "nombre": "Garbanzo Cocido Frasco 400 Gr",
+      "envase": 400,
+      "url": "https://tienda.consum.es/es/p/garbanzo-cocido-frasco/7043987"
+    },
+    "alubias": {
+      "ref": "7043979",
+      "nombre": "Alubia Blanca Cocida Frasco 400 Gr",
+      "envase": 400,
+      "url": "https://tienda.consum.es/es/p/alubia-blanca-cocida-frasco/7043979"
+    },
+    "tomate_tri": {
+      "ref": "7029213",
+      "nombre": "Tomate Triturado Lata 800 Gr",
+      "envase": 800,
+      "url": "https://tienda.consum.es/es/p/tomate-triturado-lata/7029213"
+    },
+    "tomate_frito": {
+      "ref": "7029218",
+      "nombre": "Tomate Frito Frasco 550 Gr",
+      "envase": 550,
+      "url": "https://tienda.consum.es/es/p/tomate-frito-frasco/7029218"
+    },
+    "atun": {
+      "ref": "7046092",
+      "nombre": "Atún Claro Aceite Girasol Pack de 3 3 x 52 Gr",
+      "envase": 156,
+      "url": "https://tienda.consum.es/es/p/atun-claro-aceite-girasol-pack-de-3/7046092"
+    },
+    "coco": {
+      "ref": "7311207",
+      "nombre": "Jugo de Coco para Cocinar Lata 400 ml",
+      "envase": 400,
+      "url": "https://tienda.consum.es/es/p/jugo-de-coco-para-cocinar-lata/7311207"
+    },
+    "maiz": {
+      "ref": "7301708",
+      "nombre": "Maíz Dulce Lata Pack de 3 3 x 140 Gr",
+      "envase": 420,
+      "url": "https://tienda.consum.es/es/p/maiz-dulce-lata-pack-de-3/7301708"
+    },
+    "tortillas": {
+      "ref": "7392264",
+      "nombre": "Tortillas Wrap de Trigo 6 Unidades 360 Gr",
+      "envase": 6,
+      "url": "https://tienda.consum.es/es/p/tortillas-wrap-de-trigo-6-unidades/7392264"
+    },
+    "cebolla": {
+      "ref": "76018",
+      "nombre": "Cebolla Seca Malla 1 kg",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/cebolla-seca-malla-1-kg/76018"
+    },
+    "patata": {
+      "ref": "303677",
+      "nombre": "Patata España Aptas Todo Uso Culinario 3 Kg",
+      "envase": 3000,
+      "url": "https://tienda.consum.es/es/p/patata-espana-aptas-todo-uso-culinario/303677"
+    },
+    "boniato": {
+      "ref": "179481",
+      "nombre": "Boniato Rojo",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/boniato-rojo/179481",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "ajo": {
+      "ref": "2600815",
+      "nombre": "Ajos Secos Malla 250 Gr",
+      "envase": 250,
+      "url": "https://tienda.consum.es/es/p/ajos-secos-malla/2600815"
+    },
+    "pechuga": {
+      "ref": "601609",
+      "nombre": "Filetes Pechuga de Pollo",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/filetes-pechuga-de-pollo/601609",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "muslos": {
+      "ref": "5948997",
+      "nombre": "Contramuslos de Pollo Deshuesados",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/contramuslos-de-pollo-deshuesados/5948997",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "picada": {
+      "ref": "925594",
+      "nombre": "Preparado Picada Mixta 400 Gr",
+      "envase": 400,
+      "url": "https://tienda.consum.es/es/p/preparado-picada-mixta/925594"
+    },
+    "picada_pollo": {
+      "ref": "7234300",
+      "nombre": "Preparado Picada Pollo 400 Gr",
+      "envase": 400,
+      "url": "https://tienda.consum.es/es/p/preparado-picada-pollo/7234300"
+    },
+    "lomo": {
+      "ref": "7450658",
+      "nombre": "Filetes de Lomo Extrafinos",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/filetes-de-lomo-extrafinos/7450658",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "burger": {
+      "ref": "7235617",
+      "nombre": "Burger Meat Pollo 4 Unidades 360 Gr",
+      "envase": 4,
+      "url": "https://tienda.consum.es/es/p/burger-meat-pollo-4-unidades/7235617"
+    },
+    "salmon": {
+      "ref": "7435563",
+      "nombre": "Porciones de Salmón Rosado",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/porciones-de-salmon-rosado/7435563",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "merluza": {
+      "ref": "7416498",
+      "nombre": "Filete Merluza Cabo MSC Sin piel 400 Gr",
+      "envase": 400,
+      "url": "https://tienda.consum.es/es/p/filete-merluza-cabo-msc-sin-piel/7416498"
+    },
+    "gambas": {
+      "ref": "7424237",
+      "nombre": "Gambas Peladas Mediana 360 Gr",
+      "envase": 360,
+      "url": "https://tienda.consum.es/es/p/gambas-peladas-mediana/7424237"
+    },
+    "calamar": {
+      "ref": "7420177",
+      "nombre": "Calamar Troceado 450 Gr",
+      "envase": 450,
+      "url": "https://tienda.consum.es/es/p/calamar-troceado/7420177"
+    },
+    "brocoli": {
+      "ref": "7219483",
+      "nombre": "Brócoli 900 Gr",
+      "envase": 900,
+      "url": "https://tienda.consum.es/es/p/brocoli/7219483"
+    },
+    "espinacas": {
+      "ref": "7220650",
+      "nombre": "Espinacas Cortadas 400 Gr",
+      "envase": 400,
+      "url": "https://tienda.consum.es/es/p/espinacas-cortadas/7220650"
+    },
+    "judias": {
+      "ref": "7220648",
+      "nombre": "Judía Fina Troceada 1 Kg",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/judia-fina-troceada/7220648"
+    },
+    "salteado": {
+      "ref": "7221612",
+      "nombre": "Salteado Tradicional 450 Gr",
+      "envase": 450,
+      "url": "https://tienda.consum.es/es/p/salteado-tradicional/7221612"
+    },
+    "guisantes": {
+      "ref": "7219512",
+      "nombre": "Guisantes Finos 1 Kg",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/guisantes-finos/7219512"
+    },
+    "huevos": {
+      "ref": "7098395",
+      "nombre": "Huevos L Grandes Docena 1 Dc",
+      "envase": 12,
+      "url": "https://tienda.consum.es/es/p/huevos-l-grandes-docena/7098395"
+    },
+    "queso": {
+      "ref": "7036155",
+      "nombre": "Mozzarella Rallada Especial Pizza 200 Gr",
+      "envase": 200,
+      "url": "https://tienda.consum.es/es/p/mozzarella-rallada-especial-pizza/7036155"
+    },
+    "pimiento": {
+      "ref": "66290",
+      "nombre": "Pimiento Rojo",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/pimiento-rojo/66290",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "calabacin": {
+      "ref": "5526694",
+      "nombre": "Calabacín Verde",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/calabacin-verde/5526694",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "zanahoria": {
+      "ref": "4501508",
+      "nombre": "Zanahoria de Mesa Bolsa 1 Kg",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/zanahoria-de-mesa-bolsa/4501508"
+    },
+    "tomate": {
+      "ref": "63016",
+      "nombre": "Tomate Pera",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/tomate-pera/63016",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "ensalada": {
+      "ref": "7054323",
+      "nombre": "Ensalada 4 Estaciones Bolsa 250 Gr",
+      "envase": 250,
+      "url": "https://tienda.consum.es/es/p/ensalada-4-estaciones-bolsa/7054323"
+    },
+    "champi": {
+      "ref": "7314896",
+      "nombre": "Champiñón Laminado Peso Variable",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/champinon-laminado-peso-variable/7314896",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "limon": {
+      "ref": "2124360",
+      "nombre": "Limón Malla 1 Kg",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/limon-malla/2124360"
+    },
+    "yogur": {
+      "ref": "7340888",
+      "nombre": "Yogur Natural Pack de 4 Unidades 4 x 125 Gr",
+      "envase": 4,
+      "url": "https://tienda.consum.es/es/p/yogur-natural-pack-de-4-unidades/7340888"
+    },
+    "pan_rallado": {
+      "ref": "7050516",
+      "nombre": "Pan Rallado Clasico Paquete 500 Gr",
+      "envase": 500,
+      "url": "https://tienda.consum.es/es/p/pan-rallado-clasico-paquete/7050516"
+    },
+    "jamon": {
+      "ref": "7293749",
+      "nombre": "Jamón Cocido Extra Finas Lonchas 160 Gr",
+      "envase": 160,
+      "url": "https://tienda.consum.es/es/p/jamon-cocido-extra-finas-lonchas/7293749"
+    },
+    "fideos": {
+      "ref": "7364979",
+      "nombre": "Fideo 4 Paquete 450 Gr",
+      "envase": 450,
+      "url": "https://tienda.consum.es/es/p/fideo-4-paquete/7364979"
+    },
+    "caldo_pollo": {
+      "ref": "7069292",
+      "nombre": "Caldo Líquido Casero de Pollo  Brik 1 L",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/caldo-liquido-casero-de-pollo-brik/7069292"
+    },
+    "caldo_pescado": {
+      "ref": "7069297",
+      "nombre": "Caldo Líquido Pescado Brik 1 L",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/caldo-liquido-pescado-brik/7069297"
+    },
+    "pavo": {
+      "ref": "5848916",
+      "nombre": "Pechuga de Pavo Fileteada",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/pechuga-de-pavo-fileteada/5848916",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "burger_pavo": {
+      "ref": "7440449",
+      "nombre": "Burger Meat Pollo y Pavo 240 Gr",
+      "envase": 2,
+      "url": "https://tienda.consum.es/es/p/burger-meat-pollo-y-pavo/7440449",
+      "aprox": true
+    },
+    "fideos_arroz": {
+      "ref": "7250314",
+      "nombre": "Tallarines de Arroz 250 Gr",
+      "envase": 250,
+      "url": "https://tienda.consum.es/es/p/tallarines-de-arroz/7250314"
+    },
+    "solomillo": {
+      "ref": "3339975",
+      "nombre": "Solomillo de Cerdo",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/solomillo-de-cerdo/3339975",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "ternera": {
+      "ref": "7307304",
+      "nombre": "Filete 1ª de Añojo Plancha- Freír",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/filete-1-de-anojo-plancha--freir/7307304",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "alubias_rojas": {
+      "ref": "7022473",
+      "nombre": "Alubia Roja Cocida Frasco 400 Gr",
+      "envase": 400,
+      "url": "https://tienda.consum.es/es/p/alubia-roja-cocida-frasco/7022473"
+    },
+    "lasana": {
+      "ref": "7024578",
+      "nombre": "Lasaña Fácil Precocida Caja 18 Placas 200 Gr",
+      "envase": 200,
+      "url": "https://tienda.consum.es/es/p/lasana-facil-precocida-caja-18-placas/7024578"
+    },
+    "bacalao": {
+      "ref": "7423465",
+      "nombre": "Porciones de Bacalao S/piel en su punto de sal 400 Gr",
+      "envase": 400,
+      "url": "https://tienda.consum.es/es/p/porciones-de-bacalao-s-piel-en-su-punto-de-sal/7423465"
+    },
+    "emperador": {
+      "ref": "7434256",
+      "nombre": "Rodaja Emperador",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/rodaja-emperador/7434256",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "teriyaki": {
+      "ref": "7420656",
+      "nombre": "Salsa Teriyaki Botella 300 ml",
+      "envase": 300,
+      "url": "https://tienda.consum.es/es/p/salsa-teriyaki-botella/7420656"
+    },
+    "nata": {
+      "ref": "7264096",
+      "nombre": "Nata para Cocinar Minibrik Pack de 3 3 x 200 ml",
+      "envase": 600,
+      "url": "https://tienda.consum.es/es/p/nata-para-cocinar-minibrik-pack-de-3/7264096"
+    },
+    "mostaza": {
+      "ref": "382226",
+      "nombre": "Mostaza Dijón Originale Frasco 215 Gr",
+      "envase": 215,
+      "url": "https://tienda.consum.es/es/p/mostaza-dijon-originale-frasco/382226"
+    },
+    "edamame": {
+      "ref": "7317956",
+      "nombre": "Edamame en Grano 250 Gr",
+      "envase": 250,
+      "url": "https://tienda.consum.es/es/p/edamame-en-grano/7317956"
+    },
+    "esparragos": {
+      "ref": "7352438",
+      "nombre": "Espárrago Verde 300 Gr",
+      "envase": 300,
+      "url": "https://tienda.consum.es/es/p/esparrago-verde/7352438"
+    },
+    "bonito": {
+      "ref": "7462906",
+      "nombre": "Bonito del Norte en Aceite de Oliva 80 Gr",
+      "envase": 80,
+      "url": "https://tienda.consum.es/es/p/bonito-del-norte-en-aceite-de-oliva/7462906"
+    },
+    "caballa": {
+      "ref": "7387595",
+      "nombre": "Filetes de Caballa en Aceite de Oliva 84 Gr",
+      "envase": 84,
+      "url": "https://tienda.consum.es/es/p/filetes-de-caballa-en-aceite-de-oliva/7387595"
+    },
+    "sardinas": {
+      "ref": "7325793",
+      "nombre": "Sardinillas en Aceite de Oliva Pack 2 2 x 65 Gr",
+      "envase": 130,
+      "url": "https://tienda.consum.es/es/p/sardinillas-en-aceite-de-oliva-pack-2/7325793"
+    },
+    "pan_integral": {
+      "ref": "7069800",
+      "nombre": "Pan Molde 100% Integral 0% Azúcares Añadidos 460 Gr",
+      "envase": 16,
+      "url": "https://tienda.consum.es/es/p/pan-molde-100-integral-0-azucares-anadidos/7069800",
+      "aprox": true
+    },
+    "langostinos": {
+      "ref": "7407500",
+      "nombre": "Cola de Langostino Pelada y Cruda 180 Gr",
+      "envase": 180,
+      "url": "https://tienda.consum.es/es/p/cola-de-langostino-pelada-y-cruda/7407500"
+    },
+    "masa_empanadilla": {
+      "ref": "7484483",
+      "nombre": "Masa Empanadillas 215 Gr",
+      "envase": 16,
+      "url": "https://tienda.consum.es/es/p/masa-empanadillas/7484483",
+      "aprox": true
+    },
+    "pasta_lentejas": {
+      "ref": "7417186",
+      "nombre": "Pasta de Lenteja Roja 250 Gr",
+      "envase": 250,
+      "url": "https://tienda.consum.es/es/p/pasta-de-lenteja-roja/7417186"
+    },
+    "hummus": {
+      "ref": "7470284",
+      "nombre": "Hummus Clásico 220 Gr",
+      "envase": 220,
+      "url": "https://tienda.consum.es/es/p/hummus-clasico/7470284"
+    },
+    "noquis": {
+      "ref": "7437283",
+      "nombre": "Gnocchis Patatas 500 Gr",
+      "envase": 500,
+      "url": "https://tienda.consum.es/es/p/gnocchis-patatas/7437283"
+    },
+    "berenjena": {
+      "ref": "5526686",
+      "nombre": "Berenjena Negra",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/berenjena-negra/5526686",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "quinoa": {
+      "ref": "7270044",
+      "nombre": "Quinoa Roja y Blanca Vasitos 2 x 125 Gr",
+      "envase": 250,
+      "url": "https://tienda.consum.es/es/p/quinoa-roja-y-blanca-vasitos/7270044"
+    },
+    "dorada": {
+      "ref": "7269967",
+      "nombre": "Filete de Dorada Crianza de España",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/filete-de-dorada-crianza-de-espana/7269967",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "copos_maiz": {
+      "ref": "7256873",
+      "nombre": "Corn Flakes Classic sin Azúcar y sin Gluten 300 Gr",
+      "envase": 300,
+      "url": "https://tienda.consum.es/es/p/corn-flakes-classic-sin-azucar-y-sin-gluten/7256873"
+    },
+    "pesto": {
+      "ref": "7283869",
+      "nombre": "Salsa Pesto 185 Gr",
+      "envase": 185,
+      "url": "https://tienda.consum.es/es/p/salsa-pesto/7283869"
+    },
+    "salchichas": {
+      "ref": "7105380",
+      "nombre": "Salchichas de Pavo 7 Unidades 3 x 140 Gr",
+      "envase": 420,
+      "url": "https://tienda.consum.es/es/p/salchichas-de-pavo-7-unidades/7105380"
+    },
+    "pina": {
+      "ref": "7059426",
+      "nombre": "Piña en su Jugo Pack de 3 3 x 140 Gr",
+      "envase": 420,
+      "url": "https://tienda.consum.es/es/p/pina-en-su-jugo-pack-de-3/7059426"
+    },
+    "leche": {
+      "ref": "7080604",
+      "nombre": "Leche Semidesnatada Brik 1 L",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/leche-semidesnatada-brik/7080604"
+    },
+    "calabaza": {
+      "ref": "7234552",
+      "nombre": "Calabaza Troceada Bandeja 400 Gr",
+      "envase": 400,
+      "url": "https://tienda.consum.es/es/p/calabaza-troceada-bandeja/7234552"
+    },
+    "gazpacho": {
+      "ref": "7150308",
+      "nombre": "Gazpacho Tradicional 1 L",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/gazpacho-tradicional/7150308"
+    },
+    "tinta": {
+      "ref": "7017684",
+      "nombre": "Tinta de Sepia 8 bolsitas 32 Gr",
+      "envase": 8,
+      "url": "https://tienda.consum.es/es/p/tinta-de-sepia-8-bolsitas/7017684"
+    },
+    "anacardos": {
+      "ref": "7442135",
+      "nombre": "Anacardos Crudos 200 Gr",
+      "envase": 200,
+      "url": "https://tienda.consum.es/es/p/anacardos-crudos/7442135"
+    },
+    "feta": {
+      "ref": "7486850",
+      "nombre": "Queso Feta D.O.P 150 Gr",
+      "envase": 150,
+      "url": "https://tienda.consum.es/es/p/queso-feta-dop/7486850"
+    },
+    "manzana": {
+      "ref": "7487775",
+      "nombre": "Manzana Golden Bolsa 1,5 Kg",
+      "envase": 1500,
+      "url": "https://tienda.consum.es/es/p/manzana-golden-bolsa/7487775",
+      "aprox": true
+    },
+    "pan_burger": {
+      "ref": "7069821",
+      "nombre": "Pan Maxi Burger 4 Unidades 300 Gr",
+      "envase": 4,
+      "url": "https://tienda.consum.es/es/p/pan-maxi-burger-4-unidades/7069821"
+    }
+  },
+  "sin_equivalente": []
+}
