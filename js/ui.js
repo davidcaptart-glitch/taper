@@ -715,6 +715,7 @@ function renderPerfil(){
       return `<div class="pr"><span>${esc(p.name)}${upTag(p.id)}<small>${fmtQty(p.env,p.unit)}${own?` · corregido a mano${m?` (Mercadona: ${eur(m.precio)})`:""} <button class="reset" data-reset="${p.id}">Usar el de Mercadona</button>`:m?" · Mercadona":" · estimado"}</small></span><input type="number" step="0.01" min="0" data-price="${p.id}" value="${price(p.id).toFixed(2)}" aria-label="Precio de ${esc(p.name)}"></div>`}).join("")}</div>`);
   h+=acc("app","📦","Copia de seguridad y novedades",`Versión ${APP_VERSION} · tu código ${S.uid}`,`<p class="small muted">Todo se guarda solo en este móvil. Descarga una copia de vez en cuando y antes de cambiar de móvil.</p>
     <div class="actions"><button class="btn" id="exp">Exportar copia</button><button class="btn ghost" id="imp">Importar copia</button></div><input type="file" id="impFile" accept="application/json,.json" hidden>
+    <div class="field"><label>Aspecto</label><div class="chips">${[["light","Claro"],["dark","Oscuro"],["auto","Como el móvil"]].map(([k,t])=>chip("data-theme-set",k,(S.home.theme||"light")===k,t)).join("")}</div></div>
     <div class="actions"><button class="btn ghost small" id="newsAll">Ver todas las novedades</button><button class="btn ghost small" id="restartWiz">Repetir el asistente</button></div>`);
   h+=`</section>`;
   main.innerHTML=h;
@@ -737,6 +738,7 @@ function renderPerfil(){
   document.getElementById("exp").onclick=exportBackup;
   const f=document.getElementById("impFile");document.getElementById("imp").onclick=()=>f.click();f.onchange=()=>{if(f.files[0])importBackup(f.files[0]);f.value=""};
   document.getElementById("newsAll").onclick=()=>openNews(true);
+  q("[data-theme-set]").forEach(b=>b.onclick=()=>{S.home.theme=b.dataset.themeSet;save();applyTheme();render()});
   bindAvisos();
   document.getElementById("svProfile")?.addEventListener("click",openSurvey);
   document.getElementById("sugRec2")?.addEventListener("click",openSuggestRecipe);

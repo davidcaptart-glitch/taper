@@ -2,7 +2,7 @@
 "use strict";
 
 // Versión de la app: súbela (y el ?v= de index.html y VERSION de sw.js) en cada mejora, y añade sus novedades a data/novedades.json
-const APP_VERSION = 14;
+const APP_VERSION = 15;
 
 /* ---------- Utilidades ---------- */
 const DAYS = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];   // índice 0 = lunes
@@ -101,6 +101,9 @@ function migrateV1(o){
   return s;
 }
 let S=load();
+function applyTheme(){const t=(S.home&&S.home.theme)||"light";if(t==="auto")delete document.documentElement.dataset.theme;else document.documentElement.dataset.theme=t;
+  const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=document.documentElement.dataset.theme==="dark"?"#101215":"#D22F2A"}
+applyTheme();
 // Código de usuario anónimo: se crea una vez por móvil (sirve para identificar sus sugerencias)
 if(!S.uid){S.uid="U-"+Math.random().toString(36).slice(2,7).toUpperCase();try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}
 function load(){

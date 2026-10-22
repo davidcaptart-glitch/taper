@@ -143,6 +143,14 @@
         "Los coins solo se ganan cuando hay respuesta: alguien abre tu enlace, empieza a usar Táper o la sigue usando.",
         "Ya no se repiten las animaciones cada vez que tocas algo."
       ]
+    },
+    {
+      "version": 15,
+      "fecha": "2026-10-22",
+      "titulo": "Siempre en rojo, plata y blanco",
+      "cambios": [
+        "La app usa siempre el tema claro aunque tu móvil esté en modo oscuro. Puedes cambiarlo en Perfil › Copia de seguridad y novedades › Aspecto."
+      ]
     }
   ]
 }
