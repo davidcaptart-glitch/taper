@@ -26584,6 +26584,4063 @@
         "desayuno"
       ],
       "para_llevar": false
+    },
+    {
+      "id": "canelonesnadal",
+      "nombre": "Canelones de Sant Esteve de carne y pollo",
+      "grupo": "carne",
+      "proteina_principal": "ternera",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "lasana",
+          "cantidad": 50
+        },
+        {
+          "producto": "picada",
+          "cantidad": 70
+        },
+        {
+          "producto": "picada_pollo",
+          "cantidad": 70
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        },
+        {
+          "producto": "leche",
+          "cantidad": 40
+        },
+        {
+          "producto": "pan_rallado",
+          "cantidad": 10
+        },
+        {
+          "producto": "nata",
+          "cantidad": 70
+        },
+        {
+          "producto": "queso",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 815,
+        "proteina": 43,
+        "hidratos": 53,
+        "grasa": 47
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 45,
+          "minutos_trabajo": 22,
+          "pasos": [
+            "En la tabla, pica la cebolla muy fina.",
+            "En una sartén grande a fuego medio, pocha la cebolla con un chorrito de aceite 8 min.",
+            "Sube a fuego medio-alto, añade las dos carnes con sal, pimienta y una pizca de nuez moscada y cocínalas 10 min, hasta que no quede nada rosado; apaga y mezcla con el pan rallado mojado en la leche.",
+            "Mientras, en un bol con agua caliente, remoja las placas de lasaña 5 min y sécalas sobre un paño.",
+            "Pon relleno en cada placa, enróllala y colócalas en una fuente de horno; cubre con la nata y el queso.",
+            "Hornea a 200 °C, calor arriba y abajo, 18 min, hasta que la superficie esté gratinada."
+          ],
+          "utensilios": [
+            "sartén grande",
+            "bol",
+            "fuente de horno",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 8
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 10
+            },
+            {
+              "utensilio": "bol",
+              "min": 5,
+              "nota": "agua caliente"
+            },
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 200,
+              "modo": "arriba y abajo",
+              "min": 18
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 35,
+          "minutos_trabajo": 22,
+          "pasos": [
+            "En la tabla, pica la cebolla muy fina.",
+            "En una sartén grande a fuego medio, pocha la cebolla con un chorrito de aceite 8 min.",
+            "Sube a fuego medio-alto, añade las dos carnes con sal, pimienta y una pizca de nuez moscada y cocínalas 10 min, hasta que no quede nada rosado; apaga y mezcla con el pan rallado mojado en la leche.",
+            "Mientras, en un bol con agua caliente, remoja las placas de lasaña 5 min y sécalas sobre un paño.",
+            "Rellena y enrolla las placas y colócalas en un molde apto para air fryer; cubre con la nata y el queso.",
+            "Air fryer a 180 °C 12 min, hasta que gratine."
+          ],
+          "utensilios": [
+            "sartén grande",
+            "bol",
+            "molde apto para air fryer",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 8
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 10
+            },
+            {
+              "utensilio": "bol",
+              "min": 5,
+              "nota": "agua caliente"
+            },
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 180,
+              "min": 12
+            }
+          ]
+        }
+      ],
+      "pack": "navidad"
+    },
+    {
+      "id": "escudella",
+      "nombre": "Escudella ligera con pilotes y garbanzos",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "caldo_pollo",
+          "cantidad": 400
+        },
+        {
+          "producto": "muslos",
+          "cantidad": 90
+        },
+        {
+          "producto": "picada",
+          "cantidad": 60
+        },
+        {
+          "producto": "pan_rallado",
+          "cantidad": 8
+        },
+        {
+          "producto": "garbanzos",
+          "cantidad": 80
+        },
+        {
+          "producto": "patata",
+          "cantidad": 100
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 50
+        },
+        {
+          "producto": "pasta",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 685,
+        "proteina": 44,
+        "hidratos": 70,
+        "grasa": 24
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 45,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En un bol, mezcla la carne picada con el pan rallado, sal, pimienta y perejil, y forma 3 o 4 pilotes alargadas.",
+            "En la tabla, pela y trocea la patata y la zanahoria, y corta el contramuslo en trozos.",
+            "En una olla a fuego fuerte, lleva a ebullición el caldo con el pollo, la zanahoria y la patata.",
+            "Baja a fuego medio, añade las pilotes y cuece tapado 20 min.",
+            "Añade la pasta (mejor si son galets) y los garbanzos escurridos y cuece 10 min más; sirve la sopa con la carne y las verduras."
+          ],
+          "utensilios": [
+            "olla",
+            "bol",
+            "tabla y cuchillo",
+            "cucharón"
+          ],
+          "info": [
+            null,
+            null,
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 5
+            },
+            {
+              "utensilio": "olla",
+              "fuego": "medio",
+              "min": 20
+            },
+            {
+              "utensilio": "olla",
+              "fuego": "medio",
+              "min": 10
+            }
+          ]
+        }
+      ],
+      "pack": "navidad"
+    },
+    {
+      "id": "pollomanzana",
+      "nombre": "Contramuslos al horno con manzana y pasas",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "muslos",
+          "cantidad": 200
+        },
+        {
+          "producto": "manzana",
+          "cantidad": 150
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        },
+        {
+          "producto": "pasas",
+          "cantidad": 15
+        },
+        {
+          "producto": "patata",
+          "cantidad": 150
+        }
+      ],
+      "nutricion": {
+        "kcal": 630,
+        "proteina": 43,
+        "hidratos": 59,
+        "grasa": 25
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 50,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En la tabla, corta la patata en rodajas finas, la cebolla en juliana y la manzana en gajos.",
+            "En una fuente de horno, pon la patata y la cebolla con sal y un chorrito de aceite y hornea a 200 °C, calor arriba y abajo, 15 min.",
+            "Saca la fuente, añade los contramuslos salpimentados, la manzana y las pasas, y riega con un chorrito de agua.",
+            "Hornea a 200 °C, calor arriba y abajo, 30 min, hasta que el pollo esté dorado y bien hecho por dentro."
+          ],
+          "utensilios": [
+            "fuente de horno",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 200,
+              "modo": "arriba y abajo",
+              "min": 15
+            },
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 200,
+              "modo": "arriba y abajo",
+              "min": 30
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 35,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En la tabla, corta la patata en rodajas finas, la cebolla en juliana y la manzana en gajos.",
+            "En un molde apto para air fryer, pon la patata y la cebolla con sal y un chorrito de aceite: air fryer a 180 °C 10 min.",
+            "Añade los contramuslos salpimentados, la manzana y las pasas, y riega con un chorrito de agua.",
+            "Air fryer a 190 °C 20 min, dándole la vuelta al pollo a mitad, hasta que esté bien hecho por dentro."
+          ],
+          "utensilios": [
+            "molde apto para air fryer",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 180,
+              "min": 10
+            },
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 20,
+              "nota": "da la vuelta a mitad"
+            }
+          ]
+        }
+      ],
+      "pack": "navidad"
+    },
+    {
+      "id": "cremamarisco",
+      "nombre": "Crema de marisco con gambas",
+      "grupo": "pescado",
+      "proteina_principal": "marisco",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "gambas",
+          "cantidad": 100
+        },
+        {
+          "producto": "langostinos",
+          "cantidad": 60
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 80
+        },
+        {
+          "producto": "caldo_pescado",
+          "cantidad": 300
+        },
+        {
+          "producto": "nata",
+          "cantidad": 40
+        },
+        {
+          "producto": "pan_barra",
+          "cantidad": 20
+        }
+      ],
+      "nutricion": {
+        "kcal": 415,
+        "proteina": 36,
+        "hidratos": 27,
+        "grasa": 18
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 35,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En la tabla, pica la cebolla y la zanahoria.",
+            "En una olla a fuego medio, sofríe la cebolla y la zanahoria con un chorrito de aceite 8 min.",
+            "Sube a fuego medio-alto, añade los langostinos y la mitad de las gambas 3 min y agrega el tomate triturado 2 min más.",
+            "Vierte el caldo de pescado, añade el pan y cuece a fuego medio 12 min.",
+            "Tritura con la batidora hasta que quede fina, añade la nata y las gambas restantes en trocitos y cuece a fuego bajo 3 min."
+          ],
+          "utensilios": [
+            "olla",
+            "batidora",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "olla",
+              "fuego": "medio",
+              "min": 8
+            },
+            {
+              "utensilio": "olla",
+              "fuego": "medio-alto",
+              "min": 5
+            },
+            {
+              "utensilio": "olla",
+              "fuego": "medio",
+              "min": 12
+            },
+            {
+              "utensilio": "olla",
+              "fuego": "bajo",
+              "min": 3
+            }
+          ]
+        }
+      ],
+      "pack": "navidad"
+    },
+    {
+      "id": "solomillopasas",
+      "nombre": "Solomillo de cerdo con salsa de pasas y puré",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "solomillo",
+          "cantidad": 160
+        },
+        {
+          "producto": "pasas",
+          "cantidad": 20
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        },
+        {
+          "producto": "caldo_pollo",
+          "cantidad": 100
+        },
+        {
+          "producto": "nata",
+          "cantidad": 30
+        },
+        {
+          "producto": "patata",
+          "cantidad": 200
+        },
+        {
+          "producto": "leche",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 580,
+        "proteina": 41,
+        "hidratos": 56,
+        "grasa": 21
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 35,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En la tabla, corta el solomillo en medallones de 2 cm, pica la cebolla y pela y trocea la patata.",
+            "En un cazo con agua y sal a fuego fuerte, cuece la patata 18 min, escúrrela con el colador y cháfala con la leche caliente y un hilo de aceite.",
+            "Mientras, en una sartén a fuego fuerte, marca los medallones con sal y pimienta 2 min por cada lado y resérvalos.",
+            "En la misma sartén a fuego medio, pocha la cebolla 6 min, añade las pasas y el caldo y deja reducir 5 min.",
+            "Añade la nata y los medallones y cocina a fuego bajo 4 min, hasta que la carne esté hecha por dentro; sirve con el puré."
+          ],
+          "utensilios": [
+            "cazo",
+            "colador",
+            "sartén",
+            "tabla y cuchillo",
+            "tenedor o pasapurés"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 18
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "fuerte",
+              "min": 4
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 11
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "bajo",
+              "min": 4
+            }
+          ]
+        }
+      ],
+      "pack": "navidad"
+    },
+    {
+      "id": "pavoasado",
+      "nombre": "Pavo al horno con manzana y boniato",
+      "grupo": "carne",
+      "proteina_principal": "pavo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pavo",
+          "cantidad": 170
+        },
+        {
+          "producto": "manzana",
+          "cantidad": 120
+        },
+        {
+          "producto": "boniato",
+          "cantidad": 200
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 500,
+        "proteina": 45,
+        "hidratos": 58,
+        "grasa": 10
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 40,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En la tabla, corta el boniato en dados, la manzana en gajos y la cebolla en juliana.",
+            "En una bandeja de horno con papel, hornea el boniato y la cebolla con aceite y sal a 200 °C, calor arriba y abajo, 15 min.",
+            "Añade los filetes de pavo con sal, pimienta y tomillo, y la manzana.",
+            "Hornea a 200 °C, calor arriba y abajo, 15 min más, hasta que el pavo esté hecho por dentro."
+          ],
+          "utensilios": [
+            "bandeja de horno",
+            "papel de horno",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 200,
+              "modo": "arriba y abajo",
+              "min": 15
+            },
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 200,
+              "modo": "arriba y abajo",
+              "min": 15
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 30,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En la tabla, corta el boniato en dados, la manzana en gajos y la cebolla en juliana.",
+            "En la cesta de la air fryer, boniato y cebolla con aceite y sal a 190 °C 12 min, removiendo a mitad.",
+            "Añade los filetes de pavo con sal, pimienta y tomillo, y la manzana.",
+            "Air fryer a 190 °C 12 min, dándole la vuelta al pavo a mitad, hasta que esté hecho por dentro."
+          ],
+          "utensilios": [
+            "cesta de la air fryer",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 12,
+              "nota": "remueve a mitad"
+            },
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 12,
+              "nota": "da la vuelta a mitad"
+            }
+          ]
+        }
+      ],
+      "pack": "navidad"
+    },
+    {
+      "id": "pepitoria",
+      "nombre": "Pollo en pepitoria con arroz",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "muslos",
+          "cantidad": 180
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        },
+        {
+          "producto": "almendras",
+          "cantidad": 15
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "caldo_pollo",
+          "cantidad": 150
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 60
+        }
+      ],
+      "nutricion": {
+        "kcal": 770,
+        "proteina": 50,
+        "hidratos": 54,
+        "grasa": 38
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 55,
+          "minutos_trabajo": 18,
+          "pasos": [
+            "En un cazo con agua a fuego fuerte, cuece el huevo 10 min, enfríalo y pélalo.",
+            "En la tabla, pica la cebolla y corta el contramuslo en trozos.",
+            "En una cacerola a fuego medio-alto, dora el pollo salpimentado con un chorrito de aceite 6 min; añade la cebolla y sofríe 6 min más.",
+            "Agrega el caldo con unas hebras de azafrán y cuece tapado a fuego medio 20 min, hasta que el pollo esté tierno.",
+            "Con la batidora, tritura las almendras con la yema del huevo y un poco del caldo; añádelo a la cacerola con la clara picada y cocina a fuego bajo 3 min.",
+            "Mientras se guisa, en el cazo con agua y sal a fuego fuerte, cuece el arroz 15 min, escúrrelo con el colador y sírvelo con el pollo."
+          ],
+          "utensilios": [
+            "cacerola",
+            "cazo",
+            "colador",
+            "batidora",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 10
+            },
+            null,
+            {
+              "utensilio": "cacerola",
+              "fuego": "medio-alto",
+              "min": 12
+            },
+            {
+              "utensilio": "cacerola",
+              "fuego": "medio",
+              "min": 20
+            },
+            {
+              "utensilio": "cacerola",
+              "fuego": "bajo",
+              "min": 3
+            },
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 15
+            }
+          ]
+        }
+      ],
+      "pack": "navidad"
+    },
+    {
+      "id": "langostinoshorno",
+      "nombre": "Langostinos al horno con ajo y patatas panaderas",
+      "grupo": "pescado",
+      "proteina_principal": "marisco",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "langostinos",
+          "cantidad": 180
+        },
+        {
+          "producto": "patata",
+          "cantidad": 200
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 5
+        },
+        {
+          "producto": "limon",
+          "cantidad": 20
+        }
+      ],
+      "nutricion": {
+        "kcal": 430,
+        "proteina": 39,
+        "hidratos": 41,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 40,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En la tabla, corta la patata y la cebolla en rodajas finas y lamina el ajo.",
+            "En una fuente de horno con aceite y sal, hornea la patata y la cebolla a 200 °C, calor arriba y abajo, 25 min.",
+            "Seca los langostinos descongelados con papel de cocina y ponlos sobre las patatas con el ajo, perejil y un hilo de aceite.",
+            "Hornea a 200 °C, calor arriba y abajo, 8 min, hasta que estén rosados; sirve con el limón."
+          ],
+          "utensilios": [
+            "fuente de horno",
+            "tabla y cuchillo",
+            "papel de cocina"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 200,
+              "modo": "arriba y abajo",
+              "min": 25
+            },
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 200,
+              "modo": "arriba y abajo",
+              "min": 8
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 30,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En la tabla, corta la patata y la cebolla en rodajas finas y lamina el ajo.",
+            "En la cesta de la air fryer, patata y cebolla con aceite y sal a 180 °C 18 min, removiendo a mitad.",
+            "Pásalas a un molde apto, seca los langostinos con papel de cocina y ponlos encima con el ajo, perejil y un hilo de aceite.",
+            "Air fryer a 200 °C 6 min, hasta que estén rosados; sirve con el limón."
+          ],
+          "utensilios": [
+            "cesta de la air fryer",
+            "molde apto para air fryer",
+            "tabla y cuchillo",
+            "papel de cocina"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 180,
+              "min": 18,
+              "nota": "remueve a mitad"
+            },
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 6
+            }
+          ]
+        }
+      ],
+      "pack": "navidad"
+    },
+    {
+      "id": "pastelpescado",
+      "nombre": "Pastel de merluza y gambas",
+      "grupo": "pescado",
+      "proteina_principal": "pescado_blanco",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "merluza",
+          "cantidad": 130
+        },
+        {
+          "producto": "gambas",
+          "cantidad": 50
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        },
+        {
+          "producto": "nata",
+          "cantidad": 50
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 40
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 60
+        }
+      ],
+      "nutricion": {
+        "kcal": 460,
+        "proteina": 46,
+        "hidratos": 8,
+        "grasa": 26
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 50,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En un cazo con agua y sal a fuego medio, cuece la merluza y las gambas 5 min y escúrrelas con el colador.",
+            "En un bol, desmenuza el pescado sin espinas, trocea las gambas y mézclalo con los huevos batidos, la nata, el tomate frito, sal y pimienta.",
+            "Vierte la mezcla en un molde de horno engrasado y colócalo dentro de una fuente con dos dedos de agua caliente.",
+            "Hornea al baño maría a 180 °C, calor arriba y abajo, 35 min, hasta que al pinchar salga limpio.",
+            "Deja templar y sírvelo en lonchas con la ensalada."
+          ],
+          "utensilios": [
+            "cazo",
+            "colador",
+            "bol",
+            "molde de horno",
+            "fuente de horno"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "medio",
+              "min": 5
+            },
+            null,
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 180,
+              "modo": "arriba y abajo",
+              "min": 35,
+              "nota": "al baño maría"
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "micro",
+          "minutos": 20,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En un bol apto para microondas, cuece la merluza y las gambas tapadas a 800 W 3 min y escurre el líquido con el colador.",
+            "En un bol, desmenuza el pescado sin espinas, trocea las gambas y mézclalo con los huevos batidos, la nata, el tomate frito, sal y pimienta.",
+            "Vierte la mezcla en un molde apto para microondas engrasado.",
+            "Microondas a 800 W, tapado, 8 min, hasta que cuaje; deja reposar 5 min.",
+            "Deja templar y sírvelo en lonchas con la ensalada."
+          ],
+          "utensilios": [
+            "bol apto para microondas",
+            "colador",
+            "bol",
+            "molde apto para microondas"
+          ],
+          "info": [
+            {
+              "utensilio": "microondas",
+              "potencia": 800,
+              "min": 3,
+              "nota": "tapado"
+            },
+            null,
+            null,
+            {
+              "utensilio": "microondas",
+              "potencia": 800,
+              "min": 8,
+              "nota": "tapado"
+            },
+            null
+          ]
+        }
+      ],
+      "pack": "navidad"
+    },
+    {
+      "id": "marimuntanya",
+      "nombre": "Mar i muntanya de pollo y gambas",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "muslos",
+          "cantidad": 160
+        },
+        {
+          "producto": "gambas",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 80
+        },
+        {
+          "producto": "almendras",
+          "cantidad": 10
+        },
+        {
+          "producto": "caldo_pollo",
+          "cantidad": 150
+        },
+        {
+          "producto": "patata",
+          "cantidad": 150
+        }
+      ],
+      "nutricion": {
+        "kcal": 620,
+        "proteina": 52,
+        "hidratos": 35,
+        "grasa": 29
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 45,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En la tabla, pica la cebolla, trocea el pollo y pela y corta la patata en dados.",
+            "En una cacerola a fuego medio-alto, dora el pollo salpimentado con un chorrito de aceite 6 min.",
+            "Baja a fuego medio, añade la cebolla 6 min y el tomate 5 min más.",
+            "Agrega el caldo y la patata y cuece tapado a fuego medio 18 min.",
+            "Pica las almendras muy finas en la tabla, añádelas con las gambas y cocina a fuego medio 4 min, hasta que las gambas estén rosadas."
+          ],
+          "utensilios": [
+            "cacerola",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "cacerola",
+              "fuego": "medio-alto",
+              "min": 6
+            },
+            {
+              "utensilio": "cacerola",
+              "fuego": "medio",
+              "min": 11
+            },
+            {
+              "utensilio": "cacerola",
+              "fuego": "medio",
+              "min": 18
+            },
+            {
+              "utensilio": "cacerola",
+              "fuego": "medio",
+              "min": 4
+            }
+          ]
+        }
+      ],
+      "pack": "navidad"
+    },
+    {
+      "id": "ensarroz",
+      "nombre": "Ensalada de arroz con atún, huevo y maíz",
+      "grupo": "pescado",
+      "proteina_principal": "atun",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "arroz",
+          "cantidad": 75
+        },
+        {
+          "producto": "atun",
+          "cantidad": 60
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "maiz",
+          "cantidad": 50
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 40
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 80
+        }
+      ],
+      "nutricion": {
+        "kcal": 595,
+        "proteina": 30,
+        "hidratos": 71,
+        "grasa": 20
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En un cazo con agua y sal a fuego fuerte, cuece el arroz 16 min.",
+            "Al mismo tiempo, en otro cazo con agua a fuego fuerte, cuece el huevo 10 min; enfríalo y pélalo.",
+            "Escurre el arroz con el colador y enfríalo bajo el grifo.",
+            "En la tabla, pica el pimiento, el tomate y el huevo; en un bol mézclalo todo con el arroz, el atún y el maíz y aliña con aceite, vinagre y sal.",
+            "Guárdala en el táper en la nevera y sácala 10 min antes de comer."
+          ],
+          "utensilios": [
+            "cazo",
+            "colador",
+            "bol",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 16
+            },
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 10
+            },
+            null,
+            null,
+            null
+          ]
+        }
+      ],
+      "pack": "oficina"
+    },
+    {
+      "id": "wrapcesar",
+      "nombre": "Wrap de pollo César",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "tortillas",
+          "cantidad": 2
+        },
+        {
+          "producto": "pechuga",
+          "cantidad": 130
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 50
+        },
+        {
+          "producto": "queso",
+          "cantidad": 15
+        },
+        {
+          "producto": "yogur",
+          "cantidad": 1
+        },
+        {
+          "producto": "mostaza",
+          "cantidad": 5
+        }
+      ],
+      "nutricion": {
+        "kcal": 575,
+        "proteina": 46,
+        "hidratos": 48,
+        "grasa": 21
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En una sartén a fuego medio-alto, haz la pechuga a la plancha con sal y pimienta 8 min, hasta que esté hecha por dentro; córtala en tiras en la tabla.",
+            "En un bol, mezcla el yogur con la mostaza, una pizca de ajo en polvo, sal y pimienta.",
+            "Unta las tortillas con la salsa, reparte la lechuga, el pollo y el queso, y enróllalas bien apretadas.",
+            "Envuélvelas en papel de aluminio y guárdalas en el táper en la nevera."
+          ],
+          "utensilios": [
+            "sartén",
+            "bol",
+            "tabla y cuchillo",
+            "papel de aluminio"
+          ],
+          "info": [
+            {
+              "utensilio": "sartén",
+              "fuego": "medio-alto",
+              "min": 8
+            },
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pon la pechuga con sal, pimienta y un poco de aceite en la cesta: air fryer a 190 °C 12 min, dándole la vuelta a mitad, hasta que esté hecha; córtala en tiras.",
+            "En un bol, mezcla el yogur con la mostaza, una pizca de ajo en polvo, sal y pimienta.",
+            "Unta las tortillas con la salsa, reparte la lechuga, el pollo y el queso, y enróllalas bien apretadas.",
+            "Envuélvelas en papel de aluminio y guárdalas en el táper en la nevera."
+          ],
+          "utensilios": [
+            "cesta de la air fryer",
+            "bol",
+            "tabla y cuchillo",
+            "papel de aluminio"
+          ],
+          "info": [
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 12,
+              "nota": "da la vuelta a mitad"
+            },
+            null,
+            null,
+            null
+          ]
+        }
+      ],
+      "pack": "oficina"
+    },
+    {
+      "id": "muffinshuevo",
+      "nombre": "Muffins de huevo con verduras y jamón",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "huevos",
+          "cantidad": 3
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 40
+        },
+        {
+          "producto": "espinacas",
+          "cantidad": 40
+        },
+        {
+          "producto": "jamon",
+          "cantidad": 30
+        },
+        {
+          "producto": "queso",
+          "cantidad": 20
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 390,
+        "proteina": 33,
+        "hidratos": 6,
+        "grasa": 26
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 30,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En la tabla, pica el pimiento y el jamón; escurre bien las espinacas descongeladas.",
+            "En un bol, bate los huevos con sal y pimienta y mézclalos con las verduras, el jamón y el queso.",
+            "Reparte en moldes de magdalena engrasados (hasta 3/4) y hornea a 180 °C, calor arriba y abajo, 20 min, hasta que estén cuajados.",
+            "Deja templar, desmolda y guárdalos en el táper con la ensalada aparte."
+          ],
+          "utensilios": [
+            "bol",
+            "moldes de magdalena",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 180,
+              "modo": "arriba y abajo",
+              "min": 20
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 22,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En la tabla, pica el pimiento y el jamón; escurre bien las espinacas descongeladas.",
+            "En un bol, bate los huevos con sal y pimienta y mézclalos con las verduras, el jamón y el queso.",
+            "Reparte en moldes de silicona engrasados (hasta 3/4): air fryer a 160 °C 12 min, hasta que estén cuajados.",
+            "Deja templar, desmolda y guárdalos en el táper con la ensalada aparte."
+          ],
+          "utensilios": [
+            "bol",
+            "moldes de silicona",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 160,
+              "min": 12
+            },
+            null
+          ]
+        }
+      ],
+      "pack": "oficina"
+    },
+    {
+      "id": "bolquinoapollo",
+      "nombre": "Bol de quinoa, pollo y aguacate",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "quinoa",
+          "cantidad": 125
+        },
+        {
+          "producto": "pechuga",
+          "cantidad": 130
+        },
+        {
+          "producto": "aguacate",
+          "cantidad": 70
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 80
+        },
+        {
+          "producto": "maiz",
+          "cantidad": 40
+        },
+        {
+          "producto": "limon",
+          "cantidad": 10
+        }
+      ],
+      "nutricion": {
+        "kcal": 510,
+        "proteina": 39,
+        "hidratos": 37,
+        "grasa": 21
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En una sartén a fuego medio-alto, haz la pechuga a la plancha con sal y pimienta 8 min, hasta que esté hecha por dentro.",
+            "Suelta la quinoa cocida en un bol con un tenedor.",
+            "En la tabla, corta el pollo, el tomate y el aguacate en dados, y riega el aguacate con limón para que no se oscurezca.",
+            "Monta el táper con la quinoa, el pollo, el tomate, el maíz y el aguacate; lleva el aliño de aceite y sal aparte."
+          ],
+          "utensilios": [
+            "sartén",
+            "bol",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "sartén",
+              "fuego": "medio-alto",
+              "min": 8
+            },
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pon la pechuga con sal, pimienta y un poco de aceite en la cesta: air fryer a 190 °C 12 min, dándole la vuelta a mitad, hasta que esté hecha.",
+            "Suelta la quinoa cocida en un bol con un tenedor.",
+            "En la tabla, corta el pollo, el tomate y el aguacate en dados, y riega el aguacate con limón para que no se oscurezca.",
+            "Monta el táper con la quinoa, el pollo, el tomate, el maíz y el aguacate; lleva el aliño de aceite y sal aparte."
+          ],
+          "utensilios": [
+            "cesta de la air fryer",
+            "bol",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 12,
+              "nota": "da la vuelta a mitad"
+            },
+            null,
+            null,
+            null
+          ]
+        }
+      ],
+      "pack": "oficina"
+    },
+    {
+      "id": "enspatsalchichas",
+      "nombre": "Ensalada de patata con salchichas",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "patata",
+          "cantidad": 250
+        },
+        {
+          "producto": "salchichas",
+          "cantidad": 120
+        },
+        {
+          "producto": "pepino",
+          "cantidad": 60
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 20
+        },
+        {
+          "producto": "mostaza",
+          "cantidad": 10
+        },
+        {
+          "producto": "yogur",
+          "cantidad": 1
+        }
+      ],
+      "nutricion": {
+        "kcal": 575,
+        "proteina": 26,
+        "hidratos": 55,
+        "grasa": 27
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En una olla con agua y sal a fuego medio-alto, cuece las patatas con piel 20 min, hasta que se pinchen bien.",
+            "Mientras, en una sartén a fuego medio, dora las salchichas en rodajas con unas gotas de aceite 5 min.",
+            "En la tabla, pela las patatas templadas y córtalas en rodajas; pica el pepino y la cebolla muy fina.",
+            "En un bol, mezcla el yogur, la mostaza, un chorrito de aceite y vinagre y sal, y envuelve la patata, el pepino, la cebolla y las salchichas."
+          ],
+          "utensilios": [
+            "olla",
+            "sartén",
+            "bol",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "olla",
+              "fuego": "medio-alto",
+              "min": 20
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 5
+            },
+            null,
+            null
+          ]
+        },
+        {
+          "aparato": "micro",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pela la patata, córtala en dados y ponla en un bol apto para microondas con 3 cucharadas de agua y sal: 800 W, tapado, 10 min.",
+            "Pon las salchichas en rodajas en un plato apto para microondas: 800 W 2 min.",
+            "En la tabla, pica el pepino y la cebolla muy fina.",
+            "En un bol, mezcla el yogur, la mostaza, un chorrito de aceite y vinagre y sal, y envuelve la patata, el pepino, la cebolla y las salchichas."
+          ],
+          "utensilios": [
+            "bol apto para microondas",
+            "plato apto para microondas",
+            "bol",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "microondas",
+              "potencia": 800,
+              "min": 10,
+              "nota": "tapado"
+            },
+            {
+              "utensilio": "microondas",
+              "potencia": 800,
+              "min": 2
+            },
+            null,
+            null
+          ]
+        }
+      ],
+      "pack": "oficina"
+    },
+    {
+      "id": "waldorf",
+      "nombre": "Ensalada Waldorf con pollo",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pechuga",
+          "cantidad": 130
+        },
+        {
+          "producto": "manzana",
+          "cantidad": 120
+        },
+        {
+          "producto": "nueces",
+          "cantidad": 15
+        },
+        {
+          "producto": "yogur",
+          "cantidad": 1
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 50
+        },
+        {
+          "producto": "pasas",
+          "cantidad": 10
+        },
+        {
+          "producto": "limon",
+          "cantidad": 10
+        }
+      ],
+      "nutricion": {
+        "kcal": 450,
+        "proteina": 38,
+        "hidratos": 30,
+        "grasa": 19
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En una sartén a fuego medio-alto, haz la pechuga a la plancha con sal y pimienta 8 min, hasta que esté hecha por dentro; deja que se temple.",
+            "En la tabla, corta el pollo y la manzana en dados (riega la manzana con limón) y trocea las nueces.",
+            "En un bol, mezcla el yogur con sal y pimienta y envuelve el pollo, la manzana, las nueces y las pasas.",
+            "Pon la lechuga en el fondo del táper y la ensalada encima; guárdala en la nevera."
+          ],
+          "utensilios": [
+            "sartén",
+            "bol",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "sartén",
+              "fuego": "medio-alto",
+              "min": 8
+            },
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 22,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pon la pechuga con sal, pimienta y un poco de aceite en la cesta: air fryer a 190 °C 12 min, dándole la vuelta a mitad, hasta que esté hecha; deja que se temple.",
+            "En la tabla, corta el pollo y la manzana en dados (riega la manzana con limón) y trocea las nueces.",
+            "En un bol, mezcla el yogur con sal y pimienta y envuelve el pollo, la manzana, las nueces y las pasas.",
+            "Pon la lechuga en el fondo del táper y la ensalada encima; guárdala en la nevera."
+          ],
+          "utensilios": [
+            "cesta de la air fryer",
+            "bol",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 12,
+              "nota": "da la vuelta a mitad"
+            },
+            null,
+            null,
+            null
+          ]
+        }
+      ],
+      "pack": "oficina"
+    },
+    {
+      "id": "wrapsalmon",
+      "nombre": "Wrap de salmón, queso fresco y pepino",
+      "grupo": "pescado",
+      "proteina_principal": "pescado_azul",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "tortillas",
+          "cantidad": 2
+        },
+        {
+          "producto": "salmon",
+          "cantidad": 110
+        },
+        {
+          "producto": "queso_fresco",
+          "cantidad": 50
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 40
+        },
+        {
+          "producto": "pepino",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 585,
+        "proteina": 36,
+        "hidratos": 43,
+        "grasa": 28
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "En una sartén a fuego medio-alto, haz el salmón con sal 4 min por cada lado, hasta que se separe en lascas; desmenúzalo sin piel.",
+            "En la tabla, corta el queso fresco en dados y el pepino en bastones finos.",
+            "Reparte en las tortillas la lechuga, el salmón, el queso y el pepino con una pizca de eneldo, y enróllalas bien apretadas.",
+            "Envuélvelas en papel de aluminio y guárdalas en el táper en la nevera."
+          ],
+          "utensilios": [
+            "sartén",
+            "tabla y cuchillo",
+            "papel de aluminio"
+          ],
+          "info": [
+            {
+              "utensilio": "sartén",
+              "fuego": "medio-alto",
+              "min": 8
+            },
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 18,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Pon el salmón con sal en la cesta de la air fryer: 180 °C 10 min, hasta que se separe en lascas; desmenúzalo sin piel.",
+            "En la tabla, corta el queso fresco en dados y el pepino en bastones finos.",
+            "Reparte en las tortillas la lechuga, el salmón, el queso y el pepino con una pizca de eneldo, y enróllalas bien apretadas.",
+            "Envuélvelas en papel de aluminio y guárdalas en el táper en la nevera."
+          ],
+          "utensilios": [
+            "cesta de la air fryer",
+            "tabla y cuchillo",
+            "papel de aluminio"
+          ],
+          "info": [
+            {
+              "utensilio": "air fryer",
+              "temp": 180,
+              "min": 10
+            },
+            null,
+            null,
+            null
+          ]
+        }
+      ],
+      "pack": "oficina"
+    },
+    {
+      "id": "empanadillaspollo",
+      "nombre": "Empanadillas de pollo y pimiento al horno",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "masa_empanadilla",
+          "cantidad": 8
+        },
+        {
+          "producto": "pechuga",
+          "cantidad": 100
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 50
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 40
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 585,
+        "proteina": 40,
+        "hidratos": 59,
+        "grasa": 22
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 40,
+          "minutos_trabajo": 20,
+          "pasos": [
+            "En un cazo con agua a fuego fuerte, cuece el huevo 10 min, enfríalo, pélalo y pícalo.",
+            "En la tabla, pica la cebolla, el pimiento y el pollo en dados pequeños.",
+            "En una sartén a fuego medio, sofríe la cebolla y el pimiento con un chorrito de aceite 6 min; añade el pollo 6 min a fuego medio-alto, hasta que esté hecho, y mezcla con el tomate frito y el huevo.",
+            "Rellena las obleas, ciérralas con un tenedor y ponlas en una bandeja con papel de horno; píntalas con un poco de aceite.",
+            "Hornea a 200 °C, calor arriba y abajo, 15 min, hasta que estén doradas. Sírvelas con la ensalada."
+          ],
+          "utensilios": [
+            "sartén",
+            "cazo",
+            "bandeja de horno",
+            "papel de horno",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 10
+            },
+            null,
+            {
+              "utensilio": "sartén",
+              "fuego": "medio-alto",
+              "min": 12
+            },
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 200,
+              "modo": "arriba y abajo",
+              "min": 15
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 35,
+          "minutos_trabajo": 20,
+          "pasos": [
+            "En un cazo con agua a fuego fuerte, cuece el huevo 10 min, enfríalo, pélalo y pícalo.",
+            "En la tabla, pica la cebolla, el pimiento y el pollo en dados pequeños.",
+            "En una sartén a fuego medio, sofríe la cebolla y el pimiento con un chorrito de aceite 6 min; añade el pollo 6 min a fuego medio-alto, hasta que esté hecho, y mezcla con el tomate frito y el huevo.",
+            "Rellena las obleas, ciérralas con un tenedor y píntalas con un poco de aceite.",
+            "Ponlas en la cesta sin amontonar: air fryer a 180 °C 9 min, dándoles la vuelta a mitad. Sírvelas con la ensalada."
+          ],
+          "utensilios": [
+            "sartén",
+            "cazo",
+            "cesta de la air fryer",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 10
+            },
+            null,
+            {
+              "utensilio": "sartén",
+              "fuego": "medio-alto",
+              "min": 12
+            },
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 180,
+              "min": 9,
+              "nota": "da la vuelta a mitad"
+            }
+          ]
+        }
+      ],
+      "pack": "oficina"
+    },
+    {
+      "id": "enscuscusfeta",
+      "nombre": "Ensalada de cuscús con garbanzos y feta",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "cuscus",
+          "cantidad": 60
+        },
+        {
+          "producto": "garbanzos",
+          "cantidad": 100
+        },
+        {
+          "producto": "feta",
+          "cantidad": 40
+        },
+        {
+          "producto": "pepino",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 80
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 30
+        },
+        {
+          "producto": "limon",
+          "cantidad": 10
+        }
+      ],
+      "nutricion": {
+        "kcal": 545,
+        "proteina": 21,
+        "hidratos": 66,
+        "grasa": 21
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "micro",
+          "minutos": 15,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En un bol apto para microondas, calienta 70 ml de agua con sal a 800 W 1 min; añade el cuscús, tapa y deja reposar 5 min.",
+            "Suelta el cuscús con un tenedor y un chorrito de aceite y deja que se enfríe.",
+            "Lava y escurre los garbanzos en el colador; en la tabla, pica el pepino, el tomate y el pimiento.",
+            "Mézclalo todo con el feta desmenuzado, el zumo de limón, aceite, sal y comino, y guárdalo en el táper."
+          ],
+          "utensilios": [
+            "bol apto para microondas",
+            "colador",
+            "tabla y cuchillo",
+            "tenedor"
+          ],
+          "info": [
+            {
+              "utensilio": "microondas",
+              "potencia": 800,
+              "min": 1
+            },
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En un cazo a fuego fuerte, lleva a ebullición 70 ml de agua con sal 2 min; apaga, añade el cuscús, tapa y deja reposar 5 min.",
+            "Suelta el cuscús en un bol con un tenedor y un chorrito de aceite y deja que se enfríe.",
+            "Lava y escurre los garbanzos en el colador; en la tabla, pica el pepino, el tomate y el pimiento.",
+            "Mézclalo todo con el feta desmenuzado, el zumo de limón, aceite, sal y comino, y guárdalo en el táper."
+          ],
+          "utensilios": [
+            "cazo",
+            "bol",
+            "colador",
+            "tabla y cuchillo",
+            "tenedor"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 2
+            },
+            null,
+            null,
+            null
+          ]
+        }
+      ],
+      "pack": "oficina"
+    },
+    {
+      "id": "enspastajamon",
+      "nombre": "Ensalada de pasta con jamón, queso y guisantes",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pasta",
+          "cantidad": 80
+        },
+        {
+          "producto": "jamon",
+          "cantidad": 70
+        },
+        {
+          "producto": "queso_lonchas",
+          "cantidad": 30
+        },
+        {
+          "producto": "guisantes",
+          "cantidad": 60
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 40
+        },
+        {
+          "producto": "yogur",
+          "cantidad": 1
+        }
+      ],
+      "nutricion": {
+        "kcal": 650,
+        "proteina": 38,
+        "hidratos": 76,
+        "grasa": 21
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En una olla con agua y sal a fuego fuerte, cuece la pasta el tiempo del paquete (unos 10 min); en los últimos 4 min añade los guisantes.",
+            "Escurre la pasta y los guisantes con el colador y enfríalos bajo el grifo.",
+            "En la tabla, corta el jamón y el queso en dados y ralla la zanahoria con el rallador.",
+            "En un bol, mezcla el yogur con un chorrito de aceite, sal y pimienta, envuelve todo y guárdalo en el táper en la nevera."
+          ],
+          "utensilios": [
+            "olla",
+            "colador",
+            "bol",
+            "tabla y cuchillo",
+            "rallador"
+          ],
+          "info": [
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 10
+            },
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "aparato": "micro",
+          "minutos": 18,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En un bol apto para microondas, cubre la pasta con agua caliente y sal: 800 W 12 min, añadiendo los guisantes en los últimos 4 min.",
+            "Escurre la pasta y los guisantes con el colador y enfríalos bajo el grifo.",
+            "En la tabla, corta el jamón y el queso en dados y ralla la zanahoria con el rallador.",
+            "En un bol, mezcla el yogur con un chorrito de aceite, sal y pimienta, envuelve todo y guárdalo en el táper en la nevera."
+          ],
+          "utensilios": [
+            "bol apto para microondas",
+            "colador",
+            "bol",
+            "tabla y cuchillo",
+            "rallador"
+          ],
+          "info": [
+            {
+              "utensilio": "microondas",
+              "potencia": 800,
+              "min": 12,
+              "nota": "remueve a mitad"
+            },
+            null,
+            null,
+            null
+          ]
+        }
+      ],
+      "pack": "oficina"
+    },
+    {
+      "id": "tortclaras",
+      "nombre": "Tortilla de claras con espinacas y pavo",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "huevos",
+          "cantidad": 4
+        },
+        {
+          "producto": "pavo_fiambre",
+          "cantidad": 60
+        },
+        {
+          "producto": "espinacas",
+          "cantidad": 80
+        },
+        {
+          "producto": "pan_integral",
+          "cantidad": 2
+        }
+      ],
+      "nutricion": {
+        "kcal": 390,
+        "proteina": 39,
+        "hidratos": 28,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Descongela las espinacas en un bol apto para microondas a 800 W 3 min y escúrrelas bien.",
+            "En un bol, bate 3 claras (guarda las yemas para otra receta) con 1 huevo entero, sal y pimienta; añade el pavo en tiras y las espinacas.",
+            "En una sartén antiadherente a fuego medio, cuaja la tortilla con unas gotas de aceite 3 min por lado, dándole la vuelta con un plato.",
+            "Tuesta el pan en la tostadora 3 min y sírvelo con la tortilla."
+          ],
+          "utensilios": [
+            "bol apto para microondas",
+            "bol",
+            "sartén antiadherente",
+            "tostadora"
+          ],
+          "info": [
+            {
+              "utensilio": "microondas",
+              "potencia": 800,
+              "min": 3
+            },
+            null,
+            {
+              "utensilio": "sartén antiadherente",
+              "fuego": "medio",
+              "min": 6
+            },
+            {
+              "utensilio": "tostadora",
+              "min": 3
+            }
+          ]
+        },
+        {
+          "aparato": "micro",
+          "minutos": 12,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Descongela las espinacas en un bol apto para microondas a 800 W 3 min y escúrrelas bien.",
+            "En un bol, bate 3 claras (guarda las yemas para otra receta) con 1 huevo entero, sal y pimienta; añade el pavo en tiras y las espinacas.",
+            "Vierte en un plato hondo engrasado y microondas a 800 W 3 min, hasta que cuaje del todo.",
+            "Tuesta el pan en la tostadora 3 min y sírvelo con la tortilla."
+          ],
+          "utensilios": [
+            "bol apto para microondas",
+            "bol",
+            "plato hondo",
+            "tostadora"
+          ],
+          "info": [
+            {
+              "utensilio": "microondas",
+              "potencia": 800,
+              "min": 3
+            },
+            null,
+            {
+              "utensilio": "microondas",
+              "potencia": 800,
+              "min": 3
+            },
+            {
+              "utensilio": "tostadora",
+              "min": 3
+            }
+          ]
+        }
+      ],
+      "pack": "deportistas"
+    },
+    {
+      "id": "pecharellenaesp",
+      "nombre": "Pechuga rellena de espinacas y feta con arroz",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pechuga",
+          "cantidad": 200
+        },
+        {
+          "producto": "espinacas",
+          "cantidad": 60
+        },
+        {
+          "producto": "feta",
+          "cantidad": 30
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 70
+        }
+      ],
+      "nutricion": {
+        "kcal": 610,
+        "proteina": 57,
+        "hidratos": 56,
+        "grasa": 16
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 38,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Descongela las espinacas en un bol apto para microondas a 800 W 2 min y escúrrelas bien.",
+            "En la tabla, abre la pechuga en libro, rellénala con las espinacas y el feta, ciérrala con palillos y salpimiéntala.",
+            "Ponla en una fuente de horno con un hilo de aceite y hornea a 200 °C, calor arriba y abajo, 22 min, hasta que esté hecha por dentro.",
+            "Mientras, en un cazo con agua y sal a fuego fuerte, cuece el arroz 15 min y escúrrelo con el colador."
+          ],
+          "utensilios": [
+            "bol apto para microondas",
+            "fuente de horno",
+            "cazo",
+            "colador",
+            "palillos"
+          ],
+          "info": [
+            {
+              "utensilio": "microondas",
+              "potencia": 800,
+              "min": 2
+            },
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 200,
+              "modo": "arriba y abajo",
+              "min": 22
+            },
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 15
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Descongela las espinacas en un bol apto para microondas a 800 W 2 min y escúrrelas bien.",
+            "En la tabla, abre la pechuga en libro, rellénala con las espinacas y el feta, ciérrala con palillos y salpimiéntala.",
+            "Pulveriza con aceite y ponla en la cesta: air fryer a 190 °C 16 min, dándole la vuelta a mitad, hasta que esté hecha por dentro.",
+            "Mientras, en un cazo con agua y sal a fuego fuerte, cuece el arroz 15 min y escúrrelo con el colador."
+          ],
+          "utensilios": [
+            "bol apto para microondas",
+            "cesta de la air fryer",
+            "cazo",
+            "colador",
+            "palillos"
+          ],
+          "info": [
+            {
+              "utensilio": "microondas",
+              "potencia": 800,
+              "min": 2
+            },
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 16,
+              "nota": "da la vuelta a mitad"
+            },
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 15
+            }
+          ]
+        }
+      ],
+      "pack": "deportistas"
+    },
+    {
+      "id": "burritopollo",
+      "nombre": "Burrito proteico de pollo, arroz y alubias",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "tortillas",
+          "cantidad": 2
+        },
+        {
+          "producto": "pechuga",
+          "cantidad": 150
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 50
+        },
+        {
+          "producto": "alubias_rojas",
+          "cantidad": 80
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 50
+        },
+        {
+          "producto": "queso",
+          "cantidad": 20
+        }
+      ],
+      "nutricion": {
+        "kcal": 795,
+        "proteina": 56,
+        "hidratos": 92,
+        "grasa": 20
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En un cazo con agua y sal a fuego fuerte, cuece el arroz 15 min y escúrrelo con el colador.",
+            "En la tabla, corta el pollo y el pimiento en tiras.",
+            "En una sartén grande a fuego medio-alto, saltea el pollo y el pimiento con aceite, comino, pimentón y sal 8 min, hasta que el pollo esté hecho.",
+            "Añade las alubias escurridas y calienta a fuego medio 2 min.",
+            "Reparte en las tortillas el arroz, el relleno y el queso, y enróllalas cerrando los extremos.",
+            "Dóralas en la sartén a fuego medio 1 min por cada lado."
+          ],
+          "utensilios": [
+            "cazo",
+            "colador",
+            "sartén grande",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 15
+            },
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 8
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 2
+            },
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 2
+            }
+          ]
+        }
+      ],
+      "pack": "deportistas"
+    },
+    {
+      "id": "shawarmabol",
+      "nombre": "Bol de pollo shawarma con arroz y yogur",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "muslos",
+          "cantidad": 180
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "yogur",
+          "cantidad": 1
+        },
+        {
+          "producto": "pepino",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 70
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 730,
+        "proteina": 46,
+        "hidratos": 74,
+        "grasa": 27
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En un bol, mezcla el pollo en tiras con comino, pimentón, cúrcuma, ajo en polvo, sal y un chorrito de aceite.",
+            "En un cazo con agua y sal a fuego fuerte, cuece el arroz 15 min y escúrrelo con el colador.",
+            "En una sartén grande a fuego medio-alto, cocina el pollo con la cebolla en juliana 10 min, hasta que esté dorado y bien hecho.",
+            "En la tabla, pica el pepino y el tomate; mezcla una parte del pepino rallado con el yogur y sal para la salsa.",
+            "Monta el bol con el arroz, el pollo, las verduras y la salsa de yogur."
+          ],
+          "utensilios": [
+            "bol",
+            "cazo",
+            "colador",
+            "sartén grande",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 15
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 10
+            },
+            null,
+            null
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En un bol, mezcla el pollo en tiras con comino, pimentón, cúrcuma, ajo en polvo, sal y un chorrito de aceite.",
+            "En un cazo con agua y sal a fuego fuerte, cuece el arroz 15 min y escúrrelo con el colador.",
+            "Pon el pollo y la cebolla en juliana en la cesta: air fryer a 200 °C 14 min, removiendo a mitad, hasta que el pollo esté bien hecho.",
+            "En la tabla, pica el pepino y el tomate; mezcla una parte del pepino rallado con el yogur y sal para la salsa.",
+            "Monta el bol con el arroz, el pollo, las verduras y la salsa de yogur."
+          ],
+          "utensilios": [
+            "bol",
+            "cazo",
+            "colador",
+            "cesta de la air fryer",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 15
+            },
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 14,
+              "nota": "remueve a mitad"
+            },
+            null,
+            null
+          ]
+        }
+      ],
+      "pack": "deportistas"
+    },
+    {
+      "id": "mealprep",
+      "nombre": "Táper de pollo al pimentón, arroz y brócoli",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pechuga",
+          "cantidad": 180
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 90
+        },
+        {
+          "producto": "brocoli",
+          "cantidad": 150
+        }
+      ],
+      "nutricion": {
+        "kcal": 635,
+        "proteina": 52,
+        "hidratos": 76,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 28,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En un cazo con agua y sal a fuego fuerte, cuece el arroz 15 min y escúrrelo con el colador.",
+            "Pon el brócoli en un bol apto para microondas con 2 cucharadas de agua: 800 W, tapado, 5 min.",
+            "En la tabla, corta la pechuga en dados y adóbala con pimentón, ajo en polvo, sal y aceite.",
+            "En una sartén grande a fuego medio-alto, saltea el pollo 8 min, hasta que esté hecho por dentro.",
+            "Reparte el arroz, el pollo y el brócoli en el táper y guárdalo en la nevera."
+          ],
+          "utensilios": [
+            "cazo",
+            "colador",
+            "bol apto para microondas",
+            "sartén grande",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 15
+            },
+            {
+              "utensilio": "microondas",
+              "potencia": 800,
+              "min": 5,
+              "nota": "tapado"
+            },
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 8
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 30,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En un cazo con agua y sal a fuego fuerte, cuece el arroz 15 min y escúrrelo con el colador.",
+            "Pon el brócoli en un bol apto para microondas con 2 cucharadas de agua: 800 W, tapado, 5 min.",
+            "En la tabla, corta la pechuga en dados y adóbala con pimentón, ajo en polvo, sal y aceite.",
+            "Pon el pollo en la cesta: air fryer a 200 °C 12 min, removiendo a mitad, hasta que esté hecho por dentro.",
+            "Reparte el arroz, el pollo y el brócoli en el táper y guárdalo en la nevera."
+          ],
+          "utensilios": [
+            "cazo",
+            "colador",
+            "bol apto para microondas",
+            "cesta de la air fryer",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 15
+            },
+            {
+              "utensilio": "microondas",
+              "potencia": 800,
+              "min": 5,
+              "nota": "tapado"
+            },
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 12,
+              "nota": "remueve a mitad"
+            },
+            null
+          ]
+        }
+      ],
+      "pack": "deportistas"
+    },
+    {
+      "id": "pavogarbanzos",
+      "nombre": "Pavo salteado con garbanzos y espinacas",
+      "grupo": "carne",
+      "proteina_principal": "pavo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pavo",
+          "cantidad": 160
+        },
+        {
+          "producto": "garbanzos",
+          "cantidad": 150
+        },
+        {
+          "producto": "espinacas",
+          "cantidad": 100
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 60
+        }
+      ],
+      "nutricion": {
+        "kcal": 475,
+        "proteina": 53,
+        "hidratos": 30,
+        "grasa": 14
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En la tabla, corta el pavo en dados y pica la cebolla.",
+            "En una sartén grande a fuego medio-alto, dora el pavo con sal y un chorrito de aceite 6 min y resérvalo.",
+            "En la misma sartén a fuego medio, pocha la cebolla 5 min; añade el tomate y las espinacas y cocina 6 min.",
+            "Añade los garbanzos escurridos con el colador, el pavo, comino y pimentón, y cocina 4 min más."
+          ],
+          "utensilios": [
+            "sartén grande",
+            "colador",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 6
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 11
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 4
+            }
+          ]
+        }
+      ],
+      "pack": "deportistas"
+    },
+    {
+      "id": "emperadorquinoa",
+      "nombre": "Emperador a la plancha con quinoa y verduras",
+      "grupo": "pescado",
+      "proteina_principal": "pescado_azul",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "emperador",
+          "cantidad": 180
+        },
+        {
+          "producto": "quinoa",
+          "cantidad": 125
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 100
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 60
+        },
+        {
+          "producto": "limon",
+          "cantidad": 10
+        }
+      ],
+      "nutricion": {
+        "kcal": 475,
+        "proteina": 42,
+        "hidratos": 33,
+        "grasa": 19
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En la tabla, corta el calabacín y el pimiento en dados.",
+            "En una sartén grande a fuego medio-alto, saltea las verduras con aceite y sal 7 min.",
+            "Añade la quinoa cocida y caliéntala removiendo 2 min a fuego medio.",
+            "En otra sartén a fuego fuerte, haz el emperador con sal 3 min por cada lado, hasta que esté hecho.",
+            "Sirve el pescado sobre la quinoa con unas gotas de limón."
+          ],
+          "utensilios": [
+            "sartén grande",
+            "sartén",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 7
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 2
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "fuerte",
+              "min": 6
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 22,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En la tabla, corta el calabacín y el pimiento en dados.",
+            "En la cesta de la air fryer, verduras con aceite y sal a 190 °C 10 min, removiendo a mitad.",
+            "Calienta la quinoa en un bol apto para microondas a 800 W 1 min y mézclala con las verduras.",
+            "Pon el emperador con sal y un poco de aceite en la cesta: air fryer a 200 °C 8 min, dándole la vuelta a mitad.",
+            "Sirve el pescado sobre la quinoa con unas gotas de limón."
+          ],
+          "utensilios": [
+            "cesta de la air fryer",
+            "bol apto para microondas",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 10,
+              "nota": "remueve a mitad"
+            },
+            {
+              "utensilio": "microondas",
+              "potencia": 800,
+              "min": 1
+            },
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 8,
+              "nota": "da la vuelta a mitad"
+            },
+            null
+          ]
+        }
+      ],
+      "pack": "deportistas"
+    },
+    {
+      "id": "filetehuevo",
+      "nombre": "Filete de ternera con patatas al horno y huevo",
+      "grupo": "carne",
+      "proteina_principal": "ternera",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "ternera",
+          "cantidad": 160
+        },
+        {
+          "producto": "patata",
+          "cantidad": 250
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        }
+      ],
+      "nutricion": {
+        "kcal": 570,
+        "proteina": 47,
+        "hidratos": 43,
+        "grasa": 23
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 40,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En la tabla, corta la patata en gajos y mézclala con aceite, sal y pimentón.",
+            "En una bandeja con papel de horno, hornea las patatas a 200 °C, calor arriba y abajo, 30 min, dándoles la vuelta a mitad.",
+            "En una sartén a fuego fuerte, haz el filete con sal 2 min por cada lado.",
+            "En la misma sartén a fuego medio, haz el huevo a la plancha con unas gotas de aceite 3 min, hasta que la clara esté cuajada."
+          ],
+          "utensilios": [
+            "bandeja de horno",
+            "papel de horno",
+            "sartén",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 200,
+              "modo": "arriba y abajo",
+              "min": 30,
+              "nota": "da la vuelta a mitad"
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "fuerte",
+              "min": 4
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 3
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 32,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "En la tabla, corta la patata en gajos y mézclala con aceite, sal y pimentón.",
+            "En la cesta de la air fryer, patatas a 190 °C 22 min, removiendo a mitad.",
+            "En una sartén a fuego fuerte, haz el filete con sal 2 min por cada lado.",
+            "En la misma sartén a fuego medio, haz el huevo a la plancha con unas gotas de aceite 3 min, hasta que la clara esté cuajada."
+          ],
+          "utensilios": [
+            "cesta de la air fryer",
+            "sartén",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 22,
+              "nota": "remueve a mitad"
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "fuerte",
+              "min": 4
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 3
+            }
+          ]
+        }
+      ],
+      "pack": "deportistas"
+    },
+    {
+      "id": "espagpavo",
+      "nombre": "Espaguetis con pavo y tomate",
+      "grupo": "carne",
+      "proteina_principal": "pavo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "espaguetis",
+          "cantidad": 100
+        },
+        {
+          "producto": "pavo",
+          "cantidad": 150
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 120
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "queso",
+          "cantidad": 15
+        }
+      ],
+      "nutricion": {
+        "kcal": 680,
+        "proteina": 53,
+        "hidratos": 81,
+        "grasa": 15
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En una olla con agua y sal a fuego fuerte, cuece los espaguetis el tiempo del paquete (unos 10 min) y escúrrelos con el colador.",
+            "En la tabla, pica la cebolla y corta el pavo en dados pequeños.",
+            "En una sartén grande a fuego medio-alto, dora el pavo con sal y un chorrito de aceite 5 min; añade la cebolla 4 min.",
+            "Añade el tomate con orégano y cocina a fuego medio 8 min.",
+            "Mezcla con la pasta y sirve con el queso por encima."
+          ],
+          "utensilios": [
+            "olla",
+            "colador",
+            "sartén grande",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 10
+            },
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 9
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 8
+            },
+            null
+          ]
+        }
+      ],
+      "pack": "deportistas"
+    },
+    {
+      "id": "pastapolloesp",
+      "nombre": "Macarrones con pollo, espinacas y tomate",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pasta",
+          "cantidad": 100
+        },
+        {
+          "producto": "pechuga",
+          "cantidad": 160
+        },
+        {
+          "producto": "espinacas",
+          "cantidad": 80
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 80
+        },
+        {
+          "producto": "queso",
+          "cantidad": 20
+        }
+      ],
+      "nutricion": {
+        "kcal": 700,
+        "proteina": 56,
+        "hidratos": 76,
+        "grasa": 17
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En una olla con agua y sal a fuego fuerte, cuece la pasta el tiempo del paquete (unos 10 min) y escúrrela con el colador.",
+            "En la tabla, corta la pechuga en dados y el tomate en trozos.",
+            "En una sartén grande a fuego medio-alto, dora el pollo con sal, pimienta y un chorrito de aceite 7 min, hasta que esté hecho por dentro.",
+            "Baja a fuego medio, añade las espinacas y el tomate y cocina 5 min, hasta que las espinacas suelten el agua.",
+            "Mezcla con la pasta, espolvorea el queso y remueve 1 min para que se funda."
+          ],
+          "utensilios": [
+            "olla",
+            "colador",
+            "sartén grande",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 10
+            },
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 7
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 5
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 1
+            }
+          ]
+        }
+      ],
+      "pack": "deportistas"
+    },
+    {
+      "id": "ropavieja",
+      "nombre": "Ropa vieja de pollo y garbanzos",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "muslos",
+          "cantidad": 130
+        },
+        {
+          "producto": "garbanzos",
+          "cantidad": 150
+        },
+        {
+          "producto": "patata",
+          "cantidad": 100
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 580,
+        "proteina": 38,
+        "hidratos": 47,
+        "grasa": 24
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 35,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Si no tienes sobras de cocido, cuece el contramuslo y la patata en dados en un cazo con agua y sal a fuego medio-alto 15 min y escúrrelos con el colador.",
+            "Desmenuza el pollo con dos tenedores y, en la tabla, corta la cebolla y el pimiento en tiras.",
+            "En una sartén grande a fuego medio, pocha la cebolla y el pimiento con un chorrito de aceite 8 min.",
+            "Sube a fuego medio-alto, añade la patata, el pollo y los garbanzos escurridos con pimentón y saltea 6 min, hasta que se doren."
+          ],
+          "utensilios": [
+            "cazo",
+            "colador",
+            "sartén grande",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "medio-alto",
+              "min": 15
+            },
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 8
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 6
+            }
+          ]
+        }
+      ],
+      "pack": "aprovechamiento"
+    },
+    {
+      "id": "arrozhorno",
+      "nombre": "Arroz al horno de aprovechamiento",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "salchichas",
+          "cantidad": 80
+        },
+        {
+          "producto": "garbanzos",
+          "cantidad": 80
+        },
+        {
+          "producto": "patata",
+          "cantidad": 80
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 80
+        },
+        {
+          "producto": "caldo_pollo",
+          "cantidad": 200
+        }
+      ],
+      "nutricion": {
+        "kcal": 690,
+        "proteina": 25,
+        "hidratos": 94,
+        "grasa": 23
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 45,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "Precalienta el horno a 220 °C; en la tabla, corta la patata y el tomate en rodajas y las salchichas en trozos.",
+            "En una sartén a fuego medio-alto, dora la patata y las salchichas con aceite 6 min; añade el arroz con pimentón y remueve 1 min.",
+            "Mientras, calienta el caldo en un cazo a fuego fuerte hasta que hierva.",
+            "Pasa el arroz, la patata y las salchichas a una fuente de horno con los garbanzos escurridos, vierte el caldo hirviendo y coloca el tomate encima.",
+            "Hornea a 220 °C, calor arriba y abajo, 20 min, y deja reposar 5 min antes de servir."
+          ],
+          "utensilios": [
+            "sartén",
+            "cazo",
+            "fuente de horno",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén",
+              "fuego": "medio-alto",
+              "min": 7
+            },
+            {
+              "utensilio": "cazo",
+              "fuego": "fuerte",
+              "min": 4
+            },
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 220,
+              "modo": "arriba y abajo",
+              "min": 20
+            }
+          ]
+        }
+      ],
+      "pack": "aprovechamiento"
+    },
+    {
+      "id": "revuelverd",
+      "nombre": "Revuelto de verduras de la nevera con tostada",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 100
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 50
+        },
+        {
+          "producto": "champi",
+          "cantidad": 60
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "pan_integral",
+          "cantidad": 2
+        }
+      ],
+      "nutricion": {
+        "kcal": 445,
+        "proteina": 25,
+        "hidratos": 36,
+        "grasa": 22
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "En la tabla, corta en dados pequeños las verduras que tengas (calabacín, pimiento, cebolla, champiñón).",
+            "En una sartén a fuego medio-alto, saltea las verduras con un chorrito de aceite y sal 8 min.",
+            "Baja a fuego bajo, añade los huevos batidos en un bol y remueve 3 min, hasta que estén cuajados.",
+            "Tuesta el pan en la tostadora 3 min y sírvelo con el revuelto."
+          ],
+          "utensilios": [
+            "sartén",
+            "bol",
+            "tabla y cuchillo",
+            "tostadora"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén",
+              "fuego": "medio-alto",
+              "min": 8
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "bajo",
+              "min": 3
+            },
+            {
+              "utensilio": "tostadora",
+              "min": 3
+            }
+          ]
+        }
+      ],
+      "pack": "aprovechamiento"
+    },
+    {
+      "id": "sopacebolla",
+      "nombre": "Sopa de cebolla gratinada con pan duro y huevo",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "cebolla",
+          "cantidad": 250
+        },
+        {
+          "producto": "caldo_pollo",
+          "cantidad": 350
+        },
+        {
+          "producto": "pan_barra",
+          "cantidad": 40
+        },
+        {
+          "producto": "queso",
+          "cantidad": 40
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        }
+      ],
+      "nutricion": {
+        "kcal": 515,
+        "proteina": 24,
+        "hidratos": 45,
+        "grasa": 26
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 45,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En la tabla, corta la cebolla en juliana fina.",
+            "En una olla con un chorrito de aceite, rehoga la cebolla a fuego bajo 25 min, removiendo de vez en cuando, hasta que esté dorada.",
+            "Añade el caldo con sal y pimienta y cuece a fuego medio 10 min.",
+            "Pasa la sopa a un cuenco apto para horno, casca el huevo dentro y cubre con el pan en rebanadas y el queso.",
+            "Gratina en el horno a 220 °C 6 min, hasta que el queso se dore y la clara esté cuajada."
+          ],
+          "utensilios": [
+            "olla",
+            "cuenco apto para horno",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "olla",
+              "fuego": "bajo",
+              "min": 25,
+              "nota": "empieza 5 min a fuego medio"
+            },
+            {
+              "utensilio": "olla",
+              "fuego": "medio",
+              "min": 10
+            },
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 220,
+              "modo": "gratinar",
+              "min": 6
+            }
+          ]
+        },
+        {
+          "aparato": "vitro",
+          "minutos": 42,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En la tabla, corta la cebolla en juliana fina.",
+            "En una olla con un chorrito de aceite, rehoga la cebolla a fuego bajo 25 min, removiendo de vez en cuando, hasta que esté dorada.",
+            "Añade el caldo con sal y pimienta y cuece a fuego medio 10 min.",
+            "Añade el huevo batido removiendo a fuego bajo 2 min, hasta que cuaje en hebras.",
+            "Tuesta el pan en la tostadora 3 min, ponlo en el plato con el queso y vierte la sopa caliente encima."
+          ],
+          "utensilios": [
+            "olla",
+            "tostadora",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "olla",
+              "fuego": "bajo",
+              "min": 25,
+              "nota": "empieza 5 min a fuego medio"
+            },
+            {
+              "utensilio": "olla",
+              "fuego": "medio",
+              "min": 10
+            },
+            {
+              "utensilio": "olla",
+              "fuego": "bajo",
+              "min": 2
+            },
+            {
+              "utensilio": "tostadora",
+              "min": 3
+            }
+          ]
+        }
+      ],
+      "pack": "aprovechamiento"
+    },
+    {
+      "id": "croqjamon",
+      "nombre": "Croquetas de patata y jamón sin freír",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "rebozado"
+      ],
+      "ingredientes": [
+        {
+          "producto": "patata",
+          "cantidad": 180
+        },
+        {
+          "producto": "jamon",
+          "cantidad": 60
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        },
+        {
+          "producto": "pan_rallado",
+          "cantidad": 30
+        },
+        {
+          "producto": "queso",
+          "cantidad": 15
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 60
+        }
+      ],
+      "nutricion": {
+        "kcal": 575,
+        "proteina": 36,
+        "hidratos": 56,
+        "grasa": 23
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 35,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "Si no tienes puré o patata cocida de otro día, cuece la patata pelada en dados en un cazo con agua y sal a fuego medio-alto 15 min y escúrrela con el colador.",
+            "En un bol, aplasta la patata y mézclala con el jamón muy picado, el queso, una yema y nuez moscada; forma las croquetas.",
+            "Pásalas por el resto del huevo batido en un plato hondo y luego por el pan rallado.",
+            "Ponlas en la cesta, pulveriza con aceite y air fryer a 200 °C 10 min, dándoles la vuelta a mitad. Sírvelas con la ensalada."
+          ],
+          "utensilios": [
+            "cazo",
+            "colador",
+            "bol",
+            "plato hondo",
+            "cesta de la air fryer"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "medio-alto",
+              "min": 15
+            },
+            null,
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 10,
+              "nota": "da la vuelta a mitad"
+            }
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 38,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "Si no tienes puré o patata cocida de otro día, cuece la patata pelada en dados en un cazo con agua y sal a fuego medio-alto 15 min y escúrrela con el colador.",
+            "En un bol, aplasta la patata y mézclala con el jamón muy picado, el queso, una yema y nuez moscada; forma las croquetas.",
+            "Pásalas por el resto del huevo batido en un plato hondo y luego por el pan rallado.",
+            "Ponlas en una bandeja de horno engrasada con un hilo de aceite: hornea a 210 °C, calor arriba y abajo, 14 min. Sírvelas con la ensalada."
+          ],
+          "utensilios": [
+            "cazo",
+            "colador",
+            "bol",
+            "plato hondo",
+            "bandeja de horno"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "medio-alto",
+              "min": 15
+            },
+            null,
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 210,
+              "modo": "arriba y abajo",
+              "min": 14
+            }
+          ]
+        }
+      ],
+      "pack": "aprovechamiento"
+    },
+    {
+      "id": "migas",
+      "nombre": "Migas de pan duro con pimiento y huevo",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pan_barra",
+          "cantidad": 100
+        },
+        {
+          "producto": "serrano",
+          "cantidad": 40
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 60
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 5
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        }
+      ],
+      "nutricion": {
+        "kcal": 605,
+        "proteina": 29,
+        "hidratos": 60,
+        "grasa": 27
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En la tabla, corta el pan duro en daditos, humedécelo con un poco de agua con sal y tápalo con un paño 20 min (o desde la noche anterior).",
+            "Corta el pimiento en tiras, lamina el ajo y trocea el jamón.",
+            "En una sartén grande a fuego medio, fríe el ajo y el pimiento con aceite 6 min; añade el jamón 1 min y retíralo todo.",
+            "En la misma sartén a fuego medio, echa el pan y remueve sin parar 10 min, hasta que esté suelto y dorado; vuelve a añadir el pimiento y el jamón.",
+            "En una sartén pequeña a fuego medio, fríe el huevo 3 min y sírvelo encima."
+          ],
+          "utensilios": [
+            "sartén grande",
+            "sartén",
+            "tabla y cuchillo",
+            "paño de cocina"
+          ],
+          "info": [
+            null,
+            null,
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 7
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 10
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 3
+            }
+          ]
+        }
+      ],
+      "pack": "aprovechamiento"
+    },
+    {
+      "id": "frittatapasta",
+      "nombre": "Tortilla de pasta de aprovechamiento",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pasta",
+          "cantidad": 70
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 3
+        },
+        {
+          "producto": "queso",
+          "cantidad": 30
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 40
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 660,
+        "proteina": 37,
+        "hidratos": 57,
+        "grasa": 31
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Si no tienes pasta sobrante, cuécela en una olla con agua y sal a fuego fuerte 10 min y escúrrela con el colador.",
+            "En un bol, bate los huevos con sal y pimienta y mézclalos con la pasta, el tomate frito y el queso.",
+            "En una sartén antiadherente con unas gotas de aceite a fuego medio, cuaja la tortilla tapada 6 min; dale la vuelta con un plato y cocina 4 min más.",
+            "Sírvela caliente o fría con la ensalada."
+          ],
+          "utensilios": [
+            "olla",
+            "colador",
+            "bol",
+            "sartén antiadherente",
+            "plato llano"
+          ],
+          "info": [
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 10
+            },
+            null,
+            {
+              "utensilio": "sartén antiadherente",
+              "fuego": "medio",
+              "min": 10
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 35,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Si no tienes pasta sobrante, cuécela en una olla con agua y sal a fuego fuerte 10 min y escúrrela con el colador.",
+            "En un bol, bate los huevos con sal y pimienta y mézclalos con la pasta, el tomate frito y el queso.",
+            "Vierte en una fuente de horno engrasada y hornea a 190 °C, calor arriba y abajo, 18 min, hasta que cuaje.",
+            "Sírvela caliente o fría con la ensalada."
+          ],
+          "utensilios": [
+            "olla",
+            "colador",
+            "bol",
+            "fuente de horno"
+          ],
+          "info": [
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 10
+            },
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 190,
+              "modo": "arriba y abajo",
+              "min": 18
+            },
+            null
+          ]
+        }
+      ],
+      "pack": "aprovechamiento"
+    },
+    {
+      "id": "panzanella",
+      "nombre": "Panzanella de pan duro con tomate y atún",
+      "grupo": "pescado",
+      "proteina_principal": "atun",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "frio",
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pan_barra",
+          "cantidad": 70
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 200
+        },
+        {
+          "producto": "pepino",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 30
+        },
+        {
+          "producto": "atun",
+          "cantidad": 60
+        }
+      ],
+      "nutricion": {
+        "kcal": 475,
+        "proteina": 25,
+        "hidratos": 50,
+        "grasa": 19
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En la tabla, corta el tomate en trozos y ponlo en un bol con sal 10 min para que suelte su jugo.",
+            "Corta el pan duro en dados, el pepino en medias lunas y la cebolla muy fina.",
+            "Añade al bol el pan, el pepino, la cebolla y el atún escurrido, aliña con aceite, vinagre y orégano y mezcla bien.",
+            "Deja reposar 10 min para que el pan se empape y sirve."
+          ],
+          "utensilios": [
+            "bol",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "bol",
+              "min": 10,
+              "nota": "reposo"
+            },
+            null,
+            null,
+            {
+              "utensilio": "bol",
+              "min": 10,
+              "nota": "reposo"
+            }
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En la tabla, corta el pan duro en dados y tuéstalo en una bandeja de horno a 200 °C, calor arriba y abajo, 8 min.",
+            "Mientras, corta el tomate en trozos y ponlo en un bol con sal para que suelte su jugo; corta el pepino en medias lunas y la cebolla muy fina.",
+            "Añade al bol el pan, el pepino, la cebolla y el atún escurrido, aliña con aceite, vinagre y orégano y mezcla bien.",
+            "Deja reposar 10 min para que el pan se empape y sirve."
+          ],
+          "utensilios": [
+            "bandeja de horno",
+            "bol",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "horno",
+              "temp": 200,
+              "modo": "arriba y abajo",
+              "min": 8
+            },
+            null,
+            null,
+            {
+              "utensilio": "bol",
+              "min": 10,
+              "nota": "reposo"
+            }
+          ]
+        }
+      ],
+      "pack": "aprovechamiento"
+    },
+    {
+      "id": "tortitaspure",
+      "nombre": "Tortitas de patata y verduras sobrantes",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "patata",
+          "cantidad": 200
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 80
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 50
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "queso",
+          "cantidad": 30
+        },
+        {
+          "producto": "pan_rallado",
+          "cantidad": 15
+        }
+      ],
+      "nutricion": {
+        "kcal": 485,
+        "proteina": 21,
+        "hidratos": 53,
+        "grasa": 21
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "Si no tienes puré o patata cocida de otro día, cuece la patata en dados en un cazo con agua y sal a fuego medio-alto 15 min y escúrrela con el colador.",
+            "Ralla el calabacín y la zanahoria con el rallador y escúrrelos con las manos.",
+            "En un bol, aplasta la patata y mézclala con las verduras, el huevo, el queso, el pan rallado, sal y pimienta; forma tortitas.",
+            "En una sartén antiadherente a fuego medio con unas gotas de aceite, dóralas 4 min por cada lado."
+          ],
+          "utensilios": [
+            "cazo",
+            "colador",
+            "rallador",
+            "bol",
+            "sartén antiadherente"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "medio-alto",
+              "min": 15
+            },
+            null,
+            null,
+            {
+              "utensilio": "sartén antiadherente",
+              "fuego": "medio",
+              "min": 8
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 32,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "Si no tienes puré o patata cocida de otro día, cuece la patata en dados en un cazo con agua y sal a fuego medio-alto 15 min y escúrrela con el colador.",
+            "Ralla el calabacín y la zanahoria con el rallador y escúrrelos con las manos.",
+            "En un bol, aplasta la patata y mézclala con las verduras, el huevo, el queso, el pan rallado, sal y pimienta; forma tortitas.",
+            "Ponlas en la cesta con papel perforado, pulveriza con aceite: air fryer a 190 °C 12 min, dándoles la vuelta a mitad."
+          ],
+          "utensilios": [
+            "cazo",
+            "colador",
+            "rallador",
+            "bol",
+            "cesta de la air fryer"
+          ],
+          "info": [
+            {
+              "utensilio": "cazo",
+              "fuego": "medio-alto",
+              "min": 15
+            },
+            null,
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 12,
+              "nota": "da la vuelta a mitad"
+            }
+          ]
+        }
+      ],
+      "pack": "aprovechamiento"
     }
   ]
 }

@@ -529,6 +529,15 @@
         "Solo planifico platos que encajan con todos, y la dieta y las alergias no se saltan nunca. En gustos ya no salen los ingredientes que no tomas.",
         "En Recetas, filtros de veganas y vegetarianas. En la tienda, botón «Usar» para cambiar entre las estéticas, colores y avatares que ya tienes."
       ]
+    },
+    {
+      "version": 56,
+      "fecha": "2026-10-22",
+      "titulo": "Packs de recetas",
+      "cambios": [
+        "Ya están en la tienda los 4 packs de recetas (30 coins cada uno), todos con foto: 🎄 Navidad (canelones de Sant Esteve, escudella, pavo al horno…), 💼 Tápers de oficina, 💪 Deportistas y ♻️ Aprovechamiento.",
+        "En Recetas los ves con un candado. Cuando desbloqueas uno, sus platos empiezan a salir en tus menús."
+      ]
     }
   ]
 }

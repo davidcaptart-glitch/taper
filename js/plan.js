@@ -357,6 +357,8 @@ function scoreRecipe(r,slot,ctx){
   const mineR=S.ratings.filter(x=>x.rid===r.id&&x.ease&&slot.eaters.concat(slot.tupper).some(a=>a.id===x.who));
   if(mineR.some(x=>x.ease==="dificil"))s-=2.5;else if(mineR.some(x=>x.ease==="facil"))s+=0.6;
   s+=monthPrefScore(r,slot,ctx);
+  // Recetas de un pack que has desbloqueado: salen más, para que se note lo comprado
+  if(r.pack&&hasPack(r))s+=2.5;
   return s;
 }
 function makeCtx(start,exceptId){
@@ -490,7 +492,8 @@ function genWeekFromScratch(start){
     // Coste real de la semana (paquetes enteros de lo fresco): así se nota el ahorro de compartir ingredientes
     const cost=weekCost(start), rep=S.home.repeat||"no";
     const bal=balanceOf(wk);
-    const sc=bal*(rep==="semana"?1:2)-cost/(rep==="no"?8:3);
+    const packs=Object.values(wk.slots).filter(v=>RX[v.recipe]&&RX[v.recipe].pack&&hasPack(RX[v.recipe])).length;
+    const sc=bal*(rep==="semana"?1:2)-cost/(rep==="no"?8:3)+Math.min(packs,2)*1.2;
     tries.push({sc,slots:JSON.parse(JSON.stringify(wk.slots))});
   }
   tries.sort((a,b)=>b.sc-a.sc);
@@ -528,6 +531,7 @@ function fitBudget(start){
       if(sl.fixed)continue;const v=wk.slots[sl.id];if(!v||v.locked)continue;const cur=RX[v.recipe];if(!cur)continue;
       // Lo que se ha pedido para este mes (más de algo, o repetir un plato) no se cambia por ahorrar
       {const mp=monthPrefs(sl.date);if(mp&&((mp.favs||[]).includes(cur.id)||(mp.more||[]).some(k=>prefMatch[k]&&prefMatch[k](cur))))continue}
+      if(cur.pack&&hasPack(cur))continue;   // lo que has desbloqueado en la tienda tampoco
       const ctx=makeCtx(start,sl.id);ctx.noise=0;
       const curS=scoreRecipe(cur,sl,ctx);
       const sameWeekOk=(S.home.repeat||"no")==="semana";
