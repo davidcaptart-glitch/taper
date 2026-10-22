@@ -43,7 +43,12 @@ async function textFromImage(file,onProgress){
 // "1 PLATANO" seguido de "0,862 kg   2,15 €/kg   1,85"
 function parseTicket(text){
   const raw=text.split(/\r?\n/).map(l=>l.replace(/\s+/g," ").trim()).filter(Boolean);
-  const out={date:null,total:null,lines:[]};
+  const out={date:null,total:null,lines:[],super:null,store:""};
+  // Supermercado y tienda: el nombre de la cadena y la dirección están en las primeras líneas
+  const head=raw.slice(0,6), up=normTxt(head.join(" "));
+  const sp=(SUPERS||[]).find(x=>x.nombre.split("/").some(n=>up.includes(normTxt(n))));out.super=sp?sp.id:null;
+  const addr=head.find(l=>/(C\/|CL\.?|CALLE|AV\.?|AVDA|AVENIDA|PZA|PLAZA|CTRA|PASEO|PG|RAMBLA|CARRER)/i.test(l))||head.find((l,i)=>i>0&&!/S\.A\.|\d{2}\/\d{2}\/\d{4}|TEL|FACTURA|NIF|CIF/i.test(l));
+  out.store=addr?addr.replace(/\s+/g," ").trim():"";
   const dm=text.match(/(\d{2})\/(\d{2})\/(\d{4})/);if(dm)out.date=`${dm[3]}-${dm[2]}-${dm[1]}`;
   const money="(\\d{1,4}[,.]\\d{2})";
   const reItem=new RegExp(`^(\\d{1,2})\\s+(.+?)\\s+${money}(?:\\s+${money})?$`);
@@ -126,6 +131,8 @@ function openTicketReview(tk,text){
     showDialog(`<div class="mod">${closeBtn}<h2>Ticket del ${esc(longDate(date))}</h2>
       <p>Comida: <b>${eur(foodT)}</b>${nonT?` · No es comida (no se cuenta): ${eur(nonT)}`:""}${tk.total!=null?` · Total del ticket: ${eur(tk.total)}`:""}</p>
       ${Math.abs(diff)>0.05?`<div class="warnbox">Las líneas leídas suman ${eur(tk.sum)} y el ticket dice ${eur(tk.total)}: puede que alguna línea no se haya leído bien. Revisa y corrige.</div>`:""}
+      <div class="row"><div class="field" style="flex:1"><label>Supermercado</label><select id="tkSuper">${(SUPERS||[]).map(x=>`<option value="${x.id}" ${tk.super===x.id?"selected":""}>${esc(x.nombre)}</option>`).join("")}<option value="otro" ${!tk.super?"selected":""}>Otro</option></select></div>
+        <div class="field" style="flex:1.4"><label>Tienda</label><input type="text" id="tkStore" value="${esc(tk.store)}" placeholder="Dirección o barrio"></div></div>
       <div class="field"><label>¿De qué compra es?</label><select id="tkList"><option value="mes" ${dest.key==="mes"?"selected":""}>Compra del mes</option>${dest.weeks.map((s,i)=>`<option value="${i}" ${dest.key===String(i)?"selected":""}>Semana del ${shortDate(s)}</option>`).join("")}</select></div>
       <table class="wtable">${tk.lines.map((l,i)=>`<tr><td>${l.qty} × ${esc(l.desc)}${l.kg?` <span class="small muted">${String(l.kg).replace(".",",")} kg</span>`:""}
         <div class="small muted">${esc(l.match?l.match.name:"Sin identificar")} · ${esc(l.group)}</div>
@@ -136,6 +143,8 @@ function openTicketReview(tk,text){
     dlg.querySelectorAll("[data-tkf]").forEach(b=>b.onclick=()=>{const l=tk.lines[b.dataset.tkf];l.food=!l.food;if(!l.food)l.pid=null;draw()});
     dlg.querySelectorAll("[data-tkp]").forEach(s=>s.onchange=()=>{const l=tk.lines[s.dataset.tkp];l.pid=s.value||null;if(l.pid){l.food=true;l.group=P[l.pid].aisle}});
     dlg.querySelector("#tkList").onchange=e=>{dest={...dest,key:e.target.value}};
+    dlg.querySelector("#tkSuper").onchange=e=>{tk.super=e.target.value==="otro"?null:e.target.value};
+    dlg.querySelector("#tkStore").onchange=e=>{tk.store=e.target.value.trim()};
     dlg.querySelector("#tkSave").onclick=()=>saveTicket(tk,date,dest);
   };
   draw();
@@ -143,7 +152,7 @@ function openTicketReview(tk,text){
 function saveTicket(tk,date,dest){
   S.tickets=S.tickets||[];
   const lines=tk.lines.map(l=>({qty:l.qty,desc:l.desc,amount:l.amount,kg:l.kg||null,food:l.food,pid:l.pid||null,mid:l.match?l.match.mid:null,group:l.pid?P[l.pid].aisle:l.group}));
-  const t={id:uid("t"),date,m:dest.m,list:dest.key,total:tk.total,food:Math.round(lines.filter(l=>l.food).reduce((s,l)=>s+l.amount,0)*100)/100,lines};
+  const t={id:uid("t"),date,m:dest.m,list:dest.key,super:tk.super||"otro",store:tk.store||"",total:tk.total,food:Math.round(lines.filter(l=>l.food).reduce((s,l)=>s+l.amount,0)*100)/100,lines};
   S.tickets.push(t);
   // Lo pagado de esa lista = suma de sus tickets (solo comida)
   S.spent[dest.m+"|"+dest.key]=Math.round(S.tickets.filter(x=>x.m===dest.m&&x.list===dest.key).reduce((s,x)=>s+x.food,0)*100)/100;
@@ -156,7 +165,9 @@ function saveTicket(tk,date,dest){
 function spendingOf(m){
   const tks=(S.tickets||[]).filter(t=>t.m===m);if(!tks.length)return null;
   const sh=shopping(m), inList=new Set();for(const l of Object.values(sh.lists))for(const it of l.items)inList.add(it.pid);
-  const groups={},offList=[];let food=0,non=0;
+  const groups={},offList=[],shops={};let food=0,non=0;
+  const superName=id=>((SUPERS||[]).find(x=>x.id===id)||{nombre:"Otro"}).nombre;
+  for(const t of tks){const k=superName(t.super)+(t.store?" · "+t.store:"");shops[k]=(shops[k]||0)+t.food}
   for(const t of tks)for(const l of t.lines){
     if(!l.food){non+=l.amount;continue}
     food+=l.amount;const g=l.pid?({"Carne y pescado":"Carne y pescado"}[P[l.pid]?.aisle]||P[l.pid]?.aisle||l.group):l.group;groups[g]=(groups[g]||0)+l.amount;
@@ -164,7 +175,7 @@ function spendingOf(m){
   }
   const off=offList.reduce((t,l)=>t+l.amount,0);
   const top=Object.values(offList.reduce((a,l)=>{const k=l.desc;a[k]=a[k]||{desc:k,amount:0};a[k].amount+=l.amount;return a},{})).sort((a,b)=>b.amount-a.amount).slice(0,5);
-  return {tickets:tks.length,food,non,off,top,groups:Object.entries(groups).sort((a,b)=>b[1]-a[1])};
+  return {tickets:tks.length,food,non,off,top,groups:Object.entries(groups).sort((a,b)=>b[1]-a[1]),shops:Object.entries(shops).sort((a,b)=>b[1]-a[1])};
 }
 function spendingHTML(m){
   const sp=spendingOf(m);
@@ -175,7 +186,8 @@ function spendingHTML(m){
     <h3 style="font-size:1rem;margin:10px 0 6px">En qué se va el dinero</h3>
     ${sp.groups.map(([g,v])=>`<div class="spbar"><span>${esc(g)}</span><i style="width:${Math.max(4,v/max*100)}%"></i><b>${eur(v)}</b></div>`).join("")}
     ${sp.off>0.5?`<p class="small" style="margin-top:10px"><b>Fuera de la lista: ${eur(sp.off)}</b> (${Math.round(sp.off/sp.food*100)} % de la comida). Lo que más: ${sp.top.map(t=>esc(t.desc.toLowerCase())+" "+eur(t.amount)).join(", ")}.</p>`:`<p class="small okbox">Casi todo lo que compraste estaba en la lista.</p>`}
-    <details class="small"><summary>Ver tickets</summary>${(S.tickets||[]).filter(t=>t.m===m).map(t=>`<div class="fixed"><span>${esc(longDate(t.date))}<small>${eur(t.food)} en comida · ${t.lines.length} líneas</small></span><button class="btn ghost small" data-tkdel="${t.id}">Borrar</button></div>`).join("")}</details></div>`;
+    ${sp.shops.length>1?`<h3 style="font-size:1rem;margin:10px 0 6px">Dónde compras</h3>${sp.shops.map(([s,v])=>`<div class="spbar"><span>${esc(s)}</span><i style="width:${Math.max(4,v/sp.shops[0][1]*100)}%"></i><b>${eur(v)}</b></div>`).join("")}`:`<p class="small muted">Comprado en ${esc(sp.shops[0][0])}.</p>`}
+    <details class="small"><summary>Ver tickets</summary>${(S.tickets||[]).filter(t=>t.m===m).map(t=>`<div class="fixed"><span>${esc(longDate(t.date))}<small>${esc(((SUPERS||[]).find(x=>x.id===t.super)||{nombre:"Otro"}).nombre)}${t.store?" · "+esc(t.store):""} · ${eur(t.food)} en comida · ${t.lines.length} líneas</small></span><button class="btn ghost small" data-tkdel="${t.id}">Borrar</button></div>`).join("")}</details></div>`;
   return h;
 }
 function bindSpending(){
