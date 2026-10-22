@@ -388,12 +388,16 @@ function ensureWeek(start,regen){
   const wk=S.plans[start]=S.plans[start]||{start,slots:{},training:null,confirmed:false,createdAt:todayISO()};
   if(regen){for(const [id,v] of Object.entries(wk.slots))if(!v.locked)delete wk.slots[id];wk.confirmed=false}
   const slots=buildSlots(start);
+  let changed=safetySweep(start,slots);
   const ctx=makeCtx(start);
-  let changed=false;
   for(const sl of slots){
     if(sl.fixed){
-      if(sl.fixed.recipe&&(!wk.slots[sl.id]||wk.slots[sl.id].recipe!==sl.fixed.recipe)){wk.slots[sl.id]={recipe:sl.fixed.recipe,locked:true};changed=true}
-      continue;
+      const fr=sl.fixed.recipe&&RX[sl.fixed.recipe];
+      // Un plato fijo que alguien de los que comen ya no puede tomar no se pone: se elige otro
+      if(!(fr&&unsafeFor(slotPeople(sl),fr).length)){
+        if(fr&&(!wk.slots[sl.id]||wk.slots[sl.id].recipe!==sl.fixed.recipe)){wk.slots[sl.id]={recipe:sl.fixed.recipe,locked:true};changed=true}
+        continue;
+      }
     }
     const cur=wk.slots[sl.id];
     if(cur&&RX[cur.recipe])continue;
@@ -401,8 +405,39 @@ function ensureWeek(start,regen){
     wk.slots[sl.id]={recipe:r.id};addToCtx(ctx,r);changed=true;
   }
   ensureSmall(start);
+  if(safetySweep(start,slots,true)){ensureSmall(start);changed=true}
   return {wk,slots,changed};
 }
+/* ---------- Seguridad: alergias, dieta e ingredientes que alguien no puede tomar ----------
+   No son gustos: mandan sobre todo, también sobre los platos elegidos a mano y los platos fijos.
+   Desde hoy en adelante, cualquier plato que alguien de los que comen no pueda tomar se quita (y se elige otro)
+   y se avisa de qué se ha cambiado y por qué. Lo ya pasado no se toca. */
+let safetyNotes=[];
+const slotPeople=sl=>[...new Set(sl.eaters.concat(sl.kids,sl.tupper))];
+const unsafeFor=(people,r)=>people.filter(p=>!canEat(p,r));
+// Por qué no puede: "huevo", "gluten", "pollo (vegano)"…
+function whyCant(p,r){
+  const al=p.allergies||[],a=recipeAllergens(r).filter(x=>al.includes(x));
+  if(a.length)return a.map(x=>ALLERGENS[x].split(" (")[0].toLowerCase()).join(" ni ");
+  const ing=r.ing.find(([pid])=>ingPref(p,pid)===-9);if(ing)return P[ing[0]].name.toLowerCase();
+  const bad=r.ing.find(([pid])=>!dietAllows(p,pid));if(bad)return P[bad[0]].name.toLowerCase()+" ("+DIETS[dietOf(p)][1].toLowerCase()+")";
+  if(!rawOk(p,r))return "platos cocinados (crudivegano)";
+  return "algún ingrediente";
+}
+function safetySweep(start,slots,small){
+  const wk=S.plans[start];if(!wk)return false;const today=todayISO();let any=false;
+  const note=(d,meal,r,bad)=>{if(!safetyNotes.some(n=>n.d===d&&n.meal===meal&&n.rid===r.id))safetyNotes.push({d,meal,rid:r.id,name:r.name,who:bad.map(p=>(isMe(p)?"tú":personName(p))+": "+whyCant(p,r))})};
+  if(!small){for(const sl of slots||buildSlots(start)){if(sl.date<today)continue;const v=wk.slots[sl.id],r=v&&RX[v.recipe];if(!r)continue;
+    const bad=unsafeFor(slotPeople(sl),r);if(bad.length){delete wk.slots[sl.id];note(sl.date,sl.meal,r,bad);any=true}}}
+  else for(const [d,dd] of Object.entries(wk.small||{})){if(d<today)continue;
+    for(const [m,v] of Object.entries(dd)){const r=v&&RX[v.recipe];if(!r)continue;const bad=unsafeFor(smallEaters(d,m),r);
+      if(bad.length){delete dd[m];note(d,m,r,bad);any=true}}}
+  return any;
+}
+// Repasa todo lo que viene (se llama al pintar cada pantalla: así también la compra queda limpia)
+function safetyAll(){let any=false;const today=todayISO();
+  for(const s of Object.keys(S.plans))if(addDays(s,6)>=today){const sl=buildSlots(s);if(safetySweep(s,sl)||safetySweep(s,sl,true)){ensureWeek(s);any=true}}
+  if(any)save();return any}
 /* ---------- Comidas pequeñas: desayuno, almuerzo y merienda ----------
    Cada persona dice, para cada día, si la hace en casa ("casa"), se la lleva ("llevar") o no la hace ("no"):
    p.smallMeals = {desayuno:[7], almuerzo:[7], merienda:[7]} · p.smallSet = true cuando lo ha confirmado.
@@ -466,13 +501,7 @@ function monthPrepDate(m){
   return d;
 }
 // Tras cambiar la dieta o las alergias de alguien: fuera los platos que ya no puede comer (salvo los elegidos a mano)
-function replanIncompatible(){
-  for(const s of Object.keys(S.plans)){if(addDays(s,6)<todayISO())continue;const wk=S.plans[s];
-    for(const sl of buildSlots(s)){const v=wk.slots[sl.id],r=v&&RX[v.recipe];if(r&&!v.locked&&!sl.eaters.concat(sl.kids,sl.tupper).every(p=>canEat(p,r)))delete wk.slots[sl.id]}
-    for(const [d,dd] of Object.entries(wk.small||{}))for(const [m,v] of Object.entries(dd)){const r=RX[v.recipe];if(r&&!v.locked&&!smallEaters(d,m).every(p=>canEat(p,r)))delete dd[m]}
-    ensureWeek(s)}
-  save();
-}
+function replanIncompatible(){safetyAll();save()}
 function refreshSmall(){for(const s of Object.keys(S.plans))if(addDays(s,6)>=todayISO()){const sm=S.plans[s].small||{};
   for(const d of Object.keys(sm))for(const m of Object.keys(sm[d]))if(!smallEaters(d,m).length)delete sm[d][m];ensureSmall(s)}}
 function smallOf(d){const wk=S.plans[weekStartFor(d)];return (wk&&wk.small&&wk.small[d])||{}}

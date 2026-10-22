@@ -32,6 +32,7 @@ function renderHeader(){
 // Las animaciones de entrada solo al cambiar de pestaña (o de paso del asistente), no en cada toque
 let lastView=null;
 function render(){
+  try{if(S.onboarded)safetyAll()}catch(e){console.error(e)}
   if(!S.onboarded&&tab!=="wizard")tab="wizard";
   setTimeout(renderBell,0);
   const vk=tab+"|"+(tab==="wizard"?(wiz.single||wiz.i):"")+"|"+month;
@@ -360,6 +361,13 @@ function notifAction(tipo,tag){
   else {month=m;tab="compra";listSel=key;render();scrollTo(0,0)}
 }
 
+// Platos quitados por alergias o dieta: se dice cuáles y por qué, hasta que se lee
+function safetyCard(){
+  if(!safetyNotes.length)return "";
+  return `<div class="warnbox" id="safetyBox"><b>⚠️ He cambiado ${safetyNotes.length===1?"un plato":safetyNotes.length+" platos"} por alergias o dieta</b>
+    <ul style="margin:6px 0 4px 18px;padding:0">${safetyNotes.map(n=>`<li>${esc(n.name)} · ${esc(DAYS[dow(n.d)].toLowerCase())} ${esc(shortDate(n.d))}, ${esc(MEAL_ART[n.meal]?MEAL_ART[n.meal].split(" ")[1]:n.meal)} · ${esc(n.who.join("; "))}</li>`).join("")}</ul>
+    <small>Ya tienes otro plato en su lugar y la lista de la compra está al día.</small> <button class="btn ghost small" id="safetyOk">Entendido</button></div>`;
+}
 // Fila compacta con las comidas pequeñas del día
 function smallLine(d){
   const sm=smallOf(d),ks=Object.keys(SMALL).filter(m=>sm[m]&&RX[sm[m].recipe]);if(!ks.length)return "";
@@ -446,7 +454,7 @@ function syncMenuWeek(){
 function renderMenu(){
   const ws=syncMenuWeek();
   const weeks=[weekSel];
-  let h=`<section class="view">`+viewHead(monthName(month),"Qué *comemos*",`${servidorOn()?`<button class="btn ghost small" id="shareMenu" title="Compartir el menú con alguien de casa">👥</button>`:""}<button class="btn ghost small" id="printMenu" title="Menú imprimible">🖨️</button>`)+followChips()+monthPrepCard()+((n=>n&&weekStartFor(n.d)===weekSel)(nextMeal())?todayCard():"")+weekPicker(ws,weekSel)+dayStrip(weekSel)+useUpCard()+`<div class="row" style="justify-content:flex-end;margin:4px 0 -4px"><button class="btn ghost small" id="startDay">📅 ${S.home.start&&S.home.start>todayISO()?"Cambiar el día de inicio":"Empezar el plan otro día"}</button></div>`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
+  let h=`<section class="view">`+viewHead(monthName(month),"Qué *comemos*",`${servidorOn()?`<button class="btn ghost small" id="shareMenu" title="Compartir el menú con alguien de casa">👥</button>`:""}<button class="btn ghost small" id="printMenu" title="Menú imprimible">🖨️</button>`)+followChips()+safetyCard()+monthPrepCard()+((n=>n&&weekStartFor(n.d)===weekSel)(nextMeal())?todayCard():"")+weekPicker(ws,weekSel)+dayStrip(weekSel)+useUpCard()+`<div class="row" style="justify-content:flex-end;margin:4px 0 -4px"><button class="btn ghost small" id="startDay">📅 ${S.home.start&&S.home.start>todayISO()?"Cambiar el día de inicio":"Empezar el plan otro día"}</button></div>`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
   for(const start of weeks){
     const wk=S.plans[start], dates=weekDates(start);
     h+=`<div class="week"><div class="weekhead"><h2>${shortDate(start)} – ${shortDate(dates[6])}</h2>${wk&&wk.confirmed?`<span class="badge ok">Planificada</span>`:wk?`<span class="badge">Previsión</span>`:""}</div>`;
@@ -490,6 +498,7 @@ function renderMenu(){
   main.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>openDay(b.dataset.day));
   main.querySelectorAll("[data-session]").forEach(b=>b.onclick=()=>openSession(b.dataset.session));
   bindRate(main,render);
+  document.getElementById("safetyOk")?.addEventListener("click",()=>{safetyNotes=[];render()});
   document.getElementById("shareMenu")?.addEventListener("click",openShareMenu);
   main.querySelectorAll("[data-follow]").forEach(b=>b.onclick=()=>openFollowed(b.dataset.follow));
   main.querySelectorAll("[data-sp]").forEach(b=>b.onclick=()=>{const [d,i,st,type]=b.dataset.sp.split("|");withRecalc(()=>setSport(d,Number(i),st,type))});
@@ -606,7 +615,7 @@ function changeMeal(d,m,v,redraw){
 function openSwap(sid){
   const d=sid.slice(0,10), sl=slotFor(d,sid.slice(11));if(!sl)return;
   const alts=alternatives(sl,8);
-  const sel=R.filter(r=>variantFor(r)).sort((a,b)=>a.name.localeCompare(b.name));
+  const sel=R.filter(r=>variantFor(r)&&!r.small&&!unsafeFor(slotPeople(sl),r).length).sort((a,b)=>a.name.localeCompare(b.name));
   showDialog(`<div class="mod">${closeBtn}<h2>Cambiar plato</h2><div class="small muted">${esc(longDate(d))}, ${sl.meal}${company(sl).length?" · con "+esc(company(sl).map(personName).join(" y ")):""}</div>
     ${needLine(sl)}
     <div style="margin-top:10px">${alts.map(({r,miss})=>`<button class="alt altimg" data-pick="${r.id}">${dishImg(r,"s")}<span><b>${esc(r.name)}</b><small>${recipeTime(r)} min · ${r.prot||"?"} g proteína · ${eur(rationCost(r))}/ración · ${r.type==="c"?"⚡ hidratos":"🥗 ligera"}</small>
@@ -654,6 +663,7 @@ function openRecipe(id,sid){
       ${photoCredit(r)}
       <div class="rtags">${tags.map(t=>`<span>${t}</span>`).join("")}</div>
       <h2 class="rtitle">${esc(r.name)}</h2>
+      ${(()=>{const bad=S.people.filter(p=>!canEat(p,r));return bad.length?`<div class="warnbox" style="margin:6px 0">⛔ <b>No apto para ${bad.map(p=>esc(isMe(p)?"ti":personName(p))).join(" ni ")}</b>: ${bad.map(p=>esc(whyCant(p,r))).filter((x,i,a)=>a.indexOf(x)===i).join(", ")}. No lo pondré en un día en que coma.</div>`:""})()}
       ${recipeAllergens(r).length?`<div class="chips" style="margin:2px 0 4px">${recipeAllergens(r).map(a=>`<span class="pill carga">⚠️ ${esc(ALLERGENS[a].split(" (")[0])}</span>`).join("")}</div>`:`<div class="small muted">Sin alérgenos principales</div>`}${r.sug?`<div class="small muted">💡 ${r.author?"Sugerida por "+esc(r.author):"Sugerida por la comunidad"}</div>`:""}
       <div class="scards">
         <div><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg><span class="sv"><button data-s="-0.5" aria-label="Menos raciones">−</button><b>${String(serv).replace(".",",")}</b><button data-s="0.5" aria-label="Más raciones">+</button></span><small>Raciones</small></div>
@@ -884,7 +894,7 @@ function renderCompra(){
   if(listSel!=="mes"&&!sh.lists[listSel])listSel="mes";
   const l=sh.lists[listSel], wi=listSel==="mes"?null:Number(listSel);
   let h=`<section class="view">${viewHead(monthName(month),"Tu *compra*")}<div class="seg" role="group" aria-label="Lista"><button aria-pressed="${listSel==="mes"}" data-list="mes">Compra del mes</button>`;
-  sh.weeks.forEach((s,i)=>h+=`<button aria-pressed="${listSel===String(i)}" data-list="${i}">Semana ${shortDate(s)}</button>`);
+  sh.weeks.forEach((s,i)=>{if(S.home.start&&addDays(s,6)<S.home.start)return;h+=`<button aria-pressed="${listSel===String(i)}" data-list="${i}">Semana ${shortDate(s)}</button>`});
   h+=`</div><div class="listtotal"><h2>${listSel==="mes"?"Despensa, congelados y carne":"Fresco de la semana"}</h2><b>${eur(l.cost+l.fee)}</b></div>
   <div class="modes chips">${Object.entries(SHOP_MODES).map(([m,t])=>chip("data-lm",m,l.mode===m,t)).join("")}</div>
   ${l.groups.length>1?`<p class="small muted" style="margin:4px 0">Repartido en ${l.groups.length} supermercados, cada producto donde sale más barato.${l.fee?` Envíos: ${eur(l.fee)}.`:""}</p>`
@@ -893,6 +903,7 @@ function renderCompra(){
   if(l.mode==="online"){
     h+=`<p class="shophint">Toca 🛒 para abrir el producto en Mercadona y añadirlo al carro.</p>`;
   }
+  if(l.autoStore)h+=`<div class="infobox">🏪 Con esta compra (${eur(l.cost)}) no llegas al mínimo de ${eur(l.autoStore.min)} para pedirla ${l.autoStore.mode==="online"?"online":"a domicilio"}: te faltan ${eur(l.autoStore.short)}. Te la dejo para <b>comprar en tienda</b>${wi!=null?", o júntala con la compra del mes":""}. <button class="btn ghost small" data-lm="${l.autoStore.mode}">Pedirla ${l.autoStore.mode==="online"?"online":"a domicilio"} igualmente</button></div>`;
   if(l.belowMin){const bg=l.groups.find(g=>g.belowMin);
     h+=`<div class="warnbox">${l.groups.length>1?esc(superById(bg.sup).nombre)+": n":"N"}o llegas al pedido mínimo (${eur(bg.min)}): faltan ${eur(bg.min-bg.cost)}.${wi!=null?` <button class="btn small" id="fillMin">Completar con cosas del mes</button>`:" Pásala a compra en tienda o junta compras."}</div>`;
   }
@@ -932,7 +943,7 @@ function renderCompra(){
   }
   if(listSel==="mes")h+=spendingHTML(month)+`<div class="card">${reviewHTML(monthReview(month),false)}</div>`;
   const wb=weekBudget(month);
-  h+=`<div class="card"><h2>Presupuesto por semana</h2><table class="wtable">${sh.weeks.map((s,i)=>`<tr><td>Semana del ${shortDate(s)}${i===0?" (con la compra del mes)":""}</td><td class="${sh.perWeek[i]>wb?"up":""}">${eur(sh.perWeek[i])} / ${eur(wb)}</td></tr>`).join("")}</table></div>`;
+  h+=`<div class="card"><h2>Presupuesto por semana</h2><table class="wtable">${sh.weeks.map((s,i)=>S.home.start&&addDays(s,6)<S.home.start?"":`<tr><td>Semana del ${shortDate(s)}${i===mesWeek(sh.weeks)?" (con la compra del mes)":""}</td><td class="${sh.perWeek[i]>wb?"up":""}">${eur(sh.perWeek[i])} / ${eur(wb)}</td></tr>`).join("")}</table></div>`;
   main.innerHTML=h+`</section>`;
   main.querySelectorAll("[data-list]").forEach(b=>b.onclick=()=>{listSel=b.dataset.list;render()});
   document.getElementById("sendList")?.addEventListener("click",()=>shareList(month,l,listSel==="mes"?"Compra del mes":"Compra de la semana del "+shortDate(sh.weeks[wi])));
@@ -1095,6 +1106,16 @@ function renderPerfil(){
     <div id="coinsBox">${servidorOn()?`<p class="small muted">Cargando tus coins…</p>`:""}</div>
     <div id="qrBox" style="display:grid;place-items:center;margin:10px 0;background:#fff;border-radius:12px;padding:10px"></div>
     <div class="actions"><button class="btn" id="shareApp">Enviar el enlace</button><button class="btn ghost" id="copyApp">Copiar enlace</button></div>`);
+  h+=acc("privacidad","🔒","Tus datos y privacidad","Qué se queda en tu móvil y qué sale",`<p class="small"><b>Se queda solo en tu móvil:</b> tu familia, gustos, alergias, menús, lista de la compra, valoraciones y las fotos de tus platos. No hay cuenta ni contraseña.</p>
+    <p class="small"><b>Sale del móvil solo si lo usas:</b></p>
+    <ul class="small" style="margin:0 0 6px 18px;padding:0">
+      <li><b>Avisos:</b> el texto de tus próximos avisos, para mandártelos a su hora.</li>
+      <li><b>Código postal:</b> para saber qué precios de supermercado te tocan.</li>
+      <li><b>Tickets:</b> los productos y precios del ticket, sin tu nombre, para corregir precios. La foto no se guarda.</li>
+      <li><b>Casa compartida o menú compartido:</b> una copia del menú, la familia y la compra mientras compartas, para que lo vea la otra persona.</li>
+      <li><b>Invitaciones y coins:</b> un código anónimo (${esc(S.uid||"")}) con tus coins y a quién invitaste.</li>
+      <li><b>Visitas:</b> un recuento anónimo, sin cookies, que puedes quitar en Sugerencias y opinión.</li></ul>
+    <p class="small muted">Todo va a un servidor propio de Táper (Cloudflare). No se vende ni se comparte con nadie. Para llevarte tus datos o borrarlo todo, usa Copia y novedades.</p>`);
   h+=acc("opinion","💡","Sugerencias y opinión","Ideas, recetas, encuesta y privacidad",`${suggestUrl()?`<p class="small muted">¿Se te ocurre una mejora, una receta o has visto un fallo? Cuéntamelo.</p><a class="btn" href="${esc(suggestUrl())}" target="_blank" rel="noopener">Enviar una sugerencia</a>`:`<p class="small muted">Pronto podrás enviar sugerencias desde aquí.</p>`}
     <div class="actions">${recipeSuggestOn()?`<button class="btn ghost small" id="sugRec2">🍳 Sugerir una receta</button>`:""}${surveyOn()?`<button class="btn ghost small" id="svProfile">📋 Encuesta del mes</button>`:""}</div>
     <label class="row small"><input type="checkbox" id="noStats" ${S.noStats?"":"checked"} style="width:auto"> Contar mis visitas de forma anónima (sin cookies ni datos personales) para saber cuánta gente usa Táper</label>`);

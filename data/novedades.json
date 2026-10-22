@@ -623,6 +623,19 @@
         "¿Viernes de pizza siempre? Ponlo como plato fijo en Ajustes y entra en la compra del mes.",
         "El menú nunca te propone caprichos por su cuenta, y no cuentan para tus objetivos."
       ]
+    },
+    {
+      "version": 65,
+      "fecha": "2026-10-22",
+      "titulo": "Más fiable: alergias, fechas y compra",
+      "cambios": [
+        "⛔ Alergias y dietas mandan siempre: si añades una alergia, quito al momento cualquier plato que no se pueda tomar, también los elegidos a mano, los platos fijos, los tápers y los desayunos, y la lista de la compra queda al día. Te digo qué he cambiado y por qué.",
+        "Las recetas que alguien de casa no puede tomar lo dicen bien claro.",
+        "El plan empieza el día que empiezas: nada de comidas ni compras de días ya pasados, y el presupuesto de ese mes cuenta solo lo que queda.",
+        "Si una compra no llega al pedido mínimo online, te la propongo directamente en tienda.",
+        "El presupuesto semanal es el mismo en todas partes.",
+        "Nuevo apartado en Perfil: Tus datos y privacidad."
+      ]
     }
   ]
 }

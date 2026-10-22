@@ -1,7 +1,9 @@
 /* Táper · compra: listas del mes y de cada semana, online o en tienda, pedido mínimo y presupuesto */
 "use strict";
 
-function deliveryDate(start){for(const d of weekDates(start))if(dow(d)===S.home.shop.delivery)return d;return start}
+// Día de la compra de una semana; la semana en que empiezas, como pronto el día que empiezas
+function deliveryDate(start){let r=start;for(const d of weekDates(start))if(dow(d)===S.home.shop.delivery){r=d;break}
+  const st=S.home.start;return st&&r<st&&st<=addDays(start,6)?st:r}
 // Formas de comprar y sus tarifas (las pone el supermercado, no el usuario)
 const SHOP_MODES={online:"🛒 Online",domicilio:"🚚 En tienda, te lo llevan",tienda:"🏪 En tienda"};
 const superInfo=()=>(SUPERS||[]).find(x=>x.id===S.home.super)||(SUPERS||[])[0]||{};
@@ -12,8 +14,13 @@ const tarifa=(mode,sid)=>{const sp=sid?superById(sid):superInfo();if(mode!=="tie
   return {envio:Number(e&&e.envio)||0,minimo:Number(e&&e.minimo)||0,gratisDesde:Number(e&&e.gratis_desde)||0}};
 const listMode=(m,key)=>S.modes[m+"|"+key]||(key==="mes"?S.home.shop.monthMode:S.home.shop.weekMode);
 // Presupuesto de un mes: el que se puso al prepararlo (Navidad, vacaciones…) o el normal
-const monthBudget=m=>Number(((S.monthPrep||{})[m]||{}).budget)||Number(S.home.budget.month)||0;
-const weekBudget=m=>(((S.monthPrep||{})[m]||{}).budget?0:Number(S.home.budget.week))||Math.round(monthBudget(m)/Math.max(1,weeksInMonth(m).length)*100)/100;
+const monthBudgetFull=m=>Number(((S.monthPrep||{})[m]||{}).budget)||Number(S.home.budget.month)||0;
+const weekBudget=m=>(((S.monthPrep||{})[m]||{}).budget?0:Number(S.home.budget.week))||Math.round(monthBudgetFull(m)/Math.max(1,weeksInMonth(m).length)*100)/100;
+// Semanas del mes que cuentan (las de antes de empezar el plan no)
+// La compra del mes va con la primera semana del plan (no con semanas de antes de empezar)
+const mesWeek=weeks=>Math.max(0,weeks.findIndex(s=>!S.home.start||addDays(s,6)>=S.home.start));
+const activeWeeks=m=>weeksInMonth(m).filter(s=>!S.home.start||addDays(s,6)>=S.home.start);
+const monthBudget=m=>{const b=monthBudgetFull(m),all=weeksInMonth(m).length,n=activeWeeks(m).length;return n<all?Math.round(weekBudget(m)*n*100)/100:b};
 
 // Recorre los platos del mes: qué ingredientes hacen falta, en qué lista y cuándo
 function monthUses(m,exceptId){
@@ -58,20 +65,25 @@ function shopping(m){
   for(const key of Object.keys(lists)){
     const items=Object.entries(lists[key]).map(([pid,q])=>({pid,q,packs:packsFor(pid,q),cost:packsFor(pid,q)*price(pid),sup:superFor(pid)}));
     const cost=items.reduce((t,i)=>t+i.cost,0);
-    const mode=listMode(m,key);
     // Un grupo por supermercado: cada uno con su envío y su pedido mínimo
-    const groups={};for(const it of items){const g=groups[it.sup]=groups[it.sup]||{sup:it.sup,items:[],cost:0};g.items.push(it);g.cost+=it.cost}
-    for(const g of Object.values(groups)){const t=tarifa(mode,g.sup);g.soloTienda=!!t.soloTienda;g.min=t.minimo;
-      g.fee=t.gratisDesde&&g.cost>=t.gratisDesde?0:t.envio;g.belowMin=t.minimo>0&&g.cost<t.minimo}
-    const gl=Object.values(groups).sort((a,b)=>(b.sup===mainSuper())-(a.sup===mainSuper())||b.cost-a.cost);
-    const main=groups[mainSuper()]||gl[0]||{min:tarifa(mode).minimo};
-    out.lists[key]={key,items,cost,mode,groups:gl,fee:gl.reduce((t,g)=>t+g.fee,0),min:main.min||0,belowMin:gl.some(g=>g.belowMin)};
+    const build=mode=>{
+      const groups={};for(const it of items){const g=groups[it.sup]=groups[it.sup]||{sup:it.sup,items:[],cost:0};g.items.push(it);g.cost+=it.cost}
+      for(const g of Object.values(groups)){const t=tarifa(mode,g.sup);g.soloTienda=!!t.soloTienda;g.min=t.minimo;
+        g.fee=t.gratisDesde&&g.cost>=t.gratisDesde?0:t.envio;g.belowMin=t.minimo>0&&g.cost<t.minimo}
+      const gl=Object.values(groups).sort((a,b)=>(b.sup===mainSuper())-(a.sup===mainSuper())||b.cost-a.cost);
+      const main=groups[mainSuper()]||gl[0]||{min:tarifa(mode).minimo};
+      return {mode,groups:gl,fee:gl.reduce((t,g)=>t+g.fee,0),min:main.min||0,belowMin:gl.some(g=>g.belowMin)};
+    };
+    let L=build(listMode(m,key));
+    // No llega al mínimo para pedir (y no lo ha elegido a mano): se pasa a comprar en tienda, que sí se puede
+    if(L.belowMin&&L.mode!=="tienda"&&!S.modes[m+"|"+key]){const was=L;L=build("tienda");L.autoStore={mode:was.mode,min:was.min,short:Math.max(0,was.min-cost)}}
+    out.lists[key]={key,items,cost,...L};
   }
   const listsTotal=Object.values(out.lists).reduce((t,l)=>t+l.cost+l.fee,0);
   out.extrasTotal=extras.reduce((a,b)=>a+b,0);
   out.total=listsTotal+out.extrasTotal+(Number(S.home.budget.basics)||0);
   // Gasto previsto por semana (la compra del mes se cuenta en la primera)
-  out.perWeek=weeks.map((s,i)=>{const l=out.lists[i];return (l?l.cost+l.fee:0)+extras[i]+(i===0?out.lists.mes.cost+out.lists.mes.fee+(Number(S.home.budget.basics)||0):0)});
+  out.perWeek=weeks.map((s,i)=>{const l=out.lists[i];return (l?l.cost+l.fee:0)+extras[i]+(i===mesWeek(weeks)?out.lists.mes.cost+out.lists.mes.fee+(Number(S.home.budget.basics)||0):0)});
   return out;
 }
 const checkKey=(m,key,pid)=>m+"|"+key+"|"+pid;
@@ -91,7 +103,7 @@ function shopReminders(){
     let sh;try{sh=shopping(m)}catch(e){continue}
     for(const l of Object.values(sh.lists)){
       if(!l.items.length)continue;
-      const wi=l.key==="mes"?0:Number(l.key), ws=sh.weeks[wi];if(!ws)continue;
+      const wi=l.key==="mes"?mesWeek(sh.weeks):Number(l.key), ws=sh.weeks[wi];if(!ws)continue;
       if(S.home.start&&addDays(ws,6)<S.home.start)continue;
       const buyDay=deliveryDate(ws), online=l.mode!=="tienda";
       if(buyDay<addDays(today,-3))continue;   // compras ya pasadas: no se recuerdan
@@ -113,7 +125,7 @@ function ticketDue(){
   const out=[],today=todayISO(),cur=today.slice(0,7),[y,mm]=cur.split("-").map(Number),prev=iso(new Date(y,mm-2,1)).slice(0,7);
   for(const m of [prev,cur]){let sh;try{sh=shopping(m)}catch(e){continue}
     for(const l of Object.values(sh.lists)){if(!l.items.length)continue;
-      const ws=sh.weeks[l.key==="mes"?0:Number(l.key)];if(!ws)continue;const day=deliveryDate(ws),k=shopKey(m,l.key);
+      const ws=sh.weeks[l.key==="mes"?mesWeek(sh.weeks):Number(l.key)];if(!ws)continue;const day=deliveryDate(ws),k=shopKey(m,l.key);
       if((S.tickets||[]).some(t=>t.m===m&&t.list===l.key)||(S.ticketSkip||{})[k])continue;
       const done=!!(S.shopDone||{})[k];
       if(!(done||day<=today)||day<addDays(today,-5))continue;

@@ -88,13 +88,15 @@ function renderWizard(){
 // Título con una parte en cursiva de acento: "¿Dónde haces *la compra?*"
 const accentTitle=t=>esc(t).replace(/\*(.+?)\*/g,"<em>$1</em>");
 function finishOnboarding(){
+  // Lo de antes de hoy no se planifica ni se compra: el plan empieza hoy (o el día que elegiste)
+  if(!S.home.start||S.home.start<todayISO())S.home.start=todayISO();
   S.onboarded=true;save();
   if(typeof trackOnBoot==="function")trackOnBoot();
   preparingScreen(()=>{ensureHorizon();save()},()=>{tab="menu";if(S.home.start&&S.home.start>todayISO())month=S.home.start.slice(0,7);render();toast("Menú generado. Puedes cambiar lo que quieras")});
 }
 // Pantalla "Preparando tu semana": hace el trabajo y enseña lo que va haciendo
 function preparingScreen(work,done){
-  const b=Number(S.home.budget.week)||Math.round((Number(S.home.budget.month)||0)/4.3);
+  const b=Number(S.home.budget.week)||weekBudget((S.home.start&&S.home.start>todayISO()?S.home.start:todayISO()).slice(0,7));
   const msgs=["Ajustando a vuestros gustos…","Teniendo en cuenta quién come cada día…",b?`Manteniendo la compra por debajo de ${b} € a la semana…`:"Buscando lo más barato…","Preparando tu lista de la compra…"];
   const ov=document.createElement("div");ov.className="prep";
   ov.innerHTML=`<div class="prepin"><h2 class="wh">Preparando <em>tu semana</em></h2><p>Un momento, nos encargamos.</p>
@@ -269,7 +271,7 @@ function stepBody(fullId){
   if(id==="compra"){const sh=H.shop,b=H.budget;
     const modeChips=(k,v)=>Object.entries(SHOP_MODES).map(([m,t])=>chip("data-mode",k+":"+m,v===m,t)).join("");
     const tf=Object.entries(SHOP_MODES).map(([m,t])=>{const x=tarifa(m);return `${t}: ${x.envio?eur(x.envio)+" de envío":"sin envío"}${x.minimo?", pedido mínimo "+eur(x.minimo):""}`}).join(" · ");
-    return `<div class="budget"><div class="bnum"><span id="bVal">${Math.round(b.month)}</span><sup>€</sup></div><div class="bsub">al mes · unos <b id="bWeek">${eur((Number(b.month)||0)/4.3)}</b> a la semana</div>
+    return `<div class="budget"><div class="bnum"><span id="bVal">${Math.round(b.month)}</span><sup>€</sup></div><div class="bsub">al mes · unos <b id="bWeek">${eur((Number(b.month)||0)/weeksInMonth(todayISO().slice(0,7)).length)}</b> a la semana</div>
       <input type="range" id="wzBM" min="40" max="900" step="5" value="${Math.min(900,Math.max(40,Number(b.month)||150))}" style="--p:${(Math.min(900,Math.max(40,Number(b.month)||150))-40)/8.6}%" aria-label="Presupuesto al mes">
       <div class="brange"><span>40 €</span><span>900 €</span></div>
       <div class="bcount"><span class="ico">👥</span><span><b>Cocinas para</b><small>${S.people.length===1?"Solo tú":S.people.map(personName).join(", ")}</small></span><span class="bn">${S.people.length}</span></div></div>
@@ -325,7 +327,7 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
   q("#wzTr")&&(q("#wzTr").onclick=openTransferCode);
   q("#wzRestore")&&(q("#wzRestore").onclick=()=>{if(restoreSnapshot()){wiz={i:0,single:null};tab="menu";render();toast("Datos recuperados")}});
   ["#wzMPD","#wzMPA"].forEach(sel=>q(sel)&&(q(sel).onchange=()=>{H.monthPrepDay=Number(q("#wzMPD").value);H.monthPrepAlt=Number(q("#wzMPA").value);save();q("#mpPrev").textContent=monthPrepPreview(H)}));
-  q("#wzBM")&&(q("#wzBM").oninput=e=>{const v=Number(e.target.value);e.target.style.setProperty("--p",(v-40)/8.6+"%");q("#bVal").textContent=v;q("#bWeek").textContent=eur(v/4.3)});
+  q("#wzBM")&&(q("#wzBM").oninput=e=>{const v=Number(e.target.value);e.target.style.setProperty("--p",(v-40)/8.6+"%");q("#bVal").textContent=v;q("#bWeek").textContent=eur(v/weeksInMonth(todayISO().slice(0,7)).length)});
   // Código postal: al escribir los 5 números, busco el municipio (y, si hay varios, los ofrezco)
   q("#wzCp")&&(q("#wzCp").oninput=async e=>{const cp=e.target.value.trim();if(!/^\d{5}$/.test(cp)||cp===H.cpLooked)return;H.cpLooked=cp;
     try{const r=await fetch("https://api.zippopotam.us/es/"+cp);if(!r.ok)throw 0;const d=await r.json();

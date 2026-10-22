@@ -74,13 +74,13 @@ function buildSchedule(){
   if(T.compra!==false||T.descongelar){try{
     for(const m of [today.slice(0,7),nextMonthOf(today.slice(0,7))]){const sh=shopping(m);
       for(const [key,bg] of Object.entries(sh.bags||{})){const pend=bagsPending(sh,key);if(!pend.length)continue;
-        const ws=sh.weeks[key==="mes"?0:Number(key)];if(!ws)continue;const day=deliveryDate(ws);
+        const ws=sh.weeks[key==="mes"?mesWeek(sh.weeks):Number(key)];if(!ws)continue;const day=deliveryDate(ws);
         for(let i=0;i<2;i++)push(at(addDays(day,i),"20:00"),`🧊 Reparte y congela: ${pend.length} ${pend.length===1?"bolsa":"bolsas"}`,`Una bolsa por plato con su día (${[...new Set(pend.map(b=>P[b.pid].name.toLowerCase()))].slice(0,3).join(", ")}…). Márcalas en la compra.`,"frz|"+m+"|"+key)}}
   }catch(e){}}
   if(T.compra!==false){try{
     // Ticket: la noche del día de la compra y la mañana siguiente, si no se ha subido
     for(const m of [today.slice(0,7),nextMonthOf(today.slice(0,7))]){const sh=shopping(m);
-      for(const l of Object.values(sh.lists)){if(!l.items.length)continue;const ws=sh.weeks[l.key==="mes"?0:Number(l.key)];if(!ws)continue;
+      for(const l of Object.values(sh.lists)){if(!l.items.length)continue;const ws=sh.weeks[l.key==="mes"?mesWeek(sh.weeks):Number(l.key)];if(!ws)continue;
         const day=deliveryDate(ws),k=shopKey(m,l.key);
         if((S.tickets||[]).some(t=>t.m===m&&t.list===l.key)||(S.ticketSkip||{})[k])continue;
         push(at(day,"21:00"),"📸 ¿Subes el ticket de la compra?","Escanéalo y ganas 3 coins (y afino los precios para todos)","tk|"+k);
