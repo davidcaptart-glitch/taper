@@ -282,6 +282,25 @@ function dishOfMeal(d,meal){
   const f=fixedFor(sid.slice(0,10),sid.slice(11));
   return {state:st,recipe:v&&RX[v.recipe],capricho:!!(f&&f.capricho)};
 }
+// Lo que lleva la ración de una persona (calorías y macros de la receta por su factor de ración)
+function portionNutr(r,f){
+  const k=x=>x==null?null:Math.round(x*f);
+  return {kcal:k(r.kcal),prot:k(r.prot),carb:k(r.carb),fat:k(r.fat)};
+}
+const factorOf=p=>p.kind==="adulto"?adultFactor(p):(Number(p.factor)||0.6);
+// Total de comida y cena de una persona en un día (los caprichos y comidas fuera no se cuentan)
+function dayTotals(p,d){
+  const t={kcal:0,prot:0,carb:0,fat:0,meals:0,skipped:[]};
+  for(const meal of ["comida","cena"]){
+    const x=dishOfMeal(d,meal);
+    if(p.kind!=="adulto"){const sl=buildSlots(weekStartFor(d)).find(s=>s.id===d+"|"+meal);if(!sl||!sl.kids.includes(p))continue}
+    if(!x.recipe||x.capricho){if(x.state==="fuera"||x.capricho)t.skipped.push(meal);continue}
+    const n=portionNutr(x.recipe,factorOf(p));
+    for(const k of ["kcal","prot","carb","fat"])t[k]+=n[k]||0;
+    t.meals++;
+  }
+  return t;
+}
 function dayProtein(a,d){
   const t=proteinTarget(a,d);if(!t)return null;
   let got=0,unknown=false;

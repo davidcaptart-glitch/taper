@@ -39,6 +39,7 @@ function render(){
 
 /* ---------- Menú ---------- */
 function slotFor(d,meal){const start=weekStartFor(d);return buildSlots(start).find(s=>s.id===d+"|"+meal)}
+const nutrTxt=n=>n.kcal==null?`${n.prot} g proteína`:`${n.kcal.toLocaleString("es-ES")} kcal · ${n.prot} g proteína · ${n.carb} g hidratos · ${n.fat} g grasa`;
 function needLine(sl,r){
   if(sl.fixed&&sl.fixed.capricho)return `<div class="need muted">🍕 Capricho: no cuenta para tus objetivos</div>`;
   if(!sl.need.why.length)return "";
@@ -48,7 +49,7 @@ function mealLine(d,meal,wk){
   const st=mealState(d,meal);
   const label=meal==="comida"?"Comida":"Cena";
   if(st==="taper"){const prev=dishOfMeal(d,"comida");
-    return `<div class="meta"><b>${label}:</b> táper${prev.recipe?" de "+esc(prev.recipe.name.toLowerCase()):""}</div>`}
+    return `<div class="meta"><b>${label}:</b> táper${prev.recipe?" de "+esc(prev.recipe.name.toLowerCase()):""}</div>${prev.recipe&&!prev.capricho?`<div class="nutr">Tu táper: ${nutrTxt(portionNutr(prev.recipe,adultFactor(me())))}</div>`:""}`}
   if(st==="fuera"||st==="libre")return `<div class="meta"><b>${label}:</b> ${MEALSTATE[st].toLowerCase()}</div>`;
   const sl=slotFor(d,meal);if(!sl)return "";
   const v=wk&&wk.slots[sl.id], r=v&&RX[v.recipe];
@@ -57,6 +58,8 @@ function mealLine(d,meal,wk){
   if(r)h+=`<button class="name" data-open="${r.id}" data-slot="${sl.id}">${esc(r.name)}</button>`;
   else if(sl.fixed)h+=`<b>${esc(sl.fixed.name)}</b>`;
   h+=`<div class="meta">${r?`${recipeTime(r)} min · ${r.prot||"?"} g proteína · ${String(sl.portions).replace(".",",")} raciones`:sl.fixed?"Plato fijo":""}</div>`;
+  if(r){const ps=(st==="solotaper"?[]:sl.eaters).concat(sl.kids);
+    h+=ps.map(p=>`<div class="nutr">${p.kind==="adulto"?"Tu plato":esc(personName(p))}: ${nutrTxt(portionNutr(r,factorOf(p)))}</div>`).join("")}
   h+=needLine(sl,r);
   if(r){
     if(S.home.cookMode==="lote"){const k=keepPlan(r,sl);
@@ -90,6 +93,12 @@ function pendingMeals(){
     }
   }
   return out;
+}
+// Contador del día: lo que comes entre comida y cena
+function dayCounter(d,pt){
+  const a=me(), t=dayTotals(a,d);if(!t.meals)return "";
+  const prot=pt&&!pt.unknown?`<span class="${t.prot<pt.target*0.85?"low":""}">${t.prot} g proteína de ${pt.target}</span>`:`${t.prot} g proteína`;
+  return `<div class="daybar">Hoy en ${t.meals===2?"comida y cena":t.skipped.length?"lo que comes en casa":"esta comida"}: <b>${t.kcal.toLocaleString("es-ES")} kcal</b> · ${prot} · ${t.carb} g hidratos · ${t.fat} g grasa${t.skipped.length?" (sin contar "+t.skipped.map(m=>m==="comida"?"la comida":"la cena").join(" ni ")+")":""}</div>`;
 }
 function rateCard(){
   const list=pendingMeals();if(!list.length)return "";
@@ -165,7 +174,7 @@ function renderMenu(){
       h+=`<div class="slot ${empty?"extra":""}"><div class="day">${DSHORT[dow(d)]}<small>${shortDate(d)}</small></div><div>
         <div class="tags">${hol?`<span class="pill carga">${esc(holidayName(d))}</span>`:""}${ks.map(k=>`<span class="pill kid">${esc(personName(k))}</span>`).join("")}${sess.map(s=>`<span class="pill ligera">${esc(SPORTS[s.type])} ${s.when==="manana"?"mañana":"tarde"}</span>`).join("")}</div>
         ${mealLine(d,"comida",wk)}${mealLine(d,"cena",wk)}
-        ${pt&&!pt.unknown?`<div class="daybar">Proteína en comida y cena: <span class="${pt.got<pt.target*0.85?"low":""}">${pt.got} de ${pt.target} g</span></div>`:""}
+        ${dayCounter(d,pt)}
         <div class="ops"><button class="btn ghost small" data-day="${d}">Cambiar este día</button></div></div></div>`;
     }
     h+=`</div>`;
@@ -268,6 +277,7 @@ function openRecipe(id,sid){
       <h2>${esc(r.name)}</h2>
       <div class="stats"><div><b>${v.time} min</b><small>${v.active} de trabajo</small></div><div><b>${r.prot||"?"} g</b><small>proteína</small></div><div><b>${r.kcal?r.kcal+" kcal":eur(cost)}</b><small>${r.kcal?eur(cost)+"/ración":"por ración"}</small></div></div>
       ${r.carb!=null?`<div class="small muted">Por ración: ${r.carb} g hidratos · ${r.fat} g grasa · aguanta ${r.fridge} días en la nevera${r.freeze?" · se puede congelar":""}</div>`:""}
+      ${sl?`<div class="nutr" style="margin-top:6px">${(sl.eaters.length?sl.eaters:sl.tupper).concat(sl.kids).map(p=>`<div>${p.kind==="adulto"?"Tu plato":esc(personName(p))}: ${nutrTxt(portionNutr(r,factorOf(p)))}</div>`).join("")}</div>`:""}
       ${r.vars.length>1?`<div class="vtabs">${r.vars.map((x,i)=>`<button class="chip" data-vi="${i}" aria-pressed="${i===vi}" ${ok.has(x.app)?"":"disabled"}>${APP[x.app]}</button>`).join("")}</div>`:""}
       <div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0"><h3>Ingredientes</h3>
         <div><button class="btn ghost small" data-s="-0.5" aria-label="Menos raciones">−</button> <b>${String(serv).replace(".",",")}</b> rac. <button class="btn ghost small" data-s="0.5" aria-label="Más raciones">+</button></div></div>
