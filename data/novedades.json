@@ -729,6 +729,15 @@
         "Funciona con Mercadona, Dia, Consum, Condis, Eroski y Bonpreu; si repartes la compra, va súper por súper.",
         "Al final te digo si te has dejado alguno."
       ]
+    },
+    {
+      "version": 80,
+      "fecha": "2026-10-23",
+      "titulo": "Sube el ticket, también el de la compra online",
+      "cambios": [
+        "«Subir el ticket»: foto del ticket de papel, captura de pantalla o el PDF que te envían por correo o descargas en la app del súper.",
+        "Si la compra fue online, te ofrezco primero subir el PDF o la captura."
+      ]
     }
   ]
 }

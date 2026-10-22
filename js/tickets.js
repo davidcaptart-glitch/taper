@@ -97,11 +97,13 @@ function matchLine(desc){
 }
 
 /* ---------- Ver el ticket, corregirlo y guardarlo ---------- */
-function openTicketScan(){
-  showDialog(`<div class="mod">${closeBtn}<h2>Escanear un ticket</h2>
-    <p class="small muted">Haz una foto al ticket de papel (bien plano y con luz) o elige el PDF del ticket digital de Mercadona. Se lee en tu móvil. Solo se envían, sin datos personales, los precios que no cuadran, para corregirlos para todos. Cada ticket nuevo te da 3 coins.</p>
-    <div class="actions"><label class="btn">📷 Foto del ticket<input type="file" accept="image/*" capture="environment" id="tkImg" hidden></label>
-    <label class="btn ghost">📄 PDF o imagen guardada<input type="file" accept="application/pdf,image/*" id="tkFile" hidden></label></div>
+// online: la compra se hizo por internet, así que el ticket es un PDF o una captura (se ofrece primero subirlo)
+function openTicketScan(online){
+  const up=`<label class="btn ${online?"":"ghost"} wide">${ico("receipt")} Subir PDF o captura<input type="file" accept="application/pdf,.pdf,image/*" id="tkFile" hidden></label>`;
+  const ph=`<label class="btn ${online?"ghost":""} wide">${ico("camera")} Hacer foto al ticket<input type="file" accept="image/*" capture="environment" id="tkImg" hidden></label>`;
+  showDialog(`<div class="mod">${closeBtn}<h2>Sube tu ticket</h2>
+    <p class="small muted">${online?"Si compraste online, sube el PDF del ticket o la factura que te enviaron por correo (o que descargas en su app), o una captura de pantalla.":"Hazle una foto al ticket de papel, bien plano y con luz. Si es un ticket digital, sube el PDF o una captura."} Se lee en tu móvil. Solo se envían, sin datos personales, los precios que no cuadran, para corregirlos para todos. Cada ticket nuevo te da 3 coins.</p>
+    <div class="actions" style="flex-direction:column;align-items:stretch">${online?up+ph:ph+up}</div>
     <div id="tkState" class="small muted"></div></div>`);
   const go=async file=>{if(!file)return;const st=dlg.querySelector("#tkState");
     try{
@@ -209,8 +211,8 @@ function spendingOf(m){
 }
 function spendingHTML(m){
   const sp=spendingOf(m);
-  let h=`<div class="card"><h2>Tickets</h2><button class="btn wide" id="tkScan">📷 Escanear un ticket</button>`;
-  if(!sp)return h+`<p class="small muted">Escanea tus tickets (foto o PDF) y verás en qué se va el dinero. Lo que no es comida se descarta solo.</p></div>`;
+  let h=`<div class="card"><h2>Tickets</h2><button class="btn wide" id="tkScan">${ico("receipt")} Subir un ticket (foto, captura o PDF)</button>`;
+  if(!sp)return h+`<p class="small muted">Sube tus tickets (foto, captura o PDF) y verás en qué se va el dinero. Lo que no es comida se descarta solo.</p></div>`;
   const max=sp.groups[0][1];
   h+=`<p style="margin-top:10px">${sp.tickets} ${sp.tickets===1?"ticket":"tickets"} · comida <b>${eur(sp.food)}</b>${sp.non?` · no comida (no cuenta) ${eur(sp.non)}`:""}</p>
     <h3 style="font-size:1rem;margin:10px 0 6px">En qué se va el dinero</h3>

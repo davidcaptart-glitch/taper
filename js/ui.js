@@ -932,7 +932,7 @@ function renderCompra(){
     h+=`<details class="frzcard"><summary><span class="fzi">${ico("snowflake")}</span><span><b>Al llegar: ${bg.length} ${bg.length===1?"bolsa":"bolsas"} para congelar</b><small>${done===bg.length?"✓ Todas hechas":`${done} de ${bg.length} hechas · una bolsa por plato, con su día`}</small></span></summary>
       ${bg.map(b=>{const r=RX[b.rid],on=!!(S.bags||{})[b.id];return `<label class="bag ${on?"done":""}"><input type="checkbox" data-bag="${esc(b.id)}" ${on?"checked":""}>${r?dishImg(r,"s"):prodImg(b.pid)}<span><b>${esc(P[b.pid].name)} · ${fmtQty(b.q,P[b.pid].unit)}</b><small>Etiqueta: ${esc(DAYS[dow(b.date)])} ${esc(shortDate(b.date))}${r?" · "+esc(r.name):""}</small></span></label>`}).join("")}
       <p class="small muted" style="margin:8px 2px 0">Aplana las bolsas para que se congelen y descongelen antes. La noche antes de cada día te aviso de pasarla a la nevera.</p></details>`}}
-  if(ticketDue().some(x=>x.m===month&&x.key===listSel))h+=`<div class="tkban"><span class="ti">${ico("receipt")}</span><span><b>Sube el ticket de esta compra</b><small>+3 coins y me ayudas a afinar los precios</small></span><button class="btn small" id="tkBanner">Escanear</button><button class="tkx" id="tkSkip" aria-label="No tengo ticket">✕</button></div>`;
+  if(ticketDue().some(x=>x.m===month&&x.key===listSel))h+=`<div class="tkban"><span class="ti">${ico("receipt")}</span><span><b>Sube el ticket de esta compra</b><small>+3 coins y me ayudas a afinar los precios</small></span><button class="btn small" id="tkBanner">Subir</button><button class="tkx" id="tkSkip" aria-label="No tengo ticket">✕</button></div>`;
   if(l.items.length)h+=`<div class="row" style="margin:4px 0"><button class="btn small" id="sendList">${ico("share")} Enviar la lista</button>${servidorOn()?`<button class="btn ghost small" id="shareMenuC">${ico("users")} ${S.share?"Compartida con alguien de casa":"Compartir con alguien de casa"}</button>`:""}</div>`;
   if(l.items.length&&!shopIsDone(month,l))h+=`<div class="row" style="margin:4px 0 8px"><button class="btn ghost small" id="shopDone">✓ Ya he hecho esta compra</button></div>`;
   else if(l.items.length)h+=`<p class="small okt" style="margin:4px 0 8px;color:var(--ok);font-weight:600">✓ Compra hecha</p>`;
@@ -981,7 +981,7 @@ function renderCompra(){
   document.getElementById("sendList")?.addEventListener("click",()=>shareList(month,l,listSel==="mes"?"Compra del mes":"Compra de la semana del "+shortDate(sh.weeks[wi])));
   document.getElementById("shareMenuC")?.addEventListener("click",openShareMenu);
   document.getElementById("shopDone")?.addEventListener("click",()=>{const m=month,k=listSel;markShopDone(m,k);render();askTicket(m,k)});
-  document.getElementById("tkBanner")?.addEventListener("click",()=>openTicketScan());
+  document.getElementById("tkBanner")?.addEventListener("click",()=>openTicketScan(l.mode!=="tienda"));
   document.getElementById("tkSkip")?.addEventListener("click",()=>{S.ticketSkip=S.ticketSkip||{};S.ticketSkip[shopKey(month,listSel)]=todayISO();save();render()});
   main.querySelectorAll("[data-bag]").forEach(i=>i.onchange=()=>{S.bags=S.bags||{};if(i.checked)S.bags[i.dataset.bag]=todayISO();else delete S.bags[i.dataset.bag];save();render()});
   main.querySelectorAll("[data-splan]").forEach(b=>b.onclick=()=>{const p=SHOP_PLANS.find(x=>x.id===b.dataset.splan);

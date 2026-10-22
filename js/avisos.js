@@ -86,8 +86,8 @@ function buildSchedule(){
       for(const l of Object.values(sh.lists)){if(!l.items.length)continue;const ws=sh.weeks[l.key==="mes"?mesWeek(sh.weeks):Number(l.key)];if(!ws)continue;
         const day=deliveryDate(ws),k=shopKey(m,l.key);
         if((S.tickets||[]).some(t=>t.m===m&&t.list===l.key)||(S.ticketSkip||{})[k])continue;
-        push(at(day,"21:00"),"📸 ¿Subes el ticket de la compra?","Escanéalo y ganas 3 coins (y afino los precios para todos)","tk|"+k);
-        push(at(addDays(day,1),"10:00"),"📸 Te queda subir el ticket","Escanéalo y ganas 3 coins","tk|"+k)}}
+        push(at(day,"21:00"),"📸 ¿Subes el ticket de la compra?","Foto, captura o PDF: ganas 3 coins (y afino los precios para todos)","tk|"+k);
+        push(at(addDays(day,1),"10:00"),"📸 Te queda subir el ticket","Foto, captura o PDF: ganas 3 coins","tk|"+k)}}
   }catch(e){}}
   if(T.compra!==false){try{
     for(const r of shopReminders()){

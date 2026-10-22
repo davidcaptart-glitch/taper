@@ -138,9 +138,9 @@ function ticketDue(){
 function askTicket(m,key){
   showDialog(`<div class="mod">${closeBtn}<div class="veb">Compra hecha</div><h2 class="vh" style="font-size:1.8rem">¿Subes el <em>ticket</em>?</h2>
     <p>Así sé lo que has gastado de verdad y corrijo los precios para todos. <b>+3 coins</b> por ticket.</p>
-    <div class="actions"><button class="btn wide" id="atScan">📸 Escanear el ticket</button></div>
+    <div class="actions"><button class="btn wide" id="atScan">${ico("receipt")} Subir el ticket</button></div>
     <div class="actions"><button class="btn ghost" id="atLater">Luego</button><button class="btn ghost" id="atNo">No tengo ticket</button></div></div>`);
-  dlg.querySelector("#atScan").onclick=()=>openTicketScan();
+  dlg.querySelector("#atScan").onclick=()=>openTicketScan(listMode(m,key)!=="tienda");
   dlg.querySelector("#atLater").onclick=()=>dlg.close();
   dlg.querySelector("#atNo").onclick=()=>{S.ticketSkip=S.ticketSkip||{};S.ticketSkip[shopKey(m,key)]=todayISO();save();dlg.close();render()};
 }
