@@ -132,6 +132,17 @@
         "Perfil ordenado en apartados desplegables.",
         "Puedes elegir cuándo empieza tu plan y, mientras, la app te ayuda a gastar lo que tienes en casa."
       ]
+    },
+    {
+      "version": 14,
+      "fecha": "2026-10-22",
+      "titulo": "Rojo, plata y blanco",
+      "cambios": [
+        "Nuevos colores: rojo, gris plateado y blanco, con un acabado más cuidado.",
+        "Botón «Empezar el plan otro día» en el Menú: hasta entonces te ayuda a gastar lo que tienes.",
+        "Los coins solo se ganan cuando hay respuesta: alguien abre tu enlace, empieza a usar Táper o la sigue usando.",
+        "Ya no se repiten las animaciones cada vez que tocas algo."
+      ]
     }
   ]
 }

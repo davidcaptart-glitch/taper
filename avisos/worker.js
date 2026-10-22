@@ -64,7 +64,7 @@ export default {
         if (p.length) await env.TAPER.delete("pend:" + uid);
         return json(req, p);
       }
-      if (req.method === "POST" && url.pathname === "/evento") return json(req, await evento(env, await req.json()));
+      if (req.method === "POST" && url.pathname === "/evento") return json(req, await evento(env, await req.json(), req));
       if (req.method === "GET" && url.pathname === "/stats") {
         const uid = url.searchParams.get("uid");
         if (!uidOk(uid)) return json(req, {}, 400);
@@ -110,31 +110,49 @@ async function enviarPendientes(env) {
 }
 
 /* ---------- Invitaciones, contadores y coins ---------- */
-// Coins: compartir +1 (máx. 3 al día) · alguien instala con tu QR +10 · cada semana que lo usa +2
-//        · tu propio uso semanal +1 · bienvenida al invitado +5
-const COINS = { compartir: 1, instalacion: 10, activoInvitado: 2, activoPropio: 1, bienvenida: 5 };
-const nuevaFicha = () => ({ compartido: 0, instalados: 0, activos: 0, coins: 0, historial: [] });
+// Coins solo por retorno real: alguien abre tu enlace +1 (una vez por persona y conexión) · empieza a usar
+// Táper +10 · cada semana que la usa +2 · tu propio uso semanal +1 · bienvenida al invitado +5.
+// Pulsar "compartir" se cuenta, pero no da coins.
+const COINS = { visita: 1, instalacion: 10, activoInvitado: 2, activoPropio: 1, bienvenida: 5 };
+const MAX_VISITAS_DIA = 10;
+async function huellaConexion(req) {
+  const ip = req.headers.get("CF-Connecting-IP") || "";
+  const h = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("taper:" + ip));
+  return [...new Uint8Array(h)].slice(0, 8).map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+const nuevaFicha = () => ({ compartido: 0, visitas: 0, instalados: 0, activos: 0, coins: 0, historial: [] });
 const semana = (d = new Date()) => { const t = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate())); const n = (t.getUTCDay() + 6) % 7; t.setUTCDate(t.getUTCDate() - n + 3); const y = new Date(Date.UTC(t.getUTCFullYear(), 0, 4)); return t.getUTCFullYear() + "-W" + String(1 + Math.round(((t - y) / 864e5 - 3 + ((y.getUTCDay() + 6) % 7)) / 7)).padStart(2, "0"); };
 const hoy = () => new Date().toISOString().slice(0, 10);
 
 async function sumar(env, uid, campo, coins, motivo) {
   const f = (await env.TAPER.get("st:" + uid, "json")) || nuevaFicha();
   if (campo) f[campo] = (f[campo] || 0) + 1;
-  if (coins) { f.coins += coins; f.historial = [{ fecha: hoy(), coins, motivo }].concat(f.historial).slice(0, 30); }
+  if (coins && motivo) { f.coins += coins; f.historial = [{ fecha: hoy(), coins, motivo }].concat(f.historial).slice(0, 30); }
   await env.TAPER.put("st:" + uid, JSON.stringify(f));
 }
 async function contarGlobal(env, campo) {
   const g = (await env.TAPER.get("global", "json")) || {};
   g[campo] = (g[campo] || 0) + 1; await env.TAPER.put("global", JSON.stringify(g));
 }
-async function evento(env, b) {
+async function evento(env, b, req) {
   if (!b || !uidOk(b.uid)) return { error: "usuario no válido" };
   const uid = b.uid, ref = uidOk(b.ref) && b.ref !== uid ? b.ref : null;
   if (b.tipo === "compartir") {
-    const k = "sh:" + uid + ":" + hoy(), n = Number((await env.TAPER.get(k)) || 0);
-    await env.TAPER.put(k, String(n + 1), { expirationTtl: 60 * 60 * 48 });
-    await sumar(env, uid, "compartido", n < 3 ? COINS.compartir : 0, "Has compartido Táper");
+    await sumar(env, uid, "compartido", 0, null);
     await contarGlobal(env, "compartidos");
+    return { ok: true };
+  }
+  // Alguien ha abierto el enlace de otra persona: cuenta una vez por visitante y por conexión
+  if (b.tipo === "visita") {
+    if (!ref) return { ok: true };
+    const hu = await huellaConexion(req);
+    if (await env.TAPER.get("vv:" + ref + ":" + uid) || await env.TAPER.get("vi:" + ref + ":" + hu)) return { ok: true, repetido: true };
+    const kd = "vd:" + ref + ":" + hoy(), n = Number((await env.TAPER.get(kd)) || 0);
+    await env.TAPER.put("vv:" + ref + ":" + uid, "1", { expirationTtl: 60 * 60 * 24 * 365 });
+    await env.TAPER.put("vi:" + ref + ":" + hu, "1", { expirationTtl: 60 * 60 * 24 * 30 });
+    await env.TAPER.put(kd, String(n + 1), { expirationTtl: 60 * 60 * 48 });
+    await sumar(env, ref, "visitas", n < MAX_VISITAS_DIA ? COINS.visita : 0, "Alguien ha abierto tu enlace");
+    await contarGlobal(env, "visitas");
     return { ok: true };
   }
   if (b.tipo === "instalar") {
@@ -165,7 +183,7 @@ async function resumenAdmin(env) {
   const w = semana(), prev = semana(new Date(Date.now() - 7 * 864e5));
   let avisos = 0, cursor;
   do { const l = await env.TAPER.list({ prefix: "sub:", cursor }); avisos += l.keys.length; cursor = l.list_complete ? null : l.cursor; } while (cursor);
-  return { instalaciones: g.instalaciones || 0, compartidos: g.compartidos || 0, activosEstaSemana: g["activos:" + w] || 0, activosSemanaPasada: g["activos:" + prev] || 0, conAvisos: avisos };
+  return { instalaciones: g.instalaciones || 0, visitasConInvitacion: g.visitas || 0, compartidos: g.compartidos || 0, activosEstaSemana: g["activos:" + w] || 0, activosSemanaPasada: g["activos:" + prev] || 0, conAvisos: avisos };
 }
 
 /* ---------- Push sin contenido firmado con VAPID (ES256) ---------- */

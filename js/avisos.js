@@ -98,14 +98,14 @@ async function evento(tipo,extra){if(!servidorOn())return;try{await postAvisos("
 // Al abrir: guarda quién le invitó y, una vez por semana, cuenta que la está usando
 function trackOnBoot(){
   const ref=new URLSearchParams(location.search).get("ref");
-  if(ref&&!S.ref&&ref!==S.uid&&!S.onboarded){S.ref=ref;try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}
+  if(ref&&ref!==S.uid&&!(S.visited||{})[ref]){S.visited={...(S.visited||{}),[ref]:true};if(!S.ref&&!S.onboarded)S.ref=ref;try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){};evento("visita",{ref})}
   if(S.onboarded&&!S.installSent){S.installSent=true;try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){};evento("instalar",{ref:S.ref||null})}
   const wk=mondayOf(todayISO());if(S.onboarded&&S.activeWeek!==wk){S.activeWeek=wk;try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){};evento("activo")}
 }
 async function fillStats(){
   const box=document.getElementById("coinsBox");if(!box||!servidorOn())return;
   try{const r=await fetch(CFG.avisos.url.replace(/\/$/,"")+"/stats?uid="+encodeURIComponent(S.uid),{cache:"no-store"});const f=await r.json();
-    box.innerHTML=`<div class="stats"><div><b>${f.compartido||0}</b><small>veces compartida</small></div><div><b>${f.instalados||0}</b><small>la han empezado a usar</small></div><div><b>${f.activos||0}</b><small>semanas de uso de tus invitados</small></div></div>
+    box.innerHTML=`<div class="stats"><div><b>${f.visitas||0}</b><small>han abierto tu enlace</small></div><div><b>${f.instalados||0}</b><small>la han empezado a usar</small></div><div><b>${f.activos||0}</b><small>semanas de uso de tus invitados</small></div></div>
       <p class="coins">🪙 <b>${f.coins||0} coins</b> <span class="small muted">· pronto podrás canjearlos</span></p>
       ${(f.historial||[]).length?`<details class="small"><summary>Cómo los has ganado</summary>${f.historial.map(h=>`<div>${esc(shortDate(h.fecha))} · +${h.coins} · ${esc(h.motivo)}</div>`).join("")}</details>`:""}`;
   }catch(e){box.innerHTML=`<p class="small muted">No se han podido cargar tus coins ahora mismo.</p>`}

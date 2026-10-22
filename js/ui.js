@@ -29,8 +29,12 @@ function renderHeader(){
   const note=document.getElementById("budgetNote");note.classList.toggle("over",spent>budget);
   note.textContent=(spent>budget?"Te pasas "+eur(spent-budget)+" con lo previsto. Cambia algún plato o revisa el presupuesto.":"Previsto este mes · te sobran "+eur(budget-spent))+(real?` · Gastado de verdad: ${eur(real)}`:"");
 }
+// Las animaciones de entrada solo al cambiar de pestaña (o de paso del asistente), no en cada toque
+let lastView=null;
 function render(){
   if(!S.onboarded&&tab!=="wizard")tab="wizard";
+  const vk=tab+"|"+(tab==="wizard"?(wiz.single||wiz.i):"")+"|"+month;
+  main.classList.toggle("anim",vk!==lastView);lastView=vk;
   renderHeader();
   if(tab==="wizard")return renderWizard();
   if(tab==="menu")renderMenu();
@@ -207,7 +211,7 @@ function moveToNext(rid,from){
 }
 function renderMenu(){
   const weeks=weeksInMonth(month);
-  let h=`<section class="view">`+useUpCard()+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
+  let h=`<section class="view">`+useUpCard()+`<div class="row" style="justify-content:flex-end;margin:4px 0 -4px"><button class="btn ghost small" id="startDay">📅 ${S.home.start&&S.home.start>todayISO()?"Cambiar el día de inicio":"Empezar el plan otro día"}</button></div>`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
   if(!weeks.length)h+=`<div class="empty"><p>No hay semanas que empiecen este mes.</p></div>`;
   for(const start of weeks){
     const wk=S.plans[start], dates=weekDates(start);
@@ -243,6 +247,7 @@ function renderMenu(){
   main.querySelectorAll("[data-sacr]").forEach(b=>b.onclick=()=>openSacrifice(b.dataset.sacr));
   bindReview(main);bindSurvey();bindThaw();bindInstall();
   document.getElementById("useUp")?.addEventListener("click",openUseUp);
+  document.getElementById("startDay")?.addEventListener("click",openStartDay);
   main.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>openDay(b.dataset.day));
   main.querySelectorAll("[data-session]").forEach(b=>b.onclick=()=>openSession(b.dataset.session));
   main.querySelectorAll("[data-rate]").forEach(b=>b.onclick=()=>{const [sid,rid,who,v]=b.dataset.rate.split("~");
@@ -409,7 +414,7 @@ function openRecipe(id,sid){
     const cost=rationCost(r);
     showDialog(`<div class="mod">${closeBtn}
       <span class="pill ${r.type==="c"?"carga":"ligera"}">${r.type==="c"?"⚡ Con hidratos":"🥗 Ligera"}</span>${r.kid?` <span class="pill kid">Gusta a niños</span>`:""}${r.heavy?` <span class="pill fixed">Pesada</span>`:""}
-      ${dishImg(r,"l")}
+      ${dishImg(r,"l")}${photoCredit(r)}
       <div class="row" style="margin-top:6px"><label class="btn ghost small">📷 ${MYPHOTOS[r.id]?"Cambiar mi foto":"Foto de mi plato"}<input type="file" accept="image/*" capture="environment" id="myPh" hidden></label>${MYPHOTOS[r.id]?`<button class="btn ghost small" id="myPhDel">Quitar mi foto</button>`:""}</div>
       <h2>${esc(r.name)}</h2>${r.sug?`<div class="small muted">💡 ${r.author?"Sugerida por "+esc(r.author):"Sugerida por la comunidad"}</div>`:""}
       <div class="stats"><div><b>${v.time} min</b><small>${v.active} de trabajo</small></div><div><b>${r.prot||"?"} g</b><small>proteína</small></div><div><b>${r.kcal?r.kcal+" kcal":eur(cost)}</b><small>${r.kcal?eur(cost)+"/ración":"por ración"}</small></div></div>
@@ -695,7 +700,7 @@ function renderPerfil(){
     ["compra","Compra y presupuesto",eur(S.home.budget.month)+" al mes"]];
   h+=acc("ajustes","⚙️","Ajustes","Familia, objetivos, entrenos, compra…",`<div class="settingslist">${items.map(([id,t,d])=>`<button data-edit="${id}">${t}<small>${esc(d)}</small></button>`).join("")}</div>`);
   h+=acc("avisos","🔔","Avisos en el móvil",S.notif&&S.notif.on?"Activados":"Desactivados",avisosCard().replace('<div class="card"><h2>Avisos en el móvil</h2>','<div>'));
-  h+=acc("coins","🪙","Invita y gana coins","Tu QR personal y tus coins",`<p class="small muted">Este es <b>tu</b> código: quien lo escanee con la cámara del móvil abre Táper y queda como invitado tuyo. Ganas coins cuando compartes, cuando alguien empieza a usarla y cada semana que la sigue usando.</p>
+  h+=acc("coins","🪙","Invita y gana coins","Tu QR personal y tus coins",`<p class="small muted">Este es <b>tu</b> código: quien lo escanee con la cámara del móvil abre Táper y queda como invitado tuyo. Ganas coins solo cuando hay respuesta: alguien abre tu enlace (+1), empieza a usar Táper (+10) y cada semana que la sigue usando (+2).</p>
     <div id="coinsBox">${servidorOn()?`<p class="small muted">Cargando tus coins…</p>`:""}</div>
     <div id="qrBox" style="display:grid;place-items:center;margin:10px 0;background:#fff;border-radius:12px;padding:10px"></div>
     <div class="actions"><button class="btn" id="shareApp">Enviar el enlace</button><button class="btn ghost" id="copyApp">Copiar enlace</button></div>`);
@@ -763,6 +768,20 @@ function useUpCard(){
   return `<div class="hero"><div class="eyebrow">Tu plan empieza el ${esc(longDate(S.home.start).replace(/^\w+, /,""))}</div><h2>Mientras, gasta lo que tienes</h2>
     <p>Dime qué hay en tu despensa, nevera y congelador y te propongo recetas para aprovecharlo, sin comprar casi nada.</p>
     <button class="btn" id="useUp">${n?`Ver ideas con mis ${n} productos`:"¿Qué tengo en casa?"}</button></div>`;
+}
+// Elegir cuándo empieza el plan (hasta entonces: gastar lo que hay en casa)
+function openStartDay(){
+  const nextMonth=iso(new Date(new Date().getFullYear(),new Date().getMonth()+1,1));
+  showDialog(`<div class="mod">${closeBtn}<h2>¿Cuándo empiezas?</h2><p class="small muted">Hasta ese día no preparo menú ni compra: te ayudo a gastar lo que ya tienes en casa.</p>
+    <div class="field"><label for="sdIn">Empezar el plan el</label><input type="date" id="sdIn" min="${todayISO()}" value="${esc(S.home.start&&S.home.start>todayISO()?S.home.start:nextMonth)}"></div>
+    <div class="actions"><button class="btn" id="sdOk">Guardar</button>${S.home.start&&S.home.start>todayISO()?`<button class="btn ghost" id="sdNow">Empezar ya</button>`:""}</div></div>`);
+  const apply=st=>{S.home.start=st&&st>todayISO()?st:null;
+    if(S.home.start)for(const s of Object.keys(S.plans))if(addDays(s,6)<S.home.start)delete S.plans[s];
+    const first=weekStartFor(S.home.start||todayISO());for(const s of [first,addDays(first,7)])if(!S.plans[s])genWeekFromScratch(s);
+    save();dlg.close();month=(S.home.start||todayISO()).slice(0,7)===todayISO().slice(0,7)?month:todayISO().slice(0,7);render();
+    toast(S.home.start?"Tu plan empieza el "+longDate(S.home.start).replace(/^\w+, /,""):"Plan en marcha desde hoy")};
+  dlg.querySelector("#sdOk").onclick=()=>apply(dlg.querySelector("#sdIn").value);
+  dlg.querySelector("#sdNow")?.addEventListener("click",()=>apply(null));
 }
 function openUseUp(){
   const have=new Set(S.pantry||[]);let step=have.size?1:0;
@@ -957,6 +976,7 @@ async function boot(){
   try{FEST=await getJSON("data/festivos.json")}catch(e){FEST=null}
   try{SUPERS=(await getJSON("data/supermercados.json")).supermercados}catch(e){SUPERS=[{id:"mercadona",nombre:"Mercadona",estado:"activo"}]}
   await loadMyPhotos();
+  try{DISHPHOTOS=await getJSON("data/fotos_platos.json")}catch(e){DISHPHOTOS={}}
   PR=loadSavedPrices();
   // Precios de la zona del usuario: el almacén que corresponde a su código postal (si aún no está, los de la zona principal)
   try{ZONES=await getJSON("data/zonas.json",true)}catch(e){ZONES=null}

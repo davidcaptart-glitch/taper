@@ -4,12 +4,14 @@
 
 const PHOTO_SKIP=new Set(["cebolla","ajo","limon","caldo_pollo","caldo_pescado","mostaza","teriyaki"]);
 let MYPHOTOS={};   // id de receta -> URL de la foto propia (cargada de IndexedDB al arrancar)
+let DISHPHOTOS={}; // id de receta -> {archivo, autor, licencia, fuente}: fotos libres de Wikimedia Commons
 
 const prodImg=(pid,cls="pimg")=>{const p=P[pid];return p&&p.img?`<img class="${cls}" src="${esc(p.img)}" alt="" loading="lazy" decoding="async">`:`<span class="${cls} noimg">🥫</span>`};
 // Ingredientes principales de un plato: los de más cantidad, sin los que apenas se ven (cebolla, ajo…)
 function mainIngs(r,n=3){return r.ing.filter(([p])=>P[p]&&P[p].img&&!PHOTO_SKIP.has(p)).sort((a,b)=>b[1]*(P[b[0]].unit==="ud"?80:1)-a[1]*(P[a[0]].unit==="ud"?80:1)).slice(0,n).map(([p])=>p)}
 function dishImg(r,size="s"){
   if(MYPHOTOS[r.id])return `<span class="dish ${size}"><img src="${MYPHOTOS[r.id]}" alt="${esc(r.name)}" class="mine"></span>`;
+  const f=DISHPHOTOS[r.id];if(f)return `<span class="dish ${size} photo"><img src="${esc(f.archivo)}" alt="${esc(r.name)}" class="mine" loading="lazy" decoding="async"></span>`;
   const ps=mainIngs(r,size==="s"?1:3);if(!ps.length)return `<span class="dish ${size} noimg">🍽️</span>`;
   return `<span class="dish ${size} n${ps.length}" aria-hidden="true">${ps.map(p=>`<img src="${esc(P[p].img)}" alt="" loading="lazy" decoding="async">`).join("")}</span>`;
 }
@@ -31,4 +33,10 @@ async function saveMyPhoto(rid,file){
 async function deleteMyPhoto(rid){
   const db=await photoDB();await new Promise(ok=>{const tx=db.transaction("fotos","readwrite");tx.objectStore("fotos").delete(rid);tx.oncomplete=ok;tx.onerror=ok});
   if(MYPHOTOS[rid])URL.revokeObjectURL(MYPHOTOS[rid]);delete MYPHOTOS[rid];
+}
+
+// Crédito de la foto (lo exige la licencia): autor, licencia y enlace a la ficha original
+function photoCredit(r){
+  if(MYPHOTOS[r.id])return "";const f=DISHPHOTOS[r.id];if(!f)return "";
+  return `<div class="credit">Foto: ${esc(f.autor||"autor desconocido")} · <a href="${esc(f.licencia_url||f.fuente)}" target="_blank" rel="noopener">${esc(f.licencia||"licencia libre")}</a> · <a href="${esc(f.fuente)}" target="_blank" rel="noopener">Wikimedia Commons</a></div>`;
 }
