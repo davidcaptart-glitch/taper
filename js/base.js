@@ -2,7 +2,7 @@
 "use strict";
 
 // Versión de la app: súbela (y el ?v= de index.html y VERSION de sw.js) en cada mejora, y añade sus novedades a data/novedades.json
-const APP_VERSION = 56;
+const APP_VERSION = 57;
 
 /* ---------- Utilidades ---------- */
 const DAYS = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];   // índice 0 = lunes
@@ -46,12 +46,21 @@ const DIETS = {
   omni:["🍽️","Sin restricciones",[]],
   flexi:["🥗","Flexitariano",[]],
   pesce:["🐟","Pescetariano",["carne"]],
-  vege:["🥚","Vegetariano (ovolácteo)",["carne","pescado","marisco"]],
+  vege:["🥚","Ovolactovegetariano",["carne","pescado","marisco"]],
   ovo:["🍳","Ovovegetariano",["carne","pescado","marisco","lacteo"]],
   lacto:["🧀","Lactovegetariano",["carne","pescado","marisco","huevo"]],
   vegano:["🌱","Vegano",["carne","pescado","marisco","huevo","lacteo","miel"]],
+  crudi:["🥕","Crudivegano",["carne","pescado","marisco","huevo","lacteo","miel"]],
   halal:["☪️","Halal",["cerdo","alcohol"]],
   sincerdo:["🐷","Sin cerdo",["cerdo"]]
+};
+// Qué come y qué no cada dieta (para explicarlo al elegir)
+const DIET_INFO = {
+  omni:"Come de todo.",flexi:"Sobre todo vegetal; carne y pescado de vez en cuando.",pesce:"Vegetales, huevos, lácteos, pescado y marisco. Sin carne.",
+  vege:"Vegetales, lácteos y huevos. Sin carne ni pescado (el vegetarianismo estándar).",ovo:"Vegetales y huevos. Sin carne, pescado ni lácteos.",
+  lacto:"Vegetales y lácteos. Sin carne, pescado ni huevos.",vegano:"Solo alimentos de origen vegetal. Nada animal: tampoco miel ni gelatina.",
+  crudi:"Vegano y sin cocinar: solo platos crudos o que no pasan por el fuego. De momento hay pocas recetas así.",
+  halal:"Sin cerdo ni alcohol. La carne, con sello halal.",sincerdo:"Come de todo menos cerdo."
 };
 const ALLERGEN_ICO = {gluten:"🌾",lacteos:"🥛",huevo:"🥚",pescado:"🐟",crustaceos:"🦐",moluscos:"🦑",frutos_cascara:"🌰",cacahuete:"🥜",soja:"🫘",sesamo:"🌱",apio:"🥬",mostaza:"🫙",sulfitos:"🍷",altramuces:"🌼"};
 const WT_ICO = {cocinar:"🍳",taper:"🥡",fuera:"🍴",libre:"–"};

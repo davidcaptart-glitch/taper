@@ -181,7 +181,8 @@ function stepBody(fullId){
     for(const p of S.people){const dt=dietOf(p),al=p.allergies||[];
       h+=`<div class="kidcard"><div class="row"><b>${esc(p.id==="yo"?(p.name||"Tú"):personName(p))}</b><span class="small muted">${p.id==="yo"?"tú":p.kind==="nino"?"niño o niña":"adulto"}</span></div>
         <div class="field"><label>Forma de comer</label><div class="chips">${Object.entries(DIETS).map(([k,[e,t]])=>chip("data-diet",p.id+"|"+k,dt===k,e+" "+esc(t))).join("")}</div>
-        ${dt==="halal"?`<div class="hint">Quito el cerdo y lo que lleva alcohol. Compra la carne con sello halal: los supermercados no lo indican en su web.</div>`:dt==="flexi"?`<div class="hint">Más platos vegetales y menos carne, sin prohibir nada.</div>`:DIETS[dt][2].length?`<div class="hint">Sin ${DIETS[dt][2].map(x=>({carne:"carne",pescado:"pescado",marisco:"marisco",huevo:"huevo",lacteo:"lácteos",miel:"miel",cerdo:"cerdo"})[x]).join(", ")}.</div>`:""}</div>
+        <div class="okbox small" style="margin-top:8px"><b>${DIETS[dt][0]} ${esc(DIETS[dt][1])}:</b> ${esc(DIET_INFO[dt]||"")}${dt==="halal"?" Los supermercados no indican el sello halal en su web.":""}
+          ${(()=>{const n=R.filter(r=>!r.small&&!r.pack&&canEat(p,r)).length;return dt==="omni"?"":`<br>${n<10?"⚠️ ":""}Hay <b>${n}</b> ${n===1?"plato principal que encaja":"platos principales que encajan"}${n<10?": tus menús se repetirán bastante hasta que añada más.":"."}`})()}</div></div>
         <div class="field"><label>Alergias o intolerancias</label><div class="chips">${chip("data-alg-none",p.id,!al.length,"🍽️ Ninguna")}${Object.entries(ALLERGENS).map(([k,t])=>chip("data-alg",p.id+"|"+k,al.includes(k),ALLERGEN_ICO[k]+" "+esc(t))).join("")}</div>
           <div class="hint">Es orientativo: revisa siempre la etiqueta.</div></div></div>`}
     return h+`<p class="small muted">Si en casa coméis el mismo plato, buscaré platos que encajen con todos.</p>`;

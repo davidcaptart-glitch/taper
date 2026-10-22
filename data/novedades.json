@@ -538,6 +538,16 @@
         "Ya están en la tienda los 4 packs de recetas (30 coins cada uno), todos con foto: 🎄 Navidad (canelones de Sant Esteve, escudella, pavo al horno…), 💼 Tápers de oficina, 💪 Deportistas y ♻️ Aprovechamiento.",
         "En Recetas los ves con un candado. Cuando desbloqueas uno, sus platos empiezan a salir en tus menús."
       ]
+    },
+    {
+      "version": 57,
+      "fecha": "2026-10-22",
+      "titulo": "Más dietas, mejor explicadas",
+      "cambios": [
+        "Nueva dieta crudivegana. «Vegetariano (ovolácteo)» se llama ahora Ovolactovegetariano.",
+        "Al elegir la dieta de cada persona ves qué come y qué no, y cuántos platos encajan con ella.",
+        "Cada persona tiene un botón «Cambiar dieta» en el Perfil, para cambiarla cuando quieras."
+      ]
     }
   ]
 }

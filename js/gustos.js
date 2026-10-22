@@ -46,6 +46,7 @@ function tasteScore(p,r,lm){
 }
 // Tipo de alimentación: ¿puede comer este producto?
 const dietOf=p=>DIETS[p.diet]?p.diet:"omni";
+const rawOk=(p,r)=>dietOf(p)!=="crudi"||r.vars.some(v=>v.app==="ninguno"&&!(v.info||[]).some(x=>x&&(x.fuego||x.temp||x.potencia)));
 const dietAllows=(p,pid)=>{const bl=DIETS[dietOf(p)][2];return !bl.length||!((P[pid]&&P[pid].org)||[]).some(o=>bl.includes(o))};
 // Lo que es una receta según sus ingredientes (vegana, vegetariana…)
 function recipeDiet(r){const o=new Set(r.ing.flatMap(([pid])=>(P[pid]&&P[pid].org)||[]));
@@ -53,7 +54,7 @@ function recipeDiet(r){const o=new Set(r.ing.flatMap(([pid])=>(P[pid]&&P[pid].or
 // Alérgenos de una receta (de sus ingredientes)
 const recipeAllergens=r=>[...new Set(r.ing.flatMap(([pid])=>(P[pid]&&P[pid].alg)||[]))];
 // ¿Puede comerlo? (alergias e intolerancias de la persona e ingredientes marcados como "no puede")
-const canEat=(p,r)=>{const al=p.allergies||[];return !r.ing.some(([pid])=>ingPref(p,pid)===-9||!dietAllows(p,pid)||(al.length&&((P[pid]&&P[pid].alg)||[]).some(a=>al.includes(a))))};
+const canEat=(p,r)=>{const al=p.allergies||[];if(!rawOk(p,r))return false;return !r.ing.some(([pid])=>ingPref(p,pid)===-9||!dietAllows(p,pid)||(al.length&&((P[pid]&&P[pid].alg)||[]).some(a=>al.includes(a))))};
 
 /* ---------- Valoraciones ---------- */
 function addRating(o){

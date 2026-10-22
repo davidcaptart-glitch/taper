@@ -1011,7 +1011,7 @@ function knowHTML(p){
   const le=y?"te":"le", Le=y?"Te":"Le", puede=y?"puedes":"puede";
   const al=p.allergies||[];
   return `<div class="know">
-    <h3>${DIETS[dietOf(p)][0]} ${esc(DIETS[dietOf(p)][1])}</h3>
+    <div class="row" style="justify-content:space-between"><h3 style="margin:0">${DIETS[dietOf(p)][0]} ${esc(DIETS[dietOf(p)][1])}</h3><button class="btn ghost small" data-edit="dieta">Cambiar dieta</button></div>
     <h3>⚠️ Alergias e intolerancias</h3>${al.length?`<div class="chips">${al.map(a=>`<span class="pill carga">${esc(ALLERGENS[a])}</span>`).join("")}</div>`:`<p class="small muted">Ninguna indicada.</p>`}
     <h3>🚫 No ${puede} comer</h3>${ichips(by(-9))}
     <h3>👎 Ingredientes que no ${le} gustan</h3>${ichips(by(-1))}
