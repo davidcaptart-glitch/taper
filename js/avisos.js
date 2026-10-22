@@ -134,7 +134,7 @@ function avisosCard(){
   return `<div class="card"><h2>Avisos en el móvil</h2>
     ${n.on?`<p class="small okbox">✅ Activados. Próximos: ${next.length?next.map(a=>`${esc(new Date(a.t).toLocaleString("es-ES",{weekday:"short",hour:"2-digit",minute:"2-digit"}))} · ${esc(a.title)}`).join("<br>"):"ninguno esta semana"}</p>`
       :`<p class="small muted">Te avisa a su hora de lo que hay que hacer. Funciona aunque no tengas la app abierta.</p><button class="btn" id="avOn">🔔 Activar avisos</button>`}
-    <div class="group"><h3>¿De qué te aviso?</h3>${Object.entries(NOTIF_TYPES).map(([k,[t,d]])=>`<label class="row small" style="margin:6px 0"><input type="checkbox" data-nt="${k}" ${n.types[k]?"checked":""} style="width:auto"> <span><b>${t}</b> · <span class="muted">${d}</span></span></label>`).join("")}
+    <div class="group"><h3>¿De qué te aviso?</h3>${Object.entries(NOTIF_TYPES).map(([k,[t,d]])=>`<label class="ntrow"><span class="ntt"><b>${t}</b><small>${d}</small></span><input type="checkbox" class="switch" data-nt="${k}" ${n.types[k]?"checked":""} aria-label="${esc(t)}"></label>`).join("")}
     <div class="row small"><label>Hora del aviso de descongelar</label><input type="time" id="avThaw" value="${esc(n.thaw)}" style="width:auto"></div></div>
     ${n.on?`<div class="actions"><button class="btn ghost small" id="avTest">Enviarme un aviso de prueba</button><button class="btn ghost small" id="avOff">Desactivar avisos</button></div>`:""}</div>`;
 }

@@ -388,6 +388,14 @@
         "Cada paso lleva su utensilio, el fuego (bajo, medio, medio-alto, fuerte), la temperatura y el modo del horno, los grados de la air fryer, los vatios del microondas y los minutos.",
         "En el modo cocina, el temporizador ya trae el tiempo exacto de cada paso."
       ]
+    },
+    {
+      "version": 41,
+      "fecha": "2026-10-22",
+      "titulo": "Avisos más claros",
+      "cambios": [
+        "Los tipos de aviso se activan con un interruptor al lado de cada uno, bien alineados."
+      ]
     }
   ]
 }
