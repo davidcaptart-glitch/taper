@@ -60,7 +60,8 @@ const dowSelect=(id,val)=>`<select id="${id}">${DAYS.map((d,i)=>`<option value="
 function stepBody(fullId){
   const H=S.home, a=stepPerson(fullId), id=stepKind(fullId)==="gustos"?fullId:stepKind(fullId), you=a.id==="yo";
   if(id==="hola")return `<p class="lead">Táper te prepara el menú, la lista de la compra y los tápers de la semana, a tu medida. Unas preguntas rápidas y empezamos. Todo se puede cambiar después.</p>
-    <div class="field"><label for="wzName">¿Cómo te llamas?</label><input id="wzName" type="text" value="${esc(a.name)}" placeholder="Tu nombre"></div>`;
+    <div class="field"><label for="wzName">¿Cómo te llamas?</label><input id="wzName" type="text" value="${esc(a.name)}" placeholder="Tu nombre"></div>
+    ${isStandalone()&&servidorOn()?`<button type="button" class="btn ghost small" id="wzTr">¿Ya usabas Táper en Safari? Trae tus datos</button>`:""}`;
   if(id==="aparatos")return `<p class="lead">Solo te propondré recetas que puedas hacer.</p><div class="chips">${Object.entries(APP).filter(([k])=>k!=="ninguno").map(([k,v])=>chip("data-app",k,H.apps.includes(k),v)).join("")}</div>`;
   if(id==="zona"){const ch=H.supers&&H.supers.length?H.supers:[H.super||"mercadona"],ok=x=>superHasPrices(x.id);
     return `<p class="lead">¿Dónde te viene bien comprar? Marca todos los supermercados, aunque solo vayas a la tienda: comparo sus precios cada semana.</p>
@@ -180,6 +181,7 @@ function bindStep(fullId){
     const fd=new URLSearchParams();fd.append(c.campos.tipo,"Otra cosa");fd.append(c.campos.texto,`AÑADIR CÓDIGO POSTAL: ${H.cp}
 USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean).join(" · "));fd.append(c.campos.version,String(APP_VERSION));
     try{await fetch(c.url,{method:"POST",mode:"no-cors",body:fd});S.zoneAsked=H.cp;save();rerender();toast("Pedido enviado")}catch(e){toast("Sin conexión: inténtalo más tarde")}});
+  q("#wzTr")&&(q("#wzTr").onclick=openTransferCode);
   qa("[data-super]").forEach(b=>b.onclick=()=>{const sid=b.dataset.super;let ch=H.supers&&H.supers.length?[...H.supers]:[H.super||"mercadona"];
     if(ch.includes(sid)){if(ch.length===1){toast("Elige al menos un supermercado");return}ch=ch.filter(x=>x!==sid)}else ch.push(sid);
     H.supers=ch;if(!ch.includes(H.super))H.super=ch[0];rerender()});

@@ -217,6 +217,16 @@
         "En la lista de la compra, «Comparar supermercados» te dice cuánto costaría en cada uno.",
         "Los precios de DIA, Condis y otros se irán activando a medida que los conecte; se actualizan solos cada domingo."
       ]
+    },
+    {
+      "version": 23,
+      "fecha": "2026-10-22",
+      "titulo": "De Safari a la app sin perder nada",
+      "cambios": [
+        "En iPhone, si empiezas a usar Táper en Safari y luego la instalas, la app reconoce tu móvil y te ofrece traer todos tus datos con un toque: familia, gustos, menús, lista, coins y avisos.",
+        "Si no te reconoce (por ejemplo, si has cambiado de wifi a datos), usa tu código de traspaso: está en Perfil › Copia y novedades de Safari.",
+        "Ya tienes precios reales de DIA, Condis, Consum y Eroski: márcalos en Perfil › Ajustes › Supermercados y zona."
+      ]
     }
   ]
 }

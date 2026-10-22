@@ -769,6 +769,8 @@ function renderPerfil(){
     ${Object.values(P).sort((a,b)=>a.name.localeCompare(b.name)).map(p=>{const m=mprice(p.id),own=S.prices[p.id]!=null;
       return `<div class="pr"><span>${esc(p.name)}${upTag(p.id)}<small>${fmtQty(p.env,p.unit)}${own?` · corregido a mano${m?` (Mercadona: ${eur(m.precio)})`:""} <button class="reset" data-reset="${p.id}">Usar el de Mercadona</button>`:m?" · Mercadona":" · estimado"}</small></span><input type="number" step="0.01" min="0" data-price="${p.id}" value="${price(p.id).toFixed(2)}" aria-label="Precio de ${esc(p.name)}"></div>`}).join("")}</div>`);
   h+=acc("app","📦","Copia de seguridad y novedades",`Versión ${APP_VERSION} · tu código ${S.uid}`,`<p class="small muted">Todo se guarda solo en este móvil. Descarga una copia de vez en cuando y antes de cambiar de móvil.</p>
+    ${needsTransfer()?`<div class="okbox"><b>¿Vas a instalar Táper?</b> Tus datos pasarán solos a la app. Si no te los reconoce, usa este código de traspaso: <b style="letter-spacing:.15em">${esc(transferCode())}</b></div>`:""}
+    ${isStandalone()&&servidorOn()?`<button class="btn ghost small" id="trBring" style="margin-bottom:8px">Traer mis datos de Safari</button>`:""}
     <div class="actions"><button class="btn" id="exp">Exportar copia</button><button class="btn ghost" id="imp">Importar copia</button></div><input type="file" id="impFile" accept="application/json,.json" hidden>
     <div class="field"><label>Aspecto</label><div class="chips">${[["light","Claro"],["dark","Oscuro"],["auto","Como el móvil"]].map(([k,t])=>chip("data-theme-set",k,(S.home.theme||"light")===k,t)).join("")}</div></div>
     <div class="actions"><button class="btn ghost small" id="newsAll">Ver todas las novedades</button><button class="btn ghost small" id="restartWiz">Repetir el asistente</button></div>`);
@@ -793,7 +795,7 @@ function renderPerfil(){
   document.getElementById("festAdd").onclick=()=>{const v=document.getElementById("festIn").value;if(v&&!S.home.festivosExtra.includes(v)){S.home.festivosExtra.push(v);S.home.festivosExtra.sort();save();refreshPlans();render()}};
   q("[data-price]").forEach(i=>i.onchange=()=>{const v=Number(i.value);if(v>=0){S.prices[i.dataset.price]=v;save();render()}});
   q("[data-reset]").forEach(b=>b.onclick=()=>{delete S.prices[b.dataset.reset];save();render()});
-  document.getElementById("exp").onclick=exportBackup;
+  document.getElementById("exp").onclick=exportBackup;document.getElementById("trBring")?.addEventListener("click",openTransferCode);
   const f=document.getElementById("impFile");document.getElementById("imp").onclick=()=>f.click();f.onchange=()=>{if(f.files[0])importBackup(f.files[0]);f.value=""};
   document.getElementById("newsAll").onclick=()=>openNews(true);
   q("[data-theme-set]").forEach(b=>b.onclick=()=>{S.home.theme=b.dataset.themeSet;save();applyTheme();render()});
@@ -914,7 +916,7 @@ function installCard(){
   if(installPrompt)how=`<button class="btn" id="doInstall">📲 Instalar Táper</button>`;
   else if(inApp)how=`<p class="small">Estás en un navegador integrado. Toca <b>⋮</b> y elige <b>«Abrir en Chrome»</b>; allí aparecerá el botón para instalarla.</p>`;
   else if(samsung)how=`<p class="small">Toca el menú <b>≡</b> › <b>Añadir página a</b> › <b>Pantalla de inicio</b>.</p>`;
-  else if(ios)how=`<p class="small">Toca <b>Compartir</b> (el cuadrado con la flecha) › <b>Añadir a pantalla de inicio</b>.</p>`;
+  else if(ios)how=`<p class="small">Toca <b>Compartir</b> (el cuadrado con la flecha) › <b>Añadir a pantalla de inicio</b>. Tus datos pasarán solos a la app${S.onboarded?` (código de traspaso, por si acaso: <b>${esc(transferCode())}</b>)`:""}.</p>`;
   else how=`<p class="small">En Chrome, toca <b>⋮</b> › <b>Instalar aplicación</b> (o <b>Añadir a pantalla de inicio</b> › <b>Instalar</b>).</p>`;
   return `<div class="rate"><h3>📲 Instala Táper en tu móvil</h3><p class="small muted">Tendrás su icono en la pantalla de inicio, funcionará sin conexión y te llegarán los avisos.</p>${how}
     <button class="btn ghost small" id="hideInstall" style="margin-top:6px">Ahora no</button></div>`;
@@ -1098,7 +1100,7 @@ async function boot(){
   else if(!S.onboarded){S.seenVersion=APP_VERSION;save()}
   checkUpdate();startCounter();
   if(avisosOn()&&S.notif&&S.notif.on){shareWithSW().catch(()=>{});queueSyncAvisos()}
-  trackOnBoot();checkAvisos();watchPermission();
+  trackOnBoot();checkAvisos();watchPermission();checkTransferOnBoot();queueTransfer();
 }
 boot();
 if("serviceWorker" in navigator&&location.protocol!=="file:")navigator.serviceWorker.register("sw.js").catch(()=>{});

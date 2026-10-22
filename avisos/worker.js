@@ -5,6 +5,9 @@
    - Así no hace falta cifrar el contenido del push: solo se firma la petición (VAPID).
    Datos guardados (KV): sub:<uid> = {sub, plan:[{t,title,body,tag}], at}; pend:<uid> = [avisos];
    log:<uid> = último envío {at, status} (para saber si el móvil recibe los avisos).
+   tr:<código> = copia de los datos de quien usa Táper en Safari, para pasarlos a la app instalada (iPhone
+   guarda por separado los datos de Safari y los de la app); trm:<huella> = código del último móvil con esa
+   conexión y modelo, para reconocerlo solo.
 */
 
 const ORIGENES = ["https://davidcaptart-glitch.github.io", "http://localhost:8765"];
@@ -83,6 +86,31 @@ export default {
         if (p.length) await env.TAPER.delete("pend:" + uid);
         return json(req, p);
       }
+      // Traspaso Safari -> app instalada
+      if (req.method === "POST" && url.pathname === "/traspaso") {
+        const txt = await req.text();
+        if (txt.length > 3_000_000) return json(req, { error: "demasiado grande" }, 413);
+        const b = JSON.parse(txt);
+        if (!codigoOk(b.codigo) || !uidOk(b.uid) || !b.estado) return json(req, { error: "datos no válidos" }, 400);
+        const prev = await env.TAPER.get("tr:" + b.codigo, "json");
+        if (prev && prev.uid !== b.uid) return json(req, { error: "código en uso" }, 409);
+        await env.TAPER.put("tr:" + b.codigo, JSON.stringify({ uid: b.uid, nombre: String(b.nombre || "").slice(0, 40), at: Date.now(), estado: b.estado }), { expirationTtl: TRASPASO_TTL });
+        await env.TAPER.put("trm:" + (await huellaMovil(req)), b.codigo, { expirationTtl: 60 * 60 * 24 * 3 });
+        return json(req, { ok: true });
+      }
+      // La app recién instalada pregunta si hay datos de este mismo móvil (misma conexión y modelo)
+      if (req.method === "GET" && url.pathname === "/traspaso/buscar") {
+        const codigo = await env.TAPER.get("trm:" + (await huellaMovil(req)));
+        const d = codigo ? await env.TAPER.get("tr:" + codigo, "json") : null;
+        return json(req, d ? { codigo, nombre: d.nombre, at: d.at } : {});
+      }
+      if (req.method === "GET" && url.pathname === "/traspaso/cargar") {
+        const codigo = (url.searchParams.get("codigo") || "").toUpperCase();
+        if (!codigoOk(codigo)) return json(req, { error: "código no válido" }, 400);
+        const d = await env.TAPER.get("tr:" + codigo, "json");
+        if (!d) return json(req, { error: "no encontrado" }, 404);
+        return json(req, { nombre: d.nombre, at: d.at, estado: d.estado });
+      }
       if (req.method === "POST" && url.pathname === "/evento") return json(req, await evento(env, await req.json(), req));
       if (req.method === "GET" && url.pathname === "/stats") {
         const uid = url.searchParams.get("uid");
@@ -142,6 +170,14 @@ async function envia(env, uid, d) {
 // Pulsar "compartir" se cuenta, pero no da coins.
 const COINS = { visita: 1, instalacion: 10, activoInvitado: 2, activoPropio: 1, bienvenida: 5 };
 const MAX_VISITAS_DIA = 10;
+const TRASPASO_TTL = 60 * 60 * 24 * 30;
+const codigoOk = (c) => typeof c === "string" && /^[A-Z2-9]{6}$/.test(c);
+// Huella del móvil: conexión + modelo/sistema. Safari y la app instalada del mismo iPhone dan la misma.
+async function huellaMovil(req) {
+  const base = (req.headers.get("CF-Connecting-IP") || "") + "|" + (req.headers.get("User-Agent") || "").replace(/ Safari\/[\d.]+/, "").replace(/ Version\/[\d.]+/, "");
+  const h = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("taper-movil:" + base));
+  return [...new Uint8Array(h)].slice(0, 12).map((b) => b.toString(16).padStart(2, "0")).join("");
+}
 async function huellaConexion(req) {
   const ip = req.headers.get("CF-Connecting-IP") || "";
   const h = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("taper:" + ip));

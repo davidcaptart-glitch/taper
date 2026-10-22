@@ -141,6 +141,63 @@ function bindAvisos(){
       toast(r.status>=200&&r.status<300?"Enviado: debería aparecerte en unos segundos":"Google no ha aceptado el aviso (código "+r.status+"). Desactiva y vuelve a activar los avisos")}catch(e){toast("No se ha podido: "+e.message)}});
 }
 
+/* ---------- Traspaso de datos de Safari a la app instalada (iPhone) ----------
+   En iPhone, Safari y la app de la pantalla de inicio guardan los datos por separado. Mientras usas Táper
+   en Safari, se guarda una copia en el servidor; la app instalada la reconoce al abrirse por primera vez. */
+const isIOS=()=>/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+const needsTransfer=()=>servidorOn()&&isIOS()&&!isStandalone()&&S.onboarded;
+function transferCode(){
+  if(!S.trCode){const a="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";S.trCode=Array.from(crypto.getRandomValues(new Uint8Array(6)),b=>a[b%a.length]).join("")}
+  return S.trCode;
+}
+let trTimer=null;
+function queueTransfer(){
+  if(!needsTransfer())return;
+  clearTimeout(trTimer);trTimer=setTimeout(async()=>{
+    try{const code=transferCode();
+      const r=await fetch(CFG.avisos.url.replace(/\/$/,"")+"/traspaso",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({codigo:code,uid:S.uid,nombre:me().name||"",estado:S})});
+      if(r.status===409){delete S.trCode;queueTransfer()}
+    }catch(e){}
+  },8000);
+}
+// Pone los datos de Safari en esta app (mismo usuario: avisos, coins e invitaciones siguen igual)
+async function loadTransfer(code){
+  const r=await fetch(CFG.avisos.url.replace(/\/$/,"")+"/traspaso/cargar?codigo="+encodeURIComponent(code.toUpperCase().trim()),{cache:"no-store"});
+  if(r.status===404)throw new Error("No encuentro ese código. Revísalo en Táper en Safari");
+  if(!r.ok)throw new Error("El servidor ha respondido "+r.status);
+  const d=await r.json();
+  S=mergeState(d.estado);S.transferredFrom=code;S.installSent=true;save();
+  try{if(S.notif&&S.notif.on){S.notif.on=false;save()}}catch(e){}
+  tab="menu";render();toast(`Listo${d.nombre?", "+d.nombre:""}: ya tienes aquí todo lo de Safari`);
+  // Los avisos van con cada app: hay que activarlos una vez aquí
+  if(avisosOn())setTimeout(()=>{
+    showDialog(`<div class="mod">${closeBtn}<h2>Activa los avisos aquí</h2><p class="small muted">Los avisos van con la app instalada, así que hay que activarlos una vez más en esta app.</p><div class="actions"><button class="btn wide" id="trAv">🔔 Activar avisos</button></div></div>`);
+    document.getElementById("trAv").onclick=()=>{dlg.close();enableAvisos().catch(e=>toast(e.message))}},900);
+}
+function openTransferCode(){
+  showDialog(`<div class="mod">${closeBtn}<h2>Traer mis datos de Safari</h2>
+    <p class="small muted">Abre Táper en Safari, ve a Perfil › Copia y novedades y copia aquí tu código de traspaso.</p>
+    <div class="field"><input id="trIn" type="text" maxlength="6" autocapitalize="characters" autocomplete="off" placeholder="ABC123" style="text-transform:uppercase;letter-spacing:.2em;font-size:1.3rem;text-align:center"></div>
+    <div class="actions"><button class="btn wide" id="trGo">Traer mis datos</button></div></div>`);
+  dlg.querySelector("#trGo").onclick=async()=>{const v=dlg.querySelector("#trIn").value;try{await loadTransfer(v);dlg.close()}catch(e){toast(e.message)}};
+}
+// Primera vez en la app instalada: ¿hay datos de Safari de este mismo móvil?
+async function checkTransferOnBoot(){
+  if(!servidorOn()||S.onboarded||!isStandalone()||S.transferChecked)return;
+  S.transferChecked=true;
+  try{const d=await (await fetch(CFG.avisos.url.replace(/\/$/,"")+"/traspaso/buscar",{cache:"no-store"})).json();
+    if(!d.codigo)return;
+    showDialog(`<div class="mod">${closeBtn}<h2>¿Son tus datos?</h2>
+      <p>Has usado Táper en Safari${d.nombre?` como <b>${esc(d.nombre)}</b>`:""} (última vez: ${esc(new Date(d.at).toLocaleString("es-ES",{day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"}))}).</p>
+      <p class="small muted">Puedo traer aquí tu familia, gustos, menús y lista, para que no tengas que empezar de nuevo.</p>
+      <div class="actions"><button class="btn wide" id="trYes">Sí, traer mis datos</button><button class="btn ghost wide" id="trNo">No, empezar de cero</button></div></div>`);
+    dlg.querySelector("#trYes").onclick=async()=>{try{await loadTransfer(d.codigo);dlg.close()}catch(e){toast(e.message)}};
+    dlg.querySelector("#trNo").onclick=()=>dlg.close();
+  }catch(e){}
+}
+const _saveTr=save;
+save=function(){_saveTr();queueTransfer()};
+
 /* ---------- Invitaciones y coins ---------- */
 // Enlace personal: quien lo abre queda como invitado de este usuario
 const shareLink=()=>location.origin+location.pathname.replace(/index\.html$/,"")+"?ref="+encodeURIComponent(S.uid);
