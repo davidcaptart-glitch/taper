@@ -541,10 +541,10 @@ function afinarCard(){
   if(!A||A.state!=="ask")return `<div class="row" style="justify-content:flex-start;margin:6px 0"><button class="btn ghost small" id="afinarOpen">✨ Afinar mi menú</button></div>`;
   return `<div class="afcard"><b class="aft">Tu menú está listo</b>
     <p class="small" style="margin:4px 0 8px">${A.cost?`Sale por unos <b>${eur(A.cost)} al mes</b>. `:""}He supuesto <b>comida y cena en casa todos los días</b>, que cocinas cada día y que compras en tienda.</p>
-    ${afinarList()}</div>`;
+    <details class="afdet"><summary>¿Quieres afinarlo más?</summary>${afinarList(true)}</details></div>`;
 }
-function afinarList(){
-  return `<h3 style="margin:6px 0 2px">¿Quieres afinarlo más?</h3><p class="small muted" style="margin:0 0 6px">Marca lo que quieras ajustar y te pregunto solo eso.</p>
+function afinarList(inDet){
+  return `${inDet?"":`<h3 style="margin:6px 0 2px">¿Quieres afinarlo más?</h3>`}<p class="small muted" style="margin:0 0 6px">Marca lo que quieras ajustar y te pregunto solo eso.</p>
     <div class="aflist">${AFINAR.filter(([k])=>k!=="invitar"||servidorOn()).map(([k,t])=>`<label class="afi"><input type="checkbox" data-af="${k}"> ${esc(t)}</label>`).join("")}</div>
     <div class="actions"><button class="btn" id="afGo">Afinar</button>${S.afinar&&S.afinar.state==="ask"?`<button class="btn ghost" id="afNo">Así está bien</button>`:""}</div>`;
 }

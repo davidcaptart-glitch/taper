@@ -948,3 +948,9 @@ input.switch:checked::after{transform:translateX(20px)}
 .aflist{display:grid;gap:2px;margin:4px 0 8px}
 .afi{display:flex;gap:10px;align-items:center;padding:8px 2px;border-bottom:1px solid var(--line);font-size:.92rem}
 .afi input{width:auto;margin:0}
+
+.afdet summary{font-weight:700;font-size:1.02rem;cursor:pointer;padding:6px 0;list-style:none;display:flex;align-items:center;justify-content:space-between}
+.afdet summary::-webkit-details-marker{display:none}
+.afdet summary::after{content:"";width:9px;height:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin:0 6px 4px;transition:transform .2s}
+.afdet[open] summary::after{transform:rotate(-135deg);margin-bottom:-4px}
+.afdet p{margin-top:2px}
