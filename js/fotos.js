@@ -11,6 +11,8 @@ const prodImg=(pid,cls="pimg")=>{const p=P[pid];return p&&p.img?`<img class="${c
 function mainIngs(r,n=3){return r.ing.filter(([p])=>P[p]&&P[p].img&&!PHOTO_SKIP.has(p)).sort((a,b)=>b[1]*(P[b[0]].unit==="ud"?80:1)-a[1]*(P[a[0]].unit==="ud"?80:1)).slice(0,n).map(([p])=>p)}
 // Regla: una receta solo se usa si tiene foto (la real del plato o la tuya).
 // Si las fotos no se han podido cargar, no se bloquea nada.
+// Recetas de un pack: solo si se ha desbloqueado en la tienda
+const hasPack=r=>!r.pack||(S.owned||[]).includes("pack_"+r.pack);
 const hasPhoto=r=>!!(MYPHOTOS[r.id]||DISHPHOTOS[r.id]||!Object.keys(DISHPHOTOS||{}).length);
 function dishImg(r,size="s"){
   if(MYPHOTOS[r.id])return `<span class="dish ${size}"><img src="${MYPHOTOS[r.id]}" alt="${esc(r.name)}" class="mine"></span>`;

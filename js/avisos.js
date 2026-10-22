@@ -268,11 +268,57 @@ function trackOnBoot(){
   if(S.onboarded&&!S.installSent){S.installSent=true;try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){};evento("instalar",{ref:S.ref||null})}
   const wk=mondayOf(todayISO());if(S.onboarded&&S.activeWeek!==wk){S.activeWeek=wk;try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){};evento("activo")}
 }
+/* ---------- Tienda de coins ---------- */
+const SHOP={
+  av_chef:{t:"Avatar Chef",c:10,ico:"🧑‍🍳",g:"Avatares"},av_aguacate:{t:"Avatar Aguacate",c:10,ico:"🥑",g:"Avatares"},av_pizza:{t:"Avatar Pizza",c:10,ico:"🍕",g:"Avatares"},av_zorro:{t:"Avatar Zorro",c:10,ico:"🦊",g:"Avatares"},av_panda:{t:"Avatar Panda",c:10,ico:"🐼",g:"Avatares"},av_pulpo:{t:"Avatar Pulpo",c:10,ico:"🐙",g:"Avatares"},av_taco:{t:"Avatar Taco",c:10,ico:"🌮",g:"Avatares"},av_tomate:{t:"Avatar Tomate",c:10,ico:"🍅",g:"Avatares"},
+  tema_oliva:{t:"Tema verde oliva",c:20,ico:"🫒",g:"Temas"},tema_marino:{t:"Tema azul marino",c:20,ico:"🌊",g:"Temas"},
+  tema_mostaza:{t:"Tema mostaza",c:20,ico:"🌻",g:"Temas"},tema_berenjena:{t:"Tema berenjena",c:20,ico:"🍆",g:"Temas"},
+  pack_navidad:{t:"Pack Navidad",c:30,ico:"🎄",g:"Packs de recetas",d:"Platos de fiesta que se pueden hacer en casa"},
+  pack_oficina:{t:"Pack Tápers de oficina",c:30,ico:"💼",g:"Packs de recetas",d:"Platos que viajan bien y se comen fríos o recalentados"},
+  pack_deportistas:{t:"Pack Deportistas",c:30,ico:"💪",g:"Packs de recetas",d:"Mucha proteína y energía para entrenar"},
+  pack_aprovechamiento:{t:"Pack Aprovechamiento",c:30,ico:"♻️",g:"Packs de recetas",d:"Para gastar sobras y lo que está a punto de caducar"},
+  imprimible:{t:"Menú imprimible",c:40,ico:"🖨️",g:"Extras",d:"El menú del mes y la lista de la compra en A4, para la nevera"}
+};
+const owns=item=>(S.owned||[]).includes(item);
+let coinsNow=null;
+async function loadStats(){const r=await fetch(CFG.avisos.url.replace(/\/$/,"")+"/stats?uid="+encodeURIComponent(S.uid),{cache:"no-store"});const f=await r.json();
+  coinsNow=f.coins||0;if(Array.isArray(f.compras)){S.owned=f.compras;try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}return f}
+async function openShop(){
+  if(!servidorOn()){toast("La tienda necesita conexión");return}
+  if(!S.secret){S.secret=Array.from(crypto.getRandomValues(new Uint8Array(18)),b=>b.toString(16).padStart(2,"0")).join("");save()}
+  try{await loadStats()}catch(e){}
+  // Un pack solo se vende si ya hay recetas suyas en la app
+  const groups={};for(const [k,v] of Object.entries(SHOP)){if(k.startsWith("pack_")&&!R.some(r=>r.pack===k.slice(5)))continue;(groups[v.g]=groups[v.g]||[]).push([k,v])}
+  showDialog(`<div class="mod">${closeBtn}<div class="veb">Tienda</div><h2 class="vh" style="font-size:1.9rem">Canjea tus <em>coins</em></h2>
+    <div class="coinbig">🪙 <b>${coinsNow??"…"}</b> coins</div>
+    <p class="small muted">Gánalas invitando a gente, usando Táper cada semana y subiendo los tickets de la compra. Lo que canjeas es para siempre.</p>
+    ${Object.entries(groups).map(([g,its])=>`<h3 class="mq">${esc(g)}</h3>${its.map(([k,v])=>`<div class="shopit ${owns(k)?"own":""}"><span class="si">${v.ico}</span><span><b>${esc(v.t)}</b>${v.d?`<small>${esc(v.d)}</small>`:""}</span>
+      ${owns(k)?`<span class="okt">✓ Tuyo</span>`:`<button class="btn small" data-buy="${k}" ${coinsNow!=null&&coinsNow<v.c?"disabled":""}>🪙 ${v.c}</button>`}</div>`).join("")}`).join("")}</div>`);
+  dlg.querySelectorAll("[data-buy]").forEach(b=>b.onclick=async()=>{const k=b.dataset.buy;b.disabled=true;
+    try{const r=await fetch(CFG.avisos.url.replace(/\/$/,"")+"/canjear",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({uid:S.uid,clave:S.secret,item:k})});const j=await r.json();
+      if(!r.ok){toast(j.error||"No se ha podido canjear");b.disabled=false;return}
+      S.owned=j.compras;coinsNow=j.coins;save();
+      if(k.startsWith("tema_")){S.accent=k.slice(5);applyAccent()}
+      if(k.startsWith("av_"))S.avatar=k;
+      if(k.startsWith("pack_"))refreshPlansForPacks();
+      toast(`${SHOP[k].ico} ${SHOP[k].t}: ¡es tuyo!`);openShop();render()}
+    catch(e){toast("Sin conexión: inténtalo luego");b.disabled=false}});
+}
+// Temas de color comprados
+const ACCENTS={rojo:["#D22F2A","#B42520","#FBE8E7"],oliva:["#5B7F2A","#4A6A20","#EEF4E3"],marino:["#1F4E8C","#173E70","#E6EEF9"],mostaza:["#B97F0F","#9C6A0B","#FBF1DC"],berenjena:["#6B2D5C","#56234A","#F4E6F0"]};
+function applyAccent(){const a=ACCENTS[S.accent]&&(S.accent==="rojo"||owns("tema_"+S.accent))?ACCENTS[S.accent]:null,st=document.documentElement.style;
+  if(!a){["--accent","--accent-2","--accent-soft"].forEach(v=>st.removeProperty(v));return}
+  st.setProperty("--accent",a[0]);st.setProperty("--accent-2",a[1]);st.setProperty("--accent-soft",a[2]);
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content",a[0]);}
+// Al desbloquear un pack, sus recetas entran en las semanas que vienen
+function refreshPlansForPacks(){for(const s of Object.keys(S.plans))if(addDays(s,6)>=todayISO()&&!(S.plans[s].confirmed))genWeekFromScratch(s);save()}
 async function fillStats(){
   const box=document.getElementById("coinsBox");if(!box||!servidorOn())return;
-  try{const r=await fetch(CFG.avisos.url.replace(/\/$/,"")+"/stats?uid="+encodeURIComponent(S.uid),{cache:"no-store"});const f=await r.json();
+  try{const f=await loadStats();
     box.innerHTML=`<div class="stats"><div><b>${f.visitas||0}</b><small>han abierto tu enlace</small></div><div><b>${f.instalados||0}</b><small>la han empezado a usar</small></div><div><b>${f.activos||0}</b><small>semanas de uso de tus invitados</small></div></div>
-      <p class="coins">🪙 <b>${f.coins||0} coins</b> <span class="small muted">· pronto podrás canjearlos</span></p>
-      ${(f.historial||[]).length?`<details class="small"><summary>Cómo los has ganado</summary>${f.historial.map(h=>`<div>${esc(shortDate(h.fecha))} · +${h.coins} · ${esc(h.motivo)}</div>`).join("")}</details>`:""}`;
+      <p class="coins">🪙 <b>${f.coins||0} coins</b></p><button class="btn wide" id="openShop">🛍️ Tienda de coins</button>
+      <p class="small muted" style="margin-top:8px">Se ganan invitando a gente, usando Táper cada semana y subiendo los tickets de la compra (+3 cada uno).</p>
+      ${(f.historial||[]).length?`<details class="small"><summary>Historial de coins</summary>${f.historial.map(h=>`<div>${esc(shortDate(h.fecha))} · ${h.coins>0?"+":""}${h.coins} · ${esc(h.motivo)}</div>`).join("")}</details>`:""}`;
+    document.getElementById("openShop").onclick=openShop;
   }catch(e){box.innerHTML=`<p class="small muted">No se han podido cargar tus coins ahora mismo.</p>`}
 }

@@ -291,7 +291,7 @@ function weekRecipes(start,exceptId){
 function candidates(slot,opts={}){
   const out=[];
   for(const r of R){
-    if(r.small||!variantFor(r)||!hasPhoto(r))continue;
+    if(r.small||!variantFor(r)||!hasPhoto(r)||!hasPack(r))continue;
     const people=slot.eaters.concat(slot.kids,slot.tupper);
     if(!people.every(p=>canEat(p,r)))continue;
     if(slot.eaters.concat(slot.tupper).some(a=>dishPref(a,r.id)<=-1))continue;
@@ -415,7 +415,7 @@ function smallEaters(d,m){
   return S.people.filter(p=>smallState(p,m,d)!=="no"&&presentSmall(p,d,m)&&!(m!=="merienda"&&(S.days[d]||{}).comida==="fuera"&&p.id==="yo"));
 }
 function smallCandidates(eaters,m){
-  return R.filter(r=>r.small&&r.moments.includes(m)&&variantFor(r)&&hasPhoto(r)&&eaters.every(p=>canEat(p,r)));
+  return R.filter(r=>r.small&&r.moments.includes(m)&&variantFor(r)&&hasPhoto(r)&&hasPack(r)&&eaters.every(p=>canEat(p,r)));
 }
 function ensureSmall(start){
   const wk=S.plans[start];if(!wk)return;wk.small=wk.small||{};

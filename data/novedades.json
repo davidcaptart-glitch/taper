@@ -498,6 +498,18 @@
         "🪙 +3 coins por cada ticket nuevo (con fecha reciente y al menos 3 productos de comida), hasta 3 tickets con premio por semana.",
         "Cada ticket me ayuda a saber lo que gastas de verdad y a corregir los precios para todos. Solo se envían, sin datos personales, los precios que no cuadran."
       ]
+    },
+    {
+      "version": 53,
+      "fecha": "2026-10-22",
+      "titulo": "🛍️ Tienda de coins",
+      "cambios": [
+        "Ya puedes gastar tus coins en Perfil › Invita y gana coins › Tienda de coins.",
+        "Avatares (10 coins): chef, aguacate, pizza, zorro, panda, pulpo, taco y tomate. Toca tu inicial en el Perfil para cambiarlo.",
+        "Temas de color (20 coins): verde oliva, azul marino, mostaza y berenjena. Se eligen en Perfil › Aspecto.",
+        "Menú imprimible (40 coins): el menú del mes y la lista de la compra en A4 (botón 🖨️ en el Menú).",
+        "Pronto: packs de recetas temáticos (Navidad, oficina, deportistas, aprovechamiento)."
+      ]
     }
   ]
 }

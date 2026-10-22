@@ -137,10 +137,28 @@ export default {
         return json(req, { nombre: d.nombre, at: d.at, estado: d.estado });
       }
       if (req.method === "POST" && url.pathname === "/evento") return json(req, await evento(env, await req.json(), req));
+      // Canjear coins: hace falta la clave secreta del móvil (la primera vez queda registrada)
+      if (req.method === "POST" && url.pathname === "/canjear") {
+        const b = await req.json();
+        if (!uidOk(b.uid) || typeof b.clave !== "string" || b.clave.length < 16) return json(req, { error: "datos no válidos" }, 400);
+        const coste = TIENDA[b.item];
+        if (!coste) return json(req, { error: "artículo desconocido" }, 400);
+        const f = (await env.TAPER.get("st:" + b.uid, "json")) || nuevaFicha();
+        const h = await sha(b.clave);
+        if (f.clave && f.clave !== h) return json(req, { error: "Este móvil no puede gastar estas coins" }, 403);
+        f.clave = h; f.compras = f.compras || [];
+        if (f.compras.includes(b.item)) return json(req, { ok: true, coins: f.coins, compras: f.compras, yaLoTenias: true });
+        if (f.coins < coste) return json(req, { error: "No tienes coins suficientes", coins: f.coins }, 402);
+        f.coins -= coste; f.compras.push(b.item);
+        f.historial = [{ fecha: hoy(), coins: -coste, motivo: "Canjeado en la tienda" }].concat(f.historial || []).slice(0, 30);
+        await env.TAPER.put("st:" + b.uid, JSON.stringify(f));
+        return json(req, { ok: true, coins: f.coins, compras: f.compras });
+      }
       if (req.method === "GET" && url.pathname === "/stats") {
         const uid = url.searchParams.get("uid");
         if (!uidOk(uid)) return json(req, {}, 400);
-        return json(req, (await env.TAPER.get("st:" + uid, "json")) || nuevaFicha());
+        const f = (await env.TAPER.get("st:" + uid, "json")) || nuevaFicha(); delete f.clave;
+        return json(req, f);
       }
       // Precios de tickets que no cuadran con los de la app (se revisan a mano desde /admin)
       if (req.method === "POST" && url.pathname === "/ticket-precios") {
@@ -226,6 +244,11 @@ async function envia(env, uid, d) {
 // Pulsar "compartir" se cuenta, pero no da coins.
 const COINS = { visita: 1, instalacion: 10, activoInvitado: 2, activoPropio: 1, bienvenida: 5, ticket: 3 };
 const MAX_TICKETS_SEMANA = 3;
+// Tienda de coins: el precio lo pone el servidor (la app no puede cambiarlo)
+const TIENDA = { tema_oliva: 20, tema_marino: 20, tema_mostaza: 20, tema_berenjena: 20,
+  av_chef: 10, av_aguacate: 10, av_pizza: 10, av_zorro: 10, av_panda: 10, av_pulpo: 10, av_taco: 10, av_tomate: 10,
+  pack_navidad: 30, pack_oficina: 30, pack_deportistas: 30, pack_aprovechamiento: 30, imprimible: 40 };
+async function sha(t) { const h = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("taper-clave:" + t)); return [...new Uint8Array(h)].map((b) => b.toString(16).padStart(2, "0")).join(""); }
 const MAX_VISITAS_DIA = 10;
 /* ---------- Corrección automática de precios con los tickets ----------
    Con los tickets de los últimos 60 días, por supermercado y producto:
