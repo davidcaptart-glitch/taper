@@ -8,10 +8,12 @@ se guardan solo en tu móvil: usa **Ajustes > Copia de seguridad** de vez en cua
 
 | Archivo | Para qué sirve |
 |---|---|
-| `index.html` | La app |
+| `index.html`, `css/`, `js/` | La app (`js/plan.js` es el planificador, `js/compra.js` la compra, `js/gustos.js` lo que aprende) |
 | `manifest.webmanifest`, `sw.js`, `icons/` | Para instalarla en Android y usarla sin conexión |
 | `data/productos.json` | Productos, con su id de Mercadona |
-| `data/recetas.json` | Recetas |
+| `data/recetas.json` | Recetas: variantes por aparato, nutrición y cuánto aguantan |
+| `data/festivos.json` | Festivos de Cataluña y locales |
+| `docs/` | Requisitos acordados y lista de recetas |
 | `data/precios.json` | Precios de Mercadona. Lo actualiza GitHub solo cada domingo |
 | `scripts/actualizar_precios.py` | El programa que consulta los precios |
 | `.github/workflows/precios.yml` | La tarea programada de GitHub que lanza ese programa |

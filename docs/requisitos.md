@@ -52,6 +52,20 @@ aprende se ve y se corrige en una pantalla "Lo que sé de ti" (por persona: adul
 - Sobre la marcha: "hoy me apetece otra cosa" (con lo que hay en casa), intercambiar días, "hoy no cocino".
 - Las cenas anteriores a la entrega del pedido solo usan lo que ya hay en casa.
 
+### La vida es variable (principio)
+- Todo se puede cambiar en cualquier momento, desde el propio menú: quién come, si cocinas, comes fuera o
+  tienes un plan, qué plato. La app recalcula tápers, compra y presupuesto.
+- Semana tipo por día: comida y cena = cocino / táper / fuera / libre. Caprichos (p. ej. viernes pizza,
+  fin de semana carbonara): cuentan para compra y presupuesto, no para objetivos.
+- Si dejas de cocinar un plato: cocinar solo el táper, pasarlo al día siguiente o no cocinarlo.
+- Cada hijo con su propio horario (uno siempre, otro fines de semana alternos…).
+
+### Después de cada comida
+- Se pregunta "¿qué tal?" hora y media después de la hora de cada comida: valoración por persona, o
+  "me lo comí / comí fuera / comí otra cosa (cuál y qué tal) / no lo cociné" y, si no se cocinó, pasarlo a otro día.
+- Horario de comida y cena configurable. Otras comidas (desayuno, media mañana, merienda, pre y post entreno,
+  recena) con su hora. **Pendiente**: proponer opciones para esas comidas, con su compra y su proteína.
+
 ### Gustos y aprendizaje
 - Valorar cada plato al día siguiente (👍 / 👎 / "bien, pero no a menudo"), por separado tú y el niño.
 - "No me gusta" con motivo: ingrediente concreto, preparación, pesado, sabor, mucho trabajo, texto libre.

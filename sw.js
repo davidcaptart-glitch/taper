@@ -1,10 +1,19 @@
 // Service worker de Táper: guarda la app para usarla sin conexión.
 // Al cambiar cualquier archivo de la app, sube VERSION para que los móviles descarguen la nueva.
-const VERSION = "taper-v1";
+const VERSION = "taper-v2";
 const SHELL = [
   "./",
   "index.html",
+  "css/app.css",
+  "js/base.js",
+  "js/datos.js",
+  "js/gustos.js",
+  "js/plan.js",
+  "js/compra.js",
+  "js/bienvenida.js",
+  "js/ui.js",
   "manifest.webmanifest",
+  "data/festivos.json",
   "data/productos.json",
   "data/recetas.json",
   "icons/icon.svg",
@@ -34,7 +43,7 @@ self.addEventListener("fetch", e => {
   if (url.origin !== location.origin && !isFont) return;
 
   const networkFirst = url.origin === location.origin &&
-    (req.mode === "navigate" || url.pathname.endsWith(".json") || url.pathname.endsWith(".html") || url.pathname.endsWith("/"));
+    (req.mode === "navigate" || /\.(json|html|js|css)$/.test(url.pathname) || url.pathname.endsWith("/"));
 
   if (networkFirst) {
     // precios.json se pide con ?t=… para saltarse cachés: se guarda sin ese parámetro
