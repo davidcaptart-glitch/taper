@@ -352,6 +352,15 @@ function fitBudget(start){
 function balanceOf(wk){const c={};for(const v of Object.values(wk.slots)){const r=RX[v.recipe];if(r){c[r.group]=(c[r.group]||0)+1;if(r.red)c.red=(c.red||0)+1}}
   return Math.min(c.legumbre||0,2)+Math.min(c.pescado||0,2)-Math.max(0,(c.carne||0)-3)-Math.max(0,(c.red||0)-1)-Math.max(0,(c.huevo||0)-2)}
 
+/* ---------- Previsión ---------- */
+// Siempre hay menú preparado hasta el final del mes siguiente (o del mes en que empieza el plan, si es más tarde)
+function ensureHorizon(){
+  const today=todayISO(), from=S.home.start&&S.home.start>today?S.home.start:today;
+  const base=parseISO(from), end=iso(new Date(base.getFullYear(),base.getMonth()+(from===today?2:1),0));
+  let s=weekStartFor(from),n=0;
+  while(s<=end&&n<12){if(!S.plans[s]||!Object.keys(S.plans[s].slots||{}).length)genWeekFromScratch(s);s=addDays(s,7);n++}
+}
+
 /* ---------- Alternativas para cambiar un plato ---------- */
 function alternatives(slot,n=6){
   const start=weekStartFor(slot.date);

@@ -218,7 +218,7 @@ function renderMenu(){
     const wk=S.plans[start], dates=weekDates(start);
     if(dates[6]<todayISO()&&!wk)continue;   // semanas pasadas sin menú: nada que enseñar
     if(S.home.start&&dates[6]<S.home.start)continue;   // antes de que empiece el plan
-    h+=`<div class="week"><div class="weekhead"><h2>${shortDate(start)} – ${shortDate(dates[6])}</h2>${wk&&wk.confirmed?`<span class="badge ok">Planificada</span>`:""}</div>`;
+    h+=`<div class="week"><div class="weekhead"><h2>${shortDate(start)} – ${shortDate(dates[6])}</h2>${wk&&wk.confirmed?`<span class="badge ok">Planificada</span>`:wk?`<span class="badge">Previsión</span>`:""}</div>`;
     if(!wk||!Object.keys(wk.slots||{}).length){h+=`<div class="empty"><p>Aún no hay menú para esta semana.</p><button class="btn" data-plan="${start}">Planificar la semana</button></div></div>`;continue}
     const {changed}=ensureWeek(start);if(changed)save();
     h+=`<div class="weekacts"><button class="btn small" data-plan="${start}">${wk.confirmed?"Revisar la semana":"Planificar la semana"}</button><button class="btn ghost small" data-regen="${start}">Rehacer platos</button></div>`;
@@ -417,7 +417,7 @@ function openRecipe(id,sid){
       <span class="pill ${r.type==="c"?"carga":"ligera"}">${r.type==="c"?"⚡ Con hidratos":"🥗 Ligera"}</span>${r.kid?` <span class="pill kid">Gusta a niños</span>`:""}${r.heavy?` <span class="pill fixed">Pesada</span>`:""}
       ${dishImg(r,"l")}${photoCredit(r)}
       <div class="row" style="margin-top:6px"><label class="btn ghost small">📷 ${MYPHOTOS[r.id]?"Cambiar mi foto":"Foto de mi plato"}<input type="file" accept="image/*" capture="environment" id="myPh" hidden></label>${MYPHOTOS[r.id]?`<button class="btn ghost small" id="myPhDel">Quitar mi foto</button>`:""}</div>
-      <h2>${esc(r.name)}</h2>${r.sug?`<div class="small muted">💡 ${r.author?"Sugerida por "+esc(r.author):"Sugerida por la comunidad"}</div>`:""}
+      <h2>${esc(r.name)}</h2>${recipeAllergens(r).length?`<div class="chips" style="margin:4px 0">${recipeAllergens(r).map(a=>`<span class="pill carga">⚠️ ${esc(ALLERGENS[a].split(" (")[0])}</span>`).join("")}</div>`:`<div class="small muted">Sin alérgenos principales</div>`}${r.sug?`<div class="small muted">💡 ${r.author?"Sugerida por "+esc(r.author):"Sugerida por la comunidad"}</div>`:""}
       <div class="stats"><div><b>${v.time} min</b><small>${v.active} de trabajo</small></div><div><b>${r.prot||"?"} g</b><small>proteína</small></div><div><b>${r.kcal?r.kcal+" kcal":eur(cost)}</b><small>${r.kcal?eur(cost)+"/ración":"por ración"}</small></div></div>
       ${r.carb!=null?`<div class="small muted">Por ración: ${r.carb} g hidratos · ${r.fat} g grasa · aguanta ${r.fridge} días en la nevera${r.freeze?" · se puede congelar":""}</div>`:""}
       ${sl?`<div class="nutr" style="margin-top:6px">${(sl.eaters.length?sl.eaters:sl.tupper).concat(sl.kids).map(p=>`<div>${p.id==="yo"?"Tu plato":esc(personName(p))}: ${nutrTxt(portionNutr(r,factorOf(p)))}</div>`).join("")}</div>`:""}
@@ -701,7 +701,9 @@ function knowHTML(p){
   const dchips=list=>list.length?list.map(([rid])=>`<div class="fixed"><span><b>${esc(RX[rid].name)}</b><small>${esc(p.tastes.src["d:"+rid]||"")}</small></span><button class="btn ghost small" data-unD="${p.id}|${rid}">Quitar</button></div>`).join(""):`<p class="small muted">Nada todavía.</p>`;
   const lr=learned(p), y=p.id==="yo";
   const le=y?"te":"le", Le=y?"Te":"Le", puede=y?"puedes":"puede";
+  const al=p.allergies||[];
   return `<div class="know">
+    <h3>⚠️ Alergias e intolerancias</h3>${al.length?`<div class="chips">${al.map(a=>`<span class="pill carga">${esc(ALLERGENS[a])}</span>`).join("")}</div>`:`<p class="small muted">Ninguna indicada.</p>`}
     <h3>🚫 No ${puede} comer</h3>${ichips(by(-9))}
     <h3>👎 Ingredientes que no ${le} gustan</h3>${ichips(by(-1))}
     <h3>❤️ Ingredientes que ${le} gustan</h3>${ichips(by(1))}
@@ -709,7 +711,7 @@ function knowHTML(p){
     <h3>Platos que no ${le} gustan</h3>${dchips(dl(-1))}
     ${lr.length?`<h3>He notado que…</h3>${lr.map(x=>`<div class="fixed"><span><b>${x.v>0?Le+" gusta":"No "+le+" gusta"} ${esc(P[x.pid].name.toLowerCase())}</b><small>${esc(x.src)}</small></span><span><button class="btn small" data-lok="${p.id}|${x.pid}|${x.v}">Es así</button> <button class="btn ghost small" data-lno="${p.id}|${x.pid}">No</button></span></div>`).join("")}`:""}
     <p class="small muted">${S.ratings.filter(x=>x.who===p.id).length} valoraciones hasta ahora.</p>
-    <button class="btn ghost small" data-edit="gustos:${p.id}">Editar ingredientes</button></div>`;
+    <button class="btn ghost small" data-edit="gustos:${p.id}">Editar alergias e ingredientes</button></div>`;
 }
 let accOpen=new Set(["yo"]);
 // Apartado desplegable del Perfil (recuerda si estaba abierto)
@@ -817,8 +819,7 @@ function openStartDay(){
     <div class="actions"><button class="btn" id="sdOk">Guardar</button>${S.home.start&&S.home.start>todayISO()?`<button class="btn ghost" id="sdNow">Empezar ya</button>`:""}</div></div>`);
   const apply=st=>{S.home.start=st&&st>todayISO()?st:null;
     if(S.home.start)for(const s of Object.keys(S.plans))if(addDays(s,6)<S.home.start)delete S.plans[s];
-    const first=weekStartFor(S.home.start||todayISO());for(const s of [first,addDays(first,7)])if(!S.plans[s])genWeekFromScratch(s);
-    save();dlg.close();month=(S.home.start||todayISO()).slice(0,7)===todayISO().slice(0,7)?month:todayISO().slice(0,7);render();
+    ensureHorizon();save();dlg.close();month=(S.home.start||todayISO()).slice(0,7);render();
     toast(S.home.start?"Tu plan empieza el "+longDate(S.home.start).replace(/^\w+, /,""):"Plan en marcha desde hoy")};
   dlg.querySelector("#sdOk").onclick=()=>apply(dlg.querySelector("#sdIn").value);
   dlg.querySelector("#sdNow")?.addEventListener("click",()=>apply(null));
@@ -1062,7 +1063,9 @@ async function boot(){
   try{NEWS=(await getJSON("data/novedades.json",true)).versiones}catch(e){NEWS=null}
   try{CFG=await getJSON("data/config.json",true)}catch(e){CFG={}}
   // Al abrir, la semana actual y la siguiente tienen menú si ya se había planificado alguna
-  if(S.onboarded){const s=weekStartFor(S.home.start&&S.home.start>todayISO()?S.home.start:todayISO());if(!S.plans[s])genWeekFromScratch(s);save()}
+  if(S.onboarded){ensureHorizon();save();
+    // Si el plan aún no ha empezado, el Menú abre directamente en el mes en que empieza
+    if(S.home.start&&S.home.start>todayISO()&&!weeksInMonth(month).some(s=>addDays(s,6)>=S.home.start))month=S.home.start.slice(0,7)}
   render();
   // Tras actualizar: explica qué ha mejorado (no a quien acaba de empezar); y avisa si su receta sugerida ya está
   const approved=checkApprovedSuggestions();

@@ -49,9 +49,7 @@ function renderWizard(){
 function finishOnboarding(){
   S.onboarded=true;save();
   if(typeof trackOnBoot==="function")trackOnBoot();
-  const start=weekStartFor(S.home.start&&S.home.start>todayISO()?S.home.start:todayISO());
-  for(const s of [start,addDays(start,7)])if(!S.plans[s]||!Object.keys(S.plans[s].slots).length)genWeekFromScratch(s);
-  save();tab="menu";render();toast("Menú generado. Puedes cambiar lo que quieras");
+  ensureHorizon();save();tab="menu";if(S.home.start&&S.home.start>todayISO())month=S.home.start.slice(0,7);render();toast("Menú generado. Puedes cambiar lo que quieras");
 }
 // Tras cambiar ajustes: rellena los huecos nuevos sin tocar los platos ya elegidos
 function refreshPlans(){for(const s of Object.keys(S.plans))if(s>=weekStartFor(todayISO()))ensureWeek(s);save()}
@@ -148,7 +146,10 @@ function stepBody(fullId){
 
 function tastesEditor(p){
   const groups={};for(const x of Object.values(P))(groups[x.aisle]=groups[x.aisle]||[]).push(x);
-  let h=`<p class="lead">Toca cada ingrediente para cambiarlo. Lo que dejes sin marcar lo iré aprendiendo.</p>
+  const al=p.allergies||[];
+  let h=`<div class="group"><h3>¿Alguna alergia o intolerancia?</h3><p class="small muted" style="margin:0 0 8px">Nunca propondré platos con estos alérgenos${p.id==="yo"?"":" a "+esc(personName(p))}. Es orientativo: revisa siempre la etiqueta.</p>
+    <div class="chips">${chip("data-alg-none",p.id,!al.length,"Ninguna")}${Object.entries(ALLERGENS).map(([k,t])=>chip("data-alg",p.id+"|"+k,al.includes(k),esc(t))).join("")}</div></div>
+  <p class="lead">Toca cada ingrediente para cambiarlo. Lo que dejes sin marcar lo iré aprendiendo.</p>
   <div class="legend"><span>1 toque: ❤️ me encanta</span><span>2: 👍 me gusta</span><span>3: 👎 no me gusta</span><span>4: 🚫 no puede comerlo</span></div>`;
   for(const [g,list] of Object.entries(groups)){
     h+=`<div class="group"><h3>${esc(g)}</h3><div class="chips">${list.sort((a,b)=>a.name.localeCompare(b.name)).map(x=>{const v=ingPref(p,x.id);
@@ -207,6 +208,9 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
   qa("[data-rep]").forEach(b=>b.onclick=()=>{H.repeat=b.dataset.rep;rerender()});
   qa("[data-sac]").forEach(b=>b.onclick=()=>{const sc=H.sacrifice=H.sacrifice||{},k=b.dataset.sac;if(sc[k])delete sc[k];else sc[k]=true;rerender()});
   qa("[data-mode]").forEach(b=>b.onclick=()=>{const [k,v]=b.dataset.mode.split(":");H.shop[k]=v;rerender()});
+  qa("[data-alg]").forEach(b=>b.onclick=()=>{const [pid,k]=b.dataset.alg.split("|");const p=S.people.find(x=>x.id===pid);const al=p.allergies=p.allergies||[];
+    if(al.includes(k))p.allergies=al.filter(x=>x!==k);else al.push(k);rerender()});
+  qa("[data-alg-none]").forEach(b=>b.onclick=()=>{const p=S.people.find(x=>x.id===b.dataset.algNone);p.allergies=[];rerender()});
   qa("[data-ing]").forEach(b=>b.onclick=()=>{const p=S.people.find(x=>x.id===b.dataset.person),pid=b.dataset.ing;
     const v=ingPref(p,pid),nv=ING_CYCLE[(ING_CYCLE.indexOf(v)+1)%ING_CYCLE.length];
     setIng(p,pid,nv,"Lo indicaste tú");

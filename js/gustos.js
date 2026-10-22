@@ -42,8 +42,10 @@ function tasteScore(p,r,lm){
   s+=ing/Math.max(2,r.ing.length)*2.2;
   return s;
 }
-// ¿Puede comerlo? (alergias e intolerancias)
-const canEat=(p,r)=>!r.ing.some(([pid])=>ingPref(p,pid)===-9);
+// Alérgenos de una receta (de sus ingredientes)
+const recipeAllergens=r=>[...new Set(r.ing.flatMap(([pid])=>(P[pid]&&P[pid].alg)||[]))];
+// ¿Puede comerlo? (alergias e intolerancias de la persona e ingredientes marcados como "no puede")
+const canEat=(p,r)=>{const al=p.allergies||[];return !r.ing.some(([pid])=>ingPref(p,pid)===-9||(al.length&&((P[pid]&&P[pid].alg)||[]).some(a=>al.includes(a))))};
 
 /* ---------- Valoraciones ---------- */
 function addRating(o){

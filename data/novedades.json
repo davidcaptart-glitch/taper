@@ -177,6 +177,16 @@
         "Arriba a la derecha, la campanita reúne todo lo pendiente: comidas por valorar, entrenos, descongelar, semanas por planificar, presupuesto, subidas de precio… Toca cada aviso para resolverlo.",
         "También ves los próximos avisos que te llegarán al móvil."
       ]
+    },
+    {
+      "version": 19,
+      "fecha": "2026-10-22",
+      "titulo": "Alergias y previsión del mes",
+      "cambios": [
+        "Cada persona puede indicar sus alergias e intolerancias (gluten, lactosa, huevo, pescado, marisco…). Nunca le propondré platos con ellas. Lo indicas en Perfil › Tu familia › Editar alergias e ingredientes.",
+        "Cada receta muestra sus alérgenos principales. Es orientativo: revisa siempre la etiqueta.",
+        "Siempre tienes preparado el menú del mes siguiente como previsión. Si tu plan empieza más adelante, la app abre directamente en ese mes."
+      ]
     }
   ]
 }

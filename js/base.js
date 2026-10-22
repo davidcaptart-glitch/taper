@@ -2,7 +2,7 @@
 "use strict";
 
 // Versión de la app: súbela (y el ?v= de index.html y VERSION de sw.js) en cada mejora, y añade sus novedades a data/novedades.json
-const APP_VERSION = 18;
+const APP_VERSION = 19;
 
 /* ---------- Utilidades ---------- */
 const DAYS = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];   // índice 0 = lunes
@@ -35,6 +35,10 @@ const SACRIFICES = {
   raciones:["Raciones algo más ajustadas","Un 10 % menos en las raciones de los adultos"],
   gustos:["Dar menos peso a los gustos","Sigue sin poner lo que no os gusta, pero no busca tanto lo favorito"]
 };
+// Los 14 alérgenos de declaración obligatoria en la UE
+const ALLERGENS = {gluten:"Gluten",lacteos:"Lácteos y lactosa",huevo:"Huevo",pescado:"Pescado",crustaceos:"Crustáceos (gambas, langostinos)",
+  moluscos:"Moluscos (calamar, sepia)",frutos_cascara:"Frutos de cáscara",cacahuete:"Cacahuete",soja:"Soja",sesamo:"Sésamo",
+  apio:"Apio",mostaza:"Mostaza",sulfitos:"Sulfitos",altramuces:"Altramuces"};
 const MEALSTATE = {cocinar:"Cocino",taper:"Táper",fuera:"Fuera",libre:"Libre"};
 const EXTRA_MEALS = {desayuno:"Desayuno",mediamanana:"Media mañana",merienda:"Merienda",pre:"Antes de entrenar",post:"Después de entrenar",recena:"Recena"};
 
