@@ -548,6 +548,16 @@
         "Al elegir la dieta de cada persona ves qué come y qué no, y cuántos platos encajan con ella.",
         "Cada persona tiene un botón «Cambiar dieta» en el Perfil, para cambiarla cuando quieras."
       ]
+    },
+    {
+      "version": 58,
+      "fecha": "2026-10-22",
+      "titulo": "40 recetas nuevas",
+      "cambios": [
+        "Más pescado: 12 platos nuevos, del bacalhau a la chowder.",
+        "10 platos sin cerdo, 8 favoritos de los niños y 10 rápidos y baratos.",
+        "Todas con su foto, utensilios, fuego y tiempos en cada paso."
+      ]
     }
   ]
 }

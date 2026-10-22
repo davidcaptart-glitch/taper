@@ -2814,5 +2814,325 @@
   "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
   "fuente": "https://commons.wikimedia.org/wiki/File:Vegetable_pancake.jpg",
   "titulo": "File:Vegetable pancake.jpg"
+ },
+ "n_bacalhau": {
+  "archivo": "images/platos/n_bacalhau.jpg",
+  "autor": "Fpenteado",
+  "licencia": "CC0",
+  "licencia_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Bacalhau_com_natas.jpg",
+  "titulo": "File:Bacalhau com natas.jpg"
+ },
+ "n_nicoise": {
+  "archivo": "images/platos/n_nicoise.jpg",
+  "autor": "Daderot",
+  "licencia": "CC0",
+  "licencia_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Salade_niçoise_variant_-_Massachusetts.jpg",
+  "titulo": "File:Salade niçoise variant - Massachusetts.jpg"
+ },
+ "n_chowder": {
+  "archivo": "images/platos/n_chowder.jpg",
+  "autor": "Nate Steiner",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Fishchowder.jpg",
+  "titulo": "File:Fishchowder.jpg"
+ },
+ "n_fishpie": {
+  "archivo": "images/platos/n_fishpie.jpg",
+  "autor": "Atelier Joly",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Fish_Pie.jpg",
+  "titulo": "File:Fish Pie.jpg"
+ },
+ "n_calamartinta": {
+  "archivo": "images/platos/n_calamartinta.jpg",
+  "autor": "Jorge Díaz from San Francisco, USA",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Calamares_en_su_tinta.jpg",
+  "titulo": "File:Calamares en su tinta.jpg"
+ },
+ "n_langaguacate": {
+  "archivo": "images/platos/n_langaguacate.jpg",
+  "autor": "Marie from Malang, East Java, Indonesia",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Avocado,_Shrimp,_and_Mango_Salad_(16199246763).jpg",
+  "titulo": "File:Avocado, Shrimp, and Mango Salad (16199246763).jpg"
+ },
+ "n_brochlang": {
+  "archivo": "images/platos/n_brochlang.jpg",
+  "autor": "Eximiousincorp",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Grilled_Shrimp_Skewers.jpg",
+  "titulo": "File:Grilled Shrimp Skewers.jpg"
+ },
+ "n_salmonmiel": {
+  "archivo": "images/platos/n_salmonmiel.jpg",
+  "autor": "Daderot",
+  "licencia": "CC0",
+  "licencia_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Salmon,_pan-seared_and_glazed,_with_Brussels_sprouts_and_root_vegetables_-_Massachusetts.jpg",
+  "titulo": "File:Salmon, pan-seared and glazed, with Brussels sprouts and root vegetables - Massachusetts.jpg"
+ },
+ "n_pilpil": {
+  "archivo": "images/platos/n_pilpil.jpg",
+  "autor": "Javier Lastras from España/Spain",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Bacalao-pil-pil-02-jlastras.jpg",
+  "titulo": "File:Bacalao-pil-pil-02-jlastras.jpg"
+ },
+ "n_moqueca": {
+  "archivo": "images/platos/n_moqueca.jpg",
+  "autor": "Gabriel_David_R_Botelho",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Moqueca_de_peixe.jpg",
+  "titulo": "File:Moqueca de peixe.jpg"
+ },
+ "n_suquet": {
+  "archivo": "images/platos/n_suquet.jpg",
+  "autor": "Hector Garcia from Barcelona, Catalonia, Spain",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Suquet_de_peix.jpg",
+  "titulo": "File:Suquet de peix.jpg"
+ },
+ "n_samfaina": {
+  "archivo": "images/platos/n_samfaina.jpg",
+  "autor": "Slastic",
+  "licencia": "Public domain",
+  "licencia_url": "",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tonyina_amb_samfaina.jpg",
+  "titulo": "File:Tonyina amb samfaina.jpg"
+ },
+ "n_biryani": {
+  "archivo": "images/platos/n_biryani.jpg",
+  "autor": "Umesh Tongbra",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Dum_Biryani_Plate.jpg",
+  "titulo": "File:Dum Biryani Plate.jpg"
+ },
+ "n_jambalaya": {
+  "archivo": "images/platos/n_jambalaya.jpg",
+  "autor": "Craig Murphy",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Chicken_jambalaya_-_2010.jpg",
+  "titulo": "File:Chicken jambalaya - 2010.jpg"
+ },
+ "n_lomosaltado": {
+  "archivo": "images/platos/n_lomosaltado.jpg",
+  "autor": "Miguel Alan Córdova Silva",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Lomo_saltado_peruano.jpg",
+  "titulo": "File:Lomo saltado peruano.jpg"
+ },
+ "n_goulash": {
+  "archivo": "images/platos/n_goulash.jpg",
+  "autor": "Hu Totya",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Hungarian_goulash_soup.jpg",
+  "titulo": "File:Hungarian goulash soup.jpg"
+ },
+ "n_pavochampis": {
+  "archivo": "images/platos/n_pavochampis.jpg",
+  "autor": "Andy / Andrew Fogg from near Cambridge, UK",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Turkey_escalopes_(76652605).jpg",
+  "titulo": "File:Turkey escalopes (76652605).jpg"
+ },
+ "n_pollosatay": {
+  "archivo": "images/platos/n_pollosatay.jpg",
+  "autor": "Rashmiwalia85",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Chicken_satay_sticks.jpg",
+  "titulo": "File:Chicken satay sticks.jpg"
+ },
+ "n_tinga": {
+  "archivo": "images/platos/n_tinga.jpg",
+  "autor": "El Mono Español",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tinga.jpg",
+  "titulo": "File:Tinga.jpg"
+ },
+ "n_koftacurry": {
+  "archivo": "images/platos/n_koftacurry.jpg",
+  "autor": "Miansari66",
+  "licencia": "CC0",
+  "licencia_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Kofta_Curry_(cropped).JPG",
+  "titulo": "File:Kofta Curry (cropped).JPG"
+ },
+ "n_moruno": {
+  "archivo": "images/platos/n_moruno.jpg",
+  "autor": "Francesc Fort",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pincho_Moruno.jpg",
+  "titulo": "File:Pincho Moruno.jpg"
+ },
+ "n_cacciatore": {
+  "archivo": "images/platos/n_cacciatore.jpg",
+  "autor": "Burkhard Mücke",
+  "licencia": "CC BY 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:2024-07-13_Chicken_Cacciatore_2.jpg",
+  "titulo": "File:2024-07-13 Chicken Cacciatore 2.jpg"
+ },
+ "n_pollonaranja": {
+  "archivo": "images/platos/n_pollonaranja.jpg",
+  "autor": "jeffreyw",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Orange_chicken_(4363046795).jpg",
+  "titulo": "File:Orange chicken (4363046795).jpg"
+ },
+ "n_bangers": {
+  "archivo": "images/platos/n_bangers.jpg",
+  "autor": "Qwerty Binary",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Bangers_and_mash_with_peas.jpg",
+  "titulo": "File:Bangers and mash with peas.jpg"
+ },
+ "n_cordonbleu": {
+  "archivo": "images/platos/n_cordonbleu.jpg",
+  "autor": "Christian Michelides",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Cordon_bleu_mit_gemischtem_Salat.jpg",
+  "titulo": "File:Cordon bleu mit gemischtem Salat.jpg"
+ },
+ "n_carbonarapavo": {
+  "archivo": "images/platos/n_carbonarapavo.jpg",
+  "autor": "Triplec85",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Spaghetti_Carbonara_von_Unico_Tauberbischofsheim.jpg",
+  "titulo": "File:Spaghetti Carbonara von Unico Tauberbischofsheim.jpg"
+ },
+ "n_tsukune": {
+  "archivo": "images/platos/n_tsukune.jpg",
+  "autor": "Arnold Gatilao from Oakland, CA, USA",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tsukune_(chicken_meatballs)_(16065642291).jpg",
+  "titulo": "File:Tsukune (chicken meatballs) (16065642291).jpg"
+ },
+ "n_sloppyjoe": {
+  "archivo": "images/platos/n_sloppyjoe.jpg",
+  "autor": "Buck Blues",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Sloppy_Joe_\"homemade\".jpg",
+  "titulo": "File:Sloppy Joe \"homemade\".jpg"
+ },
+ "n_omurice": {
+  "archivo": "images/platos/n_omurice.jpg",
+  "autor": "Kanesue",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Omurice_by_Taimeiken.jpg",
+  "titulo": "File:Omurice by Taimeiken.jpg"
+ },
+ "n_sincronizadas": {
+  "archivo": "images/platos/n_sincronizadas.jpg",
+  "autor": "Nsaum75",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Sincronizada_mexicana.jpg",
+  "titulo": "File:Sincronizada mexicana.jpg"
+ },
+ "n_pastaceci": {
+  "archivo": "images/platos/n_pastaceci.jpg",
+  "autor": "Joey Doll",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tortiglioni_con_ceci.jpg",
+  "titulo": "File:Tortiglioni con ceci.jpg"
+ },
+ "n_pastabroc": {
+  "archivo": "images/platos/n_pastabroc.jpg",
+  "autor": "AnticoMu90",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:BroccoliPasta.jpg",
+  "titulo": "File:BroccoliPasta.jpg"
+ },
+ "n_tortang": {
+  "archivo": "images/platos/n_tortang.jpg",
+  "autor": "whologwhy",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:EGGPLANT_TORTA.jpg",
+  "titulo": "File:EGGPLANT TORTA.jpg"
+ },
+ "n_huevosmex": {
+  "archivo": "images/platos/n_huevosmex.jpg",
+  "autor": "Jluisdrv",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Huevos_a_la_mexicana_y_quesadillas_(cropped).png",
+  "titulo": "File:Huevos a la mexicana y quesadillas (cropped).png"
+ },
+ "n_chilaquiles": {
+  "archivo": "images/platos/n_chilaquiles.jpg",
+  "autor": "Alejandra Mendoza Santillan",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Chilaquiles_caseros.jpg",
+  "titulo": "File:Chilaquiles caseros.jpg"
+ },
+ "n_pastaguisantes": {
+  "archivo": "images/platos/n_pastaguisantes.jpg",
+  "autor": "Davide from Ostra, Italia",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pasta_con_funghi_e_piselli_(2361160170).jpg",
+  "titulo": "File:Pasta con funghi e piselli (2361160170).jpg"
+ },
+ "n_quesadillachampi": {
+  "archivo": "images/platos/n_quesadillachampi.jpg",
+  "autor": "Luis Alvaz",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Quesadilla_de_champiñones_poblana.jpg",
+  "titulo": "File:Quesadilla de champiñones poblana.jpg"
+ },
+ "n_curryhuevo": {
+  "archivo": "images/platos/n_curryhuevo.jpg",
+  "autor": "onlybestrecipes.com",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Spicy_Anda_Curry.jpg",
+  "titulo": "File:Spicy Anda Curry.jpg"
+ },
+ "n_espagatun": {
+  "archivo": "images/platos/n_espagatun.jpg",
+  "autor": "Luca Nebuloni from Milan, Italy",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Spaghetti_with_tuna_and_pumpkin_(6378917709).jpg",
+  "titulo": "File:Spaghetti with tuna and pumpkin (6378917709).jpg"
+ },
+ "n_kedgeree": {
+  "archivo": "images/platos/n_kedgeree.jpg",
+  "autor": "Edsel Little",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:R_Bistro_-_Dessert_-_Oct_2012_-_02.jpg",
+  "titulo": "File:R Bistro - Dessert - Oct 2012 - 02.jpg"
  }
 }
