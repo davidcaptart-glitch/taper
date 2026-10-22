@@ -36,6 +36,7 @@ function render(){
   setTimeout(renderBell,0);
   const vk=tab+"|"+(tab==="wizard"?(wiz.single||wiz.i):"")+"|"+month;
   main.classList.toggle("anim",vk!==lastView);lastView=vk;
+  if(tab==="menu"&&S.onboarded)syncMenuWeek();
   renderHeader();
   document.body.classList.toggle("wizmode",tab==="wizard");
   if(tab==="wizard")return renderWizard();
@@ -362,22 +363,43 @@ function todayCard(){
       <div class="tcbtns"><button class="btn" data-open="${n.r.id}" data-slot="${n.sl.id}">Ver receta</button><button class="btn glass" data-cooknow="${n.r.id}|${n.sl.portions}">▶ Cocinar</button></div></div></div>`;
 }
 // Tira de días de la semana actual: toca uno para ir a él
-function dayStrip(){
-  const n=nextMeal(),st=weekStartFor(n?n.d:todayISO()),ds=weekDates(st);if(!S.plans[st])return "";
+function dayStrip(st){
+  if(!st){const n=nextMeal();st=weekStartFor(n?n.d:todayISO())}const ds=weekDates(st);if(!S.plans[st])return "";
   return `<div class="dstrip">${ds.map(d=>{const has=["comida","cena"].some(m=>!["fuera","libre"].includes(mealState(d,m)));
     return `<button class="dsd ${d===todayISO()?"on":""} ${d<todayISO()?"past":""}" data-goday="${d}"><small>${DSHORT[dow(d)]}</small><b>${Number(d.slice(8))}</b><i class="${has?"y":""}"></i></button>`}).join("")}</div>`;
 }
 const SEC_ICO=[["frut","🥦"],["verdur","🥦"],["carne","🥩"],["pollo","🍗"],["pescad","🐟"],["marisc","🦐"],["huevo","🥚"],["leche","🥛"],["lácte","🥛"],["yogur","🥛"],["queso","🧀"],["charcut","🧀"],["congel","🧊"],["arroz","🍚"],["pasta","🍝"],["legumbre","🫘"],["conserv","🥫"],["caldo","🥫"],["aceite","🫒"],["especia","🧂"],["salsa","🫙"],["pan","🥖"],["cereal","🥣"],["fruto","🥜"]];
 const secIco=s=>{const l=String(s).toLowerCase();const m=SEC_ICO.find(([k])=>l.includes(k));return m?m[1]:"🛒"};
 
+// Semanas que se pueden ver: desde dos atrás (o el inicio del plan) hasta la última con menú
+let weekSel=null, menuMonth=null;
+function menuWeeks(){
+  const cur=weekStartFor(todayISO()), first=S.home.start&&S.home.start>todayISO()?weekStartFor(S.home.start):addDays(cur,-14);
+  const last=Object.keys(S.plans).sort().pop()||cur, out=[];
+  for(let s=first;s<=last&&out.length<16;s=addDays(s,7))if(!(S.home.start&&addDays(s,6)<S.home.start))out.push(s);
+  return out.length?out:[cur];
+}
+function defaultWeek(ws){const cur=weekStartFor(todayISO());return ws.includes(cur)?cur:ws.find(s=>s>=cur)||ws[0]}
+function weekPicker(ws,sel){
+  const cur=weekStartFor(todayISO());
+  return `<div class="wpick" role="tablist" aria-label="Semanas">${ws.map(s=>{const wk=S.plans[s];
+    return `<button role="tab" class="wp ${s===sel?"on":""} ${addDays(s,6)<todayISO()?"past":""}" data-wsel="${s}" aria-selected="${s===sel}">
+      <small>${s===cur?"Esta semana":s===addDays(cur,7)?"La que viene":esc(monthName(s.slice(0,7)).split(" ")[0])}</small><b>${Number(s.slice(8))}–${esc(shortDate(addDays(s,6)))}</b>
+      <i>${wk&&wk.confirmed?"✓ Planificada":wk?"Previsión":"Sin menú"}</i></button>`}).join("")}</div>`;
+}
+// Elige la semana del Menú (y su mes) antes de pintar la cabecera
+function syncMenuWeek(){
+  const ws=menuWeeks();if(!weekSel||!ws.includes(weekSel))weekSel=defaultWeek(ws);
+  // Si el mes se ha cambiado desde fuera (flechas, preparar el mes…), se va a su primera semana
+  if(menuMonth&&month!==menuMonth){const w=ws.find(s=>monthOfWeek(s)===month)||ws.find(s=>addDays(s,6).slice(0,7)===month);if(w)weekSel=w}
+  month=monthOfWeek(weekSel);menuMonth=month;return ws;
+}
 function renderMenu(){
-  const weeks=weeksInMonth(month);
-  let h=`<section class="view">`+viewHead(monthName(month),"Qué *comemos*")+monthPrepCard()+((n=>n&&weeks.includes(weekStartFor(n.d)))(nextMeal())?todayCard()+dayStrip():"")+useUpCard()+`<div class="row" style="justify-content:flex-end;margin:4px 0 -4px"><button class="btn ghost small" id="startDay">📅 ${S.home.start&&S.home.start>todayISO()?"Cambiar el día de inicio":"Empezar el plan otro día"}</button></div>`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
-  if(!weeks.length)h+=`<div class="empty"><p>No hay semanas que empiecen este mes.</p></div>`;
+  const ws=syncMenuWeek();
+  const weeks=[weekSel];
+  let h=`<section class="view">`+viewHead(monthName(month),"Qué *comemos*")+monthPrepCard()+((n=>n&&weekStartFor(n.d)===weekSel)(nextMeal())?todayCard():"")+weekPicker(ws,weekSel)+dayStrip(weekSel)+useUpCard()+`<div class="row" style="justify-content:flex-end;margin:4px 0 -4px"><button class="btn ghost small" id="startDay">📅 ${S.home.start&&S.home.start>todayISO()?"Cambiar el día de inicio":"Empezar el plan otro día"}</button></div>`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
   for(const start of weeks){
     const wk=S.plans[start], dates=weekDates(start);
-    if(dates[6]<todayISO()&&!wk)continue;   // semanas pasadas sin menú: nada que enseñar
-    if(S.home.start&&dates[6]<S.home.start)continue;   // antes de que empiece el plan
     h+=`<div class="week"><div class="weekhead"><h2>${shortDate(start)} – ${shortDate(dates[6])}</h2>${wk&&wk.confirmed?`<span class="badge ok">Planificada</span>`:wk?`<span class="badge">Previsión</span>`:""}</div>`;
     if(!wk||!Object.keys(wk.slots||{}).length){h+=`<div class="empty"><p>Aún no hay menú para esta semana.</p><button class="btn" data-plan="${start}">Planificar la semana</button></div></div>`;continue}
     const {changed}=ensureWeek(start);if(changed)save();
@@ -403,6 +425,8 @@ function renderMenu(){
   }
   main.innerHTML=h+`</section>`;
   main.querySelectorAll("[data-plan]").forEach(b=>b.onclick=()=>openWeekPlanner(b.dataset.plan));
+  main.querySelectorAll("[data-wsel]").forEach(b=>b.onclick=()=>{weekSel=b.dataset.wsel;render()});
+  {const on=main.querySelector(".wp.on");if(on)on.scrollIntoView({inline:"center",block:"nearest"})}
   main.querySelectorAll("[data-mprep]").forEach(b=>b.onclick=()=>openMonthPrep(b.dataset.mprep));
   main.querySelectorAll("[data-smre]").forEach(b=>b.onclick=()=>{const [d,m]=b.dataset.smre.split("|");rerollSmall(d,m);save();render();toast("Cambiado")});
   main.querySelectorAll("[data-goday]").forEach(b=>b.onclick=()=>{const el=document.getElementById("d-"+b.dataset.goday);if(el){el.scrollIntoView({behavior:"smooth",block:"start"});el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash")}});

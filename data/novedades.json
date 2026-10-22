@@ -470,6 +470,14 @@
       "cambios": [
         "Si tu código postal aún no tiene precios propios, la app los pide sola y los tendrás en uno o dos días. Mientras, ves los de la zona más cercana."
       ]
+    },
+    {
+      "version": 50,
+      "fecha": "2026-10-22",
+      "titulo": "Una semana cada vez",
+      "cambios": [
+        "El Menú enseña una semana cada vez. Cambias de semana con el selector horizontal de arriba (deslízalo a los lados); cada una te dice si está planificada o es previsión."
+      ]
     }
   ]
 }
