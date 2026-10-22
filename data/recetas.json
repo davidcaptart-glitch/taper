@@ -15477,6 +15477,2568 @@
           ]
         }
       ]
+    },
+    {
+      "id": "tostatomate",
+      "nombre": "Tostada con tomate y aceite",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pan_barra",
+          "cantidad": 80
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 80
+        }
+      ],
+      "nutricion": {
+        "kcal": 325,
+        "proteina": 8,
+        "hidratos": 47,
+        "grasa": 11
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Abre el pan y tuéstalo en la tostadora.",
+            "Parte el tomate por la mitad y frótalo sobre el pan (o rállalo y extiéndelo).",
+            "Añade un chorrito de aceite de oliva y una pizca de sal."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "desayuno",
+        "almuerzo"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "tostaserrano",
+      "nombre": "Tostada con tomate y jamón serrano",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pan_barra",
+          "cantidad": 80
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 60
+        },
+        {
+          "producto": "serrano",
+          "cantidad": 25
+        }
+      ],
+      "nutricion": {
+        "kcal": 330,
+        "proteina": 16,
+        "hidratos": 46,
+        "grasa": 9
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Tuesta el pan.",
+            "Frota o extiende el tomate rallado y añade un hilo de aceite.",
+            "Coloca las lonchas de jamón serrano encima."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "desayuno",
+        "almuerzo"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "tostaguacate",
+      "nombre": "Tostada de aguacate y huevo",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pan_integral",
+          "cantidad": 2
+        },
+        {
+          "producto": "aguacate",
+          "cantidad": 125
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        }
+      ],
+      "nutricion": {
+        "kcal": 360,
+        "proteina": 15,
+        "hidratos": 30,
+        "grasa": 19
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 10,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Tuesta las rebanadas de pan.",
+            "Chafa medio aguacate con sal, pimienta y unas gotas de limón.",
+            "Haz el huevo a la plancha o escalfado en una sartén con unas gotas de aceite.",
+            "Unta el aguacate en el pan y pon el huevo encima."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "desayuno"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "tostapavo",
+      "nombre": "Tostada de pavo y queso fresco",
+      "grupo": "carne",
+      "proteina_principal": "pavo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pan_integral",
+          "cantidad": 2
+        },
+        {
+          "producto": "queso_fresco",
+          "cantidad": 60
+        },
+        {
+          "producto": "pavo_fiambre",
+          "cantidad": 40
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 310,
+        "proteina": 23,
+        "hidratos": 28,
+        "grasa": 11
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Tuesta el pan.",
+            "Pon rodajas de tomate con una pizca de sal y orégano.",
+            "Añade el queso fresco en lonchas y el pavo encima."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "desayuno",
+        "almuerzo"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "tostacacahuete",
+      "nombre": "Tostada con crema de cacahuete y plátano",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pan_integral",
+          "cantidad": 2
+        },
+        {
+          "producto": "crema_cacahuete",
+          "cantidad": 20
+        },
+        {
+          "producto": "platano",
+          "cantidad": 90
+        }
+      ],
+      "nutricion": {
+        "kcal": 315,
+        "proteina": 12,
+        "hidratos": 43,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Tuesta el pan.",
+            "Unta la crema de cacahuete.",
+            "Corta medio plátano en rodajas por encima y espolvorea canela si te gusta."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "desayuno",
+        "merienda"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "tostamermelada",
+      "nombre": "Tostadas de queso batido y confitura",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pan_integral",
+          "cantidad": 2
+        },
+        {
+          "producto": "queso_batido",
+          "cantidad": 80
+        },
+        {
+          "producto": "mermelada",
+          "cantidad": 25
+        }
+      ],
+      "nutricion": {
+        "kcal": 200,
+        "proteina": 12,
+        "hidratos": 30,
+        "grasa": 3
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 4,
+          "minutos_trabajo": 4,
+          "pasos": [
+            "Tuesta el pan.",
+            "Unta una capa generosa de queso fresco batido.",
+            "Termina con la confitura de fresa por encima."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "merienda",
+        "desayuno"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "porridge",
+      "nombre": "Porridge de avena con plátano y canela",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "avena",
+          "cantidad": 50
+        },
+        {
+          "producto": "leche",
+          "cantidad": 250
+        },
+        {
+          "producto": "platano",
+          "cantidad": 90
+        }
+      ],
+      "nutricion": {
+        "kcal": 360,
+        "proteina": 15,
+        "hidratos": 56,
+        "grasa": 8
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 8,
+          "minutos_trabajo": 4,
+          "pasos": [
+            "Pon la avena y la leche en un cazo con una pizca de canela.",
+            "Cuece a fuego medio 5 min removiendo hasta que espese.",
+            "Sirve con medio plátano en rodajas por encima."
+          ]
+        },
+        {
+          "aparato": "micro",
+          "minutos": 5,
+          "minutos_trabajo": 3,
+          "pasos": [
+            "Mezcla la avena y la leche en un bol grande.",
+            "Calienta 2 min en el microondas, remueve y da 1 min más.",
+            "Añade el plátano en rodajas y canela."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "desayuno"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "porridgecacao",
+      "nombre": "Porridge de cacao y plátano",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "avena",
+          "cantidad": 50
+        },
+        {
+          "producto": "leche",
+          "cantidad": 250
+        },
+        {
+          "producto": "cacao",
+          "cantidad": 8
+        },
+        {
+          "producto": "platano",
+          "cantidad": 90
+        },
+        {
+          "producto": "miel",
+          "cantidad": 5
+        }
+      ],
+      "nutricion": {
+        "kcal": 405,
+        "proteina": 17,
+        "hidratos": 60,
+        "grasa": 10
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 8,
+          "minutos_trabajo": 4,
+          "pasos": [
+            "Pon la avena, la leche y el cacao en un cazo.",
+            "Cuece 5 min a fuego medio removiendo.",
+            "Endulza con la miel y sirve con el plátano en rodajas."
+          ]
+        },
+        {
+          "aparato": "micro",
+          "minutos": 5,
+          "minutos_trabajo": 3,
+          "pasos": [
+            "Mezcla avena, leche y cacao en un bol grande.",
+            "Calienta 2 min, remueve y da 1 min más.",
+            "Añade la miel y el plátano en rodajas."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "desayuno"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "overnight",
+      "nombre": "Overnight oats con frutos rojos",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "avena",
+          "cantidad": 50
+        },
+        {
+          "producto": "leche",
+          "cantidad": 120
+        },
+        {
+          "producto": "yogur",
+          "cantidad": 1
+        },
+        {
+          "producto": "chia",
+          "cantidad": 10
+        },
+        {
+          "producto": "frutos_rojos",
+          "cantidad": 80
+        }
+      ],
+      "nutricion": {
+        "kcal": 405,
+        "proteina": 19,
+        "hidratos": 56,
+        "grasa": 11
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "La noche antes, mezcla en un tarro la avena, la leche, el yogur y la chía.",
+            "Añade los frutos rojos congelados por encima y cierra el tarro.",
+            "Deja toda la noche en la nevera y cómelo frío por la mañana."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "desayuno"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "tortitasavena",
+      "nombre": "Tortitas de avena y plátano",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "avena",
+          "cantidad": 50
+        },
+        {
+          "producto": "platano",
+          "cantidad": 180
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "leche",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 400,
+        "proteina": 17,
+        "hidratos": 60,
+        "grasa": 10
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Tritura la avena, el plátano, el huevo y la leche hasta tener una masa.",
+            "Calienta una sartén antiadherente con unas gotas de aceite.",
+            "Echa cucharones de masa y cuaja 1-2 min por cada lado.",
+            "Sírvelas solas o con fruta; se pueden llevar frías en un táper."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "desayuno",
+        "merienda"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "revueltodes",
+      "nombre": "Huevos revueltos con tostada",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        },
+        {
+          "producto": "pan_integral",
+          "cantidad": 2
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 60
+        }
+      ],
+      "nutricion": {
+        "kcal": 350,
+        "proteina": 20,
+        "hidratos": 28,
+        "grasa": 16
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 8,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Bate los huevos con una pizca de sal.",
+            "Cuájalos a fuego suave en una sartén con unas gotas de aceite, removiendo.",
+            "Sirve sobre el pan tostado con rodajas de tomate."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "desayuno"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "yogurfruta",
+      "nombre": "Vasito de yogur con frutos rojos, plátano y avena",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "yogur",
+          "cantidad": 1
+        },
+        {
+          "producto": "frutos_rojos",
+          "cantidad": 60
+        },
+        {
+          "producto": "platano",
+          "cantidad": 90
+        },
+        {
+          "producto": "avena",
+          "cantidad": 20
+        }
+      ],
+      "nutricion": {
+        "kcal": 230,
+        "proteina": 8,
+        "hidratos": 40,
+        "grasa": 4
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Descongela los frutos rojos unos minutos (o 30 s en el microondas) y cháfalos un poco.",
+            "En un vaso, pon una capa de frutos rojos, el yogur y el plátano en rodajas.",
+            "Termina con la avena por encima justo antes de comer para que quede crujiente."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "desayuno",
+        "merienda"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "quesobatido",
+      "nombre": "Queso batido con fresas y almendras",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "queso_batido",
+          "cantidad": 150
+        },
+        {
+          "producto": "fresas",
+          "cantidad": 100
+        },
+        {
+          "producto": "almendras",
+          "cantidad": 15
+        },
+        {
+          "producto": "miel",
+          "cantidad": 5
+        }
+      ],
+      "nutricion": {
+        "kcal": 210,
+        "proteina": 16,
+        "hidratos": 18,
+        "grasa": 8
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 3,
+          "pasos": [
+            "Saca las fresas del congelador un rato antes (o caliéntalas 1 min en el microondas).",
+            "Pon el queso batido en un bol con las fresas troceadas.",
+            "Añade las almendras picadas y un hilo de miel."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "merienda",
+        "desayuno"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "kefirbol",
+      "nombre": "Bol de kéfir con avena y frutos rojos",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "kefir",
+          "cantidad": 250
+        },
+        {
+          "producto": "frutos_rojos",
+          "cantidad": 80
+        },
+        {
+          "producto": "avena",
+          "cantidad": 30
+        },
+        {
+          "producto": "miel",
+          "cantidad": 5
+        }
+      ],
+      "nutricion": {
+        "kcal": 255,
+        "proteina": 14,
+        "hidratos": 44,
+        "grasa": 3
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Pon el kéfir en un bol.",
+            "Añade la avena y los frutos rojos (descongelados unos minutos).",
+            "Endulza con un poco de miel."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "desayuno",
+        "merienda"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "batidoplatano",
+      "nombre": "Batido de plátano y avena",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "leche",
+          "cantidad": 250
+        },
+        {
+          "producto": "platano",
+          "cantidad": 180
+        },
+        {
+          "producto": "avena",
+          "cantidad": 20
+        }
+      ],
+      "nutricion": {
+        "kcal": 300,
+        "proteina": 12,
+        "hidratos": 52,
+        "grasa": 5
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Pela el plátano y trocéalo.",
+            "Bátelo con la leche fría y la avena hasta que quede fino.",
+            "Sirve al momento, con canela si te gusta."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "desayuno",
+        "merienda"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "batidofresa",
+      "nombre": "Batido de fresa y yogur",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "leche",
+          "cantidad": 200
+        },
+        {
+          "producto": "fresas",
+          "cantidad": 120
+        },
+        {
+          "producto": "yogur",
+          "cantidad": 1
+        },
+        {
+          "producto": "miel",
+          "cantidad": 5
+        }
+      ],
+      "nutricion": {
+        "kcal": 225,
+        "proteina": 11,
+        "hidratos": 30,
+        "grasa": 7
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Pon en el vaso de la batidora las fresas congeladas, el yogur y la leche.",
+            "Bate hasta que quede cremoso.",
+            "Endulza con un poco de miel si hace falta."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "merienda",
+        "desayuno"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "bocatortilla",
+      "nombre": "Bocadillo de tortilla francesa",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pan_barra",
+          "cantidad": 70
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 310,
+        "proteina": 13,
+        "hidratos": 38,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 8,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Bate el huevo con sal y haz una tortilla francesa en una sartén con unas gotas de aceite.",
+            "Abre el pan y frota un poco de tomate.",
+            "Mete la tortilla dentro y envuelve el bocadillo en papel de aluminio o en una bolsa reutilizable."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "almuerzo",
+        "merienda"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "bocaserrano",
+      "nombre": "Bocadillo de jamón serrano con tomate",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pan_barra",
+          "cantidad": 70
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 40
+        },
+        {
+          "producto": "serrano",
+          "cantidad": 25
+        }
+      ],
+      "nutricion": {
+        "kcal": 303,
+        "proteina": 15,
+        "hidratos": 40,
+        "grasa": 9
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 4,
+          "minutos_trabajo": 4,
+          "pasos": [
+            "Abre el pan.",
+            "Frota el tomate y añade un hilo de aceite.",
+            "Rellena con el jamón serrano y envuélvelo."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "almuerzo",
+        "merienda"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "bocapavo",
+      "nombre": "Bocadillo de pavo y queso",
+      "grupo": "carne",
+      "proteina_principal": "pavo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pan_barra",
+          "cantidad": 70
+        },
+        {
+          "producto": "pavo_fiambre",
+          "cantidad": 40
+        },
+        {
+          "producto": "queso_lonchas",
+          "cantidad": 25
+        }
+      ],
+      "nutricion": {
+        "kcal": 320,
+        "proteina": 19,
+        "hidratos": 39,
+        "grasa": 9
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 4,
+          "minutos_trabajo": 4,
+          "pasos": [
+            "Abre el pan (puedes untarlo con un poco de tomate).",
+            "Rellena con las lonchas de pavo y de queso.",
+            "Envuélvelo para llevar."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "almuerzo",
+        "merienda"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "bocatun",
+      "nombre": "Bocadillo de atún con tomate",
+      "grupo": "pescado",
+      "proteina_principal": "atun",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pan_barra",
+          "cantidad": 70
+        },
+        {
+          "producto": "atun",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 320,
+        "proteina": 21,
+        "hidratos": 40,
+        "grasa": 7
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Escurre una lata de atún.",
+            "Abre el pan y pon rodajas finas de tomate.",
+            "Añade el atún, cierra y envuélvelo."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "almuerzo",
+        "merienda"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "bocayork",
+      "nombre": "Bocadillo de jamón cocido y queso",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pan_barra",
+          "cantidad": 70
+        },
+        {
+          "producto": "jamon",
+          "cantidad": 40
+        },
+        {
+          "producto": "queso_lonchas",
+          "cantidad": 25
+        }
+      ],
+      "nutricion": {
+        "kcal": 325,
+        "proteina": 20,
+        "hidratos": 39,
+        "grasa": 9
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 4,
+          "minutos_trabajo": 4,
+          "pasos": [
+            "Abre el pan.",
+            "Rellena con el jamón cocido y el queso.",
+            "Envuélvelo para llevar."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "almuerzo",
+        "merienda"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "sandpavo",
+      "nombre": "Sándwich de pavo, queso y tomate",
+      "grupo": "carne",
+      "proteina_principal": "pavo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pan_integral",
+          "cantidad": 2
+        },
+        {
+          "producto": "pavo_fiambre",
+          "cantidad": 40
+        },
+        {
+          "producto": "queso_lonchas",
+          "cantidad": 20
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 30
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 15
+        }
+      ],
+      "nutricion": {
+        "kcal": 260,
+        "proteina": 20,
+        "hidratos": 27,
+        "grasa": 8
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Pon en una rebanada el queso, el pavo, unas hojas de lechuga y rodajas finas de tomate.",
+            "Cierra con la otra rebanada y corta en triángulos.",
+            "Envuélvelo en film o en una fiambrera."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "almuerzo",
+        "merienda"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "sandpbj",
+      "nombre": "Sándwich de crema de cacahuete y confitura",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pan_integral",
+          "cantidad": 2
+        },
+        {
+          "producto": "crema_cacahuete",
+          "cantidad": 15
+        },
+        {
+          "producto": "mermelada",
+          "cantidad": 15
+        }
+      ],
+      "nutricion": {
+        "kcal": 240,
+        "proteina": 11,
+        "hidratos": 28,
+        "grasa": 9
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 3,
+          "minutos_trabajo": 3,
+          "pasos": [
+            "Unta una rebanada con crema de cacahuete.",
+            "Unta la otra con confitura de fresa.",
+            "Junta las dos y corta en triángulos."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "merienda",
+        "almuerzo"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "sandhummus",
+      "nombre": "Sándwich de hummus y pepino",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pan_integral",
+          "cantidad": 2
+        },
+        {
+          "producto": "hummus",
+          "cantidad": 50
+        },
+        {
+          "producto": "pepino",
+          "cantidad": 50
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 310,
+        "proteina": 11,
+        "hidratos": 34,
+        "grasa": 14
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Unta las dos rebanadas con hummus.",
+            "Añade pepino en rodajas finas y zanahoria rallada.",
+            "Cierra, corta por la mitad y envuélvelo."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "almuerzo"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "wrappavo",
+      "nombre": "Wrap de pavo y queso",
+      "grupo": "carne",
+      "proteina_principal": "pavo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "tortillas",
+          "cantidad": 1
+        },
+        {
+          "producto": "pavo_fiambre",
+          "cantidad": 40
+        },
+        {
+          "producto": "queso_lonchas",
+          "cantidad": 20
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 20
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 285,
+        "proteina": 19,
+        "hidratos": 30,
+        "grasa": 10
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Extiende la tortilla de trigo.",
+            "Pon el queso, el pavo, la lechuga y el tomate en tiras.",
+            "Enrolla bien apretado, corta por la mitad y envuélvelo en papel."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "almuerzo",
+        "merienda"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "mixto",
+      "nombre": "Sándwich mixto",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pan_integral",
+          "cantidad": 2
+        },
+        {
+          "producto": "jamon",
+          "cantidad": 30
+        },
+        {
+          "producto": "queso_lonchas",
+          "cantidad": 25
+        }
+      ],
+      "nutricion": {
+        "kcal": 270,
+        "proteina": 18,
+        "hidratos": 25,
+        "grasa": 10
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 6,
+          "minutos_trabajo": 4,
+          "pasos": [
+            "Monta el sándwich con el jamón cocido y el queso.",
+            "Tuéstalo en una sartén con unas gotas de aceite 2 min por lado, aplastando un poco.",
+            "Corta en triángulos y sirve caliente."
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 7,
+          "minutos_trabajo": 3,
+          "pasos": [
+            "Monta el sándwich con el jamón y el queso.",
+            "Ponlo en la freidora de aire a 180 °C 6 min, dándole la vuelta a mitad."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "desayuno",
+        "merienda"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "manzanacacahuete",
+      "nombre": "Manzana con crema de cacahuete",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "manzana",
+          "cantidad": 190
+        },
+        {
+          "producto": "crema_cacahuete",
+          "cantidad": 15
+        }
+      ],
+      "nutricion": {
+        "kcal": 180,
+        "proteina": 4,
+        "hidratos": 23,
+        "grasa": 8
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 3,
+          "minutos_trabajo": 3,
+          "pasos": [
+            "Lava la manzana y córtala en gajos (unas gotas de limón evitan que se oscurezca).",
+            "Sirve con la crema de cacahuete para mojar o untada por encima."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "merienda",
+        "almuerzo"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "tortitascacahuete",
+      "nombre": "Tortitas de arroz con cacahuete y plátano",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "tortitas_arroz",
+          "cantidad": 16
+        },
+        {
+          "producto": "crema_cacahuete",
+          "cantidad": 15
+        },
+        {
+          "producto": "platano",
+          "cantidad": 90
+        }
+      ],
+      "nutricion": {
+        "kcal": 205,
+        "proteina": 5,
+        "hidratos": 28,
+        "grasa": 8
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 3,
+          "minutos_trabajo": 3,
+          "pasos": [
+            "Unta dos tortitas de arroz con la crema de cacahuete.",
+            "Pon medio plátano en rodajas encima.",
+            "Para llevar, lleva el plátano entero aparte."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "merienda",
+        "almuerzo"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "tortitasqueso",
+      "nombre": "Tortitas de arroz con queso fresco y pavo",
+      "grupo": "carne",
+      "proteina_principal": "pavo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "tortitas_arroz",
+          "cantidad": 16
+        },
+        {
+          "producto": "queso_fresco",
+          "cantidad": 50
+        },
+        {
+          "producto": "pavo_fiambre",
+          "cantidad": 30
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 185,
+        "proteina": 13,
+        "hidratos": 17,
+        "grasa": 7
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 3,
+          "minutos_trabajo": 3,
+          "pasos": [
+            "Pon sobre dos tortitas de arroz unas rodajas de tomate.",
+            "Añade el queso fresco y el pavo."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "merienda"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "hummuszanahoria",
+      "nombre": "Hummus con bastones de zanahoria y pepino",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "hummus",
+          "cantidad": 60
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 100
+        },
+        {
+          "producto": "pepino",
+          "cantidad": 100
+        }
+      ],
+      "nutricion": {
+        "kcal": 230,
+        "proteina": 6,
+        "hidratos": 21,
+        "grasa": 15
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Pela la zanahoria y córtala en bastones; corta el pepino igual.",
+            "Pon el hummus en un tarrito con tapa.",
+            "Lleva los bastones en un táper para mojar."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "almuerzo",
+        "merienda"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "macedonia",
+      "nombre": "Macedonia de frutas",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "naranja",
+          "cantidad": 140
+        },
+        {
+          "producto": "kiwi",
+          "cantidad": 110
+        },
+        {
+          "producto": "platano",
+          "cantidad": 90
+        },
+        {
+          "producto": "pera",
+          "cantidad": 80
+        }
+      ],
+      "nutricion": {
+        "kcal": 190,
+        "proteina": 3,
+        "hidratos": 42,
+        "grasa": 1
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 8,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Pela la naranja, el kiwi y el plátano; lava la pera.",
+            "Trocea toda la fruta en dados.",
+            "Mezcla con el zumo de la propia naranja para que no se oxide. Se lleva bien en un táper."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "merienda",
+        "almuerzo"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "brochetasfruta",
+      "nombre": "Brochetas de fruta",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "platano",
+          "cantidad": 90
+        },
+        {
+          "producto": "kiwi",
+          "cantidad": 110
+        },
+        {
+          "producto": "mandarina",
+          "cantidad": 117
+        },
+        {
+          "producto": "pera",
+          "cantidad": 80
+        }
+      ],
+      "nutricion": {
+        "kcal": 185,
+        "proteina": 3,
+        "hidratos": 42,
+        "grasa": 1
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 10,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pela y corta la fruta en trozos de un bocado; separa la mandarina en gajos.",
+            "Ensarta los trozos alternando colores en palillos de brocheta (para niños pequeños, quita la punta)."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "merienda"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "yogurmanzana",
+      "nombre": "Yogur con manzana, nueces y canela",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "yogur",
+          "cantidad": 1
+        },
+        {
+          "producto": "manzana",
+          "cantidad": 190
+        },
+        {
+          "producto": "nueces",
+          "cantidad": 15
+        },
+        {
+          "producto": "miel",
+          "cantidad": 5
+        }
+      ],
+      "nutricion": {
+        "kcal": 280,
+        "proteina": 7,
+        "hidratos": 35,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Corta la manzana en dados.",
+            "Ponla sobre el yogur con las nueces troceadas.",
+            "Termina con canela y un hilo de miel."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "desayuno",
+        "merienda"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "mandarinasnueces",
+      "nombre": "Mandarinas con nueces",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "mandarina",
+          "cantidad": 234
+        },
+        {
+          "producto": "nueces",
+          "cantidad": 20
+        }
+      ],
+      "nutricion": {
+        "kcal": 200,
+        "proteina": 4,
+        "hidratos": 21,
+        "grasa": 13
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 1,
+          "minutos_trabajo": 1,
+          "pasos": [
+            "Lleva dos mandarinas enteras y un puñado de nueces en un tarrito (para menores de 5 años, nueces bien picadas)."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "almuerzo",
+        "merienda"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "melimato",
+      "nombre": "Queso fresco con miel y nueces (mel i mató)",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "queso_fresco",
+          "cantidad": 100
+        },
+        {
+          "producto": "miel",
+          "cantidad": 10
+        },
+        {
+          "producto": "nueces",
+          "cantidad": 10
+        }
+      ],
+      "nutricion": {
+        "kcal": 270,
+        "proteina": 14,
+        "hidratos": 12,
+        "grasa": 19
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 3,
+          "minutos_trabajo": 3,
+          "pasos": [
+            "Pon el queso fresco en un plato.",
+            "Riégalo con la miel y añade las nueces troceadas."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "merienda"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "muffinsavena",
+      "nombre": "Muffins de avena y plátano",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "avena",
+          "cantidad": 40
+        },
+        {
+          "producto": "platano",
+          "cantidad": 90
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "pasas",
+          "cantidad": 10
+        }
+      ],
+      "nutricion": {
+        "kcal": 310,
+        "proteina": 12,
+        "hidratos": 45,
+        "grasa": 9
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 30,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Precalienta el horno a 180 °C.",
+            "Chafa los plátanos y mézclalos con los huevos, la avena, una cucharadita de levadura y las pasas.",
+            "Reparte en moldes de magdalena (2 por ración).",
+            "Hornea 20-25 min hasta que estén dorados. Deja enfriar y guarda en un táper."
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Prepara la masa igual: plátano chafado, huevo, avena, levadura y pasas.",
+            "Reparte en moldes de silicona.",
+            "Cocina en la freidora de aire a 160 °C unos 12-14 min."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "merienda",
+        "almuerzo",
+        "desayuno"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "galletasavena",
+      "nombre": "Galletas de avena y plátano",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "avena",
+          "cantidad": 40
+        },
+        {
+          "producto": "platano",
+          "cantidad": 90
+        },
+        {
+          "producto": "pasas",
+          "cantidad": 10
+        }
+      ],
+      "nutricion": {
+        "kcal": 235,
+        "proteina": 6,
+        "hidratos": 44,
+        "grasa": 4
+      },
+      "conserva": {
+        "nevera_dias": 5,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 25,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Precalienta el horno a 180 °C.",
+            "Chafa el plátano y mézclalo con la avena, las pasas y canela.",
+            "Haz bolitas y aplánalas sobre papel de horno.",
+            "Hornea 15-18 min. Deja enfriar del todo antes de guardarlas."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "merienda",
+        "almuerzo"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "batidokefir",
+      "nombre": "Batido de kéfir y frutos rojos",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "kefir",
+          "cantidad": 250
+        },
+        {
+          "producto": "frutos_rojos",
+          "cantidad": 100
+        },
+        {
+          "producto": "platano",
+          "cantidad": 90
+        }
+      ],
+      "nutricion": {
+        "kcal": 185,
+        "proteina": 10,
+        "hidratos": 33,
+        "grasa": 1
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Pon el kéfir, los frutos rojos congelados y medio plátano en la batidora.",
+            "Bate hasta que quede cremoso y sirve."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "merienda",
+        "almuerzo"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "puddingchia",
+      "nombre": "Pudin de chía con frutos rojos",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "leche",
+          "cantidad": 150
+        },
+        {
+          "producto": "chia",
+          "cantidad": 20
+        },
+        {
+          "producto": "frutos_rojos",
+          "cantidad": 60
+        },
+        {
+          "producto": "miel",
+          "cantidad": 5
+        }
+      ],
+      "nutricion": {
+        "kcal": 210,
+        "proteina": 9,
+        "hidratos": 22,
+        "grasa": 9
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Mezcla la leche, la chía y la miel en un tarro; remueve otra vez a los 10 min.",
+            "Deja en la nevera al menos 3 h o toda la noche.",
+            "Sirve con los frutos rojos por encima."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "merienda",
+        "desayuno"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "manzanaasada",
+      "nombre": "Manzana asada con nueces",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "manzana",
+          "cantidad": 190
+        },
+        {
+          "producto": "nueces",
+          "cantidad": 10
+        },
+        {
+          "producto": "miel",
+          "cantidad": 5
+        }
+      ],
+      "nutricion": {
+        "kcal": 170,
+        "proteina": 2,
+        "hidratos": 26,
+        "grasa": 7
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "micro",
+          "minutos": 6,
+          "minutos_trabajo": 2,
+          "pasos": [
+            "Lava la manzana, quítale el corazón y haz un corte alrededor de la piel.",
+            "Rellena el hueco con las nueces, la miel y canela.",
+            "Cocina en el microondas tapada 4-5 min a máxima potencia."
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 35,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Prepara la manzana igual.",
+            "Hornea a 180 °C unos 30 min."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "merienda"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "tostaqueso",
+      "nombre": "Tostada de queso fresco y tomate",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pan_barra",
+          "cantidad": 70
+        },
+        {
+          "producto": "queso_fresco",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 350,
+        "proteina": 14,
+        "hidratos": 40,
+        "grasa": 15
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Tuesta el pan y riégalo con un hilo de aceite.",
+            "Pon rodajas de tomate y el queso fresco encima.",
+            "Termina con orégano y una pizca de sal."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "desayuno"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "peraqueso",
+      "nombre": "Pera con queso tierno",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pera",
+          "cantidad": 166
+        },
+        {
+          "producto": "queso_lonchas",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 195,
+        "proteina": 8,
+        "hidratos": 22,
+        "grasa": 9
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 3,
+          "minutos_trabajo": 3,
+          "pasos": [
+            "Lava la pera y córtala en gajos.",
+            "Acompáñala con el queso en lonchas o en dados."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "merienda",
+        "almuerzo"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "tortillayork",
+      "nombre": "Tortilla francesa de jamón cocido",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        },
+        {
+          "producto": "jamon",
+          "cantidad": 30
+        },
+        {
+          "producto": "pan_integral",
+          "cantidad": 1
+        }
+      ],
+      "nutricion": {
+        "kcal": 300,
+        "proteina": 21,
+        "hidratos": 13,
+        "grasa": 17
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 7,
+          "minutos_trabajo": 7,
+          "pasos": [
+            "Bate los huevos con una pizca de sal.",
+            "Cuaja la tortilla en una sartén con unas gotas de aceite y pon el jamón en tiras antes de doblarla.",
+            "Sirve con una tostada."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "desayuno"
+      ],
+      "para_llevar": false
+    },
+    {
+      "id": "platanonueces",
+      "nombre": "Plátano con nueces",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "platano",
+          "cantidad": 180
+        },
+        {
+          "producto": "nueces",
+          "cantidad": 15
+        }
+      ],
+      "nutricion": {
+        "kcal": 210,
+        "proteina": 4,
+        "hidratos": 25,
+        "grasa": 10
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 1,
+          "minutos_trabajo": 1,
+          "pasos": [
+            "Lleva un plátano y un puñado de nueces en un tarrito (para menores de 5 años, nueces bien picadas)."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "almuerzo",
+        "merienda"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "frutafrutos",
+      "nombre": "Manzana, mandarina y frutos secos",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "sin_cocinar"
+      ],
+      "ingredientes": [
+        {
+          "producto": "manzana",
+          "cantidad": 190
+        },
+        {
+          "producto": "mandarina",
+          "cantidad": 117
+        },
+        {
+          "producto": "almendras",
+          "cantidad": 15
+        }
+      ],
+      "nutricion": {
+        "kcal": 215,
+        "proteina": 5,
+        "hidratos": 28,
+        "grasa": 9
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 5,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Corta la manzana en gajos (unas gotas de limón evitan que se oscurezca) y pela la mandarina.",
+            "Sirve la fruta con un puñado de almendras (para menores de 5 años, picadas). Para llevar, todo en un táper."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "almuerzo",
+        "merienda"
+      ],
+      "para_llevar": true
+    },
+    {
+      "id": "huevopasado",
+      "nombre": "Huevo pasado por agua con soldaditos",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        },
+        {
+          "producto": "pan_integral",
+          "cantidad": 2
+        }
+      ],
+      "nutricion": {
+        "kcal": 290,
+        "proteina": 19,
+        "hidratos": 25,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 0,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 8,
+          "minutos_trabajo": 3,
+          "pasos": [
+            "Pon agua a hervir y cuece los huevos 5-6 min para que la yema quede líquida.",
+            "Mientras, tuesta el pan y córtalo en tiras (soldaditos).",
+            "Sirve los huevos en hueveras, quítales la parte de arriba y moja los soldaditos en la yema."
+          ]
+        }
+      ],
+      "pequena": true,
+      "momentos": [
+        "desayuno"
+      ],
+      "para_llevar": false
     }
   ]
 }

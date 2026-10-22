@@ -811,3 +811,17 @@ details.more summary{padding:12px 0;color:var(--ink);font-weight:600}
 .fp{border:0;background:var(--surface);border-radius:16px;padding:8px;display:flex;gap:8px;align-items:center;text-align:left;font-size:.82rem;font-weight:600;box-shadow:inset 0 0 0 1.5px var(--line)}
 .fp .dish.s{width:42px;height:42px;border-radius:10px}
 .fp[aria-pressed="true"]{background:var(--accent-soft);box-shadow:inset 0 0 0 2.5px var(--accent)}
+
+/* ---------- Comidas pequeñas ---------- */
+.mg.sm{font-size:.95rem;color:var(--ink)}
+.mg.sm.no{background:var(--surface-2);color:var(--muted)}
+.mg.sm.casa{background:var(--accent-soft);box-shadow:inset 0 0 0 2px var(--accent)}
+.mg.sm.llevar{background:#FDE1C9;box-shadow:inset 0 0 0 2px #E39A5A}
+.smallrow{display:grid;gap:6px;margin:4px 0 8px;padding:8px;background:var(--surface-2);border-radius:16px}
+.smi{display:flex;align-items:center;gap:10px}
+.smimg{border:0;padding:0;background:none;flex:none}
+.smi .dish.s{width:40px;height:40px;border-radius:12px}
+.smi>span{flex:1;min-width:0}
+.smi small{display:block;font-size:.7rem;color:var(--muted);font-weight:600}
+.smn{font-size:.88rem!important;font-weight:600!important;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.smre{border:0;background:var(--surface);width:30px;height:30px;border-radius:50%;flex:none;color:var(--muted);font-size:1rem}

@@ -26,7 +26,8 @@ function setRecipes(list){
       kcal:n.kcal,prot:n.proteina,carb:n.hidratos,fat:n.grasa,vars,
       fridge:r.conserva?r.conserva.nevera_dias:3,freeze:r.conserva?!!r.conserva.congelable:false,
       red:r.proteina_principal==="ternera"||r.proteina_principal==="cerdo",
-      sug:r.sugerida||null,author:r.autor||null};
+      sug:r.sugerida||null,author:r.autor||null,
+      small:!!r.pequena,moments:r.momentos||[],portable:!!r.para_llevar};
   });
   RX=Object.fromEntries(R.map(r=>[r.id,r]));
 }

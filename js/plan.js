@@ -235,7 +235,7 @@ function weekRecipes(start,exceptId){
 function candidates(slot,opts={}){
   const out=[];
   for(const r of R){
-    if(!variantFor(r)||!hasPhoto(r))continue;
+    if(r.small||!variantFor(r)||!hasPhoto(r))continue;
     const people=slot.eaters.concat(slot.kids,slot.tupper);
     if(!people.every(p=>canEat(p,r)))continue;
     if(slot.eaters.concat(slot.tupper).some(a=>dishPref(a,r.id)<=-1))continue;
@@ -339,8 +339,67 @@ function ensureWeek(start,regen){
     const r=pickFor(sl,ctx);if(!r)continue;
     wk.slots[sl.id]={recipe:r.id};addToCtx(ctx,r);changed=true;
   }
+  ensureSmall(start);
   return {wk,slots,changed};
 }
+/* ---------- Comidas pequeñas: desayuno, almuerzo y merienda ----------
+   Cada persona dice, para cada día, si la hace en casa ("casa"), se la lleva ("llevar") o no la hace ("no"):
+   p.smallMeals = {desayuno:[7], almuerzo:[7], merienda:[7]} · p.smallSet = true cuando lo ha confirmado.
+   Cada día y momento se elige un plato pequeño para todos los que lo hacen; si alguien se lo lleva, que se pueda llevar.
+   Se guarda en S.plans[semana].small[día][momento] = {recipe, locked?}. */
+const SMALL={desayuno:["☀️","Desayuno"],almuerzo:["🍎","Almuerzo"],merienda:["🥪","Merienda"]};
+const smallState=(p,m,d)=>((p.smallMeals||{})[m]||[])[dow(d)]||"no";
+// ¿Está ese día para esa comida pequeña? (la mañana va con la comida, la tarde con la cena; aunque coma fuera)
+function presentSmall(p,d,m){
+  if(p.id==="yo")return true;
+  const o=((S.days[d]||{}).kids||{})[p.id];if(o!=null)return o;
+  const k={...p,away:null};return presentByRule(k,d,m==="merienda"?"cena":"comida");
+}
+function smallEaters(d,m){
+  return S.people.filter(p=>smallState(p,m,d)!=="no"&&presentSmall(p,d,m)&&!(m!=="merienda"&&(S.days[d]||{}).comida==="fuera"&&p.id==="yo"));
+}
+function smallCandidates(eaters,m){
+  return R.filter(r=>r.small&&r.moments.includes(m)&&variantFor(r)&&hasPhoto(r)&&eaters.every(p=>canEat(p,r)));
+}
+function ensureSmall(start){
+  const wk=S.plans[start];if(!wk)return;wk.small=wk.small||{};
+  const usedW={};for(const dd of Object.values(wk.small))for(const v of Object.values(dd))if(v&&v.recipe)usedW[v.recipe]=(usedW[v.recipe]||0)+1;
+  for(const d of weekDates(start)){
+    if(S.home.start&&d<S.home.start)continue;
+    for(const m of Object.keys(SMALL)){
+      const eaters=smallEaters(d,m);const cur=(wk.small[d]||{})[m];
+      if(!eaters.length){if(cur&&!cur.locked)delete wk.small[d][m];continue}
+      if(cur&&RX[cur.recipe])continue;
+      const llevar=eaters.some(p=>smallState(p,m,d)==="llevar"), kidsIn=eaters.some(p=>p.kind==="nino");
+      const prev=[addDays(d,-1),addDays(d,-2)].map(x=>((wk.small[x]||{})[m]||{}).recipe);
+      let best=null,bs=-1e9;
+      for(const r of smallCandidates(eaters,m)){
+        if(llevar&&!r.portable)continue;
+        let s=Math.random()*2;
+        for(const p of eaters)s+=tasteScore(p,r)*(p.kind==="nino"?0.8:1);
+        if(kidsIn&&r.kid)s+=1.2;
+        if(prev.includes(r.id))s-=6;
+        if(Object.values(wk.small[d]||{}).some(v=>v&&v.recipe===r.id))s-=8;   // ni repetido el mismo día
+        s-=2.5*(usedW[r.id]||0);
+        s-=(rationCost(r)-1)*0.8;
+        const mp=monthPrefs(d);if(mp)for(const k of mp.more||[])if(prefMatch[k]&&prefMatch[k](r))s+=1.5;
+        if(s>bs){bs=s;best=r}
+      }
+      if(best){(wk.small[d]=wk.small[d]||{})[m]={recipe:best.id};usedW[best.id]=(usedW[best.id]||0)+1}
+    }
+  }
+}
+// Raciones de una comida pequeña: la ración normal de cada uno
+const smallPortions=(d,m)=>Math.round(smallEaters(d,m).reduce((t,p)=>t+(p.kind==="nino"?(Number(p.factor)||0.6):(Number(p.factor)||1)),0)*100)/100;
+function refreshSmall(){for(const s of Object.keys(S.plans))if(addDays(s,6)>=todayISO()){const sm=S.plans[s].small||{};
+  for(const d of Object.keys(sm))for(const m of Object.keys(sm[d]))if(!smallEaters(d,m).length)delete sm[d][m];ensureSmall(s)}}
+function smallOf(d){const wk=S.plans[weekStartFor(d)];return (wk&&wk.small&&wk.small[d])||{}}
+function rerollSmall(d,m){const wk=S.plans[weekStartFor(d)];if(!wk||!wk.small||!wk.small[d])return;
+  const old=(wk.small[d][m]||{}).recipe;delete wk.small[d][m];
+  for(let i=0;i<6;i++){ensureSmall(weekStartFor(d));if(((wk.small[d]||{})[m]||{}).recipe!==old)break;delete wk.small[d][m]}
+  ensureSmall(weekStartFor(d));
+}
+
 function genWeekFromScratch(start){
   // Varios intentos; se sortea entre los mejores (equilibrio y precio) para no repetir siempre el mismo
   const tries=[];
@@ -356,6 +415,9 @@ function genWeekFromScratch(start){
   }
   tries.sort((a,b)=>b.sc-a.sc);
   S.plans[start].slots=tries[Math.floor(Math.random()*Math.min(6,tries.length))].slots;
+  // Comidas pequeñas: se rehacen las que no se eligieron a mano
+  const sm=S.plans[start].small||{};for(const d of Object.keys(sm))for(const m of Object.keys(sm[d]))if(!sm[d][m].locked)delete sm[d][m];
+  ensureSmall(start);
   S.plans[start].budget=fitBudget(start);
 }
 /* ---------- Presupuesto ---------- */
@@ -365,6 +427,7 @@ function weekCost(start,slotsIn){
   const wk=S.plans[start];if(!wk)return 0;let t=0;const q={};
   for(const sl of slotsIn||buildSlots(start)){const v=wk.slots[sl.id],r=v&&RX[v.recipe];
     if(r)for(const [p,c] of r.ing)q[p]=(q[p]||0)+c*sl.portions;else if(sl.fixed&&!sl.fixed.recipe)t+=Number(sl.fixed.cost)||0}
+  for(const [d,dd] of Object.entries(wk.small||{}))for(const [m,v] of Object.entries(dd)){const r=RX[v.recipe];if(r)for(const [p,c] of r.ing)q[p]=(q[p]||0)+c*smallPortions(d,m)}
   for(const [p,c] of Object.entries(q))t+=P[p].keep==="despensa"?c/P[p].env*price(p):packsFor(p,c)*price(p);
   return Math.round(t*100)/100;
 }
@@ -466,6 +529,8 @@ const factorOf=(p,slot)=>p.kind==="adulto"?adultFactor(p,slot):kidFactor(p,slot)
 // Total de comida y cena de una persona en un día (los caprichos y comidas fuera no se cuentan)
 function dayTotals(p,d){
   const t={kcal:0,prot:0,carb:0,fat:0,meals:0,skipped:[]};
+  for(const [m,v] of Object.entries(smallOf(d))){const r=RX[v.recipe];if(!r||!smallEaters(d,m).includes(p))continue;
+    const n=portionNutr(r,p.kind==="nino"?(Number(p.factor)||0.6):(Number(p.factor)||1));for(const k of ["kcal","prot","carb","fat"])t[k]+=n[k]||0;t.meals++}
   for(const meal of ["comida","cena"]){
     const x=dishOfMeal(d,meal);
     if(p.id!=="yo"){const sl=buildSlots(weekStartFor(d)).find(s=>s.id===d+"|"+meal);if(!sl||!sl.eaters.concat(sl.kids,sl.tupper).includes(p))continue}

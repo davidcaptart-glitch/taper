@@ -126,6 +126,18 @@ function kitchenSVG(apps){
   </svg></div>`;
 }
 
+// Desayuno, almuerzo y merienda de una persona: cada casilla pasa por – (no) → 🏠 (en casa) → 🎒 (se lo lleva)
+const SMALL_ICO={no:"–",casa:"🏠",llevar:"🎒"};
+function smallGrid(k){
+  const sm=k.smallMeals||{};
+  return `<div class="field"><label>¿Desayuna, almuerza y merienda?</label>
+    <div class="hint" style="margin:0 0 6px">Toca cada casilla: – no la hace · 🏠 en casa · 🎒 se la lleva (cole, trabajo).</div>
+    ${k.smallSet?"":`<div class="warnbox small" style="margin:0 0 8px">Sin confirmar: marca sus comidas pequeñas (si no hace ninguna, toca «Ninguna»).</div>`}
+    <table class="mealgrid"><tr><th></th>${DSHORT.map(d=>`<th>${d}</th>`).join("")}</tr>
+    ${Object.entries(SMALL).map(([m,[e,t]])=>`<tr><td>${t}</td>${DSHORT.map((_,i)=>{const v=(sm[m]||[])[i]||"no";return `<td><button type="button" class="mg sm ${v}" data-sm="${m}|${i}" aria-label="${t} ${DAYS[i]}: ${v}">${SMALL_ICO[v]}</button></td>`}).join("")}</tr>`).join("")}</table>
+    <div class="chips" style="margin-top:8px">${chip("data-smq","cole",false,"Desayuno en casa y almuerzo para llevar entre semana, merienda")}${chip("data-smq","todo",false,"Las tres en casa")}${chip("data-smq","desayuno",false,"Solo desayuno")}${chip("data-smq","nada",false,"Ninguna")}</div></div>`;
+}
+
 // Días como pastillas verticales (L M X J V S D)
 const dayPills=(attr,sel)=>`<div class="daypills">${["L","M","X","J","V","S","D"].map((d,i)=>`<button type="button" class="dp" ${attr}="${i}" aria-pressed="${sel.includes(i)}" aria-label="${DAYS[i]}"><b>${d}</b><i></i></button>`).join("")}</div><p class="dpcount">${sel.length} ${sel.length===1?"día":"días"} a la semana</p>`;
 // Tras cambiar ajustes: rellena los huecos nuevos sin tocar los platos ya elegidos
@@ -157,7 +169,8 @@ function stepBody(fullId){
     ${zoneMissing?`<div class="warnbox">Tu código postal aún no tiene precios propios: de momento verás los de otra zona (pueden variar unos céntimos). ${S.zoneAsked===H.cp?"Ya lo has pedido; se añadirá en la próxima actualización.":`<button class="btn small" id="askZone">Pedir mi zona</button>`}</div>`:""}`;}
   if(id==="familia"){
     const ptypes=[["siempre","Siempre"],["alternas","Semanas alternas"],["findes","Fines de semana alternos"],["dias","Días concretos de la semana"],["manual","Lo marco cada semana"]];
-    let h=`<p class="lead">Añade a quien come contigo: pareja, hijos, otros familiares, compañeros de piso… Cada uno con cuándo está, su ración y sus propios gustos.</p>`;
+    let h=`<p class="lead">Añade a quien come contigo: pareja, hijos, otros familiares, compañeros de piso… Cada uno con cuándo está, su ración y sus propios gustos.</p>
+    <div class="kidcard" data-kid="yo"><div class="row"><b>${esc(me().name||"Tú")}</b><span class="small muted">tú</span></div>${smallGrid(me())}</div>`;
     for(const k of others()){const pr=k.presence||{type:"siempre"}, ad=k.kind==="adulto";
       h+=`<div class="kidcard" data-kid="${k.id}"><div class="row"><b>${esc(personName(k))}</b><span class="small muted">${ad?"adulto":"niño o niña"}</span><span class="spacer"></span><button class="btn ghost small" data-delkid="${k.id}">Quitar</button></div>
       <div class="field"><label>¿Cómo se llama?</label><input type="text" data-kf="name" value="${esc(k.name)}" placeholder="Nombre"></div>
@@ -177,6 +190,7 @@ function stepBody(fullId){
         ${["comida","cena"].map(m=>`<tr><td>${m==="comida"?"Comida":"Cena"}</td>${DSHORT.map((_,i)=>{const home=!(aw[m]||[]).includes(i);return `<td><button type="button" class="mg" data-away="${m}|${i}" aria-pressed="${home}" aria-label="${m} ${DAYS[i]}: ${home?"en casa":"fuera"}">${home?"✓":""}</button></td>`}).join("")}</tr>`).join("")}</table>
         <div class="chips" style="margin-top:8px">${chip("data-awayq","cole",k.mealsSet&&(aw.comida||[]).join()==="0,1,2,3,4"&&!(aw.cena||[]).length,"Entre semana solo cena en casa")}${chip("data-awayq","todo",k.mealsSet&&!(aw.comida||[]).length&&!(aw.cena||[]).length,"Todas en casa")}${chip("data-awayq","nada",false,"Desmarcar todo")}</div>
         <label class="row small" style="margin-top:6px"><input type="checkbox" data-kf="awayhol" ${k.awayHolidays?"":"checked"} style="width:auto"> Los festivos come en casa</label></div>`})():""}
+      ${pr.type!=="manual"?smallGrid(k):""}
       </div>`}
     return h+`<div class="actions"><button class="btn ghost" id="addAdult">+ Pareja u otro adulto</button><button class="btn ghost" id="addKid">+ Hijo o hija</button></div>`;
   }
@@ -291,6 +305,13 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
   q("#addAdult")&&(q("#addAdult").onclick=()=>{S.people.push({...defaultAdult(),id:uid("a"),kind:"adulto",goals:["sano"],factor:1,tupper:false,presence:{type:"siempre"},away:{comida:[0,1,2,3,4,5,6],cena:[0,1,2,3,4,5,6]},mealsSet:false});rerender()});
   qa("[data-delkid]").forEach(b=>b.onclick=()=>{if(confirm("¿Quitar a esta persona y sus gustos?")){S.people=S.people.filter(p=>p.id!==b.dataset.delkid);rerender()}});
   qa(".kidcard").forEach(c=>{const k=S.people.find(p=>p.id===c.dataset.kid);
+    // Comidas pequeñas
+    c.querySelectorAll("[data-sm]").forEach(b=>b.onclick=()=>{const [m,i]=b.dataset.sm.split("|"),n=Number(i);k.smallMeals=k.smallMeals||{};
+      const a=k.smallMeals[m]=k.smallMeals[m]||Array(7).fill("no");const order=["no","casa","llevar"];a[n]=order[(order.indexOf(a[n]||"no")+1)%3];k.smallSet=true;refreshSmall();rerender()});
+    c.querySelectorAll("[data-smq]").forEach(b=>b.onclick=()=>{const q=b.dataset.smq,w=v=>[0,1,2,3,4].map(()=>v).concat([v==="llevar"?"casa":v,v==="llevar"?"casa":v]);
+      k.smallMeals=q==="cole"?{desayuno:Array(7).fill("casa"),almuerzo:w("llevar"),merienda:Array(7).fill("casa")}:q==="todo"?{desayuno:Array(7).fill("casa"),almuerzo:Array(7).fill("casa"),merienda:Array(7).fill("casa")}
+        :q==="desayuno"?{desayuno:Array(7).fill("casa"),almuerzo:Array(7).fill("no"),merienda:Array(7).fill("no")}:{};
+      k.smallSet=true;refreshSmall();rerender()});
     c.querySelectorAll("[data-kf]").forEach(i=>i.onchange=()=>{const f=i.dataset.kf;
       if(f==="name")k.name=i.value.trim();
       if(f==="factor")k.factor=Number(i.value)||1;

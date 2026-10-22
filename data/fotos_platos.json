@@ -2134,5 +2134,373 @@
   "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
   "fuente": "https://commons.wikimedia.org/wiki/File:Chicken_and_andouille_sausage_jambalaya.jpg",
   "titulo": "File:Chicken and andouille sausage jambalaya.jpg"
+ },
+ "tostatomate": {
+  "archivo": "images/platos/tostatomate.jpg",
+  "autor": "Jennifer Woodard Maderazo",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pa_amb_tomaquet.jpg",
+  "titulo": "File:Pa amb tomaquet.jpg"
+ },
+ "tostaserrano": {
+  "archivo": "images/platos/tostaserrano.jpg",
+  "autor": "Boca Dorada",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pa_amb_tom%C3%A0quet_y_paletilla_de_jam%C3%B3n.jpg",
+  "titulo": "File:Pa amb tomàquet y paletilla de jamón.jpg"
+ },
+ "tostaguacate": {
+  "archivo": "images/platos/tostaguacate.jpg",
+  "autor": "Luca Nebuloni from Milan, Italy",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Avocado_toast_with_eggs_(28508171495).jpg",
+  "titulo": "File:Avocado toast with eggs (28508171495).jpg"
+ },
+ "tostapavo": {
+  "archivo": "images/platos/tostapavo.jpg",
+  "autor": "Daderot",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Broiled_turkey,_grape_tomatoes,_and_cheese_on_toasted_rye_bread,_with_mustard_and_black_pepper,_served_cold_-_Massachusetts.jpg",
+  "titulo": "File:Broiled turkey, grape tomatoes, and cheese on toasted rye bread, with mustard and black pepper, served cold - Massachusetts.jpg"
+ },
+ "tostacacahuete": {
+  "archivo": "images/platos/tostacacahuete.jpg",
+  "autor": "Daderot",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Peanut_butter_and_banana_on_toasted_homemade_bread_-_Massachusetts.jpg",
+  "titulo": "File:Peanut butter and banana on toasted homemade bread - Massachusetts.jpg"
+ },
+ "tostamermelada": {
+  "archivo": "images/platos/tostamermelada.jpg",
+  "autor": "MOs810",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:A_modest_breakfast_at_a_London_hotel._Toast_with_strawberry_jam.jpg",
+  "titulo": "File:A modest breakfast at a London hotel. Toast with strawberry jam.jpg"
+ },
+ "porridge": {
+  "archivo": "images/platos/porridge.jpg",
+  "autor": "Shisma",
+  "licencia": "CC BY 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Banana_oatmeal_2.jpg",
+  "titulo": "File:Banana oatmeal 2.jpg"
+ },
+ "porridgecacao": {
+  "archivo": "images/platos/porridgecacao.jpg",
+  "autor": "Kotivalo",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Chocolate_porridge_from_wheat_middlings.jpg",
+  "titulo": "File:Chocolate porridge from wheat middlings.jpg"
+ },
+ "overnight": {
+  "archivo": "images/platos/overnight.jpg",
+  "autor": "USDAgov",
+  "licencia": "Public domain",
+  "licencia_url": "",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Child_Care_Recipes_(Team_Nutiriton)_(20230123-FNS-UNK-018).jpg",
+  "titulo": "File:Child Care Recipes (Team Nutiriton) (20230123-FNS-UNK-018).jpg"
+ },
+ "tortitasavena": {
+  "archivo": "images/platos/tortitasavena.jpg",
+  "autor": "Veganbaking.net from USA",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Vegan_Banana_Walnut_Pancakes_(4107494686).jpg",
+  "titulo": "File:Vegan Banana Walnut Pancakes (4107494686).jpg"
+ },
+ "revueltodes": {
+  "archivo": "images/platos/revueltodes.jpg",
+  "autor": "Andy Li",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Scrambled_eggs_on_toast_-_Joe%27s_Cafe_2024-04-14.jpg",
+  "titulo": "File:Scrambled eggs on toast - Joe's Cafe 2024-04-14.jpg"
+ },
+ "yogurfruta": {
+  "archivo": "images/platos/yogurfruta.jpg",
+  "autor": "Katrin Gilger",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Cereal,_Yoghurt,_Berries_%26_Banana_(4372854652).jpg",
+  "titulo": "File:Cereal, Yoghurt, Berries & Banana (4372854652).jpg"
+ },
+ "quesobatido": {
+  "archivo": "images/platos/quesobatido.jpg",
+  "autor": "Peter Hershey peterhershey",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Lancaster,_United_States_(Unsplash).jpg",
+  "titulo": "File:Lancaster, United States (Unsplash).jpg"
+ },
+ "kefirbol": {
+  "archivo": "images/platos/kefirbol.jpg",
+  "autor": "David Stewart",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Muesli_with_Berries.jpg",
+  "titulo": "File:Muesli with Berries.jpg"
+ },
+ "batidoplatano": {
+  "archivo": "images/platos/batidoplatano.jpg",
+  "autor": "Amit154",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Banana_smoothie.jpg",
+  "titulo": "File:Banana smoothie.jpg"
+ },
+ "batidofresa": {
+  "archivo": "images/platos/batidofresa.jpg",
+  "autor": "miss_yasmina",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Plain_yoghurt_and_strawberry_smoothie_(5700145998).jpg",
+  "titulo": "File:Plain yoghurt and strawberry smoothie (5700145998).jpg"
+ },
+ "bocatortilla": {
+  "archivo": "images/platos/bocatortilla.jpg",
+  "autor": "Juan Emilio Prades Bel",
+  "licencia": "CC BY 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Bocadillo_de_tortilla_francesa,_pan_con_tomate_(Espa%C3%B1a).jpg",
+  "titulo": "File:Bocadillo de tortilla francesa, pan con tomate (España).jpg"
+ },
+ "bocaserrano": {
+  "archivo": "images/platos/bocaserrano.jpg",
+  "autor": "travelwayoflife",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Bocadillo_de_Jam%C3%B3n_Serrano_-_travelwayoflife.jpg",
+  "titulo": "File:Bocadillo de Jamón Serrano - travelwayoflife.jpg"
+ },
+ "bocapavo": {
+  "archivo": "images/platos/bocapavo.jpg",
+  "autor": "petradr petradr",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Deli_Baguette_Sandwich_(Unsplash).jpg",
+  "titulo": "File:Deli Baguette Sandwich (Unsplash).jpg"
+ },
+ "bocatun": {
+  "archivo": "images/platos/bocatun.jpg",
+  "autor": "Ezarate",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tostadadeatunytomate.jpg",
+  "titulo": "File:Tostadadeatunytomate.jpg"
+ },
+ "bocayork": {
+  "archivo": "images/platos/bocayork.jpg",
+  "autor": "Boulanger: Nat / Photographer: Nat",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Sandwichs_classiques.jpg",
+  "titulo": "File:Sandwichs classiques.jpg"
+ },
+ "sandpavo": {
+  "archivo": "images/platos/sandpavo.jpg",
+  "autor": "hazel.kenady",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Sandwich_@_Gavin%27s_Cafe.jpg",
+  "titulo": "File:Sandwich @ Gavin's Cafe.jpg"
+ },
+ "sandpbj": {
+  "archivo": "images/platos/sandpbj.jpg",
+  "autor": "JefferyGoldman",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Peanut_Butter_and_Jelly_Sandwich.jpg",
+  "titulo": "File:Peanut Butter and Jelly Sandwich.jpg"
+ },
+ "sandhummus": {
+  "archivo": "images/platos/sandhummus.jpg",
+  "autor": "Jennifer from Vancouver, Canada",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Toasted_tomato,_avocado,_cucumber_and_hummus_sandwich_(4815088397).jpg",
+  "titulo": "File:Toasted tomato, avocado, cucumber and hummus sandwich (4815088397).jpg"
+ },
+ "wrappavo": {
+  "archivo": "images/platos/wrappavo.jpg",
+  "autor": "Ser Amantio di Nicolao",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Turkey_wrap_from_Spangles_restaurant.jpg",
+  "titulo": "File:Turkey wrap from Spangles restaurant.jpg"
+ },
+ "mixto": {
+  "archivo": "images/platos/mixto.jpg",
+  "autor": "Traumrune",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Croque_Monsieur.JPG",
+  "titulo": "File:Croque Monsieur.JPG"
+ },
+ "manzanacacahuete": {
+  "archivo": "images/platos/manzanacacahuete.jpg",
+  "autor": "HaJunkiyada",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Apple_slices_with_honey_for_Rosh_Hashanah.jpg",
+  "titulo": "File:Liat Portal for Foodie Disorder - Apple slices with honey for Rosh Hashanah.jpg"
+ },
+ "tortitascacahuete": {
+  "archivo": "images/platos/tortitascacahuete.jpg",
+  "autor": "Tasneem",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Rice_cakes_with_smoked_snoek_pate.jpg",
+  "titulo": "File:Rice cakes with smoked snoek pate.jpg"
+ },
+ "tortitasqueso": {
+  "archivo": "images/platos/tortitasqueso.jpg",
+  "autor": "HaJunkiyada",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Rice_Cake_with_Ricotta_and_Tomato.jpg",
+  "titulo": "File:Liat Portal for Foodie Disorder - Rice Cake with Ricotta and Tomato.jpg"
+ },
+ "hummuszanahoria": {
+  "archivo": "images/platos/hummuszanahoria.jpg",
+  "autor": "USDAgov",
+  "licencia": "Public domain",
+  "licencia_url": "",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Child_Care_Recipes_(Team_Nutiriton)_(20211231-FNS-UNC-0026).jpg",
+  "titulo": "File:Child Care Recipes (Team Nutiriton) (20211231-FNS-UNC-0026).jpg"
+ },
+ "macedonia": {
+  "archivo": "images/platos/macedonia.jpg",
+  "autor": "Bukky658",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Fruit_salads.jpg",
+  "titulo": "File:Fruit salads.jpg"
+ },
+ "brochetasfruta": {
+  "archivo": "images/platos/brochetasfruta.jpg",
+  "autor": "Aerous",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Fruit_skewers.jpg",
+  "titulo": "File:Fruit skewers.jpg"
+ },
+ "yogurmanzana": {
+  "archivo": "images/platos/yogurmanzana.jpg",
+  "autor": "JopkeB",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Yoghurt_met_appelmoes_en_walnoten_2025.jpg",
+  "titulo": "File:Yoghurt met appelmoes en walnoten 2025.jpg"
+ },
+ "mandarinasnueces": {
+  "archivo": "images/platos/mandarinasnueces.jpg",
+  "autor": "HaJunkiyada",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Mandarin_segments.jpg",
+  "titulo": "File:Liat Portal for Foodie Disorder - Mandarin segments.jpg"
+ },
+ "melimato": {
+  "archivo": "images/platos/melimato.jpg",
+  "autor": "Juan Emilio Prades Bel",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Reques%C3%B3n_con_miel_y_nueces.jpg",
+  "titulo": "File:Requesón con miel y nueces.jpg"
+ },
+ "muffinsavena": {
+  "archivo": "images/platos/muffinsavena.jpg",
+  "autor": "AlbertCahalan",
+  "licencia": "Public domain",
+  "licencia_url": "",
+  "fuente": "https://commons.wikimedia.org/wiki/File:CookbookRaisinOatmealMuffins.jpg",
+  "titulo": "File:CookbookRaisinOatmealMuffins.jpg"
+ },
+ "galletasavena": {
+  "archivo": "images/platos/galletasavena.jpg",
+  "autor": "Paul Martin",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Oatmeal_Cookies_with_orange_zest,_golden_raisins,_and_chocolate_chips.jpg",
+  "titulo": "File:Oatmeal Cookies with orange zest, golden raisins, and chocolate chips.jpg"
+ },
+ "batidokefir": {
+  "archivo": "images/platos/batidokefir.jpg",
+  "autor": "Charles Haynes from Hobart, Australia",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Banana_and_raspberry_smoothie_(14114450783).jpg",
+  "titulo": "File:Banana and raspberry smoothie (14114450783).jpg"
+ },
+ "puddingchia": {
+  "archivo": "images/platos/puddingchia.jpg",
+  "autor": "Miscellaneous contributor",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Chia_seed_pudding_in_a_tea_cup.jpg",
+  "titulo": "File:Chia seed pudding in a tea cup.jpg"
+ },
+ "manzanaasada": {
+  "archivo": "images/platos/manzanaasada.jpg",
+  "autor": "Alabama Extension",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Hot_and_Sweet_Baked_Apples.jpg",
+  "titulo": "File:Hot and Sweet Baked Apples.jpg"
+ },
+ "tostaqueso": {
+  "archivo": "images/platos/tostaqueso.jpg",
+  "autor": "ImGz",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "fuente": "https://commons.wikimedia.org/wiki/File:BruschettaWiki.jpg",
+  "titulo": "File:BruschettaWiki.jpg"
+ },
+ "peraqueso": {
+  "archivo": "images/platos/peraqueso.jpg",
+  "autor": "Jon Sullivan",
+  "licencia": "Public domain",
+  "licencia_url": "",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Gorgonzola_and_a_pear.jpg",
+  "titulo": "File:Gorgonzola and a pear.jpg"
+ },
+ "tortillayork": {
+  "archivo": "images/platos/tortillayork.jpg",
+  "autor": "Ceeseven",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Ham_Omelette_with_Toast.jpg",
+  "titulo": "File:Ham Omelette with Toast.jpg"
+ },
+ "platanonueces": {
+  "archivo": "images/platos/platanonueces.jpg",
+  "autor": "Veganbaking.net from USA",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Bananas,_Walnuts_and_Oats_(6808325110).jpg",
+  "titulo": "File:Bananas, Walnuts and Oats (6808325110).jpg"
+ },
+ "frutafrutos": {
+  "archivo": "images/platos/frutafrutos.jpg",
+  "autor": "HaJunkiyada",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Healthy_snack_plate_with_fruit_and_nuts.jpg",
+  "titulo": "File:Liat Portal for Foodie Disorder - Healthy snack plate with fruit and nuts.jpg"
+ },
+ "huevopasado": {
+  "archivo": "images/platos/huevopasado.jpg",
+  "autor": "Kolforn",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:-2019-12-06_Boiled_egg_with_toasted_soliders,_Trimingham.JPG",
+  "titulo": "File:-2019-12-06 Boiled egg with toasted soliders, Trimingham.JPG"
  }
 }

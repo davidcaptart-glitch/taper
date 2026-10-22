@@ -301,6 +301,13 @@ function notifAction(tipo,tag){
   else {month=m;tab="compra";listSel=key;render();scrollTo(0,0)}
 }
 
+// Fila compacta con las comidas pequeñas del día
+function smallLine(d){
+  const sm=smallOf(d),ks=Object.keys(SMALL).filter(m=>sm[m]&&RX[sm[m].recipe]);if(!ks.length)return "";
+  return `<div class="smallrow">${ks.map(m=>{const r=RX[sm[m].recipe],ll=smallEaters(d,m).some(p=>smallState(p,m,d)==="llevar");
+    return `<div class="smi"><button class="smimg" data-open="${r.id}" aria-label="${esc(r.name)}">${dishImg(r,"s")}</button><span><small>${SMALL[m][0]} ${SMALL[m][1]}${ll?" · 🎒":""}</small><button class="name smn" data-open="${r.id}">${esc(r.name)}</button></span><button class="smre" data-smre="${d}|${m}" aria-label="Cambiar ${SMALL[m][1].toLowerCase()}">↻</button></div>`}).join("")}</div>`;
+}
+
 /* ---------- Piezas de diseño comunes ---------- */
 // Cabecera de cada pantalla: etiqueta pequeña + título grande con *acento* en cursiva
 const viewHead=(eyebrow,title,side)=>`<div class="vhead"><div><div class="veb">${esc(eyebrow)}</div><h1 class="vh">${esc(title).replace(/\*(.+?)\*/g,"<em>$1</em>")}</h1></div>${side||""}</div>`;
@@ -362,7 +369,7 @@ function renderMenu(){
       const empty=["comida","cena"].every(m=>["fuera","libre"].includes(mealState(d,m)));
       h+=`<div class="slot ${empty?"extra":""} ${d===todayISO()?"today":""}" id="d-${d}"><div class="day"><small>${DSHORT[dow(d)]}</small><b>${Number(d.slice(8))}</b><small>${esc(shortDate(d).split(" ")[1]||"")}</small></div><div>
         <div class="tags">${hol?`<span class="pill carga">${esc(holidayName(d))}</span>`:""}${ks.map(k=>{const c=peopleAt(d,"comida").includes(k),n=peopleAt(d,"cena").includes(k);return `<span class="pill kid">${esc(personName(k))}${c&&!n?" · solo comida":!c&&n?" · solo cena":""}</span>`}).join("")}${sess.map(s=>`<span class="pill ligera">${esc(SPORTS[s.type])} ${esc(sessTime(s))}</span>`).join("")}</div>
-        ${mealLine(d,"comida",wk)}${mealLine(d,"cena",wk)}
+        ${smallLine(d)}${mealLine(d,"comida",wk)}${mealLine(d,"cena",wk)}
         ${dayCounter(d,pt)}
         <div class="ops"><button class="btn ghost small" data-day="${d}">Cambiar este día</button></div></div></div>`;
     }
@@ -371,6 +378,7 @@ function renderMenu(){
   main.innerHTML=h+`</section>`;
   main.querySelectorAll("[data-plan]").forEach(b=>b.onclick=()=>openWeekPlanner(b.dataset.plan));
   main.querySelectorAll("[data-mprep]").forEach(b=>b.onclick=()=>openMonthPrep(b.dataset.mprep));
+  main.querySelectorAll("[data-smre]").forEach(b=>b.onclick=()=>{const [d,m]=b.dataset.smre.split("|");rerollSmall(d,m);save();render();toast("Cambiado")});
   main.querySelectorAll("[data-goday]").forEach(b=>b.onclick=()=>{const el=document.getElementById("d-"+b.dataset.goday);if(el){el.scrollIntoView({behavior:"smooth",block:"start"});el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash")}});
   main.querySelectorAll("[data-cooknow]").forEach(b=>b.onclick=()=>{const [rid,p]=b.dataset.cooknow.split("|");const r=RX[rid];openCook(r,variantFor(r)||r.vars[0],Number(p)||2)});
   main.querySelectorAll("[data-regen]").forEach(b=>b.onclick=()=>{if(confirm("¿Rehacer los platos de esta semana? Se mantienen los que elegiste a mano.")){genWeekFromScratch(b.dataset.regen);save();render();toast("Platos rehechos")}});
@@ -804,6 +812,7 @@ function renderCompra(){
 function renderRecetas(){
   const a=me();
   const fl={todas:"Todas",fav:"Favoritas",nuevas:"Sin probar",no:"Descartadas",c:"⚡ Hidratos",l:"🥗 Ligeras",kid:"Gustan a niños"};
+  if(R.some(r=>r.small))fl.pequenas="🥐 Desayunos y meriendas";
   if(R.some(r=>r.sug))fl.comunidad="💡 De la comunidad";
   for(const k of S.home.apps)fl[k]=APP[k];
   let h=`<section class="view">${viewHead(R.length+" recetas","Tus *recetas*")}${recipeSuggestOn()?`<button class="btn ghost small" id="sugRec" style="margin:4px 0 10px">💡 Sugerir una receta</button>`:""}<div class="field"><input type="text" id="rq" placeholder="Buscar receta o ingrediente" value="${esc(recSearch)}"></div><div class="filters">`+Object.entries(fl).map(([k,v])=>`<button class="btn ${recFilter===k?"":"ghost"} small" data-f="${k}">${v}</button>`).join("")+`</div>`;
@@ -815,7 +824,7 @@ function renderRecetas(){
     if(!hasPhoto(r))return false;
     if(qn&&!(r.name.toLowerCase().includes(qn)||r.ing.some(([p])=>P[p].name.toLowerCase().includes(qn))))return false;
     const dp=dishPref(a,r.id);
-    switch(recFilter){case "comunidad":return !!r.sug;case "fav":return dp>=1.5;case "nuevas":return !tried.has(r.id);case "no":return dp<=-1;case "c":return r.type==="c";case "l":return r.type==="l";case "kid":return r.kid;case "todas":return true;default:return r.vars.some(v=>v.app===recFilter)}
+    switch(recFilter){case "pequenas":return r.small;case "comunidad":return !!r.sug;case "fav":return dp>=1.5;case "nuevas":return !tried.has(r.id);case "no":return dp<=-1;case "c":return r.type==="c";case "l":return r.type==="l";case "kid":return r.kid;case "todas":return true;default:return r.vars.some(v=>v.app===recFilter)}
   });
   h+=`<p class="small muted">${list.length} recetas</p><div class="rgrid">`;
   for(const r of list){const dp=dishPref(a,r.id),can=!!variantFor(r);
@@ -1055,6 +1064,7 @@ function inboxItems(){
     else if(!avisosOn()&&isIOS()&&!isStandalone())out.push({ico:"📲",t:"Instala Táper para recibir avisos",s:"En iPhone solo llegan con la app en la pantalla de inicio",go:()=>{dlg.close();showDialog(`<div class="mod">${closeBtn}<h2>Instala Táper</h2><ol class="steps"><li>Toca <b>Compartir</b> (el cuadrado con la flecha ↑)</li><li>Toca <b>Añadir a pantalla de inicio</b></li><li>Abre Táper desde su icono nuevo</li><li>Tus datos pasarán solos</li></ol></div>`)}});
     else if(!avisosOn()&&!isIOS())out.push({ico:"🔕",t:"Este navegador no recibe avisos",s:"Abre Táper con Chrome e instálala para recibirlos",go:()=>{dlg.close();tab="perfil";render()}});
   }catch(e){}
+  try{for(const k of S.people)if(!k.smallSet&&(k.id==="yo"||(k.presence||{}).type!=="manual"))out.push({ico:"🥐",t:k.id==="yo"?"¿Desayunas, almuerzas y meriendas?":`¿Qué desayuna y merienda ${personName(k)}?`,s:"Te propongo desayunos, almuerzos y meriendas sanos",go:()=>{dlg.close();openWizard("familia");scrollTo(0,0)}})}catch(e){}
   try{for(const k of others())if(!k.mealsSet&&(k.presence||{}).type!=="manual")out.push({ico:"🍽️",t:`¿Qué comidas hace ${personName(k)} en casa?`,s:"Comida y cena de cada día: así no cocino de más",go:()=>{dlg.close();openWizard("familia");scrollTo(0,0)}})}catch(e){}
   try{for(const r of shopDueNow())out.push({ico:"🛒",t:r.title.replace("🛒 ",""),s:r.body,go:()=>openShopReminder(r)})}catch(e){}
   try{const nx=monthPrepDue();if(nx)out.push({ico:"📋",t:`Prepara ${mName(nx)}`,s:"5 preguntas y te dejo el menú y el pedido del mes listos",go:()=>{dlg.close();openMonthPrep(nx)}})}catch(e){}

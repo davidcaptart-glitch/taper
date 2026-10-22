@@ -30,6 +30,11 @@ function monthUses(m,exceptId){
       const freshWi=wi>0&&cook<deliv?wi-1:wi;
       for(const [pid,q] of r.ing)out.push({pid,q:q*sl.portions,wi,freshWi,date:cook,slot:sl,r});
     }
+    // Desayunos, almuerzos y meriendas
+    for(const [d,dd] of Object.entries(wk.small||{})){if(d<start||d>addDays(start,6))continue;
+      for(const [m,v] of Object.entries(dd)){const r=RX[v.recipe];if(!r)continue;
+        const fw=wi>0&&d<deliv?wi-1:wi, n=smallPortions(d,m);
+        for(const [pid,q] of r.ing)out.push({pid,q:q*n,wi,freshWi:fw,date:d,slot:{date:d,meal:m},r})}}
   });
   return out;
 }
