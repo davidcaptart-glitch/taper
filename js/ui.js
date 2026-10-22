@@ -205,7 +205,7 @@ function moveToNext(rid,from){
 }
 function renderMenu(){
   const weeks=weeksInMonth(month);
-  let h=`<section class="view">`+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
+  let h=`<section class="view">`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
   if(!weeks.length)h+=`<div class="empty"><p>No hay semanas que empiecen este mes.</p></div>`;
   for(const start of weeks){
     const wk=S.plans[start], dates=weekDates(start);
@@ -238,7 +238,7 @@ function renderMenu(){
   main.querySelectorAll("[data-regen]").forEach(b=>b.onclick=()=>{if(confirm("¿Rehacer los platos de esta semana? Se mantienen los que elegiste a mano.")){genWeekFromScratch(b.dataset.regen);save();render();toast("Platos rehechos")}});
   main.querySelectorAll("[data-swap]").forEach(b=>b.onclick=()=>openSwap(b.dataset.swap));
   main.querySelectorAll("[data-sacr]").forEach(b=>b.onclick=()=>openSacrifice(b.dataset.sacr));
-  bindReview(main);bindSurvey();bindThaw();
+  bindReview(main);bindSurvey();bindThaw();bindInstall();
   main.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>openDay(b.dataset.day));
   main.querySelectorAll("[data-session]").forEach(b=>b.onclick=()=>openSession(b.dataset.session));
   main.querySelectorAll("[data-rate]").forEach(b=>b.onclick=()=>{const [sid,rid,who,v]=b.dataset.rate.split("~");
@@ -736,6 +736,28 @@ function shiftMonth(n){const [y,m]=month.split("-").map(Number);const d=new Date
 document.getElementById("prevM").onclick=()=>shiftMonth(-1);
 document.getElementById("nextM").onclick=()=>shiftMonth(1);
 dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
+
+/* ---------- Instalar la app ---------- */
+let installPrompt=null;
+const isStandalone=()=>matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;if(S.onboarded&&tab==="menu")render()});
+addEventListener("appinstalled",()=>{installPrompt=null;toast("¡Táper instalada! Ábrela desde el icono de tu pantalla");render()});
+function installCard(){
+  if(isStandalone()||(S.installHidden&&S.installHidden>todayISO()))return "";
+  const ua=navigator.userAgent, samsung=/SamsungBrowser/i.test(ua), ios=/iPhone|iPad/i.test(ua), inApp=/(FBAN|FBAV|Instagram|Line|wv\)|GSA\/)/i.test(ua);
+  let how;
+  if(installPrompt)how=`<button class="btn" id="doInstall">📲 Instalar Táper</button>`;
+  else if(inApp)how=`<p class="small">Estás en un navegador integrado. Toca <b>⋮</b> y elige <b>«Abrir en Chrome»</b>; allí aparecerá el botón para instalarla.</p>`;
+  else if(samsung)how=`<p class="small">Toca el menú <b>≡</b> › <b>Añadir página a</b> › <b>Pantalla de inicio</b>.</p>`;
+  else if(ios)how=`<p class="small">Toca <b>Compartir</b> (el cuadrado con la flecha) › <b>Añadir a pantalla de inicio</b>.</p>`;
+  else how=`<p class="small">En Chrome, toca <b>⋮</b> › <b>Instalar aplicación</b> (o <b>Añadir a pantalla de inicio</b> › <b>Instalar</b>).</p>`;
+  return `<div class="rate"><h3>📲 Instala Táper en tu móvil</h3><p class="small muted">Tendrás su icono en la pantalla de inicio, funcionará sin conexión y te llegarán los avisos.</p>${how}
+    <button class="btn ghost small" id="hideInstall" style="margin-top:6px">Ahora no</button></div>`;
+}
+function bindInstall(){
+  document.getElementById("doInstall")?.addEventListener("click",async()=>{if(!installPrompt)return;installPrompt.prompt();const r=await installPrompt.userChoice;installPrompt=null;if(r.outcome!=="accepted")render()});
+  document.getElementById("hideInstall")?.addEventListener("click",()=>{S.installHidden=addDays(todayISO(),7);save();render()});
+}
 
 /* ---------- Contador anónimo de uso y sugerencias ---------- */
 let CFG={};

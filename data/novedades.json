@@ -114,6 +114,14 @@
         "El envío y el pedido mínimo los pone la app con la tarifa de tu supermercado: en Mercadona, online 8,20 € con mínimo de 60 €.",
         "Nueva forma de comprar: en la tienda y que te lo lleven a casa (6,50 €, sin mínimo)."
       ]
+    },
+    {
+      "version": 12,
+      "fecha": "2026-10-22",
+      "titulo": "Instalar es más fácil",
+      "cambios": [
+        "Si abres Táper en el navegador, te aparece un botón para instalarla como app (o los pasos según tu navegador)."
+      ]
     }
   ]
 }
