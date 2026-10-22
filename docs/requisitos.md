@@ -4,7 +4,12 @@ Lista viva de lo acordado para las próximas fases. La fase 1 (base, precios sem
 
 **Principio general: cuanto más personalizada, mejor.** La app aprende continuamente de los gustos,
 preferencias, valoraciones e historial de cada persona y sugiere cosas hechas a su medida. Todo lo que
-aprende se ve y se corrige en una pantalla "Lo que sé de ti" (por persona: adulto y niños).
+aprende se ve y se corrige en una pantalla "Lo que sé de ti" (por persona: adulto y niños), con:
+- **Ingredientes que le gustan** y **que no le gustan** (y los que no puede comer por alergia o intolerancia).
+- **Platos que le gustan** y **que no le gustan**, con el motivo cuando lo dio.
+- De dónde sale cada dato: cuestionario inicial, valoración de un plato, o aprendido por la app
+  (por ejemplo: "3 platos con champiñón valorados 👎").
+- Cada elemento se puede mover de lista, borrar o añadir a mano; el siguiente menú ya lo tiene en cuenta.
 
 ## Fase 2: menú a tu medida
 
