@@ -2,7 +2,7 @@
 "use strict";
 
 // Versión de la app: súbela (y el ?v= de index.html y VERSION de sw.js) en cada mejora, y añade sus novedades a data/novedades.json
-const APP_VERSION = 10;
+const APP_VERSION = 11;
 
 /* ---------- Utilidades ---------- */
 const DAYS = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];   // índice 0 = lunes
@@ -71,7 +71,7 @@ function defaultState(){
     home:{super:"mercadona",cp:"",municipio:"",apps:["air","horno","vitro","micro"],cookMode:"diario",cookDays:[6],weekTpl:defaultWeekTpl(),
       planFreq:"semanal",planDay:6,planTime:"17:00",
       mealTimes:{comida:"14:00",cena:"21:00"},extraMeals:{},
-      shop:{monthMode:"online",weekMode:"online",delivery:1,min:50,fee:8.2},
+      shop:{monthMode:"online",weekMode:"online",delivery:1},
       budget:{month:180,week:null,basics:6},festivosExtra:[]},
     people:[defaultAdult("")],
     fixed:[], plans:{}, days:{}, ratings:[], prices:{}, checks:{}, assign:{}, modes:{}, spent:{}, orders:{}, sport:{}, tickets:[], seenVersion:0, base:null

@@ -290,7 +290,7 @@ function weekCost(start,slotsIn){
 // Lo que se puede gastar en comida esa semana: presupuesto semanal menos envío y la parte de básicos
 function weekFoodTarget(start){
   const m=monthOfWeek(start), n=Math.max(1,weeksInMonth(m).length);
-  const fee=S.home.shop.weekMode==="online"?Number(S.home.shop.fee)||0:0, monthFee=S.home.shop.monthMode==="online"?(Number(S.home.shop.fee)||0)/n:0;
+  const fee=tarifa(S.home.shop.weekMode).envio, monthFee=tarifa(S.home.shop.monthMode).envio/n;
   return weekBudget(m)-fee-monthFee-(Number(S.home.budget.basics)||0)/n;
 }
 // Cambia los platos más caros por otros más baratos que sigan encajando, hasta llegar al presupuesto

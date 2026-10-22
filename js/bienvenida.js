@@ -122,12 +122,12 @@ function stepBody(fullId){
     <div class="field"><label for="wzPDay">Día (la semana del menú empieza ese día)</label>${dowSelect("wzPDay",H.planDay)}</div>
     <div class="field"><label for="wzPTime">Hora</label><input id="wzPTime" type="time" value="${esc(H.planTime)}"></div>`;
   if(id==="compra"){const sh=H.shop,b=H.budget;
-    const modeChips=(k,v)=>chip("data-mode",k+":online",v==="online","Online")+chip("data-mode",k+":tienda",v==="tienda","En tienda");
+    const modeChips=(k,v)=>Object.entries(SHOP_MODES).map(([m,t])=>chip("data-mode",k+":"+m,v===m,t)).join("");
+    const tf=Object.entries(SHOP_MODES).map(([m,t])=>{const x=tarifa(m);return `${t}: ${x.envio?eur(x.envio)+" de envío":"sin envío"}${x.minimo?", pedido mínimo "+eur(x.minimo):""}`}).join(" · ");
     return `<div class="group"><h3>Compra del mes (despensa, carne para congelar y congelados)</h3><div class="chips">${modeChips("monthMode",sh.monthMode)}</div></div>
     <div class="group"><h3>Compra de cada semana (fresco)</h3><div class="chips">${modeChips("weekMode",sh.weekMode)}</div></div>
     <div class="field"><label for="wzDel">Día en que llega o haces la compra semanal</label>${dowSelect("wzDel",sh.delivery)}<div class="hint">Lo que cocines antes de ese día sale de lo que ya tienes en casa.</div></div>
-    <div class="row"><div class="field" style="flex:1"><label for="wzMin">Pedido mínimo online (€)</label><input id="wzMin" type="number" min="0" step="1" value="${sh.min}"></div>
-    <div class="field" style="flex:1"><label for="wzFee">Envío (€)</label><input id="wzFee" type="number" min="0" step="0.01" value="${sh.fee}"></div></div>
+    <p class="small muted">Tarifas de ${esc(superInfo().nombre||"tu supermercado")}: ${esc(tf)}. Las pone la app y se actualizan si cambian.</p>
     <div class="field"><label for="wzBM">Presupuesto al mes (€)</label><input id="wzBM" type="number" min="0" step="5" value="${b.month}"></div>
     <div class="field"><label for="wzBW">Presupuesto a la semana (€)</label><input id="wzBW" type="number" min="0" step="1" value="${b.week??""}" placeholder="Automático: el del mes entre las semanas"></div>
     <div class="field"><label for="wzBB">Básicos al mes: aceite, sal, especias (€)</label><input id="wzBB" type="number" min="0" step="1" value="${b.basics}"></div>
@@ -228,7 +228,7 @@ function validateStep(fullId){
   if(id==="objetivos"){if(!a.goals.length){toast("Elige al menos un objetivo");return false}a.weight=Number(v("#wzW"))||null}
   if(id==="cocina"&&H.cookMode==="lote"&&!H.cookDays.length){toast("Elige al menos un día para cocinar");return false}
   if(id==="plan"){H.planFreq=v("#wzFreq");H.planDay=Number(v("#wzPDay"));H.planTime=v("#wzPTime")||"17:00"}
-  if(id==="compra"){H.shop.delivery=Number(v("#wzDel"));H.shop.min=Number(v("#wzMin"))||0;H.shop.fee=Number(v("#wzFee"))||0;
+  if(id==="compra"){H.shop.delivery=Number(v("#wzDel"));
     H.budget.month=Number(v("#wzBM"))||0;H.budget.week=v("#wzBW")===""?null:Number(v("#wzBW"));H.budget.basics=Number(v("#wzBB"))||0}
   return true;
 }

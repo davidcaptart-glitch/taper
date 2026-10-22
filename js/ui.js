@@ -303,7 +303,7 @@ function openSacrifice(start){
   showDialog(`<div class="mod">${closeBtn}<h2>¿Qué sacrificamos?</h2><p class="small muted">Faltan unos ${eur(cost-target)} esta semana. Elige lo que te parezca bien y vuelvo a preparar el menú.</p>
     ${Object.entries(SACRIFICES).map(([k,[t,d]])=>`<label class="alt" style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" data-sk="${k}" ${sc[k]?"checked":""} style="width:auto;margin-top:4px"><span><b>${t}</b><small>${d}</small></span></label>`).join("")}
     <div class="field"><label for="repSel">Repetir platos</label><select id="repSel">${Object.entries(REPEAT).map(([k,[t]])=>`<option value="${k}" ${(S.home.repeat||"no")===k?"selected":""}>${t}${k!=="no"?" (ahorra unos "+eur(repeatSaving(start,k))+" esta semana)":""}</option>`).join("")}</select></div>
-    ${S.home.shop.weekMode==="online"?`<label class="alt" style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" id="toShop" style="width:auto;margin-top:4px"><span><b>Hacer la compra semanal en tienda</b><small>Te ahorras ${eur(S.home.shop.fee)} de envío cada semana</small></span></label>`:""}
+    ${tarifa(S.home.shop.weekMode).envio?`<label class="alt" style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" id="toShop" style="width:auto;margin-top:4px"><span><b>Hacer la compra semanal en tienda y llevártela tú</b><small>Te ahorras ${eur(tarifa(S.home.shop.weekMode).envio)} de envío cada semana</small></span></label>`:""}
     <label class="alt" style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" id="raiseB" style="width:auto;margin-top:4px"><span><b>Subir el presupuesto semanal a ${eur(need)}</b><small>Ahora es ${eur(wb)}. Es lo que cuesta este menú sin sacrificar nada más.</small></span></label>
     <div class="actions"><button class="btn" id="sacOk">Rehacer el menú</button></div></div>`);
   dlg.querySelector("#sacOk").onclick=()=>{
@@ -518,11 +518,11 @@ function openWeekPlanner(start){
     if(step===3){
       const m=monthOfWeek(start), sh=shopping(m), wi=sh.weeks.indexOf(start), l=sh.lists[wi], wb=weekBudget(m);
       h+=`<h2>La compra</h2>`;
-      if(wi===0)h+=`<p>Compra del mes: <b>${eur(sh.lists.mes.cost+sh.lists.mes.fee)}</b> (${sh.lists.mes.mode==="online"?"online":"en tienda"})</p>`;
-      h+=`<p>Compra de esta semana: <b>${eur(l?l.cost+l.fee:0)}</b> (${l&&l.mode==="online"?"online":"en tienda"})</p>
+      if(wi===0)h+=`<p>Compra del mes: <b>${eur(sh.lists.mes.cost+sh.lists.mes.fee)}</b> (${SHOP_MODES[sh.lists.mes.mode].toLowerCase()})</p>`;
+      h+=`<p>Compra de esta semana: <b>${eur(l?l.cost+l.fee:0)}</b> (${l?SHOP_MODES[l.mode].toLowerCase():""})</p>
         <p>Previsto esta semana: <b>${eur(sh.perWeek[wi]||0)}</b> de ${eur(wb)} de presupuesto semanal.</p>
         ${(sh.perWeek[wi]||0)>wb?`<div class="warnbox">Te pasas ${eur((sh.perWeek[wi]||0)-wb)}. Vuelve al paso anterior y elige platos más baratos, o revisa el presupuesto.</div>`:`<div class="okbox">Dentro del presupuesto.</div>`}
-        ${l&&l.belowMin?`<div class="warnbox">El pedido online no llega al mínimo de ${eur(S.home.shop.min)}. En la pestaña Compra puedes completarlo con cosas del mes.</div>`:""}`;
+        ${l&&l.belowMin?`<div class="warnbox">El pedido no llega al mínimo de ${eur(l.min)}. En la pestaña Compra puedes completarlo con cosas del mes.</div>`:""}`;
     }
     h+=`<div class="actions">${step>0?`<button class="btn ghost" data-pb>Atrás</button>`:""}<button class="btn" data-pn>${step===3?"Confirmar la semana":"Siguiente"}</button></div></div>`;
     showDialog(h);
@@ -568,19 +568,22 @@ function renderCompra(){
   let h=`<section class="view"><div class="seg" role="group" aria-label="Lista"><button aria-pressed="${listSel==="mes"}" data-list="mes">Compra del mes</button>`;
   sh.weeks.forEach((s,i)=>h+=`<button aria-pressed="${listSel===String(i)}" data-list="${i}">Semana ${shortDate(s)}</button>`);
   h+=`</div><div class="listtotal"><h2>${listSel==="mes"?"Despensa, congelados y carne":"Fresco de la semana"}</h2><b>${eur(l.cost+l.fee)}</b></div>
-  <div class="modes">${chip("data-lm","online",l.mode==="online","🛒 Online")}${chip("data-lm","tienda",l.mode==="tienda","🏪 En tienda")}</div>`;
+  <div class="modes chips">${Object.entries(SHOP_MODES).map(([m,t])=>chip("data-lm",m,l.mode===m,t)).join("")}</div>
+  <p class="small muted" style="margin:4px 0">${l.fee?`Envío: ${eur(l.fee)}`:"Sin envío"}${l.min?` · pedido mínimo ${eur(l.min)}`:""} (tarifa de ${esc(superInfo().nombre||"tu supermercado")})</p>`;
   if(wi!=null)h+=`<p class="small muted" style="margin:0">Llega o se compra el ${esc(longDate(deliveryDate(sh.weeks[wi])))}. Lo que se cocina antes sale de lo que ya hay en casa.</p>`;
   if(l.mode==="online"){
-    h+=`<p class="shophint">Toca 🛒 para abrir el producto en Mercadona y añadirlo al carro. Incluye ${eur(l.fee)} de envío.</p>`;
-    if(l.belowMin)h+=`<div class="warnbox">No llegas al pedido mínimo online (${eur(S.home.shop.min)}): faltan ${eur(S.home.shop.min-l.cost)}.${wi!=null?` <button class="btn small" id="fillMin">Completar con cosas del mes</button>`:" Pásala a compra en tienda o junta compras."}</div>`;
+    h+=`<p class="shophint">Toca 🛒 para abrir el producto en Mercadona y añadirlo al carro.</p>`;
+  }
+  if(l.belowMin){
+    h+=`<div class="warnbox">No llegas al pedido mínimo (${eur(l.min)}): faltan ${eur(l.min-l.cost)}.${wi!=null?` <button class="btn small" id="fillMin">Completar con cosas del mes</button>`:" Pásala a compra en tienda o junta compras."}</div>`;
   }
   if(l.items.length)h+=orderBlock(l,listSel==="mes"?"mes":"semana");
   // Por secciones de Mercadona, en el orden en que se recorre la tienda
   const bySec={};for(const it of l.items)(bySec[P[it.pid].sec]=bySec[P[it.pid].sec]||[]).push(it);
   const secs=[...STORE_ORDER,...Object.keys(bySec).filter(s=>!STORE_ORDER.includes(s))].filter(s=>bySec[s]);
-  if(l.mode==="tienda")h+=`<p class="shophint">Ordenado por secciones, en el orden en que se suele recorrer Mercadona: coges todo lo de cada sección de una vez y los congelados al final.</p>`;
+  if(l.mode!=="online")h+=`<p class="shophint">Ordenado por secciones, en el orden en que se suele recorrer Mercadona: coges todo lo de cada sección de una vez y los congelados al final.</p>`;
   secs.forEach((sec,si)=>{
-    h+=`<div class="aisle"><h3>${l.mode==="tienda"?`<span class="secn">${si+1}</span>`:""}${esc(sec)} <span class="muted small">· ${bySec[sec].length}</span></h3>`;
+    h+=`<div class="aisle"><h3>${l.mode!=="online"?`<span class="secn">${si+1}</span>`:""}${esc(sec)} <span class="muted small">· ${bySec[sec].length}</span></h3>`;
     for(const it of bySec[sec].sort((a,b)=>P[a.pid].name.localeCompare(P[b.pid].name))){
       const key=checkKey(month,listSel,it.pid),done=!!S.checks[key],moved=(S.assign[month]||{})[it.pid]!=null&&listSel!=="mes";
       h+=`<label class="item ${done?"done":""}"><input type="checkbox" data-ck="${key}" ${done?"checked":""}>${prodImg(it.pid)}<span class="t">${it.packs} × ${esc(P[it.pid].name)}<small>Necesitas ${fmtQty(it.q,P[it.pid].unit)}${P[it.pid].keep==="congelar"?", para congelar":""}${moved?" · adelantado de la compra del mes":""}</small></span><span class="p">${eur(it.cost)}${upTag(it.pid)}</span>${l.mode==="online"&&P[it.pid].mid?`<a class="mlink" href="https://tienda.mercadona.es/product/${encodeURIComponent(P[it.pid].mid)}/" target="_blank" rel="noopener" aria-label="Abrir ${esc(P[it.pid].name)} en Mercadona">🛒</a>`:""}</label>`}

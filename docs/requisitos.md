@@ -157,8 +157,9 @@ aprende se ve y se corrige en una pantalla "Lo que sé de ti" (por persona: adul
 - Presupuesto mensual y semanal (semanal propio o mensual / semanas). Gasto real apuntado tras cada compra,
   comparado con lo previsto. Aviso si se pasa, con propuestas para abaratar.
 - Compra mensual (despensa, carne para congelar, congelados) + semanal (fresco).
-- Cada lista se marca "online" o "en tienda". Online: pedido mínimo (50 € según prensa de 2025) y envío
-  (8,20 €), editables; si no se llega al mínimo, propone completar adelantando despensa del mes.
+- Cada lista se marca online, en tienda con entrega a domicilio o en tienda. Las tarifas las pone la app según
+  el supermercado (`data/supermercados.json`; Mercadona 2026: online 8,20 € y mínimo 60 €; en tienda con entrega
+  6,50 € sin mínimo); si no se llega al mínimo, propone completar adelantando despensa del mes.
 - La lista descuenta lo que ya hay en casa (congelador y despensa).
 
 ## Fase 3: congelador y notificaciones

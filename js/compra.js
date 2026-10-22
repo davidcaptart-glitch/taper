@@ -2,6 +2,10 @@
 "use strict";
 
 function deliveryDate(start){for(const d of weekDates(start))if(dow(d)===S.home.shop.delivery)return d;return start}
+// Formas de comprar y sus tarifas (las pone el supermercado, no el usuario)
+const SHOP_MODES={online:"🛒 Online",domicilio:"🚚 En tienda, te lo llevan",tienda:"🏪 En tienda"};
+const superInfo=()=>(SUPERS||[]).find(x=>x.id===S.home.super)||(SUPERS||[])[0]||{};
+const tarifa=mode=>{const e=(superInfo().entrega||{})[mode];return {envio:Number(e&&e.envio)||0,minimo:Number(e&&e.minimo)||0}};
 const listMode=(m,key)=>S.modes[m+"|"+key]||(key==="mes"?S.home.shop.monthMode:S.home.shop.weekMode);
 const weekBudget=m=>Number(S.home.budget.week)||Math.round((Number(S.home.budget.month)||0)/Math.max(1,weeksInMonth(m).length)*100)/100;
 
@@ -40,8 +44,8 @@ function shopping(m){
   for(const key of Object.keys(lists)){
     const items=Object.entries(lists[key]).map(([pid,q])=>({pid,q,packs:packsFor(pid,q),cost:packsFor(pid,q)*price(pid)}));
     const cost=items.reduce((t,i)=>t+i.cost,0);
-    const mode=listMode(m,key), online=mode==="online"&&items.length>0;
-    out.lists[key]={key,items,cost,mode,fee:online?Number(S.home.shop.fee)||0:0,belowMin:online&&cost<(Number(S.home.shop.min)||0)};
+    const mode=listMode(m,key), t=tarifa(mode), any=items.length>0;
+    out.lists[key]={key,items,cost,mode,fee:any?t.envio:0,min:t.minimo,belowMin:any&&t.minimo>0&&cost<t.minimo};
   }
   const listsTotal=Object.values(out.lists).reduce((t,l)=>t+l.cost+l.fee,0);
   out.extrasTotal=extras.reduce((a,b)=>a+b,0);
@@ -62,7 +66,7 @@ function inventory(m,exceptId){
 }
 // Completa un pedido online que no llega al mínimo adelantando cosas de la compra del mes
 function fillToMinimum(m,wi){
-  const sh=shopping(m), l=sh.lists[wi], min=Number(S.home.shop.min)||0;
+  const sh=shopping(m), l=sh.lists[wi], min=l.min||0;
   const deliv=deliveryDate(sh.weeks[wi]);
   let cost=l.cost;const a=S.assign[m]=S.assign[m]||{};const moved=[];
   const cands=sh.lists.mes.items.filter(it=>!S.checks[checkKey(m,"mes",it.pid)]&&(sh.first[it.pid]||"")>=deliv).sort((x,y)=>y.cost-x.cost);
@@ -81,7 +85,7 @@ function monthReview(m){
   const eaten=weeks.reduce((t,st)=>t+(S.plans[st]?weekCost(st):0),0);
   const spent=real&&realEntries.length>=listsWith?real:sh.total;
   const reasons=[];
-  if(fees>0)reasons.push({eur:fees,txt:`Envíos de los pedidos online: ${eur(fees)}`,fix:{weekMode:"tienda"},fixTxt:"Compra semanal en tienda"});
+  if(fees>0)reasons.push({eur:fees,txt:`Envíos a domicilio: ${eur(fees)}`,fix:{weekMode:"tienda"},fixTxt:"Compra semanal en tienda, llevándotela tú"});
   if(sh.extrasTotal>0)reasons.push({eur:sh.extrasTotal,txt:`Caprichos y platos fijos sin receta: ${eur(sh.extrasTotal)}`});
   const over=weeks.filter(st=>S.plans[st]&&weekCost(st)>weekFoodTarget(st)+0.5);
   if(over.length)reasons.push({eur:over.reduce((t,st)=>t+weekCost(st)-weekFoodTarget(st),0),txt:`${over.length} ${over.length===1?"semana se pasó":"semanas se pasaron"} incluso con los platos más baratos que encajaban`,fix:{sacrifice:"proteina"},fixTxt:"Menos pescado y carne"});

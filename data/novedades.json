@@ -105,6 +105,15 @@
         "Más de 20 deportes para elegir, agrupados por tipo.",
         "Para ahorrar puedes aceptar repetir platos, entre semanas o en la misma semana."
       ]
+    },
+    {
+      "version": 11,
+      "fecha": "2026-10-22",
+      "titulo": "Envíos con la tarifa real",
+      "cambios": [
+        "El envío y el pedido mínimo los pone la app con la tarifa de tu supermercado: en Mercadona, online 8,20 € con mínimo de 60 €.",
+        "Nueva forma de comprar: en la tienda y que te lo lleven a casa (6,50 €, sin mínimo)."
+      ]
     }
   ]
 }
