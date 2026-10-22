@@ -14,6 +14,7 @@ const AFINAR=[
   ["cocinar","chef-hat|Cómo cocinas (cada día o tápers)",()=>["cocina"]],
   ["deporte","run|Deporte y objetivos",()=>adults().map(a=>"objetivos:"+a.id).concat(S.people.filter(p=>p.trains).map(p=>"entreno:"+p.id))],
   ["dificultad","stairs|Dificultad de los platos",()=>["dificultad"]],
+  ["repetir","repeat|Cocinar una vez para varios días",()=>["cocina"]],
   ["fijos","pizza|Platos fijos y caprichos",()=>["cocina"]],
   ["invitar","mail-forward|Que alguien de casa rellene sus preferencias",()=>[]]];
 
@@ -336,6 +337,10 @@ function stepBody(fullId){
     <details class="more"><summary>⏰ Horario y otras comidas</summary><div class="group" style="margin-top:6px"><div class="row"><label class="small" style="min-width:4.5em">Comida</label><input type="time" data-mt="comida" value="${esc(H.mealTimes.comida)}" style="width:auto"><label class="small">Cena</label><input type="time" data-mt="cena" value="${esc(H.mealTimes.cena)}" style="width:auto"></div>
       <p class="muted small">¿Haces más comidas? Márcalas con su hora (de momento el menú planifica comida y cena).</p>
       ${Object.entries(EXTRA_MEALS).map(([k,v])=>`<div class="row" style="margin:4px 0"><label class="row small" style="flex:1"><input type="checkbox" data-xm="${k}" ${H.extraMeals[k]?"checked":""} style="width:auto"> ${v}</label>${H.extraMeals[k]?`<input type="time" data-xmt="${k}" value="${esc(H.extraMeals[k])}" style="width:auto">`:""}</div>`).join("")}</div></details>`;
+    h+=`<div class="group"><h3>${ico("repeat")} Cocinar una vez para varios días</h3><p class="muted small" style="margin:0 0 8px">Cocinas una vez y comes lo mismo los días siguientes: menos trabajo y la compra sale más barata (paquetes enteros para un plato).</p>
+      ${["comida","cena"].map(m=>{const rr=repRule(m),dd=rr.days||1;return `<div class="field"><label>${m==="comida"?"Comidas":"Cenas"}: ¿cuántos días seguidos lo mismo?</label><div class="chips">${[1,2,3].map(n=>chip("data-repd",m+"|"+n,dd===n,n===1?"1 día (variado)":n+" días")).join("")}</div>
+        ${dd>1&&kids().length?`<div class="chips" style="margin-top:6px">${[["todas","Siempre"],["sin","Solo cuando no están los niños"],["con","Solo cuando están los niños"]].map(([k,t])=>chip("data-repw",m+"|"+k,(rr.who||"todas")===k,t)).join("")}</div>`:""}</div>`}).join("")}
+      <div class="hint">Solo repito platos que aguantan en la nevera esos días (o que se pueden congelar).</div></div>`;
     h+=`<details class="more" ${S.fixed.length?"open":""}><summary>🍕 Platos fijos y caprichos${S.fixed.length?` (${S.fixed.length})`:""}</summary><p class="muted small" style="margin:6px 0 8px">Por ejemplo, pizza el viernes por la noche. Los caprichos cuentan para la compra, pero no para tus objetivos.</p>`+fixedEditor()+`</details>`;
     return h;
   }
@@ -491,6 +496,9 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
   qa("[data-pdel]").forEach(b=>b.onclick=()=>{S.people=S.people.filter(p=>p.id!==b.dataset.pdel);if(wiz.editP===b.dataset.pdel)wiz.editP=null;rerender()});
   // Cómo coméis
   qa("[data-more]").forEach(b=>b.onclick=()=>{wiz.more={...(wiz.more||{}),[b.dataset.more]:true};render()});
+  const setRep=(m,f)=>{const rm=S.home.repeatMeals=S.home.repeatMeals||{};rm[m]={days:1,who:"todas",...(rm[m]||{}),...f};H._repChanged=true;rerender()};
+  qa("[data-repd]").forEach(b=>b.onclick=()=>{const [m,n]=b.dataset.repd.split("|");setRep(m,{days:Number(n)})});
+  qa("[data-repw]").forEach(b=>b.onclick=()=>{const [m,w]=b.dataset.repw.split("|");setRep(m,{who:w})});
   qa("[data-maxd]").forEach(b=>b.onclick=()=>{H.maxDiff=b.dataset.maxd;rerender()});
   qa("[data-startpick]").forEach(b=>b.onclick=()=>{H.startPick=b.dataset.startpick;rerender()});
   q("#wzStartO")&&(q("#wzStartO").onchange=e=>{H.startOther=e.target.value;rerender()});
@@ -544,6 +552,7 @@ function validateStep(fullId){
     if(sin){toast(`Marca qué comidas hace ${personName(sin)} en casa`);return false}}
   if(id==="objetivos"){if(!a.goals.length){toast("Elige al menos un objetivo");return false}a.weight=Number(v("#wzW"))||null}
   if(id==="cocina"&&H.cookMode==="lote"&&!H.cookDays.length){toast("Elige al menos un día para cocinar");return false}
+  if(id==="cocina"&&H._repChanged){delete H._repChanged;if(!wiz.afinar)setTimeout(()=>{redoFromToday();render()},0)}
   if(id==="plan"){const st=v("#wzStart");H.start=st&&st>todayISO()?st:(H.start&&H.start<=todayISO()?H.start:null);
     // Los menús de semanas que ya no cuentan (antes del inicio) se borran
     if(H.start)for(const s of Object.keys(S.plans))if(addDays(s,6)<H.start)delete S.plans[s];

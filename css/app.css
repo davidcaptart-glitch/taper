@@ -975,3 +975,7 @@ details.more2 .card{box-shadow:none;padding:10px 0;margin:0;border-top:1px solid
 .acc summary .ico .ic{width:22px;height:22px;vertical-align:middle;color:var(--accent)}
 .afi .ic{color:var(--accent)}
 .fzi .ic,.tkban .ti .ic{width:26px;height:26px}
+
+/* Compra: los 3 modos en una línea */
+.modes.chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.modes.chips .chip{justify-content:center;padding:8px 4px;font-size:.84rem;white-space:nowrap;gap:5px}

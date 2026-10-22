@@ -698,6 +698,18 @@
         "Al empezar puedes marcar lo que ya tienes en casa y no te lo pongo en la primera compra.",
         "Iconos de línea iguales en botones y apartados."
       ]
+    },
+    {
+      "version": 76,
+      "fecha": "2026-10-22",
+      "titulo": "Cocina una vez, come dos o tres días",
+      "cambios": [
+        "Nuevo en Afinar › Cocinar una vez para varios días: elige para comidas y para cenas cuántos días seguidos comes lo mismo (1, 2 o 3).",
+        "Puede ser siempre, solo cuando no están los niños o solo cuando están.",
+        "El primer día te dice cuántas raciones cocinar y para qué días; los siguientes, «ya está hecho, solo calentar». Por lotes, el plato se cocina una sola vez en la sesión.",
+        "Solo repite platos que aguantan en la nevera (o se congelan).",
+        "En Compra, las tres formas de comprar caben en una línea."
+      ]
     }
   ]
 }

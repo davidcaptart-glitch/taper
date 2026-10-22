@@ -5,7 +5,7 @@
 function deliveryDate(start){let r=start;for(const d of weekDates(start))if(dow(d)===S.home.shop.delivery){r=d;break}
   const st=S.home.start;return st&&r<st&&st<=addDays(start,6)?st:r}
 // Formas de comprar y sus tarifas (las pone el supermercado, no el usuario)
-const SHOP_MODES={online:"Online",domicilio:"En tienda, te lo llevan",tienda:"En tienda"};
+const SHOP_MODES={online:"Online",domicilio:"Tienda y envío",tienda:"En tienda"};
 const SHOP_ICO={online:"shopping-cart",domicilio:"truck",tienda:"building-store"};
 const superInfo=()=>(SUPERS||[]).find(x=>x.id===S.home.super)||(SUPERS||[])[0]||{};
 // ¿Reparte este súper en tu código postal? (si no, solo se puede comprar en tienda)
@@ -35,7 +35,7 @@ function monthUses(m,exceptId){
       if(sl.id===exceptId)continue;
       const v=wk.slots[sl.id], r=v&&RX[v.recipe];
       if(!r){if(sl.fixed&&!sl.fixed.recipe)out.push({extra:Number(sl.fixed.cost)||0,wi,slot:sl});continue}
-      const cook=cookDayFor(sl.date);
+      const cook=cookDayFor(v.rep?v.rep.slice(0,10):sl.date);   // si repite el plato de otro día, se compra para aquel día
       // Lo fresco para lo que se cocina antes de que llegue el pedido sale del pedido de la semana anterior
       const freshWi=wi>0&&cook<deliv?wi-1:wi;
       for(const [pid,q] of slotIng(r,sl))out.push({pid,q,wi,freshWi,date:cook,slot:sl,r});

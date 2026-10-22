@@ -49,13 +49,16 @@ function buildSchedule(){
       const mt=S.home.mealTimes[sl.meal]||"14:00";
       if(T.descongelar&&S.home.cookMode!=="lote"){const th=r.ing.filter(([p])=>P[p].thaw).map(([p])=>P[p].name.toLowerCase());
         if(th.length)push(at(addDays(d,-1),n.thaw),"❄️ Descongela para mañana",`Pasa ${th.join(" y ")} del congelador a la nevera para ${r.name.toLowerCase()}.`,"thaw|"+sl.id)}
-      if(fromBatch(sl)){
+      if(v.rep&&!fromBatch(sl)){
+        // Mismo plato que otro día: ya está hecho
+        if(T.cocinar)push(at(d,mt,-30),`🥡 Saca el táper: ${r.name}`,`Lo cocinaste el ${DAYS[dow(v.rep.slice(0,10))].toLowerCase()}. Caliéntalo y a comer.`,"cook|"+sl.id);
+      }else if(fromBatch(sl)){
         // Ya cocinado en la sesión: solo sacarlo (y, si va congelado, pasarlo a la nevera la noche antes)
         const k=keepPlan(r,sl);
         if(T.descongelar&&k.freeze)push(at(addDays(d,-1),n.thaw),"❄️ Pasa el táper a la nevera",`El de ${r.name.toLowerCase()} para mañana (${sl.meal}).`,"thawt|"+sl.id);
         if(T.cocinar)push(at(d,mt,-30),`🥡 Saca el táper: ${r.name}`,`Lo cocinaste el ${DAYS[dow(k.cook)].toLowerCase()}. Caliéntalo y a comer.`,"cook|"+sl.id);
       }else if(S.home.cookMode==="lote"){/* se avisa una vez al día de cocinar (abajo) */
-      }else if(T.cocinar)push(at(d,mt,-60),`🍳 Hoy: ${r.name}`,`${recipeTime(r)} min · ${String(sl.portions).replace(".",",")} raciones${sl.tupper.length?" · haz el táper de mañana":""}.`,"cook|"+sl.id);
+      }else if(T.cocinar)push(at(d,mt,-60),`🍳 Hoy: ${r.name}`,`${recipeTime(r)} min · ${String(cookPortions(sl)).replace(".",",")} raciones${sl.tupper.length?" · haz el táper de mañana":""}${repChildren(sl).length?" · también para "+repChildren(sl).map(c=>DAYS[dow(c.date)].toLowerCase()).join(" y "):""}.`,"cook|"+sl.id);
       if(T.horas){const who=sl.eaters.concat(sl.kids);if(who.length)push(at(d,mt),`${sl.meal==="comida"?"🍽️ A comer":"🌙 A cenar"}: ${r.name}`,`Para ${names(who)}${sl.guests?` y ${sl.guests} invitados`:""}.`,"eat|"+sl.id)}
       if(T.valorar&&sl.eaters.concat(sl.kids).some(p=>!ratedBefore(p,r.id)))push(at(d,mt,90),`¿Qué tal ${r.name.toLowerCase()}?`,"Toca para valorarlo y que aprenda lo que te gusta.","rate|"+sl.id);
     }

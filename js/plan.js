@@ -229,6 +229,26 @@ function batchCovers(cd){
   let last=cd;for(let i=1;i<7;i++){const x=addDays(cd,i);if(S.home.cookDays.includes(dow(x)))break;last=x}
   return {from:cd,to:last,days:daysBetween(cd,last)+1};
 }
+/* ---------- Cocinar una vez para varios días ----------
+   S.home.repeatMeals = {comida:{days:1|2|3, who:"todas"|"sin"|"con"}, cena:{…}}: cuántos días seguidos se come lo mismo
+   y si solo cuando no están los niños (o solo cuando están). El hueco que repite guarda v.rep = id del primero:
+   se cocina una vez (en el primero) con las raciones de todos. */
+const repRule=meal=>((S.home.repeatMeals||{})[meal])||{days:1,who:"todas"};
+const repApplies=sl=>{const r=repRule(sl.meal);if((r.days||1)<2)return false;if(r.who==="con")return sl.kids.length>0;if(r.who==="sin")return sl.kids.length===0;return true};
+function repeatFrom(wk,sl,slots){
+  if(!repApplies(sl)||sl.fixed||mealState(sl.date,sl.meal)!=="cocinar")return null;
+  const prevId=addDays(sl.date,-1)+"|"+sl.meal,prev=slots.find(s=>s.id===prevId);if(!prev||!repApplies(prev)||prev.fixed)return null;
+  const pv=wk.slots[prevId],r=pv&&RX[pv.recipe];if(!r||r.cap)return null;
+  const head=pv.rep||prevId,n=1+Object.entries(wk.slots).filter(([id,v])=>v.rep===head&&id<sl.id).length;
+  if(n>=(repRule(sl.meal).days||1))return null;
+  if(daysBetween(cookDayFor(head.slice(0,10)),sl.date)>r.fridge&&!r.freeze)return null;
+  if(!slotPeople(sl).every(p=>canEat(p,r)))return null;
+  if(sl.kids.length&&!r.kid&&!sl.kids.every(k=>dishPref(k,r.id)>=1))return null;
+  return {recipe:r.id,rep:head};
+}
+// Huecos que repiten el plato de este (se cocinan con él) y raciones totales a cocinar
+const repChildren=sl=>{const wk=S.plans[weekStartFor(sl.date)];return wk?Object.keys(wk.slots).filter(id=>wk.slots[id].rep===sl.id).sort().map(id=>slotFor(id.slice(0,10),id.slice(11))).filter(Boolean):[]};
+const cookPortions=sl=>Math.round((sl.portions+repChildren(sl).reduce((t,c)=>t+c.portions,0))*100)/100;
 // En qué tápers se reparte un plato: uno para la comida o cena de ese día (los que comen en casa)
 // y uno por persona para el táper del día siguiente
 function tupperSplit(sl){
@@ -236,6 +256,7 @@ function tupperSplit(sl){
   if(home.length||sl.guests){const rac=home.reduce((t,p)=>t+(p.kind==="nino"?kidFactor(p,sl):adultFactor(p,sl)),0)+(sl.guests||0);
     out.push({when:`${DAYS[dow(sl.date)]} · ${sl.meal}${S.home.cookMode==="lote"&&!fromBatch(sl)?" (para hoy, sin táper)":""}`,rac:Math.round(rac*100)/100,who:home.map(p=>isMe(p)?"tú":personName(p)).concat(sl.guests?[`${sl.guests} invitados`]:[])})}
   for(const a of sl.tupper)out.push({when:`Táper del ${DAYS[dow(addDays(sl.date,1))].toLowerCase()} · comida`,rac:adultFactor(a,sl),who:[isMe(a)?"tú":personName(a)]});
+  for(const c of repChildren(sl))out.push({when:`${DAYS[dow(c.date)]} · ${c.meal} (mismo plato)`,rac:c.portions,who:c.eaters.concat(c.kids).map(p=>isMe(p)?"tú":personName(p))});
   return out;
 }
 /* ---------- Cocinar varios platos a la vez ----------
@@ -392,6 +413,8 @@ function ensureWeek(start,regen){
   if(regen){for(const [id,v] of Object.entries(wk.slots))if(!v.locked)delete wk.slots[id];wk.confirmed=false}
   const slots=buildSlots(start);
   let changed=safetySweep(start,slots);
+  // Un hueco que repetía el plato de otro, si ese otro ha cambiado, se vuelve a elegir
+  for(const [id,v] of Object.entries(wk.slots))if(v.rep&&(!wk.slots[v.rep]||wk.slots[v.rep].recipe!==v.recipe)){delete wk.slots[id];changed=true}
   const ctx=makeCtx(start);
   for(const sl of slots){
     if(sl.fixed){
@@ -404,6 +427,8 @@ function ensureWeek(start,regen){
     }
     const cur=wk.slots[sl.id];
     if(cur&&RX[cur.recipe])continue;
+    // Cocinar una vez para varios días: mismo plato que el día anterior si toca
+    const rp=repeatFrom(wk,sl,slots);if(rp){wk.slots[sl.id]=rp;changed=true;continue}
     const r=pickFor(sl,ctx);if(!r)continue;
     wk.slots[sl.id]={recipe:r.id};addToCtx(ctx,r);changed=true;
   }
@@ -563,7 +588,7 @@ function fitBudget(start){
     const cost=weekCost(start,slots);if(cost<=target)return {ok:true,cost,target};
     let best=null;const pre=[];
     for(const sl of slots){
-      if(sl.fixed)continue;const v=wk.slots[sl.id];if(!v||v.locked)continue;const cur=RX[v.recipe];if(!cur)continue;
+      if(sl.fixed)continue;const v=wk.slots[sl.id];if(!v||v.locked||v.rep||Object.values(wk.slots).some(x=>x.rep===sl.id))continue;const cur=RX[v.recipe];if(!cur)continue;
       // Lo que se ha pedido para este mes (más de algo, o repetir un plato) no se cambia por ahorrar
       {const mp=monthPrefs(sl.date);if(mp&&((mp.favs||[]).includes(cur.id)||(mp.more||[]).some(k=>prefMatch[k]&&prefMatch[k](cur))))continue}
       if(cur.pack&&hasPack(cur))continue;   // lo que has desbloqueado en la tienda tampoco
@@ -639,7 +664,8 @@ function alternatives(slot,n=6){
 function missingFor(r,slot,inv){return r.ing.filter(([pid,q])=>(inv[pid]||0)<q*slot.portions-1).map(([pid])=>pid)}
 function setSlotRecipe(slot,rid){
   const start=weekStartFor(slot.date);const wk=S.plans[start];
-  wk.slots[slot.id]={...(wk.slots[slot.id]||{}),recipe:rid,locked:true};save();
+  // Elegido a mano: deja de repetir el plato de otro día (los días que lo repetían se rehacen solos)
+  wk.slots[slot.id]={recipe:rid,locked:true};save();
 }
 // Pasa el plato de un hueco al siguiente, y así sucesivamente (el último se descarta)
 function shiftForward(start,fromId){

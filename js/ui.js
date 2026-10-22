@@ -78,6 +78,8 @@ function mealLine(d,meal,wk){
   const who=[...(st==="solotaper"?[]:["tú"]),...sl.kids.map(k=>personName(k))];
   const comp=company(sl);
   let h=`<div style="margin-top:6px"><div class="small muted">${label}${st==="solotaper"?" (solo el táper de mañana)":""}${sl.tupper.length&&st!=="solotaper"?" + táper de mañana":""}${comp.length?" · con "+esc(comp.map(personName).join(" y ")):""}${sl.guests?` · <b>+${sl.guests} ${sl.guests===1?"invitado":"invitados"}</b>`:""}</div>`;
+  if(r&&v.rep&&!fromBatch(sl))h+=`<div class="batchtag">${ico("repeat")} El mismo plato que el ${DAYS[dow(v.rep.slice(0,10))].toLowerCase()} · ya está hecho, solo calentar</div>`;
+  else if(r&&!fromBatch(sl)&&repChildren(sl).length)h+=`<div class="batchtag">${ico("repeat")} Cocina ${String(cookPortions(sl)).replace(".",",")} raciones: también para ${esc(repChildren(sl).map(c=>DAYS[dow(c.date)].toLowerCase()).join(" y "))}</div>`;
   if(r&&fromBatch(sl)){const k=keepPlan(r,sl);h+=`<div class="batchtag">${k.freeze?"❄️":"🥡"} Del táper del ${DAYS[dow(k.cook)].toLowerCase()}${k.freeze?" · pásalo a la nevera la noche antes":" · solo sacarlo y calentar"}</div>`}
   if(r)h+=`<div class="dishrow">${dishImg(r,"s")}<button class="name" data-open="${r.id}" data-slot="${sl.id}">${esc(r.name)}</button></div>`;
   else if(sl.fixed)h+=`<b>${esc(sl.fixed.name)}</b>`;
@@ -668,7 +670,7 @@ function bindOpen(){main.querySelectorAll("[data-open]").forEach(b=>b.onclick=()
 let recTab="ing";
 function openRecipe(id,sid){
   const r=RX[id];let serv=2;let vi=Math.max(0,r.vars.indexOf(variantFor(r)));
-  const sl=sid?slotFor(sid.slice(0,10),sid.slice(11)):null;if(sl)serv=sl.portions;
+  const sl=sid?slotFor(sid.slice(0,10),sid.slice(11)):null;if(sl)serv=cookPortions(sl);
   const draw=()=>{
     const v=r.vars[vi], ok=new Set([...S.home.apps,"ninguno"]);
     const cost=rationCost(r);
@@ -792,7 +794,7 @@ function startTimer(sec){
 function openSession(cd){
   const start=weekStartFor(cd), out=[];
   for(const s of [addDays(start,-7),start,addDays(start,7)]){const wk=S.plans[s];if(!wk)continue;
-    for(const sl of buildSlots(s)){const v=wk.slots[sl.id],r=v&&RX[v.recipe];if(r&&cookDayFor(sl.date)===cd)out.push({sl,r,v:variantFor(r),k:keepPlan(r,sl)})}}
+    for(const sl of buildSlots(s)){const v=wk.slots[sl.id],r=v&&RX[v.recipe];if(r&&!v.rep&&cookDayFor(sl.date)===cd)out.push({sl,r,v:variantFor(r),k:keepPlan(r,sl)})}}
   const order={horno:0,air:1,vitro:2,micro:3,ninguno:4};
   out.sort((a,b)=>order[a.v.app]-order[b.v.app]||b.v.time-a.v.time);
   const active=out.reduce((t,o)=>t+o.v.active,0), longest=Math.max(0,...out.map(o=>o.v.time));
@@ -801,7 +803,7 @@ function openSession(cd){
     <div class="okbox"><b>Cocinas para ${cv.days} ${cv.days===1?"día":"días"}</b>: del ${esc(DAYS[dow(cv.from)].toLowerCase())} al ${esc(DAYS[dow(cv.to)].toLowerCase())}. ${out.length} platos repartidos en ${nTp} tápers.</div>
     <p class="small muted">Unos ${Math.max(active,longest)} min si vas encadenando. Empieza por el horno y, mientras, ve con la vitro. Pon una etiqueta a cada táper con el día.</p>
     ${out.length?`<button class="cookrow" id="cookAll"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg></span><b>Cocinar todo paso a paso</b><small class="muted" style="margin-left:auto">unos ${batchPlan(out).total} min</small></button>`:""}
-    ${out.map((o,i)=>`<div class="session sesscard">${dishImg(o.r,"s")}<div class="sessin"><b>${i+1}. ${esc(o.r.name)}</b><div class="small muted">${APP[o.v.app]} · ${o.v.time} min (${o.v.active} de trabajo) · ${String(o.sl.portions).replace(".",",")} raciones</div>
+    ${out.map((o,i)=>`<div class="session sesscard">${dishImg(o.r,"s")}<div class="sessin"><b>${i+1}. ${esc(o.r.name)}</b><div class="small muted">${APP[o.v.app]} · ${o.v.time} min (${o.v.active} de trabajo) · ${String(cookPortions(o.sl)).replace(".",",")} raciones</div>
       <div class="tsplit"><b>Repártelo en ${tupperSplit(o.sl).length} ${tupperSplit(o.sl).length===1?"táper":"tápers"}${o.k.freeze?" · ❄️ al congelador":""}</b>
         ${tupperSplit(o.sl).map(t=>`<div class="tsp"><span>🥡 ${esc(t.when)}</span><span>${String(t.rac).replace(".",",")} rac. · ${esc(t.who.join(", "))}</span></div>`).join("")}</div>
       <button class="btn ghost small" data-open2="${o.r.id}" data-sl="${o.sl.id}">Ver receta</button></div></div>`).join("")}</div>`);
