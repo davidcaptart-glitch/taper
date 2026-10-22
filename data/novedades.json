@@ -83,6 +83,16 @@
         "Si tu código postal aún no está, puedes pedirlo con un botón desde Perfil > Código postal y municipio.",
         "Tus recetas sugeridas pueden ir firmadas con tu nombre, y en Perfil ves tu código de usuario."
       ]
+    },
+    {
+      "version": 9,
+      "fecha": "2026-10-22",
+      "titulo": "Tu congelador",
+      "cambios": [
+        "Nueva pestaña Congelador: se llena al marcar como comprado lo que va al congelador y se vacía al cocinar.",
+        "Avisa de lo que lleva más de 3 meses y lo propone antes en los menús.",
+        "El día de un plato con carne o pescado congelado te pregunta si lo descongelaste; si no, te da un plan B."
+      ]
     }
   ]
 }

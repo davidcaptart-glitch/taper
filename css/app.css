@@ -164,7 +164,8 @@ dialog::backdrop{background:rgb(10 14 20 / .55)}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 
 /* ---------- Fase 2 ---------- */
-nav.tabs .in{grid-template-columns:repeat(4,1fr)}
+nav.tabs .in{grid-template-columns:repeat(5,1fr)}
+nav.tabs button{font-size:.82rem;padding-left:2px;padding-right:2px}
 .muted{color:var(--muted)}
 .small{font-size:.86rem}
 .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}

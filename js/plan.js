@@ -213,6 +213,7 @@ function scoreRecipe(r,slot,ctx){
   if(r.red&&(c.red||0)>=(goals.includes("sano")?1:2))s-=3;
   if(r.group==="huevo"&&(c.huevo||0)>=2)s-=3;
   if(ctx.have)s+=ctx.have(r)*1.5;
+  if(ctx.oldFrozen&&r.ing.some(([p])=>ctx.oldFrozen.has(p)))s+=2;
   // Facilidad: lo que te resultó complicado sale menos; lo fácil, algo más
   const mineR=S.ratings.filter(x=>x.rid===r.id&&x.ease&&slot.eaters.concat(slot.tupper).some(a=>a.id===x.who));
   if(mineR.some(x=>x.ease==="dificil"))s-=2.5;else if(mineR.some(x=>x.ease==="facil"))s+=0.6;
@@ -224,7 +225,9 @@ function makeCtx(start,exceptId){
   const hist={};for(const k of [3,2,1])for(const sign of [-1,1])for(const id of weekRecipes(addDays(start,sign*7*k)))hist[id]=k;
   const counts={},mains={};for(const id of used){const r=RX[id];if(!r)continue;counts[r.group]=(counts[r.group]||0)+1;mains[r.main]=(mains[r.main]||0)+1;if(r.red)counts.red=(counts.red||0)+1}
   const lm=Object.fromEntries(S.people.map(p=>[p.id,learnedMap(p)]));
-  return {used,hist,counts,mains,lm};
+  // Lo que lleva más de 3 meses en el congelador: mejor gastarlo pronto
+  let oldFrozen=null;try{if(typeof freezerState==="function")oldFrozen=new Set(freezerState().filter(e=>e.days>FREEZER_MONTHS*30).map(e=>e.pid))}catch(e){}
+  return {used,hist,counts,mains,lm,oldFrozen};
 }
 function pickFor(slot,ctx){
   let c=candidates(slot);

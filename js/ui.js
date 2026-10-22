@@ -10,6 +10,7 @@ function renderHeader(){
   const onb=S.onboarded&&tab!=="wizard";
   document.querySelector(".top .ticket").hidden=!onb;
   document.querySelector(".monthnav").style.visibility=onb&&(tab==="menu"||tab==="compra")?"visible":"hidden";
+  document.querySelector(".top .ticket").hidden=!onb||tab==="congelador";
   document.querySelector("nav.tabs").hidden=!onb;
   document.getElementById("monthLabel").textContent=monthName(month);
   document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-current",b.dataset.tab===tab?"page":"false"));
@@ -35,6 +36,7 @@ function render(){
   if(tab==="menu")renderMenu();
   if(tab==="compra")renderCompra();
   if(tab==="recetas")renderRecetas();
+  if(tab==="congelador")renderCongelador();
   if(tab==="perfil")renderPerfil();
 }
 
@@ -203,7 +205,7 @@ function moveToNext(rid,from){
 }
 function renderMenu(){
   const weeks=weeksInMonth(month);
-  let h=`<section class="view">`+reviewCard()+surveyCard()+sportCard()+rateCard();
+  let h=`<section class="view">`+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
   if(!weeks.length)h+=`<div class="empty"><p>No hay semanas que empiecen este mes.</p></div>`;
   for(const start of weeks){
     const wk=S.plans[start], dates=weekDates(start);
@@ -236,7 +238,7 @@ function renderMenu(){
   main.querySelectorAll("[data-regen]").forEach(b=>b.onclick=()=>{if(confirm("¿Rehacer los platos de esta semana? Se mantienen los que elegiste a mano.")){genWeekFromScratch(b.dataset.regen);save();render();toast("Platos rehechos")}});
   main.querySelectorAll("[data-swap]").forEach(b=>b.onclick=()=>openSwap(b.dataset.swap));
   main.querySelectorAll("[data-sacr]").forEach(b=>b.onclick=()=>openSacrifice(b.dataset.sacr));
-  bindReview(main);bindSurvey();
+  bindReview(main);bindSurvey();bindThaw();
   main.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>openDay(b.dataset.day));
   main.querySelectorAll("[data-session]").forEach(b=>b.onclick=()=>openSession(b.dataset.session));
   main.querySelectorAll("[data-rate]").forEach(b=>b.onclick=()=>{const [sid,rid,who,v]=b.dataset.rate.split("~");
@@ -585,7 +587,7 @@ function renderCompra(){
   main.innerHTML=h+`</section>`;
   main.querySelectorAll("[data-list]").forEach(b=>b.onclick=()=>{listSel=b.dataset.list;render()});
   main.querySelectorAll("[data-lm]").forEach(b=>b.onclick=()=>{S.modes[month+"|"+listSel]=b.dataset.lm;save();render()});
-  main.querySelectorAll("[data-ck]").forEach(i=>i.onchange=()=>{if(i.checked)S.checks[i.dataset.ck]=true;else delete S.checks[i.dataset.ck];i.closest(".item").classList.toggle("done",i.checked);save()});
+  main.querySelectorAll("[data-ck]").forEach(i=>i.onchange=()=>{S.checkedAt=S.checkedAt||{};if(i.checked){S.checks[i.dataset.ck]=true;S.checkedAt[i.dataset.ck]=todayISO()}else{delete S.checks[i.dataset.ck];delete S.checkedAt[i.dataset.ck]}i.closest(".item").classList.toggle("done",i.checked);save()});
   document.getElementById("spentIn").onchange=e=>{const v=e.target.value;if(v==="")delete S.spent[sk];else S.spent[sk]=Number(v);save();renderHeader()};
   main.querySelectorAll("[data-saveorder]").forEach(b=>b.onclick=()=>{const items={};for(const it of l.items)items[it.pid]=it.packs;S.orders[b.dataset.saveorder]={items,savedAt:todayISO()};save();render();toast("Pedido guardado")});
   bindReview(main);bindSpending();
