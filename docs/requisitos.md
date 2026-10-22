@@ -169,6 +169,18 @@ aprende se ve y se corrige en una pantalla "Lo que sé de ti" (por persona: adul
   descongelar (21:30), qué cocinar hoy (18:30), valorar el plato de ayer (14:00), planificar (según usuario),
   subidas de precio (domingo), presupuesto, congelador. Varios usuarios: una suscripción por móvil.
 
+### Notificaciones: opciones (decisión pendiente)
+Una app web sin servidor no puede programar avisos en el móvil. Opciones:
+- **A. Recomendada: un pequeño servidor gratuito (Cloudflare Workers).** Cada móvil se apunta a los avisos y
+  envía sus próximos avisos con hora y texto (descongelar, qué cocinar, ¿qué tal?, ¿entrenaste?, planificar,
+  subidas de precio). El servidor los manda a su hora como notificación de Táper, para todos los usuarios.
+  Gratis para este uso. Necesita que David cree una cuenta de Cloudflare; el resto lo monta Claude.
+  Privacidad: en el servidor solo quedan la suscripción del móvil y los textos de los próximos avisos.
+- **B. Sin servidor: recordatorios en el calendario del móvil.** La app genera un archivo de calendario con
+  los avisos de la semana (descongelar, cocinar, planificar) y el móvil avisa con sus alarmas. Muy fiable, pero
+  hay que volver a añadirlo si cambia el plan, y no sirve para preguntas como "¿qué tal la cena?".
+- Ya funciona sin nada de esto: los avisos y preguntas dentro de la app al abrirla.
+
 ## Precios por zona
 - Variable `CODIGOS_POSTALES` (lista). El script consulta una vez por almacén y guarda
   `data/precios/<almacén>.json` y un índice código postal -> almacén. `data/precios.json` sigue siendo la zona
