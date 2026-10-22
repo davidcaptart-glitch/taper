@@ -979,3 +979,15 @@ details.more2 .card{box-shadow:none;padding:10px 0;margin:0;border-top:1px solid
 /* Compra: los 3 modos en una línea */
 .modes.chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
 .modes.chips .chip{justify-content:center;padding:8px 4px;font-size:.84rem;white-space:nowrap;gap:5px}
+
+/* Compra: lista y secciones plegables */
+details.shoplist>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:6px;padding:10px 2px;font-size:1rem}
+details.shoplist>summary::-webkit-details-marker{display:none}
+details.aisle>summary{list-style:none;cursor:pointer}
+details.aisle>summary::-webkit-details-marker{display:none}
+details.aisle>summary h3{margin-bottom:0;padding:6px 0}
+details.aisle>summary h3::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);margin-right:6px;transition:transform .2s}
+details.aisle[open]>summary h3::after{transform:rotate(-135deg)}
+details.aisle[open]>summary h3{margin-bottom:8px}
+details.aisle.full>summary h3{opacity:.6}
+details.aisle{margin-top:10px}

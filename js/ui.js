@@ -940,6 +940,10 @@ function renderCompra(){
   if(l.items.length&&chosenSupers().length>1)h+=compareCard(l);
   // Un bloque por supermercado; dentro, por secciones en el orden en que se recorre la tienda
   const multi=l.groups.length>1;
+  // La lista y cada sección se pliegan; por defecto, solo la primera sección con cosas por coger va abierta
+  const nDone=l.items.filter(it=>S.checks[checkKey(month,listSel,it.pid)]).length;
+  const lk=month+"|"+listSel;aisleOpen[lk]=aisleOpen[lk]||{};const AO=aisleOpen[lk];let firstOpen=null;
+  h+=`<details class="shoplist" ${AO.__all===false?"":"open"}><summary><b>${ico("shopping-cart")} Lista: ${l.items.length} productos</b><span class="small muted">${nDone?` · ${nDone} cogidos`:""}</span></summary>`;
   if(l.mode!=="online")h+=`<p class="shophint">Ordenado por secciones, en el orden en que se suele recorrer el súper: coges todo lo de cada sección de una vez y los congelados al final.</p>`;
   for(const g of l.groups){
     const sp=superById(g.sup);
@@ -948,13 +952,17 @@ function renderCompra(){
     const bySec={};for(const it of g.items)(bySec[P[it.pid].sec]=bySec[P[it.pid].sec]||[]).push(it);
     const secs=[...STORE_ORDER,...Object.keys(bySec).filter(s=>!STORE_ORDER.includes(s))].filter(s=>bySec[s]);
     secs.forEach((sec,si)=>{
-      h+=`<div class="aisle"><h3><span class="secico">${secIco(sec)}</span>${l.mode!=="online"?`<span class="secn">${si+1}</span>`:""}${esc(sec)} <span class="muted small">· ${bySec[sec].length}</span></h3>`;
+      const ak=g.sup+"|"+sec,got=bySec[sec].filter(it=>S.checks[checkKey(month,listSel,it.pid)]).length,full=got===bySec[sec].length;
+      if(AO[ak]==null&&!full&&!firstOpen)firstOpen=ak;
+      const open=AO[ak]!=null?AO[ak]:ak===firstOpen;
+      h+=`<details class="aisle ${full?"full":""}" data-aisle="${esc(ak)}" ${open?"open":""}><summary><h3><span class="secico">${secIco(sec)}</span>${l.mode!=="online"?`<span class="secn">${si+1}</span>`:""}${esc(sec)} <span class="muted small">· ${full?"✓ todo":got?got+" de "+bySec[sec].length:bySec[sec].length}</span></h3></summary>`;
       for(const it of bySec[sec].sort((a,b)=>P[a.pid].name.localeCompare(P[b.pid].name))){
         const key=checkKey(month,listSel,it.pid),done=!!S.checks[key],moved=(S.assign[month]||{})[it.pid]!=null&&listSel!=="mes";
         const sx=it.sup!=="mercadona"&&PS&&PS.supers[it.sup]?PS.supers[it.sup].productos[it.pid]:null;
         h+=`<label class="item ${done?"done":""}"><input type="checkbox" data-ck="${key}" ${done?"checked":""}>${prodImg(it.pid)}<span class="t">${it.packs} × ${esc(P[it.pid].name)}<small>Necesitas ${fmtQty(it.q,P[it.pid].unit)}${P[it.pid].keep==="congelar"?", para congelar":""}${moved?" · adelantado de la compra del mes":""}${sx?` · ${esc(sx.nombre)}`:""}</small></span><span class="p">${eur(it.cost)}${upTag(it.pid)}</span>${l.mode==="online"&&it.sup==="mercadona"&&P[it.pid].mid?`<a class="mlink" href="https://tienda.mercadona.es/product/${encodeURIComponent(P[it.pid].mid)}/" target="_blank" rel="noopener" aria-label="Abrir ${esc(P[it.pid].name)} en Mercadona">🛒</a>`:""}</label>`}
-      h+=`</div>`});
+      h+=`</details>`});
   }
+  h+=`</details>`;
   const sk=month+"|"+listSel;
   h+=`<details class="card more2"><summary><b>${ico("chart-bar")} Gasto y resumen</b> <span class="small muted">· lo pagado, tickets y presupuesto</span></summary>`;
   h+=`<div class="card"><h2>Lo que he pagado</h2><div class="spend"><span class="small muted">Apunta el total del ticket o del pedido para comparar con lo previsto (${eur(l.cost+l.fee)}).</span><input type="number" min="0" step="0.01" id="spentIn" value="${S.spent[sk]??""}" placeholder="0,00"></div></div>`;
@@ -979,6 +987,9 @@ function renderCompra(){
     save();render();toast("Hecho: "+p.t.toLowerCase())});
   main.querySelectorAll("[data-strat]").forEach(b=>b.onclick=()=>{S.home.shop.strategy=b.dataset.strat;save();render();toast(b.dataset.strat==="barato"?"Cada producto, donde sale más barato":"Todo en "+superById(mainSuper()).nombre)});
   main.querySelectorAll("[data-lm]").forEach(b=>b.onclick=()=>{S.modes[month+"|"+listSel]=b.dataset.lm;save();render()});
+  {const AO=aisleOpen[month+"|"+listSel]||{};
+    main.querySelectorAll("details[data-aisle]").forEach(d=>d.addEventListener("toggle",()=>{AO[d.dataset.aisle]=d.open}));
+    main.querySelector("details.shoplist")?.addEventListener("toggle",e=>{AO.__all=e.target.open})}
   main.querySelectorAll("[data-ck]").forEach(i=>i.onchange=()=>{S.checkedAt=S.checkedAt||{};if(i.checked){S.checks[i.dataset.ck]=true;S.checkedAt[i.dataset.ck]=todayISO()}else{delete S.checks[i.dataset.ck];delete S.checkedAt[i.dataset.ck]}i.closest(".item").classList.toggle("done",i.checked);save();if(S.share)markShared(S.share.codigo,i.dataset.ck,i.checked);
     // Lista completa: se pide el ticket
     if(i.checked&&l.items.every(it=>S.checks[checkKey(month,l.key,it.pid)])&&!(S.tickets||[]).some(t=>t.m===month&&t.list===l.key))setTimeout(()=>askTicket(month,l.key),400)});
@@ -991,6 +1002,7 @@ function renderCompra(){
 /* ---------- Recetas ---------- */
 // Recetas por tandas: pintar las 500 de golpe pesa en móviles modestos
 let recLimit=36;
+let aisleOpen={};   // secciones de la compra abiertas o cerradas (mientras la app está abierta)
 function renderRecetas(){
   const a=me();
   const fl={todas:"Todas",fav:"Favoritas",nuevas:"Sin probar",no:"Descartadas",c:"⚡ Hidratos",l:"🥗 Ligeras",kid:"Gustan a niños"};

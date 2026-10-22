@@ -710,6 +710,15 @@
         "Solo repite platos que aguantan en la nevera (o se congelan).",
         "En Compra, las tres formas de comprar caben en una línea."
       ]
+    },
+    {
+      "version": 77,
+      "fecha": "2026-10-22",
+      "titulo": "Lista de la compra plegable",
+      "cambios": [
+        "La lista de la compra y cada sección se pliegan. Solo va abierta la primera sección con cosas por coger.",
+        "Cada sección dice cuánto llevas: «2 de 4» o «✓ todo»."
+      ]
     }
   ]
 }
