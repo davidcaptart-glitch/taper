@@ -53,6 +53,16 @@
         "Cada ticket guarda el supermercado y la tienda donde compraste (lo detecta solo y lo puedes corregir).",
         "Si compras en varios sitios, ves cuánto gastas en cada uno."
       ]
+    },
+    {
+      "version": 6,
+      "fecha": "2026-10-22",
+      "titulo": "Tu opinión cuenta",
+      "cambios": [
+        "Botón para enviar sugerencias, ideas de recetas o fallos (en Perfil).",
+        "Una encuesta muy corta a principios de cada mes para saber qué te gusta y qué mejorar.",
+        "Contamos las visitas de forma anónima, sin cookies ni datos personales, para saber cuánta gente usa Táper. Puedes desactivarlo en Perfil."
+      ]
     }
   ]
 }

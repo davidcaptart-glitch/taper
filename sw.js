@@ -1,22 +1,23 @@
 // Service worker de Táper: guarda la app para usarla sin conexión.
 // Al cambiar cualquier archivo de la app, sube VERSION aquí y el ?v= de index.html para que los móviles descarguen la nueva.
-const VERSION = "taper-v5";
+const VERSION = "taper-v6";
 const SHELL = [
   "./",
   "index.html",
-  "css/app.css?v=5",
-  "js/base.js?v=5",
-  "js/datos.js?v=5",
-  "js/gustos.js?v=5",
-  "js/plan.js?v=5",
-  "js/compra.js?v=5",
-  "js/tickets.js?v=5",
-  "js/bienvenida.js?v=5",
-  "js/ui.js?v=5",
+  "css/app.css?v=6",
+  "js/base.js?v=6",
+  "js/datos.js?v=6",
+  "js/gustos.js?v=6",
+  "js/plan.js?v=6",
+  "js/compra.js?v=6",
+  "js/tickets.js?v=6",
+  "js/bienvenida.js?v=6",
+  "js/ui.js?v=6",
   "manifest.webmanifest",
   "data/festivos.json",
   "data/supermercados.json",
   "data/novedades.json",
+  "data/config.json",
   "data/productos.json",
   "data/recetas.json",
   "icons/icon.svg",

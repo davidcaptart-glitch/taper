@@ -724,8 +724,8 @@ function suggestUrl(){if(!CFG.sugerencias)return null;return CFG.sugerencias.rep
 
 /* ---------- Encuesta de satisfacción mensual ---------- */
 // Las opciones deben coincidir exactamente con las del formulario de Google
-const SURVEY_FEATURES=["Menú semanal automático","Recetas y modo cocina","Lista de la compra y enlaces a Mercadona","Precios actualizados",
-  "Presupuesto y resumen del mes","Escáner de tickets","Adaptación a mis entrenos","Gustos y valoraciones","Planificación con la familia","Tápers y cocina por lotes"];
+const SURVEY_FEATURES=["Menú semanal automático","Recetas y modo cocina","Lista de la compra y enlaces a supermercados (p. ej. Mercadona)","Precios actualizados",
+  "Presupuesto y resumen del mes","Escáner de tickets","Adaptación a mis entrenos","Gustos y valoraciones","Planificación con la familia","Tápers y cocina por lotes","Avisos y notificaciones"];
 const SURVEY_PAY=["De 1 a 3 €","De 4 a 6 €","De 7 a 9 €"];
 const surveyOn=()=>!!(CFG.encuesta&&CFG.encuesta.url&&CFG.encuesta.campos&&CFG.encuesta.campos.estrellas);
 function surveyCard(){

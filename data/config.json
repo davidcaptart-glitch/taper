@@ -1,16 +1,16 @@
 {
   "nota": "goatcounter: dirección de tu contador (https://TU-CODIGO.goatcounter.com/count). sugerencias: enlace del formulario de Google rellenado previamente con la versión 0 (la app la cambia por la suya). encuesta: dirección formResponse del formulario de la encuesta mensual y el número 'entry' de cada pregunta.",
-  "goatcounter": "",
-  "sugerencias": "",
+  "goatcounter": "https://taper-david.goatcounter.com/count",
+  "sugerencias": "https://docs.google.com/forms/d/e/1FAIpQLSfkZQCkxvlapO2XxowaHgEnRGux5HdutpGWNirrYHaoncmOJw/viewform?usp=pp_url&entry.1514801170=0",
   "encuesta": {
-    "url": "",
+    "url": "https://docs.google.com/forms/d/e/1FAIpQLSevll7csntwyXPT6TEgCj0JgEAWKXQXjGaYxTtbkqkgZ8srag/formResponse",
     "campos": {
-      "estrellas": "",
-      "gusta": "",
-      "disgusta": "",
-      "pagaria": "",
-      "comentario": "",
-      "version": ""
+      "estrellas": "entry.684245410",
+      "gusta": "entry.1451294788",
+      "disgusta": "entry.762985908",
+      "pagaria": "entry.509766689",
+      "comentario": "entry.84274763",
+      "version": "entry.1894034102"
     }
   }
 }
