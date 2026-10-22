@@ -600,6 +600,17 @@
         "Ya hay más de 100 platos veganos y 35 crudiveganos.",
         "Corregidos tres productos que llevaban lácteos o cerdo y no lo indicaban."
       ]
+    },
+    {
+      "version": 63,
+      "fecha": "2026-10-22",
+      "titulo": "Casa compartida",
+      "cambios": [
+        "🏠 Invita a tu pareja desde Perfil › Casa compartida: le llega un enlace y entra directamente como él o ella.",
+        "Solo contesta lo suyo: objetivos, deporte, dieta y gustos. El resto (familia, menús, compra) ya está.",
+        "Los dos veis el mismo menú y la misma lista y podéis cambiar cosas: lo que hace uno le aparece al otro.",
+        "Cada uno valora sus platos y tiene sus propios avisos."
+      ]
     }
   ]
 }

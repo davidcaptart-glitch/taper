@@ -10,6 +10,8 @@
    conexión y modelo, para reconocerlo solo.
    cm:<código> = menú compartido {clave (hash), nombre, at, datos, marcas:{clave de la lista: {on, at}}}: quien lo
    comparte lo actualiza con su clave; quien tiene el código solo puede verlo y tachar la lista.
+   cs:<código> = casa compartida {ek (hash de la llave), rev, at, por, estado}: quien tiene la llave la lee y la cambia;
+   al guardar se manda la versión de la que parte y, si otro móvil guardó antes, se le devuelve la última (409).
 */
 
 const ORIGENES = ["https://davidcaptart-glitch.github.io", "http://localhost:8765"];
@@ -176,6 +178,38 @@ export default {
         await env.TAPER.delete("cm:" + b.codigo);
         return json(req, { ok: true });
       }
+      // Casa compartida: el mismo plan en varios móviles (cs:<código> = {ek (hash de la llave), rev, at, por, estado})
+      if (req.method === "POST" && url.pathname === "/casa/crear") {
+        const txt = await req.text();
+        if (txt.length > 3_000_000) return json(req, { error: "demasiado grande" }, 413);
+        const b = JSON.parse(txt);
+        if (!codigoOk(b.id) || typeof b.k !== "string" || b.k.length < 20 || !b.estado) return json(req, { error: "datos no válidos" }, 400);
+        if (await env.TAPER.get("cs:" + b.id)) return json(req, { error: "código en uso" }, 409);
+        await env.TAPER.put("cs:" + b.id, JSON.stringify({ ek: await sha(b.k), rev: 1, at: Date.now(), por: String(b.uid || ""), estado: b.estado }), { expirationTtl: CASA_TTL });
+        return json(req, { ok: true, rev: 1 });
+      }
+      if (req.method === "GET" && url.pathname === "/casa") {
+        const id = (url.searchParams.get("id") || "").toUpperCase();
+        if (!codigoOk(id)) return json(req, { error: "código no válido" }, 400);
+        const d = await env.TAPER.get("cs:" + id, "json");
+        if (!d) return json(req, { error: "no encontrada" }, 404);
+        if (d.ek !== (await sha(url.searchParams.get("k") || ""))) return json(req, { error: "llave incorrecta" }, 403);
+        return json(req, { rev: d.rev, at: d.at, por: d.por, estado: d.estado });
+      }
+      if (req.method === "POST" && url.pathname === "/casa/guardar") {
+        const txt = await req.text();
+        if (txt.length > 3_000_000) return json(req, { error: "demasiado grande" }, 413);
+        const b = JSON.parse(txt);
+        if (!codigoOk(b.id) || !b.estado) return json(req, { error: "datos no válidos" }, 400);
+        const d = await env.TAPER.get("cs:" + b.id, "json");
+        if (!d) return json(req, { error: "no encontrada" }, 404);
+        if (d.ek !== (await sha(String(b.k || "")))) return json(req, { error: "llave incorrecta" }, 403);
+        // Otro móvil guardó antes: se le devuelve lo último para que lo junte con lo suyo
+        if (b.rev !== d.rev) return json(req, { rev: d.rev, estado: d.estado }, 409);
+        const rev = d.rev + 1;
+        await env.TAPER.put("cs:" + b.id, JSON.stringify({ ek: d.ek, rev, at: Date.now(), por: String(b.uid || ""), estado: b.estado }), { expirationTtl: CASA_TTL });
+        return json(req, { ok: true, rev });
+      }
       if (req.method === "POST" && url.pathname === "/evento") return json(req, await evento(env, await req.json(), req));
       // Canjear coins: hace falta la clave secreta del móvil (la primera vez queda registrada)
       if (req.method === "POST" && url.pathname === "/canjear") {
@@ -321,7 +355,8 @@ async function recalcularAjustes(env, nuevo) {
   await env.TAPER.put("ajustes", JSON.stringify({ calculado: new Date().toISOString(), productos }));
 }
 const TRASPASO_TTL = 60 * 60 * 24 * 30;
-const COMPARTIR_TTL = 60 * 60 * 24 * 90;   // un menú compartido que nadie actualiza en 3 meses se borra
+const COMPARTIR_TTL = 60 * 60 * 24 * 90;
+const CASA_TTL = 60 * 60 * 24 * 365;      // una casa que nadie usa en un año se borra   // un menú compartido que nadie actualiza en 3 meses se borra
 const codigoOk = (c) => typeof c === "string" && /^[A-Z2-9]{6}$/.test(c);
 // Huella del móvil: conexión + modelo/sistema. Safari y la app instalada del mismo iPhone dan la misma.
 async function huellaMovil(req) {

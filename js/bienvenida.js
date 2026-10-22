@@ -4,6 +4,11 @@
 let wiz={i:0,single:null};   // single = id del paso cuando se edita uno suelto desde Perfil
 
 function wizSteps(){
+  // Quien entra en una casa compartida solo contesta lo suyo
+  if(S.joining){const a=me();return [{id:"unirse",eyebrow:"Bienvenida",title:"Hola, *"+(a.name||"bienvenido")+"*"},
+    {id:"objetivos:"+a.id,eyebrow:"Objetivos",title:"¿Qué te *importa?*"},{id:"entreno:"+a.id,eyebrow:"Deporte",title:"¿*Entrenas?*"},
+    {id:"dieta",eyebrow:"Dieta y alergias",title:"¿Cómo *comes?*"},{id:"gustos:"+a.id,eyebrow:"Gustos",title:"¿Qué te *gusta?*"},
+    {id:"listo",eyebrow:"Todo listo",title:"¡A *comer!*"}]}
   const st=[
     // title: lo que va entre *asteriscos* sale en cursiva de acento
     {id:"hola",eyebrow:"Bienvenida",title:"Hola, *empezamos*"},
@@ -11,13 +16,13 @@ function wizSteps(){
     {id:"zona",eyebrow:"Tu súper",title:"¿Dónde haces *la compra?*"},
     {id:"familia",eyebrow:"Tu casa",title:"¿Quién come *en casa?*"},
     {id:"dieta",eyebrow:"Dieta y alergias",title:"¿Cómo *coméis?*"},
-    ...adults().flatMap(a=>[{id:"objetivos:"+a.id,eyebrow:"Objetivos",title:a.id==="yo"?"¿Qué te *importa?*":"¿Qué le importa a *"+personName(a)+"?*"},
-      {id:"entreno:"+a.id,eyebrow:"Deporte",title:a.id==="yo"?"¿*Entrenas?*":"¿"+personName(a)+" *entrena?*"}]),
+    ...adults().flatMap(a=>[{id:"objetivos:"+a.id,eyebrow:"Objetivos",title:isMe(a)?"¿Qué te *importa?*":"¿Qué le importa a *"+personName(a)+"?*"},
+      {id:"entreno:"+a.id,eyebrow:"Deporte",title:isMe(a)?"¿*Entrenas?*":"¿"+personName(a)+" *entrena?*"}]),
     ...kids().map(k=>({id:"entreno:"+k.id,eyebrow:"Deporte",title:"¿"+personName(k)+" hace *deporte?*"})),
     {id:"cocina",eyebrow:"Tu semana",title:"¿Cuándo *cocinas?*"},
     {id:"plan",eyebrow:"Planificación",title:"¿Cuándo *planificas?*"},
     {id:"compra",eyebrow:"Presupuesto",title:"Fija tu *presupuesto*"},
-    ...S.people.map(p=>({id:"gustos:"+p.id,eyebrow:"Dieta y gustos",title:p.id==="yo"?"¿Cómo *comes?*":"¿Cómo come *"+personName(p)+"?*"})),
+    ...S.people.map(p=>({id:"gustos:"+p.id,eyebrow:"Dieta y gustos",title:isMe(p)?"¿Cómo *comes?*":"¿Cómo come *"+personName(p)+"?*"})),
     {id:"listo",eyebrow:"Todo listo",title:"¡A *cocinar!*"}
   ];
   return st;
@@ -59,7 +64,7 @@ function renderWelcome(){
 function renderWizard(){
   if(!wiz.single&&!wiz.started&&wiz.i===0&&!S.onboarded)return renderWelcome();
   const steps=wizSteps();
-  const single=wiz.single==="hijos"?"familia":wiz.single==="semana"?"cocina":wiz.single==="objetivos"||wiz.single==="entreno"?wiz.single+":yo":wiz.single;
+  const single=wiz.single==="hijos"?"familia":wiz.single==="semana"?"cocina":wiz.single==="objetivos"||wiz.single==="entreno"?wiz.single+":"+me().id:wiz.single;
   const step=single?steps.find(s=>s.id===single):steps[Math.min(wiz.i,steps.length-1)];
   if(!step){wiz.single=null;tab="perfil";render();return}
   const n=steps.indexOf(step), N=steps.length;
@@ -68,14 +73,14 @@ function renderWizard(){
     ${wiz.single?`<span class="wtitle">Editar</span>`:`<div class="segs" role="progressbar" aria-valuemin="1" aria-valuemax="${N}" aria-valuenow="${n+1}">${steps.map((_,i)=>`<i class="${i<n?"done":i===n?"now":""}"></i>`).join("")}</div><span class="wcount">${n+1}/${N}</span>`}</div>
     <div class="eyebrow">${esc(step.eyebrow||"")}</div><h2 class="wh">${accentTitle(step.title)}</h2>`+stepBody(step.id)+`<div class="wcta">`;
   if(wiz.single)h+=`<button class="btn cta" data-wz="save">Guardar</button>`;
-  else h+=`<button class="btn cta" data-wz="next">${step.id==="listo"?"Crear mi menú":"Continuar"} <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>`;
+  else h+=`<button class="btn cta" data-wz="next">${step.id==="listo"?(S.joining?"Ver nuestro menú":"Crear mi menú"):"Continuar"} <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>`;
   main.innerHTML=h+`</div></section>`;
   bindStep(step.id);
   main.querySelector("[data-wz=back]")?.addEventListener("click",()=>{wiz.i--;render();scrollTo(0,0)});
   main.querySelector("[data-wz=welcome]")?.addEventListener("click",()=>{wiz.started=false;render();scrollTo(0,0)});
   main.querySelector("[data-wz=next]")?.addEventListener("click",()=>{
     if(!validateStep(step.id))return;
-    if(step.id==="listo"){finishOnboarding();return}
+    if(step.id==="listo"){if(S.joining)finishJoin();else finishOnboarding();return}
     wiz.i++;save();render();scrollTo(0,0)});
   main.querySelector("[data-wz=save]")?.addEventListener("click",()=>{if(!validateStep(step.id))return;save();refreshPlans();wiz.single=null;tab="perfil";render();toast("Guardado")});
   main.querySelector("[data-wz=cancel]")?.addEventListener("click",()=>{wiz.single=null;tab="perfil";render()});
@@ -154,7 +159,10 @@ const chip=(attr,val,on,label)=>`<button type="button" class="chip" ${attr}="${e
 const dowSelect=(id,val)=>`<select id="${id}">${DAYS.map((d,i)=>`<option value="${i}" ${i===Number(val)?"selected":""}>${d}</option>`).join("")}</select>`;
 
 function stepBody(fullId){
-  const H=S.home, a=stepPerson(fullId), id=stepKind(fullId)==="gustos"?fullId:stepKind(fullId), you=a.id==="yo";
+  const H=S.home, a=stepPerson(fullId), id=stepKind(fullId)==="gustos"?fullId:stepKind(fullId), you=isMe(a);
+  if(id==="unirse"){const o=S.people.find(x=>x.id==="yo");return `<p class="lead">${o&&o.name&&!isMe(o)?esc(o.name)+" te ha añadido a su casa en Táper.":"Te han añadido a una casa en Táper."} Tendréis el mismo menú y la misma lista de la compra, y los dos podréis cambiar cosas.</p>
+    <p>Te hago unas preguntas rápidas sobre <b>ti</b>: qué te importa, si entrenas, cómo comes y qué te gusta. Así el menú también será a tu medida.</p>
+    <div class="field"><label for="wzName">¿Cómo te llamas?</label><input id="wzName" type="text" value="${esc(a.name)}" placeholder="Tu nombre"></div>`}
   if(id==="hola")return `<p class="lead">Táper te prepara el menú, la lista de la compra y los tápers de la semana, a tu medida. Unas preguntas rápidas y empezamos. Todo se puede cambiar después.</p>
     <div class="field"><label for="wzName">¿Cómo te llamas?</label><input id="wzName" type="text" value="${esc(a.name)}" placeholder="Tu nombre"></div>
     ${isStandalone()&&servidorOn()?`<button type="button" class="btn ghost small" id="wzTr">¿Ya usabas Táper en Safari? Trae tus datos</button>`:""}
@@ -178,8 +186,8 @@ function stepBody(fullId){
     ${zoneMissing&&H.cp?`<div class="okbox small">Tu zona aún no tiene precios propios: ya los he pedido y los tendrás en uno o dos días. Mientras, verás los de la zona más cercana (suelen variar unos céntimos).</div>`:""}`;}
   if(id==="dieta"){
     let h=`<p class="lead">Elige la forma de comer de cada persona y sus alergias. Solo planificaré platos que encajen y no os preguntaré por ingredientes que no tomáis.</p>`;
-    for(const p of S.people){const dt=dietOf(p),al=p.allergies||[];
-      h+=`<div class="kidcard"><div class="row"><b>${esc(p.id==="yo"?(p.name||"Tú"):personName(p))}</b><span class="small muted">${p.id==="yo"?"tú":p.kind==="nino"?"niño o niña":"adulto"}</span></div>
+    for(const p of (S.joining?[me()]:S.people)){const dt=dietOf(p),al=p.allergies||[];
+      h+=`<div class="kidcard"><div class="row"><b>${esc(isMe(p)?(p.name||"Tú"):personName(p))}</b><span class="small muted">${isMe(p)?"tú":p.kind==="nino"?"niño o niña":"adulto"}</span></div>
         <div class="field"><label>Forma de comer</label><div class="chips">${Object.entries(DIETS).map(([k,[e,t]])=>chip("data-diet",p.id+"|"+k,dt===k,e+" "+esc(t))).join("")}</div>
         <div class="okbox small" style="margin-top:8px"><b>${DIETS[dt][0]} ${esc(DIETS[dt][1])}:</b> ${esc(DIET_INFO[dt]||"")}${dt==="halal"?" Los supermercados no indican el sello halal en su web.":""}
           ${(()=>{const n=R.filter(r=>!r.small&&!r.pack&&canEat(p,r)).length;return dt==="omni"?"":`<br>${n<10?"⚠️ ":""}Hay <b>${n}</b> ${n===1?"plato principal que encaja":"platos principales que encajan"}${n<10?": tus menús se repetirán bastante hasta que añada más.":"."}`})()}</div></div>
@@ -279,6 +287,7 @@ function stepBody(fullId){
     <div class="chips">${Object.entries(SACRIFICES).map(([k,[t]])=>chip("data-sac",k,(H.sacrifice||{})[k],t)).join("")}</div></div>`;
   }
   if(id.startsWith("gustos:"))return tastesEditor(a);
+  if(id==="listo"&&S.joining)return `<p class="lead">Listo. Ajusto el menú de la casa para que también tenga en cuenta lo tuyo. Después de cada comida te preguntaré qué tal, y así aprendo lo que te gusta.</p>`;
   if(id==="listo")return `<p class="lead">Con esto preparo tu primer menú. Cada vez que valores un plato aprenderé más de lo que os gusta.</p>
     <div class="okbox">Todo se guarda solo en este móvil. Haz una copia de seguridad de vez en cuando desde Perfil.</div>`;
   return "";
@@ -402,7 +411,7 @@ function bindFixedEditor(after){
 }
 function validateStep(fullId){
   const H=S.home,a=stepPerson(fullId),id=stepKind(fullId),v=s=>{const e=main.querySelector(s);return e?e.value:null};
-  if(id==="hola"){a.name=(v("#wzName")||"").trim()}
+  if(id==="hola"||id==="unirse"){a.name=(v("#wzName")||"").trim()}
   if(id==="aparatos"&&!H.apps.length){toast("Elige al menos uno");return false}
   if(id==="zona"){const cp=(v("#wzCp")||"").trim();if(!/^\d{5}$/.test(cp)){toast(cp?"El código postal tiene 5 números":"Pon tu código postal: lo necesito para tus precios");document.getElementById("wzCp")?.focus();return false}H.cp=cp;H.municipio=(v("#wzMun")||"").trim()}
   if(id==="familia"){main.querySelectorAll(".kidcard [data-kf=name]").forEach(i=>{const k=S.people.find(p=>p.id===i.closest(".kidcard").dataset.kid);k.name=i.value.trim()});

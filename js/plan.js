@@ -232,8 +232,8 @@ function batchCovers(cd){
 function tupperSplit(sl){
   const out=[], home=sl.eaters.concat(sl.kids);
   if(home.length||sl.guests){const rac=home.reduce((t,p)=>t+(p.kind==="nino"?kidFactor(p,sl):adultFactor(p,sl)),0)+(sl.guests||0);
-    out.push({when:`${DAYS[dow(sl.date)]} · ${sl.meal}${S.home.cookMode==="lote"&&!fromBatch(sl)?" (para hoy, sin táper)":""}`,rac:Math.round(rac*100)/100,who:home.map(p=>p.id==="yo"?"tú":personName(p)).concat(sl.guests?[`${sl.guests} invitados`]:[])})}
-  for(const a of sl.tupper)out.push({when:`Táper del ${DAYS[dow(addDays(sl.date,1))].toLowerCase()} · comida`,rac:adultFactor(a,sl),who:[a.id==="yo"?"tú":personName(a)]});
+    out.push({when:`${DAYS[dow(sl.date)]} · ${sl.meal}${S.home.cookMode==="lote"&&!fromBatch(sl)?" (para hoy, sin táper)":""}`,rac:Math.round(rac*100)/100,who:home.map(p=>isMe(p)?"tú":personName(p)).concat(sl.guests?[`${sl.guests} invitados`]:[])})}
+  for(const a of sl.tupper)out.push({when:`Táper del ${DAYS[dow(addDays(sl.date,1))].toLowerCase()} · comida`,rac:adultFactor(a,sl),who:[isMe(a)?"tú":personName(a)]});
   return out;
 }
 /* ---------- Cocinar varios platos a la vez ----------

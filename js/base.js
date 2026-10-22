@@ -2,7 +2,7 @@
 "use strict";
 
 // Versión de la app: súbela (y el ?v= de index.html y VERSION de sw.js) en cada mejora, y añade sus novedades a data/novedades.json
-const APP_VERSION = 62;
+const APP_VERSION = 63;
 
 /* ---------- Utilidades ---------- */
 const DAYS = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];   // índice 0 = lunes
@@ -144,7 +144,8 @@ function save(){
   S.updatedAt=Date.now();
   try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){toast("No se ha podido guardar en el móvil")}
 }
-const me=()=>S.people.find(p=>p.kind==="adulto");
+const me=()=>(S.meId&&S.people.find(p=>p.id===S.meId))||S.people.find(p=>p.kind==="adulto");
+const isMe=p=>!!p&&p.id===me().id;
 const adults=()=>S.people.filter(p=>p.kind==="adulto");
 const kids=()=>S.people.filter(p=>p.kind==="nino");
 const personName=p=>p.name||(p.kind==="adulto"?"Tú":"Hijo/a");

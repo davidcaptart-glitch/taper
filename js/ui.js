@@ -74,7 +74,7 @@ function mealLine(d,meal,wk){
   else if(sl.fixed)h+=`<b>${esc(sl.fixed.name)}</b>`;
   h+=`<div class="meta">${r?`${recipeTime(r)} min · ${r.prot||"?"} g proteína · ${String(sl.portions).replace(".",",")} raciones`:sl.fixed?"Plato fijo":""}</div>`;
   if(r){const ps=(st==="solotaper"?[]:sl.eaters).concat(sl.kids);
-    const who=ps.find(p=>p.id==="yo")||ps[0];if(who)h+=`<div class="nutr">${who.id==="yo"?"Tu plato":esc(personName(who))}: ${nutrShort(portionNutr(r,factorOf(who)))}</div>`}
+    const who=ps.find(isMe)||ps[0];if(who)h+=`<div class="nutr">${isMe(who)?"Tu plato":esc(personName(who))}: ${nutrShort(portionNutr(r,factorOf(who)))}</div>`}
   h+=needLine(sl,r);
   if(r){
     if(S.home.cookMode==="lote"&&!fromBatch(sl)){const k=keepPlan(r,sl);
@@ -171,8 +171,8 @@ function rateCard(){
     <div class="actions"><button class="btn small" data-ate="${key}">Sí</button><button class="btn ghost small" data-notate="${key}|${r.id}">No, otra cosa</button></div></div>`;
   return `<div class="rate"><h3>¿Qué tal ${esc(r.name.toLowerCase())}?</h3><div class="small muted">${esc(when)}${list.length>1?` · ${list.length-1} más pendientes`:""}</div>
     ${who.map(p=>`<div class="who"><div class="small"><b>${esc(personName(p))}</b></div><div class="chips">
-      <button class="chip" data-rate="${key}~${r.id}~${p.id}~2">❤️ ${p.id==="yo"?"Me encantó":"Le encantó"}</button><button class="chip" data-rate="${key}~${r.id}~${p.id}~1">👍 Bien</button>
-      <button class="chip" data-rate="${key}~${r.id}~${p.id}~-1">👎 No ${p.id==="yo"?"me":"le"} gustó</button></div></div>`).join("")}
+      <button class="chip" data-rate="${key}~${r.id}~${p.id}~2">❤️ ${isMe(p)?"Me encantó":"Le encantó"}</button><button class="chip" data-rate="${key}~${r.id}~${p.id}~1">👍 Bien</button>
+      <button class="chip" data-rate="${key}~${r.id}~${p.id}~-1">👎 No ${isMe(p)?"me":"le"} gustó</button></div></div>`).join("")}
     ${cook?(()=>{const m=S.ratings.find(x=>x.slot===key&&x.who===me().id);return `<div class="who"><div class="small"><b>¿Fue fácil de cocinar?</b></div><div class="chips">
       ${[["facil","😌 Fácil"],["normal","🙂 Normal"],["dificil","😓 Complicado"]].map(([v,t])=>`<button class="chip" data-ease="${key}~${v}" aria-pressed="${m.ease===v}">${t}</button>`).join("")}</div></div>
       <div class="who"><div class="small"><b>¿Lo repetirías?</b></div><div class="chips">
@@ -620,7 +620,7 @@ function openSwap(sid){
 }
 function openDislike(rid,who,sid){
   const r=RX[rid], p=S.people.find(x=>x.id===who);
-  showDialog(`<div class="mod">${closeBtn}<h2>¿Por qué no ${p.id==="yo"?"te":"le"} gustó?</h2><div class="small muted">${esc(r.name)} · ${esc(personName(p))}</div>
+  showDialog(`<div class="mod">${closeBtn}<h2>¿Por qué no ${isMe(p)?"te":"le"} gustó?</h2><div class="small muted">${esc(r.name)} · ${esc(personName(p))}</div>
     <div style="margin-top:10px">${Object.entries(REASONS).map(([k,t])=>`<label class="row" style="margin:8px 0"><input type="radio" name="why" value="${k}" style="width:auto"> ${t}</label>`).join("")}</div>
     <div class="field" id="whyIng" hidden><label>¿Cuál?</label><select id="whyIngSel">${r.ing.map(([pid])=>`<option value="${pid}">${esc(P[pid].name)}</option>`).join("")}</select></div>
     <div class="field" id="whyTxt" hidden><label>Cuéntame</label><input type="text" id="whyTxtIn"></div>
@@ -661,7 +661,7 @@ function openRecipe(id,sid){
       </div>
       ${r.prot!=null?`<div class="macros">${bar("Proteína",r.prot,60,"p")}${bar("Hidratos",r.carb,110,"c")}${bar("Grasas",r.fat,45,"f")}</div>`:""}
       ${r.fridge?`<p class="small muted" style="margin:6px 2px">Aguanta ${r.fridge} días en la nevera${r.freeze?" · se puede congelar":""}.</p>`:""}
-      ${sl?`<div class="nutr" style="margin-top:6px">${(sl.eaters.length?sl.eaters:sl.tupper).concat(sl.kids).map(p=>`<div>${p.id==="yo"?"Tu plato":esc(personName(p))}: ${nutrTxt(portionNutr(r,factorOf(p)))}</div>`).join("")}</div>`:""}
+      ${sl?`<div class="nutr" style="margin-top:6px">${(sl.eaters.length?sl.eaters:sl.tupper).concat(sl.kids).map(p=>`<div>${isMe(p)?"Tu plato":esc(personName(p))}: ${nutrTxt(portionNutr(r,factorOf(p)))}</div>`).join("")}</div>`:""}
       ${r.vars.length>1?`<div class="vtabs">${r.vars.map((x,i)=>`<button class="chip" data-vi="${i}" aria-pressed="${i===vi}" ${ok.has(x.app)?"":"disabled"}>${APP[x.app]}</button>`).join("")}</div>`:""}
       <div class="segtab" role="tablist"><button role="tab" data-rt="ing" aria-selected="${recTab==="ing"}">Ingredientes</button><button role="tab" data-rt="prep" aria-selected="${recTab==="prep"}">Preparación</button></div>
       ${recTab==="ing"?`<table class="ingt">${r.ing.map(([p,q])=>`<tr><td>${prodImg(p)}${esc(P[p].name)}</td><td>${fmtQty(q*serv,P[p].unit)}</td></tr>`).join("")}<tr><td><span class="pimg ph">🧂</span>Aceite, sal y especias</td><td>al gusto</td></tr></table>`
@@ -1035,7 +1035,7 @@ function knowHTML(p){
   const dishes=Object.entries(p.tastes.dish).filter(([rid])=>RX[rid]);
   const dl=v=>dishes.filter(([,x])=>v>0?x>=1:x<=-1);
   const dchips=list=>list.length?list.map(([rid])=>`<div class="fixed"><span><b>${esc(RX[rid].name)}</b><small>${esc(p.tastes.src["d:"+rid]||"")}</small></span><button class="btn ghost small" data-unD="${p.id}|${rid}">Quitar</button></div>`).join(""):`<p class="small muted">Nada todavía.</p>`;
-  const lr=learned(p), y=p.id==="yo";
+  const lr=learned(p), y=isMe(p);
   const le=y?"te":"le", Le=y?"Te":"Le", puede=y?"puedes":"puede";
   const al=p.allergies||[];
   return `<div class="know">
@@ -1050,7 +1050,7 @@ function knowHTML(p){
     <p class="small muted">${S.ratings.filter(x=>x.who===p.id).length} valoraciones hasta ahora.</p>
     <button class="btn ghost small" data-edit="gustos:${p.id}">Editar alergias e ingredientes</button></div>`;
 }
-let accOpen=new Set(["yo"]);
+let accOpen=new Set([me().id]);
 // Apartado desplegable del Perfil (recuerda si estaba abierto)
 const acc=(id,ico,title,sub,body)=>`<details class="acc" data-acc="${id}" ${accOpen.has(id)?"open":""}><summary><span class="ico">${ico}</span><span class="tx">${title}${sub?`<small>${esc(sub)}</small>`:""}</span></summary><div class="accbody">${body}</div></details>`;
 function renderPerfil(){
@@ -1062,21 +1062,22 @@ function renderPerfil(){
     <div class="pstats"><div><b>${rated}</b><small>platos valorados</small></div><div><b>${fav}</b><small>favoritos</small></div><div><b>${wks}</b><small>semanas planificadas</small></div></div>`;
   let fam="";
   for(const p of S.people){const hist=historyOf(p,20);
-    const body=`${p.id!=="yo"?`<div class="small muted">${p.kind==="nino"?(p.age?p.age+" años · ":"")+"niño o niña":"adulto"} · ración ${String(p.factor).replace(".",",")}${p.tupper?" · se lleva táper":""}</div>${turnText(p)?`<div class="small" style="margin-top:6px">${esc(turnText(p))}</div>`:""}${mealsAwayText(p)?`<div class="small" style="margin-top:4px">🍽️ ${esc(mealsAwayText(p))}</div>`:""}${kidCalendar(p)}${changesHTML(p)}`:""}${knowHTML(p)}
+    const body=`${!isMe(p)?`<div class="small muted">${p.kind==="nino"?(p.age?p.age+" años · ":"")+"niño o niña":"adulto"} · ración ${String(p.factor).replace(".",",")}${p.tupper?" · se lleva táper":""}</div>${turnText(p)?`<div class="small" style="margin-top:6px">${esc(turnText(p))}</div>`:""}${mealsAwayText(p)?`<div class="small" style="margin-top:4px">🍽️ ${esc(mealsAwayText(p))}</div>`:""}${kidCalendar(p)}${changesHTML(p)}`:""}${knowHTML(p)}
       <details style="margin-top:12px"><summary class="small"><b>Historial</b> <span class="muted">(${hist.length} ${hist.length===1?"comida reciente":"comidas recientes"})</span></summary>
       ${hist.length?`<table class="wtable">${hist.map(x=>`<tr><td>${DSHORT[dow(x.date)]} ${shortDate(x.date)} · ${x.meal}</td><td style="text-align:left;padding-left:8px">${esc(x.name)}${x.note?` <span class="small muted">${esc(x.note)}</span>`:""}</td><td>${x.v!=null?RV[x.v]:""}</td></tr>`).join("")}</table>`:`<p class="small muted">Aún no hay comidas pasadas.</p>`}</details>`;
     const likes=Object.values(p.tastes.dish).filter(v=>v>=1).length, nos=Object.values(p.tastes.ing).filter(v=>v<0).length;
-    const sub=`${likes} ${likes===1?"plato favorito":"platos favoritos"} · ${nos} ${nos===1?"cosa":"cosas"} que no ${p.id==="yo"?"te":"le"} ${nos===1?"gusta":"gustan"}`;
-    if(p.id==="yo")h+=acc(p.id,"🙂","Lo que sé de ti",sub,body);
+    const sub=`${likes} ${likes===1?"plato favorito":"platos favoritos"} · ${nos} ${nos===1?"cosa":"cosas"} que no ${isMe(p)?"te":"le"} ${nos===1?"gusta":"gustan"}`;
+    if(isMe(p))h+=acc(p.id,"🙂","Lo que sé de ti",sub,body);
     else fam+=acc(p.id,p.kind==="nino"?"🧒":"🧑",esc(personName(p)),sub,body);
   }
-  if(fam)h+=acc("familia","👨‍👩‍👧","Tu familia",others().map(personName).join(", "),fam);
+  if(fam)h+=acc("familia","👨‍👩‍👧","Tu familia",S.people.filter(p=>!isMe(p)).map(personName).join(", "),fam);
   const items=[["aparatos","Aparatos",Object.entries(APP).filter(([k])=>S.home.apps.includes(k)).map(([,v])=>v).join(", ")],["zona","Supermercados y zona",[chosenSupers().map(s=>superById(s).nombre).join(", ")+(cheapestMode()?" (lo más barato)":""),S.home.cp,S.home.municipio].filter(Boolean).join(" · ")||"Sin indicar"],["dieta","Dieta y alergias",S.people.map(p=>(p.id==="yo"?"Tú":personName(p))+": "+DIETS[dietOf(p)][1].toLowerCase()+((p.allergies||[]).length?" · "+p.allergies.length+" alergias":"")).join(" · ")],["familia","Quién come en casa",others().map(personName).join(", ")||"Solo tú"],
     ...kids().map(k=>["entreno:"+k.id,"Deporte de "+personName(k),k.trains?k.sports.map(s=>SPORTS[s]).join(", "):"No hace deporte"]),
-    ...adults().flatMap(a=>[["objetivos:"+a.id,a.id==="yo"?"Tus objetivos":"Objetivos de "+personName(a),a.goals.map(g=>GOALS[g][0]).join(", ")],["entreno:"+a.id,a.id==="yo"?"Tu entrenamiento":"Entrenamiento de "+personName(a),a.trains?a.sports.map(s=>SPORTS[s]).join(", "):"No entrena"]]),["cocina","Tu semana, caprichos y horario",(S.home.cookMode==="lote"?"Por lotes":"Cada día")+" · "+S.fixed.length+" platos fijos"],
+    ...adults().flatMap(a=>[["objetivos:"+a.id,isMe(a)?"Tus objetivos":"Objetivos de "+personName(a),a.goals.map(g=>GOALS[g][0]).join(", ")],["entreno:"+a.id,isMe(a)?"Tu entrenamiento":"Entrenamiento de "+personName(a),a.trains?a.sports.map(s=>SPORTS[s]).join(", "):"No entrena"]]),["cocina","Tu semana, caprichos y horario",(S.home.cookMode==="lote"?"Por lotes":"Cada día")+" · "+S.fixed.length+" platos fijos"],
     ["plan","Planificación",(S.home.start&&S.home.start>todayISO()?"Empieza el "+shortDate(S.home.start)+" · ":"")+{diaria:"Cada día",semanal:"Cada semana",quincenal:"Cada dos semanas",mensual:"Cada mes"}[S.home.planFreq]+", "+DAYS[S.home.planDay].toLowerCase()+" a las "+S.home.planTime],
     ["compra","Compra y presupuesto",eur(S.home.budget.month)+" al mes"]];
   h+=acc("ajustes","⚙️","Ajustes","Familia, objetivos, entrenos, compra…",`<div class="settingslist">${items.map(([id,t,d])=>`<button data-edit="${id}">${t}<small>${esc(d)}</small></button>`).join("")}</div>`);
+  if(servidorOn())h+=acc("casa","🏠","Casa compartida",S.casa?adults().filter(a=>a.joined&&!isMe(a)).map(personName).concat(["tú"]).join(", ")+" · mismo menú y compra":"Invita a tu pareja a ver y cambiar el menú",casaCard());
   h+=acc("avisos","🔔","Avisos en el móvil",S.notif&&S.notif.on?"Activados":"Desactivados",avisosCard().replace('<div class="card"><h2>Avisos en el móvil</h2>','<div>'));
   h+=acc("coins","🪙","Invita y gana coins","Tu QR personal y tus coins",`<p class="small muted">Este es <b>tu</b> código: quien lo escanee con la cámara del móvil abre Táper y queda como invitado tuyo. Ganas coins solo cuando hay respuesta: alguien abre tu enlace (+1), empieza a usar Táper (+10) y cada semana que la sigue usando (+2).</p>
     <div id="coinsBox">${servidorOn()?`<p class="small muted">Cargando tus coins…</p>`:""}</div>
@@ -1104,6 +1105,7 @@ function renderPerfil(){
   const q=s=>main.querySelectorAll(s), find=id=>S.people.find(p=>p.id===id);
   q("details.acc").forEach(d=>d.addEventListener("toggle",()=>{if(d.open)accOpen.add(d.dataset.acc);else accOpen.delete(d.dataset.acc)}));
   q("[data-edit]").forEach(b=>b.onclick=()=>{openWizard(b.dataset.edit);scrollTo(0,0)});
+  bindCasa(main);
   q("[data-addch]").forEach(b=>b.onclick=()=>openChange(b.dataset.addch));
   q("[data-delch]").forEach(b=>b.onclick=()=>{const [pp,cid]=b.dataset.delch.split("|");const p=find(pp);const c=(p.changes||[]).find(x=>x.id===cid);p.changes=p.changes.filter(x=>x.id!==cid);save();
     if(c)for(const s of Object.keys(S.plans))if(addDays(s,6)>=c.from&&s<=c.to)ensureWeek(s);save();render();toast("Cambio quitado")});
@@ -1220,7 +1222,7 @@ function inboxItems(){
     else if(!avisosOn()&&isIOS()&&!isStandalone())out.push({ico:"📲",t:"Instala Táper para recibir avisos",s:"En iPhone solo llegan con la app en la pantalla de inicio",go:()=>{dlg.close();showDialog(`<div class="mod">${closeBtn}<h2>Instala Táper</h2><ol class="steps"><li>Toca <b>Compartir</b> (el cuadrado con la flecha ↑)</li><li>Toca <b>Añadir a pantalla de inicio</b></li><li>Abre Táper desde su icono nuevo</li><li>Tus datos pasarán solos</li></ol></div>`)}});
     else if(!avisosOn()&&!isIOS())out.push({ico:"🔕",t:"Este navegador no recibe avisos",s:"Abre Táper con Chrome e instálala para recibirlos",go:()=>{dlg.close();tab="perfil";render()}});
   }catch(e){}
-  try{for(const k of S.people)if(!k.smallSet&&(k.id==="yo"||(k.presence||{}).type!=="manual"))out.push({ico:"🥐",t:k.id==="yo"?"¿Desayunas, almuerzas y meriendas?":`¿Qué desayuna y merienda ${personName(k)}?`,s:"Te propongo desayunos, almuerzos y meriendas sanos",go:()=>{dlg.close();openWizard("familia");scrollTo(0,0)}})}catch(e){}
+  try{for(const k of S.people)if(!k.smallSet&&(k.id==="yo"||(k.presence||{}).type!=="manual"))out.push({ico:"🥐",t:isMe(k)?"¿Desayunas, almuerzas y meriendas?":`¿Qué desayuna y merienda ${personName(k)}?`,s:"Te propongo desayunos, almuerzos y meriendas sanos",go:()=>{dlg.close();openWizard("familia");scrollTo(0,0)}})}catch(e){}
   try{for(const k of others())if(!k.mealsSet&&(k.presence||{}).type!=="manual")out.push({ico:"🍽️",t:`¿Qué comidas hace ${personName(k)} en casa?`,s:"Comida y cena de cada día: así no cocino de más",go:()=>{dlg.close();openWizard("familia");scrollTo(0,0)}})}catch(e){}
   try{if(S.onboarded&&!/^\d{5}$/.test(S.home.cp||""))out.push({ico:"📍",t:"Pon tu código postal",s:"Para tus precios, los supermercados que te reparten y tus festivos",go:()=>{dlg.close();openWizard("zona");scrollTo(0,0)}})}catch(e){}
   try{for(const x of ticketDue())out.push({ico:"📸",t:`Sube el ticket de ${x.title}`,s:"+3 coins · y afino los precios para todos",go:()=>{dlg.close();askTicket(x.m,x.key)}})}catch(e){}
@@ -1461,7 +1463,7 @@ async function boot(){
   if(avisosOn()&&S.notif&&S.notif.on){shareWithSW().catch(()=>{});queueSyncAvisos()}
   trackOnBoot();checkAvisos();applyAccent();applySkin();if(servidorOn())loadStats().then(()=>{applyAccent();applySkin()}).catch(()=>{});
   {const u=new URLSearchParams(location.search),t=u.get("hecho")||u.get("abrir");if(t){notifAction(u.get("hecho")?"hecho":"abrir",t);history.replaceState(null,"",location.pathname)}}
-  if(!shareOnBoot())setTimeout(()=>openRateDialog(),1500);
+  casaOnBoot().then(j=>{if(!j&&!shareOnBoot())setTimeout(()=>openRateDialog(),1500)});
   navigator.serviceWorker&&navigator.serviceWorker.addEventListener("message",e=>{if(e.data&&e.data.tipo)notifAction(e.data.tipo,e.data.tag)});watchPermission();checkTransferOnBoot();queueTransfer();
 }
 boot();

@@ -28,7 +28,7 @@ function buildSchedule(){
   const push=(t,title,body,tag)=>{if(t>now)out.push({t,title,body:String(body||"").replace(/\.?$/,".")+" Puedes quitarlo en Perfil › Avisos.",tag})};
   // Horas de las comidas pequeñas: las que haya puesto (comidas extra) o unas por defecto
   const smallTime=m=>(S.home.extraMeals||{})[m==="almuerzo"?"mediamanana":m]||{desayuno:"08:00",almuerzo:"11:00",merienda:"17:30"}[m];
-  const names=ps=>{const n=ps.map(p=>p.id==="yo"?"ti":personName(p));return n.length>1?n.slice(0,-1).join(", ")+" y "+n.slice(-1):n[0]||""};
+  const names=ps=>{const n=ps.map(p=>isMe(p)?"ti":personName(p));return n.length>1?n.slice(0,-1).join(", ")+" y "+n.slice(-1):n[0]||""};
   for(let i=0;i<8;i++){
     const d=addDays(today,i),start=weekStartFor(d),wk=S.plans[start];
     // Resumen de la mañana: todo lo que se come hoy
