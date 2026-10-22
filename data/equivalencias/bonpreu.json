@@ -1,0 +1,862 @@
+{
+  "super": "bonpreu",
+  "comprobado": "2026-10-22",
+  "productos": {
+    "arroz": {
+      "ref": "3a34dd8e-b825-4f4d-a3d7-0923875b2b41",
+      "codigo": "84755",
+      "nombre": "BONPREU Arròs extra",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-arros-extra/84755"
+    },
+    "pasta": {
+      "ref": "a5036001-edd7-455a-829f-eb51122b501a",
+      "codigo": "79534",
+      "nombre": "BONPREU Macarrons gruixuts",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-macarrons-gruixuts/79534"
+    },
+    "espaguetis": {
+      "ref": "2e678585-2662-465e-9bd6-6a0b4b43a319",
+      "codigo": "78267",
+      "nombre": "BONPREU Espaguetis",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-espaguetis/78267"
+    },
+    "cuscus": {
+      "ref": "18e85cf7-31a8-438e-9176-fc54509a1b6b",
+      "codigo": "15810",
+      "nombre": "BACCHINI Cuscús precuit",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bacchini-cuscos-precuit/15810"
+    },
+    "lentejas": {
+      "ref": "5061b7a9-1c46-42cd-b383-29defae26441",
+      "codigo": "17744",
+      "nombre": "BONPREU Llenties cuites",
+      "envase": 400,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-llenties-cuites/17744"
+    },
+    "garbanzos": {
+      "ref": "5ced22d2-3f2e-4a88-9d93-235c6789fc1f",
+      "codigo": "17785",
+      "nombre": "BONPREU Cigrons cuits extra",
+      "envase": 400,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-cigrons-cuits-extra/17785"
+    },
+    "alubias": {
+      "ref": "fc8f2572-a403-49b6-8807-018f6a12b64e",
+      "codigo": "17690",
+      "nombre": "BONPREU Mongetes cuites extra",
+      "envase": 400,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-mongetes-cuites-extra/17690"
+    },
+    "tomate_tri": {
+      "ref": "f9846f4d-b131-44e8-bc24-13a7c91bbf70",
+      "codigo": "59481",
+      "nombre": "BONPREU Tomàquet triturat extra",
+      "envase": 780,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-tomaquet-triturat-extra/59481"
+    },
+    "tomate_frito": {
+      "ref": "678dd2da-b985-4139-b1fb-97dba8987655",
+      "codigo": "60771",
+      "nombre": "BONPREU Tomàquet fregit",
+      "envase": 550,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-tomaquet-fregit/60771"
+    },
+    "atun": {
+      "ref": "8e99883f-9d92-4837-8eb3-f68f7bd3fba8",
+      "codigo": "58136",
+      "nombre": "BONPREU Tonyina clara en oli de gira-sol",
+      "envase": 312,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-tonyina-clara-en-oli-de-gira-sol/58136"
+    },
+    "coco": {
+      "ref": "a36d4361-c63c-4b3d-9be0-edc58df7fc29",
+      "codigo": "92262",
+      "nombre": "KARA Llet de coco",
+      "envase": 400,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/kara-llet-de-coco/92262"
+    },
+    "maiz": {
+      "ref": "7408c32d-d09b-425f-9c1c-ca3e215f82a2",
+      "codigo": "29864",
+      "nombre": "BONPREU Blat de moro dolç",
+      "envase": 420,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-blat-de-moro-dolc/29864"
+    },
+    "tortillas": {
+      "ref": "e2088460-a94e-4b5a-9f1b-130c1068b039",
+      "codigo": "24241",
+      "nombre": "BONPREU Tortilles de blat",
+      "envase": 8,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-tortilles-de-blat/24241"
+    },
+    "cebolla": {
+      "ref": "18a9ef95-81e7-4939-95b0-5dccf9f08fd0",
+      "codigo": "07375",
+      "nombre": "LA COLLITA Ceba seca Km0  en malla d'1 kg",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-ceba-seca-km0-en-malla-d-1-kg/07375"
+    },
+    "patata": {
+      "ref": "94bb147f-d5cd-49ad-80d7-e01e91287caf",
+      "codigo": "04657",
+      "nombre": "LA COLLITA Patata blanca bossa 4 kg",
+      "envase": 4000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-patata-blanca-bossa-4-kg/04657"
+    },
+    "boniato": {
+      "ref": "6ea31eea-7009-4cda-bdf2-b419f303216c",
+      "codigo": "08728",
+      "nombre": "Moniato 1u.",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/moniato-1u/08728",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "ajo": {
+      "ref": "f84eea7a-fe1b-46c4-ab8b-6bc705457989",
+      "codigo": "18002",
+      "nombre": "LA COLLITA Alls secs en malla de 250 g",
+      "envase": 250,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-alls-secs-en-malla-de-250-g/18002"
+    },
+    "pechuga": {
+      "ref": "08e443f4-35c7-4dc9-85d2-c4204bf20fc3",
+      "codigo": "03763",
+      "nombre": "BONPREU Filet de pollastre",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-filet-de-pollastre/03763",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "muslos": {
+      "ref": "a054fdfb-747b-4633-af85-21de2a10e505",
+      "codigo": "01734",
+      "nombre": "BONPREU Cuixa de pollastre desossada",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-cuixa-de-pollastre-desossada/01734",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "picada": {
+      "ref": "90bd9f07-229d-4dbd-a68e-f453c9c594cc",
+      "codigo": "43192",
+      "nombre": "BONPREU Preparat de porc i vedella",
+      "envase": 500,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-preparat-de-porc-i-vedella/43192"
+    },
+    "picada_pollo": {
+      "ref": "25edb26d-6590-4089-a613-1932f0ea08b5",
+      "codigo": "31885",
+      "nombre": "BONPREU Preparat de carn picada de pollastre",
+      "envase": 300,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-preparat-de-carn-picada-de-pollastre/31885"
+    },
+    "lomo": {
+      "ref": "74feb3a1-baee-4ca0-a704-9a33c37c36f4",
+      "codigo": "55251",
+      "nombre": "BONPREU Llom de porc extra fi",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-llom-de-porc-extra-fi/55251",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "burger": {
+      "ref": "1fbf9b56-c517-4ef1-987e-c6799fd32527",
+      "codigo": "54357",
+      "nombre": "BONPREU Burger meat de pollastre",
+      "envase": 6,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-burger-meat-de-pollastre/54357"
+    },
+    "salmon": {
+      "ref": "4acd43b6-2560-490d-a0b6-df4502994319",
+      "codigo": "24826",
+      "nombre": "EXKIMO Salmó sense pell",
+      "envase": 250,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/exkimo-salmo-sense-pell/24826"
+    },
+    "merluza": {
+      "ref": "1e1f8cd5-9d80-4065-a110-3580712528f5",
+      "codigo": "76608",
+      "nombre": "BONPREU Filets  de lluç del Cap sense pell",
+      "envase": 800,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-filets-de-lluc-del-cap-sense-pell/76608"
+    },
+    "gambas": {
+      "ref": "de80185f-37be-4c2e-9aa1-75e0026e444d",
+      "codigo": "27125",
+      "nombre": "IFA Gamba pelada crua mitjana",
+      "envase": 360,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/ifa-gamba-pelada-crua-mitjana/27125"
+    },
+    "calamar": {
+      "ref": "8297a61d-9fe5-4bd8-abc2-5a5b545e42c9",
+      "codigo": "39721",
+      "nombre": "BONPREU Calamar trossejat",
+      "envase": 360,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-calamar-trossejat/39721"
+    },
+    "brocoli": {
+      "ref": "4e268abd-c087-4025-b181-8554c43a7e6b",
+      "codigo": "89668",
+      "nombre": "IFA Bròcoli",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/ifa-brocoli/89668"
+    },
+    "espinacas": {
+      "ref": "8f5a1d9c-2a7c-4d94-a126-38cfeff53dba",
+      "codigo": "14186",
+      "nombre": "BONPREU Espinacs",
+      "envase": 400,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-espinacs/14186"
+    },
+    "judias": {
+      "ref": "ca2614af-3f3f-4208-aec5-90148f05f2b8",
+      "codigo": "32178",
+      "nombre": "BONPREU Mongetes tendres rodones",
+      "envase": 750,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-mongetes-tendres-rodones/32178"
+    },
+    "salteado": {
+      "ref": "5f1fd3b0-96b3-4309-8802-eb1e12db42f9",
+      "codigo": "20622",
+      "nombre": "BONPREU Saltat de verdures",
+      "envase": 450,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-saltat-de-verdures/20622"
+    },
+    "guisantes": {
+      "ref": "1dbaa0e5-65d4-407a-ab0d-11dc5b7127ce",
+      "codigo": "62774",
+      "nombre": "BONPREU Pèsols fins",
+      "envase": 750,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pesols-fins/62774"
+    },
+    "huevos": {
+      "ref": "e1aa6452-3b46-4968-813b-183cc137d2fa",
+      "codigo": "38974",
+      "nombre": "BONPREU Ous frescos de gallines soltes en el galliner L",
+      "envase": 12,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-ous-frescos-de-gallines-soltes-en-el-galliner-l/38974"
+    },
+    "queso": {
+      "ref": "d0b85395-d149-4c1f-bb1a-5a6929a2d03b",
+      "codigo": "81420",
+      "nombre": "BONPREU Formatge ratllat mozzarella",
+      "envase": 200,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-formatge-ratllat-mozzarella/81420"
+    },
+    "pimiento": {
+      "ref": "47ff51ee-b482-4513-9f2c-6bd3c5bb1acf",
+      "codigo": "07313",
+      "nombre": "Pebrot dolç vermell 1 u.",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/pebrot-dolc-vermell-1-u/07313",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "calabacin": {
+      "ref": "5ec1984a-0570-4d52-9efc-6945a94c57a7",
+      "codigo": "07315",
+      "nombre": "Carbassó  1 u.",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/carbasso-1-u/07315",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "zanahoria": {
+      "ref": "dbe27ade-ab62-4372-a3eb-ab472337b138",
+      "codigo": "06681",
+      "nombre": "LA COLLITA Pastanagues en bossa de 500 g",
+      "envase": 500,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-pastanagues-en-bossa-de-500-g/06681"
+    },
+    "tomate": {
+      "ref": "14d1558c-22c4-4a25-913e-8c35c9765eef",
+      "codigo": "04016",
+      "nombre": "Tomàquet de pera 1 u.",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/tomaquet-de-pera-1-u/04016",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "ensalada": {
+      "ref": "6c3e5791-7fe4-4a86-9d8b-99706d766524",
+      "codigo": "35633",
+      "nombre": "LA COLLITA Amanida 4 estacions",
+      "envase": 250,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-amanida-4-estacions/35633"
+    },
+    "champi": {
+      "ref": "298123ac-9e12-453c-a165-58df5f2c35c6",
+      "codigo": "04453",
+      "nombre": "LA COLLITA Xampinyons laminats safata 250 g",
+      "envase": 250,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-xampinyons-laminats-safata-250-g/04453"
+    },
+    "limon": {
+      "ref": "632ed9fe-1ea8-4e5b-9126-2b3ccff86e55",
+      "codigo": "23901",
+      "nombre": "LA COLLITA Llimona malla 1 kg",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-llimona-malla-1-kg/23901"
+    },
+    "yogur": {
+      "ref": "f98b9f01-a083-4d1c-ab70-7f49ff96f141",
+      "codigo": "90812",
+      "nombre": "BONPREU Iogurt natural",
+      "envase": 8,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-iogurt-natural/90812"
+    },
+    "pan_rallado": {
+      "ref": "85d97bd5-1424-45f5-ac6a-9e8d4e9a5740",
+      "codigo": "83912",
+      "nombre": "BONPREU Pa ratllat en bossa de 750 grams",
+      "envase": 750,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pa-ratllat-en-bossa-de-750-grams/83912"
+    },
+    "jamon": {
+      "ref": "2c2f1dfa-eccd-4be3-a74f-f3a406834ccc",
+      "codigo": "83518",
+      "nombre": "BONPREU Pernil cuit",
+      "envase": 200,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pernil-cuit/83518"
+    },
+    "fideos": {
+      "ref": "0c87f769-f42b-427a-a274-71bc64ef43e7",
+      "codigo": "60793",
+      "nombre": "BONPREU Fideus gruixuts",
+      "envase": 500,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-fideus-gruixuts/60793"
+    },
+    "caldo_pollo": {
+      "ref": "6af0b249-174b-4dc9-84c8-8ade331cc621",
+      "codigo": "13238",
+      "nombre": "BONPREU Brou de pollastre  UHT",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-brou-de-pollastre-uht/13238"
+    },
+    "caldo_pescado": {
+      "ref": "a115043c-e18d-415e-a4a0-071cc0df343c",
+      "codigo": "81028",
+      "nombre": "BONPREU Brou de peix i marisc UHT",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-brou-de-peix-i-marisc-uht/81028"
+    },
+    "pavo": {
+      "ref": "c8911a79-c8e7-41f2-8c71-1da32ac1d122",
+      "codigo": "46785",
+      "nombre": "BONPREU Pit filetejat d'indiot tall prim",
+      "envase": 500,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pit-filetejat-d-indiot-tall-prim/46785"
+    },
+    "burger_pavo": {
+      "ref": "c5c42bcb-8085-40ad-a29c-d1f5a5e441cd",
+      "codigo": "00837",
+      "nombre": "BONPREU Burger d'indiot",
+      "envase": 4,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-burger-d-indiot/00837"
+    },
+    "fideos_arroz": {
+      "ref": "85874184-78b6-45e3-8458-09c096560aff",
+      "codigo": "12497",
+      "nombre": "ORIENTAL SELECTION Noodles d'arròs",
+      "envase": 200,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/oriental-selection-noodles-d-arros/12497"
+    },
+    "solomillo": {
+      "ref": "59e38ebe-22e6-4b1a-a624-f33695b3ccc6",
+      "codigo": "09106",
+      "nombre": "BONPREU Filet de porc  al buit",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-filet-de-porc-al-buit/09106",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "ternera": {
+      "ref": "dfddab69-3b61-48ee-bece-8deef0f8c184",
+      "codigo": "09452",
+      "nombre": "BONPREU DE L'ERA Bistec de vedella",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-de-l-era-bistec-de-vedella/09452",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "alubias_rojas": {
+      "ref": "8d8fc1b9-f006-4a48-8100-07946eb2abc3",
+      "codigo": "17897",
+      "nombre": "BONPREU Mongetes vermelles cuites extra",
+      "envase": 400,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-mongetes-vermelles-cuites-extra/17897"
+    },
+    "lasana": {
+      "ref": "17fad125-47b2-4fd7-977b-57167ea6c6a8",
+      "codigo": "06271",
+      "nombre": "EL PAVO Pasta per lasanya",
+      "envase": 200,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/el-pavo-pasta-per-lasanya/06271"
+    },
+    "bacalao": {
+      "ref": "81a5158b-adc2-41f4-a97c-8a0fa9580f4d",
+      "codigo": "67161",
+      "nombre": "BONPREU Filets de bacallà d'Islàndia al punt de sal",
+      "envase": 360,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-filets-de-bacalla-d-islandia-al-punt-de-sal/67161"
+    },
+    "emperador": {
+      "ref": "46638c37-335b-4975-8267-6d42f2924c72",
+      "codigo": "26774",
+      "nombre": "FANDICOSTA Rodanxa de peix espasa",
+      "envase": 200,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/fandicosta-rodanxa-de-peix-espasa/26774"
+    },
+    "teriyaki": {
+      "ref": "9518790d-f59c-4939-930d-b12f4154461b",
+      "codigo": "41399",
+      "nombre": "MAGGI Salsa Teriyaki",
+      "envase": 355,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/maggi-salsa-teriyaki/41399"
+    },
+    "nata": {
+      "ref": "df015887-41be-4462-a788-5f43a7458ad4",
+      "codigo": "16527",
+      "nombre": "BONPREU Nata líquida per cuinar",
+      "envase": 600,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-nata-liquida-per-cuinar/16527"
+    },
+    "mostaza": {
+      "ref": "9e31c5c9-0bd1-4578-a63f-6e92a1d8de3a",
+      "codigo": "02324",
+      "nombre": "MAILLE Mostassa de Dijón",
+      "envase": 265,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/maille-mostassa-de-dijon/02324"
+    },
+    "edamame": {
+      "ref": "033cfd1b-3ed6-4e96-b98a-58d65b98fd8a",
+      "codigo": "59501",
+      "nombre": "SUSHI KING Edamame de faves de soja amb closca",
+      "envase": 400,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/sushi-king-edamame-de-faves-de-soja-amb-closca/59501"
+    },
+    "esparragos": {
+      "ref": "f31cc293-7d26-4dad-8754-522399c9ddcd",
+      "codigo": "25431",
+      "nombre": "LA COLLITA Espàrrecs verds prims en manat de 250g",
+      "envase": 250,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-esparrecs-verds-prims-en-manat-de-250g/25431"
+    },
+    "bonito": {
+      "ref": "b761466c-5661-4d06-bb3e-913a680aadf5",
+      "codigo": "16819",
+      "nombre": "BONPREU Bonítol del nord en oli d'oliva",
+      "envase": 156,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-bonitol-del-nord-en-oli-d-oliva/16819"
+    },
+    "caballa": {
+      "ref": "709e1602-ff2b-4430-80c1-d685e0180150",
+      "codigo": "15207",
+      "nombre": "BONPREU Cavalla del sud amb oli d'oliva",
+      "envase": 60,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-cavalla-del-sud-amb-oli-d-oliva/15207"
+    },
+    "sardinas": {
+      "ref": "de9cb737-613a-4e84-a93d-b44b26c5f621",
+      "codigo": "25913",
+      "nombre": "BONPREU Sardines en oli d'oliva",
+      "envase": 88,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-sardines-en-oli-d-oliva/25913"
+    },
+    "pan_integral": {
+      "ref": "1ba4c4e8-b9b7-4177-af57-6a06bd8a0485",
+      "codigo": "59865",
+      "nombre": "BONPREU Pa de motlle 100% integral",
+      "envase": 16,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pa-de-motlle-100-integral/59865"
+    },
+    "langostinos": {
+      "ref": "2e08f225-305b-4f12-b8fd-484bd76f9af9",
+      "codigo": "69361",
+      "nombre": "PESCANOVA Llagostí pelat cru",
+      "envase": 200,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/pescanova-llagosti-pelat-cru/69361"
+    },
+    "masa_empanadilla": {
+      "ref": "f30c3806-356d-4160-9fca-2b10caf5cc0d",
+      "codigo": "55677",
+      "nombre": "BUITONI Massa per a crestes i postres",
+      "envase": 16,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/buitoni-massa-per-a-crestes-i-postres/55677"
+    },
+    "pasta_lentejas": {
+      "ref": "f5f8a4c9-f8ed-4ff2-94c1-b023fbc6cc1a",
+      "codigo": "45742",
+      "nombre": "GALLO NATURE Espirals de llenties",
+      "envase": 250,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/gallo-nature-espirals-de-llenties/45742"
+    },
+    "hummus": {
+      "ref": "7cd6c221-a8a9-4fde-95ce-85188fe20817",
+      "codigo": "31874",
+      "nombre": "TERRA I TAST Hummus de cigrons",
+      "envase": 210,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/terra-i-tast-hummus-de-cigrons/31874"
+    },
+    "noquis": {
+      "ref": "95f561b5-d156-4a5c-ad82-738a6c29d1b6",
+      "codigo": "58811",
+      "nombre": "BONPREU Nyoquis de patata",
+      "envase": 500,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-nyoquis-de-patata/58811"
+    },
+    "berenjena": {
+      "ref": "73830e9b-cfc9-46ad-882c-228c072cecf0",
+      "codigo": "07319",
+      "nombre": "Albergínia negra 1 u.",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/alberginia-negra-1-u/07319",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "quinoa": {
+      "ref": "90b171f3-8b94-416c-8df3-9884913ae6bb",
+      "codigo": "21190",
+      "nombre": "BRILLANTE Quinoa blanca i vermella",
+      "envase": 250,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/brillante-quinoa-blanca-i-vermella/21190"
+    },
+    "dorada": {
+      "ref": "81b6ad4a-64a3-4c42-8f27-8213197f065b",
+      "codigo": "22795",
+      "nombre": "Filet d'Orada",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/filet-d-orada/22795",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "copos_maiz": {
+      "ref": "20a89f4a-ac00-4a0c-9207-25679631a5fe",
+      "codigo": "08946",
+      "nombre": "BONPREU Flocs de blat de moro",
+      "envase": 500,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-flocs-de-blat-de-moro/08946"
+    },
+    "pesto": {
+      "ref": "a44936b4-927d-48f2-8d88-01cd9c2f87af",
+      "codigo": "18067",
+      "nombre": "BONPREU Salsa Pesto",
+      "envase": 185,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-salsa-pesto/18067"
+    },
+    "salchichas": {
+      "ref": "be49d5f7-2aef-4706-91a1-6f2ddb4c7ca8",
+      "codigo": "37995",
+      "nombre": "WUDY Salsitxes de pollastre i indiot Clàssiques",
+      "envase": 300,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/wudy-salsitxes-de-pollastre-i-indiot-classiques/37995"
+    },
+    "pina": {
+      "ref": "45fed4a0-c37f-4b03-b819-691023b59c17",
+      "codigo": "26737",
+      "nombre": "BONPREU Rodanxes de pinya amb el seu suc",
+      "envase": 420,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-rodanxes-de-pinya-amb-el-seu-suc/26737"
+    },
+    "leche": {
+      "ref": "0ac61b94-f9d8-4f4d-8f2e-92755f5d75cb",
+      "codigo": "81178",
+      "nombre": "BONPREU Llet semidesnatada en cartró",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-llet-semidesnatada-en-cartro/81178"
+    },
+    "calabaza": {
+      "ref": "d8e4fb0e-3f7b-41b9-83cf-df4a8b6a4bfd",
+      "codigo": "27250",
+      "nombre": "LA COLLITA Carbassa tallada",
+      "envase": 400,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-carbassa-tallada/27250"
+    },
+    "gazpacho": {
+      "ref": "e72313b2-f175-4871-ae8e-01a3abe2c56e",
+      "codigo": "50548",
+      "nombre": "SUMMUM Gaspatxo en cartró d'1 litre",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/summum-gaspatxo-en-cartro-d-1-litre/50548"
+    },
+    "tinta": {
+      "ref": "bee50963-6694-46b6-84cb-840c9ef00217",
+      "codigo": "65547",
+      "nombre": "NORTINDAL Tinta sípia 4 sobres",
+      "envase": 4,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/nortindal-tinta-sipia-4-sobres/65547"
+    },
+    "anacardos": {
+      "ref": "adc97f45-d72b-4bc3-9d23-e983aaa2e17a",
+      "codigo": "57714",
+      "nombre": "BONPREU Anacards crus",
+      "envase": 150,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-anacards-crus/57714"
+    },
+    "feta": {
+      "ref": "40e9faf5-ff7d-45ad-aa53-bec3e68cb236",
+      "codigo": "80902",
+      "nombre": "HOTOS Daus de formatge feta",
+      "envase": 150,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/hotos-daus-de-formatge-feta/80902"
+    },
+    "manzana": {
+      "ref": "7add96f3-d63e-4596-b3ec-46ba58269b0d",
+      "codigo": "49235",
+      "nombre": "LA COLLITA Poma golden de Girona Km0 bossa 1,5 kg",
+      "envase": 1500,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-poma-golden-de-girona-km0-bossa-1-5-kg/49235"
+    },
+    "pan_burger": {
+      "ref": "8a3b8740-3d72-408b-bf53-691dc22ee4c6",
+      "codigo": "24409",
+      "nombre": "BONPREU Panet rodó per a hamburgueses",
+      "envase": 4,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-panet-rodo-per-a-hamburgueses/24409"
+    },
+    "pan_barra": {
+      "ref": "fdba52b2-8800-4137-a180-aa8c9a6b07fb",
+      "codigo": "14481",
+      "nombre": "Barra de pa",
+      "envase": 300,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/barra-de-pa/14481"
+    },
+    "avena": {
+      "ref": "76f8a878-5731-4967-94a0-0bb289d017d8",
+      "codigo": "07381",
+      "nombre": "BONPREU Flocs de civada",
+      "envase": 500,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-flocs-de-civada/07381"
+    },
+    "platano": {
+      "ref": "a2a1a4ca-d68c-4ac7-bfc3-569da723a9de",
+      "codigo": "07424",
+      "nombre": "Banana 1 u.",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/banana-1-u/07424",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "naranja": {
+      "ref": "534842d5-0a85-48b1-a91c-1fe354a097a4",
+      "codigo": "07398",
+      "nombre": "Taronja 1 u.",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/taronja-1-u/07398",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "mandarina": {
+      "ref": "6229c1ee-cf76-4dc1-b8bd-0674bd265b54",
+      "codigo": "09910",
+      "nombre": "Mandarina 1 u.",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/mandarina-1-u/09910",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "kiwi": {
+      "ref": "07177184-008a-43bb-9789-896abb15c566",
+      "codigo": "01086",
+      "nombre": "ZESPRI Kiwi verd en safata de 500 g",
+      "envase": 500,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/zespri-kiwi-verd-en-safata-de-500-g/01086"
+    },
+    "pera": {
+      "ref": "fa93c3f4-b9b6-4e08-a5c1-d10f2b97f15f",
+      "codigo": "07422",
+      "nombre": "Pera Conference Km0 1 u.",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/pera-conference-km0-1-u/07422",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "aguacate": {
+      "ref": "7dae93de-3803-487c-ac06-3feb5dc3a9d4",
+      "codigo": "07426",
+      "nombre": "Alvocat 1 u.",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/alvocat-1-u/07426",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "pepino": {
+      "ref": "7dd1518a-55a2-44e0-8f35-a9eace27d55e",
+      "codigo": "07318",
+      "nombre": "Cogombre  1 u.",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/cogombre-1-u/07318",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "fresas": {
+      "ref": "0ff7199a-9541-4f46-aef6-d7f9637451d4",
+      "codigo": "75555",
+      "nombre": "ARDO Maduixes",
+      "envase": 450,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/ardo-maduixes/75555"
+    },
+    "frutos_rojos": {
+      "ref": "b3bfda7b-974f-434f-ae0b-272aebd95c12",
+      "codigo": "97903",
+      "nombre": "ARDO Fruites del bosc",
+      "envase": 450,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/ardo-fruites-del-bosc/97903"
+    },
+    "queso_batido": {
+      "ref": "2749441e-6794-4f04-972e-f43b20f1ba6b",
+      "codigo": "47285",
+      "nombre": "IFA Formatge fresc batut",
+      "envase": 500,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/ifa-formatge-fresc-batut/47285"
+    },
+    "queso_fresco": {
+      "ref": "ed8eb24f-7080-4cad-bd56-54f38a66d80a",
+      "codigo": "43886",
+      "nombre": "BONPREU Formatge fresc",
+      "envase": 250,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-formatge-fresc/43886"
+    },
+    "queso_lonchas": {
+      "ref": "0d76ae5e-9a7c-44c2-8c99-911b188eb37a",
+      "codigo": "55562",
+      "nombre": "BONPREU Formatge de vaca tendre a talls",
+      "envase": 300,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-formatge-de-vaca-tendre-a-talls/55562"
+    },
+    "pavo_fiambre": {
+      "ref": "d15b54a1-e9bc-4cea-8225-0e721361f15d",
+      "codigo": "31184",
+      "nombre": "BONPREU Pit d'indiot cuit a talls fins",
+      "envase": 200,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pit-d-indiot-cuit-a-talls-fins/31184"
+    },
+    "serrano": {
+      "ref": "66cb4779-1c49-4978-b1c5-bd5b04de145d",
+      "codigo": "26398",
+      "nombre": "BONPREU Pernil serrano reserva",
+      "envase": 200,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pernil-serrano-reserva/26398"
+    },
+    "kefir": {
+      "ref": "8cd337f0-f625-4133-bd5d-65bf9dbc7033",
+      "codigo": "67546",
+      "nombre": "UBACH Quefir natural Km0",
+      "envase": 500,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/ubach-quefir-natural-km0/67546"
+    },
+    "crema_cacahuete": {
+      "ref": "956a12dd-8680-47b0-bc95-fe961b502787",
+      "codigo": "64813",
+      "nombre": "BONPREU Crema de cacauet",
+      "envase": 500,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-crema-de-cacauet/64813"
+    },
+    "cacao": {
+      "ref": "686caf93-ed82-4983-b33f-c97f2bcd39e7",
+      "codigo": "31460",
+      "nombre": "IFA Cacau pur desgreixat en pols 0% sucres afegits",
+      "envase": 250,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/ifa-cacau-pur-desgreixat-en-pols-0-sucres-afegits/31460"
+    },
+    "miel": {
+      "ref": "03590df1-f739-4e46-adc8-b3ff15fde529",
+      "codigo": "79514",
+      "nombre": "REINA APICOLA Mel de mil flors",
+      "envase": 500,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/reina-apicola-mel-de-mil-flors/79514"
+    },
+    "mermelada": {
+      "ref": "61f18411-f9bd-423a-b138-197fc517a0af",
+      "codigo": "78629",
+      "nombre": "BONPREU Melmelada de maduixa sense sucres afegits",
+      "envase": 350,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-melmelada-de-maduixa-sense-sucres-afegits/78629"
+    },
+    "nueces": {
+      "ref": "23215370-909b-476e-bc18-3f077b9bca1d",
+      "codigo": "64662",
+      "nombre": "BONPREU Nous sense closca crues",
+      "envase": 300,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-nous-sense-closca-crues/64662"
+    },
+    "almendras": {
+      "ref": "f6e70403-d768-4bd2-9269-13f7f6d44d49",
+      "codigo": "13709",
+      "nombre": "BONPREU Ametlles crues amb pell Km0",
+      "envase": 200,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-ametlles-crues-amb-pell-km0/13709"
+    },
+    "pasas": {
+      "ref": "d65723fa-d365-449d-8e88-56cb8315a7cc",
+      "codigo": "26788",
+      "nombre": "BONPREU Panses sultanes dessecades",
+      "envase": 200,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-panses-sultanes-dessecades/26788"
+    },
+    "chia": {
+      "ref": "fe2bf0d8-709b-4850-b20a-af824d1076ac",
+      "codigo": "34332",
+      "nombre": "BONPREU Llavors de xia ecològiques",
+      "envase": 250,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-llavors-de-xia-ecologiques/34332"
+    },
+    "tortitas_arroz": {
+      "ref": "7146bc40-26d4-4d88-9704-8271984d0c74",
+      "codigo": "16743",
+      "nombre": "BONPREU Coquetes d'arròs",
+      "envase": 130,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-coquetes-d-arros/16743"
+    },
+    "tofu": {
+      "ref": "69ba862a-6b4b-4b78-957a-dede2ce9c4ed",
+      "codigo": "20917",
+      "nombre": "BONPREU Tofu ecològic",
+      "envase": 300,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-tofu-ecologic/20917"
+    },
+    "soja_texturizada": {
+      "ref": "605f597f-2aff-47f6-a661-d35dab30431a",
+      "codigo": "55161",
+      "nombre": "IFA Soja texturitzada",
+      "envase": 250,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/ifa-soja-texturitzada/55161"
+    },
+    "caldo_verduras": {
+      "ref": "8fd44aa3-36a2-4702-9acf-b1e8746e6dee",
+      "codigo": "90407",
+      "nombre": "IFA Brou de verdures en pastilles",
+      "envase": 12,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/ifa-brou-de-verdures-en-pastilles/90407"
+    },
+    "salsa_soja": {
+      "ref": "12e08a7d-31ca-486d-be10-a9a9a0549b3d",
+      "codigo": "21086",
+      "nombre": "CAMILL Salsa de soja tradicional",
+      "envase": 250,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/camill-salsa-de-soja-tradicional/21086"
+    },
+    "harina_garbanzo": {
+      "ref": "cc608d92-71a4-4afb-8f46-42b9c641f783",
+      "codigo": "63503",
+      "nombre": "BONPREU Farina de cigró sense gluten ecològica",
+      "envase": 500,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-farina-de-cigro-sense-gluten-ecologica/63503"
+    },
+    "seitan": {
+      "ref": "f453ef36-485d-46be-89e1-22a9bd9b4b57",
+      "codigo": "56072",
+      "nombre": "VEGETALIA Seitan ecològic",
+      "envase": 250,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/vegetalia-seitan-ecologic/56072"
+    }
+  },
+  "sin_equivalente": [
+    "crema_soja"
+  ]
+}

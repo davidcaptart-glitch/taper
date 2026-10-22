@@ -2619,8 +2619,951 @@
     "garbanzos: HTTP Error 403: Forbidden",
     "Demasiados fallos seguidos: se para este supermercado hasta la semana que viene"
    ]
+  },
+  "bonpreu": {
+   "nombre": "Bonpreu",
+   "fecha": "2026-10-22",
+   "productos": {
+    "arroz": {
+     "precio": 1.15,
+     "envase": 1000,
+     "nombre": "BONPREU Arròs extra",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pasta": {
+     "precio": 1.15,
+     "envase": 1000,
+     "nombre": "BONPREU Macarrons gruixuts",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "espaguetis": {
+     "precio": 1.15,
+     "envase": 1000,
+     "nombre": "BONPREU Espaguetis",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "cuscus": {
+     "precio": 1.99,
+     "envase": 1000,
+     "nombre": "BACCHINI Cuscús precuit",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "lentejas": {
+     "precio": 0.89,
+     "envase": 400,
+     "nombre": "BONPREU Llenties cuites",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "garbanzos": {
+     "precio": 0.8,
+     "envase": 400,
+     "nombre": "BONPREU Cigrons cuits extra",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "alubias": {
+     "precio": 0.75,
+     "envase": 400,
+     "nombre": "BONPREU Mongetes cuites extra",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tomate_tri": {
+     "precio": 0.99,
+     "envase": 780,
+     "nombre": "BONPREU Tomàquet triturat extra",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tomate_frito": {
+     "precio": 0.89,
+     "envase": 550,
+     "nombre": "BONPREU Tomàquet fregit",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "atun": {
+     "precio": 4.2,
+     "envase": 312,
+     "nombre": "BONPREU Tonyina clara en oli de gira-sol",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "coco": {
+     "precio": 1.95,
+     "envase": 400,
+     "nombre": "KARA Llet de coco",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "maiz": {
+     "precio": 1.55,
+     "envase": 420,
+     "nombre": "BONPREU Blat de moro dolç",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tortillas": {
+     "precio": 0.99,
+     "envase": 8,
+     "nombre": "BONPREU Tortilles de blat",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "cebolla": {
+     "precio": 1.29,
+     "envase": 1000,
+     "nombre": "LA COLLITA Ceba seca Km0  en malla d'1 kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "patata": {
+     "precio": 5.49,
+     "envase": 4000,
+     "nombre": "LA COLLITA Patata blanca bossa 4 kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "boniato": {
+     "precio": 2.29,
+     "envase": 1000,
+     "nombre": " Moniato 1u.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "ajo": {
+     "precio": 1.89,
+     "envase": 250,
+     "nombre": "LA COLLITA Alls secs en malla de 250 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pechuga": {
+     "precio": 9.99,
+     "envase": 1000,
+     "nombre": "BONPREU Filet de pollastre",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "muslos": {
+     "precio": 8.95,
+     "envase": 1000,
+     "nombre": "BONPREU Cuixa de pollastre desossada",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "picada": {
+     "precio": 5.65,
+     "envase": 500,
+     "nombre": "BONPREU Preparat de porc i vedella",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "picada_pollo": {
+     "precio": 3.25,
+     "envase": 300,
+     "nombre": "BONPREU Preparat de carn picada de pollastre",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "lomo": {
+     "precio": 9.85,
+     "envase": 1000,
+     "nombre": "BONPREU Llom de porc extra fi",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "burger": {
+     "precio": 5.99,
+     "envase": 6,
+     "nombre": "BONPREU Burger meat de pollastre",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "salmon": {
+     "precio": 5.95,
+     "envase": 250,
+     "nombre": "EXKIMO Salmó sense pell",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "merluza": {
+     "precio": 8.95,
+     "envase": 800,
+     "nombre": "BONPREU Filets  de lluç del Cap sense pell",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "gambas": {
+     "precio": 4.99,
+     "envase": 360,
+     "nombre": "IFA Gamba pelada crua mitjana",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "calamar": {
+     "precio": 4.49,
+     "envase": 360,
+     "nombre": "BONPREU Calamar trossejat",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "brocoli": {
+     "precio": 2.29,
+     "envase": 1000,
+     "nombre": "IFA Bròcoli",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "espinacas": {
+     "precio": 0.95,
+     "envase": 400,
+     "nombre": "BONPREU Espinacs",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "judias": {
+     "precio": 1.55,
+     "envase": 750,
+     "nombre": "BONPREU Mongetes tendres rodones",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "salteado": {
+     "precio": 1.16,
+     "envase": 450,
+     "nombre": "BONPREU Saltat de verdures",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "guisantes": {
+     "precio": 1.39,
+     "envase": 750,
+     "nombre": "BONPREU Pèsols fins",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "huevos": {
+     "precio": 3.05,
+     "envase": 12,
+     "nombre": "BONPREU Ous frescos de gallines soltes en el galliner L",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "queso": {
+     "precio": 1.65,
+     "envase": 200,
+     "nombre": "BONPREU Formatge ratllat mozzarella",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pimiento": {
+     "precio": 3.49,
+     "envase": 1000,
+     "nombre": " Pebrot dolç vermell 1 u.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "calabacin": {
+     "precio": 1.89,
+     "envase": 1000,
+     "nombre": " Carbassó  1 u.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "zanahoria": {
+     "precio": 0.79,
+     "envase": 500,
+     "nombre": "LA COLLITA Pastanagues en bossa de 500 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tomate": {
+     "precio": 2.69,
+     "envase": 1000,
+     "nombre": " Tomàquet de pera 1 u.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "ensalada": {
+     "precio": 0.85,
+     "envase": 250,
+     "nombre": "LA COLLITA Amanida 4 estacions",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "champi": {
+     "precio": 1.69,
+     "envase": 250,
+     "nombre": "LA COLLITA Xampinyons laminats safata 250 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "limon": {
+     "precio": 2.29,
+     "envase": 1000,
+     "nombre": "LA COLLITA Llimona malla 1 kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "yogur": {
+     "precio": 1.34,
+     "envase": 8,
+     "nombre": "BONPREU Iogurt natural",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pan_rallado": {
+     "precio": 0.85,
+     "envase": 750,
+     "nombre": "BONPREU Pa ratllat en bossa de 750 grams",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "jamon": {
+     "precio": 2.05,
+     "envase": 200,
+     "nombre": "BONPREU Pernil cuit",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "fideos": {
+     "precio": 0.85,
+     "envase": 500,
+     "nombre": "BONPREU Fideus gruixuts",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "caldo_pollo": {
+     "precio": 0.75,
+     "envase": 1000,
+     "nombre": "BONPREU Brou de pollastre  UHT",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "caldo_pescado": {
+     "precio": 0.95,
+     "envase": 1000,
+     "nombre": "BONPREU Brou de peix i marisc UHT",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pavo": {
+     "precio": 5.59,
+     "envase": 500,
+     "nombre": "BONPREU Pit filetejat d'indiot tall prim",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "burger_pavo": {
+     "precio": 4.99,
+     "envase": 4,
+     "nombre": "BONPREU Burger d'indiot",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "fideos_arroz": {
+     "precio": 1.45,
+     "envase": 200,
+     "nombre": "ORIENTAL SELECTION Noodles d'arròs",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "solomillo": {
+     "precio": 9.45,
+     "envase": 1000,
+     "nombre": "BONPREU Filet de porc  al buit",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "ternera": {
+     "precio": 21.99,
+     "envase": 1000,
+     "nombre": "BONPREU DE L'ERA Bistec de vedella",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "alubias_rojas": {
+     "precio": 1.2,
+     "envase": 400,
+     "nombre": "BONPREU Mongetes vermelles cuites extra",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "lasana": {
+     "precio": 1.65,
+     "envase": 200,
+     "nombre": "EL PAVO Pasta per lasanya",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "bacalao": {
+     "precio": 7.99,
+     "envase": 360,
+     "nombre": "BONPREU Filets de bacallà d'Islàndia al punt de sal",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "emperador": {
+     "precio": 4.59,
+     "envase": 200,
+     "nombre": "FANDICOSTA Rodanxa de peix espasa",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "teriyaki": {
+     "precio": 2.39,
+     "envase": 355,
+     "nombre": "MAGGI Salsa Teriyaki",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "nata": {
+     "precio": 1.75,
+     "envase": 600,
+     "nombre": "BONPREU Nata líquida per cuinar",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "mostaza": {
+     "precio": 3.99,
+     "envase": 265,
+     "nombre": "MAILLE Mostassa de Dijón",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "edamame": {
+     "precio": 1.85,
+     "envase": 400,
+     "nombre": "SUSHI KING Edamame de faves de soja amb closca",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "esparragos": {
+     "precio": 2.95,
+     "envase": 250,
+     "nombre": "LA COLLITA Espàrrecs verds prims en manat de 250g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "bonito": {
+     "precio": 3.25,
+     "envase": 156,
+     "nombre": "BONPREU Bonítol del nord en oli d'oliva",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "caballa": {
+     "precio": 1.59,
+     "envase": 60,
+     "nombre": "BONPREU Cavalla del sud amb oli d'oliva",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "sardinas": {
+     "precio": 1.59,
+     "envase": 88,
+     "nombre": "BONPREU Sardines en oli d'oliva",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pan_integral": {
+     "precio": 0.9,
+     "envase": 16,
+     "nombre": "BONPREU Pa de motlle 100% integral",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "langostinos": {
+     "precio": 4.29,
+     "envase": 200,
+     "nombre": "PESCANOVA Llagostí pelat cru",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "masa_empanadilla": {
+     "precio": 1.25,
+     "envase": 16,
+     "nombre": "BUITONI Massa per a crestes i postres",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pasta_lentejas": {
+     "precio": 1.99,
+     "envase": 250,
+     "nombre": "GALLO NATURE Espirals de llenties",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "hummus": {
+     "precio": 1.35,
+     "envase": 210,
+     "nombre": "TERRA I TAST Hummus de cigrons",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "noquis": {
+     "precio": 0.99,
+     "envase": 500,
+     "nombre": "BONPREU Nyoquis de patata",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "berenjena": {
+     "precio": 2.29,
+     "envase": 1000,
+     "nombre": " Albergínia negra 1 u.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "quinoa": {
+     "precio": 1.56,
+     "envase": 250,
+     "nombre": "BRILLANTE Quinoa blanca i vermella",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "dorada": {
+     "precio": 28.95,
+     "envase": 1000,
+     "nombre": " Filet d'Orada",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "copos_maiz": {
+     "precio": 1.5,
+     "envase": 500,
+     "nombre": "BONPREU Flocs de blat de moro",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pesto": {
+     "precio": 1.9,
+     "envase": 185,
+     "nombre": "BONPREU Salsa Pesto",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "salchichas": {
+     "precio": 1.75,
+     "envase": 300,
+     "nombre": "WUDY Salsitxes de pollastre i indiot Clàssiques",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pina": {
+     "precio": 2.49,
+     "envase": 420,
+     "nombre": "BONPREU Rodanxes de pinya amb el seu suc",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "leche": {
+     "precio": 0.83,
+     "envase": 1000,
+     "nombre": "BONPREU Llet semidesnatada en cartró",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "calabaza": {
+     "precio": 1.99,
+     "envase": 400,
+     "nombre": "LA COLLITA Carbassa tallada",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "gazpacho": {
+     "precio": 1.79,
+     "envase": 1000,
+     "nombre": "SUMMUM Gaspatxo en cartró d'1 litre",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tinta": {
+     "precio": 0.69,
+     "envase": 4,
+     "nombre": "NORTINDAL Tinta sípia 4 sobres",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "anacardos": {
+     "precio": 1.99,
+     "envase": 150,
+     "nombre": "BONPREU Anacards crus",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "feta": {
+     "precio": 2.5,
+     "envase": 150,
+     "nombre": "HOTOS Daus de formatge feta",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "manzana": {
+     "precio": 2.69,
+     "envase": 1500,
+     "nombre": "LA COLLITA Poma golden de Girona Km0 bossa 1,5 kg",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pan_burger": {
+     "precio": 0.85,
+     "envase": 4,
+     "nombre": "BONPREU Panet rodó per a hamburgueses",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pan_barra": {
+     "precio": 0.89,
+     "envase": 300,
+     "nombre": " Barra de pa",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "avena": {
+     "precio": 0.85,
+     "envase": 500,
+     "nombre": "BONPREU Flocs de civada",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "platano": {
+     "precio": 1.25,
+     "envase": 1000,
+     "nombre": " Banana 1 u.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "naranja": {
+     "precio": 2.49,
+     "envase": 1000,
+     "nombre": " Taronja 1 u.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "mandarina": {
+     "precio": 2.55,
+     "envase": 1000,
+     "nombre": " Mandarina 1 u.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "kiwi": {
+     "precio": 3.49,
+     "envase": 500,
+     "nombre": "ZESPRI Kiwi verd en safata de 500 g",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pera": {
+     "precio": 2.29,
+     "envase": 1000,
+     "nombre": " Pera Conference Km0 1 u.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "aguacate": {
+     "precio": 4.99,
+     "envase": 1000,
+     "nombre": " Alvocat 1 u.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pepino": {
+     "precio": 1.69,
+     "envase": 1000,
+     "nombre": " Cogombre  1 u.",
+     "aprox": true,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "fresas": {
+     "precio": 2.69,
+     "envase": 450,
+     "nombre": "ARDO Maduixes",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "frutos_rojos": {
+     "precio": 2.85,
+     "envase": 450,
+     "nombre": "ARDO Fruites del bosc",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "queso_batido": {
+     "precio": 1.72,
+     "envase": 500,
+     "nombre": "IFA Formatge fresc batut",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "queso_fresco": {
+     "precio": 1.29,
+     "envase": 250,
+     "nombre": "BONPREU Formatge fresc",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "queso_lonchas": {
+     "precio": 2.49,
+     "envase": 300,
+     "nombre": "BONPREU Formatge de vaca tendre a talls",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pavo_fiambre": {
+     "precio": 2.59,
+     "envase": 200,
+     "nombre": "BONPREU Pit d'indiot cuit a talls fins",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "serrano": {
+     "precio": 3.69,
+     "envase": 200,
+     "nombre": "BONPREU Pernil serrano reserva",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "kefir": {
+     "precio": 1.1,
+     "envase": 500,
+     "nombre": "UBACH Quefir natural Km0",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "crema_cacahuete": {
+     "precio": 2.75,
+     "envase": 500,
+     "nombre": "BONPREU Crema de cacauet",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "cacao": {
+     "precio": 4.4,
+     "envase": 250,
+     "nombre": "IFA Cacau pur desgreixat en pols 0% sucres afegits",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "miel": {
+     "precio": 3.2,
+     "envase": 500,
+     "nombre": "REINA APICOLA Mel de mil flors",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "mermelada": {
+     "precio": 1.45,
+     "envase": 350,
+     "nombre": "BONPREU Melmelada de maduixa sense sucres afegits",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "nueces": {
+     "precio": 3.75,
+     "envase": 300,
+     "nombre": "BONPREU Nous sense closca crues",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "almendras": {
+     "precio": 2.4,
+     "envase": 200,
+     "nombre": "BONPREU Ametlles crues amb pell Km0",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "pasas": {
+     "precio": 1.44,
+     "envase": 200,
+     "nombre": "BONPREU Panses sultanes dessecades",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "chia": {
+     "precio": 2.09,
+     "envase": 250,
+     "nombre": "BONPREU Llavors de xia ecològiques",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tortitas_arroz": {
+     "precio": 1.15,
+     "envase": 130,
+     "nombre": "BONPREU Coquetes d'arròs",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "tofu": {
+     "precio": 2.45,
+     "envase": 300,
+     "nombre": "BONPREU Tofu ecològic",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "soja_texturizada": {
+     "precio": 2.25,
+     "envase": 250,
+     "nombre": "IFA Soja texturitzada",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "caldo_verduras": {
+     "precio": 0.85,
+     "envase": 12,
+     "nombre": "IFA Brou de verdures en pastilles",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "salsa_soja": {
+     "precio": 1.65,
+     "envase": 250,
+     "nombre": "CAMILL Salsa de soja tradicional",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "harina_garbanzo": {
+     "precio": 2.59,
+     "envase": 500,
+     "nombre": "BONPREU Farina de cigró sense gluten ecològica",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    },
+    "seitan": {
+     "precio": 3.45,
+     "envase": 250,
+     "nombre": "VEGETALIA Seitan ecològic",
+     "aprox": false,
+     "anterior": null,
+     "fecha": "2026-10-22"
+    }
+   },
+   "fallos": []
   }
  },
  "codigo_postal": "08784",
- "ejecutado": "2026-10-22T14:43:03+00:00"
+ "ejecutado": "2026-10-22T17:01:34+00:00"
 }

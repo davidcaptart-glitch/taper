@@ -1,0 +1,758 @@
+{
+  "super": "carrefour",
+  "comprobado": "2026-10-22",
+  "productos": {
+    "arroz": {
+      "ref": "/supermercado/arroz-categoria-primera-carrefour-1-kg/R-prod1022743/p",
+      "nombre": "Arroz categoría primera Carrefour 1 kg.",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/arroz-categoria-primera-carrefour-1-kg/R-prod1022743/p"
+    },
+    "pasta": {
+      "ref": "/supermercado/pasta-macarrones-carrefour-classic-1-kg/R-544501833/p",
+      "nombre": "Pasta macarrones Carrefour Classic 1 kg.",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/pasta-macarrones-carrefour-classic-1-kg/R-544501833/p"
+    },
+    "espaguetis": {
+      "ref": "/supermercado/pasta-espaguetis-carrefour-classic-1-kg/R-544501835/p",
+      "nombre": "Pasta espaguetis Carrefour Classic 1 kg.",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/pasta-espaguetis-carrefour-classic-1-kg/R-544501835/p"
+    },
+    "cuscus": {
+      "ref": "/supermercado/couscous-mediano-classic-carrefour-500-g/R-VC4AECOMM-099192/p",
+      "nombre": "Couscous mediano Classic Carrefour 500 g.",
+      "envase": 500,
+      "url": "https://www.carrefour.es/supermercado/couscous-mediano-classic-carrefour-500-g/R-VC4AECOMM-099192/p"
+    },
+    "lentejas": {
+      "ref": "/supermercado/lentejas-cocidas-categoria-extra-classic-carrefour-400-g/R-521005501/p",
+      "nombre": "Lentejas cocidas categoría extra Classic Carrefour 400 g.",
+      "envase": 400,
+      "url": "https://www.carrefour.es/supermercado/lentejas-cocidas-categoria-extra-classic-carrefour-400-g/R-521005501/p"
+    },
+    "garbanzos": {
+      "ref": "/supermercado/garbanzos-cocidos-categoria-extra-classic-carrefour-400-g/R-521005495/p",
+      "nombre": "Garbanzos cocidos categoría extra Classic Carrefour 400 g.",
+      "envase": 400,
+      "url": "https://www.carrefour.es/supermercado/garbanzos-cocidos-categoria-extra-classic-carrefour-400-g/R-521005495/p"
+    },
+    "alubias": {
+      "ref": "/supermercado/alubias-cocidas-categoria-extra-classic-carrefour-400-g/R-521005493/p",
+      "nombre": "Alubias cocidas categoría extra Classic Carrefour 400 g.",
+      "envase": 400,
+      "url": "https://www.carrefour.es/supermercado/alubias-cocidas-categoria-extra-classic-carrefour-400-g/R-521005493/p"
+    },
+    "tomate_tri": {
+      "ref": "/supermercado/tomate-triturado-classic-carrefour-780-g/R-791942743/p",
+      "nombre": "Tomate triturado Classic Carrefour 780 g.",
+      "envase": 780,
+      "url": "https://www.carrefour.es/supermercado/tomate-triturado-classic-carrefour-780-g/R-791942743/p"
+    },
+    "tomate_frito": {
+      "ref": "/supermercado/tomate-frito-carrefour-classic-frasco-550-g/R-600805291/p",
+      "nombre": "Tomate frito Carrefour Classic frasco 550 g.",
+      "envase": 550,
+      "url": "https://www.carrefour.es/supermercado/tomate-frito-carrefour-classic-frasco-550-g/R-600805291/p"
+    },
+    "atun": {
+      "ref": "/supermercado/atun-claro-en-aceite-de-girasol-carrefour-pack-de-6-latas-de-52-g/R-521029268/p",
+      "nombre": "Atún claro en aceite de girasol Carrefour pack de 6 latas de 52 g.",
+      "envase": 312,
+      "url": "https://www.carrefour.es/supermercado/atun-claro-en-aceite-de-girasol-carrefour-pack-de-6-latas-de-52-g/R-521029268/p"
+    },
+    "coco": {
+      "ref": "/supermercado/jugo-de-coco-carrefour-400-ml/R-prod410226/p",
+      "nombre": "Jugo de coco Carrefour 400 ml.",
+      "envase": 400,
+      "url": "https://www.carrefour.es/supermercado/jugo-de-coco-carrefour-400-ml/R-prod410226/p"
+    },
+    "maiz": {
+      "ref": "/supermercado/maiz-dulce-classic-carrefour-sin-sal-y-azucar-anadido-pack-de-3-latas-de-140-g/R-VC4AECOMM-304601/p",
+      "nombre": "Maíz dulce Classic Carrefour sin sal y azúcar añadido pack de 3 latas de 140 g.",
+      "envase": 420,
+      "url": "https://www.carrefour.es/supermercado/maiz-dulce-classic-carrefour-sin-sal-y-azucar-anadido-pack-de-3-latas-de-140-g/R-VC4AECOMM-304601/p"
+    },
+    "tortillas": {
+      "ref": "/supermercado/tortillas-de-trigo-sensation-carrefour-10-ud/R-VC4AECOMM-696577/p",
+      "nombre": "Tortillas de trigo Sensation Carrefour 10 ud.",
+      "envase": 10,
+      "url": "https://www.carrefour.es/supermercado/tortillas-de-trigo-sensation-carrefour-10-ud/R-VC4AECOMM-696577/p"
+    },
+    "cebolla": {
+      "ref": "/supermercado/cebolla-carrefour-1-kg/R-521032276/p",
+      "nombre": "Cebolla Carrefour 1 kg",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/cebolla-carrefour-1-kg/R-521032276/p"
+    },
+    "patata": {
+      "ref": "/supermercado/patata-lavada-para-todo-uso-carrefour-el-mercado-3-kg/R-596701537/p",
+      "nombre": "Patata lavada para todo uso Carrefour El Mercado 3 kg",
+      "envase": 3000,
+      "url": "https://www.carrefour.es/supermercado/patata-lavada-para-todo-uso-carrefour-el-mercado-3-kg/R-596701537/p"
+    },
+    "boniato": {
+      "ref": "/supermercado/boniato-carrefour-1-kg-aprox/R-VC4AECOMM-645288/p",
+      "nombre": "Boniato Carrefour 1 kg aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/boniato-carrefour-1-kg-aprox/R-VC4AECOMM-645288/p"
+    },
+    "ajo": {
+      "ref": "/supermercado/ajo-circulo-de-calidad-250-g/R-521031667/p",
+      "nombre": "Ajo Círculo de Calidad 250 g",
+      "envase": 250,
+      "url": "https://www.carrefour.es/supermercado/ajo-circulo-de-calidad-250-g/R-521031667/p"
+    },
+    "pechuga": {
+      "ref": "/supermercado/filetes-de-pechuga-de-pollo-carrefour-el-mercado-600-g-aprox/R-VC4AECOMM-577205/p",
+      "nombre": "Filetes de pechuga de pollo Carrefour El Mercado 600 g aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/filetes-de-pechuga-de-pollo-carrefour-el-mercado-600-g-aprox/R-VC4AECOMM-577205/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "muslos": {
+      "ref": "/supermercado/filetes-de-contramuslo-de-pollo-carrefour-el-mercado-600-g-aprox/R-VC4AECOMM-577203/p",
+      "nombre": "Filetes de contramuslo de pollo Carrefour El Mercado 600 g aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/filetes-de-contramuslo-de-pollo-carrefour-el-mercado-600-g-aprox/R-VC4AECOMM-577203/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "picada": {
+      "ref": "/supermercado/preparado-de-carne-burger-meat-vacuno-y-cerdo-el-mercado-500-g/R-VC4AECOMM-479496/p",
+      "nombre": "Preparado de carne burger meat vacuno y cerdo El Mercado 500 g",
+      "envase": 500,
+      "url": "https://www.carrefour.es/supermercado/preparado-de-carne-burger-meat-vacuno-y-cerdo-el-mercado-500-g/R-VC4AECOMM-479496/p"
+    },
+    "picada_pollo": {
+      "ref": "/supermercado/picada-de-pollo-carrefour-400-g/R-VC4AECOMM-065820/p",
+      "nombre": "Picada de Pollo Carrefour 400 g",
+      "envase": 400,
+      "url": "https://www.carrefour.es/supermercado/picada-de-pollo-carrefour-400-g/R-VC4AECOMM-065820/p"
+    },
+    "lomo": {
+      "ref": "/supermercado/filetes-de-centro-de-lomo-de-cerdo-540-g-aprox/R-521032953/p",
+      "nombre": "Filetes de centro de lomo de cerdo 540 g aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/filetes-de-centro-de-lomo-de-cerdo-540-g-aprox/R-521032953/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "burger": {
+      "ref": "/supermercado/hamburguesa-de-pollo-carrefour-540-g/R-VC4AECOMM-065851/p",
+      "nombre": "Hamburguesa de Pollo Carrefour 540 g",
+      "envase": 6,
+      "url": "https://www.carrefour.es/supermercado/hamburguesa-de-pollo-carrefour-540-g/R-VC4AECOMM-065851/p"
+    },
+    "salmon": {
+      "ref": "/supermercado/lomos-de-salmon-congelado-dimar-230-g/R-VC4AECOMM-574095/p",
+      "nombre": "Lomos de salmón congelado Dimar 230 g",
+      "envase": 230,
+      "url": "https://www.carrefour.es/supermercado/lomos-de-salmon-congelado-dimar-230-g/R-VC4AECOMM-574095/p"
+    },
+    "merluza": {
+      "ref": "/supermercado/filete-de-merluza-del-cabo-carrefour-600-g/R-818615190/p",
+      "nombre": "Filete de Merluza del Cabo Carrefour 600 g.",
+      "envase": 600,
+      "url": "https://www.carrefour.es/supermercado/filete-de-merluza-del-cabo-carrefour-600-g/R-818615190/p"
+    },
+    "gambas": {
+      "ref": "/supermercado/gambas-peladas-carrefour-extra-360-g/R-VC4AECOMM-539084/p",
+      "nombre": "Gambas peladas Carrefour Extra 360 g",
+      "envase": 360,
+      "url": "https://www.carrefour.es/supermercado/gambas-peladas-carrefour-extra-360-g/R-VC4AECOMM-539084/p"
+    },
+    "calamar": {
+      "ref": "/supermercado/calamar-crudo-troceado-y-limpio-de-la-india-congelado-carrefour-475-g/R-VC4AECOMM-602600/p",
+      "nombre": "Calamar crudo troceado y limpio de la india congelado Carrefour 475 g",
+      "envase": 475,
+      "url": "https://www.carrefour.es/supermercado/calamar-crudo-troceado-y-limpio-de-la-india-congelado-carrefour-475-g/R-VC4AECOMM-602600/p"
+    },
+    "brocoli": {
+      "ref": "/supermercado/brocoli-ultracongelado-carrefour-classic-900-g/R-521031630/p",
+      "nombre": "Brócoli ultracongelado Carrefour Classic’ 900 g.",
+      "envase": 900,
+      "url": "https://www.carrefour.es/supermercado/brocoli-ultracongelado-carrefour-classic-900-g/R-521031630/p"
+    },
+    "espinacas": {
+      "ref": "/supermercado/espinacas-en-hojas-carrefour-400-g/R-521031553/p",
+      "nombre": "Espinacas en hojas Carrefour 400 g.",
+      "envase": 400,
+      "url": "https://www.carrefour.es/supermercado/espinacas-en-hojas-carrefour-400-g/R-521031553/p"
+    },
+    "judias": {
+      "ref": "/supermercado/judias-verdes-planas-carrefour-classic-1-kg/R-521031543/p",
+      "nombre": "Judías verdes planas Carrefour Classic 1 kg.",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/judias-verdes-planas-carrefour-classic-1-kg/R-521031543/p"
+    },
+    "salteado": {
+      "ref": "/supermercado/salteado-verdura-campestres-carrefour-600-g/R-640301895/p",
+      "nombre": "Salteado verdura campestres Carrefour 600 g.",
+      "envase": 600,
+      "url": "https://www.carrefour.es/supermercado/salteado-verdura-campestres-carrefour-600-g/R-640301895/p"
+    },
+    "guisantes": {
+      "ref": "/supermercado/guisantes-carrefour-1-kg/R-531705261/p",
+      "nombre": "Guisantes Carrefour 1 kg.",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/guisantes-carrefour-1-kg/R-531705261/p"
+    },
+    "huevos": {
+      "ref": "/supermercado/huevos-frescos-l-carrefour-el-mercado-12-ud/R-VC4AECOMM-307927/p",
+      "nombre": "Huevos frescos L Carrefour El Mercado 12 ud.",
+      "envase": 12,
+      "url": "https://www.carrefour.es/supermercado/huevos-frescos-l-carrefour-el-mercado-12-ud/R-VC4AECOMM-307927/p"
+    },
+    "queso": {
+      "ref": "/supermercado/mozzarella-rallada-fundente-classic-carrefour-400-g/R-VC4AECOMM-742697/p",
+      "nombre": "Mozzarella rallada fundente Classic Carrefour 400 g.",
+      "envase": 400,
+      "url": "https://www.carrefour.es/supermercado/mozzarella-rallada-fundente-classic-carrefour-400-g/R-VC4AECOMM-742697/p"
+    },
+    "pimiento": {
+      "ref": "/supermercado/pimiento-rojo-granel-1-kg-aprox/R-532601619/p",
+      "nombre": "Pimiento rojo  granel 1 Kg aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/pimiento-rojo-granel-1-kg-aprox/R-532601619/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "calabacin": {
+      "ref": "/supermercado/calabacin-granel-carrefour-750-g-aprox/R-VC4AECOMM-431967/p",
+      "nombre": "Calabacín granel Carrefour 750 g aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/calabacin-granel-carrefour-750-g-aprox/R-VC4AECOMM-431967/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "zanahoria": {
+      "ref": "/supermercado/zanahoria-circulo-de-calidad-carrefour-1-kg/R-prod223071/p",
+      "nombre": "Zanahoria Círculo de Calidad Carrefour 1 kg",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/zanahoria-circulo-de-calidad-carrefour-1-kg/R-prod223071/p"
+    },
+    "tomate": {
+      "ref": "/supermercado/tomate-pera-carrefour-1-kg-aprox/R-VC4AECOMM-646403/p",
+      "nombre": "Tomate pera Carrefour 1 kg aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/tomate-pera-carrefour-1-kg-aprox/R-VC4AECOMM-646403/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "ensalada": {
+      "ref": "/supermercado/ensalada-variada-carrefour-el-mercado-320-g/R-529916707/p",
+      "nombre": "Ensalada variada Carrefour El Mercado 320 g",
+      "envase": 320,
+      "url": "https://www.carrefour.es/supermercado/ensalada-variada-carrefour-el-mercado-320-g/R-529916707/p"
+    },
+    "champi": {
+      "ref": "/supermercado/champinon-laminado-carrefour-bio-300-g-aprox/R-fprod1220113/p",
+      "nombre": "Champiñon laminado Carrefour Bio 300 g aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/champinon-laminado-carrefour-bio-300-g-aprox/R-fprod1220113/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "limon": {
+      "ref": "/supermercado/limon-carrefour-a-granel-1-kg-aprox/R-VC4AECOMM-100139/p",
+      "nombre": "Limón Carrefour a granel 1 kg aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/limon-carrefour-a-granel-1-kg-aprox/R-VC4AECOMM-100139/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "yogur": {
+      "ref": "/supermercado/yogur-natural-carrefour-pack-de-8-unidades-de-125-g/R-VC4AECOMM-441067/p",
+      "nombre": "Yogur natural Carrefour pack de 8 unidades de 125 g.",
+      "envase": 8,
+      "url": "https://www.carrefour.es/supermercado/yogur-natural-carrefour-pack-de-8-unidades-de-125-g/R-VC4AECOMM-441067/p"
+    },
+    "pan_rallado": {
+      "ref": "/supermercado/pan-rallado-carrefour-750-g/R-805763831/p",
+      "nombre": "Pan rallado Carrefour 750 g.",
+      "envase": 750,
+      "url": "https://www.carrefour.es/supermercado/pan-rallado-carrefour-750-g/R-805763831/p"
+    },
+    "jamon": {
+      "ref": "/supermercado/jamon-cocido-extra-en-finas-lonchas-carrefour-el-mercado-sin-gluten-200-g/R-VC4AECOMM-050697/p",
+      "nombre": "Jamón cocido extra en finas lonchas Carrefour El Mercado sin gluten 200 g",
+      "envase": 200,
+      "url": "https://www.carrefour.es/supermercado/jamon-cocido-extra-en-finas-lonchas-carrefour-el-mercado-sin-gluten-200-g/R-VC4AECOMM-050697/p"
+    },
+    "fideos": {
+      "ref": "/supermercado/pasta-fideo-grueso-carrefour-classic-500-g/R-VC4AECOMM-601562/p",
+      "nombre": "Pasta fideo grueso Carrefour Classic 500 g.",
+      "envase": 500,
+      "url": "https://www.carrefour.es/supermercado/pasta-fideo-grueso-carrefour-classic-500-g/R-VC4AECOMM-601562/p"
+    },
+    "caldo_pollo": {
+      "ref": "/supermercado/caldo-de-pollo-classic-carrefour-sin-gluten-pack-4-briks-de-1-l/R-prod700433/p",
+      "nombre": "Caldo de pollo Classic Carrefour sin gluten pack 4 briks de 1 l.",
+      "envase": 4000,
+      "url": "https://www.carrefour.es/supermercado/caldo-de-pollo-classic-carrefour-sin-gluten-pack-4-briks-de-1-l/R-prod700433/p"
+    },
+    "caldo_pescado": {
+      "ref": "/supermercado/caldo-de-pescado-classic-carrefour-sin-gluten-1-l/R-521005793/p",
+      "nombre": "Caldo de pescado Classic Carrefour sin gluten 1 l.",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/caldo-de-pescado-classic-carrefour-sin-gluten-1-l/R-521005793/p"
+    },
+    "pavo": {
+      "ref": "/supermercado/pechuga-de-pavo-fileteada-carrefour-600-g-aprox/R-prod920182/p",
+      "nombre": "Pechuga de pavo fileteada Carrefour 600 g aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/pechuga-de-pavo-fileteada-carrefour-600-g-aprox/R-prod920182/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "burger_pavo": {
+      "ref": "/supermercado/burger-picada-de-pavo-carrefour-400-g/R-VC4AECOMM-451188/p",
+      "nombre": "Burger picada de pavo Carrefour 400 g",
+      "envase": 4,
+      "url": "https://www.carrefour.es/supermercado/burger-picada-de-pavo-carrefour-400-g/R-VC4AECOMM-451188/p"
+    },
+    "fideos_arroz": {
+      "ref": "/supermercado/fideos-de-arroz-go-tan-250-g/R-521006917/p",
+      "nombre": "Fideos de arroz Go-Tan 250 g.",
+      "envase": 250,
+      "url": "https://www.carrefour.es/supermercado/fideos-de-arroz-go-tan-250-g/R-521006917/p"
+    },
+    "solomillo": {
+      "ref": "/supermercado/solomillo-de-cerdo-carrefour-12-kg-aprox/R-VC4AECOMM-518437/p",
+      "nombre": "Solomillo de cerdo Carrefour 1,2 kg aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/solomillo-de-cerdo-carrefour-12-kg-aprox/R-VC4AECOMM-518437/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "ternera": {
+      "ref": "/supermercado/filete-1-a-vacuno-el-mercado-500-g-aprox/R-VC4AECOMM-133782/p",
+      "nombre": "Filete 1ª A Vacuno El Mercado 500 g aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/filete-1-a-vacuno-el-mercado-500-g-aprox/R-VC4AECOMM-133782/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "alubias_rojas": {
+      "ref": "/supermercado/alubias-rojas-cocidas-classic-carrefour-400-g/R-VC4AECOMM-784128/p",
+      "nombre": "Alubias rojas cocidas Classic Carrefour 400 g.",
+      "envase": 400,
+      "url": "https://www.carrefour.es/supermercado/alubias-rojas-cocidas-classic-carrefour-400-g/R-VC4AECOMM-784128/p"
+    },
+    "lasana": {
+      "ref": "/supermercado/placas-para-lasana-extrafinas-gallo-224-g/R-856500405/p",
+      "nombre": "Placas para lasaña extrafinas Gallo 224 g.",
+      "envase": 224,
+      "url": "https://www.carrefour.es/supermercado/placas-para-lasana-extrafinas-gallo-224-g/R-856500405/p"
+    },
+    "bacalao": {
+      "ref": "/supermercado/lomo-de-bacalao-procedente-de-pesca-sostenible-congelado-carrefour-300-g/R-799398282/p",
+      "nombre": "Lomo de bacalao procedente de pesca sostenible congelado Carrefour 300 g.",
+      "envase": 300,
+      "url": "https://www.carrefour.es/supermercado/lomo-de-bacalao-procedente-de-pesca-sostenible-congelado-carrefour-300-g/R-799398282/p"
+    },
+    "emperador": {
+      "ref": "/supermercado/rodaja-de-pez-espada-carrefour-el-mercado-350-g-aprox/R-VC4AECOMM-351409/p",
+      "nombre": "Rodaja de pez espada Carrefour El Mercado 350 g aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/rodaja-de-pez-espada-carrefour-el-mercado-350-g-aprox/R-VC4AECOMM-351409/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "teriyaki": {
+      "ref": "/supermercado/salsa-teriyaki-king-tiger-botella-250-ml/R-fprod1320082/p",
+      "nombre": "Salsa Teriyaki King Tiger botella 250 ml.",
+      "envase": 250,
+      "url": "https://www.carrefour.es/supermercado/salsa-teriyaki-king-tiger-botella-250-ml/R-fprod1320082/p"
+    },
+    "nata": {
+      "ref": "/supermercado/nata-liquida-para-cocinar-carrefour-pack-de-3-unidades-de-200-ml/R-prod1120698/p",
+      "nombre": "Nata liquida para cocinar Carrefour pack de 3 unidades de 200 ml.",
+      "envase": 600,
+      "url": "https://www.carrefour.es/supermercado/nata-liquida-para-cocinar-carrefour-pack-de-3-unidades-de-200-ml/R-prod1120698/p"
+    },
+    "mostaza": {
+      "ref": "/supermercado/mostaza-de-dijon-classic-carrefour-frasco-200-g/R-VC4AECOMM-524157/p",
+      "nombre": "Mostaza de Dijon Classic Carrefour frasco 200 g.",
+      "envase": 200,
+      "url": "https://www.carrefour.es/supermercado/mostaza-de-dijon-classic-carrefour-frasco-200-g/R-VC4AECOMM-524157/p"
+    },
+    "edamame": {
+      "ref": "/supermercado/edamame-vainas-de-soja-carrefour-500-g/R-VC4AECOMM-442121/p",
+      "nombre": "Edamame vainas de soja Carrefour 500 g.",
+      "envase": 500,
+      "url": "https://www.carrefour.es/supermercado/edamame-vainas-de-soja-carrefour-500-g/R-VC4AECOMM-442121/p"
+    },
+    "esparragos": {
+      "ref": "/supermercado/esparrago-verde-fino-carrefour-el-mercado-250-g/R-VC4AECOMM-335208/p",
+      "nombre": "Espárrago verde fino Carrefour El Mercado 250 g",
+      "envase": 250,
+      "url": "https://www.carrefour.es/supermercado/esparrago-verde-fino-carrefour-el-mercado-250-g/R-VC4AECOMM-335208/p"
+    },
+    "bonito": {
+      "ref": "/supermercado/migas-de-bonito-del-norte-en-aceite-de-oliva-extra-carrefour-pack-de-3-latas-de-52-g/R-VC4AECOMM-666739/p",
+      "nombre": "Migas de bonito del Norte en aceite de oliva Extra Carrefour pack de 3 latas de 52 g.",
+      "envase": 156,
+      "url": "https://www.carrefour.es/supermercado/migas-de-bonito-del-norte-en-aceite-de-oliva-extra-carrefour-pack-de-3-latas-de-52-g/R-VC4AECOMM-666739/p"
+    },
+    "caballa": {
+      "ref": "/supermercado/filetes-de-caballa-del-sur-en-aceite-de-oliva-carrefour-classic-pack-de-2-unidades-de-85-g/R-VC4AECOMM-748358/p",
+      "nombre": "Filetes de caballa del sur en aceite de oliva Carrefour Classic pack de 2 unidades de 85 g,",
+      "envase": 170,
+      "url": "https://www.carrefour.es/supermercado/filetes-de-caballa-del-sur-en-aceite-de-oliva-carrefour-classic-pack-de-2-unidades-de-85-g/R-VC4AECOMM-748358/p"
+    },
+    "sardinas": {
+      "ref": "/supermercado/sardinas-en-aceite-de-oliva-virgen-extra-classic-carrefour-95-g/R-VC4AECOMM-765241/p",
+      "nombre": "Sardinas en aceite de oliva virgen extra Classic Carrefour 95 g.",
+      "envase": 95,
+      "url": "https://www.carrefour.es/supermercado/sardinas-en-aceite-de-oliva-virgen-extra-classic-carrefour-95-g/R-VC4AECOMM-765241/p"
+    },
+    "pan_integral": {
+      "ref": "/supermercado/pan-de-molde-integral-sin-azucar-anadido-carrefour-460-g/R-VC4AECOMM-470192/p",
+      "nombre": "Pan de molde integral sin azúcar añadido Carrefour 460 g.",
+      "envase": 16,
+      "url": "https://www.carrefour.es/supermercado/pan-de-molde-integral-sin-azucar-anadido-carrefour-460-g/R-VC4AECOMM-470192/p"
+    },
+    "langostinos": {
+      "ref": "/supermercado/langostino-vannamei-pelado-carrefour-classic-220-g/R-VC4AECOMM-539055/p",
+      "nombre": "Langostino vannamei pelado Carrefour Classic 220 g",
+      "envase": 220,
+      "url": "https://www.carrefour.es/supermercado/langostino-vannamei-pelado-carrefour-classic-220-g/R-VC4AECOMM-539055/p"
+    },
+    "masa_empanadilla": {
+      "ref": "/supermercado/masa-para-empanadillas-y-postres-buitoni-160-g/R-521030338/p",
+      "nombre": "Masa para empanadillas y postres Buitoni 160 g.",
+      "envase": 16,
+      "url": "https://www.carrefour.es/supermercado/masa-para-empanadillas-y-postres-buitoni-160-g/R-521030338/p"
+    },
+    "pasta_lentejas": {
+      "ref": "/supermercado/pasta-fusilli-lenteja-roja-carrefour-sensation-sin-gluten-250-g/R-VC4AECOMM-601564/p",
+      "nombre": "Pasta fusilli lenteja roja Carrefour Sensation sin gluten 250 g.",
+      "envase": 250,
+      "url": "https://www.carrefour.es/supermercado/pasta-fusilli-lenteja-roja-carrefour-sensation-sin-gluten-250-g/R-VC4AECOMM-601564/p"
+    },
+    "hummus": {
+      "ref": "/supermercado/hummus-de-garbanzos-clasico-carrefour-extra-sin-gluten-240-g/R-VC4AECOMM-683553/p",
+      "nombre": "Hummus de garbanzos clásico Carrefour Extra sin gluten 240 g.",
+      "envase": 240,
+      "url": "https://www.carrefour.es/supermercado/hummus-de-garbanzos-clasico-carrefour-extra-sin-gluten-240-g/R-VC4AECOMM-683553/p"
+    },
+    "noquis": {
+      "ref": "/supermercado/gnocchi-de-patata-carrefour-extra-500-g/R-prod1090094/p",
+      "nombre": "Gnocchi de patata Carrefour Extra 500 g.",
+      "envase": 500,
+      "url": "https://www.carrefour.es/supermercado/gnocchi-de-patata-carrefour-extra-500-g/R-prod1090094/p"
+    },
+    "berenjena": {
+      "ref": "/supermercado/berenjena-carrefour-a-granel-1-kg-aprox/R-VC4AECOMM-394518/p",
+      "nombre": "Berenjena Carrefour a granel 1 kg aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/berenjena-carrefour-a-granel-1-kg-aprox/R-VC4AECOMM-394518/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "quinoa": {
+      "ref": "/supermercado/quinoa-blanca-y-roja-para-microondas-brillante-pack-de-2-unidades-de-125-g/R-834407519/p",
+      "nombre": "Quinoa blanca y roja para microondas Brillante pack de 2 unidades de 125 g.",
+      "envase": 250,
+      "url": "https://www.carrefour.es/supermercado/quinoa-blanca-y-roja-para-microondas-brillante-pack-de-2-unidades-de-125-g/R-834407519/p"
+    },
+    "dorada": {
+      "ref": "/supermercado/filete-de-dorada-carrefour-el-mercado-240-g-aprox/R-VC4AECOMM-342464/p",
+      "nombre": "Filete de Dorada Carrefour El Mercado 240 g aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/filete-de-dorada-carrefour-el-mercado-240-g-aprox/R-VC4AECOMM-342464/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "copos_maiz": {
+      "ref": "/supermercado/cereales-de-maiz-sin-azucar-anadido-corn-flakes-carrefour-500-g/R-527030608/p",
+      "nombre": "Cereales de maíz sin azúcar añadido Corn Flakes Carrefour 500 g.",
+      "envase": 500,
+      "url": "https://www.carrefour.es/supermercado/cereales-de-maiz-sin-azucar-anadido-corn-flakes-carrefour-500-g/R-527030608/p"
+    },
+    "pesto": {
+      "ref": "/supermercado/salsa-pesto-carrefour-bolsita-140-g/R-590209225/p",
+      "nombre": "Salsa pesto Carrefour bolsita 140 g.",
+      "envase": 140,
+      "url": "https://www.carrefour.es/supermercado/salsa-pesto-carrefour-bolsita-140-g/R-590209225/p"
+    },
+    "salchichas": {
+      "ref": "/supermercado/salchichas-cocidas-de-pollo-ahumadas-carrefour-clasicc-sin-gluten-200-g/R-VC4AECOMM-676112/p",
+      "nombre": "Salchichas cocidas de pollo ahumadas Carrefour Clasicc sin gluten 200 g.",
+      "envase": 200,
+      "url": "https://www.carrefour.es/supermercado/salchichas-cocidas-de-pollo-ahumadas-carrefour-clasicc-sin-gluten-200-g/R-VC4AECOMM-676112/p"
+    },
+    "pina": {
+      "ref": "/supermercado/pina-en-rodajas-en-su-jugo-classic-carrefour-pack-de-3-unidades-de-140-g/R-VC4AECOMM-152215/p",
+      "nombre": "Piña en rodajas en su jugo Classic Carrefour pack de 3 unidades de 140 g.",
+      "envase": 420,
+      "url": "https://www.carrefour.es/supermercado/pina-en-rodajas-en-su-jugo-classic-carrefour-pack-de-3-unidades-de-140-g/R-VC4AECOMM-152215/p"
+    },
+    "leche": {
+      "ref": "/supermercado/leche-semidesnatada-carrefour-brik-1-l/R-521007071/p",
+      "nombre": "Leche semidesnatada Carrefour brik 1 l.",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/leche-semidesnatada-carrefour-brik-1-l/R-521007071/p"
+    },
+    "calabaza": {
+      "ref": "/supermercado/calabaza-sepallo-carrefour-2-kg-aprox/R-VC4AECOMM-462664/p",
+      "nombre": "Calabaza sepallo Carrefour 2 kg aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/calabaza-sepallo-carrefour-2-kg-aprox/R-VC4AECOMM-462664/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "gazpacho": {
+      "ref": "/supermercado/gazpacho-carrefour-sin-gluten-1-l/R-805505583/p",
+      "nombre": "Gazpacho Carrefour sin gluten 1 l.",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/gazpacho-carrefour-sin-gluten-1-l/R-805505583/p"
+    },
+    "tinta": {
+      "ref": "/supermercado/tinta-de-sepia-carrefour-classic-sin-gluten-pack-de-4-unidades-de-4-g/R-VC4AECOMM-531637/p",
+      "nombre": "Tinta de sepia Carrefour Classic' sin gluten pack de 4 unidades de 4 g.",
+      "envase": 4,
+      "url": "https://www.carrefour.es/supermercado/tinta-de-sepia-carrefour-classic-sin-gluten-pack-de-4-unidades-de-4-g/R-VC4AECOMM-531637/p"
+    },
+    "anacardos": {
+      "ref": "/supermercado/anacardo-crudo-original-carrefour-200-g/R-VC4AECOMM-491998/p",
+      "nombre": "Anacardo crudo Original Carrefour 200 g.",
+      "envase": 200,
+      "url": "https://www.carrefour.es/supermercado/anacardo-crudo-original-carrefour-200-g/R-VC4AECOMM-491998/p"
+    },
+    "feta": {
+      "ref": "/supermercado/queso-feta-carrefour-extra-200-g/R-VC4AECOMM-306945/p",
+      "nombre": "Queso feta Carrefour Extra 200 g.",
+      "envase": 200,
+      "url": "https://www.carrefour.es/supermercado/queso-feta-carrefour-extra-200-g/R-VC4AECOMM-306945/p"
+    },
+    "manzana": {
+      "ref": "/supermercado/manzana-golden-circulo-de-calidad-a-granel-1-kg-aprox/R-532601637/p",
+      "nombre": "Manzana golden Círculo de Calidad a granel 1 Kg aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/manzana-golden-circulo-de-calidad-a-granel-1-kg-aprox/R-532601637/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "pan_burger": {
+      "ref": "/supermercado/pan-de-burger-maxi-classic-carrefour-4-ud/R-521007180/p",
+      "nombre": "Pan de burger maxi Classic´ Carrefour 4 ud.",
+      "envase": 4,
+      "url": "https://www.carrefour.es/supermercado/pan-de-burger-maxi-classic-carrefour-4-ud/R-521007180/p"
+    },
+    "pan_barra": {
+      "ref": "/supermercado/barra-de-pan-carrefour-250-g/R-527063193/p",
+      "nombre": "Barra de pan Carrefour 250 g",
+      "envase": 250,
+      "url": "https://www.carrefour.es/supermercado/barra-de-pan-carrefour-250-g/R-527063193/p"
+    },
+    "avena": {
+      "ref": "/supermercado/copos-de-avena-integral-original-carrefour-500-g/R-641402048/p",
+      "nombre": "Copos de avena integral Original Carrefour 500 g.",
+      "envase": 500,
+      "url": "https://www.carrefour.es/supermercado/copos-de-avena-integral-original-carrefour-500-g/R-641402048/p"
+    },
+    "platano": {
+      "ref": "/supermercado/banana-a-granel-1-kg-aprox/R-529921745/p",
+      "nombre": "Banana a granel 1 Kg aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/banana-a-granel-1-kg-aprox/R-529921745/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "naranja": {
+      "ref": "/supermercado/naranjas-de-mesa-carrefour-el-mercado-3-kg/R-VC4AECOMM-385545/p",
+      "nombre": "Naranjas de mesa Carrefour el Mercado 3 kg",
+      "envase": 3000,
+      "url": "https://www.carrefour.es/supermercado/naranjas-de-mesa-carrefour-el-mercado-3-kg/R-VC4AECOMM-385545/p"
+    },
+    "mandarina": {
+      "ref": "/supermercado/mandarina-carrefour-el-mercado-15-kg/R-VC4AECOMM-531347/p",
+      "nombre": "Mandarina Carrefour El Mercado 1,5 kg",
+      "envase": 1500,
+      "url": "https://www.carrefour.es/supermercado/mandarina-carrefour-el-mercado-15-kg/R-VC4AECOMM-531347/p"
+    },
+    "kiwi": {
+      "ref": "/supermercado/kiwi-carrefour-1-kg-aprox/R-VC4AECOMM-670535/p",
+      "nombre": "Kiwi Carrefour 1 kg aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/kiwi-carrefour-1-kg-aprox/R-VC4AECOMM-670535/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "pera": {
+      "ref": "/supermercado/pera-blanquilla-carrefour-15-kg-aprox/R-VC4AECOMM-531316/p",
+      "nombre": "Pera blanquilla Carrefour 1,5 kg aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/pera-blanquilla-carrefour-15-kg-aprox/R-VC4AECOMM-531316/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "aguacate": {
+      "ref": "/supermercado/aguacate-maduro-carrefour-seleccion-2-ud/R-579101653/p",
+      "nombre": "Aguacate maduro Carrefour Selección 2 ud.",
+      "envase": 500,
+      "url": "https://www.carrefour.es/supermercado/aguacate-maduro-carrefour-seleccion-2-ud/R-579101653/p",
+      "aprox": true
+    },
+    "pepino": {
+      "ref": "/supermercado/pepino-de-almeria-500-gr-aprox/R-VC4AECOMM-783606/p",
+      "nombre": "Pepino de Almería 500 gr aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/pepino-de-almeria-500-gr-aprox/R-VC4AECOMM-783606/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "fresas": {
+      "ref": "/supermercado/fresas-carrefour-classic-650-g/R-prod830022/p",
+      "nombre": "Fresas Carrefour Classic 650 g.",
+      "envase": 650,
+      "url": "https://www.carrefour.es/supermercado/fresas-carrefour-classic-650-g/R-prod830022/p"
+    },
+    "frutos_rojos": {
+      "ref": "/supermercado/mix-frutos-rojos-carrefour-500-g/R-VC4AECOMM-730917/p",
+      "nombre": "Mix frutos rojos Carrefour 500 g.",
+      "envase": 500,
+      "url": "https://www.carrefour.es/supermercado/mix-frutos-rojos-carrefour-500-g/R-VC4AECOMM-730917/p"
+    },
+    "queso_batido": {
+      "ref": "/supermercado/queso-fresco-batido-desnatado-carrefour-classic-500-g/R-526501224/p",
+      "nombre": "Queso fresco batido desnatado Carrefour Classic 500 g.",
+      "envase": 500,
+      "url": "https://www.carrefour.es/supermercado/queso-fresco-batido-desnatado-carrefour-classic-500-g/R-526501224/p"
+    },
+    "queso_fresco": {
+      "ref": "/supermercado/queso-fresco-de-burgos-carrefour-220-g-aprox/R-603504386/p",
+      "nombre": "Queso fresco de Burgos Carrefour 220 g aprox",
+      "envase": 1000,
+      "url": "https://www.carrefour.es/supermercado/queso-fresco-de-burgos-carrefour-220-g-aprox/R-603504386/p",
+      "aprox": true,
+      "precio_por": "kilo"
+    },
+    "queso_lonchas": {
+      "ref": "/supermercado/queso-gouda-tierno-en-lonchas-carrefour-classic-300-g/R-VC4AECOMM-588832/p",
+      "nombre": "Queso gouda tierno en lonchas Carrefour Classic 300 g.",
+      "envase": 300,
+      "url": "https://www.carrefour.es/supermercado/queso-gouda-tierno-en-lonchas-carrefour-classic-300-g/R-VC4AECOMM-588832/p"
+    },
+    "pavo_fiambre": {
+      "ref": "/supermercado/pechuga-de-pavo-en-lonchas-carrefour-el-mercado-sin-gluten-2x200-g/R-VC4AECOMM-050651/p",
+      "nombre": "Pechuga de pavo en lonchas Carrefour El Mercado sin gluten 2x200 g",
+      "envase": 400,
+      "url": "https://www.carrefour.es/supermercado/pechuga-de-pavo-en-lonchas-carrefour-el-mercado-sin-gluten-2x200-g/R-VC4AECOMM-050651/p"
+    },
+    "serrano": {
+      "ref": "/supermercado/jamon-serrano-gran-reserva-en-lonchas-carrefour-el-mercado-sin-gluten-y-sin-lactosa-90-g/R-VC4AECOMM-215198/p",
+      "nombre": "Jamón serrano gran reserva en lonchas Carrefour El Mercado sin gluten y sin lactosa 90 g",
+      "envase": 90,
+      "url": "https://www.carrefour.es/supermercado/jamon-serrano-gran-reserva-en-lonchas-carrefour-el-mercado-sin-gluten-y-sin-lactosa-90-g/R-VC4AECOMM-215198/p"
+    },
+    "kefir": {
+      "ref": "/supermercado/kefir-natural-carrefour-sensation-500-g/R-VC4AECOMM-486724/p",
+      "nombre": "Kéfir natural Carrefour Sensation 500 g.",
+      "envase": 500,
+      "url": "https://www.carrefour.es/supermercado/kefir-natural-carrefour-sensation-500-g/R-VC4AECOMM-486724/p"
+    },
+    "crema_cacahuete": {
+      "ref": "/supermercado/crema-de-cacahuete-100-sensation-carrefour-sin-gluten-500-g/R-VC4AECOMM-489756/p",
+      "nombre": "Crema de cacahuete 100% Sensation Carrefour sin gluten 500 g.",
+      "envase": 500,
+      "url": "https://www.carrefour.es/supermercado/crema-de-cacahuete-100-sensation-carrefour-sin-gluten-500-g/R-VC4AECOMM-489756/p"
+    },
+    "cacao": {
+      "ref": "/supermercado/cacao-soluble-100-puro-desgrasado-en-polvo-clavileno-sin-gluten-sin-lactosa-y-sin-azucar-anadido-250-g/R-VC4AECOMM-142616/p",
+      "nombre": "Cacao soluble 100% puro desgrasado en polvo Clavileño sin gluten, sin lactosa y sin azúcar añadido 250 g.",
+      "envase": 250,
+      "url": "https://www.carrefour.es/supermercado/cacao-soluble-100-puro-desgrasado-en-polvo-clavileno-sin-gluten-sin-lactosa-y-sin-azucar-anadido-250-g/R-VC4AECOMM-142616/p"
+    },
+    "miel": {
+      "ref": "/supermercado/miel-de-flores-carrefour-classic-500-g/R-521003512/p",
+      "nombre": "Miel de flores Carrefour Classic' 500 g.",
+      "envase": 500,
+      "url": "https://www.carrefour.es/supermercado/miel-de-flores-carrefour-classic-500-g/R-521003512/p"
+    },
+    "mermelada": {
+      "ref": "/supermercado/confitura-de-fresa-carrefour-extra-sin-azucar-anadido-300-g/R-prod1030077/p",
+      "nombre": "Confitura de fresa Carrefour Extra sin azúcar añadido 300 g.",
+      "envase": 300,
+      "url": "https://www.carrefour.es/supermercado/confitura-de-fresa-carrefour-extra-sin-azucar-anadido-300-g/R-prod1030077/p"
+    },
+    "nueces": {
+      "ref": "/supermercado/nueces-sin-cascara-original-carrefour-200-g/R-521003605/p",
+      "nombre": "Nueces sin cáscara Original Carrefour 200 g.",
+      "envase": 200,
+      "url": "https://www.carrefour.es/supermercado/nueces-sin-cascara-original-carrefour-200-g/R-521003605/p"
+    },
+    "almendras": {
+      "ref": "/supermercado/almendra-natural-frumesa-400-g/R-VC4AECOMM-665516/p",
+      "nombre": "Almendra natural Frumesa 400 g.",
+      "envase": 400,
+      "url": "https://www.carrefour.es/supermercado/almendra-natural-frumesa-400-g/R-VC4AECOMM-665516/p"
+    },
+    "pasas": {
+      "ref": "/supermercado/pasas-sultanas-carrefour-350-g/R-VC4AECOMM-594762/p",
+      "nombre": "Pasas sultanas Carrefour 350 g.",
+      "envase": 350,
+      "url": "https://www.carrefour.es/supermercado/pasas-sultanas-carrefour-350-g/R-VC4AECOMM-594762/p"
+    },
+    "chia": {
+      "ref": "/supermercado/semillas-de-chia-ecologicas-carrefour-bio-250-g/R-prod1000537/p",
+      "nombre": "Semillas de chía ecológicas Carrefour Bio 250 g.",
+      "envase": 250,
+      "url": "https://www.carrefour.es/supermercado/semillas-de-chia-ecologicas-carrefour-bio-250-g/R-prod1000537/p"
+    },
+    "tortitas_arroz": {
+      "ref": "/supermercado/tortitas-de-arroz-carrefour-pack-de-4-unidades-de-33-g/R-prod1000735/p",
+      "nombre": "Tortitas de arroz Carrefour pack de 4 unidades de 33 g.",
+      "envase": 132,
+      "url": "https://www.carrefour.es/supermercado/tortitas-de-arroz-carrefour-pack-de-4-unidades-de-33-g/R-prod1000735/p"
+    },
+    "tofu": {
+      "ref": "/supermercado/tofu-natural-ecologico-carrefour-bio-400-g/R-VC4AECOMM-134991/p",
+      "nombre": "Tofu natural ecológico Carrefour Bio 400 g.",
+      "envase": 400,
+      "url": "https://www.carrefour.es/supermercado/tofu-natural-ecologico-carrefour-bio-400-g/R-VC4AECOMM-134991/p"
+    },
+    "soja_texturizada": {
+      "ref": "/supermercado/soja-texturizada-esgir-sin-gluten-350-g/R-VC4AECOMM-486698/p",
+      "nombre": "Soja texturizada Esgir sin gluten 350 g.",
+      "envase": 350,
+      "url": "https://www.carrefour.es/supermercado/soja-texturizada-esgir-sin-gluten-350-g/R-VC4AECOMM-486698/p"
+    },
+    "caldo_verduras": {
+      "ref": "/supermercado/caldo-de-verduras-original-carrefour-12-pastillas/R-VC4AECOMM-549101/p",
+      "nombre": "Caldo de verduras Original Carrefour 12 pastillas",
+      "envase": 12,
+      "url": "https://www.carrefour.es/supermercado/caldo-de-verduras-original-carrefour-12-pastillas/R-VC4AECOMM-549101/p"
+    },
+    "salsa_soja": {
+      "ref": "/supermercado/salsa-de-soja-con-sal-sensation-carrefour-botella-250-ml/R-VC4AECOMM-034281/p",
+      "nombre": "Salsa de soja con sal Sensation Carrefour botella 250 ml.",
+      "envase": 250,
+      "url": "https://www.carrefour.es/supermercado/salsa-de-soja-con-sal-sensation-carrefour-botella-250-ml/R-VC4AECOMM-034281/p"
+    },
+    "harina_garbanzo": {
+      "ref": "/supermercado/harina-de-garbanzo-extra-carrefour-sin-gluten-500-g/R-prod960041/p",
+      "nombre": "Harina de garbanzo Extra Carrefour sin gluten 500 g.",
+      "envase": 500,
+      "url": "https://www.carrefour.es/supermercado/harina-de-garbanzo-extra-carrefour-sin-gluten-500-g/R-prod960041/p"
+    },
+    "crema_soja": {
+      "ref": "/supermercado/preparado-de-soja-para-cocinar-alpro-sin-gluten-y-sin-lactosa-250-ml/R-VC4AECOMM-732767/p",
+      "nombre": "Preparado de soja para cocinar Alpro sin gluten y sin lactosa 250 ml.",
+      "envase": 250,
+      "url": "https://www.carrefour.es/supermercado/preparado-de-soja-para-cocinar-alpro-sin-gluten-y-sin-lactosa-250-ml/R-VC4AECOMM-732767/p"
+    },
+    "seitan": {
+      "ref": "/supermercado/seitan-en-lonchas-ecologico-soria-natural-300-g/R-590205151/p",
+      "nombre": "Seitán en lonchas ecológico Soria Natural 300 g.",
+      "envase": 300,
+      "url": "https://www.carrefour.es/supermercado/seitan-en-lonchas-ecologico-soria-natural-300-g/R-590205151/p"
+    }
+  },
+  "sin_equivalente": []
+}
