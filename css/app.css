@@ -1023,3 +1023,10 @@ details.aisle{margin-top:10px}
 .colsw.lock .dot{opacity:.75}
 .lockchip em{font-style:normal;color:var(--muted);font-size:.8em;margin-left:4px}
 .swbig{height:46px;border-radius:14px;margin:8px 0}
+
+/* Vista previa antes de comprar un color o una estética */
+.pvcard{border-radius:18px;padding:14px;background:var(--bg);margin:0 0 10px;border:1px solid var(--line)}
+.pvcard .pv-t{font-size:1.4rem;font-weight:800;margin-bottom:8px}.pvcard .pv-t em{color:var(--accent);font-family:var(--serif,serif);font-weight:400}
+.pvcard .pv-c{display:flex;justify-content:space-between;align-items:center;background:var(--surface);border-radius:12px;padding:10px 12px;margin-bottom:10px}
+.pvcard .pv-c i{font-style:normal;font-size:.75rem;background:var(--accent);color:#fff;border-radius:999px;padding:3px 9px}
+.pvcard .pv-row{display:flex;gap:8px;align-items:center}

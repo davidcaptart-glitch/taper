@@ -777,6 +777,14 @@
         "5 colores nuevos: naranja, turquesa, frambuesa, lavanda y grafito (10 en total).",
         "En Perfil › Coins y aspecto ves todos los colores y estéticas: los tuyos se usan con un toque y los demás se compran ahí mismo."
       ]
+    },
+    {
+      "version": 91,
+      "fecha": "2026-10-23",
+      "titulo": "Pruébalo antes de comprarlo",
+      "cambios": [
+        "Al tocar un color o una estética que no tienes, toda la app se pone así para que veas cómo queda. Si no lo compras, vuelve a como estaba."
+      ]
     }
   ]
 }

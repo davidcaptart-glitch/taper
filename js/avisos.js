@@ -315,6 +315,7 @@ async function openShop(){
 const SKIN_FONTS="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Playfair+Display:ital,wght@0,700;1,500&display=swap";
 function loadSkinFonts(){if(document.getElementById("skinFonts"))return;const l=document.createElement("link");l.id="skinFonts";l.rel="stylesheet";l.href=SKIN_FONTS;document.head.appendChild(l)}
 function applySkin(){
+  if(lookPreview){previewLook(lookPreview);return}
   document.body.className=document.body.className.replace(/\bskin-\S+/g,"").trim();
   if(S.skin&&owns("skin_"+S.skin)){loadSkinFonts();document.body.classList.add("skin-"+S.skin);
     const c=getComputedStyle(document.body).getPropertyValue("--accent").trim();if(c)document.querySelector('meta[name="theme-color"]')?.setAttribute("content",c)}
@@ -333,15 +334,30 @@ async function buyItem(k){
     toast(`${SHOP[k].ico} ${SHOP[k].t}: ¡es tuyo!`);render();return true}
   catch(e){toast("Sin conexión: inténtalo luego");return false}
 }
-// Comprar desde Perfil: se pregunta antes
+// Probar un color o una estética sin tenerlo: se pone en toda la app mientras decides
+function previewLook(k){
+  const st=document.documentElement.style;
+  if(k.startsWith("tema_")){const a=ACCENTS[k.slice(5)];document.body.className=document.body.className.replace(/\bskin-\S+/g,"").trim();
+    st.setProperty("--accent",a[0]);st.setProperty("--accent-2",a[1]);st.setProperty("--accent-soft",a[2]);document.querySelector('meta[name="theme-color"]')?.setAttribute("content",a[0])}
+  if(k.startsWith("skin_")){["--accent","--accent-2","--accent-soft"].forEach(v=>st.removeProperty(v));loadSkinFonts();document.body.className=document.body.className.replace(/\bskin-\S+/g,"").trim();document.body.classList.add("skin-"+k.slice(5))}
+}
+// Comprar desde Perfil: primero se ve cómo queda; si no se compra, todo vuelve a como estaba
 function askBuy(k){const v=SHOP[k];if(!v)return;
-  showDialog(`<div class="mod">${closeBtn}<h2>${v.ico} ${esc(v.t)}</h2><p>Cuesta <b>🪙 ${v.c} coins</b>.${v.d?" "+esc(v.d)+".":""}</p>
-    ${k.startsWith("tema_")?`<div class="swbig" style="background:${ACCENTS[k.slice(5)][0]}"></div>`:""}
+  const look=k.startsWith("tema_")||k.startsWith("skin_");let bought=false;
+  if(look){lookPreview=k;previewLook(k)}
+  showDialog(`<div class="mod">${closeBtn}<h2>${v.ico} ${esc(v.t)}</h2>
+    ${look?`<p class="small muted" style="margin:0 0 8px">Así se ve Táper con ${k.startsWith("tema_")?"este color":"esta estética"}: mira también la pantalla de detrás.</p>
+      <div class="pvcard${k.startsWith("skin_")?" skinprev skin-"+k.slice(5):""}"><div class="pv-t">Qué <em>comemos</em></div><div class="pv-c"><span>🍝 Pasta al pesto</span><i>Hoy</i></div>
+        <div class="pv-row"><span class="btn small">Planificar la semana</span><span class="chip" aria-pressed="true">Cena</span></div></div>`:""}
+    <p>Cuesta <b>🪙 ${v.c} coins</b>.${v.d?" "+esc(v.d)+".":""}</p>
     <div class="actions"><button class="btn wide" id="bkOk">Comprar y usar</button><button class="btn ghost wide" data-x>Ahora no</button></div></div>`);
-  dlg.querySelector("#bkOk").onclick=async e=>{e.target.disabled=true;if(await buyItem(k))dlg.close();else e.target.disabled=false};
+  // Al cerrar la ventana (por donde sea), si no se ha comprado, todo vuelve a como estaba
+  if(look){const t=setInterval(()=>{if(dlg.open&&dlg.querySelector("#bkOk"))return;clearInterval(t);if(lookPreview!==k)return;lookPreview=null;applyAccent();applySkin()},150)}
+  dlg.querySelector("#bkOk").onclick=async e=>{e.target.disabled=true;if(await buyItem(k)){bought=true;dlg.close()}else e.target.disabled=false};
 }
 const ACCENTS={rojo:["#D22F2A","#B42520","#FBE8E7"],oliva:["#5B7F2A","#4A6A20","#EEF4E3"],marino:["#1F4E8C","#173E70","#E6EEF9"],mostaza:["#B97F0F","#9C6A0B","#FBF1DC"],berenjena:["#6B2D5C","#56234A","#F4E6F0"],naranja:["#D2601A","#B04E12","#FCEBDD"],turquesa:["#0E8A8A","#0A6F6F","#E0F3F3"],rosa:["#C2366E","#A12A5B","#FBE6EE"],lavanda:["#6B55B5","#574497","#EEEAF9"],grafito:["#3D4552","#2C333D","#E9EBEE"]};
-function applyAccent(){const a=ACCENTS[S.accent]&&(S.accent==="rojo"||owns("tema_"+S.accent))?ACCENTS[S.accent]:null,st=document.documentElement.style;
+let lookPreview=null;   // color o estética que se está probando antes de comprar
+function applyAccent(){if(lookPreview){previewLook(lookPreview);return}const a=ACCENTS[S.accent]&&(S.accent==="rojo"||owns("tema_"+S.accent))?ACCENTS[S.accent]:null,st=document.documentElement.style;
   if(!a){["--accent","--accent-2","--accent-soft"].forEach(v=>st.removeProperty(v));return}
   st.setProperty("--accent",a[0]);st.setProperty("--accent-2",a[1]);st.setProperty("--accent-soft",a[2]);
   document.querySelector('meta[name="theme-color"]')?.setAttribute("content",a[0]);}
