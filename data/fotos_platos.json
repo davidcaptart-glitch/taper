@@ -3438,5 +3438,525 @@
   "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
   "fuente": "https://commons.wikimedia.org/wiki/File:Ajo_blanco.jpg",
   "titulo": "File:Ajo blanco.jpg"
+ },
+ "vg_fabada": {
+  "archivo": "images/platos/vg_fabada.jpg",
+  "autor": "Sahaquiel9102",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Fabada_asturiana_del_Valle_02.jpg",
+  "titulo": "File:Fabada asturiana del Valle 02.jpg"
+ },
+ "vg_pisto": {
+  "archivo": "images/platos/vg_pisto.jpg",
+  "autor": "El Mono Español",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pisto_manchego.jpg",
+  "titulo": "File:Pisto manchego.jpg"
+ },
+ "vg_escalivada": {
+  "archivo": "images/platos/vg_escalivada.jpg",
+  "autor": "Sílvia Martín",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Escalivada_-_8564805343.jpg",
+  "titulo": "File:Escalivada - 8564805343.jpg"
+ },
+ "vg_fideua": {
+  "archivo": "images/platos/vg_fideua.jpg",
+  "autor": "Juan Emilio Prades Bel",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Fideu%C3%A0_de_Setas_de_temporada.jpg",
+  "titulo": "File:Fideuà de Setas de temporada.jpg"
+ },
+ "vg_lasana": {
+  "archivo": "images/platos/vg_lasana.jpg",
+  "autor": "La.blasco",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Vegan_chard_and_quinoa_lasagna,_February_2012.jpg",
+  "titulo": "File:Vegan chard and quinoa lasagna, February 2012.jpg"
+ },
+ "vg_estofado": {
+  "archivo": "images/platos/vg_estofado.jpg",
+  "autor": "Lablascovegmenu from London",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Seitan_stew_(8492596064).jpg",
+  "titulo": "File:Seitan stew (8492596064).jpg"
+ },
+ "vg_burger": {
+  "archivo": "images/platos/vg_burger.jpg",
+  "autor": "divinemisscopa",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Veggie_burger_flickr_user_divinemisscopa_creative_commons.jpg",
+  "titulo": "File:Veggie burger flickr user divinemisscopa creative commons.jpg"
+ },
+ "vg_stroganoff": {
+  "archivo": "images/platos/vg_stroganoff.jpg",
+  "autor": "Kolforn (Kolforn)\nI'd appreciate if you could mail me (Kolforn@gmail.com) if you want to use this picture out of the Wikimedia project scope.\n\n\n\n This file is licensed under the Creative Commons Attri",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:-2019-12-10_Beef_Stroganoff,_Trimingham_(2).JPG",
+  "titulo": "File:-2019-12-10 Beef Stroganoff, Trimingham (2).JPG"
+ },
+ "vg_mapotofu": {
+  "archivo": "images/platos/vg_mapotofu.jpg",
+  "autor": "pelican from Tokyo, Japan",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Mapo_Tofu_(8840681150).jpg",
+  "titulo": "File:Mapo Tofu (8840681150).jpg"
+ },
+ "vg_teriyaki": {
+  "archivo": "images/platos/vg_teriyaki.jpg",
+  "autor": "Andy Li",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Vegan_teriyaki_rice_(M)_-_Goemon_Ramen_Bar_2025-04-14.jpg",
+  "titulo": "File:Vegan teriyaki rice (M) - Goemon Ramen Bar 2025-04-14.jpg"
+ },
+ "vg_bibimbap": {
+  "archivo": "images/platos/vg_bibimbap.jpg",
+  "autor": "Chloe Lim",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Bibimbap_6.jpg",
+  "titulo": "File:Bibimbap 6.jpg"
+ },
+ "vg_pho": {
+  "archivo": "images/platos/vg_pho.jpg",
+  "autor": "Andy Li",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tofu_noodle_soup_(Ph%E1%BB%9F_chay)_-_Pho_Hanoi_Authentic_2024-12-01.jpg",
+  "titulo": "File:Tofu noodle soup (Phở chay) - Pho Hanoi Authentic 2024-12-01.jpg"
+ },
+ "vg_burrito": {
+  "archivo": "images/platos/vg_burrito.jpg",
+  "autor": "Levi bernardo",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Burrito_chihuahuense_de_chile_verde_c.jpg",
+  "titulo": "File:Burrito chihuahuense de chile verde c.jpg"
+ },
+ "vg_currythai": {
+  "archivo": "images/platos/vg_currythai.jpg",
+  "autor": "Upendra Kanda",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pumpkin_curry_(1861461547).jpg",
+  "titulo": "File:Pumpkin curry (1861461547).jpg"
+ },
+ "vg_aloogobi": {
+  "archivo": "images/platos/vg_aloogobi.jpg",
+  "autor": "",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Aloo_gobi.jpg",
+  "titulo": "File:Aloo gobi.jpg"
+ },
+ "vg_biryani": {
+  "archivo": "images/platos/vg_biryani.jpg",
+  "autor": "Phadke09",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Vegetable_Biryani_IMG_001.jpg",
+  "titulo": "File:Vegetable Biryani IMG 001.jpg"
+ },
+ "vg_koshari": {
+  "archivo": "images/platos/vg_koshari.jpg",
+  "autor": "Dina Said",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Egyptian_food_Koshary.jpg",
+  "titulo": "File:Egyptian food Koshary.jpg"
+ },
+ "vg_buddha": {
+  "archivo": "images/platos/vg_buddha.jpg",
+  "autor": "FitTasteTic",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Healthy_Vegan_Buddha_Bowl_-_49859044753.jpg",
+  "titulo": "File:Healthy Vegan Buddha Bowl - 49859044753.jpg"
+ },
+ "vg_shawarma": {
+  "archivo": "images/platos/vg_shawarma.jpg",
+  "autor": "Roee Shpernik",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Vegan_Shawarma.JPG",
+  "titulo": "File:Vegan Shawarma.JPG"
+ },
+ "vg_lomosaltado": {
+  "archivo": "images/platos/vg_lomosaltado.jpg",
+  "autor": "Dtarazona",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Lomo_Saltado_servido_en_Taper.JPG",
+  "titulo": "File:Lomo Saltado servido en Taper.JPG"
+ },
+ "vg_sloppy": {
+  "archivo": "images/platos/vg_sloppy.jpg",
+  "autor": "Tony Webster from Portland, Oregon",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Bad_Waitress_Vegan_Sloppy_Joe_(23526271476).jpg",
+  "titulo": "File:Bad Waitress Vegan Sloppy Joe (23526271476).jpg"
+ },
+ "vg_ribollita": {
+  "archivo": "images/platos/vg_ribollita.jpg",
+  "autor": "Ithunn",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Ribollita_toscana.JPG",
+  "titulo": "File:Ribollita toscana.JPG"
+ },
+ "vg_macqueso": {
+  "archivo": "images/platos/vg_macqueso.jpg",
+  "autor": "Stephanie",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Vegan_Mac_%26_Cheese,_New_Orleans.jpg",
+  "titulo": "File:Vegan Mac & Cheese, New Orleans.jpg"
+ },
+ "vg_noquis": {
+  "archivo": "images/platos/vg_noquis.jpg",
+  "autor": "MaximusTG",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Gnocchidipatate.jpg",
+  "titulo": "File:Gnocchidipatate.jpg"
+ },
+ "vg_nuggets": {
+  "archivo": "images/platos/vg_nuggets.jpg",
+  "autor": "Mx. Granger",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Impossible_chicken_nuggets_2.jpg",
+  "titulo": "File:Impossible chicken nuggets 2.jpg"
+ },
+ "vg_gadogado": {
+  "archivo": "images/platos/vg_gadogado.jpg",
+  "autor": "Timothy A. Gonsalves",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Gado_Gado_PTG_Gourmet_IITMandi_Nov17_D72_3256.jpg",
+  "titulo": "File:Gado Gado PTG Gourmet IITMandi Nov17 D72 3256.jpg"
+ },
+ "vg_ollagitana": {
+  "archivo": "images/platos/vg_ollagitana.jpg",
+  "autor": "Retama",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Olla_gitana.jpg",
+  "titulo": "File:Olla gitana.jpg"
+ },
+ "vg_seitanempanado": {
+  "archivo": "images/platos/vg_seitanempanado.jpg",
+  "autor": "Benreis",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Veganes_Frankfurter_Schnitzel_mit_veganer_Gr%C3%BCner_Sauce_und_Salzkartoffeln.jpg",
+  "titulo": "File:Veganes Frankfurter Schnitzel mit veganer Grüner Sauce und Salzkartoffeln.jpg"
+ },
+ "vg_enchiladas": {
+  "archivo": "images/platos/vg_enchiladas.jpg",
+  "autor": "Jon Sullivan",
+  "licencia": "Public domain",
+  "licencia_url": "",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Enchiladas_rice_beans.jpg",
+  "titulo": "File:Enchiladas rice beans.jpg"
+ },
+ "vg_romesco": {
+  "archivo": "images/platos/vg_romesco.jpg",
+  "autor": "J Doll",
+  "licencia": "CC BY 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Chickpeas_Romesco_(140491839).jpeg",
+  "titulo": "File:Chickpeas Romesco (140491839).jpeg"
+ },
+ "vg_jambalaya": {
+  "archivo": "images/platos/vg_jambalaya.jpg",
+  "autor": "Andreas Ivarsson",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Vegetarisk_jambalaya.jpg",
+  "titulo": "File:Vegetarisk jambalaya.jpg"
+ },
+ "vg_pastafagioli": {
+  "archivo": "images/platos/vg_pastafagioli.jpg",
+  "autor": "Spinoziano",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pasta_e_fagioli_cannellini.jpg",
+  "titulo": "File:Pasta e fagioli cannellini.jpg"
+ },
+ "vg_farinata": {
+  "archivo": "images/platos/vg_farinata.jpg",
+  "autor": "Samuele Silva",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:La_Farinata_di_ceci.jpg",
+  "titulo": "File:La Farinata di ceci.jpg"
+ },
+ "vg_croquetas": {
+  "archivo": "images/platos/vg_croquetas.jpg",
+  "autor": "Jonathan Pincas from Leon, Spain",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Croquetas_Caseras_(7068664101).jpg",
+  "titulo": "File:Croquetas Caseras (7068664101).jpg"
+ },
+ "vg_mafe": {
+  "archivo": "images/platos/vg_mafe.jpg",
+  "autor": "Atimukoh",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Peanut_stew.jpg",
+  "titulo": "File:Peanut stew.jpg"
+ },
+ "vg_puttanesca": {
+  "archivo": "images/platos/vg_puttanesca.jpg",
+  "autor": "Popo le Chien",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pasta_Puttanesca.jpg",
+  "titulo": "File:Pasta Puttanesca.jpg"
+ },
+ "vg_kungpao": {
+  "archivo": "images/platos/vg_kungpao.jpg",
+  "autor": "Steven G. Johnson",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Kung-pao-shanghai.jpg",
+  "titulo": "File:Kung-pao-shanghai.jpg"
+ },
+ "vg_tikka": {
+  "archivo": "images/platos/vg_tikka.jpg",
+  "autor": "Vegan Feast Catering",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tofu_Tikka_Masala_with_Brown_Rice_and_Chilies_(4940053063).jpg",
+  "titulo": "File:Tofu Tikka Masala with Brown Rice and Chilies (4940053063).jpg"
+ },
+ "vg_empanada": {
+  "archivo": "images/platos/vg_empanada.jpg",
+  "autor": "Jorge Díaz from San Francisco, USA",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Empanada_-_xurde.jpg",
+  "titulo": "File:Empanada - xurde.jpg"
+ },
+ "vg_katsu": {
+  "archivo": "images/platos/vg_katsu.jpg",
+  "autor": "avlxyz",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Katsu_curry_by_avlxyz.jpg",
+  "titulo": "File:Katsu curry by avlxyz.jpg"
+ },
+ "cr_hummusbol": {
+  "archivo": "images/platos/cr_hummusbol.jpg",
+  "autor": "Vikingit",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:%D7%97%D7%95%D7%9E%D7%95%D7%A1_%D7%A2%D7%9D_%D7%A1%D7%9C%D7%98_%D7%99%D7%A9%D7%A8%D7%90%D7%9C%D7%99.jpg",
+  "titulo": "File:חומוס עם סלט ישראלי.jpg"
+ },
+ "cr_hummusalubias": {
+  "archivo": "images/platos/cr_hummusalubias.jpg",
+  "autor": "Beyrouthhh at English Wikipedia",
+  "licencia": "CC BY 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Lebanese_style_hummus.jpg",
+  "titulo": "File:Lebanese style hummus.jpg"
+ },
+ "cr_hummusremolacha": {
+  "archivo": "images/platos/cr_hummusremolacha.jpg",
+  "autor": "Wikiuni123",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Homemade_Beetroot_Hummus.jpg",
+  "titulo": "File:Homemade Beetroot Hummus.jpg"
+ },
+ "cr_cevichetofu": {
+  "archivo": "images/platos/cr_cevichetofu.jpg",
+  "autor": "Lablascovegmenu from London",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Vegan_Ceviche_de_tofu_(5970843596).jpg",
+  "titulo": "File:Vegan Ceviche de tofu (5970843596).jpg"
+ },
+ "cr_cevichechampi": {
+  "archivo": "images/platos/cr_cevichechampi.jpg",
+  "autor": "Lablascovegmenu from London",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Raw_vegan_avocado_mushroom_salad_-_Ensalada_vegana_de_champi%C3%B1ones_crudos_y_aguacate_(4817783254).jpg",
+  "titulo": "File:Raw vegan avocado mushroom salad - Ensalada vegana de champiñones crudos y aguacate (4817783254).jpg"
+ },
+ "cr_tomatesrellenos": {
+  "archivo": "images/platos/cr_tomatesrellenos.jpg",
+  "autor": "Vegan Feast Catering",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Artichoke_Stuffed_Tomato_(5052814731).jpg",
+  "titulo": "File:Artichoke Stuffed Tomato (5052814731).jpg"
+ },
+ "cr_ensremolacha": {
+  "archivo": "images/platos/cr_ensremolacha.jpg",
+  "autor": "Chris Olszewski",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Beetroot,_Avocado_and_Zucchini_salad.jpg",
+  "titulo": "File:Beetroot, Avocado and Zucchini salad.jpg"
+ },
+ "cr_tabule": {
+  "archivo": "images/platos/cr_tabule.jpg",
+  "autor": "Lablascovegmenu from London",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Vegan_quinoa_tabbouleh_-_Tabul%C3%A9_de_quinoa_(6916828023).jpg",
+  "titulo": "File:Vegan quinoa tabbouleh - Tabulé de quinoa (6916828023).jpg"
+ },
+ "cr_pipirrana": {
+  "archivo": "images/platos/cr_pipirrana.jpg",
+  "autor": "Titanas",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Persian_salad_(1712808743).jpg",
+  "titulo": "File:Persian salad (1712808743).jpg"
+ },
+ "cr_hiyayakko": {
+  "archivo": "images/platos/cr_hiyayakko.jpg",
+  "autor": "Ocdp",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Hiya-yakko_001.jpg",
+  "titulo": "File:Hiya-yakko 001.jpg"
+ },
+ "cr_carpaccio": {
+  "archivo": "images/platos/cr_carpaccio.jpg",
+  "autor": "Jen Arrr",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Zucchini_Carpaccio_(6905387516).jpg",
+  "titulo": "File:Zucchini Carpaccio (6905387516).jpg"
+ },
+ "cr_gazpachoverde": {
+  "archivo": "images/platos/cr_gazpachoverde.jpg",
+  "autor": "cyclonebill",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Flickr_-_cyclonebill_-_Fennikelgazpacho.jpg",
+  "titulo": "File:Flickr - cyclonebill - Fennikelgazpacho.jpg"
+ },
+ "cr_zanahoria": {
+  "archivo": "images/platos/cr_zanahoria.jpg",
+  "autor": "Jerry Pank",
+  "licencia": "CC BY 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Carrot,_onion_and_mint_salad_recipe.jpg",
+  "titulo": "File:Carrot, onion and mint salad recipe.jpg"
+ },
+ "cr_griega": {
+  "archivo": "images/platos/cr_griega.jpg",
+  "autor": "Geoff Peters from Vancouver, BC, Canada",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Greek_salad_(5178297958).jpg",
+  "titulo": "File:Greek salad (5178297958).jpg"
+ },
+ "cr_caprese": {
+  "archivo": "images/platos/cr_caprese.jpg",
+  "autor": "CNEcija12345",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Insalata_caprese_servings.jpg",
+  "titulo": "File:Insalata caprese servings.jpg"
+ },
+ "cr_naranja": {
+  "archivo": "images/platos/cr_naranja.jpg",
+  "autor": "Juan Emilio Prades Bel",
+  "licencia": "CC BY 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Ensalada_de_naranja_y_cebolla_(Espa%C3%B1a).jpg",
+  "titulo": "File:Ensalada de naranja y cebolla (España).jpg"
+ },
+ "cr_tropical": {
+  "archivo": "images/platos/cr_tropical.jpg",
+  "autor": "Daderot",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pineapple,_carrots,_avocado_on_mixed_greens_-_Massachusetts.jpg",
+  "titulo": "File:Pineapple, carrots, avocado on mixed greens - Massachusetts.jpg"
+ },
+ "cr_piquillos": {
+  "archivo": "images/platos/cr_piquillos.jpg",
+  "autor": "https://www.flickr.com/people/sindandune/",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Pimientos_del_piquillo_rellenos.jpg",
+  "titulo": "File:Pimientos del piquillo rellenos.jpg"
+ },
+ "cr_barquitas": {
+  "archivo": "images/platos/cr_barquitas.jpg",
+  "autor": "Vegan Feast Catering",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Mexicali_Cous_Cous_Lettuce_Wraps_(4607576535).jpg",
+  "titulo": "File:Mexicali Cous Cous Lettuce Wraps (4607576535).jpg"
+ },
+ "cr_tacoscrudos": {
+  "archivo": "images/platos/cr_tacoscrudos.jpg",
+  "autor": "Tony Webster from Portland, Oregon",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Vegan_raw_tacos_at_The_Wooden_Monkey,_Halifax,_Nova_Scotia_(24033033815).jpg",
+  "titulo": "File:Vegan raw tacos at The Wooden Monkey, Halifax, Nova Scotia (24033033815).jpg"
+ },
+ "cr_trempo": {
+  "archivo": "images/platos/cr_trempo.jpg",
+  "autor": "Rafael Ortega Díaz",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Tremp%C3%B3_mallorqu%C3%ADn.jpg",
+  "titulo": "File:Trempó mallorquín.jpg"
+ },
+ "cr_rucula": {
+  "archivo": "images/platos/cr_rucula.jpg",
+  "autor": "Gerda Arendt",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Salad_from_friend%27s_kitchen,_Cortlandt_Manor.jpg",
+  "titulo": "File:Salad from friend's kitchen, Cortlandt Manor.jpg"
+ },
+ "cr_mangolentejas": {
+  "archivo": "images/platos/cr_mangolentejas.jpg",
+  "autor": "cyclonebill from Copenhagen, Denmark",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Avocado,_mango_og_r%C3%B8d_spidsk%C3%A5l_(6323335706).jpg",
+  "titulo": "File:Avocado, mango og rød spidskål (6323335706).jpg"
+ },
+ "cr_garbtahini": {
+  "archivo": "images/platos/cr_garbtahini.jpg",
+  "autor": "Canbel",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Hummus_salad.jpg",
+  "titulo": "File:Hummus salad.jpg"
+ },
+ "cr_garbalcachofa": {
+  "archivo": "images/platos/cr_garbalcachofa.jpg",
+  "autor": "Unknown author",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Plant-fruit-bowl-dish-food-salad-1200225-pxhere.jpg",
+  "titulo": "File:Plant-fruit-bowl-dish-food-salad-1200225-pxhere.jpg"
  }
 }

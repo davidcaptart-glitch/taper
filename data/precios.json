@@ -1063,9 +1063,189 @@
       "anterior": null,
       "precio_kilo": 12.33,
       "fecha": "2026-10-22"
+    },
+    "bebida_soja": {
+      "mercadona_id": "14707",
+      "nombre_mercadona": "Bebida de soja con calcio y vitaminas sin azúcares añadidos Hacendado",
+      "formato": "Brik 1.0 l",
+      "precio": 0.65,
+      "anterior": null,
+      "precio_kilo": 0.65,
+      "fecha": "2026-10-22"
+    },
+    "harina": {
+      "mercadona_id": "29100",
+      "nombre_mercadona": "Harina de trigo Hacendado",
+      "formato": "Paquete 1.0 kg",
+      "precio": 0.72,
+      "anterior": null,
+      "precio_kilo": 0.72,
+      "fecha": "2026-10-22"
+    },
+    "tahini": {
+      "mercadona_id": "17441",
+      "nombre_mercadona": "Pasta de sésamo Tahini Hacendado",
+      "formato": "Tarro 0.2 kg",
+      "precio": 2.95,
+      "anterior": null,
+      "precio_kilo": 14.75,
+      "fecha": "2026-10-22"
+    },
+    "coliflor": {
+      "mercadona_id": "61231",
+      "nombre_mercadona": "Coliflor Hacendado ultracongelada",
+      "formato": "Paquete 1.0 kg",
+      "precio": 1.8,
+      "anterior": null,
+      "precio_kilo": 1.8,
+      "fecha": "2026-10-22"
+    },
+    "setas": {
+      "mercadona_id": "61025",
+      "nombre_mercadona": "Salteado de setas Hacendado ultracongeladas",
+      "formato": "Paquete 0.45 kg",
+      "precio": 1.61,
+      "anterior": null,
+      "precio_kilo": 3.58,
+      "fecha": "2026-10-22"
+    },
+    "alcachofa": {
+      "mercadona_id": "13865",
+      "nombre_mercadona": "Alcachofa troceada Hacendado ultracongelada",
+      "formato": "Paquete 0.4 kg",
+      "precio": 2.55,
+      "anterior": null,
+      "precio_kilo": 6.38,
+      "fecha": "2026-10-22"
+    },
+    "repollo": {
+      "mercadona_id": "68462",
+      "nombre_mercadona": "Repollo liso partido",
+      "formato": "1/2 Pieza 0.9 kg",
+      "precio": 1.94,
+      "anterior": null,
+      "precio_kilo": 2.15,
+      "fecha": "2026-10-22"
+    },
+    "pan_pita": {
+      "mercadona_id": "14378",
+      "nombre_mercadona": "Pan de pita Mission",
+      "formato": "Paquete 0.3 kg",
+      "precio": 2.0,
+      "anterior": null,
+      "precio_kilo": 6.67,
+      "fecha": "2026-10-22"
+    },
+    "aceitunas": {
+      "mercadona_id": "8309",
+      "nombre_mercadona": "Aceitunas negras en rodajas Hacendado",
+      "formato": "0.148 kg",
+      "precio": 1.9,
+      "anterior": null,
+      "precio_kilo": 12.84,
+      "fecha": "2026-10-22"
+    },
+    "alcaparras": {
+      "mercadona_id": "33190",
+      "nombre_mercadona": "Alcaparras Hacendado",
+      "formato": "Tarro 0.135 kg",
+      "precio": 1.35,
+      "anterior": null,
+      "precio_kilo": 10.0,
+      "fecha": "2026-10-22"
+    },
+    "cacahuetes": {
+      "mercadona_id": "13451",
+      "nombre_mercadona": "Cacahuete tostado Hacendado 0% sal añadida pelado",
+      "formato": "Paquete 0.2 kg",
+      "precio": 1.05,
+      "anterior": null,
+      "precio_kilo": 5.25,
+      "fecha": "2026-10-22"
+    },
+    "masa_empanada": {
+      "mercadona_id": "63476",
+      "nombre_mercadona": "Masa fresca empanada Hacendado",
+      "formato": "0.46 kg",
+      "precio": 2.4,
+      "anterior": null,
+      "precio_kilo": 5.22,
+      "fecha": "2026-10-22"
+    },
+    "pipas_calabaza": {
+      "mercadona_id": "18259",
+      "nombre_mercadona": "Pipas de calabaza natural Hacendado peladas",
+      "formato": "Paquete 0.2 kg",
+      "precio": 2.2,
+      "anterior": null,
+      "precio_kilo": 11.0,
+      "fecha": "2026-10-22"
+    },
+    "cogollos": {
+      "mercadona_id": "69581",
+      "nombre_mercadona": "Cogollos de lechuga",
+      "formato": "3.0 ud",
+      "precio": 1.05,
+      "anterior": null,
+      "precio_kilo": 0.35,
+      "fecha": "2026-10-22"
+    },
+    "tomate_cherry": {
+      "mercadona_id": "69990",
+      "nombre_mercadona": "Tomates cherry",
+      "formato": "Bandeja 0.5 kg",
+      "precio": 2.2,
+      "anterior": null,
+      "precio_kilo": 4.4,
+      "fecha": "2026-10-22"
+    },
+    "rucula": {
+      "mercadona_id": "69753",
+      "nombre_mercadona": "Rúcula lavada",
+      "formato": "Paquete 0.05 kg",
+      "precio": 0.85,
+      "anterior": null,
+      "precio_kilo": 17.0,
+      "fecha": "2026-10-22"
+    },
+    "alcachofa_bote": {
+      "mercadona_id": "16040",
+      "nombre_mercadona": "Corazones de alcachofa Hacendado",
+      "formato": "Tarro 0.29 kg",
+      "precio": 1.8,
+      "anterior": null,
+      "precio_kilo": 6.21,
+      "fecha": "2026-10-22"
+    },
+    "mango": {
+      "mercadona_id": "3050",
+      "nombre_mercadona": "Mango",
+      "formato": "Pieza 0.497 kg",
+      "precio": 1.44,
+      "anterior": null,
+      "precio_kilo": 2.9,
+      "fecha": "2026-10-22"
+    },
+    "remolacha": {
+      "mercadona_id": "69523",
+      "nombre_mercadona": "Remolacha cocida y pelada",
+      "formato": "Paquete 0.45 kg",
+      "precio": 1.05,
+      "anterior": null,
+      "precio_kilo": 2.33,
+      "fecha": "2026-10-22"
+    },
+    "piquillo": {
+      "mercadona_id": "16005",
+      "nombre_mercadona": "Pimientos del piquillo enteros Hacendado extra",
+      "formato": "Tarro 0.34 kg",
+      "precio": 1.45,
+      "anterior": null,
+      "precio_kilo": 4.26,
+      "fecha": "2026-10-22"
     }
   },
   "fallos_ultima_vez": [],
   "registro": [],
-  "ejecutado": "2026-10-22T15:39:08+00:00"
+  "ejecutado": "2026-10-22T16:17:50+00:00"
 }

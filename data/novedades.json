@@ -589,6 +589,17 @@
       "cambios": [
         "Al tocar el aviso de «¿Qué tal?», la app se abre directamente en la pregunta. Puedes quitar este aviso en Perfil › Avisos."
       ]
+    },
+    {
+      "version": 62,
+      "fecha": "2026-10-22",
+      "titulo": "65 platos veganos y crudiveganos más",
+      "cambios": [
+        "40 veganos nuevos: fabada, pisto, lasaña de soja, croquetas, empanada, mapo tofu, curry tailandés, biryani, shawarma, mac and cheese vegano…",
+        "25 crudiveganos sin fuego, con 18 g de proteína o más: hummus, ceviche de tofu, tabulé, pipirrana, tomates rellenos…",
+        "Ya hay más de 100 platos veganos y 35 crudiveganos.",
+        "Corregidos tres productos que llevaban lácteos o cerdo y no lo indicaban."
+      ]
     }
   ]
 }
