@@ -209,14 +209,22 @@ function stepBody(fullId){
     <p class="kitcount">${n?`${n} ${n===1?"aparato":"aparatos"}: ${H.apps.filter(k=>APP[k]&&k!=="ninguno").map(k=>APP[k].toLowerCase()).join(", ")}`:"Toca los aparatos de tu cocina"}</p>`}
   if(id==="comer"){
     const mainDiets=["omni","vege","vegano","halal"],mainAlg=["gluten","lacteos","huevo","frutos_cascara","pescado"];
-    let h=`<p class="lead">Solo planificaré platos que encajen con cada uno.</p>`;
+    let h=`<p class="lead">Uno a uno: solo planificaré platos que encajen con cada persona.</p>`;
+    // Una persona abierta cada vez; las demás plegadas con su resumen. "Listo" la cierra y abre la siguiente
+    const done=wiz.comerDone||{};if(!wiz.comerOpen||!S.people.some(p=>p.id===wiz.comerOpen))wiz.comerOpen=(S.people.find(p=>!done[p.id])||{}).id||null;
     for(const p of S.people){const dt=dietOf(p),al=p.allergies||[],more=(wiz.more||{})[p.id];
+      const name=esc(isMe(p)?(p.name||"Tú"):personName(p)),tag=isMe(p)?"tú":esc(ageLabel(p.ageRange));
+      if(wiz.comerOpen!==p.id){
+        h+=`<button type="button" class="kidcard kfold ${done[p.id]?"ok":""}" data-copen="${p.id}"><span class="row"><b>${done[p.id]?"✓ ":""}${name}</b><span class="small muted">${tag}</span><span class="spacer"></span><span class="small">${done[p.id]?"Cambiar":"Rellenar"}</span></span>
+          ${done[p.id]?`<span class="small muted">${esc(DIETS[dt][1])} · ${al.length?al.map(k=>ALLERGENS[k].split(" (")[0].toLowerCase()).join(", "):"sin alergias"} · ${p.trains?"hace deporte":"no hace deporte"}</span>`:""}</button>`;continue}
       const ds=more?Object.keys(DIETS):[...new Set(mainDiets.concat(dt))],as=more?Object.keys(ALLERGENS):[...new Set(mainAlg.concat(al))];
-      h+=`<div class="kidcard"><div class="row"><b>${esc(isMe(p)?(p.name||"Tú"):personName(p))}</b><span class="small muted">${isMe(p)?"tú":esc(ageLabel(p.ageRange))}</span></div>
+      const nxt=S.people.find(x=>x.id!==p.id&&!done[x.id]);
+      h+=`<div class="kidcard kopen"><div class="row"><b>${name}</b><span class="small muted">${tag}</span></div>
         <div class="field"><label>Forma de comer</label><div class="chips">${ds.map(k=>chip("data-diet",p.id+"|"+k,dt===k,DIETS[k][0]+" "+esc(DIETS[k][1]))).join("")}</div></div>
         <div class="field"><label>Alergias o intolerancias</label><div class="chips">${chip("data-alg-none",p.id,!al.length,"🍽️ Ninguna")}${as.map(k=>chip("data-alg",p.id+"|"+k,al.includes(k),ALLERGEN_ICO[k]+" "+esc(ALLERGENS[k].split(" (")[0]))).join("")}</div></div>
         ${more?"":`<button type="button" class="btn ghost small" data-more="${p.id}">Más formas de comer y alergias</button>`}
-        <div class="field"><label>¿Hace deporte?</label><div class="chips">${chip("data-trainp",p.id+"|1",p.trains,"Sí")}${chip("data-trainp",p.id+"|0",!p.trains,"No")}</div>${p.trains?`<div class="hint">Los días y horas, cuando afines el menú.</div>`:""}</div></div>`}
+        <div class="field"><label>¿Hace deporte?</label><div class="chips">${chip("data-trainp",p.id+"|1",p.trains,"Sí")}${chip("data-trainp",p.id+"|0",!p.trains,"No")}</div>${p.trains?`<div class="hint">Los días y horas, cuando afines el menú.</div>`:""}</div>
+        <button type="button" class="btn wide" data-cok="${p.id}">✓ Listo${nxt?", ahora "+esc(personName(nxt)):""}</button></div>`}
     const n=R.filter(r=>!r.small&&!r.pack&&S.people.every(p=>canEat(p,r))).length;
     return h+`<div class="okbox small">${n<10?"⚠️ ":"✓ "}<b>${n}</b> ${n===1?"plato encaja":"platos encajan"} con vuestra casa.</div><div class="hint">Es orientativo: revisa siempre la etiqueta.</div>`;
   }
@@ -480,6 +488,8 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
   qa("[data-more]").forEach(b=>b.onclick=()=>{wiz.more={...(wiz.more||{}),[b.dataset.more]:true};render()});
   qa("[data-startpick]").forEach(b=>b.onclick=()=>{H.startPick=b.dataset.startpick;rerender()});
   q("#wzStartO")&&(q("#wzStartO").onchange=e=>{H.startOther=e.target.value;rerender()});
+  qa("[data-copen]").forEach(b=>b.onclick=()=>{wiz.comerOpen=b.dataset.copen;render()});
+  qa("[data-cok]").forEach(b=>b.onclick=()=>{wiz.comerDone={...(wiz.comerDone||{}),[b.dataset.cok]:true};const nx=S.people.find(p=>!wiz.comerDone[p.id]);wiz.comerOpen=nx?nx.id:"-";save();render();scrollTo(0,0)});
   qa("[data-trainp]").forEach(b=>b.onclick=()=>{const [pid,v]=b.dataset.trainp.split("|"),p=S.people.find(x=>x.id===pid);p.trains=v==="1";rerender()});
   bindFixedEditor(rerender);
 }
@@ -514,6 +524,10 @@ function validateStep(fullId){
     const sin=S.people.find(p=>p.name&&!p.ageRange&&!(p.kind==="nino"&&p.age));if(sin){toast("Falta la edad de "+sin.name+": tócalo para ponerla");return false}
     S.people=S.people.filter(p=>p.id==="yo"||p.name);
     if(!H.apps.filter(k=>k!=="ninguno").length){toast("Marca al menos un aparato de tu cocina");return false}}
+  if(id==="comer"){const nx=S.people.find(p=>!(wiz.comerDone||{})[p.id]);if(nx){
+    // Lo que tenga abierto cuenta como revisado; si queda alguien sin mirar, se abre
+    if(wiz.comerOpen===nx.id&&S.people.filter(p=>!(wiz.comerDone||{})[p.id]).length===1){wiz.comerDone={...(wiz.comerDone||{}),[nx.id]:true}}
+    else{wiz.comerOpen=nx.id;render();toast("Falta "+personName(nx));return false}}}
   if(id==="super"&&H.startPick==="otro"&&!(H.startOther&&H.startOther>=todayISO())){toast("Elige el día en que empiezas");return false}
   if(id==="super"){const cp=(v("#wzCp")||"").trim();if(!/^\d{5}$/.test(cp)){toast(cp?"El código postal tiene 5 números":"Pon tu código postal: lo necesito para tus precios");document.getElementById("wzCp")?.focus();return false}H.cp=cp}
   if(id==="aparatos"&&!H.apps.length){toast("Elige al menos uno");return false}

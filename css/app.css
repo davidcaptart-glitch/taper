@@ -958,3 +958,10 @@ input.switch:checked::after{transform:translateX(20px)}
 /* Tira de días: hoy se marca con un punto rojo aunque no esté seleccionado */
 .dsd.today:not(.on) i{background:var(--accent)}
 .dsd.today:not(.on) b{color:var(--accent)}
+
+/* Cómo coméis: una persona abierta cada vez */
+button.kidcard.kfold{display:block;width:100%;text-align:left;border:0;cursor:pointer;font:inherit;color:inherit}
+.kidcard.kfold .row{display:flex;align-items:center;gap:8px}
+.kidcard.kfold .small:last-child{display:block;margin-top:4px}
+.kidcard.kfold.ok{opacity:.9}
+.kidcard.kopen{outline:2px solid var(--accent);outline-offset:-2px}
