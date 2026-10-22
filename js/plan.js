@@ -14,7 +14,9 @@ function weeksInMonth(m){
 const monthOfWeek=start=>start.slice(0,7);
 
 /* ---------- Quién está y qué comida toca ---------- */
-function kidPresentByRule(k,d){
+// Cuándo está cada miembro de la familia (tú estás siempre)
+function presentByRule(k,d){
+  if(k.id==="yo")return true;
   const pr=k.presence||{type:"siempre"}, w=dow(d);
   if(pr.type==="siempre")return true;
   if(pr.type==="manual")return false;
@@ -25,10 +27,15 @@ function kidPresentByRule(k,d){
   if(pr.type==="findes")return even&&(w>=5||w===4);   // viernes (cena), sábado y domingo
   return false;
 }
-function kidsAt(d){
+const kidPresentByRule=presentByRule;
+// Quién está un día: lo que diga su horario, salvo que ese día lo hayas cambiado
+function peopleAt(d){
   const o=(S.days[d]||{}).kids||{};
-  return kids().filter(k=>o[k.id]!=null?o[k.id]:kidPresentByRule(k,d));
+  return S.people.filter(k=>k.id==="yo"||(o[k.id]!=null?o[k.id]:presentByRule(k,d)));
 }
+const kidsAt=d=>peopleAt(d).filter(p=>p.kind==="nino");
+const adultsAt=d=>peopleAt(d).filter(p=>p.kind==="adulto");
+const others=()=>S.people.filter(p=>p.id!=="yo");
 function mealState(d,meal){
   const o=S.days[d]||{};
   if(o[meal])return o[meal];
@@ -48,7 +55,7 @@ function fixedFor(d,meal){
 function plannedSessions(d){
   const wk=S.plans[weekStartFor(d)];
   if(wk&&wk.training&&wk.training[d])return wk.training[d];
-  const out=[];for(const a of adults())if(a.trains)for(const s of (a.train[dow(d)]||[]))out.push(s);
+  const out=[];for(const a of adultsAt(d))if(a.trains)for(const s of (a.train[dow(d)]||[]))out.push({...s,who:a.id});
   return out;
 }
 // Sesiones reales: las previstas menos las que no hiciste, con las que cambiaste y las que añadiste
@@ -62,13 +69,14 @@ const toMin=t=>{const [h,m]=String(t||"0:0").split(":").map(Number);return h*60+
 const sessTime=s=>s.time||(s.when==="tarde"?"19:00":"08:00");
 // Antes o después de comer, según la hora del entreno y la de la comida
 const whenOf=s=>s.time?(toMin(s.time)<toMin(S.home.mealTimes.comida)?"manana":"tarde"):(s.when||"manana");
-const sessLabel=s=>(SPORTS[s.type]||s.type).toLowerCase()+" a las "+sessTime(s);
+const sessWho=s=>{const p=s.who&&s.who!=="yo"&&S.people.find(x=>x.id===s.who);return p?personName(p)+": ":""};
+const sessLabel=s=>sessWho(s)+(SPORTS[s.type]||s.type).toLowerCase()+" a las "+sessTime(s);
 // Qué necesita un plato según los entrenos de alrededor
 function needsFor(slot){
   const d=slot.date, out={carbs:false,prot:false,noHeavy:false,why:[]};
   if(slot.meal==="cena"){
     const sD=sessionsOn(d), sN=slot.tupper.length?sessionsOn(addDays(d,1)):[];
-    if(sN.length){out.carbs=true;out.why.push("mañana entrenas: "+sN.map(sessLabel).join(" y "))}
+    if(sN.length){out.carbs=true;out.why.push("mañana se entrena: "+sN.map(sessLabel).join(" y "))}
     const pmD=sD.filter(s=>whenOf(s)==="tarde");
     if(pmD.length){out.prot=true;out.why.push("recuperación de "+pmD.map(s=>SPORTS[s.type].toLowerCase()).join(" y "));if(pmD.some(s=>ENDURANCE.has(s.type)))out.carbs=true}
     if(sN.some(s=>whenOf(s)==="manana"))out.prot=true;
@@ -76,7 +84,7 @@ function needsFor(slot){
     if(sN.length>=2){out.prot=true;out.why.push("día doble")}
   }else{
     const sD=sessionsOn(d);
-    if(sD.length){out.carbs=true;out.why.push("hoy entrenas: "+sD.map(sessLabel).join(" y "))}
+    if(sD.length){out.carbs=true;out.why.push("hoy se entrena: "+sD.map(sessLabel).join(" y "))}
     if(sD.some(s=>whenOf(s)==="tarde"&&ENDURANCE.has(s.type)))out.noHeavy=true;
     if(sD.some(s=>whenOf(s)==="manana"))out.prot=true;
   }
@@ -84,8 +92,10 @@ function needsFor(slot){
 }
 
 /* ---------- Huecos de la semana ---------- */
+const sacrifice=k=>!!((S.home.sacrifice||{})[k]);
 function adultFactor(a,slot){
   let f=Number(a.factor)||1;
+  if(sacrifice("raciones"))f-=0.1;
   if(a.goals.includes("musculo"))f+=0.15;
   if(a.goals[0]==="adelgazar")f-=0.1;
   if(slot&&slot.need&&slot.need.why.includes("día doble"))f+=0.1;
@@ -99,8 +109,9 @@ function buildSlots(start){
       const st=mealState(d,meal);
       if(st!=="cocinar"&&st!=="solotaper")continue;
       const ks=st==="solotaper"?[]:kidsAt(d);
-      const as=st==="solotaper"?[]:adults();
-      const tupper=meal==="cena"&&mealState(addDays(d,1),"comida")==="taper"?adults():[];
+      const as=st==="solotaper"?[]:adultsAt(d);
+      // Táper para el día siguiente: los adultos que estén y se lleven táper
+      const tupper=meal==="cena"&&mealState(addDays(d,1),"comida")==="taper"?adultsAt(addDays(d,1)).filter(a=>a.id==="yo"||a.tupper):[];
       if(st==="solotaper"&&!tupper.length)continue;
       const f=st==="solotaper"?null:fixedFor(d,meal);
       const slot={id:d+"|"+meal,date:d,meal,eaters:as,kids:ks,tupper,fixed:f};
@@ -162,7 +173,9 @@ function candidates(slot,opts={}){
   return out;
 }
 function scoreRecipe(r,slot,ctx){
-  const main=me(), goals=main?main.goals:[];
+  // Objetivos de los adultos que comen: los tuyos pesan más
+  const eatA=[...new Set(slot.eaters.concat(slot.tupper))];
+  const goals=[...new Set(eatA.sort((a,b)=>(a.id==="yo"?-1:1)).flatMap(a=>a.goals||[]))].slice(0,4);
   let s=Math.random()*(ctx.noise??2.4);
   // Tipo de plato según los entrenos y el objetivo
   const wantCarbs=slot.need.carbs||(goals.includes("musculo")&&slot.meal==="comida");
@@ -179,16 +192,19 @@ function scoreRecipe(r,slot,ctx){
   });
   // Gustos de quien come
   const lm=ctx.lm||{};
-  for(const a of slot.eaters.concat(slot.tupper.filter(t=>!slot.eaters.includes(t))))s+=tasteScore(a,r,lm[a.id]);
-  for(const k of slot.kids)s+=0.8*tasteScore(k,r,lm[k.id]);
+  const tw=sacrifice("gustos")?0.5:1;
+  for(const a of slot.eaters.concat(slot.tupper.filter(t=>!slot.eaters.includes(t))))s+=tw*tasteScore(a,r,lm[a.id]);
+  for(const k of slot.kids)s+=tw*0.8*tasteScore(k,r,lm[k.id]);
   // Variedad: no repetir en la semana y cada vez menos penalización hasta 4 semanas atrás;
   // los "bien, pero no a menudo" esperan más
-  if(ctx.used.has(r.id))s-=8;
-  const ago=ctx.hist[r.id];if(ago!=null)s-=[4.5,3,1.8][ago-1]||0;
+  const rw=sacrifice("repetir")?0.4:1;
+  if(ctx.used.has(r.id))s-=8*rw;
+  const ago=ctx.hist[r.id];if(ago!=null)s-=rw*([4.5,3,1.8][ago-1]||0);
   if(slot.eaters.some(a=>isRare(a,r.id))&&ago!=null)s-=5;
   // Equilibrio semanal: algo de legumbre y pescado, sin pasarse, y variando la proteína principal
   const c=ctx.counts;
-  if((r.group==="legumbre"&&(c.legumbre||0)<1)||(r.group==="pescado"&&(c.pescado||0)<2))s+=1.6;
+  if(sacrifice("proteina")){if(r.group==="legumbre"||r.group==="huevo")s+=1.2;if(r.main==="pescado_azul"||r.main==="marisco"||r.main==="ternera")s-=1.5}
+  else if((r.group==="legumbre"&&(c.legumbre||0)<1)||(r.group==="pescado"&&(c.pescado||0)<2))s+=1.6;
   if(r.group==="legumbre"&&(c.legumbre||0)>=2)s-=2.5;
   if(r.group==="pescado"&&(c.pescado||0)>=3)s-=2.5;
   if(!c[r.group])s+=0.8;
@@ -252,6 +268,42 @@ function genWeekFromScratch(start){
   }
   tries.sort((a,b)=>b.sc-a.sc);
   S.plans[start].slots=tries[Math.floor(Math.random()*Math.min(6,tries.length))].slots;
+  S.plans[start].budget=fitBudget(start);
+}
+/* ---------- Presupuesto ---------- */
+// Coste aproximado de la comida de una semana (raciones x precio; la lista real redondea a envases)
+function weekCost(start){
+  const wk=S.plans[start];if(!wk)return 0;let t=0;
+  for(const sl of buildSlots(start)){const v=wk.slots[sl.id],r=v&&RX[v.recipe];if(r)t+=rationCost(r)*sl.portions;else if(sl.fixed&&!sl.fixed.recipe)t+=Number(sl.fixed.cost)||0}
+  return Math.round(t*100)/100;
+}
+// Lo que se puede gastar en comida esa semana: presupuesto semanal menos envío y la parte de básicos
+function weekFoodTarget(start){
+  const m=monthOfWeek(start), n=Math.max(1,weeksInMonth(m).length);
+  const fee=S.home.shop.weekMode==="online"?Number(S.home.shop.fee)||0:0, monthFee=S.home.shop.monthMode==="online"?(Number(S.home.shop.fee)||0)/n:0;
+  return weekBudget(m)-fee-monthFee-(Number(S.home.budget.basics)||0)/n;
+}
+// Cambia los platos más caros por otros más baratos que sigan encajando, hasta llegar al presupuesto
+function fitBudget(start){
+  const wk=S.plans[start];if(!wk)return {ok:true};
+  const target=weekFoodTarget(start);
+  for(let it=0;it<12;it++){
+    const cost=weekCost(start);if(cost<=target)return {ok:true,cost,target};
+    let best=null;
+    for(const sl of buildSlots(start)){
+      if(sl.fixed)continue;const v=wk.slots[sl.id];if(!v||v.locked)continue;const cur=RX[v.recipe];if(!cur)continue;
+      const ctx=makeCtx(start,sl.id);ctx.noise=0;
+      const curS=scoreRecipe(cur,sl,ctx), curC=rationCost(cur)*sl.portions;
+      for(const r of candidates(sl)){if(r.id===cur.id||ctx.used.has(r.id))continue;
+        const save=curC-rationCost(r)*sl.portions;if(save<=0.3)continue;
+        const loss=Math.max(0,curS-scoreRecipe(r,sl,ctx));
+        const val=save/(1+loss*0.6);
+        if(!best||val>best.val)best={val,id:sl.id,rid:r.id}}
+    }
+    if(!best)return {ok:false,cost,target};
+    wk.slots[best.id]={recipe:best.rid};
+  }
+  const cost=weekCost(start);return {ok:cost<=target,cost,target};
 }
 function balanceOf(wk){const c={};for(const v of Object.values(wk.slots)){const r=RX[v.recipe];if(r){c[r.group]=(c[r.group]||0)+1;if(r.red)c.red=(c.red||0)+1}}
   return Math.min(c.legumbre||0,2)+Math.min(c.pescado||0,2)-Math.max(0,(c.carne||0)-3)-Math.max(0,(c.red||0)-1)-Math.max(0,(c.huevo||0)-2)}
@@ -308,7 +360,7 @@ function dayTotals(p,d){
   const t={kcal:0,prot:0,carb:0,fat:0,meals:0,skipped:[]};
   for(const meal of ["comida","cena"]){
     const x=dishOfMeal(d,meal);
-    if(p.kind!=="adulto"){const sl=buildSlots(weekStartFor(d)).find(s=>s.id===d+"|"+meal);if(!sl||!sl.kids.includes(p))continue}
+    if(p.id!=="yo"){const sl=buildSlots(weekStartFor(d)).find(s=>s.id===d+"|"+meal);if(!sl||!sl.eaters.concat(sl.kids,sl.tupper).includes(p))continue}
     if(!x.recipe||x.capricho){if(x.state==="fuera"||x.capricho)t.skipped.push(meal);continue}
     const n=portionNutr(x.recipe,factorOf(p));
     for(const k of ["kcal","prot","carb","fat"])t[k]+=n[k]||0;

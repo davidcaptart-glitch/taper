@@ -38,6 +38,20 @@ aprende se ve y se corrige en una pantalla "Lo que sé de ti" (por persona: adul
 - **Gustos**: cuestionario inicial de ingredientes y tipos de plato (me encanta / me gusta / no me gusta /
   no lo como por alergia o intolerancia), uno por cada persona (adulto y niños).
 
+### Núcleo familiar
+- Cualquier familia: pareja, hijos, otros familiares, compañeros de piso. Cada miembro: nombre, adulto o
+  niño (edad), cuándo come en casa, ración (pequeña/normal/grande o por edad), si se lleva táper, y sus propios
+  objetivos, entreno, gustos, historial y calendario.
+- El menú combina a quien come cada día: gustos y alergias de todos, objetivos de los adultos (los tuyos pesan
+  más), entrenos de quien entrena y la ración de cada uno.
+
+### Presupuesto realista
+- Siempre se intenta acercarse al máximo: si una semana se pasa, se cambian los platos más caros por otros
+  más baratos que sigan encajando.
+- Si aun así no llega, se pregunta qué sacrificar: menos pescado y carne, raciones más ajustadas, repetir más
+  platos, menos peso a los gustos, compra semanal en tienda (sin envío) o subir el presupuesto a lo que cuesta.
+  Se puede dejar decidido en el asistente.
+
 ### Planificación
 - Asistente de planificación (por defecto domingo 17:00):
   1. Entrenos de la semana (prerrellenado con la plantilla).

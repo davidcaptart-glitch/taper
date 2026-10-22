@@ -62,7 +62,7 @@
       "nombre": "Lentejas con pollo y verduras",
       "grupo": "legumbre",
       "proteina_principal": "legumbre",
-      "tipo": "hidratos",
+      "tipo": "ligera",
       "pesada": false,
       "gusta_ninos": true,
       "etiquetas": [],
@@ -3273,7 +3273,7 @@
     },
     {
       "id": "abadejo",
-      "nombre": "Abadejo al horno con verduras",
+      "nombre": "Dorada al horno con verduras",
       "grupo": "pescado",
       "proteina_principal": "pescado_blanco",
       "tipo": "ligera",
@@ -3282,7 +3282,7 @@
       "etiquetas": [],
       "ingredientes": [
         {
-          "producto": "merluza",
+          "producto": "dorada",
           "cantidad": 200
         },
         {
@@ -3303,10 +3303,10 @@
         }
       ],
       "nutricion": {
-        "kcal": 310,
-        "proteina": 38,
+        "kcal": 360,
+        "proteina": 42,
         "hidratos": 14,
-        "grasa": 12
+        "grasa": 16
       },
       "conserva": {
         "nevera_dias": 2,
@@ -3319,7 +3319,7 @@
           "minutos_trabajo": 7,
           "pasos": [
             "Corta las verduras en rodajas y ponlas en una bandeja con aceite y sal: horno 10 min a 200 °C.",
-            "Pon el pescado (abadejo o merluza) encima con sal, ajo en polvo y pimentón.",
+            "Pon los filetes de dorada encima con sal, ajo en polvo y pimentón.",
             "Hornea 12 min más."
           ]
         },
@@ -3329,7 +3329,7 @@
           "minutos_trabajo": 6,
           "pasos": [
             "Corta las verduras en rodajas y alíñalas con aceite y sal: air fryer 8 min a 200 °C.",
-            "Pon el pescado (abadejo o merluza) encima con sal, ajo en polvo y pimentón.",
+            "Pon los filetes de dorada encima con sal, ajo en polvo y pimentón.",
             "Air fryer 10 min más a 180 °C."
           ]
         }
@@ -5382,7 +5382,7 @@
       "nombre": "Garbanzos con espinacas y huevo",
       "grupo": "legumbre",
       "proteina_principal": "legumbre",
-      "tipo": "hidratos",
+      "tipo": "ligera",
       "pesada": false,
       "gusta_ninos": false,
       "etiquetas": [],
@@ -5433,7 +5433,7 @@
       "nombre": "Alubias con pollo y verduras",
       "grupo": "legumbre",
       "proteina_principal": "legumbre",
-      "tipo": "hidratos",
+      "tipo": "ligera",
       "pesada": false,
       "gusta_ninos": false,
       "etiquetas": [],
@@ -6662,6 +6662,5690 @@
             "Tritura con un chorrito de aceite y el queso.",
             "Tuesta el pan en dados en una sartén 2 min.",
             "Sirve la crema con el huevo picado y los picatostes."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polloromero",
+      "nombre": "Pollo al limón y romero con patatas",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "muslos",
+          "cantidad": 200
+        },
+        {
+          "producto": "patata",
+          "cantidad": 250
+        },
+        {
+          "producto": "limon",
+          "cantidad": 40
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 610,
+        "proteina": 44,
+        "hidratos": 49,
+        "grasa": 26
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 30,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Corta la patata en rodajas finas y la cebolla en tiras.",
+            "Ponlas en una bandeja con aceite y sal: horno 10 min a 210 °C.",
+            "Añade el pollo con sal, romero y el zumo de medio limón.",
+            "Hornea 18 min más, hasta que el pollo esté dorado."
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 28,
+          "minutos_trabajo": 7,
+          "pasos": [
+            "Corta la patata en dados y la cebolla en tiras y alíñalas con aceite y sal.",
+            "Air fryer 10 min a 200 °C.",
+            "Añade el pollo con sal, romero y el zumo de medio limón.",
+            "Air fryer 15 min más a 190 °C, removiendo a mitad."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pollosoja",
+      "nombre": "Pollo salteado con verduras y soja",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pechuga",
+          "cantidad": 180
+        },
+        {
+          "producto": "salteado",
+          "cantidad": 200
+        }
+      ],
+      "nutricion": {
+        "kcal": 360,
+        "proteina": 45,
+        "hidratos": 12,
+        "grasa": 13
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Corta el pollo en tiras y dóralo con aceite a fuego fuerte 5 min.",
+            "Añade las verduras congeladas y saltea 7 min.",
+            "Echa dos cucharadas de salsa de soja, remueve 1 min y sirve."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pollocopos",
+      "nombre": "Pollo crujiente con copos de maíz",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "rebozado"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pechuga",
+          "cantidad": 170
+        },
+        {
+          "producto": "copos_maiz",
+          "cantidad": 35
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 100
+        }
+      ],
+      "nutricion": {
+        "kcal": 500,
+        "proteina": 51,
+        "hidratos": 35,
+        "grasa": 17
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 22,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Corta el pollo en tiras y sálalo.",
+            "Machaca los copos de maíz dentro de una bolsa con las manos.",
+            "Pasa las tiras por el huevo batido y luego por los copos.",
+            "Air fryer 12 min a 190 °C, dándoles la vuelta a mitad.",
+            "Sirve con la ensalada y el tomate aliñados."
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Corta el pollo en tiras y sálalo.",
+            "Machaca los copos de maíz dentro de una bolsa con las manos.",
+            "Pasa las tiras por el huevo batido y luego por los copos.",
+            "Ponlas en una bandeja con papel y un hilo de aceite: horno 15 min a 210 °C.",
+            "Sirve con la ensalada y el tomate aliñados."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pastapesto",
+      "nombre": "Pasta con pollo al pesto",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pasta",
+          "cantidad": 85
+        },
+        {
+          "producto": "pechuga",
+          "cantidad": 140
+        },
+        {
+          "producto": "pesto",
+          "cantidad": 30
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 100
+        }
+      ],
+      "nutricion": {
+        "kcal": 640,
+        "proteina": 45,
+        "hidratos": 66,
+        "grasa": 21
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Cuece la pasta en agua con sal el tiempo del paquete (unos 10 min) y escúrrela.",
+            "Corta el pollo en dados y dóralo con aceite y sal 5 min.",
+            "Añade el calabacín en dados y saltea 5 min.",
+            "Apaga el fuego y mezcla con la pasta y el pesto."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polloyogur",
+      "nombre": "Pollo con salsa de yogur y cuscús",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pechuga",
+          "cantidad": 170
+        },
+        {
+          "producto": "cuscus",
+          "cantidad": 75
+        },
+        {
+          "producto": "yogur",
+          "cantidad": 1
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 100
+        },
+        {
+          "producto": "limon",
+          "cantidad": 20
+        }
+      ],
+      "nutricion": {
+        "kcal": 640,
+        "proteina": 54,
+        "hidratos": 64,
+        "grasa": 17
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pon el cuscús en un bol con 80 ml de agua hirviendo y sal, tapa y deja 5 min.",
+            "Corta el pollo y el calabacín en dados y saltéalos con aceite y sal 8 min.",
+            "Mezcla el yogur con el zumo de limón, sal y ajo en polvo.",
+            "Sirve el pollo sobre el cuscús con la salsa por encima."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tandoori",
+      "nombre": "Pollo tandoori con arroz",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "muslos",
+          "cantidad": 200
+        },
+        {
+          "producto": "yogur",
+          "cantidad": 1
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 710,
+        "proteina": 49,
+        "hidratos": 69,
+        "grasa": 25
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Mezcla el yogur con curry, pimentón, comino y sal.",
+            "Embadurna bien el pollo con la mezcla.",
+            "Air fryer 15 min a 200 °C, dándole la vuelta a mitad.",
+            "Cuece el arroz en agua con sal 15 min y escúrrelo.",
+            "Sirve el pollo con el arroz y la ensalada."
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 28,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Mezcla el yogur con curry, pimentón, comino y sal.",
+            "Embadurna bien el pollo con la mezcla y ponlo en una bandeja.",
+            "Horno 20 min a 220 °C.",
+            "Cuece el arroz en agua con sal 15 min y escúrrelo.",
+            "Sirve el pollo con el arroz y la ensalada."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polloajillo",
+      "nombre": "Pollo al ajillo con patatas",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "muslos",
+          "cantidad": 200
+        },
+        {
+          "producto": "patata",
+          "cantidad": 250
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 6
+        }
+      ],
+      "nutricion": {
+        "kcal": 630,
+        "proteina": 43,
+        "hidratos": 44,
+        "grasa": 30
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 28,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Pela la patata, córtala en dados y caliéntala tapada al microondas 6 min.",
+            "Trocea el pollo y dóralo con aceite y sal 8 min.",
+            "Añade los ajos en láminas y la patata y fríe 5 min más.",
+            "Echa un chorrito de agua y deja reducir 3 min."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "arrozchampi",
+      "nombre": "Arroz con pollo y champiñones",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "pechuga",
+          "cantidad": 150
+        },
+        {
+          "producto": "champi",
+          "cantidad": 120
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "caldo_pollo",
+          "cantidad": 250
+        }
+      ],
+      "nutricion": {
+        "kcal": 590,
+        "proteina": 46,
+        "hidratos": 68,
+        "grasa": 13
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Pica la cebolla y dórala con aceite junto al pollo en dados 5 min.",
+            "Añade los champiñones y saltea 3 min.",
+            "Echa el arroz, remueve y añade el caldo caliente.",
+            "Cuece 17 min a fuego medio sin remover y deja reposar 2 min."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kebab",
+      "nombre": "Kebab casero de pollo",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pechuga",
+          "cantidad": 160
+        },
+        {
+          "producto": "tortillas",
+          "cantidad": 2
+        },
+        {
+          "producto": "yogur",
+          "cantidad": 1
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 30
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 620,
+        "proteina": 50,
+        "hidratos": 52,
+        "grasa": 22
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Corta el pollo en tiras finas y alíñalo con comino, pimentón, ajo en polvo y sal.",
+            "Dóralo con aceite a fuego fuerte 7 min.",
+            "Mezcla el yogur con sal y ajo en polvo para la salsa.",
+            "Calienta las tortillas y rellénalas con el pollo, la ensalada, el tomate, la cebolla y la salsa."
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Corta el pollo en tiras finas y alíñalo con aceite, comino, pimentón, ajo en polvo y sal.",
+            "Air fryer 10 min a 200 °C, removiendo a mitad.",
+            "Mezcla el yogur con sal y ajo en polvo para la salsa.",
+            "Calienta las tortillas y rellénalas con el pollo, la ensalada, el tomate, la cebolla y la salsa."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polloagridulce",
+      "nombre": "Pollo agridulce con arroz",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pechuga",
+          "cantidad": 170
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "pina",
+          "cantidad": 60
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 630,
+        "proteina": 46,
+        "hidratos": 78,
+        "grasa": 13
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Cuece el arroz en agua con sal 15 min y escúrrelo.",
+            "Corta el pollo, el pimiento y la cebolla en dados y saltéalos con aceite 8 min.",
+            "Añade la piña en trozos con 3 cucharadas de su jugo, 1 de vinagre y 1 de soja.",
+            "Deja reducir 3 min y sirve con el arroz."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fideospollo",
+      "nombre": "Fideos salteados con pollo",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "fideos_arroz",
+          "cantidad": 70
+        },
+        {
+          "producto": "pechuga",
+          "cantidad": 150
+        },
+        {
+          "producto": "salteado",
+          "cantidad": 150
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        }
+      ],
+      "nutricion": {
+        "kcal": 640,
+        "proteina": 49,
+        "hidratos": 67,
+        "grasa": 19
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pon los fideos en agua hirviendo 5 min y escúrrelos.",
+            "Saltea el pollo en tiras con aceite a fuego fuerte 5 min.",
+            "Añade las verduras congeladas y saltea 5 min.",
+            "Echa el huevo batido, remueve y añade los fideos y 2 cucharadas de soja; saltea 2 min."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polloboniato",
+      "nombre": "Pollo al horno con boniato y cebolla",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "muslos",
+          "cantidad": 200
+        },
+        {
+          "producto": "boniato",
+          "cantidad": 220
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 80
+        }
+      ],
+      "nutricion": {
+        "kcal": 600,
+        "proteina": 42,
+        "hidratos": 50,
+        "grasa": 26
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 30,
+          "minutos_trabajo": 7,
+          "pasos": [
+            "Corta el boniato en dados y la cebolla en gajos.",
+            "Ponlos en una bandeja con el pollo, aceite, sal y pimentón.",
+            "Horno 25 min a 210 °C, removiendo a mitad."
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 25,
+          "minutos_trabajo": 6,
+          "pasos": [
+            "Corta el boniato en dados y la cebolla en gajos.",
+            "Alíñalos con el pollo: aceite, sal y pimentón.",
+            "Air fryer 12 min a 200 °C.",
+            "Remueve y deja 10 min más a 190 °C."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muslitos",
+      "nombre": "Muslitos de pollo al horno con verduras",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "muslos",
+          "cantidad": 220
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 120
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 480,
+        "proteina": 45,
+        "hidratos": 11,
+        "grasa": 27
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 30,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Corta el calabacín, el pimiento y la cebolla en trozos grandes.",
+            "Ponlos en una bandeja con el pollo, aceite, sal, ajo en polvo y orégano.",
+            "Horno 25 min a 210 °C, dándole la vuelta al pollo a mitad."
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 25,
+          "minutos_trabajo": 7,
+          "pasos": [
+            "Corta el calabacín, el pimiento y la cebolla en trozos grandes.",
+            "Alíñalos con el pollo: aceite, sal, ajo en polvo y orégano.",
+            "Air fryer 12 min a 200 °C.",
+            "Remueve y deja 10 min más a 190 °C."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "arrozpollo",
+      "nombre": "Arroz con pollo",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "muslos",
+          "cantidad": 160
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 60
+        },
+        {
+          "producto": "guisantes",
+          "cantidad": 50
+        },
+        {
+          "producto": "caldo_pollo",
+          "cantidad": 250
+        }
+      ],
+      "nutricion": {
+        "kcal": 690,
+        "proteina": 41,
+        "hidratos": 74,
+        "grasa": 24
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Trocea el pollo y dóralo con aceite y sal 5 min.",
+            "Añade el pimiento en dados y el tomate y sofríe 3 min.",
+            "Echa el arroz, una pizca de pimentón y el caldo caliente.",
+            "Cuece 15 min, añade los guisantes y deja 3 min más."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chilindron",
+      "nombre": "Pollo al chilindrón rápido",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "muslos",
+          "cantidad": 200
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 120
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 120
+        },
+        {
+          "producto": "jamon",
+          "cantidad": 20
+        }
+      ],
+      "nutricion": {
+        "kcal": 500,
+        "proteina": 45,
+        "hidratos": 16,
+        "grasa": 26
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Trocea el pollo y dóralo con aceite y sal 6 min.",
+            "Añade la cebolla, el pimiento en tiras y el jamón picado y sofríe 6 min.",
+            "Echa el tomate y una cucharadita de pimentón.",
+            "Tapa y deja 12 min a fuego medio-bajo."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pechugaempanada",
+      "nombre": "Pechuga empanada al horno con ensalada",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "rebozado"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pechuga",
+          "cantidad": 170
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "pan_rallado",
+          "cantidad": 35
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 100
+        }
+      ],
+      "nutricion": {
+        "kcal": 490,
+        "proteina": 52,
+        "hidratos": 30,
+        "grasa": 17
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Abre la pechuga en filetes finos y sálalos.",
+            "Pásalos por el huevo batido y luego por el pan rallado.",
+            "Ponlos en una bandeja con papel y un hilo de aceite: horno 15 min a 210 °C, dándoles la vuelta a mitad.",
+            "Sirve con la ensalada y el tomate aliñados."
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Abre la pechuga en filetes finos y sálalos.",
+            "Pásalos por el huevo batido y luego por el pan rallado.",
+            "Pulveriza con aceite: air fryer 10 min a 200 °C, dándoles la vuelta a mitad.",
+            "Sirve con la ensalada y el tomate aliñados."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enspastapollo",
+      "nombre": "Ensalada completa de pasta, pollo y maíz",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pasta",
+          "cantidad": 80
+        },
+        {
+          "producto": "pechuga",
+          "cantidad": 130
+        },
+        {
+          "producto": "maiz",
+          "cantidad": 50
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 100
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 580,
+        "proteina": 42,
+        "hidratos": 69,
+        "grasa": 13
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Cuece la pasta en agua con sal el tiempo del paquete (unos 10 min) y escúrrela.",
+            "Enfría la pasta bajo el grifo.",
+            "Haz el pollo a la plancha con sal 8 min y córtalo en dados.",
+            "Mezcla la pasta con el pollo, el maíz, el tomate y la lechuga, y aliña con aceite, vinagre y sal."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bolpollo",
+      "nombre": "Bol de arroz, pollo y verduras con soja",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "pechuga",
+          "cantidad": 150
+        },
+        {
+          "producto": "brocoli",
+          "cantidad": 100
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 50
+        },
+        {
+          "producto": "edamame",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 640,
+        "proteina": 49,
+        "hidratos": 73,
+        "grasa": 15
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Cuece el arroz en agua con sal 15 min y escúrrelo.",
+            "Corta el pollo en dados y dóralo con aceite 5 min.",
+            "Añade el brócoli, la zanahoria en rodajas y el edamame y saltea 6 min.",
+            "Echa 2 cucharadas de soja y sirve sobre el arroz."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pavocurry",
+      "nombre": "Pavo al curry con arroz",
+      "grupo": "carne",
+      "proteina_principal": "pavo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pavo",
+          "cantidad": 170
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "coco",
+          "cantidad": 70
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 60
+        }
+      ],
+      "nutricion": {
+        "kcal": 660,
+        "proteina": 48,
+        "hidratos": 71,
+        "grasa": 19
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Cuece el arroz en agua con sal 15 min y escúrrelo.",
+            "Corta el pavo, la cebolla y el pimiento en dados y saltéalos con aceite 6 min.",
+            "Añade una cucharadita de curry y la leche de coco.",
+            "Deja 6 min a fuego medio y sirve con el arroz."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rollitospavo",
+      "nombre": "Rollitos de pavo con queso y espárragos",
+      "grupo": "carne",
+      "proteina_principal": "pavo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pavo",
+          "cantidad": 170
+        },
+        {
+          "producto": "queso",
+          "cantidad": 30
+        },
+        {
+          "producto": "esparragos",
+          "cantidad": 150
+        }
+      ],
+      "nutricion": {
+        "kcal": 380,
+        "proteina": 51,
+        "hidratos": 4,
+        "grasa": 18
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 20,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Extiende los filetes de pavo y sálalos.",
+            "Pon encima el queso y 2 o 3 espárragos, enróllalos y ciérralos con un palillo.",
+            "Úntalos con aceite y ponlos en la air fryer con el resto de espárragos.",
+            "Air fryer 12 min a 190 °C."
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Extiende los filetes de pavo y sálalos.",
+            "Pon encima el queso y 2 o 3 espárragos, enróllalos y ciérralos con un palillo.",
+            "Ponlos en una bandeja con el resto de espárragos y un hilo de aceite.",
+            "Horno 18 min a 200 °C."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pavoquinoa",
+      "nombre": "Pavo salteado con verduras y quinoa",
+      "grupo": "carne",
+      "proteina_principal": "pavo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pavo",
+          "cantidad": 160
+        },
+        {
+          "producto": "quinoa",
+          "cantidad": 125
+        },
+        {
+          "producto": "salteado",
+          "cantidad": 150
+        }
+      ],
+      "nutricion": {
+        "kcal": 500,
+        "proteina": 48,
+        "hidratos": 40,
+        "grasa": 15
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Corta el pavo en tiras y saltéalo con aceite y sal 5 min.",
+            "Añade las verduras congeladas y saltea 6 min, con un chorrito de soja.",
+            "Calienta la quinoa 1 min al microondas y mézclala con todo."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "burgerpavopan",
+      "nombre": "Hamburguesa de pavo en pan integral con ensalada",
+      "grupo": "carne",
+      "proteina_principal": "pavo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "burger_pavo",
+          "cantidad": 1
+        },
+        {
+          "producto": "pan_integral",
+          "cantidad": 2
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 40
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 80
+        }
+      ],
+      "nutricion": {
+        "kcal": 370,
+        "proteina": 25,
+        "hidratos": 33,
+        "grasa": 15
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 15,
+          "minutos_trabajo": 7,
+          "pasos": [
+            "Pon la hamburguesa en la air fryer 10 min a 190 °C, dándole la vuelta a mitad.",
+            "Tuesta el pan 2 min en la air fryer.",
+            "Monta el pan con la lechuga, el tomate en rodajas y la hamburguesa."
+          ]
+        },
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Haz la hamburguesa a la plancha con unas gotas de aceite 5 min por cada lado.",
+            "Tuesta el pan en la sartén 1 min por cada lado.",
+            "Monta el pan con la lechuga, el tomate en rodajas y la hamburguesa."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pavopure",
+      "nombre": "Pavo a la plancha con puré de boniato",
+      "grupo": "carne",
+      "proteina_principal": "pavo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pavo",
+          "cantidad": 170
+        },
+        {
+          "producto": "boniato",
+          "cantidad": 250
+        },
+        {
+          "producto": "leche",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 490,
+        "proteina": 46,
+        "hidratos": 51,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pela el boniato, trocéalo y caliéntalo tapado al microondas con un chorrito de agua 8 min.",
+            "Aplástalo con la leche, sal y un hilo de aceite.",
+            "Haz el pavo a la plancha con aceite y sal 3 min por cada lado."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cerdoagridulce",
+      "nombre": "Cerdo agridulce con arroz",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "lomo",
+          "cantidad": 170
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "pina",
+          "cantidad": 60
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 680,
+        "proteina": 45,
+        "hidratos": 78,
+        "grasa": 19
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Cuece el arroz en agua con sal 15 min y escúrrelo.",
+            "Corta el lomo, el pimiento y la cebolla en dados y saltéalos con aceite 8 min.",
+            "Añade la piña en trozos con 3 cucharadas de su jugo, 1 de vinagre y 1 de soja.",
+            "Deja reducir 3 min y sirve con el arroz."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "solomanzana",
+      "nombre": "Solomillo al horno con manzana y patata",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "solomillo",
+          "cantidad": 180
+        },
+        {
+          "producto": "manzana",
+          "cantidad": 150
+        },
+        {
+          "producto": "patata",
+          "cantidad": 200
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 550,
+        "proteina": 43,
+        "hidratos": 55,
+        "grasa": 17
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 30,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Corta la patata en rodajas finas y caliéntala tapada al microondas 5 min.",
+            "Ponla en una bandeja con la cebolla y la manzana en gajos, aceite y sal.",
+            "Pon encima el solomillo con sal y pimienta: horno 20 min a 200 °C.",
+            "Déjalo reposar 2 min y córtalo en medallones."
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 28,
+          "minutos_trabajo": 7,
+          "pasos": [
+            "Corta la patata en dados, alíñala con aceite y sal: air fryer 10 min a 200 °C.",
+            "Añade la cebolla y la manzana en gajos y el solomillo con sal y pimienta.",
+            "Air fryer 15 min a 190 °C.",
+            "Déjalo reposar 2 min y córtalo en medallones."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cerdobroc",
+      "nombre": "Salteado de cerdo con brócoli y soja",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "lomo",
+          "cantidad": 170
+        },
+        {
+          "producto": "brocoli",
+          "cantidad": 200
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 400,
+        "proteina": 44,
+        "hidratos": 10,
+        "grasa": 19
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Corta el lomo en tiras y la cebolla en gajos.",
+            "Saltea el lomo con aceite a fuego fuerte 4 min.",
+            "Añade la cebolla y el brócoli y saltea 7 min.",
+            "Echa 2 cucharadas de soja, remueve 1 min y sirve."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lomochampi",
+      "nombre": "Lomo con salsa de champiñones y puré",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "lomo",
+          "cantidad": 170
+        },
+        {
+          "producto": "champi",
+          "cantidad": 120
+        },
+        {
+          "producto": "nata",
+          "cantidad": 50
+        },
+        {
+          "producto": "patata",
+          "cantidad": 220
+        },
+        {
+          "producto": "leche",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 630,
+        "proteina": 48,
+        "hidratos": 42,
+        "grasa": 29
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 14,
+          "pasos": [
+            "Pela y trocea la patata y cuécela en agua con sal 15 min.",
+            "Haz el lomo a la plancha con sal 3 min por cada lado y resérvalo.",
+            "En la misma sartén saltea los champiñones 4 min, añade la nata y deja 2 min.",
+            "Escurre la patata y aplástala con la leche y un hilo de aceite.",
+            "Sirve el lomo con la salsa y el puré."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fajitascerdo",
+      "nombre": "Fajitas de cerdo",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "lomo",
+          "cantidad": 150
+        },
+        {
+          "producto": "tortillas",
+          "cantidad": 2
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 100
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        },
+        {
+          "producto": "queso",
+          "cantidad": 20
+        }
+      ],
+      "nutricion": {
+        "kcal": 650,
+        "proteina": 46,
+        "hidratos": 50,
+        "grasa": 28
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Corta el lomo, el pimiento y la cebolla en tiras.",
+            "Saltéalo todo con aceite, sal, comino y pimentón 8 min a fuego fuerte.",
+            "Calienta las tortillas 20 s en la sartén.",
+            "Rellénalas con el salteado y el queso y enróllalas."
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Corta el lomo, el pimiento y la cebolla en tiras.",
+            "Alíñalo con aceite, sal, comino y pimentón.",
+            "Air fryer 12 min a 200 °C, removiendo a mitad.",
+            "Rellena las tortillas con el salteado y el queso y enróllalas."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "albondpure",
+      "nombre": "Albóndigas en salsa de tomate con puré",
+      "grupo": "carne",
+      "proteina_principal": "ternera",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "picada",
+          "cantidad": 150
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 150
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "patata",
+          "cantidad": 220
+        },
+        {
+          "producto": "leche",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 660,
+        "proteina": 32,
+        "hidratos": 50,
+        "grasa": 36
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "Mezcla la carne con sal y ajo en polvo y forma bolitas.",
+            "Dóralas con aceite 5 min, añade la cebolla picada y el tomate y cuece 15 min.",
+            "Mientras, pela y trocea la patata y cuécela en agua con sal 15 min.",
+            "Escurre la patata y aplástala con la leche y un hilo de aceite."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tacoscarne",
+      "nombre": "Tacos de carne picada",
+      "grupo": "carne",
+      "proteina_principal": "ternera",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "picada",
+          "cantidad": 140
+        },
+        {
+          "producto": "tortillas",
+          "cantidad": 2
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "queso",
+          "cantidad": 20
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 690,
+        "proteina": 35,
+        "hidratos": 49,
+        "grasa": 39
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Pica la cebolla y dórala con aceite 3 min.",
+            "Añade la carne con sal, comino y pimentón y cocínala 7 min, deshaciéndola.",
+            "Calienta las tortillas 20 s en la sartén.",
+            "Rellénalas con la carne, la lechuga, el tomate en dados y el queso."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ternerapimientos",
+      "nombre": "Ternera con pimientos y arroz",
+      "grupo": "carne",
+      "proteina_principal": "ternera",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "ternera",
+          "cantidad": 160
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 150
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        }
+      ],
+      "nutricion": {
+        "kcal": 640,
+        "proteina": 41,
+        "hidratos": 74,
+        "grasa": 18
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Cuece el arroz en agua con sal 15 min y escúrrelo.",
+            "Corta la ternera, el pimiento y la cebolla en tiras.",
+            "Saltea las verduras con aceite 6 min, añade la ternera con sal y saltea 3 min más.",
+            "Echa un chorrito de soja y sirve con el arroz."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bolopollo",
+      "nombre": "Pasta a la boloñesa de pollo",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "picada_pollo",
+          "cantidad": 150
+        },
+        {
+          "producto": "pasta",
+          "cantidad": 85
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 150
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 40
+        },
+        {
+          "producto": "queso",
+          "cantidad": 15
+        }
+      ],
+      "nutricion": {
+        "kcal": 730,
+        "proteina": 43,
+        "hidratos": 76,
+        "grasa": 26
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Cuece la pasta en agua con sal el tiempo del paquete (unos 10 min) y escúrrela.",
+            "Pica la cebolla y la zanahoria y sofríelas con aceite 5 min.",
+            "Añade la carne y cocínala 5 min, deshaciéndola.",
+            "Echa el tomate, sal y orégano y deja 8 min.",
+            "Mezcla con la pasta y pon el queso por encima."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "burritocarne",
+      "nombre": "Burrito de carne y alubias",
+      "grupo": "carne",
+      "proteina_principal": "ternera",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "tortillas",
+          "cantidad": 2
+        },
+        {
+          "producto": "picada",
+          "cantidad": 110
+        },
+        {
+          "producto": "alubias_rojas",
+          "cantidad": 100
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 40
+        },
+        {
+          "producto": "queso",
+          "cantidad": 30
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 880,
+        "proteina": 41,
+        "hidratos": 90,
+        "grasa": 38
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 13,
+          "pasos": [
+            "Cuece el arroz en agua con sal 15 min y escúrrelo.",
+            "Dora la carne con sal, comino y pimentón 6 min, deshaciéndola.",
+            "Añade las alubias escurridas y el tomate y deja 3 min.",
+            "Calienta las tortillas, rellénalas con el arroz, la carne y el queso y enróllalas."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "musaca",
+      "nombre": "Musaca rápida de berenjena",
+      "grupo": "carne",
+      "proteina_principal": "ternera",
+      "tipo": "ligera",
+      "pesada": true,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "berenjena",
+          "cantidad": 250
+        },
+        {
+          "producto": "picada",
+          "cantidad": 130
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 120
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "queso",
+          "cantidad": 40
+        },
+        {
+          "producto": "nata",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 670,
+        "proteina": 35,
+        "hidratos": 22,
+        "grasa": 48
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 30,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "Corta la berenjena en rodajas y ponla en una bandeja con aceite y sal: horno 12 min a 210 °C.",
+            "Mientras, dora la carne con la cebolla picada 6 min, añade el tomate y una pizca de comino y deja 5 min.",
+            "En una fuente pon capas de berenjena y carne y cubre con la nata y el queso.",
+            "Gratina 8 min a 220 °C."
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 28,
+          "minutos_trabajo": 14,
+          "pasos": [
+            "Corta la berenjena en rodajas, alíñala con aceite y sal: air fryer 10 min a 200 °C.",
+            "Mientras, dora la carne con la cebolla picada 6 min, añade el tomate y una pizca de comino y deja 5 min.",
+            "En un molde que quepa en la air fryer pon capas de berenjena y carne y cubre con la nata y el queso.",
+            "Air fryer 6 min a 190 °C."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamburpan",
+      "nombre": "Hamburguesa en pan con patatas al horno",
+      "grupo": "carne",
+      "proteina_principal": "ternera",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "picada",
+          "cantidad": 150
+        },
+        {
+          "producto": "pan_burger",
+          "cantidad": 1
+        },
+        {
+          "producto": "patata",
+          "cantidad": 200
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 60
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 30
+        },
+        {
+          "producto": "queso",
+          "cantidad": 15
+        }
+      ],
+      "nutricion": {
+        "kcal": 780,
+        "proteina": 37,
+        "hidratos": 65,
+        "grasa": 41
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 28,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Corta la patata en gajos y alíñala con aceite y sal: air fryer 15 min a 200 °C.",
+            "Forma la hamburguesa con la carne y sal.",
+            "Añádela a la air fryer y deja 10 min más a 190 °C, dándole la vuelta a mitad.",
+            "Monta el pan con la lechuga, el tomate, el queso y la hamburguesa."
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Corta la patata en gajos y ponla en una bandeja con aceite y sal: horno 15 min a 220 °C.",
+            "Forma la hamburguesa con la carne y sal.",
+            "Ponla en la bandeja y hornea 12 min más, dándole la vuelta a mitad.",
+            "Monta el pan con la lechuga, el tomate, el queso y la hamburguesa."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ternerawok",
+      "nombre": "Ternera al wok con fideos",
+      "grupo": "carne",
+      "proteina_principal": "ternera",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "ternera",
+          "cantidad": 150
+        },
+        {
+          "producto": "fideos_arroz",
+          "cantidad": 70
+        },
+        {
+          "producto": "salteado",
+          "cantidad": 150
+        }
+      ],
+      "nutricion": {
+        "kcal": 590,
+        "proteina": 39,
+        "hidratos": 66,
+        "grasa": 18
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pon los fideos en agua hirviendo 5 min y escúrrelos.",
+            "Corta la ternera en tiras y saltéala con aceite a fuego fuerte 3 min; sácala.",
+            "Saltea las verduras congeladas 6 min.",
+            "Añade la ternera, los fideos y 2 cucharadas de soja y saltea 2 min."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fajitasternera",
+      "nombre": "Fajitas de ternera",
+      "grupo": "carne",
+      "proteina_principal": "ternera",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "ternera",
+          "cantidad": 150
+        },
+        {
+          "producto": "tortillas",
+          "cantidad": 2
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 100
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        },
+        {
+          "producto": "queso",
+          "cantidad": 20
+        }
+      ],
+      "nutricion": {
+        "kcal": 640,
+        "proteina": 44,
+        "hidratos": 50,
+        "grasa": 27
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Corta la ternera, el pimiento y la cebolla en tiras.",
+            "Saltea las verduras con aceite 6 min, añade la ternera con sal, comino y pimentón y saltea 3 min.",
+            "Calienta las tortillas 20 s en la sartén.",
+            "Rellénalas con el salteado y el queso y enróllalas."
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Corta la ternera, el pimiento y la cebolla en tiras.",
+            "Alíñalo con aceite, sal, comino y pimentón.",
+            "Air fryer 10 min a 200 °C, removiendo a mitad.",
+            "Rellena las tortillas con el salteado y el queso y enróllalas."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "macasalchichas",
+      "nombre": "Macarrones con salchichas de pollo y tomate",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pasta",
+          "cantidad": 85
+        },
+        {
+          "producto": "salchichas",
+          "cantidad": 80
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 100
+        },
+        {
+          "producto": "queso",
+          "cantidad": 15
+        }
+      ],
+      "nutricion": {
+        "kcal": 600,
+        "proteina": 25,
+        "hidratos": 75,
+        "grasa": 22
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Cuece la pasta en agua con sal el tiempo del paquete (unos 10 min) y escúrrela.",
+            "Corta las salchichas en rodajas y dóralas en una sartén con unas gotas de aceite 4 min.",
+            "Añade el tomate y calienta 3 min.",
+            "Mezcla con la pasta y pon el queso por encima."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "merltomatepim",
+      "nombre": "Merluza en salsa de tomate y pimientos",
+      "grupo": "pescado",
+      "proteina_principal": "pescado_blanco",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "merluza",
+          "cantidad": 200
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 150
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 100
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 330,
+        "proteina": 38,
+        "hidratos": 16,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Corta la cebolla y el pimiento en tiras y sofríelos con aceite 8 min.",
+            "Añade el tomate, sal y una pizca de azúcar y deja 5 min.",
+            "Pon la merluza encima con sal, tapa y deja 8 min a fuego medio."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "merllimon",
+      "nombre": "Merluza al limón con patatas",
+      "grupo": "pescado",
+      "proteina_principal": "pescado_blanco",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "merluza",
+          "cantidad": 200
+        },
+        {
+          "producto": "patata",
+          "cantidad": 250
+        },
+        {
+          "producto": "limon",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 440,
+        "proteina": 39,
+        "hidratos": 45,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 30,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Corta la patata en rodajas finas y caliéntala tapada al microondas 5 min.",
+            "Ponla en una bandeja con aceite y sal: horno 10 min a 210 °C.",
+            "Pon la merluza encima con sal, ajo en polvo y el zumo de medio limón.",
+            "Hornea 12 min más."
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 28,
+          "minutos_trabajo": 7,
+          "pasos": [
+            "Corta la patata en dados y alíñala con aceite y sal: air fryer 15 min a 200 °C.",
+            "Pon la merluza encima con sal, ajo en polvo y el zumo de medio limón.",
+            "Air fryer 10 min más a 180 °C."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vizcaina",
+      "nombre": "Bacalao a la vizcaína rápido",
+      "grupo": "pescado",
+      "proteina_principal": "pescado_blanco",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "bacalao",
+          "cantidad": 200
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 100
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 120
+        }
+      ],
+      "nutricion": {
+        "kcal": 330,
+        "proteina": 39,
+        "hidratos": 15,
+        "grasa": 11
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pica la cebolla y el pimiento y sofríelos con aceite 8 min.",
+            "Añade el tomate y una cucharadita de pimentón y deja 5 min.",
+            "Pon el bacalao encima, tapa y deja 8 min a fuego medio."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bacapisto",
+      "nombre": "Bacalao con pisto",
+      "grupo": "pescado",
+      "proteina_principal": "pescado_blanco",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "bacalao",
+          "cantidad": 180
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 120
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 100
+        }
+      ],
+      "nutricion": {
+        "kcal": 320,
+        "proteina": 37,
+        "hidratos": 16,
+        "grasa": 11
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Pica la cebolla, el pimiento y el calabacín en dados.",
+            "Sofríelos con aceite y sal 10 min a fuego medio.",
+            "Añade el tomate y deja 5 min.",
+            "Pon el bacalao encima, tapa y deja 8 min."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pescadopure",
+      "nombre": "Pescado empanado al horno con puré",
+      "grupo": "pescado",
+      "proteina_principal": "pescado_blanco",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "rebozado"
+      ],
+      "ingredientes": [
+        {
+          "producto": "merluza",
+          "cantidad": 180
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "pan_rallado",
+          "cantidad": 30
+        },
+        {
+          "producto": "patata",
+          "cantidad": 220
+        },
+        {
+          "producto": "leche",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 600,
+        "proteina": 47,
+        "hidratos": 61,
+        "grasa": 19
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 28,
+          "minutos_trabajo": 14,
+          "pasos": [
+            "Pela y trocea la patata y cuécela en agua con sal 15 min.",
+            "Pasa la merluza con sal por el huevo batido y luego por el pan rallado.",
+            "Pulveriza con aceite: air fryer 12 min a 200 °C, dándole la vuelta a mitad.",
+            "Escurre la patata y aplástala con la leche y un hilo de aceite."
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 30,
+          "minutos_trabajo": 14,
+          "pasos": [
+            "Pela y trocea la patata y cuécela en agua con sal 15 min.",
+            "Pasa la merluza con sal por el huevo batido y luego por el pan rallado.",
+            "Ponla en una bandeja con papel y un hilo de aceite: horno 15 min a 210 °C.",
+            "Escurre la patata y aplástala con la leche y un hilo de aceite."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "merlcurry",
+      "nombre": "Merluza con verduras al curry",
+      "grupo": "pescado",
+      "proteina_principal": "pescado_blanco",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "merluza",
+          "cantidad": 180
+        },
+        {
+          "producto": "salteado",
+          "cantidad": 200
+        },
+        {
+          "producto": "coco",
+          "cantidad": 70
+        }
+      ],
+      "nutricion": {
+        "kcal": 330,
+        "proteina": 35,
+        "hidratos": 14,
+        "grasa": 15
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Saltea las verduras congeladas con aceite 6 min.",
+            "Añade una cucharadita de curry y la leche de coco.",
+            "Pon la merluza en trozos con sal, tapa y deja 8 min a fuego medio."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "burgermerluza",
+      "nombre": "Hamburguesas de merluza caseras",
+      "grupo": "pescado",
+      "proteina_principal": "pescado_blanco",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "merluza",
+          "cantidad": 200
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "pan_rallado",
+          "cantidad": 25
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 30
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 100
+        }
+      ],
+      "nutricion": {
+        "kcal": 450,
+        "proteina": 47,
+        "hidratos": 26,
+        "grasa": 18
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 25,
+          "minutos_trabajo": 13,
+          "pasos": [
+            "Descongela la merluza, sécala y pícala fina con un cuchillo.",
+            "Mézclala con el huevo, el pan rallado, la cebolla muy picada y sal, y forma 2 hamburguesas.",
+            "Pulveriza con aceite: air fryer 12 min a 190 °C, dándoles la vuelta a mitad.",
+            "Sirve con la ensalada y el tomate."
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 28,
+          "minutos_trabajo": 13,
+          "pasos": [
+            "Descongela la merluza, sécala y pícala fina con un cuchillo.",
+            "Mézclala con el huevo, el pan rallado, la cebolla muy picada y sal, y forma 2 hamburguesas.",
+            "Ponlas en una bandeja con papel y un hilo de aceite: horno 15 min a 200 °C.",
+            "Sirve con la ensalada y el tomate."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sopapescado",
+      "nombre": "Sopa de pescado rápida",
+      "grupo": "pescado",
+      "proteina_principal": "pescado_blanco",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "caldo_pescado",
+          "cantidad": 400
+        },
+        {
+          "producto": "merluza",
+          "cantidad": 120
+        },
+        {
+          "producto": "gambas",
+          "cantidad": 60
+        },
+        {
+          "producto": "fideos",
+          "cantidad": 40
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 350,
+        "proteina": 39,
+        "hidratos": 32,
+        "grasa": 7
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Sofríe el tomate con un chorrito de aceite 3 min.",
+            "Añade el caldo y llévalo a hervir.",
+            "Echa los fideos y cuece 5 min.",
+            "Añade la merluza en trozos y las gambas y deja 5 min más."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "salmonyogur",
+      "nombre": "Salmón con salsa de yogur y cuscús",
+      "grupo": "pescado",
+      "proteina_principal": "pescado_azul",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "salmon",
+          "cantidad": 150
+        },
+        {
+          "producto": "cuscus",
+          "cantidad": 70
+        },
+        {
+          "producto": "yogur",
+          "cantidad": 1
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 100
+        }
+      ],
+      "nutricion": {
+        "kcal": 690,
+        "proteina": 44,
+        "hidratos": 59,
+        "grasa": 29
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 20,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Pon el salmón y el calabacín en rodajas con aceite y sal: air fryer 10 min a 190 °C.",
+            "Pon el cuscús en un bol con 75 ml de agua hirviendo y sal, tapa y deja 5 min.",
+            "Mezcla el yogur con sal, ajo en polvo y un poco de eneldo o perejil.",
+            "Sirve el salmón sobre el cuscús con la salsa por encima."
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 25,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Pon el salmón y el calabacín en rodajas en una bandeja con aceite y sal: horno 15 min a 200 °C.",
+            "Pon el cuscús en un bol con 75 ml de agua hirviendo y sal, tapa y deja 5 min.",
+            "Mezcla el yogur con sal, ajo en polvo y un poco de eneldo o perejil.",
+            "Sirve el salmón sobre el cuscús con la salsa por encima."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "salmonpapillote",
+      "nombre": "Salmón en papillote con verduras",
+      "grupo": "pescado",
+      "proteina_principal": "pescado_azul",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "salmon",
+          "cantidad": 150
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 120
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 50
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 400,
+        "proteina": 32,
+        "hidratos": 10,
+        "grasa": 25
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 25,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Corta las verduras en tiras finas.",
+            "Ponlas sobre papel de horno con el salmón encima, sal y un hilo de aceite.",
+            "Cierra el paquete doblando los bordes.",
+            "Horno 18 min a 200 °C."
+          ]
+        },
+        {
+          "aparato": "micro",
+          "minutos": 12,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Corta las verduras en tiras finas.",
+            "Ponlas en un recipiente apto con el salmón encima, sal y un hilo de aceite.",
+            "Tapa y cocina al microondas 6 min a máxima potencia.",
+            "Deja reposar 2 min tapado antes de abrir."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "poke",
+      "nombre": "Bol de salmón y arroz (poke cocinado)",
+      "grupo": "pescado",
+      "proteina_principal": "pescado_azul",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "salmon",
+          "cantidad": 140
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "edamame",
+          "cantidad": 60
+        },
+        {
+          "producto": "maiz",
+          "cantidad": 40
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 700,
+        "proteina": 42,
+        "hidratos": 73,
+        "grasa": 25
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Cuece el arroz en agua con sal 15 min y escúrrelo.",
+            "Corta el salmón en dados y hazlo en la sartén con unas gotas de aceite 4 min.",
+            "Añade 2 cucharadas de soja y deja 1 min.",
+            "Calienta el edamame tapado al microondas 3 min.",
+            "Monta el bol con el arroz, el salmón, el edamame, el maíz y la lechuga."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "caballagarb",
+      "nombre": "Caballa con ensalada de garbanzos",
+      "grupo": "pescado",
+      "proteina_principal": "pescado_azul",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "caballa",
+          "cantidad": 85
+        },
+        {
+          "producto": "garbanzos",
+          "cantidad": 150
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 100
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 50
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 460,
+        "proteina": 31,
+        "hidratos": 31,
+        "grasa": 21
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 10,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Lava y escurre los garbanzos.",
+            "Pica el tomate, el pimiento y la cebolla.",
+            "Mezcla todo con la caballa escurrida.",
+            "Aliña con aceite, vinagre y sal."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pastasardinas",
+      "nombre": "Pasta con sardinas y tomate",
+      "grupo": "pescado",
+      "proteina_principal": "pescado_azul",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pasta",
+          "cantidad": 85
+        },
+        {
+          "producto": "sardinas",
+          "cantidad": 84
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 120
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 570,
+        "proteina": 32,
+        "hidratos": 70,
+        "grasa": 16
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Cuece la pasta en agua con sal el tiempo del paquete (unos 10 min) y escúrrela.",
+            "Pica la cebolla y sofríela con aceite 4 min.",
+            "Añade el tomate con sal y orégano y deja 6 min.",
+            "Añade las sardinas escurridas en trozos y la pasta y mezcla 1 min."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "salmonpesto",
+      "nombre": "Salmón al pesto con judías verdes",
+      "grupo": "pescado",
+      "proteina_principal": "pescado_azul",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "salmon",
+          "cantidad": 150
+        },
+        {
+          "producto": "pesto",
+          "cantidad": 20
+        },
+        {
+          "producto": "judias",
+          "cantidad": 180
+        }
+      ],
+      "nutricion": {
+        "kcal": 480,
+        "proteina": 35,
+        "hidratos": 10,
+        "grasa": 33
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 20,
+          "minutos_trabajo": 6,
+          "pasos": [
+            "Cuece las judías tapadas al microondas con un poco de agua 6 min.",
+            "Unta el salmón con el pesto.",
+            "Air fryer 10 min a 190 °C.",
+            "Sirve con las judías aliñadas con aceite y sal."
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 22,
+          "minutos_trabajo": 6,
+          "pasos": [
+            "Cuece las judías tapadas al microondas con un poco de agua 6 min.",
+            "Unta el salmón con el pesto y ponlo en una bandeja.",
+            "Horno 14 min a 200 °C.",
+            "Sirve con las judías aliñadas con aceite y sal."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "arrozmeloso",
+      "nombre": "Arroz meloso con gambas y guisantes",
+      "grupo": "pescado",
+      "proteina_principal": "marisco",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "gambas",
+          "cantidad": 120
+        },
+        {
+          "producto": "guisantes",
+          "cantidad": 60
+        },
+        {
+          "producto": "caldo_pescado",
+          "cantidad": 350
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 50
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 550,
+        "proteina": 34,
+        "hidratos": 76,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Pica la cebolla y sofríela con aceite 4 min; añade el tomate y deja 2 min.",
+            "Echa el arroz, remueve y añade el caldo caliente.",
+            "Cuece 15 min a fuego medio, removiendo de vez en cuando.",
+            "Añade las gambas y los guisantes y deja 4 min más, hasta que quede caldoso."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pastagambas",
+      "nombre": "Pasta con gambas y calabacín",
+      "grupo": "pescado",
+      "proteina_principal": "marisco",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pasta",
+          "cantidad": 85
+        },
+        {
+          "producto": "gambas",
+          "cantidad": 130
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 150
+        }
+      ],
+      "nutricion": {
+        "kcal": 520,
+        "proteina": 36,
+        "hidratos": 65,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Cuece la pasta en agua con sal el tiempo del paquete (unos 10 min) y escúrrela.",
+            "Corta el calabacín en dados y saltéalo con aceite y ajo en polvo 5 min.",
+            "Añade las gambas con sal y saltea 3 min.",
+            "Mezcla con la pasta y sirve."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "calamarencebollado",
+      "nombre": "Calamar encebollado con patatas",
+      "grupo": "pescado",
+      "proteina_principal": "marisco",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "calamar",
+          "cantidad": 180
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 150
+        },
+        {
+          "producto": "patata",
+          "cantidad": 200
+        }
+      ],
+      "nutricion": {
+        "kcal": 490,
+        "proteina": 35,
+        "hidratos": 50,
+        "grasa": 16
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Pela la patata, córtala en dados y caliéntala tapada al microondas 6 min.",
+            "Corta la cebolla en tiras y póchala con aceite a fuego medio 10 min.",
+            "Añade el calamar con sal y la patata y saltea 6 min.",
+            "Echa un chorrito de agua y deja 2 min más."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gambasesparr",
+      "nombre": "Salteado de gambas, espárragos y huevo",
+      "grupo": "pescado",
+      "proteina_principal": "marisco",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "gambas",
+          "cantidad": 130
+        },
+        {
+          "producto": "esparragos",
+          "cantidad": 150
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        }
+      ],
+      "nutricion": {
+        "kcal": 390,
+        "proteina": 42,
+        "hidratos": 4,
+        "grasa": 23
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Corta los espárragos en trozos y saltéalos con aceite 5 min.",
+            "Añade las gambas con sal y ajo en polvo y saltea 3 min.",
+            "Echa los huevos batidos y remueve 1 min, hasta que cuajen."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tallarines",
+      "nombre": "Tallarines con langostinos y tomate",
+      "grupo": "pescado",
+      "proteina_principal": "marisco",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "espaguetis",
+          "cantidad": 85
+        },
+        {
+          "producto": "langostinos",
+          "cantidad": 130
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 150
+        }
+      ],
+      "nutricion": {
+        "kcal": 530,
+        "proteina": 36,
+        "hidratos": 68,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Cuece la pasta en agua con sal el tiempo del paquete (unos 10 min) y escúrrela.",
+            "Saltea los langostinos con aceite y ajo en polvo 3 min y sácalos.",
+            "En la misma sartén pon el tomate con sal y deja 6 min.",
+            "Añade los langostinos y la pasta y mezcla 1 min."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "arroznegro",
+      "nombre": "Arroz negro rápido con calamar",
+      "grupo": "pescado",
+      "proteina_principal": "marisco",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "calamar",
+          "cantidad": 150
+        },
+        {
+          "producto": "tinta",
+          "cantidad": 1
+        },
+        {
+          "producto": "caldo_pescado",
+          "cantidad": 300
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 520,
+        "proteina": 32,
+        "hidratos": 70,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Pica la cebolla y sofríela con aceite 4 min.",
+            "Añade el calamar y saltea 3 min.",
+            "Echa el arroz, remueve y añade el caldo caliente con la tinta disuelta.",
+            "Cuece 17 min a fuego medio sin remover y deja reposar 2 min."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tortespinacas",
+      "nombre": "Tortilla de espinacas y queso",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "huevos",
+          "cantidad": 3
+        },
+        {
+          "producto": "espinacas",
+          "cantidad": 150
+        },
+        {
+          "producto": "queso",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 460,
+        "proteina": 34,
+        "hidratos": 4,
+        "grasa": 34
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Saltea las espinacas con aceite y sal 5 min, hasta que suelten el agua.",
+            "Bate los huevos con sal y mézclalos con las espinacas y el queso.",
+            "Cuaja la tortilla en una sartén con unas gotas de aceite 2 min por cada lado."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tortpatatahorno",
+      "nombre": "Tortilla de patata y cebolla al horno",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "patata",
+          "cantidad": 250
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 3
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        }
+      ],
+      "nutricion": {
+        "kcal": 600,
+        "proteina": 28,
+        "hidratos": 48,
+        "grasa": 32
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 30,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Corta la patata en láminas finas y la cebolla en tiras.",
+            "Caliéntalas tapadas al microondas con aceite y sal 8 min.",
+            "Bate los huevos con sal y mézclalos con la patata.",
+            "Vierte en un molde engrasado: horno 18 min a 190 °C."
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 28,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Corta la patata en láminas finas y la cebolla en tiras.",
+            "Caliéntalas tapadas al microondas con aceite y sal 8 min.",
+            "Bate los huevos con sal y mézclalos con la patata.",
+            "Vierte en un molde engrasado que quepa en la air fryer: 15 min a 170 °C."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "flamenca",
+      "nombre": "Huevos a la flamenca rápidos",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 100
+        },
+        {
+          "producto": "guisantes",
+          "cantidad": 60
+        },
+        {
+          "producto": "jamon",
+          "cantidad": 30
+        },
+        {
+          "producto": "patata",
+          "cantidad": 150
+        }
+      ],
+      "nutricion": {
+        "kcal": 480,
+        "proteina": 28,
+        "hidratos": 43,
+        "grasa": 21
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pela la patata, córtala en dados y caliéntala tapada al microondas con aceite y sal 6 min.",
+            "Ponla en una cazuela de horno con el tomate, los guisantes y el jamón en tiras.",
+            "Casca los huevos encima.",
+            "Horno 10 min a 200 °C, hasta que cuaje la clara."
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 22,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pela la patata, córtala en dados y caliéntala tapada al microondas con aceite y sal 6 min.",
+            "Ponla en una cazuelita apta con el tomate, los guisantes y el jamón en tiras.",
+            "Casca los huevos encima.",
+            "Air fryer 8 min a 180 °C, hasta que cuaje la clara."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "quiche",
+      "nombre": "Quiche sin masa de jamón y queso",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "huevos",
+          "cantidad": 3
+        },
+        {
+          "producto": "jamon",
+          "cantidad": 50
+        },
+        {
+          "producto": "queso",
+          "cantidad": 40
+        },
+        {
+          "producto": "leche",
+          "cantidad": 100
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 520,
+        "proteina": 45,
+        "hidratos": 8,
+        "grasa": 35
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 30,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Bate los huevos con la leche, sal y pimienta.",
+            "Añade el jamón picado y el queso.",
+            "Vierte en un molde engrasado: horno 22 min a 180 °C.",
+            "Sirve con la ensalada."
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 25,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Bate los huevos con la leche, sal y pimienta.",
+            "Añade el jamón picado y el queso.",
+            "Vierte en un molde engrasado que quepa en la air fryer: 16 min a 160 °C.",
+            "Sirve con la ensalada."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wraphuevo",
+      "nombre": "Wrap de huevo, espinacas y queso",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "tortillas",
+          "cantidad": 2
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        },
+        {
+          "producto": "espinacas",
+          "cantidad": 100
+        },
+        {
+          "producto": "queso",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 570,
+        "proteina": 31,
+        "hidratos": 43,
+        "grasa": 30
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Saltea las espinacas con aceite y sal 4 min.",
+            "Añade los huevos batidos y remueve 2 min, hasta que cuajen.",
+            "Calienta las tortillas 20 s en la sartén.",
+            "Rellénalas con el revuelto y el queso y enróllalas."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tortatun",
+      "nombre": "Tortilla de atún y tomate",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "huevos",
+          "cantidad": 3
+        },
+        {
+          "producto": "atun",
+          "cantidad": 65
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 100
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 450,
+        "proteina": 41,
+        "hidratos": 6,
+        "grasa": 30
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Corta el tomate en dados pequeños.",
+            "Bate los huevos con sal y mézclalos con el atún escurrido y la mitad del tomate.",
+            "Cuaja la tortilla en una sartén con unas gotas de aceite 2 min por cada lado.",
+            "Sirve con la ensalada y el resto del tomate."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "huevospisto",
+      "nombre": "Huevos con pisto",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 150
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 120
+        }
+      ],
+      "nutricion": {
+        "kcal": 400,
+        "proteina": 20,
+        "hidratos": 18,
+        "grasa": 27
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Pica la cebolla, el pimiento y el calabacín en dados.",
+            "Sofríelos con aceite y sal 10 min a fuego medio.",
+            "Añade el tomate y deja 6 min.",
+            "Haz dos huecos, casca los huevos, tapa y deja 5 min, hasta que cuajen."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enspatatahuevo",
+      "nombre": "Ensalada de patata, huevo y atún",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "patata",
+          "cantidad": 250
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        },
+        {
+          "producto": "atun",
+          "cantidad": 65
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 610,
+        "proteina": 38,
+        "hidratos": 48,
+        "grasa": 29
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pela la patata, córtala en dados y cuécela en agua con sal junto con los huevos 12 min.",
+            "Enfría la patata y los huevos bajo el grifo y pela los huevos.",
+            "Pica el tomate, la cebolla y los huevos.",
+            "Mezcla todo con el atún y aliña con aceite, vinagre y sal."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mujaddara",
+      "nombre": "Lentejas con arroz y cebolla (mujaddara)",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "lentejas",
+          "cantidad": 180
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 60
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 150
+        },
+        {
+          "producto": "yogur",
+          "cantidad": 1
+        }
+      ],
+      "nutricion": {
+        "kcal": 650,
+        "proteina": 24,
+        "hidratos": 90,
+        "grasa": 19
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Corta la cebolla en tiras finas y fríela con aceite a fuego medio 15 min, hasta que se dore.",
+            "Cuece el arroz en agua con sal 15 min y escúrrelo.",
+            "Mezcla el arroz con las lentejas escurridas, la mitad de la cebolla, comino y sal, y calienta 2 min.",
+            "Sirve con el resto de la cebolla por encima y el yogur aparte."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "garbcurry",
+      "nombre": "Garbanzos al curry con espinacas",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "garbanzos",
+          "cantidad": 180
+        },
+        {
+          "producto": "espinacas",
+          "cantidad": 120
+        },
+        {
+          "producto": "coco",
+          "cantidad": 70
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 60
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 620,
+        "proteina": 22,
+        "hidratos": 76,
+        "grasa": 22
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Cuece el arroz en agua con sal 15 min y escúrrelo.",
+            "Pica la cebolla y sofríela con aceite 4 min; añade el tomate y una cucharadita de curry.",
+            "Echa los garbanzos escurridos, las espinacas y la leche de coco.",
+            "Deja 8 min a fuego medio y sirve con el arroz."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chiliveg",
+      "nombre": "Chili de alubias vegetal",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [
+        "picante"
+      ],
+      "ingredientes": [
+        {
+          "producto": "alubias_rojas",
+          "cantidad": 200
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 150
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        },
+        {
+          "producto": "maiz",
+          "cantidad": 50
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 580,
+        "proteina": 22,
+        "hidratos": 88,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Cuece el arroz en agua con sal 15 min y escúrrelo.",
+            "Pica la cebolla y el pimiento y sofríelos con aceite 6 min.",
+            "Añade el tomate, las alubias escurridas, el maíz, comino, pimentón y una pizca de guindilla.",
+            "Deja 10 min a fuego medio y sirve con el arroz."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ensalubias",
+      "nombre": "Ensalada de alubias blancas con atún y huevo",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "alubias",
+          "cantidad": 180
+        },
+        {
+          "producto": "atun",
+          "cantidad": 65
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 100
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 450,
+        "proteina": 37,
+        "hidratos": 28,
+        "grasa": 19
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Cuece el huevo en agua 10 min, enfríalo y pélalo.",
+            "Lava y escurre las alubias.",
+            "Pica el tomate, la cebolla y el huevo.",
+            "Mezcla todo con el atún y aliña con aceite, vinagre y sal."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lentejashuevo",
+      "nombre": "Lentejas con verduras y huevo",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "lentejas",
+          "cantidad": 220
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 60
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 50
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 60
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        }
+      ],
+      "nutricion": {
+        "kcal": 460,
+        "proteina": 26,
+        "hidratos": 45,
+        "grasa": 17
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Cuece el huevo en agua 10 min, enfríalo y pélalo.",
+            "Pica la cebolla, el pimiento y la zanahoria y sofríelos con aceite 6 min.",
+            "Añade el tomate, una cucharadita de pimentón, las lentejas lavadas y un vaso de agua.",
+            "Deja 10 min a fuego medio y sirve con el huevo en trozos."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "potajebacalao",
+      "nombre": "Potaje de garbanzos con bacalao",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "garbanzos",
+          "cantidad": 180
+        },
+        {
+          "producto": "bacalao",
+          "cantidad": 120
+        },
+        {
+          "producto": "espinacas",
+          "cantidad": 100
+        },
+        {
+          "producto": "patata",
+          "cantidad": 100
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 530,
+        "proteina": 40,
+        "hidratos": 51,
+        "grasa": 15
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Pica la cebolla y sofríela con aceite 4 min; añade el tomate y una cucharadita de pimentón.",
+            "Añade la patata en dados pequeños y 400 ml de agua con sal y cuece 12 min.",
+            "Echa los garbanzos escurridos, las espinacas y el bacalao en trozos.",
+            "Deja 8 min a fuego medio."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alubiasgambas",
+      "nombre": "Alubias blancas con gambas",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "alubias",
+          "cantidad": 200
+        },
+        {
+          "producto": "gambas",
+          "cantidad": 120
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 60
+        },
+        {
+          "producto": "caldo_pescado",
+          "cantidad": 150
+        }
+      ],
+      "nutricion": {
+        "kcal": 400,
+        "proteina": 37,
+        "hidratos": 30,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pica la cebolla y sofríela con aceite 4 min; añade el tomate y una pizca de pimentón.",
+            "Echa las alubias escurridas y el caldo y deja 6 min.",
+            "Añade las gambas y deja 3 min más."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enslentejasqueso",
+      "nombre": "Ensalada de lentejas, pimiento y queso",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "lentejas",
+          "cantidad": 200
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 80
+        },
+        {
+          "producto": "feta",
+          "cantidad": 40
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 100
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 450,
+        "proteina": 23,
+        "hidratos": 38,
+        "grasa": 19
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 10,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Lava y escurre las lentejas.",
+            "Pica el pimiento, el tomate y la cebolla.",
+            "Mezcla todo con el queso en dados.",
+            "Aliña con aceite, vinagre y sal."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "garbpollo",
+      "nombre": "Garbanzos con pollo al pimentón",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "garbanzos",
+          "cantidad": 180
+        },
+        {
+          "producto": "pechuga",
+          "cantidad": 130
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 60
+        }
+      ],
+      "nutricion": {
+        "kcal": 500,
+        "proteina": 44,
+        "hidratos": 37,
+        "grasa": 16
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Corta el pollo en dados y dóralo con aceite y sal 5 min.",
+            "Añade la cebolla y el pimiento picados y sofríe 5 min.",
+            "Echa una cucharadita de pimentón, el tomate y los garbanzos escurridos.",
+            "Añade medio vaso de agua y deja 8 min a fuego medio."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "burgerlentejas",
+      "nombre": "Hamburguesa de lentejas",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "lentejas",
+          "cantidad": 200
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "pan_rallado",
+          "cantidad": 30
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "pan_burger",
+          "cantidad": 1
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 630,
+        "proteina": 32,
+        "hidratos": 80,
+        "grasa": 18
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Escurre bien las lentejas y aplástalas con un tenedor.",
+            "Mézclalas con el huevo, el pan rallado, la cebolla muy picada, sal y comino, y forma 2 hamburguesas.",
+            "Pulveriza con aceite: air fryer 12 min a 190 °C, dándoles la vuelta a mitad.",
+            "Sírvelas en el pan con la lechuga."
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 28,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Escurre bien las lentejas y aplástalas con un tenedor.",
+            "Mézclalas con el huevo, el pan rallado, la cebolla muy picada, sal y comino, y forma 2 hamburguesas.",
+            "Ponlas en una bandeja con papel y un hilo de aceite: horno 15 min a 200 °C.",
+            "Sírvelas en el pan con la lechuga."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ensquinoa",
+      "nombre": "Ensalada de quinoa con garbanzos",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [
+        "sin_cocinar",
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "quinoa",
+          "cantidad": 125
+        },
+        {
+          "producto": "garbanzos",
+          "cantidad": 120
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 100
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 60
+        },
+        {
+          "producto": "feta",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 530,
+        "proteina": 21,
+        "hidratos": 56,
+        "grasa": 23
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "ninguno",
+          "minutos": 10,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Suelta la quinoa con un tenedor.",
+            "Lava y escurre los garbanzos.",
+            "Pica el tomate y el pimiento y mezcla todo con el queso en dados.",
+            "Aliña con aceite, limón o vinagre y sal."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bolmexicano",
+      "nombre": "Bol mexicano de alubias, arroz y maíz",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "alubias_rojas",
+          "cantidad": 150
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 70
+        },
+        {
+          "producto": "maiz",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 80
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 30
+        },
+        {
+          "producto": "queso",
+          "cantidad": 20
+        }
+      ],
+      "nutricion": {
+        "kcal": 560,
+        "proteina": 22,
+        "hidratos": 87,
+        "grasa": 11
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Cuece el arroz en agua con sal 15 min y escúrrelo.",
+            "Calienta las alubias escurridas con comino, pimentón y sal 3 min.",
+            "Pica el tomate y la lechuga.",
+            "Monta el bol con el arroz, las alubias, el maíz, el tomate, la lechuga y el queso."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enslentsalmon",
+      "nombre": "Ensalada templada de lentejas y salmón",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "lentejas",
+          "cantidad": 180
+        },
+        {
+          "producto": "salmon",
+          "cantidad": 120
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 50
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 540,
+        "proteina": 39,
+        "hidratos": 32,
+        "grasa": 26
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Haz el salmón a la plancha con sal 4 min por cada lado y desmígalo.",
+            "Lava y escurre las lentejas y caliéntalas 1 min al microondas.",
+            "Mezcla las lentejas con la ensalada, el tomate y la cebolla picados.",
+            "Pon el salmón encima y aliña con aceite, vinagre y sal."
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 18,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Pon el salmón con sal: air fryer 10 min a 190 °C, y desmígalo.",
+            "Lava y escurre las lentejas y caliéntalas 1 min al microondas.",
+            "Mezcla las lentejas con la ensalada, el tomate y la cebolla picados.",
+            "Pon el salmón encima y aliña con aceite, vinagre y sal."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pastamozza",
+      "nombre": "Pasta con tomate y mozzarella",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pasta",
+          "cantidad": 90
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 150
+        },
+        {
+          "producto": "queso",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 560,
+        "proteina": 22,
+        "hidratos": 72,
+        "grasa": 20
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Cuece la pasta en agua con sal el tiempo del paquete (unos 10 min) y escúrrela.",
+            "Calienta el tomate con aceite, sal y orégano 8 min.",
+            "Mezcla con la pasta y la mozzarella y deja 1 min para que se funda."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "arroztomatehuevo",
+      "nombre": "Arroz con tomate y huevo",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 200
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 590,
+        "proteina": 23,
+        "hidratos": 73,
+        "grasa": 22
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Cuece el arroz en agua con sal 15 min y escúrrelo.",
+            "Pica la cebolla y el tomate y sofríelos con aceite y sal 8 min.",
+            "Añade los huevos batidos y remueve 2 min, hasta que cuajen.",
+            "Mezcla con el arroz y sirve."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cremaverd",
+      "nombre": "Crema de verduras con huevo y picatostes",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "calabacin",
+          "cantidad": 150
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 100
+        },
+        {
+          "producto": "patata",
+          "cantidad": 100
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        },
+        {
+          "producto": "pan_integral",
+          "cantidad": 1
+        }
+      ],
+      "nutricion": {
+        "kcal": 490,
+        "proteina": 23,
+        "hidratos": 46,
+        "grasa": 23
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Cuece los huevos en agua 10 min y pélalos.",
+            "Trocea las verduras y la patata y cuécelas en 400 ml de agua con sal 15 min.",
+            "Tritura con un chorrito de aceite.",
+            "Tuesta el pan en dados en una sartén 2 min.",
+            "Sirve la crema con el huevo picado y los picatostes."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pizzapan",
+      "nombre": "Pizza de pan integral",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pan_integral",
+          "cantidad": 3
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 50
+        },
+        {
+          "producto": "queso",
+          "cantidad": 50
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 40
+        },
+        {
+          "producto": "maiz",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 430,
+        "proteina": 22,
+        "hidratos": 49,
+        "grasa": 16
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 12,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Unta las rebanadas de pan con el tomate.",
+            "Pon encima el pimiento en tiras, el maíz, el queso y orégano.",
+            "Air fryer 6 min a 180 °C, hasta que se funda el queso."
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 15,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Unta las rebanadas de pan con el tomate.",
+            "Pon encima el pimiento en tiras, el maíz, el queso y orégano.",
+            "Horno 8 min a 220 °C, hasta que se funda el queso."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lasanaverd",
+      "nombre": "Lasaña de verduras rápida",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "lasana",
+          "cantidad": 50
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 150
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 120
+        },
+        {
+          "producto": "queso",
+          "cantidad": 40
+        },
+        {
+          "producto": "nata",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 530,
+        "proteina": 20,
+        "hidratos": 51,
+        "grasa": 27
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 30,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "Pon las placas en agua caliente el tiempo que indique el paquete.",
+            "Saltea el calabacín y el pimiento en dados con aceite 6 min y añade el tomate 3 min.",
+            "En una fuente alterna placas y verduras y termina con la nata y el queso.",
+            "Horno 15 min a 200 °C."
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 28,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "Pon las placas en agua caliente el tiempo que indique el paquete.",
+            "Saltea el calabacín y el pimiento en dados con aceite 6 min y añade el tomate 3 min.",
+            "En un molde que quepa en la air fryer alterna placas y verduras y termina con la nata y el queso.",
+            "Air fryer 12 min a 180 °C."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enspastamed",
+      "nombre": "Ensalada de pasta mediterránea",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pasta",
+          "cantidad": 80
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 120
+        },
+        {
+          "producto": "feta",
+          "cantidad": 40
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 50
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 530,
+        "proteina": 18,
+        "hidratos": 67,
+        "grasa": 20
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Cuece la pasta en agua con sal el tiempo del paquete (unos 10 min) y escúrrela.",
+            "Enfría la pasta bajo el grifo.",
+            "Pica el tomate, el pimiento y la cebolla.",
+            "Mezcla todo con el queso en dados y aliña con aceite, orégano y sal."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fideosarrozverd",
+      "nombre": "Fideos de arroz con verduras y huevo",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "fideos_arroz",
+          "cantidad": 70
+        },
+        {
+          "producto": "salteado",
+          "cantidad": 200
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        }
+      ],
+      "nutricion": {
+        "kcal": 580,
+        "proteina": 23,
+        "hidratos": 70,
+        "grasa": 23
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pon los fideos en agua hirviendo 5 min y escúrrelos.",
+            "Saltea las verduras congeladas con aceite 6 min.",
+            "Echa los huevos batidos y remueve 1 min.",
+            "Añade los fideos y 2 cucharadas de soja y saltea 2 min."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wokanacardos",
+      "nombre": "Wok de verduras con arroz y anacardos",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "arroz",
+          "cantidad": 70
+        },
+        {
+          "producto": "salteado",
+          "cantidad": 180
+        },
+        {
+          "producto": "edamame",
+          "cantidad": 60
+        },
+        {
+          "producto": "anacardos",
+          "cantidad": 25
+        }
+      ],
+      "nutricion": {
+        "kcal": 620,
+        "proteina": 20,
+        "hidratos": 76,
+        "grasa": 25
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Cuece el arroz en agua con sal 15 min y escúrrelo.",
+            "Tuesta los anacardos en una sartén sin aceite 2 min y sácalos.",
+            "Saltea las verduras y el edamame con aceite a fuego fuerte 7 min.",
+            "Añade el arroz y 2 cucharadas de soja, saltea 2 min y sirve con los anacardos."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "risotto",
+      "nombre": "Risotto rápido de champiñones",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "champi",
+          "cantidad": 150
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "queso",
+          "cantidad": 30
+        },
+        {
+          "producto": "nata",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 560,
+        "proteina": 18,
+        "hidratos": 70,
+        "grasa": 22
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 14,
+          "pasos": [
+            "Pica la cebolla y sofríela con aceite 4 min; añade los champiñones y saltea 3 min.",
+            "Echa el arroz y remueve 1 min.",
+            "Añade 350 ml de agua caliente con media pastilla de caldo, poco a poco, removiendo, 18 min.",
+            "Apaga el fuego y mezcla con la nata y el queso."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "calabatun",
+      "nombre": "Calabacín relleno de atún",
+      "grupo": "pescado",
+      "proteina_principal": "atun",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "calabacin",
+          "cantidad": 250
+        },
+        {
+          "producto": "atun",
+          "cantidad": 65
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 50
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "queso",
+          "cantidad": 25
+        }
+      ],
+      "nutricion": {
+        "kcal": 340,
+        "proteina": 27,
+        "hidratos": 15,
+        "grasa": 20
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 30,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Parte el calabacín a lo largo, vacíalo con una cuchara y caliéntalo tapado al microondas 4 min.",
+            "Pica la pulpa y la cebolla y saltéalas con aceite 5 min; mezcla con el atún y el tomate.",
+            "Rellena el calabacín y pon el queso encima.",
+            "Horno 15 min a 200 °C."
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Parte el calabacín a lo largo, vacíalo con una cuchara y caliéntalo tapado al microondas 4 min.",
+            "Pica la pulpa y la cebolla y saltéalas con aceite 5 min; mezcla con el atún y el tomate.",
+            "Rellena el calabacín y pon el queso encima.",
+            "Air fryer 10 min a 180 °C."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "patatasguisadas",
+      "nombre": "Patatas guisadas con verduras",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "patata",
+          "cantidad": 300
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 60
+        },
+        {
+          "producto": "guisantes",
+          "cantidad": 60
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 50
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 60
+        }
+      ],
+      "nutricion": {
+        "kcal": 440,
+        "proteina": 12,
+        "hidratos": 72,
+        "grasa": 10
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pica la cebolla y el pimiento y sofríelos con aceite 5 min.",
+            "Añade el tomate, una cucharadita de pimentón, la patata en trozos y la zanahoria en rodajas.",
+            "Cubre con agua, sala y cuece 18 min.",
+            "Añade los guisantes y deja 3 min más."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sopapollofideos",
+      "nombre": "Sopa de verduras con pollo y fideos",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "caldo_pollo",
+          "cantidad": 400
+        },
+        {
+          "producto": "pechuga",
+          "cantidad": 100
+        },
+        {
+          "producto": "fideos",
+          "cantidad": 40
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 50
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 80
+        }
+      ],
+      "nutricion": {
+        "kcal": 350,
+        "proteina": 31,
+        "hidratos": 36,
+        "grasa": 8
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Corta el pollo, la zanahoria y el calabacín en dados pequeños.",
+            "Dóralos con un chorrito de aceite 4 min.",
+            "Añade el caldo y cuece 10 min.",
+            "Echa los fideos y cuece 5 min más."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cremacalabaza",
+      "nombre": "Crema de calabaza con pollo",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "calabaza",
+          "cantidad": 250
+        },
+        {
+          "producto": "patata",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "pechuga",
+          "cantidad": 130
+        },
+        {
+          "producto": "leche",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 410,
+        "proteina": 36,
+        "hidratos": 36,
+        "grasa": 12
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Trocea la calabaza, la patata y la cebolla y cuécelas en 300 ml de agua con sal 15 min.",
+            "Mientras, haz el pollo a la plancha con aceite y sal 8 min y córtalo en dados.",
+            "Tritura las verduras con la leche y un hilo de aceite.",
+            "Sirve la crema con el pollo por encima."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "caldogarbanzos",
+      "nombre": "Caldo con garbanzos y huevo",
+      "grupo": "legumbre",
+      "proteina_principal": "legumbre",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "caldo_pollo",
+          "cantidad": 400
+        },
+        {
+          "producto": "garbanzos",
+          "cantidad": 150
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 300,
+        "proteina": 20,
+        "hidratos": 27,
+        "grasa": 11
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Cuece el huevo en agua 10 min, enfríalo y pélalo.",
+            "Calienta el caldo con la zanahoria en rodajas 8 min.",
+            "Añade los garbanzos escurridos y deja 3 min.",
+            "Sirve con el huevo picado por encima."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "minestrone",
+      "nombre": "Sopa minestrone rápida",
+      "grupo": "vegetal",
+      "proteina_principal": "legumbre",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "pasta",
+          "cantidad": 40
+        },
+        {
+          "producto": "alubias",
+          "cantidad": 100
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 100
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 50
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 390,
+        "proteina": 15,
+        "hidratos": 54,
+        "grasa": 11
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pica la cebolla, la zanahoria y el calabacín y sofríelos con aceite 5 min.",
+            "Añade el tomate y 500 ml de agua con media pastilla de caldo y cuece 8 min.",
+            "Echa la pasta y cuece 8 min más.",
+            "Añade las alubias escurridas y deja 2 min."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gazpachohuevo",
+      "nombre": "Gazpacho con huevo y atún",
+      "grupo": "huevo",
+      "proteina_principal": "huevo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": false,
+      "etiquetas": [
+        "frio"
+      ],
+      "ingredientes": [
+        {
+          "producto": "gazpacho",
+          "cantidad": 350
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        },
+        {
+          "producto": "atun",
+          "cantidad": 65
+        },
+        {
+          "producto": "pan_integral",
+          "cantidad": 1
+        }
+      ],
+      "nutricion": {
+        "kcal": 540,
+        "proteina": 38,
+        "hidratos": 29,
+        "grasa": 31
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Cuece los huevos en agua 10 min, enfríalos y pélalos.",
+            "Pica los huevos y el pan en dados pequeños.",
+            "Sirve el gazpacho bien frío con el huevo, el atún y el pan por encima."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "espagalbpollo",
+      "nombre": "Espaguetis con tomate y albóndigas de pollo",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "espaguetis",
+          "cantidad": 85
+        },
+        {
+          "producto": "picada_pollo",
+          "cantidad": 140
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 150
+        },
+        {
+          "producto": "queso",
+          "cantidad": 15
+        }
+      ],
+      "nutricion": {
+        "kcal": 680,
+        "proteina": 41,
+        "hidratos": 70,
+        "grasa": 25
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Mezcla la carne con sal y ajo en polvo y forma bolitas.",
+            "Dóralas con aceite 5 min, añade el tomate y deja 10 min.",
+            "Mientras, cuece la pasta en agua con sal el tiempo del paquete (unos 10 min) y escúrrela.",
+            "Mezcla la pasta con las albóndigas y pon el queso por encima."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nuggetspescado",
+      "nombre": "Nuggets de pescado caseros con patatas",
+      "grupo": "pescado",
+      "proteina_principal": "pescado_blanco",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "rebozado"
+      ],
+      "ingredientes": [
+        {
+          "producto": "merluza",
+          "cantidad": 180
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "pan_rallado",
+          "cantidad": 35
+        },
+        {
+          "producto": "patata",
+          "cantidad": 200
+        }
+      ],
+      "nutricion": {
+        "kcal": 590,
+        "proteina": 46,
+        "hidratos": 60,
+        "grasa": 18
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 28,
+          "minutos_trabajo": 14,
+          "pasos": [
+            "Corta la patata en bastones, alíñala con aceite y sal: air fryer 15 min a 200 °C.",
+            "Corta la merluza en trozos, sálala y pásala por el huevo batido y el pan rallado.",
+            "Añade los nuggets a la air fryer y deja 10 min más a 190 °C, removiendo a mitad."
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 30,
+          "minutos_trabajo": 14,
+          "pasos": [
+            "Corta la patata en bastones y ponla en una bandeja con aceite y sal: horno 15 min a 220 °C.",
+            "Corta la merluza en trozos, sálala y pásala por el huevo batido y el pan rallado.",
+            "Pon los nuggets en la bandeja y hornea 12 min más, dándoles la vuelta a mitad."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "minipizzas",
+      "nombre": "Mini pizzas de tortilla",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "tortillas",
+          "cantidad": 2
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 50
+        },
+        {
+          "producto": "queso",
+          "cantidad": 50
+        },
+        {
+          "producto": "jamon",
+          "cantidad": 40
+        },
+        {
+          "producto": "maiz",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 500,
+        "proteina": 27,
+        "hidratos": 51,
+        "grasa": 20
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 12,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Unta las tortillas con el tomate.",
+            "Pon encima el jamón en trozos, el maíz, el queso y orégano.",
+            "Hazlas de una en una en la air fryer 5 min a 180 °C."
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 15,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Unta las tortillas con el tomate.",
+            "Pon encima el jamón en trozos, el maíz, el queso y orégano.",
+            "Horno 8 min a 220 °C, hasta que se funda el queso."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "arrozsalchichas",
+      "nombre": "Arroz con salchichas de pollo y tomate",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [],
+      "ingredientes": [
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "salchichas",
+          "cantidad": 80
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 100
+        },
+        {
+          "producto": "guisantes",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 570,
+        "proteina": 19,
+        "hidratos": 81,
+        "grasa": 18
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Cuece el arroz en agua con sal 15 min y escúrrelo.",
+            "Corta las salchichas en rodajas y dóralas con unas gotas de aceite 4 min.",
+            "Añade el tomate y los guisantes y deja 4 min.",
+            "Mezcla con el arroz y sirve."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "croquetaspollo",
+      "nombre": "Croquetas de pollo al horno con ensalada",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "ligera",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "rebozado"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pechuga",
+          "cantidad": 140
+        },
+        {
+          "producto": "patata",
+          "cantidad": 150
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "pan_rallado",
+          "cantidad": 30
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 60
+        }
+      ],
+      "nutricion": {
+        "kcal": 540,
+        "proteina": 47,
+        "hidratos": 49,
+        "grasa": 17
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 28,
+          "minutos_trabajo": 14,
+          "pasos": [
+            "Cuece la patata pelada y el pollo en dados en agua con sal 12 min.",
+            "Escurre, aplasta la patata y mézclala con el pollo muy picado; forma croquetas.",
+            "Pásalas por el huevo batido y el pan rallado.",
+            "Pulveriza con aceite: air fryer 10 min a 200 °C.",
+            "Sirve con la ensalada."
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 30,
+          "minutos_trabajo": 14,
+          "pasos": [
+            "Cuece la patata pelada y el pollo en dados en agua con sal 12 min.",
+            "Escurre, aplasta la patata y mézclala con el pollo muy picado; forma croquetas.",
+            "Pásalas por el huevo batido y el pan rallado.",
+            "Ponlas en una bandeja con papel y un hilo de aceite: horno 14 min a 210 °C.",
+            "Sirve con la ensalada."
           ]
         }
       ]

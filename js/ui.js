@@ -40,6 +40,7 @@ function render(){
 /* ---------- Menú ---------- */
 function slotFor(d,meal){const start=weekStartFor(d);return buildSlots(start).find(s=>s.id===d+"|"+meal)}
 const nutrTxt=n=>n.kcal==null?`${n.prot} g proteína`:`${n.kcal.toLocaleString("es-ES")} kcal · ${n.prot} g proteína · ${n.carb} g hidratos · ${n.fat} g grasa`;
+const company=sl=>sl.eaters.filter(a=>a.id!=="yo").concat(sl.kids);
 function needLine(sl,r){
   if(sl.fixed&&sl.fixed.capricho)return `<div class="need muted">🍕 Capricho: no cuenta para tus objetivos</div>`;
   if(!sl.need.why.length)return "";
@@ -54,12 +55,13 @@ function mealLine(d,meal,wk){
   const sl=slotFor(d,meal);if(!sl)return "";
   const v=wk&&wk.slots[sl.id], r=v&&RX[v.recipe];
   const who=[...(st==="solotaper"?[]:["tú"]),...sl.kids.map(k=>personName(k))];
-  let h=`<div style="margin-top:6px"><div class="small muted">${label}${st==="solotaper"?" (solo el táper de mañana)":""}${sl.tupper.length&&st!=="solotaper"?" + táper de mañana":""}${sl.kids.length?" · con "+esc(sl.kids.map(personName).join(" y ")):""}</div>`;
+  const comp=company(sl);
+  let h=`<div style="margin-top:6px"><div class="small muted">${label}${st==="solotaper"?" (solo el táper de mañana)":""}${sl.tupper.length&&st!=="solotaper"?" + táper de mañana":""}${comp.length?" · con "+esc(comp.map(personName).join(" y ")):""}</div>`;
   if(r)h+=`<button class="name" data-open="${r.id}" data-slot="${sl.id}">${esc(r.name)}</button>`;
   else if(sl.fixed)h+=`<b>${esc(sl.fixed.name)}</b>`;
   h+=`<div class="meta">${r?`${recipeTime(r)} min · ${r.prot||"?"} g proteína · ${String(sl.portions).replace(".",",")} raciones`:sl.fixed?"Plato fijo":""}</div>`;
   if(r){const ps=(st==="solotaper"?[]:sl.eaters).concat(sl.kids);
-    h+=ps.map(p=>`<div class="nutr">${p.kind==="adulto"?"Tu plato":esc(personName(p))}: ${nutrTxt(portionNutr(r,factorOf(p)))}</div>`).join("")}
+    h+=ps.map(p=>`<div class="nutr">${p.id==="yo"?"Tu plato":esc(personName(p))}: ${nutrTxt(portionNutr(r,factorOf(p)))}</div>`).join("")}
   h+=needLine(sl,r);
   if(r){
     if(S.home.cookMode==="lote"){const k=keepPlan(r,sl);
@@ -150,8 +152,8 @@ function rateCard(){
     <div class="actions"><button class="btn small" data-ate="${key}">Sí</button><button class="btn ghost small" data-notate="${key}|${r.id}">No, otra cosa</button></div></div>`;
   return `<div class="rate"><h3>¿Qué tal ${esc(r.name.toLowerCase())}?</h3><div class="small muted">${esc(when)}${list.length>1?` · ${list.length-1} más pendientes`:""}</div>
     ${who.map(p=>`<div class="who"><div class="small"><b>${esc(personName(p))}</b></div><div class="chips">
-      <button class="chip" data-rate="${key}~${r.id}~${p.id}~2">❤️ ${p.kind==="adulto"?"Me encantó":"Le encantó"}</button><button class="chip" data-rate="${key}~${r.id}~${p.id}~1">👍 Bien</button>
-      <button class="chip" data-rate="${key}~${r.id}~${p.id}~-1">👎 No ${p.kind==="adulto"?"me":"le"} gustó</button></div></div>`).join("")}
+      <button class="chip" data-rate="${key}~${r.id}~${p.id}~2">❤️ ${p.id==="yo"?"Me encantó":"Le encantó"}</button><button class="chip" data-rate="${key}~${r.id}~${p.id}~1">👍 Bien</button>
+      <button class="chip" data-rate="${key}~${r.id}~${p.id}~-1">👎 No ${p.id==="yo"?"me":"le"} gustó</button></div></div>`).join("")}
     ${cook?(()=>{const m=S.ratings.find(x=>x.slot===key&&x.who===me().id);return `<div class="who"><div class="small"><b>¿Fue fácil de cocinar?</b></div><div class="chips">
       ${[["facil","😌 Fácil"],["normal","🙂 Normal"],["dificil","😓 Complicado"]].map(([v,t])=>`<button class="chip" data-ease="${key}~${v}" aria-pressed="${m.ease===v}">${t}</button>`).join("")}</div></div>
       <div class="who"><div class="small"><b>¿Lo repetirías?</b></div><div class="chips">
@@ -209,12 +211,15 @@ function renderMenu(){
     if(!wk||!Object.keys(wk.slots||{}).length){h+=`<div class="empty"><p>Aún no hay menú para esta semana.</p><button class="btn" data-plan="${start}">Planificar la semana</button></div></div>`;continue}
     const {changed}=ensureWeek(start);if(changed)save();
     h+=`<div class="weekacts"><button class="btn small" data-plan="${start}">${wk.confirmed?"Revisar la semana":"Planificar la semana"}</button><button class="btn ghost small" data-regen="${start}">Rehacer platos</button></div>`;
+    {const cost=weekCost(start),target=weekFoodTarget(start);
+      h+=cost>target+0.5?`<div class="warnbox">💶 La comida de esta semana sale por unos <b>${eur(cost)}</b> y tu presupuesto deja <b>${eur(target)}</b>. He elegido lo más barato que encaja con vuestros gustos y entrenos, pero no llego. <button class="btn small" data-sacr="${start}">¿Qué sacrificamos?</button></div>`
+        :`<div class="small muted" style="margin-bottom:6px">💶 Comida de la semana: ${eur(cost)} de ${eur(target)} disponibles</div>`}
     for(const g of tupperGaps(start))h+=`<div class="warnbox">El ${DAYS[dow(g)].toLowerCase()} ${shortDate(g)} no tienes táper: la cena de la víspera no se cocina. <button class="btn ghost small" data-day="${g}">Arreglarlo</button></div>`;
     if(S.home.cookMode==="lote"){const cds=[...new Set(buildSlots(start).filter(s=>wk.slots[s.id]).map(s=>cookDayFor(s.date)))].sort();
       for(const cd of cds){const n=buildSlots(start).filter(s=>cookDayFor(s.date)===cd&&wk.slots[s.id]&&RX[wk.slots[s.id].recipe]).length;
         h+=`<div class="session"><b>Sesión de cocina: ${esc(longDate(cd))}</b><div class="small muted">${n} platos</div><button class="btn ghost small" data-session="${cd}">Ver la sesión</button></div>`}}
     for(const d of dates){
-      const ks=kidsAt(d), hol=isHoliday(d), a=me(), pt=a?dayProtein(a,d):null;
+      const ks=peopleAt(d).filter(p=>p.id!=="yo"), hol=isHoliday(d), a=me(), pt=a?dayProtein(a,d):null;
       const sess=sessionsOn(d);
       const empty=["comida","cena"].every(m=>["fuera","libre"].includes(mealState(d,m)));
       h+=`<div class="slot ${empty?"extra":""}"><div class="day">${DSHORT[dow(d)]}<small>${shortDate(d)}</small></div><div>
@@ -229,6 +234,7 @@ function renderMenu(){
   main.querySelectorAll("[data-plan]").forEach(b=>b.onclick=()=>openWeekPlanner(b.dataset.plan));
   main.querySelectorAll("[data-regen]").forEach(b=>b.onclick=()=>{if(confirm("¿Rehacer los platos de esta semana? Se mantienen los que elegiste a mano.")){genWeekFromScratch(b.dataset.regen);save();render();toast("Platos rehechos")}});
   main.querySelectorAll("[data-swap]").forEach(b=>b.onclick=()=>openSwap(b.dataset.swap));
+  main.querySelectorAll("[data-sacr]").forEach(b=>b.onclick=()=>openSacrifice(b.dataset.sacr));
   main.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>openDay(b.dataset.day));
   main.querySelectorAll("[data-session]").forEach(b=>b.onclick=()=>openSession(b.dataset.session));
   main.querySelectorAll("[data-rate]").forEach(b=>b.onclick=()=>{const [sid,rid,who,v]=b.dataset.rate.split("~");
@@ -248,6 +254,24 @@ function renderMenu(){
 }
 
 /* ---------- Ventanas ---------- */
+// No se llega al presupuesto: elige qué sacrificar o sube el presupuesto a lo que realmente cuesta
+function openSacrifice(start){
+  const sc=S.home.sacrifice=S.home.sacrifice||{};
+  const cost=weekCost(start),target=weekFoodTarget(start),m=monthOfWeek(start),wb=weekBudget(m),need=Math.ceil((wb+cost-target)/5)*5;
+  showDialog(`<div class="mod">${closeBtn}<h2>¿Qué sacrificamos?</h2><p class="small muted">Faltan unos ${eur(cost-target)} esta semana. Elige lo que te parezca bien y vuelvo a preparar el menú.</p>
+    ${Object.entries(SACRIFICES).map(([k,[t,d]])=>`<label class="alt" style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" data-sk="${k}" ${sc[k]?"checked":""} style="width:auto;margin-top:4px"><span><b>${t}</b><small>${d}</small></span></label>`).join("")}
+    ${S.home.shop.weekMode==="online"?`<label class="alt" style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" id="toShop" style="width:auto;margin-top:4px"><span><b>Hacer la compra semanal en tienda</b><small>Te ahorras ${eur(S.home.shop.fee)} de envío cada semana</small></span></label>`:""}
+    <label class="alt" style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" id="raiseB" style="width:auto;margin-top:4px"><span><b>Subir el presupuesto semanal a ${eur(need)}</b><small>Ahora es ${eur(wb)}. Es lo que cuesta este menú sin sacrificar nada más.</small></span></label>
+    <div class="actions"><button class="btn" id="sacOk">Rehacer el menú</button></div></div>`);
+  dlg.querySelector("#sacOk").onclick=()=>{
+    dlg.querySelectorAll("[data-sk]").forEach(c=>{if(c.checked)sc[c.dataset.sk]=true;else delete sc[c.dataset.sk]});
+    if(dlg.querySelector("#raiseB").checked)S.home.budget.week=need;
+    if(dlg.querySelector("#toShop")?.checked)S.home.shop.weekMode="tienda";
+    for(const s of Object.keys(S.plans))if(s>=weekStartFor(todayISO())&&!S.plans[s].confirmed||s===start)genWeekFromScratch(s);
+    save();dlg.close();render();
+    const c2=weekCost(start),t2=weekFoodTarget(start);toast(c2<=t2+0.5?"Listo: "+eur(c2)+" de "+eur(t2):"Más cerca: "+eur(c2)+" de "+eur(t2)+". Puedes sacrificar algo más");
+  };
+}
 function showDialog(html,full){dlg.className=full?"full":"";dlg.innerHTML=html;if(!dlg.open)dlg.showModal();dlg.querySelectorAll("[data-x]").forEach(b=>b.onclick=()=>dlg.close())}
 const closeBtn=`<button class="close" aria-label="Cerrar" data-x>✕</button>`;
 
@@ -255,16 +279,16 @@ const closeBtn=`<button class="close" aria-label="Cerrar" data-x>✕</button>`;
 function openDay(d){
   const o=S.days[d]=S.days[d]||{};
   const draw=()=>{
-    const ks=kids();
+    const ks=others();
     showDialog(`<div class="mod">${closeBtn}<h2>${esc(longDate(d))}</h2>${isHoliday(d)?`<span class="pill carga">${esc(holidayName(d))}</span>`:""}
-      ${ks.length?`<h3 style="margin-top:12px">¿Quién está?</h3><div class="chips">${ks.map(k=>chip("data-dk",k.id,kidsAt(d).includes(k),esc(personName(k)))).join("")}</div>`:""}
+      ${ks.length?`<h3 style="margin-top:12px">¿Quién está?</h3><div class="chips">${ks.map(k=>chip("data-dk",k.id,peopleAt(d).includes(k),esc(personName(k)))).join("")}</div>`:""}
       ${adults().some(a=>a.trains)?`<h3 style="margin-top:12px">Entreno</h3>
         ${plannedSessions(d).map((s,i)=>{const r=(((S.sport||{})[d]||{}).res||{})[i];return `<div class="row small" style="margin:4px 0">${esc(SPORTS[s.type])} a las ${esc(sessTime(s))}${r?` · ${r.st==="no"?"no lo hiciste":r.st==="otro"?"hiciste "+esc(SPORTS[r.type].toLowerCase()):"hecho ✓"}`:""}<span class="spacer"></span><button class="btn ghost small" data-dsx="${i}">${r&&r.st==="no"?"Sí lo hago":"No lo hago"}</button></div>`}).join("")}
         ${(((S.sport||{})[d]||{}).extra||[]).map((s,i)=>`<div class="row small" style="margin:4px 0">${esc(SPORTS[s.type])} a las ${esc(s.time)} (añadido)<span class="spacer"></span><button class="btn ghost small" data-dse="${i}">Quitar</button></div>`).join("")}
         <div class="row" style="margin-top:6px"><select id="dsT" style="flex:1">${Object.entries(SPORTS).map(([k,v])=>`<option value="${k}">${v}</option>`).join("")}</select><input type="time" id="dsH" value="19:00" style="width:auto"><button class="btn small" data-dsa>Añadir</button></div>`:""}
       ${["comida","cena"].map(m=>`<h3 style="margin-top:12px">${m==="comida"?"Comida":"Cena"}</h3><div class="chips">${(m==="comida"?["taper","cocinar","fuera","libre"]:["cocinar","solotaper","fuera","libre"]).map(v=>chip("data-dm",m+":"+v,mealState(d,m)===v,v==="solotaper"?"Solo el táper":MEALSTATE[v])).join("")}</div>`).join("")}
       <div class="actions"><button class="btn ghost" data-reset>Como la semana tipo</button><button class="btn" data-x>Hecho</button></div></div>`);
-    dlg.querySelectorAll("[data-dk]").forEach(b=>b.onclick=()=>{const id=b.dataset.dk;o.kids=o.kids||{};o.kids[id]=!kidsAt(d).some(k=>k.id===id);after()});
+    dlg.querySelectorAll("[data-dk]").forEach(b=>b.onclick=()=>{const id=b.dataset.dk;o.kids=o.kids||{};o.kids[id]=!peopleAt(d).some(k=>k.id===id);after()});
     dlg.querySelectorAll("[data-dm]").forEach(b=>b.onclick=()=>{const [m,v]=b.dataset.dm.split(":");changeMeal(d,m,v,draw)});
     dlg.querySelector("[data-reset]").onclick=()=>{delete S.days[d];after();dlg.close()};
     const sp=()=>{S.sport=S.sport||{};return S.sport[d]=S.sport[d]||{}};
@@ -299,7 +323,7 @@ function openSwap(sid){
   const d=sid.slice(0,10), sl=slotFor(d,sid.slice(11));if(!sl)return;
   const alts=alternatives(sl,8);
   const sel=R.filter(r=>variantFor(r)).sort((a,b)=>a.name.localeCompare(b.name));
-  showDialog(`<div class="mod">${closeBtn}<h2>Cambiar plato</h2><div class="small muted">${esc(longDate(d))}, ${sl.meal}${sl.kids.length?" · con "+esc(sl.kids.map(personName).join(" y ")):""}</div>
+  showDialog(`<div class="mod">${closeBtn}<h2>Cambiar plato</h2><div class="small muted">${esc(longDate(d))}, ${sl.meal}${company(sl).length?" · con "+esc(company(sl).map(personName).join(" y ")):""}</div>
     ${needLine(sl)}
     <div style="margin-top:10px">${alts.map(({r,miss})=>`<button class="alt" data-pick="${r.id}"><b>${esc(r.name)}</b><small>${recipeTime(r)} min · ${r.prot||"?"} g proteína · ${eur(rationCost(r))}/ración · ${r.type==="c"?"⚡ hidratos":"🥗 ligera"}</small>
       ${miss?(miss.length?`<span class="badge miss">Te falta: ${esc(miss.slice(0,3).map(p=>P[p].name.toLowerCase()).join(", "))}${miss.length>3?"…":""}</span>`:`<span class="badge ok">Tienes todo</span>`):""}</button>`).join("")||"<p>No hay alternativas con tus filtros.</p>"}</div>
@@ -312,7 +336,7 @@ function openSwap(sid){
 }
 function openDislike(rid,who,sid){
   const r=RX[rid], p=S.people.find(x=>x.id===who);
-  showDialog(`<div class="mod">${closeBtn}<h2>¿Por qué no ${p.kind==="adulto"?"te":"le"} gustó?</h2><div class="small muted">${esc(r.name)} · ${esc(personName(p))}</div>
+  showDialog(`<div class="mod">${closeBtn}<h2>¿Por qué no ${p.id==="yo"?"te":"le"} gustó?</h2><div class="small muted">${esc(r.name)} · ${esc(personName(p))}</div>
     <div style="margin-top:10px">${Object.entries(REASONS).map(([k,t])=>`<label class="row" style="margin:8px 0"><input type="radio" name="why" value="${k}" style="width:auto"> ${t}</label>`).join("")}</div>
     <div class="field" id="whyIng" hidden><label>¿Cuál?</label><select id="whyIngSel">${r.ing.map(([pid])=>`<option value="${pid}">${esc(P[pid].name)}</option>`).join("")}</select></div>
     <div class="field" id="whyTxt" hidden><label>Cuéntame</label><input type="text" id="whyTxtIn"></div>
@@ -340,7 +364,7 @@ function openRecipe(id,sid){
       <h2>${esc(r.name)}</h2>
       <div class="stats"><div><b>${v.time} min</b><small>${v.active} de trabajo</small></div><div><b>${r.prot||"?"} g</b><small>proteína</small></div><div><b>${r.kcal?r.kcal+" kcal":eur(cost)}</b><small>${r.kcal?eur(cost)+"/ración":"por ración"}</small></div></div>
       ${r.carb!=null?`<div class="small muted">Por ración: ${r.carb} g hidratos · ${r.fat} g grasa · aguanta ${r.fridge} días en la nevera${r.freeze?" · se puede congelar":""}</div>`:""}
-      ${sl?`<div class="nutr" style="margin-top:6px">${(sl.eaters.length?sl.eaters:sl.tupper).concat(sl.kids).map(p=>`<div>${p.kind==="adulto"?"Tu plato":esc(personName(p))}: ${nutrTxt(portionNutr(r,factorOf(p)))}</div>`).join("")}</div>`:""}
+      ${sl?`<div class="nutr" style="margin-top:6px">${(sl.eaters.length?sl.eaters:sl.tupper).concat(sl.kids).map(p=>`<div>${p.id==="yo"?"Tu plato":esc(personName(p))}: ${nutrTxt(portionNutr(r,factorOf(p)))}</div>`).join("")}</div>`:""}
       ${r.vars.length>1?`<div class="vtabs">${r.vars.map((x,i)=>`<button class="chip" data-vi="${i}" aria-pressed="${i===vi}" ${ok.has(x.app)?"":"disabled"}>${APP[x.app]}</button>`).join("")}</div>`:""}
       <div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0"><h3>Ingredientes</h3>
         <div><button class="btn ghost small" data-s="-0.5" aria-label="Menos raciones">−</button> <b>${String(serv).replace(".",",")}</b> rac. <button class="btn ghost small" data-s="0.5" aria-label="Más raciones">+</button></div></div>
@@ -429,9 +453,9 @@ function openWeekPlanner(start){
     }
     if(step===1){
       h+=`<h2>¿Quién está y qué cambia?</h2><p class="small muted">Toca para cambiar cualquier comida: si comes fuera, tienes un plan o están los niños.</p>`;
-      for(const d of weekDates(start)){const ks=kidsAt(d);
+      for(const d of weekDates(start)){const ks=peopleAt(d);
         h+=`<div class="daycard"><div class="row"><b>${DSHORT[dow(d)]} ${shortDate(d)}</b>${isHoliday(d)?`<span class="pill carga">${esc(holidayName(d))}</span>`:""}</div>
-        ${kids().length?`<div class="chips" style="margin-top:6px">${kids().map(k=>chip("data-wk",d+"|"+k.id,ks.includes(k),esc(personName(k)))).join("")}</div>`:""}
+        ${others().length?`<div class="chips" style="margin-top:6px">${others().map(k=>chip("data-wk",d+"|"+k.id,ks.includes(k),esc(personName(k)))).join("")}</div>`:""}
         <div class="row small" style="margin-top:6px">Comida: <select data-wm="${d}|comida" style="width:auto">${["taper","cocinar","fuera","libre"].map(v=>`<option value="${v}" ${mealState(d,"comida")===v?"selected":""}>${MEALSTATE[v]}</option>`).join("")}</select>
         Cena: <select data-wm="${d}|cena" style="width:auto">${["cocinar","solotaper","fuera","libre"].map(v=>`<option value="${v}" ${mealState(d,"cena")===v?"selected":""}>${v==="solotaper"?"Solo táper":MEALSTATE[v]}</option>`).join("")}</select></div></div>`}
     }
@@ -439,7 +463,7 @@ function openWeekPlanner(start){
       ensureWeek(start);save();
       h+=`<h2>Los platos</h2><p class="small muted">Toca una alternativa para cambiarlo.</p><button class="btn ghost small" data-rg>Proponer otros platos</button>`;
       for(const sl of buildSlots(start)){const v=wk.slots[sl.id],r=v&&RX[v.recipe];
-        h+=`<div class="daycard"><div class="small muted">${DSHORT[dow(sl.date)]} ${shortDate(sl.date)} · ${sl.meal}${sl.kids.length?" · con "+esc(sl.kids.map(personName).join(" y ")):""}</div>
+        h+=`<div class="daycard"><div class="small muted">${DSHORT[dow(sl.date)]} ${shortDate(sl.date)} · ${sl.meal}${company(sl).length?" · con "+esc(company(sl).map(personName).join(" y ")):""}</div>
         <b>${r?esc(r.name):esc(sl.fixed?sl.fixed.name:"—")}</b>${needLine(sl)}
         ${r&&!sl.fixed?`<div class="chips" style="margin-top:6px">${alternatives(sl,3).map(({r:x})=>`<button class="chip" data-alt="${sl.id}|${x.id}">${esc(x.name)}</button>`).join("")}</div>`:""}</div>`}
     }
@@ -459,7 +483,7 @@ function openWeekPlanner(start){
     q("[data-ds]").forEach(b=>b.onclick=()=>{const [d,i]=b.dataset.ds.split("|");wk.training[d].splice(Number(i),1);save();draw()});
     q("[data-tw]").forEach(s=>s.onchange=()=>{const [d,i]=s.dataset.tw.split("|");wk.training[d][i].time=s.value;delete wk.training[d][i].when;save()});
     q("[data-tt]").forEach(s=>s.onchange=()=>{const [d,i]=s.dataset.tt.split("|");wk.training[d][i].type=s.value;save()});
-    q("[data-wk]").forEach(b=>b.onclick=()=>{const [d,id]=b.dataset.wk.split("|");const o=S.days[d]=S.days[d]||{};o.kids=o.kids||{};o.kids[id]=!kidsAt(d).some(k=>k.id===id);save();draw()});
+    q("[data-wk]").forEach(b=>b.onclick=()=>{const [d,id]=b.dataset.wk.split("|");const o=S.days[d]=S.days[d]||{};o.kids=o.kids||{};o.kids[id]=!peopleAt(d).some(k=>k.id===id);save();draw()});
     q("[data-wm]").forEach(s=>s.onchange=()=>{const [d,m]=s.dataset.wm.split("|");S.days[d]=S.days[d]||{};S.days[d][m]=s.value;save()});
     q("[data-rg]").forEach(b=>b.onclick=()=>{genWeekFromScratch(start);save();draw()});
     q("[data-alt]").forEach(b=>b.onclick=()=>{const [sid,rid]=[b.dataset.alt.slice(0,b.dataset.alt.lastIndexOf("|")),b.dataset.alt.slice(b.dataset.alt.lastIndexOf("|")+1)];
@@ -561,7 +585,7 @@ function kidCalendar(k){
   const first=iso(new Date(y,mm-1,1)), n=new Date(y,mm,0).getDate();
   let days=0,h=`<div class="row" style="margin-top:12px"><b>Calendario de ${esc(personName(k))}</b><span class="spacer"></span><button class="btn ghost small" data-cal="-1" aria-label="Mes anterior">‹</button><span class="small" style="text-transform:capitalize">${monthName(m)}</span><button class="btn ghost small" data-cal="1" aria-label="Mes siguiente">›</button></div>
   <div class="cal">${DSHORT.map(d=>`<span class="cal-h">${d.slice(0,1)}</span>`).join("")}${"<span></span>".repeat(dow(first))}`;
-  for(let i=0;i<n;i++){const d=addDays(first,i),on=kidsAt(d).includes(k),ov=((S.days[d]||{}).kids||{})[k.id]!=null;if(on)days++;
+  for(let i=0;i<n;i++){const d=addDays(first,i),on=peopleAt(d).includes(k),ov=((S.days[d]||{}).kids||{})[k.id]!=null;if(on)days++;
     h+=`<button class="cal-d ${on?"on":""} ${isHoliday(d)?"hol":""} ${ov?"ov":""}" data-kcal="${k.id}|${d}" title="${esc(longDate(d))}${isHoliday(d)?" · "+esc(holidayName(d)):""}">${i+1}</button>`}
   return h+`</div><div class="small muted">${days} días este mes · toca un día para cambiarlo${Object.keys(S.days).some(d=>d.startsWith(m)&&((S.days[d].kids||{})[k.id]!=null))?" · los días con borde los has cambiado tú":""}</div>`;
 }
@@ -573,7 +597,7 @@ function knowHTML(p){
   const dishes=Object.entries(p.tastes.dish).filter(([rid])=>RX[rid]);
   const dl=v=>dishes.filter(([,x])=>v>0?x>=1:x<=-1);
   const dchips=list=>list.length?list.map(([rid])=>`<div class="fixed"><span><b>${esc(RX[rid].name)}</b><small>${esc(p.tastes.src["d:"+rid]||"")}</small></span><button class="btn ghost small" data-unD="${p.id}|${rid}">Quitar</button></div>`).join(""):`<p class="small muted">Nada todavía.</p>`;
-  const lr=learned(p), y=p.kind==="adulto";
+  const lr=learned(p), y=p.id==="yo";
   const le=y?"te":"le", Le=y?"Te":"Le", puede=y?"puedes":"puede";
   return `<div class="know">
     <h3>🚫 No ${puede} comer</h3>${ichips(by(-9))}
@@ -589,11 +613,11 @@ function renderPerfil(){
   let h=`<section class="view">`;
   const RV={2:"❤️",1:"👍",rare:"🙂","-1":"👎"};
   for(const p of S.people){const hist=historyOf(p,20);
-    h+=`<div class="person"><h2>${p.kind==="adulto"?"Lo que sé de ti":esc(personName(p))}</h2>${p.kind==="nino"?`<div class="small muted">${p.age?p.age+" años · ":""}ración ${String(p.factor).replace(".",",")}</div>${kidCalendar(p)}<h3 style="margin-top:14px">Lo que sé de ${esc(personName(p))}</h3>`:""}${knowHTML(p)}
+    h+=`<div class="person"><h2>${p.id==="yo"?"Lo que sé de ti":esc(personName(p))}</h2>${p.id!=="yo"?`<div class="small muted">${p.kind==="nino"?(p.age?p.age+" años · ":"")+"niño o niña":"adulto"} · ración ${String(p.factor).replace(".",",")}${p.tupper?" · se lleva táper":""}</div>${kidCalendar(p)}<h3 style="margin-top:14px">Lo que sé de ${esc(personName(p))}</h3>`:""}${knowHTML(p)}
     <details style="margin-top:10px"><summary><b>Historial</b> <span class="small muted">(${hist.length} ${hist.length===1?"comida reciente":"comidas recientes"})</span></summary>
     ${hist.length?`<table class="wtable">${hist.map(x=>`<tr><td>${DSHORT[dow(x.date)]} ${shortDate(x.date)} · ${x.meal}</td><td style="text-align:left;padding-left:8px">${esc(x.name)}${x.note?` <span class="small muted">${esc(x.note)}</span>`:""}</td><td>${x.v!=null?RV[x.v]:""}</td></tr>`).join("")}</table>`:`<p class="small muted">Aún no hay comidas pasadas.</p>`}</details></div>`}
-  const items=[["aparatos","Aparatos",Object.entries(APP).filter(([k])=>S.home.apps.includes(k)).map(([,v])=>v).join(", ")],["zona","Código postal y municipio",[S.home.cp,S.home.municipio].filter(Boolean).join(" · ")||"Sin indicar"],["hijos","Quién come contigo",kids().map(personName).join(", ")||"Solo tú"],
-    ["objetivos","Objetivos",me().goals.map(g=>GOALS[g][0]).join(", ")],["entreno","Entrenamiento",me().trains?me().sports.map(s=>SPORTS[s]).join(", "):"No entrenas"],["semana","Semana tipo y caprichos",S.fixed.length+" platos fijos"],
+  const items=[["aparatos","Aparatos",Object.entries(APP).filter(([k])=>S.home.apps.includes(k)).map(([,v])=>v).join(", ")],["zona","Código postal y municipio",[S.home.cp,S.home.municipio].filter(Boolean).join(" · ")||"Sin indicar"],["familia","Quién come en casa",others().map(personName).join(", ")||"Solo tú"],
+    ...adults().flatMap(a=>[["objetivos:"+a.id,a.id==="yo"?"Tus objetivos":"Objetivos de "+personName(a),a.goals.map(g=>GOALS[g][0]).join(", ")],["entreno:"+a.id,a.id==="yo"?"Tu entrenamiento":"Entrenamiento de "+personName(a),a.trains?a.sports.map(s=>SPORTS[s]).join(", "):"No entrena"]]),["semana","Semana tipo y caprichos",S.fixed.length+" platos fijos"],
     ["cocina","Cuándo cocinas",S.home.cookMode==="lote"?"Por lotes: "+S.home.cookDays.map(d=>DAYS[d].toLowerCase()).join(" y "):"Cada día"],["plan","Planificación",{diaria:"Cada día",semanal:"Cada semana",quincenal:"Cada dos semanas",mensual:"Cada mes"}[S.home.planFreq]+", "+DAYS[S.home.planDay].toLowerCase()+" a las "+S.home.planTime],
     ["compra","Compra y presupuesto",eur(S.home.budget.month)+" al mes"]];
   h+=`<div class="card settingslist"><h2>Ajustes</h2>${items.map(([id,t,d])=>`<button data-edit="${id}">${t}<small>${esc(d)}</small></button>`).join("")}</div>`;
@@ -611,7 +635,7 @@ function renderPerfil(){
   q("[data-edit]").forEach(b=>b.onclick=()=>{openWizard(b.dataset.edit);scrollTo(0,0)});
   q("[data-cal]").forEach(b=>b.onclick=()=>{const [y,m]=(calMonth||month).split("-").map(Number);calMonth=iso(new Date(y,m-1+Number(b.dataset.cal),1)).slice(0,7);render()});
   q("[data-kcal]").forEach(b=>b.onclick=()=>{const [id,d]=b.dataset.kcal.split("|"),k=find(id);const o=S.days[d]=S.days[d]||{};o.kids=o.kids||{};
-    const ruleOn=kidPresentByRule(k,d), nowOn=kidsAt(d).includes(k);
+    const ruleOn=presentByRule(k,d), nowOn=peopleAt(d).includes(k);
     if(!nowOn===ruleOn)delete o.kids[id];else o.kids[id]=!nowOn;
     save();if(S.plans[weekStartFor(d)])ensureWeek(weekStartFor(d));save();render()});
   q("[data-unI]").forEach(b=>b.onclick=e=>{e.preventDefault();const [pp,pid]=b.dataset.uni.split("|");setIng(find(pp),pid,0);render()});

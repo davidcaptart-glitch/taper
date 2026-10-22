@@ -17,6 +17,12 @@ const GOALS = {
   ahorrar:["Ahorrar","Recetas baratas y aprovechar ingredientes"],
   rapido:["Ir rápido","Recetas de menos de 20 minutos"]
 };
+const SACRIFICES = {
+  proteina:["Menos pescado y carne","Más legumbre y huevo, que son más baratos"],
+  raciones:["Raciones algo más ajustadas","Un 10 % menos en las raciones de los adultos"],
+  repetir:["Repetir más platos","Aprovechar mejor los ingredientes que ya compras"],
+  gustos:["Dar menos peso a los gustos","Sigue sin poner lo que no os gusta, pero no busca tanto lo favorito"]
+};
 const MEALSTATE = {cocinar:"Cocino",taper:"Táper",fuera:"Fuera",libre:"Libre"};
 const EXTRA_MEALS = {desayuno:"Desayuno",mediamanana:"Media mañana",merienda:"Merienda",pre:"Antes de entrenar",post:"Después de entrenar",recena:"Recena"};
 

@@ -8,23 +8,27 @@ function wizSteps(){
     {id:"hola",title:"Hola 👋"},
     {id:"aparatos",title:"¿Con qué cocinas?"},
     {id:"zona",title:"¿Dónde compras?"},
-    {id:"hijos",title:"¿Quién come contigo?"},
-    {id:"objetivos",title:"¿Cuál es tu objetivo?"},
-    {id:"entreno",title:"¿Entrenas?"},
+    {id:"familia",title:"¿Quién come en casa?"},
+    ...adults().flatMap(a=>[{id:"objetivos:"+a.id,title:a.id==="yo"?"¿Cuál es tu objetivo?":"Objetivos de "+personName(a)},
+      {id:"entreno:"+a.id,title:a.id==="yo"?"¿Entrenas?":"¿"+personName(a)+" entrena?"}]),
     {id:"semana",title:"Tu semana tipo"},
     {id:"cocina",title:"¿Cuándo cocinas?"},
     {id:"plan",title:"¿Cuándo planificas?"},
     {id:"compra",title:"Compra y presupuesto"},
-    ...S.people.map(p=>({id:"gustos:"+p.id,title:p.kind==="adulto"?"Tus gustos":"Gustos de "+personName(p)})),
+    ...S.people.map(p=>({id:"gustos:"+p.id,title:p.id==="yo"?"Tus gustos":"Gustos de "+personName(p)})),
     {id:"listo",title:"¡Listo!"}
   ];
   return st;
 }
 function openWizard(stepId){wiz={i:0,single:stepId||null};tab="wizard";render()}
+// Persona a la que se refiere un paso ("objetivos:yo", "entreno:k123"…)
+const stepPerson=id=>{const i=id.indexOf(":");return i<0?me():(S.people.find(p=>p.id===id.slice(i+1))||me())};
+const stepKind=id=>id.split(":")[0];
 
 function renderWizard(){
   const steps=wizSteps();
-  const step=wiz.single?steps.find(s=>s.id===wiz.single):steps[Math.min(wiz.i,steps.length-1)];
+  const single=wiz.single==="hijos"?"familia":wiz.single==="objetivos"||wiz.single==="entreno"?wiz.single+":yo":wiz.single;
+  const step=single?steps.find(s=>s.id===single):steps[Math.min(wiz.i,steps.length-1)];
   if(!step){wiz.single=null;tab="perfil";render();return}
   const n=steps.indexOf(step);
   let h=`<section class="wiz">`;
@@ -54,8 +58,8 @@ function refreshPlans(){for(const s of Object.keys(S.plans))if(s>=weekStartFor(t
 const chip=(attr,val,on,label)=>`<button type="button" class="chip" ${attr}="${esc(val)}" aria-pressed="${!!on}">${label}</button>`;
 const dowSelect=(id,val)=>`<select id="${id}">${DAYS.map((d,i)=>`<option value="${i}" ${i===Number(val)?"selected":""}>${d}</option>`).join("")}</select>`;
 
-function stepBody(id){
-  const H=S.home, a=me();
+function stepBody(fullId){
+  const H=S.home, a=stepPerson(fullId), id=stepKind(fullId)==="gustos"?fullId:stepKind(fullId), you=a.id==="yo";
   if(id==="hola")return `<p class="lead">Táper te prepara el menú, la lista de la compra y los tápers de la semana, a tu medida. Unas preguntas rápidas y empezamos. Todo se puede cambiar después.</p>
     <div class="field"><label for="wzName">¿Cómo te llamas?</label><input id="wzName" type="text" value="${esc(a.name)}" placeholder="Tu nombre"></div>`;
   if(id==="aparatos")return `<p class="lead">Solo te propondré recetas que puedas hacer.</p><div class="chips">${Object.entries(APP).filter(([k])=>k!=="ninguno").map(([k,v])=>chip("data-app",k,H.apps.includes(k),v)).join("")}</div>`;
@@ -63,30 +67,33 @@ function stepBody(id){
     <div class="field"><label for="wzCp">Código postal</label><input id="wzCp" type="text" inputmode="numeric" maxlength="5" value="${esc(H.cp)}" placeholder="08784"></div>
     <div class="field"><label for="wzMun">Municipio (para los festivos locales)</label><input id="wzMun" type="text" list="wzMunList" value="${esc(H.municipio)}" placeholder="Por ejemplo, Piera"><datalist id="wzMunList">${Object.keys((FEST||{}).locales||{}).map(m=>`<option value="${esc(m)}">`).join("")}</datalist>
     <div class="hint">Si tu municipio no sale en la lista, añade sus festivos locales en Perfil > Festivos.</div></div>`;
-  if(id==="hijos"){
-    let h=`<p class="lead">Si tienes hijos o hijas que comen contigo, añádelos. Cada uno con su edad, cuándo está y sus gustos.</p>`;
-    for(const k of kids()){const pr=k.presence||{type:"siempre"};
-      h+=`<div class="kidcard" data-kid="${k.id}"><div class="row"><b>${esc(personName(k))}</b><span class="spacer"></span><button class="btn ghost small" data-delkid="${k.id}">Quitar</button></div>
+  if(id==="familia"){
+    const ptypes=[["siempre","Siempre"],["alternas","Semanas alternas"],["findes","Fines de semana alternos"],["dias","Días concretos de la semana"],["manual","Lo marco cada semana"]];
+    let h=`<p class="lead">Añade a quien come contigo: pareja, hijos, otros familiares, compañeros de piso… Cada uno con cuándo está, su ración y sus propios gustos.</p>`;
+    for(const k of others()){const pr=k.presence||{type:"siempre"}, ad=k.kind==="adulto";
+      h+=`<div class="kidcard" data-kid="${k.id}"><div class="row"><b>${esc(personName(k))}</b><span class="small muted">${ad?"adulto":"niño o niña"}</span><span class="spacer"></span><button class="btn ghost small" data-delkid="${k.id}">Quitar</button></div>
       <div class="field"><label>¿Cómo se llama?</label><input type="text" data-kf="name" value="${esc(k.name)}" placeholder="Nombre"></div>
-      <div class="field"><label>Edad</label><input type="number" min="1" max="25" data-kf="age" value="${esc(k.age||"")}"><div class="hint">Su ración: ${String(k.factor).replace(".",",")} de la tuya (se calcula con la edad).</div></div>
-      <div class="field"><label>¿Cuándo está contigo?</label><select data-kf="ptype">${[["siempre","Siempre"],["alternas","Semanas alternas"],["findes","Fines de semana alternos"],["dias","Días concretos de la semana"],["manual","Lo marco cada semana"]].map(([v,t])=>`<option value="${v}" ${pr.type===v?"selected":""}>${t}</option>`).join("")}</select></div>
-      ${pr.type==="alternas"||pr.type==="findes"?`<div class="field"><label>Un lunes de una semana en que está contigo</label><input type="date" data-kf="anchor" value="${esc(pr.anchor||mondayOf(todayISO()))}"></div>`:""}
+      ${ad?`<div class="field"><label>Su ración</label><select data-kf="factor">${[[0.8,"Pequeña"],[1,"Normal"],[1.2,"Grande"]].map(([v,t])=>`<option value="${v}" ${Number(k.factor)===v?"selected":""}>${t}</option>`).join("")}</select></div>
+        <label class="row small"><input type="checkbox" data-kf="tupper" ${k.tupper?"checked":""} style="width:auto"> Se lleva táper los días de táper</label>`
+      :`<div class="field"><label>Edad</label><input type="number" min="1" max="25" data-kf="age" value="${esc(k.age||"")}"><div class="hint">Su ración: ${String(k.factor).replace(".",",")} de la de un adulto (se calcula con la edad).</div></div>`}
+      <div class="field"><label>¿Cuándo come en casa?</label><select data-kf="ptype">${ptypes.map(([v,t])=>`<option value="${v}" ${pr.type===v?"selected":""}>${t}</option>`).join("")}</select></div>
+      ${pr.type==="alternas"||pr.type==="findes"?`<div class="field"><label>Un lunes de una semana en que está</label><input type="date" data-kf="anchor" value="${esc(pr.anchor||mondayOf(todayISO()))}"></div>`:""}
       ${pr.type==="dias"?`<div class="chips">${DSHORT.map((d,i)=>chip("data-kday",i,(pr.days||[]).includes(i),d)).join("")}</div>`:""}
       </div>`}
-    return h+`<button class="btn ghost wide" id="addKid">+ Añadir hijo o hija</button>`;
+    return h+`<div class="actions"><button class="btn ghost" id="addAdult">+ Pareja u otro adulto</button><button class="btn ghost" id="addKid">+ Hijo o hija</button></div>`;
   }
   if(id==="objetivos"){
     return `<p class="lead">Elige hasta 3, en orden de importancia. El primero manda si chocan.</p>
     <div>${Object.entries(GOALS).map(([k,[t,d]])=>{const i=a.goals.indexOf(k);return `<button type="button" class="alt" data-goal="${k}" style="${i>=0?"outline:2px solid var(--tomato)":""}"><b>${i>=0?`<span class="chip" style="padding:0 7px;margin-right:6px">${i+1}</span>`:""}${t}</b><small>${d}</small></button>`}).join("")}</div>
     ${a.goals.includes("musculo")&&a.goals.includes("adelgazar")?`<div class="warnbox">Ganar músculo y adelgazar a la vez: aplicaré proteína alta con raciones algo ajustadas (recomposición).</div>`:""}
-    <div class="field"><label for="wzW">Tu peso en kg (opcional, para calcular la proteína)</label><input id="wzW" type="number" min="30" max="200" step="0.5" value="${esc(a.weight||"")}"></div>
+    <div class="field"><label for="wzW">${you?"Tu peso":"Su peso"} en kg (opcional, para calcular la proteína)</label><input id="wzW" type="number" min="30" max="200" step="0.5" value="${esc(a.weight||"")}"></div>
     <div class="hint" style="color:var(--muted)">Son pautas generales, no un plan de un nutricionista.</div>`;
   }
   if(id==="entreno"){
-    let h=`<div class="chips">${chip("data-trains","1",a.trains,"Sí, entreno")}${chip("data-trains","0",!a.trains,"No")}</div>`;
+    let h=`<div class="chips">${chip("data-trains","1",a.trains,you?"Sí, entreno":"Sí, entrena")}${chip("data-trains","0",!a.trains,"No")}</div>`;
     if(!a.trains)return h;
     h+=`<div class="group"><h3>¿Qué haces? (puedes elegir varios)</h3><div class="chips">${Object.entries(SPORTS).map(([k,v])=>chip("data-sport",k,a.sports.includes(k),v)).join("")}</div></div>
-    <div class="group"><h3>Tu semana habitual</h3><p class="muted small" style="margin:0 0 8px">Con la hora de cada sesión sé si entrenas antes o después de comer. Cada semana te la propondré ya rellena y solo cambiarás lo que varíe.</p>`;
+    <div class="group"><h3>${you?"Tu":"Su"} semana habitual</h3><p class="muted small" style="margin:0 0 8px">Con la hora de cada sesión sé si se entrena antes o después de comer. Cada semana te la propondré ya rellena y solo cambiarás lo que varíe.</p>`;
     for(let d=0;d<7;d++){const ss=a.train[d]||[];
       h+=`<div class="daycard"><div class="row"><b>${DAYS[d]}</b><span class="spacer"></span>${ss.length<2?`<button class="btn ghost small" data-addsess="${d}">+ Sesión</button>`:""}</div>
       ${ss.map((s,i)=>`<div class="sess"><input type="time" data-sw="${d}:${i}" value="${esc(sessTime(s))}" style="width:auto" aria-label="Hora">
@@ -120,9 +127,11 @@ function stepBody(id){
     <div class="field" style="flex:1"><label for="wzFee">Envío (€)</label><input id="wzFee" type="number" min="0" step="0.01" value="${sh.fee}"></div></div>
     <div class="field"><label for="wzBM">Presupuesto al mes (€)</label><input id="wzBM" type="number" min="0" step="5" value="${b.month}"></div>
     <div class="field"><label for="wzBW">Presupuesto a la semana (€)</label><input id="wzBW" type="number" min="0" step="1" value="${b.week??""}" placeholder="Automático: el del mes entre las semanas"></div>
-    <div class="field"><label for="wzBB">Básicos al mes: aceite, sal, especias (€)</label><input id="wzBB" type="number" min="0" step="1" value="${b.basics}"></div>`;
+    <div class="field"><label for="wzBB">Básicos al mes: aceite, sal, especias (€)</label><input id="wzBB" type="number" min="0" step="1" value="${b.basics}"></div>
+    <div class="group"><h3>Si no llega el presupuesto, acepto…</h3><p class="muted small" style="margin:0 0 8px">Siempre intento acercarme al máximo. Si no llego, te preguntaré; puedes dejarlo decidido aquí.</p>
+    <div class="chips">${Object.entries(SACRIFICES).map(([k,[t]])=>chip("data-sac",k,(H.sacrifice||{})[k],t)).join("")}</div></div>`;
   }
-  if(id.startsWith("gustos:")){const p=S.people.find(x=>x.id===id.slice(7));return tastesEditor(p)}
+  if(id.startsWith("gustos:"))return tastesEditor(a);
   if(id==="listo")return `<p class="lead">Con esto preparo tu primer menú. Cada vez que valores un plato aprenderé más de lo que os gusta.</p>
     <div class="okbox">Todo se guarda solo en este móvil. Haz una copia de seguridad de vez en cuando desde Perfil.</div>`;
   return "";
@@ -149,15 +158,18 @@ function fixedEditor(){
   return h;
 }
 
-function bindStep(id){
-  const H=S.home,a=me(),q=s=>main.querySelector(s),qa=s=>main.querySelectorAll(s);
+function bindStep(fullId){
+  const H=S.home,a=stepPerson(fullId),q=s=>main.querySelector(s),qa=s=>main.querySelectorAll(s);
   const rerender=()=>{save();render()};
   qa("[data-app]").forEach(b=>b.onclick=()=>{const k=b.dataset.app;H.apps=H.apps.includes(k)?H.apps.filter(x=>x!==k):[...H.apps,k];rerender()});
   q("#addKid")&&(q("#addKid").onclick=()=>{S.people.push({...defaultAdult(),id:uid("k"),kind:"nino",goals:["sano"],factor:0.6,presence:{type:"siempre"}});rerender()});
+  q("#addAdult")&&(q("#addAdult").onclick=()=>{S.people.push({...defaultAdult(),id:uid("a"),kind:"adulto",goals:["sano"],factor:1,tupper:false,presence:{type:"siempre"}});rerender()});
   qa("[data-delkid]").forEach(b=>b.onclick=()=>{if(confirm("¿Quitar a esta persona y sus gustos?")){S.people=S.people.filter(p=>p.id!==b.dataset.delkid);rerender()}});
   qa(".kidcard").forEach(c=>{const k=S.people.find(p=>p.id===c.dataset.kid);
     c.querySelectorAll("[data-kf]").forEach(i=>i.onchange=()=>{const f=i.dataset.kf;
       if(f==="name")k.name=i.value.trim();
+      if(f==="factor")k.factor=Number(i.value)||1;
+      if(f==="tupper")k.tupper=i.checked;
       if(f==="age"){k.age=Number(i.value)||null;k.factor=factorForAge(k.age)}
       if(f==="ptype")k.presence={...k.presence,type:i.value,anchor:k.presence.anchor||mondayOf(todayISO())};
       if(f==="anchor")k.presence.anchor=i.value;
@@ -176,6 +188,7 @@ function bindStep(id){
   qa("[data-xmt]").forEach(i=>i.onchange=()=>{H.extraMeals[i.dataset.xmt]=i.value;save()});
   qa("[data-cook]").forEach(b=>b.onclick=()=>{H.cookMode=b.dataset.cook;rerender()});
   qa("[data-cday]").forEach(b=>b.onclick=()=>{const d=Number(b.dataset.cday);H.cookDays=H.cookDays.includes(d)?H.cookDays.filter(x=>x!==d):[...H.cookDays,d];rerender()});
+  qa("[data-sac]").forEach(b=>b.onclick=()=>{const sc=H.sacrifice=H.sacrifice||{},k=b.dataset.sac;if(sc[k])delete sc[k];else sc[k]=true;rerender()});
   qa("[data-mode]").forEach(b=>b.onclick=()=>{const [k,v]=b.dataset.mode.split(":");H.shop[k]=v;rerender()});
   qa("[data-ing]").forEach(b=>b.onclick=()=>{const p=S.people.find(x=>x.id===b.dataset.person),pid=b.dataset.ing;
     const v=ingPref(p,pid),nv=ING_CYCLE[(ING_CYCLE.indexOf(v)+1)%ING_CYCLE.length];
@@ -195,13 +208,13 @@ function bindFixedEditor(after){
     after();toast("Plato fijo añadido")};
   document.querySelectorAll("[data-delf]").forEach(b=>b.onclick=()=>{S.fixed=S.fixed.filter(f=>f.id!==b.dataset.delf);after()});
 }
-function validateStep(id){
-  const H=S.home,a=me(),v=s=>{const e=main.querySelector(s);return e?e.value:null};
+function validateStep(fullId){
+  const H=S.home,a=stepPerson(fullId),id=stepKind(fullId),v=s=>{const e=main.querySelector(s);return e?e.value:null};
   if(id==="hola"){a.name=(v("#wzName")||"").trim()}
   if(id==="aparatos"&&!H.apps.length){toast("Elige al menos uno");return false}
   if(id==="zona"){const cp=(v("#wzCp")||"").trim();if(cp&&!/^\d{5}$/.test(cp)){toast("El código postal tiene 5 números");return false}H.cp=cp;H.municipio=(v("#wzMun")||"").trim()}
-  if(id==="hijos"){main.querySelectorAll(".kidcard [data-kf=name]").forEach(i=>{const k=S.people.find(p=>p.id===i.closest(".kidcard").dataset.kid);k.name=i.value.trim()});
-    if(kids().some(k=>!k.name)){toast("Escribe el nombre de cada hijo o hija");return false}}
+  if(id==="familia"){main.querySelectorAll(".kidcard [data-kf=name]").forEach(i=>{const k=S.people.find(p=>p.id===i.closest(".kidcard").dataset.kid);k.name=i.value.trim()});
+    if(others().some(k=>!k.name)){toast("Escribe el nombre de cada persona");return false}}
   if(id==="objetivos"){if(!a.goals.length){toast("Elige al menos un objetivo");return false}a.weight=Number(v("#wzW"))||null}
   if(id==="cocina"&&H.cookMode==="lote"&&!H.cookDays.length){toast("Elige al menos un día para cocinar");return false}
   if(id==="plan"){H.planFreq=v("#wzFreq");H.planDay=Number(v("#wzPDay"));H.planTime=v("#wzPTime")||"17:00"}
