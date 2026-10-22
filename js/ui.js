@@ -54,7 +54,7 @@ const nutrTxt=n=>n.kcal==null?`${n.prot} g proteína`:`${n.kcal.toLocaleString("
 const nutrShort=n=>n.kcal==null?`${n.prot} g proteína`:`${n.kcal.toLocaleString("es-ES")} kcal · P ${n.prot} · H ${n.carb} · G ${n.fat}`;
 const company=sl=>sl.eaters.filter(a=>a.id!=="yo").concat(sl.kids);
 function needLine(sl,r){
-  if(sl.fixed&&sl.fixed.capricho)return `<div class="need muted">🍕 Capricho: no cuenta para tus objetivos</div>`;
+  if((sl.fixed&&sl.fixed.capricho)||(r&&r.cap))return `<div class="need muted">🍕 Capricho: no cuenta para tus objetivos</div>`;
   if(!sl.need.why.length)return "";
   return `<div class="need">${sl.need.carbs?"⚡ Con hidratos":"💪 Con proteína"}: ${esc(sl.need.why.join("; "))}${sl.need.noHeavy?" · nada pesado":""}</div>`;
 }
@@ -611,6 +611,7 @@ function openSwap(sid){
     ${needLine(sl)}
     <div style="margin-top:10px">${alts.map(({r,miss})=>`<button class="alt altimg" data-pick="${r.id}">${dishImg(r,"s")}<span><b>${esc(r.name)}</b><small>${recipeTime(r)} min · ${r.prot||"?"} g proteína · ${eur(rationCost(r))}/ración · ${r.type==="c"?"⚡ hidratos":"🥗 ligera"}</small>
       ${miss?(miss.length?`<span class="badge miss">Te falta: ${esc(miss.slice(0,3).map(p=>P[p].name.toLowerCase()).join(", "))}${miss.length>3?"…":""}</span>`:`<span class="badge ok">Tienes todo</span>`):""}</span></button>`).join("")||"<p>No hay alternativas con tus filtros.</p>"}</div>
+    ${(()=>{const cs=candidates(sl,{cap:true}).filter(r=>r.cap);return cs.length?`<details class="more" style="margin-top:10px"><summary>🍔 Mejor un capricho</summary>${cs.map(r=>`<button class="alt altimg" data-pick="${r.id}">${dishImg(r,"s")}<span><b>${esc(r.name)}</b><small>${recipeTime(r)} min · ${eur(rationCost(r))}/ración · no cuenta para tus objetivos</small></span></button>`).join("")}</details>`:""})()}
     <div class="field"><label for="anyR">O elige cualquier receta</label><select id="anyR"><option value="">…</option>${sel.map(r=>`<option value="${r.id}">${esc(r.name)}</option>`).join("")}</select></div></div>`);
   const pick=rid=>{setSlotRecipe(sl,rid);dlg.close();render();
     const inv=inventory(monthOfWeek(weekStartFor(d)),sl.id);const miss=inv?missingFor(RX[rid],sl,inv):[];
@@ -664,7 +665,7 @@ function openRecipe(id,sid){
       ${sl?`<div class="nutr" style="margin-top:6px">${(sl.eaters.length?sl.eaters:sl.tupper).concat(sl.kids).map(p=>`<div>${isMe(p)?"Tu plato":esc(personName(p))}: ${nutrTxt(portionNutr(r,factorOf(p)))}</div>`).join("")}</div>`:""}
       ${r.vars.length>1?`<div class="vtabs">${r.vars.map((x,i)=>`<button class="chip" data-vi="${i}" aria-pressed="${i===vi}" ${ok.has(x.app)?"":"disabled"}>${APP[x.app]}</button>`).join("")}</div>`:""}
       <div class="segtab" role="tablist"><button role="tab" data-rt="ing" aria-selected="${recTab==="ing"}">Ingredientes</button><button role="tab" data-rt="prep" aria-selected="${recTab==="prep"}">Preparación</button></div>
-      ${recTab==="ing"?`<table class="ingt">${r.ing.map(([p,q])=>`<tr><td>${prodImg(p)}${esc(P[p].name)}</td><td>${fmtQty(q*serv,P[p].unit)}</td></tr>`).join("")}<tr><td><span class="pimg ph">🧂</span>Aceite, sal y especias</td><td>al gusto</td></tr></table>`
+      ${recTab==="ing"?`<table class="ingt">${r.ing.map(([p,q])=>`<tr><td>${prodImg(p)}${esc(P[p].name)}</td><td>${fmtQty(q*serv,P[p].unit)}</td></tr>`).join("")}<tr><td><span class="pimg ph">🧂</span>Aceite, sal y especias</td><td>al gusto</td></tr></table>${choiceBox(r)}`
       :`${v.tools&&v.tools.length?`<div class="needs"><b>Necesitas</b><div class="tools">${v.tools.map(t=>`<span>${toolIco(t)} ${esc(t)}</span>`).join("")}</div></div>`:""}
         <button class="cookrow" data-cook><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg></span><b>Cocinar paso a paso</b><svg class="chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
         <ol class="rsteps">${v.steps.map((s,i)=>{const tg=stepTags((v.info||[])[i]);return `<li>${esc(s)}${tg.length?`<div class="stags">${tg.map(x=>`<span>${esc(x)}</span>`).join("")}</div>`:""}</li>`}).join("")}</ol>`}
@@ -678,6 +679,7 @@ function openRecipe(id,sid){
     dlg.querySelector("#rShare").onclick=()=>shareRecipe(r,r.vars[vi],serv);
     dlg.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{serv=Math.max(0.5,serv+Number(b.dataset.s));draw()});
     dlg.querySelector("[data-cook]")?.addEventListener("click",()=>openCook(r,r.vars[vi],serv));
+    dlg.querySelectorAll("[data-choice]").forEach(x=>x.onchange=()=>{const [pid,g]=x.dataset.choice.split("|"),p=S.people.find(y=>y.id===pid);p.choices={...(p.choices||{}),[g]:x.value};save();toast("Apuntado para "+(isMe(p)?"ti":personName(p)))});
     dlg.querySelectorAll("[data-rt]").forEach(b=>b.onclick=()=>{recTab=b.dataset.rt;const y=dlg.scrollTop;draw();dlg.scrollTop=y});
     const who=()=>S.people.find(p=>p.id===dlg.querySelector("#rWho").value);
     dlg.querySelector("[data-love]").onclick=()=>{if(fav){setDish(me(),r.id,null);toast("Quitado de favoritos")}else{setDish(me(),r.id,2,"Lo marcaste como favorito");toast("❤️ Guardado en tus favoritos")}draw()};
@@ -686,6 +688,14 @@ function openRecipe(id,sid){
     dlg.querySelectorAll("[data-sim]").forEach(b=>b.onclick=()=>openRecipe(b.dataset.sim));
   };
   draw();
+}
+// Lo que cada persona elige a su gusto (la pizza de cada uno): sale en la compra, una para cada uno
+function choiceBox(r){
+  const ch=r.ing.find(([p])=>P[p].choice);if(!ch)return "";
+  const g=P[ch[0]].choice,opts=Object.values(P).filter(x=>x.choice===g).sort((a,b)=>a.name.localeCompare(b.name));
+  return `<div class="needs" style="margin-top:10px"><b>${g==="pizza"?"🍕 La pizza de cada uno":"La de cada uno"}</b>
+    ${S.people.map(p=>`<div class="row" style="margin:6px 0"><span style="flex:1">${esc(isMe(p)?"Tú":personName(p))}</span><select data-choice="${esc(p.id)}|${esc(g)}" style="width:auto;max-width:62%">${opts.map(o=>`<option value="${o.id}" ${((p.choices||{})[g]||ch[0])===o.id?"selected":""}>${esc(o.name)}</option>`).join("")}</select></div>`).join("")}
+    <div class="hint">En la lista de la compra pongo la de cada uno para cada día que toque.</div></div>`;
 }
 // Recetas parecidas: misma proteína principal o ingredientes compartidos
 function similar(r){
@@ -949,6 +959,7 @@ function renderCompra(){
 function renderRecetas(){
   const a=me();
   const fl={todas:"Todas",fav:"Favoritas",nuevas:"Sin probar",no:"Descartadas",c:"⚡ Hidratos",l:"🥗 Ligeras",kid:"Gustan a niños"};
+  if(R.some(r=>r.cap))fl.guarreo="🍔 Guarreo";
   fl.d_vegano="🌱 Veganas";fl.d_vege="🥚 Vegetarianas";
   if(R.some(r=>r.small))fl.pequenas="🥐 Desayunos y meriendas";
   for(const pk of [...new Set(R.filter(r=>r.pack).map(r=>r.pack))])if(SHOP["pack_"+pk])fl["pack_"+pk]=SHOP["pack_"+pk].ico+" "+SHOP["pack_"+pk].t.replace("Pack ","");
@@ -964,6 +975,7 @@ function renderRecetas(){
     if(qn&&!(r.name.toLowerCase().includes(qn)||r.ing.some(([p])=>P[p].name.toLowerCase().includes(qn))))return false;
     const dp=dishPref(a,r.id);
     if(recFilter.startsWith("pack_"))return r.pack===recFilter.slice(5);
+    if(recFilter==="guarreo")return r.cap;
     if(recFilter==="d_vegano")return recipeDiet(r)==="vegano";
     if(recFilter==="d_vege")return ["vegano","vege"].includes(recipeDiet(r));
     switch(recFilter){case "pequenas":return r.small;case "comunidad":return !!r.sug;case "fav":return dp>=1.5;case "nuevas":return !tried.has(r.id);case "no":return dp<=-1;case "c":return r.type==="c";case "l":return r.type==="l";case "kid":return r.kid;case "todas":return true;default:return r.vars.some(v=>v.app===recFilter)}

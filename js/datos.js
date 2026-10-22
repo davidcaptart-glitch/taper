@@ -9,7 +9,7 @@ let AJ = null;   // correcciones automáticas sacadas de los tickets de todos (s
 
 function setProducts(list){
   P={};
-  for(const p of list)P[p.id]={id:p.id,name:p.nombre,env:p.envase,unit:p.unidad,est:p.precio_estimado,keep:p.conservacion,aisle:p.pasillo,sec:p.seccion||p.pasillo,thaw:!!p.descongelar,mid:p.mercadona_id||null,img:p.foto||null,alg:p.alergenos||[],org:p.origen||[]};
+  for(const p of list)P[p.id]={id:p.id,name:p.nombre,env:p.envase,unit:p.unidad,est:p.precio_estimado,keep:p.conservacion,aisle:p.pasillo,sec:p.seccion||p.pasillo,thaw:!!p.descongelar,mid:p.mercadona_id||null,img:p.foto||null,alg:p.alergenos||[],org:p.origen||[],choice:p.eleccion||null};
 }
 // Secciones de Mercadona en el orden habitual de recorrido de la tienda (congelados al final)
 const STORE_ORDER=["Fruta y verdura","Panadería y pastelería","Charcutería y quesos","Carne","Marisco y pescado","Huevos, leche y mantequilla","Postres y yogures",
@@ -27,7 +27,7 @@ function setRecipes(list){
       fridge:r.conserva?r.conserva.nevera_dias:3,freeze:r.conserva?!!r.conserva.congelable:false,
       red:r.proteina_principal==="ternera"||r.proteina_principal==="cerdo",
       sug:r.sugerida||null,author:r.autor||null,
-      small:!!r.pequena,moments:r.momentos||[],portable:!!r.para_llevar,pack:r.pack||null};
+      small:!!r.pequena,moments:r.momentos||[],portable:!!r.para_llevar,pack:r.pack||null,cap:!!r.capricho};
   });
   RX=Object.fromEntries(R.map(r=>[r.id,r]));
 }

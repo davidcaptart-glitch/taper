@@ -305,7 +305,7 @@ function tastesEditor(p){
 }
 function fixedEditor(){
   let h=S.fixed.map(f=>`<div class="fixed"><span><b>${esc(f.recipe&&RX[f.recipe]?RX[f.recipe].name:f.name)}</b><small>${DAYS[f.dow]}, ${f.meal}${f.capricho?", capricho":""}, ${{todas:"siempre",con:"con los niños",sin:"sin los niños"}[f.who]}${!f.recipe&&f.cost?", "+eur(Number(f.cost)):""}</small></span><button class="btn ghost small" data-delf="${f.id}">Quitar</button></div>`).join("");
-  h+=`<div class="field"><label for="fxr">Plato</label><select id="fxr"><option value="">Otro (escribe el nombre)</option>${R.map(r=>`<option value="${r.id}">${esc(r.name)}</option>`).join("")}</select></div>
+  h+=`<div class="field"><label for="fxr">Plato</label><select id="fxr"><option value="">Otro (escribe el nombre)</option><optgroup label="🍔 Caprichos">${R.filter(r=>r.cap).map(r=>`<option value="${r.id}">${esc(r.name)}</option>`).join("")}</optgroup><optgroup label="Recetas">${R.filter(r=>!r.cap&&!r.small).map(r=>`<option value="${r.id}">${esc(r.name)}</option>`).join("")}</optgroup></select></div>
   <div class="field" id="fxnameW"><label for="fxn">Nombre</label><input id="fxn" type="text" placeholder="Pizza"></div>
   <div class="field" id="fxcostW"><label for="fxc">Coste aproximado (€)</label><input id="fxc" type="number" min="0" step="0.5" value="6"></div>
   <div class="row"><div style="flex:1">${dowSelect("fxd",4)}</div><select id="fxm" style="flex:1"><option value="cena">Cena</option><option value="comida">Comida</option></select></div>

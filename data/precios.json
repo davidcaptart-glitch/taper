@@ -1243,9 +1243,414 @@
       "anterior": null,
       "precio_kilo": 4.26,
       "fecha": "2026-10-22"
+    },
+    "pizza_jyq": {
+      "mercadona_id": "63581",
+      "nombre_mercadona": "Pizza jamón y queso Hacendado",
+      "formato": "0.415 kg",
+      "precio": 2.5,
+      "anterior": null,
+      "precio_kilo": 6.02,
+      "fecha": "2026-10-22"
+    },
+    "pizza_barbacoa": {
+      "mercadona_id": "63613",
+      "nombre_mercadona": "Pizza barbacoa Hacendado",
+      "formato": "0.415 kg",
+      "precio": 2.5,
+      "anterior": null,
+      "precio_kilo": 6.02,
+      "fecha": "2026-10-22"
+    },
+    "pizza_4quesos": {
+      "mercadona_id": "63580",
+      "nombre_mercadona": "Pizza 4 quesos Hacendado",
+      "formato": "0.41 kg",
+      "precio": 2.9,
+      "anterior": null,
+      "precio_kilo": 7.07,
+      "fecha": "2026-10-22"
+    },
+    "pizza_carbonara": {
+      "mercadona_id": "63653",
+      "nombre_mercadona": "Pizza carbonara Hacendado",
+      "formato": "0.43 kg",
+      "precio": 2.9,
+      "anterior": null,
+      "precio_kilo": 6.74,
+      "fecha": "2026-10-22"
+    },
+    "pizza_pepperoni": {
+      "mercadona_id": "63556",
+      "nombre_mercadona": "Pizza pepperoni Hacendado",
+      "formato": "0.41 kg",
+      "precio": 2.9,
+      "anterior": null,
+      "precio_kilo": 7.07,
+      "fecha": "2026-10-22"
+    },
+    "pizza_atunbacon": {
+      "mercadona_id": "63582",
+      "nombre_mercadona": "Pizza atún y bacón Hacendado",
+      "formato": "0.415 kg",
+      "precio": 2.9,
+      "anterior": null,
+      "precio_kilo": 6.99,
+      "fecha": "2026-10-22"
+    },
+    "pizza_pollobacon": {
+      "mercadona_id": "63645",
+      "nombre_mercadona": "Pizza pollo y bacón Hacendado",
+      "formato": "0.42 kg",
+      "precio": 2.9,
+      "anterior": null,
+      "precio_kilo": 6.9,
+      "fecha": "2026-10-22"
+    },
+    "pizza_serrana": {
+      "mercadona_id": "63551",
+      "nombre_mercadona": "Pizza serrana Hacendado",
+      "formato": "0.4 kg",
+      "precio": 2.9,
+      "anterior": null,
+      "precio_kilo": 7.25,
+      "fecha": "2026-10-22"
+    },
+    "pizza_frankfurt": {
+      "mercadona_id": "14246",
+      "nombre_mercadona": "Pizza Frankfurt Hacendado",
+      "formato": "0.42 kg",
+      "precio": 2.9,
+      "anterior": null,
+      "precio_kilo": 6.9,
+      "fecha": "2026-10-22"
+    },
+    "pizza_margarita": {
+      "mercadona_id": "63597",
+      "nombre_mercadona": "Pizzas tomate y queso Hacendado ultracongeladas",
+      "formato": "0.57 kg",
+      "precio": 2.4,
+      "anterior": null,
+      "precio_kilo": 4.21,
+      "fecha": "2026-10-22"
+    },
+    "patatas_fritas": {
+      "mercadona_id": "7879",
+      "nombre_mercadona": "Patatas fritas horno y air fryer Hacendado ultracongeladas",
+      "formato": "Paquete 0.75 kg",
+      "precio": 1.9,
+      "anterior": null,
+      "precio_kilo": 2.53,
+      "fecha": "2026-10-22"
+    },
+    "pan_brioche": {
+      "mercadona_id": "52602",
+      "nombre_mercadona": "Pan de burger Brioche Hacendado",
+      "formato": "Paquete 0.15 kg",
+      "precio": 1.1,
+      "anterior": null,
+      "precio_kilo": 7.33,
+      "fecha": "2026-10-22"
+    },
+    "pan_perrito": {
+      "mercadona_id": "82332",
+      "nombre_mercadona": "Pan hot dog Hacendado",
+      "formato": "Paquete 0.33 kg",
+      "precio": 0.9,
+      "anterior": null,
+      "precio_kilo": 2.73,
+      "fecha": "2026-10-22"
+    },
+    "frankfurt": {
+      "mercadona_id": "53141",
+      "nombre_mercadona": "Salchichas cocidas estilo Frankfurt Hacendado de pollo y cerdo sabor ahumado",
+      "formato": "0.704 kg",
+      "precio": 1.8,
+      "anterior": null,
+      "precio_kilo": 2.56,
+      "fecha": "2026-10-22"
+    },
+    "cheddar": {
+      "mercadona_id": "8180",
+      "nombre_mercadona": "Queso lonchas cheddar de vaca Hacendado",
+      "formato": "Paquete 0.2 kg",
+      "precio": 1.95,
+      "anterior": null,
+      "precio_kilo": 9.75,
+      "fecha": "2026-10-22"
+    },
+    "bacon": {
+      "mercadona_id": "21628",
+      "nombre_mercadona": "Bacón ahumado La Selva lonchas",
+      "formato": "Paquete 0.225 kg",
+      "precio": 2.05,
+      "anterior": null,
+      "precio_kilo": 9.11,
+      "fecha": "2026-10-22"
+    },
+    "guanciale": {
+      "mercadona_id": "21892",
+      "nombre_mercadona": "Guanciale Hacendado",
+      "formato": "Pieza 0.25 kg",
+      "precio": 3.75,
+      "anterior": null,
+      "precio_kilo": 15.0,
+      "fecha": "2026-10-22"
+    },
+    "nachos": {
+      "mercadona_id": "17754",
+      "nombre_mercadona": "Nachos Hacendado",
+      "formato": "Paquete 0.2 kg",
+      "precio": 1.1,
+      "anterior": null,
+      "precio_kilo": 5.5,
+      "fecha": "2026-10-22"
+    },
+    "guacamole": {
+      "mercadona_id": "3852",
+      "nombre_mercadona": "Guacamole Hacendado",
+      "formato": "Tarrina 0.2 kg",
+      "precio": 1.8,
+      "anterior": null,
+      "precio_kilo": 9.0,
+      "fecha": "2026-10-22"
+    },
+    "jalapenos": {
+      "mercadona_id": "33189",
+      "nombre_mercadona": "Jalapeños picantes en vinagre Hacendado",
+      "formato": "Tarro 0.135 kg",
+      "precio": 1.65,
+      "anterior": null,
+      "precio_kilo": 12.22,
+      "fecha": "2026-10-22"
+    },
+    "salsa_barbacoa": {
+      "mercadona_id": "17346",
+      "nombre_mercadona": "Salsa Barbacoa Hacendado",
+      "formato": "Bote 0.35 kg",
+      "precio": 1.15,
+      "anterior": null,
+      "precio_kilo": 3.29,
+      "fecha": "2026-10-22"
+    },
+    "san_jacobos": {
+      "mercadona_id": "63321",
+      "nombre_mercadona": "San Jacobos empanados de york y queso Hacendado ultracongelados",
+      "formato": "Paquete 0.35 kg",
+      "precio": 1.45,
+      "anterior": null,
+      "precio_kilo": 4.14,
+      "fecha": "2026-10-22"
+    },
+    "masa_pizza": {
+      "mercadona_id": "13985",
+      "nombre_mercadona": "Masa fresca pizza Hacendado",
+      "formato": "0.56 kg",
+      "precio": 2.2,
+      "anterior": null,
+      "precio_kilo": 3.93,
+      "fecha": "2026-10-22"
+    },
+    "mozzarella_fresca": {
+      "mercadona_id": "51050",
+      "nombre_mercadona": "Mozzarella fresca de vaca Hacendado",
+      "formato": "Paquete 0.25 kg",
+      "precio": 0.9,
+      "anterior": null,
+      "precio_kilo": 3.6,
+      "fecha": "2026-10-22"
+    },
+    "alas_pollo": {
+      "mercadona_id": "2785",
+      "nombre_mercadona": "Alas partidas de pollo",
+      "formato": "Bandeja 0.6 kg",
+      "precio": 3.12,
+      "anterior": null,
+      "precio_kilo": 5.2,
+      "fecha": "2026-10-22"
+    },
+    "burger_vacuno": {
+      "mercadona_id": "3547",
+      "nombre_mercadona": "Burger de vacuno gruesas",
+      "formato": "Bandeja 0.36 kg",
+      "precio": 5.4,
+      "anterior": null,
+      "precio_kilo": 15.0,
+      "fecha": "2026-10-22"
+    },
+    "aceite_girasol": {
+      "mercadona_id": "4040",
+      "nombre_mercadona": "Aceite de girasol refinado 0,2º Hacendado",
+      "formato": "Botella 1.0 l",
+      "precio": 1.85,
+      "anterior": null,
+      "precio_kilo": 1.85,
+      "fecha": "2026-10-22"
+    },
+    "ketchup": {
+      "mercadona_id": "23579",
+      "nombre_mercadona": "Ketchup Hacendado",
+      "formato": "Bote 0.6 kg",
+      "precio": 1.05,
+      "anterior": null,
+      "precio_kilo": 1.75,
+      "fecha": "2026-10-22"
+    },
+    "mayonesa": {
+      "mercadona_id": "52728",
+      "nombre_mercadona": "Mayonesa Hacendado",
+      "formato": "Tarro 0.24 l",
+      "precio": 1.05,
+      "anterior": null,
+      "precio_kilo": 4.38,
+      "fecha": "2026-10-22"
+    },
+    "alioli": {
+      "mercadona_id": "7973",
+      "nombre_mercadona": "Alioli con perejil Hacendado",
+      "formato": "Bote 0.31 l",
+      "precio": 1.45,
+      "anterior": null,
+      "precio_kilo": 4.68,
+      "fecha": "2026-10-22"
+    },
+    "salsa_yogur": {
+      "mercadona_id": "17327",
+      "nombre_mercadona": "Salsa Yogur Hacendado",
+      "formato": "Bote 0.31 l",
+      "precio": 1.2,
+      "anterior": null,
+      "precio_kilo": 3.87,
+      "fecha": "2026-10-22"
+    },
+    "relleno_kebab": {
+      "mercadona_id": "13778",
+      "nombre_mercadona": "Relleno para kebab con carne de pollo asado Hacendado ultracongelado",
+      "formato": "Paquete 0.3 kg",
+      "precio": 3.15,
+      "anterior": null,
+      "precio_kilo": 10.5,
+      "fecha": "2026-10-22"
+    },
+    "tortillas_maxi": {
+      "mercadona_id": "80870",
+      "nombre_mercadona": "Maxi tortillas de trigo Hacendado",
+      "formato": "Paquete 0.36 kg",
+      "precio": 1.5,
+      "anterior": null,
+      "precio_kilo": 4.17,
+      "fecha": "2026-10-22"
+    },
+    "chorizo": {
+      "mercadona_id": "54209",
+      "nombre_mercadona": "Chorizo dulce extra Hacendado",
+      "formato": "Pieza 0.28 kg",
+      "precio": 2.49,
+      "anterior": null,
+      "precio_kilo": 8.89,
+      "fecha": "2026-10-22"
+    },
+    "mantequilla": {
+      "mercadona_id": "20716",
+      "nombre_mercadona": "Mantequilla sin sal añadida Hacendado",
+      "formato": "Pastilla 0.25 kg",
+      "precio": 2.05,
+      "anterior": null,
+      "precio_kilo": 8.2,
+      "fecha": "2026-10-22"
+    },
+    "grana_padano": {
+      "mercadona_id": "51146",
+      "nombre_mercadona": "Queso en polvo grana padano Hacendado",
+      "formato": "Paquete 0.1 kg",
+      "precio": 1.65,
+      "anterior": null,
+      "precio_kilo": 16.5,
+      "fecha": "2026-10-22"
+    },
+    "pan_molde": {
+      "mercadona_id": "13810",
+      "nombre_mercadona": "Pan de molde blanco Hacendado",
+      "formato": "Paquete 0.46 kg",
+      "precio": 0.8,
+      "anterior": null,
+      "precio_kilo": 1.74,
+      "fecha": "2026-10-22"
+    },
+    "pepinillos": {
+      "mercadona_id": "11565",
+      "nombre_mercadona": "Pepinillos en vinagre Hacendado",
+      "formato": "Tarro 0.42 kg",
+      "precio": 1.45,
+      "anterior": null,
+      "precio_kilo": 3.45,
+      "fecha": "2026-10-22"
+    },
+    "salsa_burger": {
+      "mercadona_id": "17347",
+      "nombre_mercadona": "Salsa Burger Hacendado",
+      "formato": "Bote 0.25 l",
+      "precio": 1.4,
+      "anterior": null,
+      "precio_kilo": 5.6,
+      "fecha": "2026-10-22"
+    },
+    "cebolla_frita": {
+      "mercadona_id": "34208",
+      "nombre_mercadona": "Cebolla frita crujiente Hacendado",
+      "formato": "Bote 0.15 kg",
+      "precio": 1.15,
+      "anterior": null,
+      "precio_kilo": 7.67,
+      "fecha": "2026-10-22"
+    },
+    "sazonador_fajitas": {
+      "mercadona_id": "23353",
+      "nombre_mercadona": "Sazonador para fajitas Hacendado sabor tex-mex",
+      "formato": "Sobre 0.017 kg",
+      "precio": 0.9,
+      "anterior": null,
+      "precio_kilo": 52.94,
+      "fecha": "2026-10-22"
+    },
+    "calamares_romana": {
+      "mercadona_id": "63163",
+      "nombre_mercadona": "Anillas de pota a la romana Hacendado ultracongeladas",
+      "formato": "Paquete 0.5 kg",
+      "precio": 5.25,
+      "anterior": null,
+      "precio_kilo": 10.5,
+      "fecha": "2026-10-22"
+    },
+    "jamoncitos": {
+      "mercadona_id": "2778",
+      "nombre_mercadona": "Jamoncitos de pollo",
+      "formato": "Bandeja 0.92 kg",
+      "precio": 3.5,
+      "anterior": null,
+      "precio_kilo": 3.8,
+      "fecha": "2026-10-22"
+    },
+    "gallina": {
+      "mercadona_id": "3795",
+      "nombre_mercadona": "Gallina",
+      "formato": "Bandeja 0.45 kg",
+      "precio": 2.61,
+      "anterior": null,
+      "precio_kilo": 5.8,
+      "fecha": "2026-10-22"
+    },
+    "carcasa_pollo": {
+      "mercadona_id": "2853",
+      "nombre_mercadona": "Carcasa y espinazo de pollo",
+      "formato": "Bandeja 1.0 kg",
+      "precio": 1.3,
+      "anterior": null,
+      "precio_kilo": 1.3,
+      "fecha": "2026-10-22"
     }
   },
   "fallos_ultima_vez": [],
   "registro": [],
-  "ejecutado": "2026-10-22T16:17:50+00:00"
+  "ejecutado": "2026-10-22T16:44:26+00:00"
 }

@@ -28,7 +28,7 @@ function monthUses(m,exceptId){
       const cook=cookDayFor(sl.date);
       // Lo fresco para lo que se cocina antes de que llegue el pedido sale del pedido de la semana anterior
       const freshWi=wi>0&&cook<deliv?wi-1:wi;
-      for(const [pid,q] of r.ing)out.push({pid,q:q*sl.portions,wi,freshWi,date:cook,slot:sl,r});
+      for(const [pid,q] of slotIng(r,sl))out.push({pid,q,wi,freshWi,date:cook,slot:sl,r});
     }
     // Desayunos, almuerzos y meriendas
     for(const [d,dd] of Object.entries(wk.small||{})){if(d<start||d>addDays(start,6))continue;

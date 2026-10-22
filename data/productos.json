@@ -2587,6 +2587,960 @@
       "foto": "https://prod-mercadona.imgix.net/images/8d91c11f506e151e0dafe00a43ab12cf.jpg?fit=crop&h=200&w=200",
       "alergenos": [],
       "origen": []
+    },
+    {
+      "id": "pizza_jyq",
+      "nombre": "Pizza jamón y queso (refrigerada)",
+      "envase": 1,
+      "unidad": "ud",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 2.5,
+      "mercadona_id": "63581",
+      "precio_por": "envase",
+      "nombre_mercadona": "Pizza jamón y queso Hacendado",
+      "seccion": "Pizzas y platos preparados",
+      "foto": "https://prod-mercadona.imgix.net/images/b4332955fe7f32ad14615bc73901507f.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "gluten",
+        "lacteos"
+      ],
+      "origen": [
+        "carne",
+        "cerdo",
+        "lacteo"
+      ],
+      "eleccion": "pizza"
+    },
+    {
+      "id": "pizza_barbacoa",
+      "nombre": "Pizza barbacoa (refrigerada)",
+      "envase": 1,
+      "unidad": "ud",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 2.5,
+      "mercadona_id": "63613",
+      "precio_por": "envase",
+      "nombre_mercadona": "Pizza barbacoa Hacendado",
+      "seccion": "Pizzas y platos preparados",
+      "foto": "https://prod-mercadona.imgix.net/images/db22e8c9ad0b8d9583d32d9d23cca747.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "gluten",
+        "lacteos"
+      ],
+      "origen": [
+        "carne",
+        "cerdo",
+        "lacteo"
+      ],
+      "eleccion": "pizza"
+    },
+    {
+      "id": "pizza_4quesos",
+      "nombre": "Pizza 4 quesos (refrigerada)",
+      "envase": 1,
+      "unidad": "ud",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 2.9,
+      "mercadona_id": "63580",
+      "precio_por": "envase",
+      "nombre_mercadona": "Pizza 4 quesos Hacendado",
+      "seccion": "Pizzas y platos preparados",
+      "foto": "https://prod-mercadona.imgix.net/images/13af77737d77557ce05a42d101269498.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "gluten",
+        "lacteos",
+        "huevo"
+      ],
+      "origen": [
+        "lacteo",
+        "huevo"
+      ],
+      "eleccion": "pizza"
+    },
+    {
+      "id": "pizza_carbonara",
+      "nombre": "Pizza carbonara (refrigerada)",
+      "envase": 1,
+      "unidad": "ud",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 2.9,
+      "mercadona_id": "63653",
+      "precio_por": "envase",
+      "nombre_mercadona": "Pizza carbonara Hacendado",
+      "seccion": "Pizzas y platos preparados",
+      "foto": "https://prod-mercadona.imgix.net/images/92d2bd6f283f29e2729ac3deab28fd79.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "gluten",
+        "lacteos"
+      ],
+      "origen": [
+        "carne",
+        "cerdo",
+        "lacteo"
+      ],
+      "eleccion": "pizza"
+    },
+    {
+      "id": "pizza_pepperoni",
+      "nombre": "Pizza pepperoni (refrigerada)",
+      "envase": 1,
+      "unidad": "ud",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 2.9,
+      "mercadona_id": "63556",
+      "precio_por": "envase",
+      "nombre_mercadona": "Pizza pepperoni Hacendado",
+      "seccion": "Pizzas y platos preparados",
+      "foto": "https://prod-mercadona.imgix.net/images/6db726d8aac94e7b03c60045840d851f.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "gluten",
+        "lacteos"
+      ],
+      "origen": [
+        "carne",
+        "cerdo",
+        "lacteo"
+      ],
+      "eleccion": "pizza"
+    },
+    {
+      "id": "pizza_atunbacon",
+      "nombre": "Pizza atún y bacón (refrigerada)",
+      "envase": 1,
+      "unidad": "ud",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 2.9,
+      "mercadona_id": "63582",
+      "precio_por": "envase",
+      "nombre_mercadona": "Pizza atún y bacón Hacendado",
+      "seccion": "Pizzas y platos preparados",
+      "foto": "https://prod-mercadona.imgix.net/images/2350a88000eea41111d5194750894d11.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "gluten",
+        "lacteos",
+        "pescado"
+      ],
+      "origen": [
+        "carne",
+        "cerdo",
+        "pescado",
+        "lacteo"
+      ],
+      "eleccion": "pizza"
+    },
+    {
+      "id": "pizza_pollobacon",
+      "nombre": "Pizza pollo y bacón (refrigerada)",
+      "envase": 1,
+      "unidad": "ud",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 2.9,
+      "mercadona_id": "63645",
+      "precio_por": "envase",
+      "nombre_mercadona": "Pizza pollo y bacón Hacendado",
+      "seccion": "Pizzas y platos preparados",
+      "foto": "https://prod-mercadona.imgix.net/images/32c73e252594380ec6a074185bd75527.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "gluten",
+        "lacteos",
+        "mostaza",
+        "soja",
+        "sesamo"
+      ],
+      "origen": [
+        "carne",
+        "cerdo",
+        "lacteo"
+      ],
+      "eleccion": "pizza"
+    },
+    {
+      "id": "pizza_serrana",
+      "nombre": "Pizza serrana (refrigerada)",
+      "envase": 1,
+      "unidad": "ud",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 2.9,
+      "mercadona_id": "63551",
+      "precio_por": "envase",
+      "nombre_mercadona": "Pizza serrana Hacendado",
+      "seccion": "Pizzas y platos preparados",
+      "foto": "https://prod-mercadona.imgix.net/images/53747b4ea74d8687e9862282e4d14225.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "gluten",
+        "lacteos"
+      ],
+      "origen": [
+        "carne",
+        "cerdo",
+        "lacteo"
+      ],
+      "eleccion": "pizza"
+    },
+    {
+      "id": "pizza_frankfurt",
+      "nombre": "Pizza Frankfurt (refrigerada)",
+      "envase": 1,
+      "unidad": "ud",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 2.9,
+      "mercadona_id": "14246",
+      "precio_por": "envase",
+      "nombre_mercadona": "Pizza Frankfurt Hacendado",
+      "seccion": "Pizzas y platos preparados",
+      "foto": "https://prod-mercadona.imgix.net/images/4c81192927e3e2081e5b92d58cad8086.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "gluten",
+        "lacteos",
+        "mostaza",
+        "soja"
+      ],
+      "origen": [
+        "carne",
+        "cerdo",
+        "lacteo"
+      ],
+      "eleccion": "pizza"
+    },
+    {
+      "id": "pizza_margarita",
+      "nombre": "Pizzas tomate y queso congeladas (2 ud)",
+      "envase": 2,
+      "unidad": "ud",
+      "conservacion": "congelado",
+      "pasillo": "Congelados",
+      "descongelar": false,
+      "precio_estimado": 2.4,
+      "mercadona_id": "63597",
+      "precio_por": "envase",
+      "nombre_mercadona": "Pizzas tomate y queso Hacendado ultracongeladas",
+      "seccion": "Congelados",
+      "foto": "https://prod-mercadona.imgix.net/images/f0436f96ce14469e9de949a925ce4586.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "gluten",
+        "lacteos"
+      ],
+      "origen": [
+        "lacteo"
+      ],
+      "eleccion": "pizza"
+    },
+    {
+      "id": "patatas_fritas",
+      "nombre": "Patatas fritas congeladas (horno y air fryer)",
+      "envase": 750,
+      "unidad": "g",
+      "conservacion": "congelado",
+      "pasillo": "Congelados",
+      "descongelar": false,
+      "precio_estimado": 1.9,
+      "mercadona_id": "7879",
+      "precio_por": "envase",
+      "nombre_mercadona": "Patatas fritas horno y air fryer Hacendado ultracongeladas",
+      "seccion": "Congelados",
+      "foto": "https://prod-mercadona.imgix.net/images/e5cc47ec53ae7ed1f090d8069bf9ab6e.jpg?fit=crop&h=200&w=200",
+      "alergenos": [],
+      "origen": []
+    },
+    {
+      "id": "pan_brioche",
+      "nombre": "Pan de hamburguesa brioche (2 ud)",
+      "envase": 2,
+      "unidad": "ud",
+      "conservacion": "fresco",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 1.1,
+      "mercadona_id": "52602",
+      "precio_por": "envase",
+      "nombre_mercadona": "Pan de burger Brioche Hacendado",
+      "seccion": "Panadería y pastelería",
+      "foto": "https://prod-mercadona.imgix.net/images/c4f9f0e92cd76bbb10bb9761df1ca7b6.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "gluten",
+        "huevo",
+        "lacteos"
+      ],
+      "origen": [
+        "huevo",
+        "lacteo"
+      ]
+    },
+    {
+      "id": "pan_perrito",
+      "nombre": "Pan de perrito (6 ud)",
+      "envase": 6,
+      "unidad": "ud",
+      "conservacion": "fresco",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 0.9,
+      "mercadona_id": "82332",
+      "precio_por": "envase",
+      "nombre_mercadona": "Pan hot dog Hacendado",
+      "seccion": "Panadería y pastelería",
+      "foto": "https://prod-mercadona.imgix.net/images/1a4384796c10baa72355deb00039cbd4.jpeg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "gluten"
+      ],
+      "origen": []
+    },
+    {
+      "id": "frankfurt",
+      "nombre": "Salchichas Frankfurt",
+      "envase": 704,
+      "unidad": "g",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 1.8,
+      "mercadona_id": "53141",
+      "precio_por": "envase",
+      "nombre_mercadona": "Salchichas cocidas estilo Frankfurt Hacendado de pollo y cerdo sabor ahumado",
+      "seccion": "Charcutería y quesos",
+      "foto": "https://prod-mercadona.imgix.net/images/d3ca58a7c971dab07cb0095a4391f33b.jpg?fit=crop&h=200&w=200",
+      "alergenos": [],
+      "origen": [
+        "carne",
+        "cerdo"
+      ]
+    },
+    {
+      "id": "cheddar",
+      "nombre": "Queso cheddar en lonchas",
+      "envase": 200,
+      "unidad": "g",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 1.95,
+      "mercadona_id": "8180",
+      "precio_por": "envase",
+      "nombre_mercadona": "Queso lonchas cheddar de vaca Hacendado",
+      "seccion": "Charcutería y quesos",
+      "foto": "https://prod-mercadona.imgix.net/images/0b9d375bd00ab01c8971dab13297cfcb.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "lacteos"
+      ],
+      "origen": [
+        "lacteo"
+      ]
+    },
+    {
+      "id": "bacon",
+      "nombre": "Bacón ahumado en lonchas",
+      "envase": 225,
+      "unidad": "g",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 2.05,
+      "mercadona_id": "21628",
+      "precio_por": "envase",
+      "nombre_mercadona": "Bacón ahumado La Selva lonchas",
+      "seccion": "Charcutería y quesos",
+      "foto": "https://prod-mercadona.imgix.net/images/d457d5a7acd285343abe503dad001827.jpg?fit=crop&h=200&w=200",
+      "alergenos": [],
+      "origen": [
+        "carne",
+        "cerdo"
+      ]
+    },
+    {
+      "id": "guanciale",
+      "nombre": "Guanciale (papada curada)",
+      "envase": 250,
+      "unidad": "g",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 3.75,
+      "mercadona_id": "21892",
+      "precio_por": "envase",
+      "nombre_mercadona": "Guanciale Hacendado",
+      "seccion": "Charcutería y quesos",
+      "foto": "https://prod-mercadona.imgix.net/images/712e6ec294a43713d4c4fb98282b4b5d.jpg?fit=crop&h=200&w=200",
+      "alergenos": [],
+      "origen": [
+        "carne",
+        "cerdo"
+      ]
+    },
+    {
+      "id": "nachos",
+      "nombre": "Nachos (totopos de maíz)",
+      "envase": 200,
+      "unidad": "g",
+      "conservacion": "despensa",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 1.1,
+      "mercadona_id": "17754",
+      "precio_por": "envase",
+      "nombre_mercadona": "Nachos Hacendado",
+      "seccion": "Aperitivos",
+      "foto": "https://prod-mercadona.imgix.net/images/22272d7646f19d73bb88bd5506ad379f.jpg?fit=crop&h=200&w=200",
+      "alergenos": [],
+      "origen": []
+    },
+    {
+      "id": "guacamole",
+      "nombre": "Guacamole",
+      "envase": 200,
+      "unidad": "g",
+      "conservacion": "fresco",
+      "pasillo": "Fruta y verdura",
+      "descongelar": false,
+      "precio_estimado": 1.8,
+      "mercadona_id": "3852",
+      "precio_por": "envase",
+      "nombre_mercadona": "Guacamole Hacendado",
+      "seccion": "Fruta y verdura",
+      "foto": "https://prod-mercadona.imgix.net/images/66c3481e7af13e610aa808949d18a5f3.jpg?fit=crop&h=200&w=200",
+      "alergenos": [],
+      "origen": []
+    },
+    {
+      "id": "jalapenos",
+      "nombre": "Jalapeños en vinagre",
+      "envase": 135,
+      "unidad": "g",
+      "conservacion": "despensa",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 1.65,
+      "mercadona_id": "33189",
+      "precio_por": "envase",
+      "nombre_mercadona": "Jalapeños picantes en vinagre Hacendado",
+      "seccion": "Aperitivos",
+      "foto": "https://prod-mercadona.imgix.net/images/d5f83482523f5b5860d59fdf2711c9b2.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "sulfitos"
+      ],
+      "origen": []
+    },
+    {
+      "id": "salsa_barbacoa",
+      "nombre": "Salsa barbacoa",
+      "envase": 350,
+      "unidad": "g",
+      "conservacion": "despensa",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 1.15,
+      "mercadona_id": "17346",
+      "precio_por": "envase",
+      "nombre_mercadona": "Salsa Barbacoa Hacendado",
+      "seccion": "Aceite, especias y salsas",
+      "foto": "https://prod-mercadona.imgix.net/images/d01e6c7c307f1c60a9e67aac3e22700e.jpeg?fit=crop&h=200&w=200",
+      "alergenos": [],
+      "origen": []
+    },
+    {
+      "id": "san_jacobos",
+      "nombre": "San jacobos de york y queso congelados (4 ud)",
+      "envase": 350,
+      "unidad": "g",
+      "conservacion": "congelado",
+      "pasillo": "Congelados",
+      "descongelar": false,
+      "precio_estimado": 1.45,
+      "mercadona_id": "63321",
+      "precio_por": "envase",
+      "nombre_mercadona": "San Jacobos empanados de york y queso Hacendado ultracongelados",
+      "seccion": "Congelados",
+      "foto": "https://prod-mercadona.imgix.net/images/f2cf8a4cc78bd048eb248eda8c31825d.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "gluten",
+        "lacteos",
+        "soja",
+        "mostaza"
+      ],
+      "origen": [
+        "carne",
+        "cerdo",
+        "lacteo"
+      ]
+    },
+    {
+      "id": "masa_pizza",
+      "nombre": "Masa fresca de pizza (2 bases)",
+      "envase": 560,
+      "unidad": "g",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 2.2,
+      "mercadona_id": "13985",
+      "precio_por": "envase",
+      "nombre_mercadona": "Masa fresca pizza Hacendado",
+      "seccion": "Pizzas y platos preparados",
+      "foto": "https://prod-mercadona.imgix.net/images/d5ba64cc5c3fccf0c4575b61fb71040d.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "gluten"
+      ],
+      "origen": []
+    },
+    {
+      "id": "mozzarella_fresca",
+      "nombre": "Mozzarella fresca",
+      "envase": 250,
+      "unidad": "g",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 0.9,
+      "mercadona_id": "51050",
+      "precio_por": "envase",
+      "nombre_mercadona": "Mozzarella fresca de vaca Hacendado",
+      "seccion": "Charcutería y quesos",
+      "foto": "https://prod-mercadona.imgix.net/images/82991bcf404ead6164e1b3b4ad79eeea.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "lacteos"
+      ],
+      "origen": [
+        "lacteo"
+      ]
+    },
+    {
+      "id": "alas_pollo",
+      "nombre": "Alas de pollo partidas",
+      "envase": 600,
+      "unidad": "g",
+      "conservacion": "congelar",
+      "pasillo": "Carne y pescado",
+      "descongelar": true,
+      "precio_estimado": 3.12,
+      "mercadona_id": "2785",
+      "precio_por": "kilo",
+      "nombre_mercadona": "Alas partidas de pollo",
+      "seccion": "Carne",
+      "foto": "https://prod-mercadona.imgix.net/images/2d2e990b203eb6e7d83cc31666c76c4d.jpeg?fit=crop&h=200&w=200",
+      "alergenos": [],
+      "origen": [
+        "carne"
+      ]
+    },
+    {
+      "id": "burger_vacuno",
+      "nombre": "Burger de vacuno gruesas (2 ud)",
+      "envase": 360,
+      "unidad": "g",
+      "conservacion": "congelar",
+      "pasillo": "Carne y pescado",
+      "descongelar": true,
+      "precio_estimado": 5.4,
+      "mercadona_id": "3547",
+      "precio_por": "envase",
+      "nombre_mercadona": "Burger de vacuno gruesas",
+      "seccion": "Carne",
+      "foto": "https://prod-mercadona.imgix.net/images/d3bb2192a1500c898c75b9c4780a8e94.jpeg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "soja",
+        "sulfitos"
+      ],
+      "origen": [
+        "carne"
+      ]
+    },
+    {
+      "id": "aceite_girasol",
+      "nombre": "Aceite de girasol (para freír)",
+      "envase": 1000,
+      "unidad": "ml",
+      "conservacion": "despensa",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 1.85,
+      "mercadona_id": "4040",
+      "precio_por": "envase",
+      "nombre_mercadona": "Aceite de girasol refinado 0,2º Hacendado",
+      "seccion": "Aceite, especias y salsas",
+      "foto": "https://prod-mercadona.imgix.net/images/3de50b8eb0dd7aedd0c8a7da4bd2de31.jpg?fit=crop&h=200&w=200",
+      "alergenos": [],
+      "origen": []
+    },
+    {
+      "id": "ketchup",
+      "nombre": "Kétchup",
+      "envase": 600,
+      "unidad": "g",
+      "conservacion": "despensa",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 1.05,
+      "mercadona_id": "23579",
+      "precio_por": "envase",
+      "nombre_mercadona": "Ketchup Hacendado",
+      "seccion": "Aceite, especias y salsas",
+      "foto": "https://prod-mercadona.imgix.net/images/560d3c1a007e5ab9c97cc0bb2b23b206.jpg?fit=crop&h=200&w=200",
+      "alergenos": [],
+      "origen": []
+    },
+    {
+      "id": "mayonesa",
+      "nombre": "Mayonesa",
+      "envase": 240,
+      "unidad": "ml",
+      "conservacion": "despensa",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 1.05,
+      "mercadona_id": "52728",
+      "precio_por": "envase",
+      "nombre_mercadona": "Mayonesa Hacendado",
+      "seccion": "Aceite, especias y salsas",
+      "foto": "https://prod-mercadona.imgix.net/images/8fad795a540a94bad45e28495ca1b61e.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "huevo"
+      ],
+      "origen": [
+        "huevo"
+      ]
+    },
+    {
+      "id": "alioli",
+      "nombre": "Alioli",
+      "envase": 310,
+      "unidad": "ml",
+      "conservacion": "despensa",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 1.45,
+      "mercadona_id": "7973",
+      "precio_por": "envase",
+      "nombre_mercadona": "Alioli con perejil Hacendado",
+      "seccion": "Aceite, especias y salsas",
+      "foto": "https://prod-mercadona.imgix.net/images/cc105ddcf96286e8739a8f606a8bbe23.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "huevo"
+      ],
+      "origen": [
+        "huevo"
+      ]
+    },
+    {
+      "id": "salsa_yogur",
+      "nombre": "Salsa de yogur",
+      "envase": 310,
+      "unidad": "ml",
+      "conservacion": "despensa",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 1.2,
+      "mercadona_id": "17327",
+      "precio_por": "envase",
+      "nombre_mercadona": "Salsa Yogur Hacendado",
+      "seccion": "Aceite, especias y salsas",
+      "foto": "https://prod-mercadona.imgix.net/images/f4f57aefa10e985720547fb5709d2239.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "lacteos",
+        "huevo",
+        "mostaza"
+      ],
+      "origen": [
+        "lacteo",
+        "huevo"
+      ]
+    },
+    {
+      "id": "relleno_kebab",
+      "nombre": "Carne de kebab de pollo congelada",
+      "envase": 300,
+      "unidad": "g",
+      "conservacion": "congelado",
+      "pasillo": "Congelados",
+      "descongelar": false,
+      "precio_estimado": 3.15,
+      "mercadona_id": "13778",
+      "precio_por": "envase",
+      "nombre_mercadona": "Relleno para kebab con carne de pollo asado Hacendado ultracongelado",
+      "seccion": "Congelados",
+      "foto": "https://prod-mercadona.imgix.net/images/84adc6ad27ca9c31c3e4eedcf0819b9f.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "soja"
+      ],
+      "origen": [
+        "carne"
+      ]
+    },
+    {
+      "id": "tortillas_maxi",
+      "nombre": "Tortillas de trigo grandes (6 ud)",
+      "envase": 6,
+      "unidad": "ud",
+      "conservacion": "despensa",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 1.5,
+      "mercadona_id": "80870",
+      "precio_por": "envase",
+      "nombre_mercadona": "Maxi tortillas de trigo Hacendado",
+      "seccion": "Panadería y pastelería",
+      "foto": "https://prod-mercadona.imgix.net/images/9bbd7b9434f81a70eb1514d235587d1f.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "gluten"
+      ],
+      "origen": []
+    },
+    {
+      "id": "chorizo",
+      "nombre": "Chorizo dulce (pieza)",
+      "envase": 280,
+      "unidad": "g",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 2.49,
+      "mercadona_id": "54209",
+      "precio_por": "envase",
+      "nombre_mercadona": "Chorizo dulce extra Hacendado",
+      "seccion": "Charcutería y quesos",
+      "foto": "https://prod-mercadona.imgix.net/images/87a27bdd0d2ebaba9be032cc9d798f3e.jpeg?fit=crop&h=200&w=200",
+      "alergenos": [],
+      "origen": [
+        "carne",
+        "cerdo"
+      ]
+    },
+    {
+      "id": "mantequilla",
+      "nombre": "Mantequilla",
+      "envase": 250,
+      "unidad": "g",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 2.05,
+      "mercadona_id": "20716",
+      "precio_por": "envase",
+      "nombre_mercadona": "Mantequilla sin sal añadida Hacendado",
+      "seccion": "Huevos, leche y mantequilla",
+      "foto": "https://prod-mercadona.imgix.net/images/48232d267bc61b1c1f2d4c7a192fa37f.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "lacteos"
+      ],
+      "origen": [
+        "lacteo"
+      ]
+    },
+    {
+      "id": "grana_padano",
+      "nombre": "Queso grana padano rallado",
+      "envase": 100,
+      "unidad": "g",
+      "conservacion": "fresco",
+      "pasillo": "Huevos y lácteos",
+      "descongelar": false,
+      "precio_estimado": 1.65,
+      "mercadona_id": "51146",
+      "precio_por": "envase",
+      "nombre_mercadona": "Queso en polvo grana padano Hacendado",
+      "seccion": "Charcutería y quesos",
+      "foto": "https://prod-mercadona.imgix.net/images/4a8175be3a61ee058257e1bacbf59d9d.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "lacteos",
+        "huevo"
+      ],
+      "origen": [
+        "lacteo",
+        "huevo"
+      ]
+    },
+    {
+      "id": "pan_molde",
+      "nombre": "Pan de molde blanco",
+      "envase": 16,
+      "unidad": "ud",
+      "conservacion": "despensa",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 0.8,
+      "mercadona_id": "13810",
+      "precio_por": "envase",
+      "nombre_mercadona": "Pan de molde blanco Hacendado",
+      "seccion": "Panadería y pastelería",
+      "foto": "https://prod-mercadona.imgix.net/images/37367d7a79c63686cbdb1cdad6b5e927.jpeg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "gluten"
+      ],
+      "origen": []
+    },
+    {
+      "id": "pepinillos",
+      "nombre": "Pepinillos en vinagre",
+      "envase": 420,
+      "unidad": "g",
+      "conservacion": "despensa",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 1.45,
+      "mercadona_id": "11565",
+      "precio_por": "envase",
+      "nombre_mercadona": "Pepinillos en vinagre Hacendado",
+      "seccion": "Aperitivos",
+      "foto": "https://prod-mercadona.imgix.net/images/d0f57c8e5ff716eea1edd230a0d214f7.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "sulfitos"
+      ],
+      "origen": []
+    },
+    {
+      "id": "salsa_burger",
+      "nombre": "Salsa burger",
+      "envase": 250,
+      "unidad": "ml",
+      "conservacion": "despensa",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 1.4,
+      "mercadona_id": "17347",
+      "precio_por": "envase",
+      "nombre_mercadona": "Salsa Burger Hacendado",
+      "seccion": "Aceite, especias y salsas",
+      "foto": "https://prod-mercadona.imgix.net/images/afc432a6cb8dca0e3c72c62212f4c8f5.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "lacteos",
+        "mostaza"
+      ],
+      "origen": [
+        "lacteo"
+      ]
+    },
+    {
+      "id": "cebolla_frita",
+      "nombre": "Cebolla frita crujiente",
+      "envase": 150,
+      "unidad": "g",
+      "conservacion": "despensa",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 1.15,
+      "mercadona_id": "34208",
+      "precio_por": "envase",
+      "nombre_mercadona": "Cebolla frita crujiente Hacendado",
+      "seccion": "Aceite, especias y salsas",
+      "foto": "https://prod-mercadona.imgix.net/images/181ada199674ece135e225c9a06936c2.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "gluten"
+      ],
+      "origen": []
+    },
+    {
+      "id": "sazonador_fajitas",
+      "nombre": "Sazonador para fajitas",
+      "envase": 17,
+      "unidad": "g",
+      "conservacion": "despensa",
+      "pasillo": "Despensa",
+      "descongelar": false,
+      "precio_estimado": 0.9,
+      "mercadona_id": "23353",
+      "precio_por": "envase",
+      "nombre_mercadona": "Sazonador para fajitas Hacendado sabor tex-mex",
+      "seccion": "Aceite, especias y salsas",
+      "foto": "https://prod-mercadona.imgix.net/images/b20a3a1c3971641d5aa0d0014fa03c05.jpeg?fit=crop&h=200&w=200",
+      "alergenos": [],
+      "origen": []
+    },
+    {
+      "id": "calamares_romana",
+      "nombre": "Anillas de pota a la romana congeladas",
+      "envase": 500,
+      "unidad": "g",
+      "conservacion": "congelado",
+      "pasillo": "Congelados",
+      "descongelar": false,
+      "precio_estimado": 5.25,
+      "mercadona_id": "63163",
+      "precio_por": "envase",
+      "nombre_mercadona": "Anillas de pota a la romana Hacendado ultracongeladas",
+      "seccion": "Congelados",
+      "foto": "https://prod-mercadona.imgix.net/images/dc1663f10c444bbf164e13763c9b1a14.jpg?fit=crop&h=200&w=200",
+      "alergenos": [
+        "moluscos",
+        "gluten",
+        "huevo"
+      ],
+      "origen": [
+        "marisco",
+        "huevo"
+      ]
+    },
+    {
+      "id": "jamoncitos",
+      "nombre": "Jamoncitos de pollo",
+      "envase": 920,
+      "unidad": "g",
+      "conservacion": "congelar",
+      "pasillo": "Carne y pescado",
+      "descongelar": true,
+      "precio_estimado": 3.5,
+      "mercadona_id": "2778",
+      "precio_por": "kilo",
+      "nombre_mercadona": "Jamoncitos de pollo",
+      "seccion": "Carne",
+      "foto": "https://prod-mercadona.imgix.net/images/bdb83c7c681de567327ae97747a5d2bf.jpg?fit=crop&h=200&w=200",
+      "alergenos": [],
+      "origen": [
+        "carne"
+      ]
+    },
+    {
+      "id": "gallina",
+      "nombre": "Gallina (media)",
+      "envase": 450,
+      "unidad": "g",
+      "conservacion": "congelar",
+      "pasillo": "Carne y pescado",
+      "descongelar": true,
+      "precio_estimado": 2.61,
+      "mercadona_id": "3795",
+      "precio_por": "kilo",
+      "nombre_mercadona": "Gallina",
+      "seccion": "Carne",
+      "foto": "https://prod-mercadona.imgix.net/images/30fff55b83e0639e701e725a3fcbbd8b.jpg?fit=crop&h=200&w=200",
+      "alergenos": [],
+      "origen": [
+        "carne"
+      ]
+    },
+    {
+      "id": "carcasa_pollo",
+      "nombre": "Carcasa y espinazo de pollo",
+      "envase": 1000,
+      "unidad": "g",
+      "conservacion": "congelar",
+      "pasillo": "Carne y pescado",
+      "descongelar": true,
+      "precio_estimado": 1.3,
+      "mercadona_id": "2853",
+      "precio_por": "kilo",
+      "nombre_mercadona": "Carcasa y espinazo de pollo",
+      "seccion": "Carne",
+      "foto": "https://prod-mercadona.imgix.net/images/5e85a7c4d66fe891192d6c6175a2f1a9.jpg?fit=crop&h=200&w=200",
+      "alergenos": [],
+      "origen": [
+        "carne"
+      ]
     }
   ]
 }

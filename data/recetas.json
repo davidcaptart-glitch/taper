@@ -44868,6 +44868,2418 @@
           ]
         }
       ]
+    },
+    {
+      "id": "cap_pizzasuper",
+      "nombre": "Pizza del súper (una por persona)",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pizza_jyq",
+          "cantidad": 1
+        }
+      ],
+      "nutricion": {
+        "kcal": 1020,
+        "proteina": 44,
+        "hidratos": 112,
+        "grasa": 42
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 20,
+          "minutos_trabajo": 3,
+          "pasos": [
+            "Precalienta el horno a 220 °C, calor arriba y abajo. Cada uno elige su pizza: una entera por adulto y media por niño.",
+            "Quita el envoltorio y el cartón y pon la pizza directamente sobre la rejilla o sobre la bandeja en la altura media. Hornea 11 min (3-4 min más si es congelada; no hace falta descongelarla), hasta que el queso burbujee y el borde esté dorado.",
+            "Déjala reposar 1 min, córtala en porciones en la tabla y a la mesa."
+          ],
+          "utensilios": [
+            "bandeja de horno",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 220,
+              "modo": "arriba y abajo",
+              "min": 11,
+              "nota": "congelada: 3-4 min más"
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 20,
+          "minutos_trabajo": 3,
+          "pasos": [
+            "Quita el envoltorio. Si la pizza no cabe entera en la cesta, córtala por la mitad en la tabla.",
+            "Cuécela en la cesta de la air fryer a 190 °C 8 min (10 min si es congelada), de media en media si hace falta, hasta que el queso se funda y la base esté crujiente.",
+            "Córtala en porciones: una pizza por adulto y media por niño."
+          ],
+          "utensilios": [
+            "cesta de la air fryer",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 8,
+              "nota": "de media en media; congelada 10 min"
+            },
+            null
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_pizzacasera",
+      "nombre": "Pizza casera con masa fresca, jamón, champiñones y mozzarella",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "masa_pizza",
+          "cantidad": 140
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 50
+        },
+        {
+          "producto": "mozzarella_fresca",
+          "cantidad": 60
+        },
+        {
+          "producto": "queso",
+          "cantidad": 30
+        },
+        {
+          "producto": "jamon",
+          "cantidad": 40
+        },
+        {
+          "producto": "champi",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 740,
+        "proteina": 37,
+        "hidratos": 78,
+        "grasa": 30
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Saca la masa de la nevera 10 min antes y precalienta el horno a 250 °C (o al máximo), calor arriba y abajo.",
+            "Desenrolla la masa con su propio papel sobre la bandeja. Úntala con el tomate con el dorso de una cuchara, sin llegar al borde, y espolvorea orégano.",
+            "Reparte el jamón en trozos, el champiñón laminado, la mozzarella fresca escurrida y troceada, y el queso rallado. Un hilo de aceite de oliva por encima.",
+            "Hornea en la parte baja del horno 13 min, hasta que el borde esté dorado y el queso burbujee. Corta en porciones."
+          ],
+          "utensilios": [
+            "bandeja de horno",
+            "tabla y cuchillo",
+            "cuchara"
+          ],
+          "info": [
+            null,
+            null,
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 250,
+              "modo": "arriba y abajo",
+              "min": 13,
+              "nota": "parte baja del horno"
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Corta la masa en piezas que quepan en la cesta de tu air fryer (una por persona) y ponlas sobre papel de horno.",
+            "Úntalas con el tomate y orégano y reparte el jamón, el champiñón laminado, la mozzarella escurrida y el queso rallado.",
+            "Cuécelas de una en una en la air fryer a 190 °C 9 min, hasta que la base esté crujiente y el queso dorado."
+          ],
+          "utensilios": [
+            "molde apto para air fryer",
+            "papel de horno",
+            "tabla y cuchillo",
+            "cuchara"
+          ],
+          "info": [
+            null,
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 9,
+              "nota": "de una en una"
+            }
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_burgercompleta",
+      "nombre": "Hamburguesa completa con pan brioche, cheddar, bacón y patatas fritas",
+      "grupo": "carne",
+      "proteina_principal": "ternera",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "burger_vacuno",
+          "cantidad": 180
+        },
+        {
+          "producto": "pan_brioche",
+          "cantidad": 1
+        },
+        {
+          "producto": "cheddar",
+          "cantidad": 25
+        },
+        {
+          "producto": "bacon",
+          "cantidad": 30
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 40
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 15
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 15
+        },
+        {
+          "producto": "ketchup",
+          "cantidad": 15
+        },
+        {
+          "producto": "patatas_fritas",
+          "cantidad": 200
+        }
+      ],
+      "nutricion": {
+        "kcal": 1170,
+        "proteina": 54,
+        "hidratos": 98,
+        "grasa": 61
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 35,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Pon las patatas congeladas, sin descongelar, en la cesta de la air fryer a 200 °C 15 min, sacudiendo la cesta a mitad. Sálalas al sacarlas.",
+            "Mientras, en la tabla, corta el tomate y la cebolla en rodajas y lava la lechuga.",
+            "Saca las patatas y pon en la cesta las lonchas de bacón a 180 °C 5 min, hasta que estén crujientes.",
+            "En una sartén a fuego fuerte, sin aceite, haz la hamburguesa con sal y pimienta 4 min por cada lado, hasta que esté bien hecha por dentro. En el último minuto pon encima el cheddar y tapa para que se funda.",
+            "Tuesta el pan abierto en la misma sartén 1 min. Monta: pan, kétchup, lechuga, tomate, hamburguesa con queso, bacón y cebolla. Mete las patatas 2 min más en la air fryer para servirlas calientes."
+          ],
+          "utensilios": [
+            "cesta de la air fryer",
+            "tabla y cuchillo",
+            "sartén",
+            "espátula"
+          ],
+          "info": [
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 15,
+              "nota": "sacude a mitad"
+            },
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 180,
+              "min": 5
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "fuerte",
+              "min": 8,
+              "nota": "4 min por lado"
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 1
+            }
+          ]
+        },
+        {
+          "aparato": "vitro",
+          "minutos": 35,
+          "minutos_trabajo": 20,
+          "pasos": [
+            "En la tabla, corta el tomate y la cebolla en rodajas y lava la lechuga.",
+            "En una sartén honda, calienta dos dedos de aceite de girasol a fuego medio-alto (unos 180 °C) y fríe las patatas congeladas en tandas pequeñas 5 min, hasta que estén doradas. Escúrrelas sobre papel de cocina y sálalas.",
+            "En una sartén a fuego medio, dora el bacón sin aceite 4 min, hasta que esté crujiente, y resérvalo sobre papel de cocina.",
+            "En la misma sartén, a fuego fuerte, haz la hamburguesa con sal y pimienta 4 min por cada lado, hasta que esté bien hecha por dentro. En el último minuto pon encima el cheddar y tapa para que se funda.",
+            "Tuesta el pan abierto 1 min en la sartén y monta: pan, kétchup, lechuga, tomate, hamburguesa con queso, bacón y cebolla. Sirve con las patatas."
+          ],
+          "utensilios": [
+            "sartén honda",
+            "sartén",
+            "papel de cocina",
+            "tabla y cuchillo",
+            "espátula"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén honda",
+              "fuego": "medio-alto",
+              "min": 10,
+              "nota": "en tandas"
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 4
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "fuerte",
+              "min": 8,
+              "nota": "4 min por lado"
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 1
+            }
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_smash",
+      "nombre": "Smash burger doble con cheddar, pepinillos y salsa burger",
+      "grupo": "carne",
+      "proteina_principal": "ternera",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "picada",
+          "cantidad": 160
+        },
+        {
+          "producto": "pan_brioche",
+          "cantidad": 1
+        },
+        {
+          "producto": "cheddar",
+          "cantidad": 40
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 30
+        },
+        {
+          "producto": "pepinillos",
+          "cantidad": 20
+        },
+        {
+          "producto": "salsa_burger",
+          "cantidad": 20
+        },
+        {
+          "producto": "patatas_fritas",
+          "cantidad": 180
+        }
+      ],
+      "nutricion": {
+        "kcal": 1160,
+        "proteina": 49,
+        "hidratos": 86,
+        "grasa": 69
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 30,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Pon las patatas congeladas, sin descongelar, en la cesta de la air fryer a 200 °C 15 min, sacudiendo la cesta a mitad. Sálalas al sacarlas.",
+            "Mientras, haz dos bolas con la carne (80 g cada una) sin amasarla mucho, y pica la cebolla muy fina y los pepinillos en rodajas.",
+            "Calienta una sartén antiadherente a fuego fuerte hasta que humee. Pon las bolas, aplástalas con fuerza con la espátula hasta dejarlas muy finas y sala. Deja 2 min sin tocar, hasta que el borde se tueste.",
+            "Dales la vuelta rascando con la espátula, pon una loncha de cheddar sobre cada una y deja 1 min más.",
+            "Tuesta el pan 1 min en la sartén. Monta: pan con salsa burger, las dos carnes con queso una sobre otra, cebolla picada y pepinillos. Sirve con las patatas."
+          ],
+          "utensilios": [
+            "cesta de la air fryer",
+            "sartén antiadherente",
+            "espátula",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 15,
+              "nota": "sacude a mitad"
+            },
+            null,
+            {
+              "utensilio": "sartén antiadherente",
+              "fuego": "fuerte",
+              "min": 2,
+              "nota": "aplasta fuerte al ponerlas"
+            },
+            {
+              "utensilio": "sartén antiadherente",
+              "fuego": "fuerte",
+              "min": 1
+            },
+            {
+              "utensilio": "sartén antiadherente",
+              "fuego": "medio",
+              "min": 1
+            }
+          ]
+        },
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 18,
+          "pasos": [
+            "Haz dos bolas con la carne (80 g cada una) sin amasarla mucho, y pica la cebolla muy fina y los pepinillos en rodajas.",
+            "En una sartén honda, calienta dos dedos de aceite de girasol a fuego medio-alto (unos 180 °C) y fríe las patatas congeladas en tandas pequeñas 5 min, hasta que estén doradas. Escúrrelas sobre papel de cocina y sálalas.",
+            "Calienta una sartén antiadherente a fuego fuerte hasta que humee. Pon las bolas, aplástalas con fuerza con la espátula hasta dejarlas muy finas y sala. Deja 2 min sin tocar, hasta que el borde se tueste.",
+            "Dales la vuelta rascando con la espátula, pon una loncha de cheddar sobre cada una y deja 1 min más.",
+            "Tuesta el pan 1 min en la sartén. Monta: pan con salsa burger, las dos carnes con queso una sobre otra, cebolla picada y pepinillos. Sirve con las patatas."
+          ],
+          "utensilios": [
+            "sartén honda",
+            "sartén antiadherente",
+            "papel de cocina",
+            "espátula",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén honda",
+              "fuego": "medio-alto",
+              "min": 10,
+              "nota": "en tandas"
+            },
+            {
+              "utensilio": "sartén antiadherente",
+              "fuego": "fuerte",
+              "min": 2,
+              "nota": "aplasta fuerte al ponerlas"
+            },
+            {
+              "utensilio": "sartén antiadherente",
+              "fuego": "fuerte",
+              "min": 1
+            },
+            {
+              "utensilio": "sartén antiadherente",
+              "fuego": "medio",
+              "min": 1
+            }
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_perritos",
+      "nombre": "Perritos calientes con cebolla crujiente y patatas fritas",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pan_perrito",
+          "cantidad": 2
+        },
+        {
+          "producto": "frankfurt",
+          "cantidad": 90
+        },
+        {
+          "producto": "ketchup",
+          "cantidad": 15
+        },
+        {
+          "producto": "mostaza",
+          "cantidad": 5
+        },
+        {
+          "producto": "cebolla_frita",
+          "cantidad": 10
+        },
+        {
+          "producto": "patatas_fritas",
+          "cantidad": 150
+        }
+      ],
+      "nutricion": {
+        "kcal": 860,
+        "proteina": 25,
+        "hidratos": 102,
+        "grasa": 39
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 25,
+          "minutos_trabajo": 6,
+          "pasos": [
+            "Pon las patatas congeladas, sin descongelar, en la cesta de la air fryer a 200 °C 15 min, sacudiendo la cesta a mitad. Sálalas al sacarlas.",
+            "Haz unos cortes en diagonal a las salchichas (dos por persona) y ponlas en la cesta de la air fryer a 180 °C 5 min.",
+            "Abre los panes, mete una salchicha en cada uno y caliéntalos en la cesta 1 min.",
+            "Pon kétchup y mostaza por encima y termina con la cebolla crujiente. Sirve con las patatas."
+          ],
+          "utensilios": [
+            "cesta de la air fryer",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 15,
+              "nota": "sacude a mitad"
+            },
+            {
+              "utensilio": "air fryer",
+              "temp": 180,
+              "min": 5
+            },
+            {
+              "utensilio": "air fryer",
+              "temp": 180,
+              "min": 1
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En una sartén honda, calienta dos dedos de aceite de girasol a fuego medio-alto (unos 180 °C) y fríe las patatas congeladas en tandas pequeñas 5 min, hasta que estén doradas. Escúrrelas sobre papel de cocina y sálalas.",
+            "En un cazo con agua a fuego medio, calienta las salchichas (dos por persona) 5 min sin que llegue a hervir fuerte, para que no se revienten.",
+            "Abre los panes y mete una salchicha escurrida en cada uno. Pon kétchup y mostaza por encima y termina con la cebolla crujiente. Sirve con las patatas."
+          ],
+          "utensilios": [
+            "sartén honda",
+            "cazo",
+            "papel de cocina",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "sartén honda",
+              "fuego": "medio-alto",
+              "min": 10,
+              "nota": "en tandas"
+            },
+            {
+              "utensilio": "cazo",
+              "fuego": "medio",
+              "min": 5
+            },
+            null
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_nachos",
+      "nombre": "Nachos gratinados con carne, queso, guacamole y jalapeños",
+      "grupo": "carne",
+      "proteina_principal": "ternera",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "picante",
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "nachos",
+          "cantidad": 70
+        },
+        {
+          "producto": "picada",
+          "cantidad": 100
+        },
+        {
+          "producto": "sazonador_fajitas",
+          "cantidad": 3
+        },
+        {
+          "producto": "queso",
+          "cantidad": 50
+        },
+        {
+          "producto": "cheddar",
+          "cantidad": 25
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 50
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 20
+        },
+        {
+          "producto": "jalapenos",
+          "cantidad": 15
+        },
+        {
+          "producto": "guacamole",
+          "cantidad": 60
+        }
+      ],
+      "nutricion": {
+        "kcal": 970,
+        "proteina": 41,
+        "hidratos": 52,
+        "grasa": 66
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En la tabla, pica la cebolla y el tomate en dados pequeños.",
+            "En una sartén a fuego fuerte, dora la carne picada con un chorrito de aceite 6 min, desmenuzándola; añade el sazonador y 2 cucharadas de agua y deja 1 min más.",
+            "En una fuente de horno, haz una capa de nachos, la mitad de la carne y del queso rallado, otra capa de nachos y el resto de la carne, el queso rallado y el cheddar en trozos.",
+            "Gratina a 200 °C con el grill 6 min, hasta que el queso se funda y burbujee.",
+            "Saca y reparte por encima el tomate, la cebolla, los jalapeños y el guacamole a cucharadas. Se come al momento, con las manos."
+          ],
+          "utensilios": [
+            "sartén",
+            "fuente de horno",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén",
+              "fuego": "fuerte",
+              "min": 7
+            },
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 200,
+              "modo": "gratinar",
+              "min": 6,
+              "nota": "vigila que no se quemen los bordes"
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En la tabla, pica la cebolla y el tomate en dados pequeños.",
+            "En una sartén a fuego fuerte, dora la carne picada con un chorrito de aceite 6 min, desmenuzándola; añade el sazonador y 2 cucharadas de agua y deja 1 min más.",
+            "En un molde apto para air fryer, haz capas de nachos, carne, queso rallado y cheddar en trozos.",
+            "Cuécelo en la air fryer a 180 °C 5 min, hasta que el queso se funda (por tandas si no cabe todo).",
+            "Reparte por encima el tomate, la cebolla, los jalapeños y el guacamole a cucharadas, y a la mesa."
+          ],
+          "utensilios": [
+            "sartén",
+            "molde apto para air fryer",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén",
+              "fuego": "fuerte",
+              "min": 7
+            },
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 180,
+              "min": 5,
+              "nota": "por tandas"
+            },
+            null
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_fajitas",
+      "nombre": "Fajitas mixtas de pollo y ternera con guacamole y queso",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pechuga",
+          "cantidad": 80
+        },
+        {
+          "producto": "ternera",
+          "cantidad": 70
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        },
+        {
+          "producto": "sazonador_fajitas",
+          "cantidad": 4
+        },
+        {
+          "producto": "tortillas",
+          "cantidad": 3
+        },
+        {
+          "producto": "guacamole",
+          "cantidad": 50
+        },
+        {
+          "producto": "queso",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 830,
+        "proteina": 53,
+        "hidratos": 73,
+        "grasa": 36
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En la tabla, corta el pollo y la ternera en tiras finas, y el pimiento y la cebolla en tiras. Mezcla la carne con la mitad del sazonador.",
+            "En un wok o sartén grande a fuego fuerte, saltea el pimiento y la cebolla con aceite 5 min, que queden tostados pero crujientes, y resérvalos.",
+            "En el mismo wok a fuego fuerte, saltea la carne 5 min; vuelve a echar las verduras con el resto del sazonador y 2 cucharadas de agua y saltea 1 min.",
+            "Calienta las tortillas en una sartén sin aceite 30 segundos por lado.",
+            "Cada uno rellena sus tortillas con la carne y verduras, queso rallado y guacamole, y las enrolla."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "wok o sartén grande",
+            "sartén"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "wok o sartén grande",
+              "fuego": "fuerte",
+              "min": 5
+            },
+            {
+              "utensilio": "wok o sartén grande",
+              "fuego": "fuerte",
+              "min": 6
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 2,
+              "nota": "de una en una"
+            },
+            null
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_quesadillas",
+      "nombre": "Quesadillas de pollo con cheddar, jalapeños y guacamole",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "picante",
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "tortillas",
+          "cantidad": 3
+        },
+        {
+          "producto": "pechuga",
+          "cantidad": 100
+        },
+        {
+          "producto": "sazonador_fajitas",
+          "cantidad": 2
+        },
+        {
+          "producto": "queso",
+          "cantidad": 50
+        },
+        {
+          "producto": "cheddar",
+          "cantidad": 25
+        },
+        {
+          "producto": "jalapenos",
+          "cantidad": 10
+        },
+        {
+          "producto": "guacamole",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 820,
+        "proteina": 52,
+        "hidratos": 64,
+        "grasa": 40
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En la tabla, corta el pollo en dados pequeños y mézclalo con el sazonador.",
+            "En una sartén a fuego medio-alto, dora el pollo con un chorrito de aceite 6 min, hasta que esté bien hecho.",
+            "Sobre media tortilla, reparte queso rallado, pollo, cheddar en trozos y unos jalapeños; dobla la tortilla por la mitad.",
+            "Limpia la sartén y dora las quesadillas a fuego medio sin aceite 2 min por cada lado, aplastando con la espátula, hasta que el queso se funda.",
+            "Córtalas en triángulos y sírvelas con el guacamole para mojar."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "sartén",
+            "espátula"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén",
+              "fuego": "medio-alto",
+              "min": 6
+            },
+            null,
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 8,
+              "nota": "2 min por lado, por tandas"
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 25,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "En la tabla, corta el pollo en dados pequeños y mézclalo con el sazonador.",
+            "En una sartén a fuego medio-alto, dora el pollo con un chorrito de aceite 6 min, hasta que esté bien hecho.",
+            "Sobre media tortilla, reparte queso rallado, pollo, cheddar en trozos y unos jalapeños; dobla la tortilla por la mitad y pincélala con un poco de aceite.",
+            "Cuécelas en la cesta de la air fryer a 190 °C 5 min, dándoles la vuelta a mitad (por tandas). Pon un palillo si se abren.",
+            "Córtalas en triángulos y sírvelas con el guacamole para mojar."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "sartén",
+            "cesta de la air fryer"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén",
+              "fuego": "medio-alto",
+              "min": 6
+            },
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 5,
+              "nota": "da la vuelta a mitad"
+            },
+            null
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_durum",
+      "nombre": "Dürüm de kebab de pollo con salsa de yogur y patatas fritas",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "tortillas_maxi",
+          "cantidad": 1
+        },
+        {
+          "producto": "relleno_kebab",
+          "cantidad": 120
+        },
+        {
+          "producto": "salsa_yogur",
+          "cantidad": 30
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 30
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 50
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 20
+        },
+        {
+          "producto": "patatas_fritas",
+          "cantidad": 120
+        }
+      ],
+      "nutricion": {
+        "kcal": 690,
+        "proteina": 31,
+        "hidratos": 71,
+        "grasa": 31
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 30,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pon las patatas congeladas, sin descongelar, en la cesta de la air fryer a 200 °C 15 min, sacudiendo la cesta a mitad. Sálalas al sacarlas.",
+            "Pon la carne de kebab congelada en la cesta de la air fryer a 200 °C 7 min, sacudiendo a mitad, hasta que los bordes se tuesten.",
+            "Mientras, en la tabla, corta el tomate en dados y la cebolla en juliana fina, y calienta la tortilla en una sartén sin aceite 30 segundos por lado.",
+            "En el centro de la tortilla pon lechuga, tomate, cebolla, la carne y la salsa de yogur (y una pizca de picante si os gusta). Mete unas cuantas patatas dentro, como en el kebab, dobla los lados y enróllala bien apretada. El resto de patatas, al lado."
+          ],
+          "utensilios": [
+            "cesta de la air fryer",
+            "tabla y cuchillo",
+            "sartén"
+          ],
+          "info": [
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 15,
+              "nota": "sacude a mitad"
+            },
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 7,
+              "nota": "sacude a mitad"
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 1
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En una sartén honda, calienta dos dedos de aceite de girasol a fuego medio-alto (unos 180 °C) y fríe las patatas congeladas en tandas pequeñas 5 min, hasta que estén doradas. Escúrrelas sobre papel de cocina y sálalas.",
+            "En una sartén a fuego fuerte, dora la carne de kebab con un chorrito de aceite 6 min, sin removerla mucho para que se tueste.",
+            "En la tabla, corta el tomate en dados y la cebolla en juliana fina, y calienta la tortilla en la sartén limpia 30 segundos por lado.",
+            "En el centro de la tortilla pon lechuga, tomate, cebolla, la carne y la salsa de yogur. Mete unas cuantas patatas dentro, dobla los lados y enróllala bien apretada. El resto de patatas, al lado."
+          ],
+          "utensilios": [
+            "sartén honda",
+            "sartén",
+            "papel de cocina",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "sartén honda",
+              "fuego": "medio-alto",
+              "min": 10,
+              "nota": "en tandas"
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "fuerte",
+              "min": 6
+            },
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 1
+            },
+            null
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_sanjacobos",
+      "nombre": "San jacobos con patatas fritas y ensalada",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "san_jacobos",
+          "cantidad": 175
+        },
+        {
+          "producto": "patatas_fritas",
+          "cantidad": 150
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 40
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 720,
+        "proteina": 24,
+        "hidratos": 74,
+        "grasa": 35
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 30,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Pon las patatas congeladas, sin descongelar, en la cesta de la air fryer a 200 °C 15 min, sacudiendo la cesta a mitad. Sálalas al sacarlas.",
+            "Saca las patatas y pon los san jacobos congelados (dos por persona), sin descongelar y pulverizados con un poco de aceite, en la cesta a 190 °C 10 min, dándoles la vuelta a mitad.",
+            "Mientras, en la ensaladera, aliña la lechuga y el tomate troceado con aceite y sal. Vuelve a meter las patatas 2 min con los san jacobos para calentarlas y sirve."
+          ],
+          "utensilios": [
+            "cesta de la air fryer",
+            "tabla y cuchillo",
+            "ensaladera"
+          ],
+          "info": [
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 15,
+              "nota": "sacude a mitad"
+            },
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 10,
+              "nota": "da la vuelta a mitad"
+            },
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 2
+            }
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 35,
+          "minutos_trabajo": 5,
+          "pasos": [
+            "Extiende las patatas congeladas en una bandeja con papel de horno, sin amontonar, y hornéalas a 220 °C, calor arriba y abajo, 20 min, dándoles la vuelta a mitad. Sálalas al sacarlas.",
+            "Haz sitio en la bandeja, añade los san jacobos congelados (dos por persona) y hornea 14 min más, dándoles la vuelta a mitad, hasta que estén dorados y el queso se funda.",
+            "Mientras, en la ensaladera, aliña la lechuga y el tomate troceado con aceite y sal, y sirve."
+          ],
+          "utensilios": [
+            "bandeja de horno",
+            "papel de horno",
+            "tabla y cuchillo",
+            "ensaladera"
+          ],
+          "info": [
+            {
+              "utensilio": "horno",
+              "temp": 220,
+              "modo": "arriba y abajo",
+              "min": 20,
+              "nota": "da la vuelta a mitad"
+            },
+            {
+              "utensilio": "horno",
+              "temp": 220,
+              "modo": "arriba y abajo",
+              "min": 14,
+              "nota": "da la vuelta a mitad"
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "vitro",
+          "minutos": 30,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En una sartén honda, calienta dos dedos de aceite de girasol a fuego medio-alto (unos 180 °C) y fríe las patatas congeladas en tandas pequeñas 5 min, hasta que estén doradas. Escúrrelas sobre papel de cocina y sálalas.",
+            "En el mismo aceite a fuego medio, fríe los san jacobos congelados (dos por persona) 3 min por cada lado, hasta que estén dorados y el queso fundido. Escúrrelos en papel de cocina.",
+            "En la ensaladera, aliña la lechuga y el tomate troceado con aceite y sal, y sirve."
+          ],
+          "utensilios": [
+            "sartén honda",
+            "papel de cocina",
+            "tabla y cuchillo",
+            "ensaladera"
+          ],
+          "info": [
+            {
+              "utensilio": "sartén honda",
+              "fuego": "medio-alto",
+              "min": 10,
+              "nota": "en tandas"
+            },
+            {
+              "utensilio": "sartén honda",
+              "fuego": "medio",
+              "min": 6,
+              "nota": "3 min por lado"
+            },
+            null
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_bravas",
+      "nombre": "Patatas bravas caseras con alioli",
+      "grupo": "vegetal",
+      "proteina_principal": "vegetal",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "picante",
+        "capricho"
+      ],
+      "dieta": "vegetariano",
+      "ingredientes": [
+        {
+          "producto": "patata",
+          "cantidad": 300
+        },
+        {
+          "producto": "aceite_girasol",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 40
+        },
+        {
+          "producto": "alioli",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 610,
+        "proteina": 7,
+        "hidratos": 56,
+        "grasa": 39
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 40,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "Pela las patatas y córtalas en dados irregulares de 3 cm. Lávalas y sécalas muy bien con papel de cocina.",
+            "En una sartén honda, cubre las patatas con el aceite de girasol y fríelas a fuego medio 15 min, que se hagan por dentro sin dorarse. Sácalas.",
+            "Mientras, en un cazo pequeño a fuego bajo, calienta el tomate frito con una cucharadita de pimentón picante, otra de dulce, una pizca de comino y unas gotas de vinagre 3 min: es la salsa brava (pon menos picante si es para niños).",
+            "Sube el fuego a medio-alto y vuelve a freír las patatas 4 min, hasta que estén doradas y crujientes. Escúrrelas sobre papel de cocina y sálalas.",
+            "Sírvelas con la salsa brava por encima y el alioli al lado o en zigzag."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "sartén honda",
+            "cazo pequeño",
+            "papel de cocina"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén honda",
+              "fuego": "medio",
+              "min": 15
+            },
+            {
+              "utensilio": "cazo pequeño",
+              "fuego": "bajo",
+              "min": 3
+            },
+            {
+              "utensilio": "sartén honda",
+              "fuego": "medio-alto",
+              "min": 4
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 35,
+          "minutos_trabajo": 10,
+          "pasos": [
+            "Pela las patatas, córtalas en dados irregulares de 3 cm, lávalas y sécalas bien. En un bol, mézclalas con una cucharada de aceite y sal.",
+            "Cuécelas en la cesta de la air fryer a 200 °C 22 min, sacudiendo la cesta dos veces, hasta que estén doradas.",
+            "Mientras, en un cazo pequeño a fuego bajo, calienta el tomate frito con una cucharadita de pimentón picante, otra de dulce, una pizca de comino y unas gotas de vinagre 3 min.",
+            "Sírvelas con la salsa brava por encima y el alioli al lado."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "bol",
+            "cesta de la air fryer",
+            "cazo pequeño"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 22,
+              "nota": "sacude dos veces"
+            },
+            {
+              "utensilio": "cazo pequeño",
+              "fuego": "bajo",
+              "min": 3
+            },
+            null
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_croquetas",
+      "nombre": "Croquetas caseras de jamón (fritas) con ensalada",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "serrano",
+          "cantidad": 40
+        },
+        {
+          "producto": "jamon",
+          "cantidad": 30
+        },
+        {
+          "producto": "mantequilla",
+          "cantidad": 25
+        },
+        {
+          "producto": "harina",
+          "cantidad": 35
+        },
+        {
+          "producto": "leche",
+          "cantidad": 220
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "pan_rallado",
+          "cantidad": 40
+        },
+        {
+          "producto": "aceite_girasol",
+          "cantidad": 60
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 50
+        }
+      ],
+      "nutricion": {
+        "kcal": 910,
+        "proteina": 40,
+        "hidratos": 68,
+        "grasa": 52
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 75,
+          "minutos_trabajo": 45,
+          "pasos": [
+            "En la tabla, pica muy fino el jamón serrano y el cocido.",
+            "En una sartén honda a fuego medio, derrite la mantequilla con un chorrito de aceite y sofríe el jamón 1 min. Añade la harina y tuéstala 2 min sin dejar de remover.",
+            "Ve añadiendo la leche caliente poco a poco, sin dejar de remover, y cuece a fuego medio-bajo 12 min, hasta que la masa se despegue de la sartén. Prueba de sal (el jamón ya sala) y añade nuez moscada.",
+            "Extiende la masa en una fuente, tápala con film a piel y déjala enfriar en la nevera al menos 2 horas (mejor de un día para otro).",
+            "Forma las croquetas con dos cucharas o con las manos. Pásalas por el huevo batido en un plato hondo y luego por el pan rallado. Aquí puedes congelarlas.",
+            "Limpia la sartén honda, calienta el aceite de girasol a fuego medio-alto (unos 180 °C) y fríe las croquetas en tandas de 5-6 unos 2 min, hasta que estén doradas. Escúrrelas en papel de cocina y sírvelas con la ensalada."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "sartén honda",
+            "fuente de horno",
+            "plato hondo",
+            "papel de cocina"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén honda",
+              "fuego": "medio",
+              "min": 3
+            },
+            {
+              "utensilio": "sartén honda",
+              "fuego": "bajo",
+              "min": 12,
+              "nota": "remueve sin parar"
+            },
+            null,
+            null,
+            {
+              "utensilio": "sartén honda",
+              "fuego": "medio-alto",
+              "min": 8,
+              "nota": "en tandas pequeñas"
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 70,
+          "minutos_trabajo": 40,
+          "pasos": [
+            "En la tabla, pica muy fino el jamón serrano y el cocido.",
+            "En una sartén honda a fuego medio, derrite la mantequilla con un chorrito de aceite y sofríe el jamón 1 min. Añade la harina y tuéstala 2 min sin dejar de remover.",
+            "Ve añadiendo la leche caliente poco a poco, sin dejar de remover, y cuece a fuego medio-bajo 12 min, hasta que la masa se despegue de la sartén. Añade nuez moscada.",
+            "Extiende la masa en una fuente, tápala con film a piel y déjala enfriar en la nevera al menos 2 horas.",
+            "Forma las croquetas, pásalas por el huevo batido y por el pan rallado, y pulverízalas con aceite.",
+            "Cuécelas en la cesta de la air fryer, sin que se toquen, a 200 °C 9 min, girándolas a mitad. Sirve con la ensalada."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "sartén honda",
+            "fuente de horno",
+            "plato hondo",
+            "cesta de la air fryer"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "sartén honda",
+              "fuego": "medio",
+              "min": 3
+            },
+            {
+              "utensilio": "sartén honda",
+              "fuego": "bajo",
+              "min": 12,
+              "nota": "remueve sin parar"
+            },
+            null,
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 9,
+              "nota": "por tandas, gira a mitad"
+            }
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_calamares",
+      "nombre": "Bocadillo de calamares a la romana con alioli",
+      "grupo": "pescado",
+      "proteina_principal": "marisco",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pan_barra",
+          "cantidad": 125
+        },
+        {
+          "producto": "calamares_romana",
+          "cantidad": 150
+        },
+        {
+          "producto": "alioli",
+          "cantidad": 20
+        }
+      ],
+      "nutricion": {
+        "kcal": 800,
+        "proteina": 24,
+        "hidratos": 95,
+        "grasa": 35
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 15,
+          "minutos_trabajo": 4,
+          "pasos": [
+            "Pon las anillas congeladas, sin descongelar y sin amontonar, en la cesta de la air fryer a 200 °C 9 min, sacudiendo a mitad.",
+            "Mientras, abre la media barra de pan por la mitad en la tabla y caliéntala 1 min en la air fryer al final.",
+            "Rellena el pan con los calamares calientes, unas gotas de limón y el alioli. Se come al momento."
+          ],
+          "utensilios": [
+            "cesta de la air fryer",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 9,
+              "nota": "sacude a mitad"
+            },
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 1
+            },
+            null
+          ]
+        },
+        {
+          "aparato": "vitro",
+          "minutos": 15,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "En una sartén honda, calienta dos dedos de aceite de girasol a fuego medio-alto (unos 180 °C) y fríe las anillas congeladas en tandas 3 min, hasta que estén doradas. Escúrrelas sobre papel de cocina.",
+            "Abre la media barra de pan por la mitad y rellénala con los calamares calientes, unas gotas de limón y el alioli."
+          ],
+          "utensilios": [
+            "sartén honda",
+            "papel de cocina",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "sartén honda",
+              "fuego": "medio-alto",
+              "min": 6,
+              "nota": "en tandas"
+            },
+            null
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_bikini",
+      "nombre": "Bikini (mixto de jamón y queso a la mantequilla) con patatas fritas",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pan_molde",
+          "cantidad": 4
+        },
+        {
+          "producto": "jamon",
+          "cantidad": 50
+        },
+        {
+          "producto": "queso_lonchas",
+          "cantidad": 50
+        },
+        {
+          "producto": "mantequilla",
+          "cantidad": 15
+        },
+        {
+          "producto": "patatas_fritas",
+          "cantidad": 120
+        }
+      ],
+      "nutricion": {
+        "kcal": 820,
+        "proteina": 35,
+        "hidratos": 85,
+        "grasa": 38
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 25,
+          "minutos_trabajo": 6,
+          "pasos": [
+            "Pon las patatas congeladas, sin descongelar, en la cesta de la air fryer a 200 °C 15 min, sacudiendo la cesta a mitad. Sálalas al sacarlas.",
+            "Monta dos sándwiches por persona: pan, queso, jamón, queso y pan. Unta las caras de fuera con mantequilla blanda.",
+            "Cuécelos en la cesta de la air fryer a 190 °C 6 min, dándoles la vuelta a mitad (pon un palillo para que no se abran), hasta que estén dorados y el queso fundido. Córtalos en triángulos y sírvelos con las patatas."
+          ],
+          "utensilios": [
+            "cesta de la air fryer",
+            "cuchillo de untar",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 15,
+              "nota": "sacude a mitad"
+            },
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 6,
+              "nota": "da la vuelta a mitad"
+            }
+          ]
+        },
+        {
+          "aparato": "vitro",
+          "minutos": 25,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En una sartén honda, calienta dos dedos de aceite de girasol a fuego medio-alto (unos 180 °C) y fríe las patatas congeladas en tandas pequeñas 5 min, hasta que estén doradas. Escúrrelas sobre papel de cocina y sálalas.",
+            "Monta dos sándwiches por persona: pan, queso, jamón, queso y pan. Unta las caras de fuera con mantequilla blanda.",
+            "En una sartén a fuego medio, dóralos 3 min por cada lado aplastando con la espátula, hasta que el queso se funda. Córtalos en triángulos y sírvelos con las patatas."
+          ],
+          "utensilios": [
+            "sartén honda",
+            "sartén",
+            "cuchillo de untar",
+            "espátula",
+            "papel de cocina"
+          ],
+          "info": [
+            {
+              "utensilio": "sartén honda",
+              "fuego": "medio-alto",
+              "min": 10,
+              "nota": "en tandas"
+            },
+            null,
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 6,
+              "nota": "3 min por lado"
+            }
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_carbonara",
+      "nombre": "Espaguetis a la carbonara auténtica (guanciale, yema y queso)",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "espaguetis",
+          "cantidad": 100
+        },
+        {
+          "producto": "guanciale",
+          "cantidad": 50
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1.5
+        },
+        {
+          "producto": "grana_padano",
+          "cantidad": 30
+        }
+      ],
+      "nutricion": {
+        "kcal": 910,
+        "proteina": 36,
+        "hidratos": 73,
+        "grasa": 52
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 20,
+          "minutos_trabajo": 12,
+          "pasos": [
+            "Pon a hervir una olla con agua abundante y sal a fuego fuerte. En la tabla, quita la corteza al guanciale y córtalo en tiras gruesas.",
+            "En un bol, bate una yema por persona más un huevo entero por cada dos, con casi todo el queso y mucha pimienta negra recién molida, hasta tener una crema espesa. No lleva nata.",
+            "En una sartén a fuego medio, sin aceite, dora el guanciale 7 min, hasta que suelte la grasa y esté crujiente. Apaga el fuego.",
+            "Cuece los espaguetis 1 min menos de lo que diga el paquete (unos 9 min). Guarda un vaso del agua de cocción y escúrrelos.",
+            "Echa la pasta a la sartén con el guanciale (fuera del fuego), mezcla bien y añade la crema de huevo con un chorrito del agua de cocción, removiendo sin parar 1 min hasta que quede cremosa sin cuajarse. Sirve con el resto del queso y más pimienta."
+          ],
+          "utensilios": [
+            "olla",
+            "sartén",
+            "bol",
+            "tabla y cuchillo",
+            "colador"
+          ],
+          "info": [
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 8,
+              "nota": "hasta que hierva"
+            },
+            null,
+            {
+              "utensilio": "sartén",
+              "fuego": "medio",
+              "min": 7
+            },
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 9
+            },
+            null
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_macarrones",
+      "nombre": "Macarrones gratinados con chorizo y carne picada",
+      "grupo": "carne",
+      "proteina_principal": "cerdo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pasta",
+          "cantidad": 100
+        },
+        {
+          "producto": "picada",
+          "cantidad": 60
+        },
+        {
+          "producto": "chorizo",
+          "cantidad": 35
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 100
+        },
+        {
+          "producto": "queso",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 920,
+        "proteina": 41,
+        "hidratos": 88,
+        "grasa": 44
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 35,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "Cuece los macarrones en una olla con agua abundante y sal a fuego fuerte 10 min y escúrrelos.",
+            "Mientras, en la tabla, pica la cebolla y corta el chorizo en dados pequeños. En una sartén grande a fuego medio, sofríe la cebolla con aceite 5 min.",
+            "Añade el chorizo y la carne y cocina a fuego medio-alto 6 min, desmenuzando la carne, hasta que suelte la grasa roja. Añade el tomate y deja 3 min.",
+            "Mezcla la salsa con los macarrones en una fuente de horno, cubre con el queso rallado y gratina a 220 °C 8 min, hasta que el queso esté dorado."
+          ],
+          "utensilios": [
+            "olla",
+            "colador",
+            "tabla y cuchillo",
+            "sartén grande",
+            "fuente de horno"
+          ],
+          "info": [
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 10
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 5
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 9
+            },
+            {
+              "utensilio": "horno",
+              "temp": 220,
+              "modo": "gratinar",
+              "min": 8
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 35,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "Cuece los macarrones en una olla con agua abundante y sal a fuego fuerte 10 min y escúrrelos.",
+            "Mientras, en la tabla, pica la cebolla y corta el chorizo en dados pequeños. En una sartén grande a fuego medio, sofríe la cebolla con aceite 5 min.",
+            "Añade el chorizo y la carne y cocina a fuego medio-alto 6 min, desmenuzando la carne. Añade el tomate y deja 3 min.",
+            "Mezcla la salsa con los macarrones en un molde apto para air fryer, cubre con el queso rallado y gratina a 200 °C 5 min (por tandas si no cabe)."
+          ],
+          "utensilios": [
+            "olla",
+            "colador",
+            "tabla y cuchillo",
+            "sartén grande",
+            "molde apto para air fryer"
+          ],
+          "info": [
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 10
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 5
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio-alto",
+              "min": 9
+            },
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 5,
+              "nota": "por tandas"
+            }
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_lasana",
+      "nombre": "Lasaña boloñesa clásica con bechamel casera",
+      "grupo": "carne",
+      "proteina_principal": "ternera",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "lasana",
+          "cantidad": 50
+        },
+        {
+          "producto": "picada",
+          "cantidad": 130
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 40
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 120
+        },
+        {
+          "producto": "leche",
+          "cantidad": 200
+        },
+        {
+          "producto": "harina",
+          "cantidad": 20
+        },
+        {
+          "producto": "mantequilla",
+          "cantidad": 20
+        },
+        {
+          "producto": "queso",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 1050,
+        "proteina": 48,
+        "hidratos": 74,
+        "grasa": 62
+      },
+      "conserva": {
+        "nevera_dias": 3,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "horno",
+          "minutos": 80,
+          "minutos_trabajo": 35,
+          "pasos": [
+            "En la tabla, pica muy fina la cebolla y la zanahoria. En una sartén grande a fuego medio, sofríelas con aceite 8 min.",
+            "Sube a fuego fuerte, añade la carne con sal y pimienta y dórala 6 min desmenuzándola. Añade el tomate, una pizca de azúcar y orégano y deja a fuego bajo 20 min, hasta que la salsa espese.",
+            "Mientras, hidrata las placas en un bol con agua caliente si el paquete lo indica. Para la bechamel, en un cazo a fuego medio derrite la mantequilla, tuesta la harina 1 min y añade la leche poco a poco removiendo con varillas; cuece 6 min con sal y nuez moscada, hasta que espese.",
+            "En una fuente de horno, pon un poco de bechamel en el fondo y alterna placas, boloñesa y un poco de bechamel, hasta acabar con placas cubiertas de bechamel y el queso rallado.",
+            "Hornea a 200 °C, calor arriba y abajo, 25 min; los últimos 3 min con el grill para dorar el queso. Deja reposar 5 min antes de cortar."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "sartén grande",
+            "cazo",
+            "fuente de horno",
+            "bol"
+          ],
+          "info": [
+            {
+              "utensilio": "sartén grande",
+              "fuego": "medio",
+              "min": 8
+            },
+            {
+              "utensilio": "sartén grande",
+              "fuego": "bajo",
+              "min": 26
+            },
+            {
+              "utensilio": "cazo",
+              "fuego": "medio",
+              "min": 7,
+              "nota": "remueve sin parar"
+            },
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 200,
+              "modo": "arriba y abajo",
+              "min": 25,
+              "nota": "últimos 3 min con grill"
+            }
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_sopafideos",
+      "nombre": "Sopa de fideos de puchero con gallina",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": false,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "gallina",
+          "cantidad": 110
+        },
+        {
+          "producto": "carcasa_pollo",
+          "cantidad": 200
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 50
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "fideos",
+          "cantidad": 40
+        }
+      ],
+      "nutricion": {
+        "kcal": 460,
+        "proteina": 29,
+        "hidratos": 36,
+        "grasa": 22
+      },
+      "conserva": {
+        "nevera_dias": 4,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 115,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "Lava la carcasa y la gallina y ponlas en una olla grande con 600 ml de agua fría por persona, la zanahoria pelada, la cebolla partida por la mitad y sal. Si tienes, añade un trozo de puerro o de apio.",
+            "Lleva a ebullición a fuego fuerte y quita la espuma con la espumadera.",
+            "Baja a fuego bajo, tapa a medias y deja hervir suave 90 min (con olla exprés, 35 min desde que suba la válvula).",
+            "Cuela el caldo y vuelve a echarlo a la olla. Desmiga la carne de la gallina sin piel ni huesos y córtala junto con la zanahoria en trocitos.",
+            "Lleva el caldo a ebullición a fuego medio, añade los fideos y cuece 8 min. Echa la carne y la zanahoria, prueba de sal y sirve muy caliente."
+          ],
+          "utensilios": [
+            "olla",
+            "colador",
+            "espumadera",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "olla",
+              "fuego": "fuerte",
+              "min": 10,
+              "nota": "espuma"
+            },
+            {
+              "utensilio": "olla",
+              "fuego": "bajo",
+              "min": 90
+            },
+            null,
+            {
+              "utensilio": "olla",
+              "fuego": "medio",
+              "min": 8
+            }
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_alitas",
+      "nombre": "Alitas de pollo barbacoa con patatas fritas",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "alas_pollo",
+          "cantidad": 350
+        },
+        {
+          "producto": "salsa_barbacoa",
+          "cantidad": 40
+        },
+        {
+          "producto": "patatas_fritas",
+          "cantidad": 150
+        }
+      ],
+      "nutricion": {
+        "kcal": 820,
+        "proteina": 48,
+        "hidratos": 48,
+        "grasa": 48
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "air",
+          "minutos": 45,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Seca bien las alitas con papel de cocina y mézclalas en un bol con sal, pimentón, ajo en polvo y una cucharadita de aceite.",
+            "Cuécelas en la cesta de la air fryer a 200 °C 22 min, sacudiendo dos veces, hasta que la piel esté crujiente.",
+            "Píntalas con la salsa barbacoa con el pincel y dales 3 min más para que se caramelice. Sácalas y tápalas.",
+            "Pon las patatas congeladas, sin descongelar, en la cesta de la air fryer a 200 °C 15 min, sacudiendo la cesta a mitad. Sálalas al sacarlas."
+          ],
+          "utensilios": [
+            "bol",
+            "cesta de la air fryer",
+            "pincel de cocina"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 22,
+              "nota": "sacude dos veces"
+            },
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 3
+            },
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 15,
+              "nota": "sacude a mitad"
+            }
+          ]
+        },
+        {
+          "aparato": "horno",
+          "minutos": 50,
+          "minutos_trabajo": 8,
+          "pasos": [
+            "Precalienta el horno a 220 °C. Seca bien las alitas y mézclalas en un bol con sal, pimentón, ajo en polvo y una cucharadita de aceite.",
+            "Ponlas en la bandeja con papel de horno junto con las patatas congeladas, sin amontonar, y hornea arriba y abajo 35 min, dándoles la vuelta a mitad.",
+            "Pinta las alitas con la salsa barbacoa y gratina 5 min, hasta que la salsa se caramelice. Sala las patatas y sirve."
+          ],
+          "utensilios": [
+            "bol",
+            "bandeja de horno",
+            "papel de horno",
+            "pincel de cocina"
+          ],
+          "info": [
+            null,
+            {
+              "utensilio": "horno",
+              "temp": 220,
+              "modo": "arriba y abajo",
+              "min": 35,
+              "nota": "da la vuelta a mitad"
+            },
+            {
+              "utensilio": "horno",
+              "temp": 220,
+              "modo": "gratinar",
+              "min": 5
+            }
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_fingers",
+      "nombre": "Fingers de pollo crujientes con patatas fritas y kétchup",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "pechuga",
+          "cantidad": 150
+        },
+        {
+          "producto": "harina",
+          "cantidad": 15
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 0.5
+        },
+        {
+          "producto": "pan_rallado",
+          "cantidad": 40
+        },
+        {
+          "producto": "patatas_fritas",
+          "cantidad": 150
+        },
+        {
+          "producto": "ketchup",
+          "cantidad": 15
+        }
+      ],
+      "nutricion": {
+        "kcal": 740,
+        "proteina": 48,
+        "hidratos": 81,
+        "grasa": 24
+      },
+      "conserva": {
+        "nevera_dias": 1,
+        "congelable": true
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 35,
+          "minutos_trabajo": 20,
+          "pasos": [
+            "En la tabla, corta la pechuga en tiras gruesas como un dedo y sálalas con una pizca de pimentón y ajo en polvo.",
+            "Prepara tres platos hondos: harina, huevo batido y pan rallado. Pasa cada tira por los tres, apretando bien el pan rallado.",
+            "En una sartén honda, calienta dos dedos de aceite de girasol a fuego medio-alto (unos 180 °C) y fríe las patatas congeladas en tandas pequeñas 5 min, hasta que estén doradas. Escúrrelas sobre papel de cocina y sálalas.",
+            "En el mismo aceite a fuego medio-alto, fríe los fingers en tandas 4 min, dándoles la vuelta, hasta que estén dorados y hechos por dentro. Escúrrelos en papel de cocina y sírvelos con las patatas y el kétchup."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "plato hondo",
+            "sartén honda",
+            "papel de cocina"
+          ],
+          "info": [
+            null,
+            null,
+            {
+              "utensilio": "sartén honda",
+              "fuego": "medio-alto",
+              "min": 10,
+              "nota": "en tandas"
+            },
+            {
+              "utensilio": "sartén honda",
+              "fuego": "medio-alto",
+              "min": 8,
+              "nota": "en tandas"
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 35,
+          "minutos_trabajo": 15,
+          "pasos": [
+            "En la tabla, corta la pechuga en tiras gruesas como un dedo y sálalas con una pizca de pimentón y ajo en polvo.",
+            "Prepara tres platos hondos: harina, huevo batido y pan rallado. Pasa cada tira por los tres, apretando bien el pan rallado, y pulverízalas con aceite.",
+            "Pon las patatas congeladas, sin descongelar, en la cesta de la air fryer a 200 °C 15 min, sacudiendo la cesta a mitad. Sálalas al sacarlas.",
+            "Pon los fingers en la cesta sin que se toquen a 200 °C 10 min, dándoles la vuelta a mitad, hasta que estén dorados. Sírvelos con las patatas y el kétchup."
+          ],
+          "utensilios": [
+            "tabla y cuchillo",
+            "plato hondo",
+            "cesta de la air fryer"
+          ],
+          "info": [
+            null,
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 15,
+              "nota": "sacude a mitad"
+            },
+            {
+              "utensilio": "air fryer",
+              "temp": 200,
+              "min": 10,
+              "nota": "da la vuelta a mitad"
+            }
+          ]
+        }
+      ],
+      "capricho": true
+    },
+    {
+      "id": "cap_pollofrito",
+      "nombre": "Pollo frito crujiente estilo americano con ensalada de col",
+      "grupo": "carne",
+      "proteina_principal": "pollo",
+      "tipo": "hidratos",
+      "pesada": true,
+      "gusta_ninos": true,
+      "etiquetas": [
+        "capricho"
+      ],
+      "ingredientes": [
+        {
+          "producto": "jamoncitos",
+          "cantidad": 300
+        },
+        {
+          "producto": "leche",
+          "cantidad": 100
+        },
+        {
+          "producto": "harina",
+          "cantidad": 40
+        },
+        {
+          "producto": "aceite_girasol",
+          "cantidad": 80
+        },
+        {
+          "producto": "repollo",
+          "cantidad": 60
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 30
+        },
+        {
+          "producto": "mayonesa",
+          "cantidad": 20
+        }
+      ],
+      "nutricion": {
+        "kcal": 1000,
+        "proteina": 53,
+        "hidratos": 39,
+        "grasa": 68
+      },
+      "conserva": {
+        "nevera_dias": 2,
+        "congelable": false
+      },
+      "variantes": [
+        {
+          "aparato": "vitro",
+          "minutos": 60,
+          "minutos_trabajo": 25,
+          "pasos": [
+            "En un bol, mezcla la leche con una cucharada de zumo de limón o vinagre, sal, pimentón y ajo en polvo. Mete los jamoncitos y déjalos en la nevera al menos 30 min (o desde la mañana).",
+            "Para la ensalada de col, corta el repollo en tiras muy finas, ralla la zanahoria y mézclalo con la mayonesa, una pizca de azúcar, sal y unas gotas de vinagre. Guárdala en la nevera.",
+            "En un plato hondo, mezcla la harina con sal, pimienta, pimentón y ajo en polvo. Escurre los jamoncitos y rebózalos bien, apretando para que quede una capa gruesa y rugosa.",
+            "En una sartén honda, calienta el aceite de girasol a fuego medio (unos 165 °C) y fríe los jamoncitos en tandas 14 min, dándoles la vuelta, hasta que estén bien dorados y hechos junto al hueso. Escúrrelos en papel de cocina y sírvelos con la ensalada de col."
+          ],
+          "utensilios": [
+            "bol",
+            "plato hondo",
+            "sartén honda",
+            "papel de cocina",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            null,
+            null,
+            {
+              "utensilio": "sartén honda",
+              "fuego": "medio",
+              "min": 14,
+              "nota": "en tandas; bien hecho junto al hueso"
+            }
+          ]
+        },
+        {
+          "aparato": "air",
+          "minutos": 65,
+          "minutos_trabajo": 20,
+          "pasos": [
+            "En un bol, mezcla la leche con una cucharada de zumo de limón o vinagre, sal, pimentón y ajo en polvo. Mete los jamoncitos y déjalos en la nevera al menos 30 min.",
+            "Para la ensalada de col, corta el repollo en tiras muy finas, ralla la zanahoria y mézclalo con la mayonesa, una pizca de azúcar, sal y unas gotas de vinagre.",
+            "En un plato hondo, mezcla la harina con sal, pimienta, pimentón y ajo en polvo. Escurre los jamoncitos, rebózalos bien y pulverízalos con aceite por todos lados.",
+            "Cuécelos en la cesta de la air fryer sin que se toquen a 190 °C 25 min, dándoles la vuelta a mitad y pulverizando las zonas con harina seca. Sírvelos con la ensalada de col."
+          ],
+          "utensilios": [
+            "bol",
+            "plato hondo",
+            "cesta de la air fryer",
+            "tabla y cuchillo"
+          ],
+          "info": [
+            null,
+            null,
+            null,
+            {
+              "utensilio": "air fryer",
+              "temp": 190,
+              "min": 25,
+              "nota": "da la vuelta a mitad"
+            }
+          ]
+        }
+      ],
+      "capricho": true
     }
   ]
 }

@@ -611,6 +611,18 @@
         "Los dos veis el mismo menú y la misma lista y podéis cambiar cosas: lo que hace uno le aparece al otro.",
         "Cada uno valora sus platos y tiene sus propios avisos."
       ]
+    },
+    {
+      "version": 64,
+      "fecha": "2026-10-22",
+      "titulo": "🍔 Guarreo",
+      "cambios": [
+        "21 caprichos de verdad en Recetas › Guarreo: pizza, hamburguesa completa con patatas fritas, smash burger, perritos, nachos con guacamole, san jacobos, carbonara auténtica, sopa de fideos de puchero, alitas, bravas…",
+        "🍕 Cada uno elige su pizza (en la receta de la pizza del súper) y en la compra va la de cada uno.",
+        "¿Este sábado hamburguesas? Toca el plato del día › Cambiar › «Mejor un capricho».",
+        "¿Viernes de pizza siempre? Ponlo como plato fijo en Ajustes y entra en la compra del mes.",
+        "El menú nunca te propone caprichos por su cuenta, y no cuentan para tus objetivos."
+      ]
     }
   ]
 }

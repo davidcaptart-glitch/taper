@@ -291,7 +291,7 @@ function weekRecipes(start,exceptId){
 function candidates(slot,opts={}){
   const out=[];
   for(const r of R){
-    if(r.small||!variantFor(r)||!hasPhoto(r)||!hasPack(r))continue;
+    if(r.small||(r.cap&&!opts.cap)||!variantFor(r)||!hasPhoto(r)||!hasPack(r))continue;
     const people=slot.eaters.concat(slot.kids,slot.tupper);
     if(!people.every(p=>canEat(p,r)))continue;
     if(slot.eaters.concat(slot.tupper).some(a=>dishPref(a,r.id)<=-1))continue;
@@ -509,7 +509,7 @@ function genWeekFromScratch(start){
 function weekCost(start,slotsIn){
   const wk=S.plans[start];if(!wk)return 0;let t=0;const q={};
   for(const sl of slotsIn||buildSlots(start)){const v=wk.slots[sl.id],r=v&&RX[v.recipe];
-    if(r)for(const [p,c] of r.ing)q[p]=(q[p]||0)+c*sl.portions;else if(sl.fixed&&!sl.fixed.recipe)t+=Number(sl.fixed.cost)||0}
+    if(r)for(const [p,c] of slotIng(r,sl))q[p]=(q[p]||0)+c;else if(sl.fixed&&!sl.fixed.recipe)t+=Number(sl.fixed.cost)||0}
   for(const [d,dd] of Object.entries(wk.small||{}))for(const [m,v] of Object.entries(dd)){const r=RX[v.recipe];if(r)for(const [p,c] of r.ing)q[p]=(q[p]||0)+c*smallPortions(d,m)}
   for(const [p,c] of Object.entries(q))t+=P[p].keep==="despensa"?c/P[p].env*price(p):packsFor(p,c)*price(p);
   return Math.round(t*100)/100;
@@ -602,7 +602,7 @@ function dishOfMeal(d,meal){
   if(!sid)return {state:st};
   const wk=S.plans[weekStartFor(sid.slice(0,10))];const v=wk&&wk.slots[sid];
   const f=fixedFor(sid.slice(0,10),sid.slice(11));
-  return {state:st,recipe:v&&RX[v.recipe],capricho:!!(f&&f.capricho)};
+  return {state:st,recipe:v&&RX[v.recipe],capricho:!!(f&&f.capricho)||!!(v&&RX[v.recipe]&&RX[v.recipe].cap)};
 }
 // Lo que lleva la ración de una persona (calorías y macros de la receta por su factor de ración)
 function portionNutr(r,f){
@@ -610,6 +610,15 @@ function portionNutr(r,f){
   return {kcal:k(r.kcal),prot:k(r.prot),carb:k(r.carb),fat:k(r.fat)};
 }
 const factorOf=(p,slot)=>p.kind==="adulto"?adultFactor(p,slot):kidFactor(p,slot);
+// Ingredientes de un plato en un hueco: lo que cada uno elige a su gusto (la pizza de cada uno) se reparte según quién come
+function slotIng(r,sl){
+  if(!r.ing.some(([p])=>P[p].choice))return r.ing.map(([p,q])=>[p,q*sl.portions]);
+  const ps=[...new Set((sl.eaters||[]).concat(sl.kids||[],sl.tupper||[]))],fs=ps.map(p=>factorOf(p,sl)),tot=fs.reduce((a,b)=>a+b,0)||1,out=[];
+  for(const [pid,q] of r.ing){const g=P[pid].choice;
+    if(!g||!ps.length){out.push([pid,q*sl.portions]);continue}
+    ps.forEach((p,i)=>{const c=(p.choices||{})[g];out.push([c&&P[c]?c:pid,q*sl.portions*fs[i]/tot])})}
+  return out;
+}
 // Total de comida y cena de una persona en un día (los caprichos y comidas fuera no se cuentan)
 function dayTotals(p,d){
   const t={kcal:0,prot:0,carb:0,fat:0,meals:0,skipped:[]};
