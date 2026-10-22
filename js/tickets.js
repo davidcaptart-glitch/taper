@@ -98,12 +98,13 @@ function matchLine(desc){
 
 /* ---------- Ver el ticket, corregirlo y guardarlo ---------- */
 // online: la compra se hizo por internet, así que el ticket es un PDF o una captura (se ofrece primero subirlo)
-function openTicketScan(online){
+function openTicketScan(online,shared){
   const up=`<label class="btn ${online?"":"ghost"} wide">${ico("receipt")} Subir PDF o captura<input type="file" accept="application/pdf,.pdf,image/*" id="tkFile" hidden></label>`;
   const ph=`<label class="btn ${online?"ghost":""} wide">${ico("camera")} Hacer foto al ticket<input type="file" accept="image/*" capture="environment" id="tkImg" hidden></label>`;
   showDialog(`<div class="mod">${closeBtn}<h2>Sube tu ticket</h2>
     <p class="small muted">${online?"Si compraste online, sube el PDF del ticket o la factura que te enviaron por correo (o que descargas en su app), o una captura de pantalla.":"Hazle una foto al ticket de papel, bien plano y con luz. Si es un ticket digital, sube el PDF o una captura."} Se lee en tu móvil. Solo se envían, sin datos personales, los precios que no cuadran, para corregirlos para todos. Cada ticket nuevo te da 3 coins.</p>
     <div class="actions" style="flex-direction:column;align-items:stretch">${online?up+ph:ph+up}</div>
+    ${online&&!isIOS()?`<p class="small muted">También puedes compartirlo directamente: en el correo o en la app del súper, toca Compartir en el PDF y elige Táper.</p>`:""}
     <div id="tkState" class="small muted"></div></div>`);
   const go=async file=>{if(!file)return;const st=dlg.querySelector("#tkState");
     try{
@@ -117,6 +118,7 @@ function openTicketScan(online){
       openTicketReview(tk,text);
     }catch(e){st.textContent="No se ha podido leer: "+e.message+". Comprueba la conexión (la primera vez se descarga el lector)."}};
   dlg.querySelector("#tkImg").onchange=e=>go(e.target.files[0]);
+  if(shared)go(shared);
   dlg.querySelector("#tkFile").onchange=e=>go(e.target.files[0]);
 }
 function ticketListFor(date){
@@ -228,4 +230,15 @@ function bindSpending(){
     const t=S.tickets.find(t=>t.id===x.dataset.tkdel);S.tickets=S.tickets.filter(y=>y!==t);
     const k=t.m+"|"+t.list,rest=S.tickets.filter(y=>y.m===t.m&&y.list===t.list);if(rest.length)S.spent[k]=rest.reduce((s,y)=>s+y.food,0);else delete S.spent[k];
     save();render()});
+}
+
+// Ticket que llega compartido desde otra app (Android): el service worker lo deja guardado y aquí se lee
+async function checkSharedTicket(){
+  if(new URLSearchParams(location.search).get("ticket")!=="compartido")return false;
+  history.replaceState(null,"",location.pathname);
+  try{const c=await caches.open("taper-meta"),r=await c.match("/__ticket-compartido");if(!r){toast("No me ha llegado el ticket. Prueba a subirlo desde Compra");return true}
+    const b=await r.blob(),name=decodeURIComponent(r.headers.get("X-Nombre")||"ticket");await c.delete("/__ticket-compartido");
+    tab="compra";render();openTicketScan(true,new File([b],name,{type:b.type}));
+  }catch(e){toast("No se ha podido abrir el ticket compartido")}
+  return true;
 }

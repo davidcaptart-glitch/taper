@@ -1597,7 +1597,7 @@ async function boot(){
   if(avisosOn()&&S.notif&&S.notif.on){shareWithSW().catch(()=>{});queueSyncAvisos()}
   trackOnBoot();checkAvisos();applyAccent();applySkin();if(servidorOn())loadStats().then(()=>{applyAccent();applySkin()}).catch(()=>{});
   {const u=new URLSearchParams(location.search),t=u.get("hecho")||u.get("abrir");if(t){notifAction(u.get("hecho")?"hecho":"abrir",t);history.replaceState(null,"",location.pathname)}}
-  casaOnBoot().then(j=>{if(!j&&!shareOnBoot())setTimeout(()=>openRateDialog(),1500)});
+  checkSharedTicket().then(t=>{if(!t)casaOnBoot().then(j=>{if(!j&&!shareOnBoot())setTimeout(()=>openRateDialog(),1500)})});
   navigator.serviceWorker&&navigator.serviceWorker.addEventListener("message",e=>{if(e.data&&e.data.tipo)notifAction(e.data.tipo,e.data.tag)});watchPermission();checkTransferOnBoot();queueTransfer();
 }
 boot();

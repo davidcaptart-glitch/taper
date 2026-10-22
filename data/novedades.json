@@ -738,6 +738,15 @@
         "«Subir el ticket»: foto del ticket de papel, captura de pantalla o el PDF que te envían por correo o descargas en la app del súper.",
         "Si la compra fue online, te ofrezco primero subir el PDF o la captura."
       ]
+    },
+    {
+      "version": 81,
+      "fecha": "2026-10-23",
+      "titulo": "Comparte el ticket con Táper",
+      "cambios": [
+        "En Android, desde el correo o la app del súper: toca Compartir en el PDF del ticket y elige Táper. Se abre y se lee solo.",
+        "En iPhone, de momento, súbelo desde Compra › Subir el ticket."
+      ]
     }
   ]
 }

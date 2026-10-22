@@ -1,24 +1,24 @@
 // Service worker de Táper: guarda la app para usarla sin conexión.
 // Al cambiar cualquier archivo de la app, sube VERSION aquí y el ?v= de index.html para que los móviles descarguen la nueva.
-const VERSION = "taper-v80";
+const VERSION = "taper-v81";
 const SHELL = [
   "./",
   "index.html",
-  "css/app.css?v=80", "css/esteticas.css?v=80",
-  "js/base.js?v=80",
-  "js/iconos.js?v=80",
-  "js/datos.js?v=80",
-  "js/fotos.js?v=80",
-  "js/gustos.js?v=80",
-  "js/plan.js?v=80",
-  "js/compra.js?v=80",
-  "js/tickets.js?v=80",
-  "js/congelador.js?v=80",
-  "js/avisos.js?v=80",
-  "js/compartir.js?v=80",
-  "js/casa.js?v=80",
-  "js/bienvenida.js?v=80",
-  "js/ui.js?v=80",
+  "css/app.css?v=81", "css/esteticas.css?v=81",
+  "js/base.js?v=81",
+  "js/iconos.js?v=81",
+  "js/datos.js?v=81",
+  "js/fotos.js?v=81",
+  "js/gustos.js?v=81",
+  "js/plan.js?v=81",
+  "js/compra.js?v=81",
+  "js/tickets.js?v=81",
+  "js/congelador.js?v=81",
+  "js/avisos.js?v=81",
+  "js/compartir.js?v=81",
+  "js/casa.js?v=81",
+  "js/bienvenida.js?v=81",
+  "js/ui.js?v=81",
   "manifest.webmanifest",
   "data/festivos.json",
   "data/supermercados.json",
@@ -99,6 +99,20 @@ self.addEventListener("notificationclick", e => {
 // Red primero (con copia en caché) para los datos y la página; caché primero para el resto.
 self.addEventListener("fetch", e => {
   const req = e.request;
+  // Ticket compartido desde otra app (el correo, la app del súper…): se guarda y se abre Táper para leerlo
+  if (req.method === "POST" && new URL(req.url).pathname.endsWith("/compartir-ticket")) {
+    e.respondWith((async () => {
+      try {
+        const fd = await req.formData(), f = fd.get("ticket");
+        if (f && f.size) {
+          const c = await caches.open("taper-meta");
+          await c.put("/__ticket-compartido", new Response(f, { headers: { "Content-Type": f.type || "application/octet-stream", "X-Nombre": encodeURIComponent(f.name || "ticket") } }));
+        }
+      } catch (err) {}
+      return Response.redirect(new URL("./?ticket=compartido", self.registration.scope).href, 303);
+    })());
+    return;
+  }
   if (req.method !== "GET") return;
   const url = new URL(req.url);
   const isFont = url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com";

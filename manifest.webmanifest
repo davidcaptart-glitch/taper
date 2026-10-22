@@ -29,5 +29,24 @@
       "purpose": "maskable"
     }
   ],
-  "id": "/taper/"
+  "id": "/taper/",
+  "share_target": {
+    "action": "./compartir-ticket",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "files": [
+        {
+          "name": "ticket",
+          "accept": [
+            "application/pdf",
+            ".pdf",
+            "image/*"
+          ]
+        }
+      ]
+    }
+  }
 }
