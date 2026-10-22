@@ -455,7 +455,9 @@ function monthPrepDate(m){
   const last=iso(new Date(y,mm,0));
   let d=last;while(dow(d)!==W)d=addDays(d,-1);           // último "martes" del mes
   const sunday=addDays(d,6-dow(d));                       // domingo de esa semana
-  if(sunday>last){const mon=addDays(d,-dow(d)-7);return addDays(mon,F)}   // esa semana ya cambia de mes: la anterior
+  if(sunday>last){const mon=addDays(d,-dow(d)-7);d=addDays(mon,F)}   // esa semana ya cambia de mes: la anterior
+  // Si cae en festivo, el día laborable anterior (sin saltar a fin de semana si el día elegido era entre semana)
+  const wk=dow(d)<5;for(let i=0;i<10&&(isHoliday(d)||(wk&&dow(d)>=5));i++)d=addDays(d,-1);
   return d;
 }
 function refreshSmall(){for(const s of Object.keys(S.plans))if(addDays(s,6)>=todayISO()){const sm=S.plans[s].small||{};

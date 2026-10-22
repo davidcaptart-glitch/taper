@@ -444,6 +444,14 @@
         "En Perfil › Ajustes › Planificación eliges qué día de la última semana del mes te aviso para preparar el siguiente (por defecto, el martes).",
         "Si esa semana ya cambia de mes, te aviso antes, el día que elijas de la semana anterior (por defecto, el viernes). Ves los próximos avisos al momento."
       ]
+    },
+    {
+      "version": 47,
+      "fecha": "2026-10-22",
+      "titulo": "Sin avisos en festivo",
+      "cambios": [
+        "Si el día del aviso para preparar el mes cae en festivo, te aviso el día laborable anterior (por ejemplo, el 24 de diciembre en vez de Navidad)."
+      ]
     }
   ]
 }
