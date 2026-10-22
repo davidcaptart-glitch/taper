@@ -3,7 +3,8 @@
    - Cada 10 minutos (tarea programada) se buscan los avisos que ya tocan, se guardan como pendientes
      y se "despierta" al móvil con un push sin contenido; el móvil pide entonces sus avisos pendientes.
    - Así no hace falta cifrar el contenido del push: solo se firma la petición (VAPID).
-   Datos guardados (KV): sub:<uid> = {sub, plan:[{t,title,body,tag}], at}; pend:<uid> = [avisos].
+   Datos guardados (KV): sub:<uid> = {sub, plan:[{t,title,body,tag}], at}; pend:<uid> = [avisos];
+   log:<uid> = último envío {at, status} (para saber si el móvil recibe los avisos).
 */
 
 const ORIGENES = ["https://davidcaptart-glitch.github.io", "http://localhost:8765"];
@@ -50,6 +51,24 @@ export default {
         if (!prev) return json(req, { error: "no suscrito" }, 404);
         await env.TAPER.put("sub:" + b.uid, JSON.stringify({ ...prev, plan: limpiaPlan(b.plan), at: Date.now() }));
         return json(req, { ok: true });
+      }
+      // Estado de la suscripción y resultado del último envío
+      if (req.method === "GET" && url.pathname === "/estado") {
+        const uid = url.searchParams.get("uid");
+        if (!uidOk(uid)) return json(req, {}, 400);
+        const d = await env.TAPER.get("sub:" + uid, "json");
+        const log = await env.TAPER.get("log:" + uid, "json");
+        return json(req, { suscrito: !!d, endpoint: d ? d.sub.endpoint.slice(-24) : null, ultimo: log });
+      }
+      // Prueba inmediata: deja un aviso pendiente y despierta al móvil ahora mismo
+      if (req.method === "POST" && url.pathname === "/probar") {
+        const b = await req.json();
+        if (!uidOk(b.uid)) return json(req, { error: "usuario no válido" }, 400);
+        const d = await env.TAPER.get("sub:" + b.uid, "json");
+        if (!d) return json(req, { error: "no suscrito" }, 404);
+        await env.TAPER.put("pend:" + b.uid, JSON.stringify([{ t: Date.now(), title: "🔔 Aviso de prueba de Táper", body: "Si ves esto, los avisos funcionan.", tag: "test" }]), { expirationTtl: 86400 });
+        const status = await envia(env, b.uid, d);
+        return json(req, { status });
       }
       if (req.method === "POST" && url.pathname === "/baja") {
         const b = await req.json();
@@ -103,10 +122,18 @@ async function enviarPendientes(env) {
       const pend = ((await env.TAPER.get("pend:" + uid, "json")) || []).concat(tocan).slice(-20);
       await env.TAPER.put("pend:" + uid, JSON.stringify(pend), { expirationTtl: 60 * 60 * 24 * 3 });
       await env.TAPER.put(k.name, JSON.stringify({ ...d, plan: d.plan.filter((a) => a.t > ahora) }));
-      const r = await despertar(d.sub.endpoint, env);
-      if (r === 404 || r === 410) { await env.TAPER.delete(k.name); await env.TAPER.delete("pend:" + uid); }
+      await envia(env, uid, d);
     }
   } while (cursor);
+}
+// Despierta al móvil y apunta el resultado. Si la suscripción ya no existe (404/410), se borra:
+// la app lo detecta al abrirse y se vuelve a suscribir sola.
+async function envia(env, uid, d) {
+  let status = 0;
+  try { status = await despertar(d.sub.endpoint, env); } catch (e) { status = -1; }
+  await env.TAPER.put("log:" + uid, JSON.stringify({ at: Date.now(), status }), { expirationTtl: 60 * 60 * 24 * 30 });
+  if (status === 404 || status === 410) { await env.TAPER.delete("sub:" + uid); await env.TAPER.delete("pend:" + uid); }
+  return status;
 }
 
 /* ---------- Invitaciones, contadores y coins ---------- */

@@ -1,21 +1,21 @@
 // Service worker de Táper: guarda la app para usarla sin conexión.
 // Al cambiar cualquier archivo de la app, sube VERSION aquí y el ?v= de index.html para que los móviles descarguen la nueva.
-const VERSION = "taper-v19";
+const VERSION = "taper-v20";
 const SHELL = [
   "./",
   "index.html",
-  "css/app.css?v=19",
-  "js/base.js?v=19",
-  "js/datos.js?v=19",
-  "js/fotos.js?v=19",
-  "js/gustos.js?v=19",
-  "js/plan.js?v=19",
-  "js/compra.js?v=19",
-  "js/tickets.js?v=19",
-  "js/congelador.js?v=19",
-  "js/avisos.js?v=19",
-  "js/bienvenida.js?v=19",
-  "js/ui.js?v=19",
+  "css/app.css?v=20",
+  "js/base.js?v=20",
+  "js/datos.js?v=20",
+  "js/fotos.js?v=20",
+  "js/gustos.js?v=20",
+  "js/plan.js?v=20",
+  "js/compra.js?v=20",
+  "js/tickets.js?v=20",
+  "js/congelador.js?v=20",
+  "js/avisos.js?v=20",
+  "js/bienvenida.js?v=20",
+  "js/ui.js?v=20",
   "manifest.webmanifest",
   "data/festivos.json",
   "data/supermercados.json",
@@ -38,7 +38,7 @@ self.addEventListener("install", e => {
 self.addEventListener("activate", e => {
   e.waitUntil(
     caches.keys()
-      .then(keys => Promise.all(keys.filter(k => k !== VERSION).map(k => caches.delete(k))))
+      .then(keys => Promise.all(keys.filter(k => k !== VERSION && k !== "taper-meta").map(k => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });
@@ -57,10 +57,13 @@ self.addEventListener("push", e => {
     for (const a of list) {
       await self.registration.showNotification(a.title, { body: a.body, tag: a.tag || undefined, icon: "icons/icon-192.png", badge: "icons/icon-192.png", data: { tag: a.tag } });
     }
+    // Número en el icono donde el sistema lo permite (en Android sale el puntito de la notificación)
+    try { const n = (await self.registration.getNotifications()).length; if (self.navigator.setAppBadge) await self.navigator.setAppBadge(n); } catch (err) {}
   })());
 });
 self.addEventListener("notificationclick", e => {
   e.notification.close();
+  e.waitUntil((async () => { try { const n = (await self.registration.getNotifications()).length; if (self.navigator.setAppBadge) n ? await self.navigator.setAppBadge(n) : await self.navigator.clearAppBadge(); } catch (err) {} })());
   e.waitUntil((async () => {
     const all = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
     for (const c of all) if ("focus" in c) return c.focus();

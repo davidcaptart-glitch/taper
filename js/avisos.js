@@ -46,14 +46,18 @@ const b64ToBytes=s=>{const p="=".repeat((4-s.length%4)%4);const b=atob((s+p).rep
 // El service worker necesita saber el código de usuario y la dirección del servidor para pedir los avisos
 async function shareWithSW(){const c=await caches.open("taper-meta");await c.put("/__avisos",new Response(JSON.stringify({uid:S.uid,url:CFG.avisos.url})))}
 
+// Suscribe este móvil (reutiliza la suscripción si sigue viva) y se la da al servidor
+async function subscribeHere(){
+  const reg=await navigator.serviceWorker.ready;
+  const sub=(await reg.pushManager.getSubscription())||await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64ToBytes(CFG.avisos.vapidPublic)});
+  await shareWithSW();
+  await postAvisos("/suscribir",{uid:S.uid,sub:sub.toJSON(),plan:buildSchedule()});
+}
 async function enableAvisos(){
   if(!avisosOn()){toast("Los avisos aún no están disponibles");return}
   const perm=await Notification.requestPermission();
   if(perm!=="granted"){toast("Sin permiso no puedo avisarte. Puedes darlo en los ajustes del navegador");return}
-  const reg=await navigator.serviceWorker.ready;
-  const sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64ToBytes(CFG.avisos.vapidPublic)});
-  await shareWithSW();
-  await postAvisos("/suscribir",{uid:S.uid,sub:sub.toJSON(),plan:buildSchedule()});
+  await subscribeHere();
   notifCfg().on=true;S.notifSynced=Date.now();save();render();toast("Avisos activados");
 }
 async function disableAvisos(){
@@ -65,6 +69,17 @@ let syncTimer=null;
 function queueSyncAvisos(){
   if(!avisosOn()||!S.notif||!S.notif.on)return;
   clearTimeout(syncTimer);syncTimer=setTimeout(async()=>{try{await postAvisos("/programar",{uid:S.uid,plan:buildSchedule()});S.notifSynced=Date.now();try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}catch(e){}},20000);
+}
+// Al abrir la app: si los avisos están activados pero el servidor ya no tiene este móvil, se vuelve a suscribir solo
+async function checkAvisos(){
+  if(!avisosOn()||!S.notif||!S.notif.on)return;
+  if(Notification.permission!=="granted"){S.notifProblem="permiso";return}
+  try{
+    const reg=await navigator.serviceWorker.ready;const local=await reg.pushManager.getSubscription();
+    const st=await (await fetch(CFG.avisos.url.replace(/\/$/,"")+"/estado?uid="+encodeURIComponent(S.uid),{cache:"no-store"})).json();
+    if(!local||!st.suscrito||!local.endpoint.endsWith(st.endpoint||"-"))await subscribeHere();else await shareWithSW();
+    S.notifProblem=null;
+  }catch(e){}
 }
 const _saveBase=save;
 save=function(){_saveBase();queueSyncAvisos()};
@@ -86,8 +101,10 @@ function bindAvisos(){
   document.querySelectorAll("[data-nt]").forEach(c=>c.onchange=()=>{n.types[c.dataset.nt]=c.checked;save()});
   const th=document.getElementById("avThaw");if(th)th.onchange=()=>{n.thaw=th.value||"21:30";save()};
   document.getElementById("avTest")?.addEventListener("click",async()=>{
-    try{const plan=buildSchedule();plan.unshift({t:Date.now()+30000,title:"🔔 Aviso de prueba de Táper",body:"Si ves esto, los avisos funcionan.",tag:"test"});
-      await postAvisos("/programar",{uid:S.uid,plan});toast("Llegará en menos de 10 minutos")}catch(e){toast("No se ha podido: "+e.message)}});
+    try{if(Notification.permission!=="granted"){toast("El móvil tiene bloqueados los avisos de Táper: actívalos en Ajustes › Aplicaciones › Chrome › Notificaciones");return}
+      await subscribeHere();
+      let r;try{r=await postAvisos("/probar",{uid:S.uid})}catch(e){r={status:0}}
+      toast(r.status>=200&&r.status<300?"Enviado: debería aparecerte en unos segundos":"Google no ha aceptado el aviso (código "+r.status+"). Desactiva y vuelve a activar los avisos")}catch(e){toast("No se ha podido: "+e.message)}});
 }
 
 /* ---------- Invitaciones y coins ---------- */

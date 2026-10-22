@@ -187,6 +187,16 @@
         "Cada receta muestra sus alérgenos principales. Es orientativo: revisa siempre la etiqueta.",
         "Siempre tienes preparado el menú del mes siguiente como previsión. Si tu plan empieza más adelante, la app abre directamente en ese mes."
       ]
+    },
+    {
+      "version": 20,
+      "fecha": "2026-10-22",
+      "titulo": "Avisos más fiables",
+      "cambios": [
+        "Si el móvil pierde la conexión con el servidor de avisos, la app se vuelve a apuntar sola al abrirla.",
+        "Al actualizarse, la app ya no olvida dónde recoger tus avisos.",
+        "El botón «Enviarme un aviso de prueba» lo manda al momento y te dice si ha funcionado."
+      ]
     }
   ]
 }
