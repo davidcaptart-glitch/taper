@@ -62,12 +62,17 @@ function stepBody(fullId){
   if(id==="hola")return `<p class="lead">Táper te prepara el menú, la lista de la compra y los tápers de la semana, a tu medida. Unas preguntas rápidas y empezamos. Todo se puede cambiar después.</p>
     <div class="field"><label for="wzName">¿Cómo te llamas?</label><input id="wzName" type="text" value="${esc(a.name)}" placeholder="Tu nombre"></div>`;
   if(id==="aparatos")return `<p class="lead">Solo te propondré recetas que puedas hacer.</p><div class="chips">${Object.entries(APP).filter(([k])=>k!=="ninguno").map(([k,v])=>chip("data-app",k,H.apps.includes(k),v)).join("")}</div>`;
-  if(id==="zona")return `<p class="lead">¿En qué supermercado compras? Los precios cambian según la zona, y los festivos según el municipio.</p>
-    <div class="group">${SUPERS.map(x=>`<button type="button" class="alt" data-super="${x.id}" ${x.estado!=="activo"?"disabled":""} style="${H.super===x.id?"outline:2px solid var(--tomato)":""}${x.estado!=="activo"?";opacity:.55":""}"><b>${esc(x.nombre)}</b><small>${x.estado==="activo"?"Precios, lista con enlaces y tickets":x.estado==="proximamente"?"Próximamente":"Más adelante: no vende alimentación online, solo se podrán leer sus tickets"}</small></button>`).join("")}</div>
+  if(id==="zona"){const ch=H.supers&&H.supers.length?H.supers:[H.super||"mercadona"],ok=x=>superHasPrices(x.id);
+    return `<p class="lead">¿Dónde te viene bien comprar? Marca todos los supermercados, aunque solo vayas a la tienda: comparo sus precios cada semana.</p>
+    <div class="group">${SUPERS.map(x=>{const on=ch.includes(x.id),sin=(x.sin_reparto||[]).includes(H.cp);
+      return `<button type="button" class="alt supopt" data-super="${x.id}" aria-pressed="${on}" ${ok(x)?"":"disabled"} style="${ok(x)?"":"opacity:.55"}"><span class="tick">${on?"✓":""}</span><span><b>${esc(x.nombre)}${H.super===x.id&&ch.length>1?` <span class="badge ok">Principal</span>`:""}</b><small>${ok(x)?(x.id==="mercadona"?"Precios de tu zona, lista con enlaces y tickets":"Precios de su web, cada semana")+(sin?" · no reparte en tu zona, solo en tienda":""):"Próximamente"}</small></span></button>`}).join("")}</div>
+    ${ch.length>1?`<div class="field"><label>Tu supermercado principal</label><div class="chips">${ch.map(s=>chip("data-mainsup",s,H.super===s,esc(superById(s).nombre))).join("")}</div></div>
+    <div class="field"><label>¿Cómo hago la lista?</label><div class="chips">${chip("data-strat","barato",H.shop.strategy==="barato","Cada cosa donde sea más barata")}${chip("data-strat","principal",H.shop.strategy!=="barato","Todo en el principal")}</div>
+      <div class="hint">Puedes cambiarlo cuando quieras desde la lista de la compra.</div></div>`:""}
     <div class="field"><label for="wzCp">Código postal</label><input id="wzCp" type="text" inputmode="numeric" maxlength="5" value="${esc(H.cp)}" placeholder="08784"></div>
     <div class="field"><label for="wzMun">Municipio (para los festivos locales)</label><input id="wzMun" type="text" list="wzMunList" value="${esc(H.municipio)}" placeholder="Por ejemplo, Piera"><datalist id="wzMunList">${Object.keys((FEST||{}).locales||{}).map(m=>`<option value="${esc(m)}">`).join("")}</datalist>
     <div class="hint">Si tu municipio no sale en la lista, añade sus festivos locales en Perfil > Festivos.</div></div>
-    ${zoneMissing?`<div class="warnbox">Tu código postal aún no tiene precios propios: de momento verás los de otra zona (pueden variar unos céntimos). ${S.zoneAsked===H.cp?"Ya lo has pedido; se añadirá en la próxima actualización.":`<button class="btn small" id="askZone">Pedir mi zona</button>`}</div>`:""}`;
+    ${zoneMissing?`<div class="warnbox">Tu código postal aún no tiene precios propios: de momento verás los de otra zona (pueden variar unos céntimos). ${S.zoneAsked===H.cp?"Ya lo has pedido; se añadirá en la próxima actualización.":`<button class="btn small" id="askZone">Pedir mi zona</button>`}</div>`:""}`;}
   if(id==="familia"){
     const ptypes=[["siempre","Siempre"],["alternas","Semanas alternas"],["findes","Fines de semana alternos"],["dias","Días concretos de la semana"],["manual","Lo marco cada semana"]];
     let h=`<p class="lead">Añade a quien come contigo: pareja, hijos, otros familiares, compañeros de piso… Cada uno con cuándo está, su ración y sus propios gustos.</p>`;
@@ -175,7 +180,11 @@ function bindStep(fullId){
     const fd=new URLSearchParams();fd.append(c.campos.tipo,"Otra cosa");fd.append(c.campos.texto,`AÑADIR CÓDIGO POSTAL: ${H.cp}
 USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean).join(" · "));fd.append(c.campos.version,String(APP_VERSION));
     try{await fetch(c.url,{method:"POST",mode:"no-cors",body:fd});S.zoneAsked=H.cp;save();rerender();toast("Pedido enviado")}catch(e){toast("Sin conexión: inténtalo más tarde")}});
-  qa("[data-super]").forEach(b=>b.onclick=()=>{H.super=b.dataset.super;rerender()});
+  qa("[data-super]").forEach(b=>b.onclick=()=>{const sid=b.dataset.super;let ch=H.supers&&H.supers.length?[...H.supers]:[H.super||"mercadona"];
+    if(ch.includes(sid)){if(ch.length===1){toast("Elige al menos un supermercado");return}ch=ch.filter(x=>x!==sid)}else ch.push(sid);
+    H.supers=ch;if(!ch.includes(H.super))H.super=ch[0];rerender()});
+  qa("[data-mainsup]").forEach(b=>b.onclick=()=>{H.super=b.dataset.mainsup;rerender()});
+  qa("[data-strat]").forEach(b=>b.onclick=()=>{H.shop.strategy=b.dataset.strat;rerender()});
   qa("[data-app]").forEach(b=>b.onclick=()=>{const k=b.dataset.app;H.apps=H.apps.includes(k)?H.apps.filter(x=>x!==k):[...H.apps,k];rerender()});
   q("#addKid")&&(q("#addKid").onclick=()=>{S.people.push({...defaultAdult(),id:uid("k"),kind:"nino",goals:["sano"],factor:0.6,presence:{type:"siempre"}});rerender()});
   q("#addAdult")&&(q("#addAdult").onclick=()=>{S.people.push({...defaultAdult(),id:uid("a"),kind:"adulto",goals:["sano"],factor:1,tupper:false,presence:{type:"siempre"}});rerender()});

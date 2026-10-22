@@ -4,6 +4,7 @@
 // P[id] = {id, name, env, unit, est, keep, aisle, thaw, mid}
 let P = {}, R = [], RX = {}, FEST = null;
 let PR = null, prOffline = false, SUPERS = [], ZONES = null, zoneMissing = false;
+let PS = null;   // precios de los demás supermercados (data/precios_supers.json)
 
 function setProducts(list){
   P={};
@@ -39,7 +40,28 @@ const recipeTime=r=>{const v=variantFor(r);return v?v.time:r.vars[0].time};
 function loadSavedPrices(){try{const raw=localStorage.getItem("taper-precios");return raw?JSON.parse(raw):null}catch(e){return null}}
 const mprice=pid=>{const x=PR&&PR.productos&&PR.productos[pid];return x&&typeof x.precio==="number"?x:null};
 // Prioridad: precio corregido a mano > precio de Mercadona > estimación del catálogo
-const price=pid=>S.prices[pid]!=null?S.prices[pid]:mprice(pid)?mprice(pid).precio:(P[pid]?P[pid].est:0);
+/* ---------- Varios supermercados ----------
+   S.home.super: el principal · S.home.supers: todos donde te viene bien comprar (en tienda o a domicilio)
+   S.home.shop.strategy: "principal" (todo en el principal) o "barato" (cada producto donde salga más barato) */
+const superById=sid=>(SUPERS||[]).find(x=>x.id===sid)||{id:sid,nombre:sid};
+const superHasPrices=sid=>sid==="mercadona"||!!(PS&&PS.supers&&PS.supers[sid]&&Object.keys(PS.supers[sid].productos||{}).length);
+const mainSuper=()=>S.home.super||"mercadona";
+const chosenSupers=()=>{const c=(S.home.supers||[]).filter(superHasPrices);return c.includes(mainSuper())?c:[mainSuper(),...c]};
+const cheapestMode=()=>S.home.shop.strategy==="barato"&&chosenSupers().length>1;
+// Precio del envase de Táper en un supermercado (se escala por tamaño si su envase es distinto)
+function superPrice(sid,pid){
+  if(sid==="mercadona"){const m=mprice(pid);return m?m.precio:null}
+  const x=PS&&PS.supers&&PS.supers[sid]&&PS.supers[sid].productos[pid];
+  if(!x||!(x.precio>0)||!(x.envase>0)||!P[pid])return null;
+  return Math.round(x.precio/x.envase*P[pid].env*100)/100;
+}
+// Dónde se compra cada producto
+function superFor(pid){
+  const main=mainSuper();let best=superPrice(main,pid)!=null?main:null,bp=best?superPrice(main,pid):null;
+  if(cheapestMode())for(const s of chosenSupers()){const v=superPrice(s,pid);if(v!=null&&(bp==null||v<bp-0.005)){best=s;bp=v}}
+  return best||main;
+}
+const price=pid=>{if(S.prices[pid]!=null)return S.prices[pid];const v=superPrice(superFor(pid),pid);if(v!=null)return v;return mprice(pid)?mprice(pid).precio:(P[pid]?P[pid].est:0)};
 function rise(pid){const x=mprice(pid);return x&&typeof x.anterior==="number"&&x.precio>x.anterior+0.004?x.precio-x.anterior:0}
 const upTag=pid=>{const d=rise(pid);return d?` <span class="up" title="Ha subido respecto a la semana anterior">▲ +${eur(d)}</span>`:""};
 const packsFor=(pid,q)=>Math.max(1,Math.ceil(q/P[pid].env-0.03));

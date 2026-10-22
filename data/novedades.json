@@ -206,6 +206,17 @@
         "Si tu móvil tiene bloqueados los avisos de Táper, te lo dice la campana y Perfil › Avisos, con los pasos exactos para tu móvil (Android o iPhone, instalada o en el navegador).",
         "Cuando vuelves de los ajustes con el permiso activado, los avisos se activan solos."
       ]
+    },
+    {
+      "version": 22,
+      "fecha": "2026-10-22",
+      "titulo": "Varios supermercados",
+      "cambios": [
+        "Puedes marcar todos los supermercados donde te viene bien comprar, aunque solo vayas a la tienda (Perfil › Ajustes › Supermercados y zona).",
+        "Elige si lo quieres todo en tu supermercado principal o cada producto donde salga más barato: la lista se separa por supermercado, cada uno con su envío y su pedido mínimo.",
+        "En la lista de la compra, «Comparar supermercados» te dice cuánto costaría en cada uno.",
+        "Los precios de DIA, Condis y otros se irán activando a medida que los conecte; se actualizan solos cada domingo."
+      ]
     }
   ]
 }

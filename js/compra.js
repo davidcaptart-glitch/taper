@@ -5,7 +5,11 @@ function deliveryDate(start){for(const d of weekDates(start))if(dow(d)===S.home.
 // Formas de comprar y sus tarifas (las pone el supermercado, no el usuario)
 const SHOP_MODES={online:"🛒 Online",domicilio:"🚚 En tienda, te lo llevan",tienda:"🏪 En tienda"};
 const superInfo=()=>(SUPERS||[]).find(x=>x.id===S.home.super)||(SUPERS||[])[0]||{};
-const tarifa=mode=>{const e=(superInfo().entrega||{})[mode];return {envio:Number(e&&e.envio)||0,minimo:Number(e&&e.minimo)||0}};
+// ¿Reparte este súper en tu código postal? (si no, solo se puede comprar en tienda)
+const delivers=sid=>!((superById(sid).sin_reparto||[]).includes(S.home.cp));
+const tarifa=(mode,sid)=>{const sp=sid?superById(sid):superInfo();if(mode!=="tienda"&&sid&&!delivers(sid))return {envio:0,minimo:0,soloTienda:true};
+  const ent=sp.entrega||{},e=ent[mode]||(mode==="domicilio"?ent.online:null);
+  return {envio:Number(e&&e.envio)||0,minimo:Number(e&&e.minimo)||0,gratisDesde:Number(e&&e.gratis_desde)||0}};
 const listMode=(m,key)=>S.modes[m+"|"+key]||(key==="mes"?S.home.shop.monthMode:S.home.shop.weekMode);
 const weekBudget=m=>Number(S.home.budget.week)||Math.round((Number(S.home.budget.month)||0)/Math.max(1,weeksInMonth(m).length)*100)/100;
 
@@ -42,10 +46,16 @@ function shopping(m){
   }
   const out={weeks,lists:{},first,freezeGuide,extras};
   for(const key of Object.keys(lists)){
-    const items=Object.entries(lists[key]).map(([pid,q])=>({pid,q,packs:packsFor(pid,q),cost:packsFor(pid,q)*price(pid)}));
+    const items=Object.entries(lists[key]).map(([pid,q])=>({pid,q,packs:packsFor(pid,q),cost:packsFor(pid,q)*price(pid),sup:superFor(pid)}));
     const cost=items.reduce((t,i)=>t+i.cost,0);
-    const mode=listMode(m,key), t=tarifa(mode), any=items.length>0;
-    out.lists[key]={key,items,cost,mode,fee:any?t.envio:0,min:t.minimo,belowMin:any&&t.minimo>0&&cost<t.minimo};
+    const mode=listMode(m,key);
+    // Un grupo por supermercado: cada uno con su envío y su pedido mínimo
+    const groups={};for(const it of items){const g=groups[it.sup]=groups[it.sup]||{sup:it.sup,items:[],cost:0};g.items.push(it);g.cost+=it.cost}
+    for(const g of Object.values(groups)){const t=tarifa(mode,g.sup);g.soloTienda=!!t.soloTienda;g.min=t.minimo;
+      g.fee=t.gratisDesde&&g.cost>=t.gratisDesde?0:t.envio;g.belowMin=t.minimo>0&&g.cost<t.minimo}
+    const gl=Object.values(groups).sort((a,b)=>(b.sup===mainSuper())-(a.sup===mainSuper())||b.cost-a.cost);
+    const main=groups[mainSuper()]||gl[0]||{min:tarifa(mode).minimo};
+    out.lists[key]={key,items,cost,mode,groups:gl,fee:gl.reduce((t,g)=>t+g.fee,0),min:main.min||0,belowMin:gl.some(g=>g.belowMin)};
   }
   const listsTotal=Object.values(out.lists).reduce((t,l)=>t+l.cost+l.fee,0);
   out.extrasTotal=extras.reduce((a,b)=>a+b,0);
@@ -67,11 +77,20 @@ function inventory(m,exceptId){
 // Completa un pedido online que no llega al mínimo adelantando cosas de la compra del mes
 function fillToMinimum(m,wi){
   const sh=shopping(m), l=sh.lists[wi], min=l.min||0;
+  // Con varios supermercados se completa el del principal
+  const g=(l.groups||[]).find(x=>x.sup===mainSuper());if(g)l.cost=g.cost;
   const deliv=deliveryDate(sh.weeks[wi]);
   let cost=l.cost;const a=S.assign[m]=S.assign[m]||{};const moved=[];
   const cands=sh.lists.mes.items.filter(it=>!S.checks[checkKey(m,"mes",it.pid)]&&(sh.first[it.pid]||"")>=deliv).sort((x,y)=>y.cost-x.cost);
   for(const it of cands){if(cost>=min)break;a[it.pid]=wi;cost+=it.cost;moved.push(P[it.pid].name)}
   save();return {moved,ok:cost>=min,cost};
+}
+
+// Cuánto costaría esta lista entera en cada supermercado (los productos que no tiene se cuentan a precio del principal)
+function compareSupers(l){
+  return chosenSupers().map(sid=>{let cost=0,miss=0;
+    for(const it of l.items){const v=superPrice(sid,it.pid);if(v==null){miss++;cost+=it.packs*(superPrice(mainSuper(),it.pid)??price(it.pid))}else cost+=it.packs*v}
+    return {sid,cost,miss}}).sort((a,b)=>a.cost-b.cost);
 }
 
 /* ---------- Resumen del mes ---------- */

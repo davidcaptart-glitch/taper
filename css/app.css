@@ -400,3 +400,14 @@ nav.tabs{background:color-mix(in srgb,var(--silver-1) 88%,transparent);border-to
 .steps{counter-reset:st;list-style:none;padding:0;margin:14px 0}
 .steps li{counter-increment:st;position:relative;padding:10px 12px 10px 48px;margin:6px 0;background:var(--surface-2);border-radius:12px;line-height:1.4}
 .steps li::before{content:counter(st);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+
+/* ---------- Varios supermercados ---------- */
+.supopt{display:flex;gap:12px;align-items:center;text-align:left}
+.supopt .tick{width:24px;height:24px;border-radius:7px;flex:none;display:grid;place-items:center;font-weight:700;color:#fff;background:var(--surface-2);box-shadow:inset 0 0 0 1.5px var(--line)}
+.supopt[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--accent)}
+.supopt[aria-pressed="true"] .tick{background:var(--accent);box-shadow:none}
+.suphead{display:flex;justify-content:space-between;align-items:baseline;margin:22px 0 2px;padding-top:12px;border-top:2px solid var(--line)}
+.suphead h2{margin:0;font-size:1.15rem}
+.cmp summary{cursor:pointer;list-style:none}
+.cmp summary::-webkit-details-marker{display:none}
+.cmp .wtable{margin:10px 0}

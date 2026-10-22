@@ -1,5 +1,5 @@
 {
-  "nota": "Supermercados con los que puede trabajar Táper. 'activo': precios, lista con enlaces y tickets. 'proximamente': tienen tienda online de alimentación con catálogo y precios por zona, así que se podrían añadir igual que Mercadona (hay que comprobar cada uno). 'dificil': sin tienda online de alimentación en España; como mucho, tickets. 'entrega': tarifas de cada forma de compra (online, compra en tienda con entrega a domicilio, en tienda): envío y pedido mínimo en euros.",
+  "nota": "Supermercados con los que puede trabajar Táper. 'activo': precios, lista con enlaces y tickets. 'proximamente': tienen tienda online de alimentación con catálogo y precios por zona, así que se podrían añadir igual que Mercadona (hay que comprobar cada uno). 'dificil': sin tienda online de alimentación en España; como mucho, tickets. 'entrega': tarifas de cada forma de compra (online, compra en tienda con entrega a domicilio, en tienda): envío y pedido mínimo en euros. 'sin_reparto': códigos postales donde no reparte a domicilio (solo se puede comprar en tienda). 'gratis_desde': envío gratis a partir de ese importe. Los precios de los demás supermercados están en precios_supers.json; un súper aparece para elegir cuando tiene precios.",
   "supermercados": [
     {
       "id": "mercadona",
@@ -29,37 +29,135 @@
       "id": "carrefour",
       "nombre": "Carrefour",
       "estado": "proximamente",
-      "web": "https://www.carrefour.es/supermercado"
+      "web": "https://www.carrefour.es/supermercado",
+      "entrega": {
+        "online": {
+          "envio": 3.99,
+          "minimo": 0,
+          "gratis_desde": 140
+        },
+        "tienda": {
+          "envio": 0,
+          "minimo": 0
+        }
+      },
+      "sin_reparto": [],
+      "tarifas": {
+        "comprobadas": "2026-10-22",
+        "fuente": "https://www.carrefour.es/supermercado"
+      }
     },
     {
       "id": "dia",
       "nombre": "DIA",
       "estado": "proximamente",
-      "web": "https://www.dia.es"
+      "web": "https://www.dia.es",
+      "entrega": {
+        "online": {
+          "envio": 4.99,
+          "minimo": 0,
+          "gratis_desde": 100
+        },
+        "tienda": {
+          "envio": 0,
+          "minimo": 0
+        }
+      },
+      "sin_reparto": [],
+      "tarifas": {
+        "comprobadas": "2026-10-22",
+        "fuente": "https://www.dia.es/"
+      }
     },
     {
       "id": "alcampo",
       "nombre": "Alcampo",
       "estado": "proximamente",
-      "web": "https://www.compraonline.alcampo.es"
+      "web": "https://www.compraonline.alcampo.es",
+      "entrega": {
+        "online": {
+          "envio": 7,
+          "minimo": 0
+        },
+        "tienda": {
+          "envio": 0,
+          "minimo": 0
+        }
+      },
+      "sin_reparto": [
+        "08784"
+      ],
+      "tarifas": {
+        "comprobadas": "2026-10-22",
+        "fuente": "https://www.compraonline.alcampo.es/content/servicios-entrega-recogida"
+      }
     },
     {
       "id": "eroski",
       "nombre": "Eroski",
       "estado": "proximamente",
-      "web": "https://supermercado.eroski.es"
+      "web": "https://supermercado.eroski.es",
+      "entrega": {
+        "online": {
+          "envio": 3.95,
+          "minimo": 0
+        },
+        "tienda": {
+          "envio": 0,
+          "minimo": 0
+        }
+      },
+      "sin_reparto": [
+        "08784"
+      ],
+      "tarifas": {
+        "comprobadas": "2026-10-22",
+        "fuente": "https://supermercado.eroski.es/es/supermercado/envio/"
+      }
     },
     {
       "id": "consum",
       "nombre": "Consum",
       "estado": "proximamente",
-      "web": "https://tienda.consum.es"
+      "web": "https://tienda.consum.es",
+      "entrega": {
+        "online": {
+          "envio": 7,
+          "minimo": 0
+        },
+        "tienda": {
+          "envio": 0,
+          "minimo": 0
+        }
+      },
+      "sin_reparto": [
+        "08784"
+      ],
+      "tarifas": {
+        "comprobadas": "2026-10-22",
+        "fuente": "https://tienda.consum.es/site/es/nota-legal"
+      }
     },
     {
       "id": "bonpreu",
       "nombre": "Bonpreu / Esclat",
       "estado": "proximamente",
-      "web": "https://www.compraonline.bonpreuesclat.cat"
+      "web": "https://www.compraonline.bonpreuesclat.cat",
+      "entrega": {
+        "online": {
+          "envio": 4.5,
+          "minimo": 35
+        },
+        "tienda": {
+          "envio": 0,
+          "minimo": 0
+        }
+      },
+      "sin_reparto": [],
+      "tarifas": {
+        "comprobadas": "2026-10-22",
+        "fuente": "https://www.compraonline.bonpreuesclat.cat/content/preguntes-frequents"
+      }
     },
     {
       "id": "caprabo",
@@ -71,7 +169,25 @@
       "id": "condis",
       "nombre": "Condis",
       "estado": "proximamente",
-      "web": "https://compraonline.condis.es"
+      "web": "https://compraonline.condis.es",
+      "entrega": {
+        "online": {
+          "envio": 7,
+          "minimo": 40,
+          "gratis_desde": 140
+        },
+        "tienda": {
+          "envio": 0,
+          "minimo": 0
+        }
+      },
+      "sin_reparto": [
+        "08784"
+      ],
+      "tarifas": {
+        "comprobadas": "2026-10-22",
+        "fuente": "https://compraonline.condis.es/condiciones-generales/l/es_ES"
+      }
     },
     {
       "id": "elcorteingles",

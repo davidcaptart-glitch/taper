@@ -570,6 +570,15 @@ function orderBlock(l,kind){
   for(const [pid,o] of del)h+=`<li><span class="del">Quitar</span> ${esc(P[pid].name)} (tenías ${o})</li>`;
   return h+`</ul><button class="btn small" data-saveorder="${kind}">Hecho: guardar este como mi ${name}</button></div>`;
 }
+// Comparativa: esta lista en cada supermercado elegido, y lo que ahorras repartiendo
+function compareCard(l){
+  const rows=compareSupers(l), best=rows[0], mix=l.cost;
+  return `<details class="card cmp"><summary><b>Comparar supermercados</b> <span class="small muted">· ${cheapestMode()?`repartiendo ahorras ${eur(Math.max(0,rows.find(r=>r.sid===mainSuper()).cost-mix))}`:`el más barato: ${esc(superById(best.sid).nombre)}`}</span></summary>
+    <table class="wtable">${rows.map(r=>`<tr><td>Todo en ${esc(superById(r.sid).nombre)}${r.miss?` <small class="muted">(${r.miss} sin precio)</small>`:""}</td><td>${eur(r.cost)}</td></tr>`).join("")}
+    ${cheapestMode()?`<tr><td><b>Repartido (lo que ves abajo)</b></td><td><b>${eur(mix)}</b></td></tr>`:""}</table>
+    <p class="small muted">Sin contar envíos. Precios de las webs de cada súper del ${esc(PS&&PS.ejecutado?longDate(PS.ejecutado.slice(0,10)).replace(/^\w+, /,""):"")}. Si el envase es distinto, se calcula el precio para la misma cantidad.</p>
+    <div class="chips">${chip("data-strat","principal",!cheapestMode(),"Todo en "+esc(superById(mainSuper()).nombre))}${chip("data-strat","barato",cheapestMode(),"Cada cosa donde sea más barata")}</div></details>`;
+}
 function renderCompra(){
   const sh=shopping(month);
   if(!sh.weeks.length||!sh.weeks.some(s=>S.plans[s])){main.innerHTML=`<section class="view"><div class="empty"><h2>Sin lista todavía</h2><p>Planifica alguna semana de este mes y aquí aparecerá la compra.</p><button class="btn" id="goMenu">Ir al menú</button></div></section>`;document.getElementById("goMenu").onclick=()=>{tab="menu";render()};return}
@@ -579,25 +588,34 @@ function renderCompra(){
   sh.weeks.forEach((s,i)=>h+=`<button aria-pressed="${listSel===String(i)}" data-list="${i}">Semana ${shortDate(s)}</button>`);
   h+=`</div><div class="listtotal"><h2>${listSel==="mes"?"Despensa, congelados y carne":"Fresco de la semana"}</h2><b>${eur(l.cost+l.fee)}</b></div>
   <div class="modes chips">${Object.entries(SHOP_MODES).map(([m,t])=>chip("data-lm",m,l.mode===m,t)).join("")}</div>
-  <p class="small muted" style="margin:4px 0">${l.fee?`Envío: ${eur(l.fee)}`:"Sin envío"}${l.min?` · pedido mínimo ${eur(l.min)}`:""} (tarifa de ${esc(superInfo().nombre||"tu supermercado")})</p>`;
+  ${l.groups.length>1?`<p class="small muted" style="margin:4px 0">Repartido en ${l.groups.length} supermercados, cada producto donde sale más barato.${l.fee?` Envíos: ${eur(l.fee)}.`:""}</p>`
+    :`<p class="small muted" style="margin:4px 0">${l.fee?`Envío: ${eur(l.fee)}`:"Sin envío"}${l.min?` · pedido mínimo ${eur(l.min)}`:""} (tarifa de ${esc(superById((l.groups[0]||{}).sup||mainSuper()).nombre||"tu supermercado")})</p>`}`;
   if(wi!=null)h+=`<p class="small muted" style="margin:0">Llega o se compra el ${esc(longDate(deliveryDate(sh.weeks[wi])))}. Lo que se cocina antes sale de lo que ya hay en casa.</p>`;
   if(l.mode==="online"){
     h+=`<p class="shophint">Toca 🛒 para abrir el producto en Mercadona y añadirlo al carro.</p>`;
   }
-  if(l.belowMin){
-    h+=`<div class="warnbox">No llegas al pedido mínimo (${eur(l.min)}): faltan ${eur(l.min-l.cost)}.${wi!=null?` <button class="btn small" id="fillMin">Completar con cosas del mes</button>`:" Pásala a compra en tienda o junta compras."}</div>`;
+  if(l.belowMin){const bg=l.groups.find(g=>g.belowMin);
+    h+=`<div class="warnbox">${l.groups.length>1?esc(superById(bg.sup).nombre)+": n":"N"}o llegas al pedido mínimo (${eur(bg.min)}): faltan ${eur(bg.min-bg.cost)}.${wi!=null?` <button class="btn small" id="fillMin">Completar con cosas del mes</button>`:" Pásala a compra en tienda o junta compras."}</div>`;
   }
-  if(l.items.length)h+=orderBlock(l,listSel==="mes"?"mes":"semana");
-  // Por secciones de Mercadona, en el orden en que se recorre la tienda
-  const bySec={};for(const it of l.items)(bySec[P[it.pid].sec]=bySec[P[it.pid].sec]||[]).push(it);
-  const secs=[...STORE_ORDER,...Object.keys(bySec).filter(s=>!STORE_ORDER.includes(s))].filter(s=>bySec[s]);
-  if(l.mode!=="online")h+=`<p class="shophint">Ordenado por secciones, en el orden en que se suele recorrer Mercadona: coges todo lo de cada sección de una vez y los congelados al final.</p>`;
-  secs.forEach((sec,si)=>{
-    h+=`<div class="aisle"><h3>${l.mode!=="online"?`<span class="secn">${si+1}</span>`:""}${esc(sec)} <span class="muted small">· ${bySec[sec].length}</span></h3>`;
-    for(const it of bySec[sec].sort((a,b)=>P[a.pid].name.localeCompare(P[b.pid].name))){
-      const key=checkKey(month,listSel,it.pid),done=!!S.checks[key],moved=(S.assign[month]||{})[it.pid]!=null&&listSel!=="mes";
-      h+=`<label class="item ${done?"done":""}"><input type="checkbox" data-ck="${key}" ${done?"checked":""}>${prodImg(it.pid)}<span class="t">${it.packs} × ${esc(P[it.pid].name)}<small>Necesitas ${fmtQty(it.q,P[it.pid].unit)}${P[it.pid].keep==="congelar"?", para congelar":""}${moved?" · adelantado de la compra del mes":""}</small></span><span class="p">${eur(it.cost)}${upTag(it.pid)}</span>${l.mode==="online"&&P[it.pid].mid?`<a class="mlink" href="https://tienda.mercadona.es/product/${encodeURIComponent(P[it.pid].mid)}/" target="_blank" rel="noopener" aria-label="Abrir ${esc(P[it.pid].name)} en Mercadona">🛒</a>`:""}</label>`}
-    h+=`</div>`});
+  if(l.items.length&&l.groups.length===1&&l.groups[0].sup==="mercadona")h+=orderBlock(l,listSel==="mes"?"mes":"semana");
+  if(l.items.length&&chosenSupers().length>1)h+=compareCard(l);
+  // Un bloque por supermercado; dentro, por secciones en el orden en que se recorre la tienda
+  const multi=l.groups.length>1;
+  if(l.mode!=="online")h+=`<p class="shophint">Ordenado por secciones, en el orden en que se suele recorrer el súper: coges todo lo de cada sección de una vez y los congelados al final.</p>`;
+  for(const g of l.groups){
+    const sp=superById(g.sup);
+    if(multi)h+=`<div class="suphead"><h2>${esc(sp.nombre)}</h2><b>${eur(g.cost+g.fee)}</b></div>
+      <p class="small muted" style="margin:0 0 6px">${g.items.length} productos${g.soloTienda&&l.mode!=="tienda"?" · no reparte en tu zona: en tienda":g.fee?` · envío ${eur(g.fee)}`:""}${g.belowMin?` · <span class="up">no llega al mínimo de ${eur(g.min)}</span>`:""}</p>`;
+    const bySec={};for(const it of g.items)(bySec[P[it.pid].sec]=bySec[P[it.pid].sec]||[]).push(it);
+    const secs=[...STORE_ORDER,...Object.keys(bySec).filter(s=>!STORE_ORDER.includes(s))].filter(s=>bySec[s]);
+    secs.forEach((sec,si)=>{
+      h+=`<div class="aisle"><h3>${l.mode!=="online"?`<span class="secn">${si+1}</span>`:""}${esc(sec)} <span class="muted small">· ${bySec[sec].length}</span></h3>`;
+      for(const it of bySec[sec].sort((a,b)=>P[a.pid].name.localeCompare(P[b.pid].name))){
+        const key=checkKey(month,listSel,it.pid),done=!!S.checks[key],moved=(S.assign[month]||{})[it.pid]!=null&&listSel!=="mes";
+        const sx=it.sup!=="mercadona"&&PS&&PS.supers[it.sup]?PS.supers[it.sup].productos[it.pid]:null;
+        h+=`<label class="item ${done?"done":""}"><input type="checkbox" data-ck="${key}" ${done?"checked":""}>${prodImg(it.pid)}<span class="t">${it.packs} × ${esc(P[it.pid].name)}<small>Necesitas ${fmtQty(it.q,P[it.pid].unit)}${P[it.pid].keep==="congelar"?", para congelar":""}${moved?" · adelantado de la compra del mes":""}${sx?` · ${esc(sx.nombre)}`:""}</small></span><span class="p">${eur(it.cost)}${upTag(it.pid)}</span>${l.mode==="online"&&it.sup==="mercadona"&&P[it.pid].mid?`<a class="mlink" href="https://tienda.mercadona.es/product/${encodeURIComponent(P[it.pid].mid)}/" target="_blank" rel="noopener" aria-label="Abrir ${esc(P[it.pid].name)} en Mercadona">🛒</a>`:""}</label>`}
+      h+=`</div>`});
+  }
   const sk=month+"|"+listSel;
   h+=`<div class="card"><h2>Lo que he pagado</h2><div class="spend"><span class="small muted">Apunta el total del ticket o del pedido para comparar con lo previsto (${eur(l.cost+l.fee)}).</span><input type="number" min="0" step="0.01" id="spentIn" value="${S.spent[sk]??""}" placeholder="0,00"></div></div>`;
   if(listSel==="mes"){
@@ -612,6 +630,7 @@ function renderCompra(){
   h+=`<div class="card"><h2>Presupuesto por semana</h2><table class="wtable">${sh.weeks.map((s,i)=>`<tr><td>Semana del ${shortDate(s)}${i===0?" (con la compra del mes)":""}</td><td class="${sh.perWeek[i]>wb?"up":""}">${eur(sh.perWeek[i])} / ${eur(wb)}</td></tr>`).join("")}</table></div>`;
   main.innerHTML=h+`</section>`;
   main.querySelectorAll("[data-list]").forEach(b=>b.onclick=()=>{listSel=b.dataset.list;render()});
+  main.querySelectorAll("[data-strat]").forEach(b=>b.onclick=()=>{S.home.shop.strategy=b.dataset.strat;save();render();toast(b.dataset.strat==="barato"?"Cada producto, donde sale más barato":"Todo en "+superById(mainSuper()).nombre)});
   main.querySelectorAll("[data-lm]").forEach(b=>b.onclick=()=>{S.modes[month+"|"+listSel]=b.dataset.lm;save();render()});
   main.querySelectorAll("[data-ck]").forEach(i=>i.onchange=()=>{S.checkedAt=S.checkedAt||{};if(i.checked){S.checks[i.dataset.ck]=true;S.checkedAt[i.dataset.ck]=todayISO()}else{delete S.checks[i.dataset.ck];delete S.checkedAt[i.dataset.ck]}i.closest(".item").classList.toggle("done",i.checked);save()});
   document.getElementById("spentIn").onchange=e=>{const v=e.target.value;if(v==="")delete S.spent[sk];else S.spent[sk]=Number(v);save();renderHeader()};
@@ -718,7 +737,7 @@ let accOpen=new Set(["yo"]);
 const acc=(id,ico,title,sub,body)=>`<details class="acc" data-acc="${id}" ${accOpen.has(id)?"open":""}><summary><span class="ico">${ico}</span><span class="tx">${title}${sub?`<small>${esc(sub)}</small>`:""}</span></summary><div class="accbody">${body}</div></details>`;
 function renderPerfil(){
   const RV={2:"❤️",1:"👍",rare:"🙂","-1":"👎"};
-  let h=`<section class="view"><div class="hero"><div class="eyebrow">Tu perfil</div><h2>${me().name?"Hola, "+esc(me().name):"Hola"}</h2><p>${S.people.length>1?`${S.people.length} personas en casa · `:""}${eur(S.home.budget.month)} al mes · ${esc(superInfo().nombre||"")}</p></div>`;
+  let h=`<section class="view"><div class="hero"><div class="eyebrow">Tu perfil</div><h2>${me().name?"Hola, "+esc(me().name):"Hola"}</h2><p>${S.people.length>1?`${S.people.length} personas en casa · `:""}${eur(S.home.budget.month)} al mes · ${esc(chosenSupers().map(s=>superById(s).nombre).join(", "))}</p></div>`;
   let fam="";
   for(const p of S.people){const hist=historyOf(p,20);
     const body=`${p.id!=="yo"?`<div class="small muted">${p.kind==="nino"?(p.age?p.age+" años · ":"")+"niño o niña":"adulto"} · ración ${String(p.factor).replace(".",",")}${p.tupper?" · se lleva táper":""}</div>${turnText(p)?`<div class="small" style="margin-top:6px">${esc(turnText(p))}</div>`:""}${kidCalendar(p)}${changesHTML(p)}`:""}${knowHTML(p)}
@@ -730,7 +749,7 @@ function renderPerfil(){
     else fam+=acc(p.id,p.kind==="nino"?"🧒":"🧑",esc(personName(p)),sub,body);
   }
   if(fam)h+=acc("familia","👨‍👩‍👧","Tu familia",others().map(personName).join(", "),fam);
-  const items=[["aparatos","Aparatos",Object.entries(APP).filter(([k])=>S.home.apps.includes(k)).map(([,v])=>v).join(", ")],["zona","Supermercado y zona",[superInfo().nombre,S.home.cp,S.home.municipio].filter(Boolean).join(" · ")||"Sin indicar"],["familia","Quién come en casa",others().map(personName).join(", ")||"Solo tú"],
+  const items=[["aparatos","Aparatos",Object.entries(APP).filter(([k])=>S.home.apps.includes(k)).map(([,v])=>v).join(", ")],["zona","Supermercados y zona",[chosenSupers().map(s=>superById(s).nombre).join(", ")+(cheapestMode()?" (lo más barato)":""),S.home.cp,S.home.municipio].filter(Boolean).join(" · ")||"Sin indicar"],["familia","Quién come en casa",others().map(personName).join(", ")||"Solo tú"],
     ...adults().flatMap(a=>[["objetivos:"+a.id,a.id==="yo"?"Tus objetivos":"Objetivos de "+personName(a),a.goals.map(g=>GOALS[g][0]).join(", ")],["entreno:"+a.id,a.id==="yo"?"Tu entrenamiento":"Entrenamiento de "+personName(a),a.trains?a.sports.map(s=>SPORTS[s]).join(", "):"No entrena"]]),["semana","Semana tipo y caprichos",S.fixed.length+" platos fijos"],
     ["cocina","Cuándo cocinas",S.home.cookMode==="lote"?"Por lotes: "+S.home.cookDays.map(d=>DAYS[d].toLowerCase()).join(" y "):"Cada día"],["plan","Planificación",(S.home.start&&S.home.start>todayISO()?"Empieza el "+shortDate(S.home.start)+" · ":"")+{diaria:"Cada día",semanal:"Cada semana",quincenal:"Cada dos semanas",mensual:"Cada mes"}[S.home.planFreq]+", "+DAYS[S.home.planDay].toLowerCase()+" a las "+S.home.planTime],
     ["compra","Compra y presupuesto",eur(S.home.budget.month)+" al mes"]];
@@ -1063,6 +1082,8 @@ async function boot(){
   try{const fresh=await getJSON(prUrl+"?t="+Date.now(),true);
     if(fresh&&fresh.productos){PR=fresh;prOffline=false;try{localStorage.setItem("taper-precios",JSON.stringify(PR))}catch(e){}}}
   catch(e){prOffline=!!PR}
+  try{PS=JSON.parse(localStorage.getItem("taper-precios-supers")||"null")}catch(e){PS=null}
+  try{const f=await getJSON("data/precios_supers.json?t="+Date.now(),true);if(f&&f.supers){PS=f;try{localStorage.setItem("taper-precios-supers",JSON.stringify(PS))}catch(e){}}}catch(e){}
   try{NEWS=(await getJSON("data/novedades.json",true)).versiones}catch(e){NEWS=null}
   try{CFG=await getJSON("data/config.json",true)}catch(e){CFG={}}
   // Al abrir, la semana actual y la siguiente tienen menú si ya se había planificado alguna
