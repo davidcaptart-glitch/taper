@@ -307,6 +307,14 @@
         "Los tickets escaneados de todos corrigen los precios automáticamente: si varios coinciden en que algo cuesta distinto, la app lo ajusta sola.",
         "Todos los platos del menú y de Recetas tienen ya su foto real. Los que aún no la tenían se han cambiado por otros."
       ]
+    },
+    {
+      "version": 32,
+      "fecha": "2026-10-22",
+      "titulo": "La campana vigila tus avisos",
+      "cambios": [
+        "Si no tienes los avisos activados, están bloqueados o tu móvil no puede recibirlos, la campana 🔔 te lo dice y te lleva a arreglarlo con un toque."
+      ]
     }
   ]
 }

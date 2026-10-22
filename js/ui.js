@@ -952,7 +952,14 @@ function openUseUp(){
 // Todo lo pendiente de la app en un solo sitio; cada elemento lleva a resolverlo
 function inboxItems(){
   const out=[], today=todayISO(), go=(t,fn)=>()=>{dlg.close();tab=t;render();scrollTo(0,0);if(fn)setTimeout(fn,60)};
-  try{if(notifBlocked())out.push({ico:"🔕",t:"Tus avisos están bloqueados",s:"Te enseño cómo activarlos en 4 toques",go:()=>openPermHelp()})}catch(e){}
+  // Avisos del móvil: bloqueados, sin activar, o el móvil no puede recibirlos
+  try{
+    if(notifBlocked())out.push({ico:"🔕",t:"Tus avisos están bloqueados",s:"Te enseño cómo activarlos en 4 toques",go:()=>openPermHelp()});
+    else if(avisosOn()&&!(S.notif&&S.notif.on))out.push({ico:"🔔",t:"Activa los avisos",s:"Para saber qué descongelar, qué cocinar y cuándo planificar",go:()=>{dlg.close();enableAvisos().catch(e=>toast("No se ha podido: "+e.message))}});
+    else if(avisosOn()&&S.notif&&S.notif.on&&"Notification" in window&&Notification.permission==="default")out.push({ico:"🔔",t:"Vuelve a activar los avisos",s:"Este móvil aún no te ha dado permiso",go:()=>{dlg.close();enableAvisos().catch(e=>toast("No se ha podido: "+e.message))}});
+    else if(!avisosOn()&&isIOS()&&!isStandalone())out.push({ico:"📲",t:"Instala Táper para recibir avisos",s:"En iPhone solo llegan con la app en la pantalla de inicio",go:()=>{dlg.close();showDialog(`<div class="mod">${closeBtn}<h2>Instala Táper</h2><ol class="steps"><li>Toca <b>Compartir</b> (el cuadrado con la flecha ↑)</li><li>Toca <b>Añadir a pantalla de inicio</b></li><li>Abre Táper desde su icono nuevo</li><li>Tus datos pasarán solos</li></ol></div>`)}});
+    else if(!avisosOn()&&!isIOS())out.push({ico:"🔕",t:"Este navegador no recibe avisos",s:"Abre Táper con Chrome e instálala para recibirlos",go:()=>{dlg.close();tab="perfil";render()}});
+  }catch(e){}
   try{for(const k of others())if(!k.mealsSet&&(k.presence||{}).type!=="manual")out.push({ico:"🍽️",t:`¿Qué comidas hace ${personName(k)} en casa?`,s:"Comida y cena de cada día: así no cocino de más",go:()=>{dlg.close();openWizard("familia");scrollTo(0,0)}})}catch(e){}
   try{const n=pendingMeals().length;if(n)out.push({ico:"⭐",t:n===1?"1 comida por valorar":`${n} comidas por valorar`,s:"Así aprendo lo que os gusta",go:go("menu")})}catch(e){}
   try{const n=pendingSports().length;if(n)out.push({ico:"🏃",t:n===1?"¿Hiciste el entreno?":`${n} entrenos por confirmar`,s:"Para recalcular lo que te conviene comer",go:go("menu")})}catch(e){}
