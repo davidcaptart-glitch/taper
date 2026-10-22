@@ -3,7 +3,7 @@
 
 // P[id] = {id, name, env, unit, est, keep, aisle, thaw, mid}
 let P = {}, R = [], RX = {}, FEST = null;
-let PR = null, prOffline = false, SUPERS = [];
+let PR = null, prOffline = false, SUPERS = [], ZONES = null, zoneMissing = false;
 
 function setProducts(list){
   P={};

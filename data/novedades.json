@@ -73,6 +73,16 @@
         "Tus sugerencias se guardan en «Mis recetas sugeridas» con su estado, y si se aprueba te avisamos cuando ya esté en Táper.",
         "Las recetas de la comunidad llevan 💡 y tienen su propio filtro."
       ]
+    },
+    {
+      "version": 8,
+      "fecha": "2026-10-22",
+      "titulo": "Precios de tu zona",
+      "cambios": [
+        "Cada persona ve los precios del Mercadona de su zona, según su código postal.",
+        "Si tu código postal aún no está, puedes pedirlo con un botón desde Perfil > Código postal y municipio.",
+        "Tus recetas sugeridas pueden ir firmadas con tu nombre, y en Perfil ves tu código de usuario."
+      ]
     }
   ]
 }

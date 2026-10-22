@@ -17,6 +17,7 @@ function renderHeader(){
   if(PR&&PR.fecha){const ups=Object.keys(P).filter(rise).length;
     pd.innerHTML=`Precios del <b>${esc(longDate(PR.fecha).replace(/^\w+, /,""))}</b>${prOffline?" (última copia guardada)":""}${ups?` · <span class="up">▲ ${ups} ${ups===1?"producto ha subido":"productos han subido"}</span>`:""}`}
   else pd.textContent="Precios estimados: aún no se han descargado los de Mercadona";
+  if(zoneMissing)pd.innerHTML+=` · <span class="up">precios de otra zona (tu código postal aún no está)</span>`;
   if(!onb)return;
   const sh=shopping(month), budget=Number(S.home.budget.month)||0, spent=sh.total;
   const real=Object.entries(S.spent).filter(([k])=>k.startsWith(month+"|")).reduce((t,[,v])=>t+(Number(v)||0),0);
@@ -393,7 +394,7 @@ function openRecipe(id,sid){
     const cost=rationCost(r);
     showDialog(`<div class="mod">${closeBtn}
       <span class="pill ${r.type==="c"?"carga":"ligera"}">${r.type==="c"?"⚡ Con hidratos":"🥗 Ligera"}</span>${r.kid?` <span class="pill kid">Gusta a niños</span>`:""}${r.heavy?` <span class="pill fixed">Pesada</span>`:""}
-      <h2>${esc(r.name)}</h2>${r.sug?`<div class="small muted">💡 Sugerida por la comunidad${r.author?" · "+esc(r.author):""}</div>`:""}
+      <h2>${esc(r.name)}</h2>${r.sug?`<div class="small muted">💡 ${r.author?"Sugerida por "+esc(r.author):"Sugerida por la comunidad"}</div>`:""}
       <div class="stats"><div><b>${v.time} min</b><small>${v.active} de trabajo</small></div><div><b>${r.prot||"?"} g</b><small>proteína</small></div><div><b>${r.kcal?r.kcal+" kcal":eur(cost)}</b><small>${r.kcal?eur(cost)+"/ración":"por ración"}</small></div></div>
       ${r.carb!=null?`<div class="small muted">Por ración: ${r.carb} g hidratos · ${r.fat} g grasa · aguanta ${r.fridge} días en la nevera${r.freeze?" · se puede congelar":""}</div>`:""}
       ${sl?`<div class="nutr" style="margin-top:6px">${(sl.eaters.length?sl.eaters:sl.tupper).concat(sl.kids).map(p=>`<div>${p.id==="yo"?"Tu plato":esc(personName(p))}: ${nutrTxt(portionNutr(r,factorOf(p)))}</div>`).join("")}</div>`:""}
@@ -678,7 +679,7 @@ function renderPerfil(){
     ${recipeSuggestOn()?`<button class="btn ghost small" id="sugRec2" style="margin-top:8px">🍳 Sugerir una receta</button>`:""}
     ${surveyOn()?`<button class="btn ghost small" id="svProfile" style="margin-top:8px">📋 Responder la encuesta del mes</button>`:""}
     <label class="row small" style="margin-top:12px"><input type="checkbox" id="noStats" ${S.noStats?"":"checked"} style="width:auto"> Contar mis visitas de forma anónima (sin cookies ni datos personales) para saber cuánta gente usa Táper</label></div>
-  <div class="card"><h2>Novedades</h2><p class="small muted">Versión ${APP_VERSION}. La app se actualiza sola y te cuenta qué ha mejorado.</p><button class="btn ghost small" id="newsAll">Ver todas las novedades</button></div></section>`;
+  <div class="card"><h2>Novedades</h2><p class="small muted">Versión ${APP_VERSION}. La app se actualiza sola y te cuenta qué ha mejorado. Tu código de usuario: <b>${esc(S.uid)}</b>.</p><button class="btn ghost small" id="newsAll">Ver todas las novedades</button></div></section>`;
   main.innerHTML=h;
   const q=s=>main.querySelectorAll(s), find=id=>S.people.find(p=>p.id===id);
   q("[data-edit]").forEach(b=>b.onclick=()=>{openWizard(b.dataset.edit);scrollTo(0,0)});
@@ -725,8 +726,9 @@ function startCounter(){
   if(!S.installCounted&&matchMedia("(display-mode: standalone)").matches){S.installCounted=true;save();
     setTimeout(()=>{try{window.goatcounter.count&&window.goatcounter.count({path:"instalada",title:"App instalada",event:true})}catch(e){}},3000)}
 }
-// Enlace al formulario de sugerencias con la versión de la app ya rellenada
-function suggestUrl(){if(!CFG.sugerencias)return null;return CFG.sugerencias.replace(/(entry\.\d+=)0(&|$)/,"$1"+APP_VERSION+"$2")}
+// Enlace al formulario de sugerencias con la versión de la app y el código de usuario ya rellenados
+function suggestUrl(){if(!CFG.sugerencias)return null;let u=CFG.sugerencias.replace(/(entry\.\d+=)0(&|$)/,"$1"+APP_VERSION+"$2");
+  const c=CFG.sugerenciasEnvio&&CFG.sugerenciasEnvio.campos&&CFG.sugerenciasEnvio.campos.contacto;if(c)u+="&"+c+"="+encodeURIComponent((me().name?me().name+" · ":"")+S.uid);return u}
 
 /* ---------- Sugerir una receta ---------- */
 // Se envía al formulario de sugerencias como "Receta nueva", con el texto ordenado para leerlo de un vistazo
@@ -740,13 +742,16 @@ function openSuggestRecipe(){
     <div class="row"><div class="field" style="flex:1"><label for="srT">Tiempo aprox. (min)</label><input type="number" id="srT" min="1" max="240"></div>
       <div class="field" style="flex:1.3"><label for="srA">Aparato</label><select id="srA"><option value="Sin indicar">Sin indicar</option>${Object.entries(APP).map(([k,v])=>`<option value="${esc(v)}">${esc(v)}</option>`).join("")}</select></div></div>
     <label class="row small"><input type="checkbox" id="srK" style="width:auto"> Suele gustar a niños</label></details>
-    <div class="field" style="margin-top:10px"><label for="srC">Tu nombre o correo (opcional)</label><input type="text" id="srC"></div>
+    ${me().name?`<label class="row small" style="margin-top:10px"><input type="checkbox" id="srSign" checked style="width:auto"> Firmar como <b>${esc(me().name)}</b> (saldrá «Sugerida por ${esc(me().name)}»)</label>`:""}
+    <div class="field" style="margin-top:10px"><label for="srC">Correo, por si queremos responderte (opcional)</label><input type="text" id="srC" inputmode="email"></div>
     <div class="actions"><button class="btn" id="srSend">Enviar receta</button></div></div>`);
   dlg.querySelector("#srSend").onclick=async()=>{
     const v=id=>dlg.querySelector(id).value.trim();
     if(!v("#srN")){toast("Escribe el nombre de la receta");return}
     const code="R-"+Math.random().toString(36).slice(2,6).toUpperCase();
+    const sign=dlg.querySelector("#srSign")?.checked?me().name:"";
     const txt=`CÓDIGO: ${code}
+USUARIO: ${S.uid}${sign?" · "+sign:" (anónimo)"}
 RECETA: ${v("#srN")}
 
 INGREDIENTES:
@@ -757,7 +762,7 @@ ${v("#srP")||"(sin indicar)"}
 
 Tiempo: ${v("#srT")||"?"} min · Aparato: ${v("#srA")} · ${dlg.querySelector("#srK").checked?"Gusta a niños":"Sin indicar si gusta a niños"}`;
     const c=CFG.sugerenciasEnvio.campos, fd=new URLSearchParams();
-    fd.append(c.tipo,CFG.sugerenciasEnvio.tipoReceta||"Receta nueva");fd.append(c.texto,txt);if(v("#srC"))fd.append(c.contacto,v("#srC"));fd.append(c.version,String(APP_VERSION));
+    fd.append(c.tipo,CFG.sugerenciasEnvio.tipoReceta||"Receta nueva");fd.append(c.texto,txt);fd.append(c.contacto,[sign,v("#srC"),S.uid].filter(Boolean).join(" · "));fd.append(c.version,String(APP_VERSION));
     try{await fetch(CFG.sugerenciasEnvio.url,{method:"POST",mode:"no-cors",body:fd})}catch(e){toast("Sin conexión: inténtalo más tarde");return}
     S.mySug=S.mySug||[];S.mySug.push({code,name:v("#srN"),at:todayISO(),status:"enviada"});save();
     dlg.close();render();toast("¡Gracias! Receta enviada (código "+code+")");
@@ -856,7 +861,13 @@ async function boot(){
   try{FEST=await getJSON("data/festivos.json")}catch(e){FEST=null}
   try{SUPERS=(await getJSON("data/supermercados.json")).supermercados}catch(e){SUPERS=[{id:"mercadona",nombre:"Mercadona",estado:"activo"}]}
   PR=loadSavedPrices();
-  try{const fresh=await getJSON("data/precios.json?t="+Date.now(),true);
+  // Precios de la zona del usuario: el almacén que corresponde a su código postal (si aún no está, los de la zona principal)
+  try{ZONES=await getJSON("data/zonas.json",true)}catch(e){ZONES=null}
+  const wh=ZONES&&S.home.cp?ZONES.cp[S.home.cp]:null;
+  zoneMissing=!!(ZONES&&S.home.cp&&!wh);
+  const prUrl=wh&&wh!==ZONES.principal?`data/precios/${wh}.json`:"data/precios.json";
+  if(PR&&PR.codigo_postal_almacen&&wh&&PR.codigo_postal_almacen!==wh)PR=null;
+  try{const fresh=await getJSON(prUrl+"?t="+Date.now(),true);
     if(fresh&&fresh.productos){PR=fresh;prOffline=false;try{localStorage.setItem("taper-precios",JSON.stringify(PR))}catch(e){}}}
   catch(e){prOffline=!!PR}
   try{NEWS=(await getJSON("data/novedades.json",true)).versiones}catch(e){NEWS=null}

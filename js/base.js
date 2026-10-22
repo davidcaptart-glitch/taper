@@ -2,7 +2,7 @@
 "use strict";
 
 // Versión de la app: súbela (y el ?v= de index.html y VERSION de sw.js) en cada mejora, y añade sus novedades a data/novedades.json
-const APP_VERSION = 7;
+const APP_VERSION = 8;
 
 /* ---------- Utilidades ---------- */
 const DAYS = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];   // índice 0 = lunes
@@ -92,6 +92,8 @@ function migrateV1(o){
   return s;
 }
 let S=load();
+// Código de usuario anónimo: se crea una vez por móvil (sirve para identificar sus sugerencias)
+if(!S.uid){S.uid="U-"+Math.random().toString(36).slice(2,7).toUpperCase();try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}
 function load(){
   try{const raw=localStorage.getItem("taper-v2");if(raw)return mergeState(JSON.parse(raw))}catch(e){}
   try{const raw=localStorage.getItem("taper-v1");if(raw)return migrateV1(JSON.parse(raw))}catch(e){}

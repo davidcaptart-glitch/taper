@@ -1,8 +1,12 @@
-"""Actualiza data/precios.json con los precios de la tienda online de Mercadona.
+"""Actualiza los precios de la tienda online de Mercadona para una o varias zonas.
 
-Uso:  CODIGO_POSTAL=08784 python scripts/actualizar_precios.py
+Uso:  CODIGOS_POSTALES=08784,28001 python scripts/actualizar_precios.py
+      (o CODIGO_POSTAL=08784 si solo hay una zona)
 
-- Pide a Mercadona el almacén que corresponde al código postal (los precios varían por zona).
+- Pide a Mercadona el almacén que corresponde a cada código postal (los precios varían por zona).
+  Varios códigos postales pueden compartir almacén: cada almacén se consulta una sola vez.
+- El primer código postal es la zona principal: sus precios van a data/precios.json. Las demás zonas van a
+  data/precios/<almacén>.json, y data/zonas.json dice qué almacén corresponde a cada código postal.
 - Consulta cada producto de data/productos.json que tenga "mercadona_id", con una pausa entre peticiones.
 - Guarda por producto: precio actual, precio anterior (el de la semana pasada) y fecha.
 - Si un producto falla, conserva su último precio y lo apunta en "registro".
@@ -21,6 +25,8 @@ from zoneinfo import ZoneInfo
 RAIZ = Path(__file__).resolve().parent.parent
 PRODUCTOS = RAIZ / "data" / "productos.json"
 PRECIOS = RAIZ / "data" / "precios.json"
+ZONAS_DIR = RAIZ / "data" / "precios"
+ZONAS = RAIZ / "data" / "zonas.json"
 API = "https://tienda.mercadona.es/api"
 CABECERAS = {"User-Agent": "Mozilla/5.0 (uso personal: app Taper)", "Accept": "application/json"}
 PAUSA = (2.0, 4.0)       # segundos entre peticiones
@@ -68,23 +74,15 @@ def precio_de(prod, d):
     return round(float(pi["unit_price"]), 2)
 
 
-def main():
-    cp = os.environ.get("CODIGO_POSTAL", "").strip()
-    if not cp:
-        sys.exit("Falta la variable CODIGO_POSTAL (por ejemplo CODIGO_POSTAL=08784)")
-
-    hoy = datetime.now(ZoneInfo("Europe/Madrid")).date().isoformat()
-    productos = json.loads(PRODUCTOS.read_text(encoding="utf-8"))["productos"]
-    previo = json.loads(PRECIOS.read_text(encoding="utf-8")) if PRECIOS.exists() else {}
+def actualizar_zona(wh, ruta, productos, hoy):
+    """Consulta todos los productos en un almacén y escribe su archivo de precios. Devuelve los aciertos."""
+    previo = json.loads(ruta.read_text(encoding="utf-8")) if ruta.exists() else {}
     viejos = previo.get("productos", {})
     registro = previo.get("registro", [])
 
     def apunta(producto, motivo):
         print(f"  ! {producto}: {motivo}")
         registro.append({"fecha": hoy, "producto": producto, "motivo": motivo})
-
-    wh = almacen_para(cp)
-    print(f"Código postal {cp} -> almacén {wh}")
 
     nuevos, fallos, aciertos = {}, [], 0
     for i, prod in enumerate(productos):
@@ -139,9 +137,59 @@ def main():
         "registro": registro[-MAX_REGISTRO:],
         "ejecutado": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
-    PRECIOS.write_text(json.dumps(salida, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"Hecho: {aciertos} precios actualizados, {len(fallos)} fallos")
-    if not aciertos:
+    ruta.parent.mkdir(parents=True, exist_ok=True)
+    ruta.write_text(json.dumps(salida, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"Almacén {wh}: {aciertos} precios actualizados, {len(fallos)} fallos")
+    return aciertos
+
+
+def main():
+    lista = os.environ.get("CODIGOS_POSTALES", "") or os.environ.get("CODIGO_POSTAL", "")
+    cps = []
+    for cp in lista.replace(";", ",").replace(" ", ",").split(","):
+        cp = cp.strip()
+        if cp and cp not in cps:
+            if len(cp) != 5 or not cp.isdigit():
+                print(f"  ! código postal no válido, se ignora: {cp}")
+                continue
+            cps.append(cp)
+    if not cps:
+        sys.exit("Falta CODIGOS_POSTALES (por ejemplo CODIGOS_POSTALES=08784,28001) o CODIGO_POSTAL")
+
+    hoy = datetime.now(ZoneInfo("Europe/Madrid")).date().isoformat()
+    productos = json.loads(PRODUCTOS.read_text(encoding="utf-8"))["productos"]
+
+    # Código postal -> almacén (si Mercadona no responde, se conserva lo que ya se sabía)
+    zonas = json.loads(ZONAS.read_text(encoding="utf-8")) if ZONAS.exists() else {"cp": {}}
+    mapa = dict(zonas.get("cp", {}))
+    for cp in cps:
+        try:
+            mapa[cp] = almacen_para(cp)
+            print(f"Código postal {cp} -> almacén {mapa[cp]}")
+        except Exception as e:  # noqa: BLE001
+            print(f"  ! {cp}: {e}" + (f" (uso el almacén conocido {mapa[cp]})" if cp in mapa else ""))
+        time.sleep(1)
+    principal = mapa.get(cps[0])
+    if not principal:
+        sys.exit(f"No se sabe el almacén del código postal principal {cps[0]}")
+
+    almacenes = []
+    for cp in cps:
+        wh = mapa.get(cp)
+        if wh and wh not in almacenes:
+            almacenes.append(wh)
+    total = 0
+    for wh in almacenes:
+        ruta = PRECIOS if wh == principal else ZONAS_DIR / f"{wh}.json"
+        total += actualizar_zona(wh, ruta, productos, hoy)
+
+    ZONAS.write_text(json.dumps({
+        "principal": principal,
+        "cp": {cp: mapa[cp] for cp in cps if cp in mapa},
+        "almacenes": almacenes,
+        "actualizado": hoy,
+    }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if not total:
         sys.exit(1)
 
 

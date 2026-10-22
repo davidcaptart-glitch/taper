@@ -67,7 +67,8 @@ function stepBody(fullId){
     <div class="group">${SUPERS.map(x=>`<button type="button" class="alt" data-super="${x.id}" ${x.estado!=="activo"?"disabled":""} style="${H.super===x.id?"outline:2px solid var(--tomato)":""}${x.estado!=="activo"?";opacity:.55":""}"><b>${esc(x.nombre)}</b><small>${x.estado==="activo"?"Precios, lista con enlaces y tickets":x.estado==="proximamente"?"Próximamente":"Más adelante: no vende alimentación online, solo se podrán leer sus tickets"}</small></button>`).join("")}</div>
     <div class="field"><label for="wzCp">Código postal</label><input id="wzCp" type="text" inputmode="numeric" maxlength="5" value="${esc(H.cp)}" placeholder="08784"></div>
     <div class="field"><label for="wzMun">Municipio (para los festivos locales)</label><input id="wzMun" type="text" list="wzMunList" value="${esc(H.municipio)}" placeholder="Por ejemplo, Piera"><datalist id="wzMunList">${Object.keys((FEST||{}).locales||{}).map(m=>`<option value="${esc(m)}">`).join("")}</datalist>
-    <div class="hint">Si tu municipio no sale en la lista, añade sus festivos locales en Perfil > Festivos.</div></div>`;
+    <div class="hint">Si tu municipio no sale en la lista, añade sus festivos locales en Perfil > Festivos.</div></div>
+    ${zoneMissing?`<div class="warnbox">Tu código postal aún no tiene precios propios: de momento verás los de otra zona (pueden variar unos céntimos). ${S.zoneAsked===H.cp?"Ya lo has pedido; se añadirá en la próxima actualización.":`<button class="btn small" id="askZone">Pedir mi zona</button>`}</div>`:""}`;
   if(id==="familia"){
     const ptypes=[["siempre","Siempre"],["alternas","Semanas alternas"],["findes","Fines de semana alternos"],["dias","Días concretos de la semana"],["manual","Lo marco cada semana"]];
     let h=`<p class="lead">Añade a quien come contigo: pareja, hijos, otros familiares, compañeros de piso… Cada uno con cuándo está, su ración y sus propios gustos.</p>`;
@@ -162,6 +163,10 @@ function fixedEditor(){
 function bindStep(fullId){
   const H=S.home,a=stepPerson(fullId),q=s=>main.querySelector(s),qa=s=>main.querySelectorAll(s);
   const rerender=()=>{save();render()};
+  q("#askZone")&&(q("#askZone").onclick=async()=>{const c=CFG.sugerenciasEnvio;if(!c){toast("Pídeselo a quien te pasó la app");return}
+    const fd=new URLSearchParams();fd.append(c.campos.tipo,"Otra cosa");fd.append(c.campos.texto,`AÑADIR CÓDIGO POSTAL: ${H.cp}
+USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean).join(" · "));fd.append(c.campos.version,String(APP_VERSION));
+    try{await fetch(c.url,{method:"POST",mode:"no-cors",body:fd});S.zoneAsked=H.cp;save();rerender();toast("Pedido enviado")}catch(e){toast("Sin conexión: inténtalo más tarde")}});
   qa("[data-super]").forEach(b=>b.onclick=()=>{H.super=b.dataset.super;rerender()});
   qa("[data-app]").forEach(b=>b.onclick=()=>{const k=b.dataset.app;H.apps=H.apps.includes(k)?H.apps.filter(x=>x!==k):[...H.apps,k];rerender()});
   q("#addKid")&&(q("#addKid").onclick=()=>{S.people.push({...defaultAdult(),id:uid("k"),kind:"nino",goals:["sano"],factor:0.6,presence:{type:"siempre"}});rerender()});

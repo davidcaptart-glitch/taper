@@ -98,6 +98,17 @@ Cuando cambiemos algo de la app:
 3. Escribe un resumen en **Summary**, pulsa **Commit to main** y luego **Push origin**.
 4. En uno o dos minutos la app estará actualizada. En el móvil, ciérrala y vuelve a abrirla.
 
+## Añadir la zona de precios de un amigo
+
+Cuando alguien pulse "Pedir mi zona" en la app, te llegará al formulario de sugerencias un mensaje
+"AÑADIR CÓDIGO POSTAL: 28001". Para añadirlo:
+
+1. Abre `https://github.com/davidcaptart-glitch/taper/settings/variables/actions`.
+2. Edita la variable **CODIGOS_POSTALES** y añade el código al final, separado por una coma: `08784,28001`.
+   El primero (el tuyo) es la zona principal.
+3. El domingo siguiente se descargarán sus precios (o lánzalo a mano en Actions > Actualizar precios).
+   Cada zona nueva añade unos 4 minutos a la tarea.
+
 ## Si algo falla
 
 - **La app dice "Precios estimados"**: aún no se ha ejecutado el paso 6, o ha fallado. Mira la pestaña Actions.
