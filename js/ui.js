@@ -68,6 +68,7 @@ function mealLine(d,meal,wk){
   const who=[...(st==="solotaper"?[]:["tú"]),...sl.kids.map(k=>personName(k))];
   const comp=company(sl);
   let h=`<div style="margin-top:6px"><div class="small muted">${label}${st==="solotaper"?" (solo el táper de mañana)":""}${sl.tupper.length&&st!=="solotaper"?" + táper de mañana":""}${comp.length?" · con "+esc(comp.map(personName).join(" y ")):""}${sl.guests?` · <b>+${sl.guests} ${sl.guests===1?"invitado":"invitados"}</b>`:""}</div>`;
+  if(r&&fromBatch(sl)){const k=keepPlan(r,sl);h+=`<div class="batchtag">${k.freeze?"❄️":"🥡"} Del táper del ${DAYS[dow(k.cook)].toLowerCase()}${k.freeze?" · pásalo a la nevera la noche antes":" · solo sacarlo y calentar"}</div>`}
   if(r)h+=`<div class="dishrow">${dishImg(r,"s")}<button class="name" data-open="${r.id}" data-slot="${sl.id}">${esc(r.name)}</button></div>`;
   else if(sl.fixed)h+=`<b>${esc(sl.fixed.name)}</b>`;
   h+=`<div class="meta">${r?`${recipeTime(r)} min · ${r.prot||"?"} g proteína · ${String(sl.portions).replace(".",",")} raciones`:sl.fixed?"Plato fijo":""}</div>`;
@@ -75,8 +76,8 @@ function mealLine(d,meal,wk){
     const who=ps.find(p=>p.id==="yo")||ps[0];if(who)h+=`<div class="nutr">${who.id==="yo"?"Tu plato":esc(personName(who))}: ${nutrShort(portionNutr(r,factorOf(who)))}</div>`}
   h+=needLine(sl,r);
   if(r){
-    if(S.home.cookMode==="lote"){const k=keepPlan(r,sl);
-      h+=`<div class="thaw">${k.freeze?`❄️ Se cocina el ${DAYS[dow(k.cook)].toLowerCase()} y se congela: pásalo a la nevera la noche del ${DAYS[dow(addDays(sl.date,-1))].toLowerCase()}`:`Se cocina el ${DAYS[dow(k.cook)].toLowerCase()} · aguanta ${r.fridge} días en la nevera`}</div>`}
+    if(S.home.cookMode==="lote"&&!fromBatch(sl)){const k=keepPlan(r,sl);
+      h+=`<div class="thaw">🍳 Se cocina hoy en la sesión${k.freeze?" y parte se congela":""}</div>`}
     else{const th=r.ing.filter(([p])=>P[p].thaw).map(([p])=>P[p].name.toLowerCase());
       if(th.length)h+=`<div class="thaw">La noche anterior, pasa ${esc(th.join(" y "))} del congelador a la nevera.</div>`}
     h+=`<div class="ops"><button class="btn ghost small" data-swap="${sl.id}">Cambiar plato</button></div>`;
@@ -639,10 +640,13 @@ function openSession(cd){
   const order={horno:0,air:1,vitro:2,micro:3,ninguno:4};
   out.sort((a,b)=>order[a.v.app]-order[b.v.app]||b.v.time-a.v.time);
   const active=out.reduce((t,o)=>t+o.v.active,0), longest=Math.max(0,...out.map(o=>o.v.time));
-  showDialog(`<div class="mod">${closeBtn}<h2>Sesión del ${esc(longDate(cd))}</h2>
-    <p class="small muted">${out.length} platos · unos ${Math.max(active,longest)} min si vas encadenando. Empieza por el horno y, mientras, ve con la vitro.</p>
+  const cv=batchCovers(cd), nTp=out.reduce((t,o)=>t+tupperSplit(o.sl).length,0);
+  showDialog(`<div class="mod">${closeBtn}<div class="veb">Sesión de cocina</div><h2 class="vh" style="font-size:1.8rem">${esc(longDate(cd))}</h2>
+    <div class="okbox"><b>Cocinas para ${cv.days} ${cv.days===1?"día":"días"}</b>: del ${esc(DAYS[dow(cv.from)].toLowerCase())} al ${esc(DAYS[dow(cv.to)].toLowerCase())}. ${out.length} platos repartidos en ${nTp} tápers.</div>
+    <p class="small muted">Unos ${Math.max(active,longest)} min si vas encadenando. Empieza por el horno y, mientras, ve con la vitro. Pon una etiqueta a cada táper con el día.</p>
     ${out.map((o,i)=>`<div class="session"><b>${i+1}. ${esc(o.r.name)}</b><div class="small muted">${APP[o.v.app]} · ${o.v.time} min (${o.v.active} de trabajo) · ${String(o.sl.portions).replace(".",",")} raciones</div>
-      <div class="small">${esc([o.sl.eaters.length?`cena del ${DAYS[dow(o.sl.date)].toLowerCase()}`:"",o.sl.tupper.length?`táper del ${DAYS[dow(addDays(o.sl.date,1))].toLowerCase()}`:""].filter(Boolean).join(" + "))}${o.k.freeze?" · ❄️ congélalo":""}</div>
+      <div class="tsplit"><b>Repártelo en ${tupperSplit(o.sl).length} ${tupperSplit(o.sl).length===1?"táper":"tápers"}${o.k.freeze?" · ❄️ al congelador":""}</b>
+        ${tupperSplit(o.sl).map(t=>`<div class="tsp"><span>🥡 ${esc(t.when)}</span><span>${String(t.rac).replace(".",",")} rac. · ${esc(t.who.join(", "))}</span></div>`).join("")}</div>
       <button class="btn ghost small" data-open2="${o.r.id}" data-sl="${o.sl.id}">Ver receta</button></div>`).join("")}</div>`);
   dlg.querySelectorAll("[data-open2]").forEach(b=>b.onclick=()=>openRecipe(b.dataset.open2,b.dataset.sl));
 }

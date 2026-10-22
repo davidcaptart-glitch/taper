@@ -29,9 +29,19 @@ function buildSchedule(){
       const mt=S.home.mealTimes[sl.meal]||"14:00";
       if(T.descongelar&&S.home.cookMode!=="lote"){const th=r.ing.filter(([p])=>P[p].thaw).map(([p])=>P[p].name.toLowerCase());
         if(th.length)push(at(addDays(d,-1),n.thaw),"❄️ Descongela para mañana",`Pasa ${th.join(" y ")} del congelador a la nevera para ${r.name.toLowerCase()}.`,"thaw|"+sl.id)}
-      if(T.cocinar)push(at(d,mt,-60),`🍳 Hoy: ${r.name}`,`${recipeTime(r)} min · ${String(sl.portions).replace(".",",")} raciones${sl.tupper.length?" · haz el táper de mañana":""}.`,"cook|"+sl.id);
+      if(fromBatch(sl)){
+        // Ya cocinado en la sesión: solo sacarlo (y, si va congelado, pasarlo a la nevera la noche antes)
+        const k=keepPlan(r,sl);
+        if(T.descongelar&&k.freeze)push(at(addDays(d,-1),n.thaw),"❄️ Pasa el táper a la nevera",`El de ${r.name.toLowerCase()} para mañana (${sl.meal}).`,"thawt|"+sl.id);
+        if(T.cocinar)push(at(d,mt,-30),`🥡 Saca el táper: ${r.name}`,`Lo cocinaste el ${DAYS[dow(k.cook)].toLowerCase()}. Caliéntalo y a comer.`,"cook|"+sl.id);
+      }else if(S.home.cookMode==="lote"){/* se avisa una vez al día de cocinar (abajo) */
+      }else if(T.cocinar)push(at(d,mt,-60),`🍳 Hoy: ${r.name}`,`${recipeTime(r)} min · ${String(sl.portions).replace(".",",")} raciones${sl.tupper.length?" · haz el táper de mañana":""}.`,"cook|"+sl.id);
       if(T.valorar&&sl.eaters.length)push(at(d,mt,90),`¿Qué tal ${r.name.toLowerCase()}?`,"Toca para valorarlo y que aprenda lo que te gusta.","rate|"+sl.id);
     }
+    // Por lotes: el día de cocinar, un solo aviso con cuántos platos y para cuántos días
+    if(T.cocinar&&S.home.cookMode==="lote"&&S.home.cookDays.includes(dow(d))){
+      const pl=[weekStartFor(d),addDays(weekStartFor(d),7)].flatMap(s=>S.plans[s]?buildSlots(s).filter(x=>cookDayFor(x.date)===d&&S.plans[s].slots[x.id]):[]),cv=batchCovers(d);
+      if(pl.length)push(at(d,"10:30"),`🍳 Hoy toca cocinar: ${pl.length} ${pl.length===1?"plato":"platos"}`,`Para ${cv.days} ${cv.days===1?"día":"días"}. Abre la sesión y te digo en cuántos tápers repartir cada uno.`,"sess|"+d)}
     if(T.entreno)plannedSessions(d).forEach((s,j)=>push(at(d,sessTime(s),60),`🏃 ¿Hiciste ${(SPORTS[s.type]||s.type).toLowerCase()}?`,"Si no, recalculo lo que te conviene comer.","sport|"+d+"|"+j));
     {const [y,mm]=d.split("-").map(Number),last=iso(new Date(y,mm,0)),nx=mm===12?`${y+1}-01`:`${y}-${String(mm+1).padStart(2,"0")}`;
       if(T.planificar&&daysBetween(d,last)===7&&!((S.monthPrep||{})[nx]||{}).done){const nm=new Date(nx+"-01T12:00").toLocaleDateString("es-ES",{month:"long"});

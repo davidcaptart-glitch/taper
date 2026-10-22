@@ -204,6 +204,7 @@ function buildSlots(start){
 // Avisos: comidas de táper sin cena cocinada la víspera
 function tupperGaps(start){
   const out=[];
+  if(S.home.cookMode==="lote")return out;   // por lotes, los tápers salen de la sesión de cocina
   for(const d of weekDates(start)){
     if(mealState(d,"comida")!=="taper")continue;
     const prev=addDays(d,-1), st=mealState(prev,"cena");
@@ -219,6 +220,22 @@ function cookDayFor(d){
   return d;
 }
 // ¿Aguanta en la nevera desde que se cocina hasta la última ración? Si no, se congela (si se puede)
+// Por lotes: este plato ya está hecho de un día anterior (solo hay que sacarlo)
+const fromBatch=sl=>S.home.cookMode==="lote"&&cookDayFor(sl.date)!==sl.date;
+// Días que cubre una sesión de cocina: desde ese día hasta la víspera de la siguiente
+function batchCovers(cd){
+  let last=cd;for(let i=1;i<7;i++){const x=addDays(cd,i);if(S.home.cookDays.includes(dow(x)))break;last=x}
+  return {from:cd,to:last,days:daysBetween(cd,last)+1};
+}
+// En qué tápers se reparte un plato: uno para la comida o cena de ese día (los que comen en casa)
+// y uno por persona para el táper del día siguiente
+function tupperSplit(sl){
+  const out=[], home=sl.eaters.concat(sl.kids);
+  if(home.length||sl.guests){const rac=home.reduce((t,p)=>t+(p.kind==="nino"?kidFactor(p,sl):adultFactor(p,sl)),0)+(sl.guests||0);
+    out.push({when:`${DAYS[dow(sl.date)]} · ${sl.meal}${S.home.cookMode==="lote"&&!fromBatch(sl)?" (para hoy, sin táper)":""}`,rac:Math.round(rac*100)/100,who:home.map(p=>p.id==="yo"?"tú":personName(p)).concat(sl.guests?[`${sl.guests} invitados`]:[])})}
+  for(const a of sl.tupper)out.push({when:`Táper del ${DAYS[dow(addDays(sl.date,1))].toLowerCase()} · comida`,rac:adultFactor(a,sl),who:[a.id==="yo"?"tú":personName(a)]});
+  return out;
+}
 function keepPlan(r,slot){
   const cook=cookDayFor(slot.date), last=slot.tupper.length?addDays(slot.date,1):slot.date;
   const days=daysBetween(cook,last);

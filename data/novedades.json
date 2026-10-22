@@ -396,6 +396,17 @@
       "cambios": [
         "Los tipos de aviso se activan con un interruptor al lado de cada uno, bien alineados."
       ]
+    },
+    {
+      "version": 42,
+      "fecha": "2026-10-22",
+      "titulo": "Cocinar por lotes, bien",
+      "cambios": [
+        "Si cocinas por lotes, los días siguientes solo te aviso de sacar el táper (y de pasarlo a la nevera la noche antes si va congelado). Nada de «hoy cocinas».",
+        "El día de cocinar, un solo aviso: cuántos platos y para cuántos días.",
+        "La sesión de cocina te dice para qué días cocinas y en cuántos tápers repartir cada plato, con las raciones y para quién es cada uno.",
+        "Fuera el aviso de «no tienes táper» cuando cocinas por lotes."
+      ]
     }
   ]
 }
