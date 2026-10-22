@@ -23,6 +23,14 @@ function renderHeader(){
   const sh=shopping(month), budget=monthBudget(month), spent=sh.total;
   const real=Object.entries(S.spent).filter(([k])=>k.startsWith(month+"|")).reduce((t,[,v])=>t+(Number(v)||0),0);
   document.getElementById("spent").textContent=eur(spent);
+  if(!budgetSet()){
+    document.getElementById("budgetOf").textContent="previsto este mes";
+    const bar0=document.getElementById("bar");bar0.classList.remove("over");bar0.firstElementChild.style.width="0%";
+    const n0=document.getElementById("budgetNote");n0.classList.remove("over");
+    n0.innerHTML=`<button class="btn small" id="setBudget">💶 Indicar presupuesto mensual</button>${real?` <span class="small">· Gastado de verdad: ${eur(real)}</span>`:""}`;
+    document.getElementById("setBudget").onclick=()=>openWizard("compra","menu");
+    return;
+  }
   document.getElementById("budgetOf").textContent="de "+eur(budget);
   const bar=document.getElementById("bar");bar.classList.toggle("over",spent>budget);
   bar.firstElementChild.style.width=Math.min(100,budget?spent/budget*100:0)+"%";
@@ -463,7 +471,7 @@ function renderMenu(){
     h+=`<div class="weekacts"><button class="btn small" data-plan="${start}">${wk.confirmed?"Revisar la semana":"Planificar la semana"}</button><button class="btn ghost small" data-regen="${start}">Rehacer platos</button></div>`;
     {const cost=weekCost(start),target=weekFoodTarget(start);
       h+=cost>target+0.5?`<div class="warnbox">💶 La comida de esta semana sale por unos <b>${eur(cost)}</b> y tu presupuesto deja <b>${eur(target)}</b>. He elegido lo más barato que encaja con vuestros gustos y entrenos, pero no llego. <button class="btn small" data-sacr="${start}">¿Qué sacrificamos?</button></div>`
-        :`<div class="small muted" style="margin-bottom:6px">💶 Comida de la semana: ${eur(cost)} de ${eur(target)} disponibles</div>`}
+        :`<div class="small muted" style="margin-bottom:6px">💶 Comida de la semana: ${eur(cost)}${isFinite(target)?` de ${eur(target)} disponibles`:""}</div>`}
     for(const g of tupperGaps(start))h+=`<div class="warnbox">El ${DAYS[dow(g)].toLowerCase()} ${shortDate(g)} no tienes táper: la cena de la víspera no se cocina. <button class="btn ghost small" data-day="${g}">Arreglarlo</button></div>`;
     if(S.home.cookMode==="lote"){const cds=[...new Set(buildSlots(start).filter(s=>wk.slots[s.id]).map(s=>cookDayFor(s.date)))].sort();
       for(const cd of cds){const n=buildSlots(start).filter(s=>cookDayFor(s.date)===cd&&wk.slots[s.id]&&RX[wk.slots[s.id].recipe]).length;
@@ -944,7 +952,7 @@ function renderCompra(){
   }
   if(listSel==="mes")h+=spendingHTML(month)+`<div class="card">${reviewHTML(monthReview(month),false)}</div>`;
   const wb=weekBudget(month);
-  h+=`<div class="card"><h2>Presupuesto por semana</h2><table class="wtable">${sh.weeks.map((s,i)=>S.home.start&&addDays(s,6)<S.home.start?"":`<tr><td>Semana del ${shortDate(s)}${i===mesWeek(sh.weeks)?" (con la compra del mes)":""}</td><td class="${sh.perWeek[i]>wb?"up":""}">${eur(sh.perWeek[i])} / ${eur(wb)}</td></tr>`).join("")}</table></div>`;
+  h+=`<div class="card"><h2>${budgetSet()?"Presupuesto por semana":"Gasto previsto por semana"}</h2><table class="wtable">${sh.weeks.map((s,i)=>S.home.start&&addDays(s,6)<S.home.start?"":`<tr><td>Semana del ${shortDate(s)}${i===mesWeek(sh.weeks)?" (con la compra del mes)":""}</td><td class="${budgetSet()&&sh.perWeek[i]>wb?"up":""}">${eur(sh.perWeek[i])}${budgetSet()?" / "+eur(wb):""}</td></tr>`).join("")}</table></div>`;
   main.innerHTML=h+`</section>`;
   main.querySelectorAll("[data-list]").forEach(b=>b.onclick=()=>{listSel=b.dataset.list;render()});
   document.getElementById("sendList")?.addEventListener("click",()=>shareList(month,l,listSel==="mes"?"Compra del mes":"Compra de la semana del "+shortDate(sh.weeks[wi])));
@@ -1082,7 +1090,7 @@ function renderPerfil(){
   const fav=Object.values(me().tastes.dish).filter(v=>v>=1.5).length, rated=S.ratings.filter(x=>x.who===me().id).length, wks=Object.values(S.plans).filter(w=>w.confirmed).length;
   let h=`<section class="view"><div class="phero"><button class="avatar ${S.avatar&&owns(S.avatar)?"emo":""}" id="avBtn" aria-label="Cambiar avatar">${S.avatar&&owns(S.avatar)?SHOP[S.avatar].ico:esc((me().name||"T").trim().charAt(0).toUpperCase())}</button>
     <div><div class="veb">Tu perfil</div><h1 class="vh">Hola, <em>${esc(me().name||"tú")}</em></h1>
-    <p>${S.people.length>1?`${S.people.length} en casa · `:""}${eur(S.home.budget.month)} al mes · ${esc(chosenSupers().map(s=>superById(s).nombre).join(", "))}</p></div></div>
+    <p>${S.people.length>1?`${S.people.length} en casa · `:""}${budgetSet()?eur(S.home.budget.month)+" al mes":"sin presupuesto"} · ${esc(chosenSupers().map(s=>superById(s).nombre).join(", "))}</p></div></div>
     <div class="pstats"><div><b>${rated}</b><small>platos valorados</small></div><div><b>${fav}</b><small>favoritos</small></div><div><b>${wks}</b><small>semanas planificadas</small></div></div>`;
   let fam="";
   for(const p of S.people){const hist=historyOf(p,20);
@@ -1099,7 +1107,7 @@ function renderPerfil(){
     ...kids().map(k=>["entreno:"+k.id,"Deporte de "+personName(k),k.trains?k.sports.map(s=>SPORTS[s]).join(", "):"No hace deporte"]),
     ...adults().flatMap(a=>[["objetivos:"+a.id,isMe(a)?"Tus objetivos":"Objetivos de "+personName(a),a.goals.map(g=>GOALS[g][0]).join(", ")],["entreno:"+a.id,isMe(a)?"Tu entrenamiento":"Entrenamiento de "+personName(a),a.trains?a.sports.map(s=>SPORTS[s]).join(", "):"No entrena"]]),["cocina","Tu semana, caprichos y horario",(S.home.cookMode==="lote"?"Por lotes":"Cada día")+" · "+S.fixed.length+" platos fijos"],
     ["plan","Planificación",(S.home.start&&S.home.start>todayISO()?"Empieza el "+shortDate(S.home.start)+" · ":"")+{diaria:"Cada día",semanal:"Cada semana",quincenal:"Cada dos semanas",mensual:"Cada mes"}[S.home.planFreq]+", "+DAYS[S.home.planDay].toLowerCase()+" a las "+S.home.planTime],
-    ["compra","Compra y presupuesto",eur(S.home.budget.month)+" al mes"]];
+    ["compra","Compra y presupuesto",budgetSet()?eur(S.home.budget.month)+" al mes":"Sin presupuesto"]];
   h+=acc("ajustes","⚙️","Ajustes","Familia, objetivos, entrenos, compra…",`<div class="settingslist">${items.map(([id,t,d])=>`<button data-edit="${id}">${t}<small>${esc(d)}</small></button>`).join("")}</div>`);
   if(servidorOn())h+=acc("casa","🏠","Casa compartida",S.casa?adults().filter(a=>a.joined&&!isMe(a)).map(personName).concat(["tú"]).join(", ")+" · mismo menú y compra":"Invita a tu pareja a ver y cambiar el menú",casaCard());
   h+=acc("avisos","🔔","Avisos en el móvil",S.notif&&S.notif.on?"Activados":"Desactivados",avisosCard().replace('<div class="card"><h2>Avisos en el móvil</h2>','<div>'));

@@ -14,6 +14,8 @@ const tarifa=(mode,sid)=>{const sp=sid?superById(sid):superInfo();if(mode!=="tie
   return {envio:Number(e&&e.envio)||0,minimo:Number(e&&e.minimo)||0,gratisDesde:Number(e&&e.gratis_desde)||0}};
 const listMode=(m,key)=>S.modes[m+"|"+key]||(key==="mes"?S.home.shop.monthMode:S.home.shop.weekMode);
 // Presupuesto de un mes: el que se puso al prepararlo (Navidad, vacaciones…) o el normal
+// ¿Ha puesto presupuesto? (en el alta nueva no se pregunta: hasta que lo ponga, no hay tope ni avisos de "te pasas")
+const budgetSet=()=>Number(S.home.budget.month)>0||Number(S.home.budget.week)>0;
 const monthBudgetFull=m=>Number(((S.monthPrep||{})[m]||{}).budget)||Number(S.home.budget.month)||0;
 const weekBudget=m=>(((S.monthPrep||{})[m]||{}).budget?0:Number(S.home.budget.week))||Math.round(monthBudgetFull(m)/Math.max(1,weeksInMonth(m).length)*100)/100;
 // Semanas del mes que cuentan (las de antes de empezar el plan no)

@@ -7,7 +7,6 @@ let wiz={i:0,single:null};   // single = id del paso cuando se edita uno suelto 
 const ONBOARD=[{id:"casa",eyebrow:"Casa",title:"¿Quién vive *en casa?*"},{id:"comer",eyebrow:"Cómo coméis",title:"¿Algo que *tener en cuenta?*"},{id:"super",eyebrow:"Tu súper",title:"¿Dónde haces *la compra?*"}];
 // Lo que se puede afinar después del primer menú: id, texto, pasos del asistente que lo preguntan
 const AFINAR=[
-  ["presupuesto","💶 Presupuesto mensual",()=>["compra"]],
   ["quien","🗓️ Quién come y cuándo (custodias, días fuera)",()=>["familia"]],
   ["comidas","🥐 Desayunos, almuerzos y meriendas",()=>["familia"]],
   ["gustos","😋 Gustos de cada uno",()=>S.people.map(p=>"gustos:"+p.id)],
@@ -47,7 +46,7 @@ function fullSteps(){
   ];
   return st;
 }
-function openWizard(stepId){wiz={i:0,single:stepId||null};tab="wizard";render()}
+function openWizard(stepId,back){wiz={i:0,single:stepId||null,back:back||null};tab="wizard";render();scrollTo(0,0)}
 // Persona a la que se refiere un paso ("objetivos:yo", "entreno:k123"…)
 const stepPerson=id=>{const i=id.indexOf(":");return i<0?me():(S.people.find(p=>p.id===id.slice(i+1))||me())};
 const stepKind=id=>id.split(":")[0];
@@ -104,8 +103,8 @@ function renderWizard(){
     if(!S.onboarded&&!S.joining&&step.id==="super"){finishOnboarding();return}
     if(step.id==="listo"){if(S.joining)finishJoin();else finishOnboarding();return}
     wiz.i++;save();render();scrollTo(0,0)});
-  main.querySelector("[data-wz=save]")?.addEventListener("click",()=>{if(!validateStep(step.id))return;save();refreshPlans();wiz.single=null;tab="perfil";render();toast("Guardado")});
-  main.querySelector("[data-wz=cancel]")?.addEventListener("click",()=>{const af=!!wiz.afinar;wiz={i:0,single:null};tab=af?"menu":"perfil";render()});
+  main.querySelector("[data-wz=save]")?.addEventListener("click",()=>{if(!validateStep(step.id))return;save();refreshPlans();const bk=wiz.back;wiz={i:0,single:null};tab=bk||"perfil";render();toast("Guardado")});
+  main.querySelector("[data-wz=cancel]")?.addEventListener("click",()=>{const bk=wiz.afinar?"menu":wiz.back;wiz={i:0,single:null};tab=bk||"perfil";render()});
 }
 // Título con una parte en cursiva de acento: "¿Dónde haces *la compra?*"
 const accentTitle=t=>esc(t).replace(/\*(.+?)\*/g,"<em>$1</em>");
@@ -122,7 +121,7 @@ function finishOnboarding(){
   S.onboarded=true;save();
   if(typeof trackOnBoot==="function")trackOnBoot();
   if(S.home.cp&&S.home.cp!==S.home.cpLooked)lookupCp(S.home.cp).then(()=>save()).catch(()=>{});
-  preparingScreen(()=>{ensureHorizon();if(quick&&!Number(S.home.budget.month)){S.home.budget.month=estimateMonthBudget();S.afinar.cost=S.home.budget.month}save()},()=>{tab="menu";if(S.home.start&&S.home.start>todayISO())month=S.home.start.slice(0,7);render();toast("Menú generado. Puedes cambiar lo que quieras")});
+  preparingScreen(()=>{ensureHorizon();if(quick)S.afinar.cost=estimateMonthBudget();save()},()=>{tab="menu";if(S.home.start&&S.home.start>todayISO())month=S.home.start.slice(0,7);render();toast("Menú generado. Puedes cambiar lo que quieras")});
 }
 // Pantalla "Preparando tu semana": hace el trabajo y enseña lo que va haciendo
 function preparingScreen(work,done){
@@ -518,7 +517,7 @@ function validateStep(fullId){
     if(H.start)for(const s of Object.keys(S.plans))if(addDays(s,6)<H.start)delete S.plans[s];
     H.planFreq=v("#wzFreq");H.planDay=Number(v("#wzPDay"));H.planTime=v("#wzPTime")||"17:00"}
   if(id==="compra"){H.shop.delivery=Number(v("#wzDel"));
-    H.budget.month=Number(v("#wzBM"))||0;H.budget.week=v("#wzBW")===""?null:Number(v("#wzBW"));H.budget.basics=Number(v("#wzBB"))||0}
+    H.budget.month=Number(v("#wzBM"))||0;H.budgetConfirmed=true;H.budget.week=v("#wzBW")===""?null:Number(v("#wzBW"));H.budget.basics=Number(v("#wzBB"))||0}
   return true;
 }
 

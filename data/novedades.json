@@ -648,6 +648,15 @@
         "El pueblo y los festivos salen del código postal.",
         "Arreglada la detección de la tienda al escanear tickets."
       ]
+    },
+    {
+      "version": 69,
+      "fecha": "2026-10-22",
+      "titulo": "Presupuesto, solo si lo pones tú",
+      "cambios": [
+        "Si no has puesto presupuesto, no te digo que te pasas: arriba ves lo previsto del mes y un botón para indicar tu presupuesto mensual.",
+        "«¿Quieres afinarlo más?» sale plegado."
+      ]
     }
   ]
 }
