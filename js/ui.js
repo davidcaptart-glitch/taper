@@ -27,7 +27,7 @@ function renderHeader(){
     document.getElementById("budgetOf").textContent="previsto este mes";
     const bar0=document.getElementById("bar");bar0.classList.remove("over");bar0.firstElementChild.style.width="0%";
     const n0=document.getElementById("budgetNote");n0.classList.remove("over");
-    n0.innerHTML=`<button class="btn small" id="setBudget">💶 Indicar presupuesto mensual</button>${real?` <span class="small">· Gastado de verdad: ${eur(real)}</span>`:""}`;
+    n0.innerHTML=`<button class="btn small" id="setBudget">${ico("coin-euro")} Indicar presupuesto mensual</button>${real?` <span class="small">· Gastado de verdad: ${eur(real)}</span>`:""}`;
     document.getElementById("setBudget").onclick=()=>openWizard("compra","menu");
     return;
   }
@@ -375,7 +375,7 @@ function notifAction(tipo,tag){
 // Platos quitados por alergias o dieta: se dice cuáles y por qué, hasta que se lee
 function safetyCard(){
   if(!safetyNotes.length)return "";
-  return `<div class="warnbox" id="safetyBox"><b>⚠️ He cambiado ${safetyNotes.length===1?"un plato":safetyNotes.length+" platos"} por alergias o dieta</b>
+  return `<div class="warnbox" id="safetyBox"><b>${ico("alert-triangle")} He cambiado ${safetyNotes.length===1?"un plato":safetyNotes.length+" platos"} por alergias o dieta</b>
     <ul style="margin:6px 0 4px 18px;padding:0">${safetyNotes.map(n=>`<li>${esc(n.name)} · ${esc(DAYS[dow(n.d)].toLowerCase())} ${esc(shortDate(n.d))}, ${esc(MEAL_ART[n.meal]?MEAL_ART[n.meal].split(" ")[1]:n.meal)} · ${esc(n.who.join("; "))}</li>`).join("")}</ul>
     <small>Ya tienes otro plato en su lugar y la lista de la compra está al día.</small> <button class="btn ghost small" id="safetyOk">Entendido</button></div>`;
 }
@@ -471,7 +471,7 @@ function syncMenuWeek(){
 function renderMenu(){
   const ws=syncMenuWeek();
   const weeks=[weekSel];
-  let h=`<section class="view">`+viewHead(monthName(month),"Qué *comemos*",`${servidorOn()?`<button class="btn ghost small" id="shareMenu" title="Compartir el menú con alguien de casa">👥</button>`:""}<button class="btn ghost small" id="printMenu" title="Menú imprimible">🖨️</button>`)+followChips()+safetyCard()+afinarCard()+monthPrepCard()+((n=>n&&weekStartFor(n.d)===weekSel)(nextMeal())?todayCard():"")+weekPicker(ws,weekSel)+dayStrip(weekSel)+useUpCard()+`<div class="row" style="justify-content:flex-end;margin:4px 0 -4px"><button class="btn ghost small" id="startDay">📅 ${S.home.start&&S.home.start>todayISO()?"Cambiar el día de inicio":"Empezar el plan otro día"}</button></div>`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
+  let h=`<section class="view">`+viewHead(monthName(month),"Qué *comemos*",`${servidorOn()?`<button class="btn ghost small" id="shareMenu" title="Compartir el menú con alguien de casa" aria-label="Compartir el menú">${ico("users")}</button>`:""}<button class="btn ghost small" id="printMenu" title="Menú imprimible" aria-label="Menú imprimible">${ico("printer")}</button>`)+followChips()+safetyCard()+afinarCard()+monthPrepCard()+((n=>n&&weekStartFor(n.d)===weekSel)(nextMeal())?todayCard():"")+weekPicker(ws,weekSel)+dayStrip(weekSel)+useUpCard()+`<div class="row" style="justify-content:flex-end;margin:4px 0 -4px"><button class="btn ghost small" id="startDay">📅 ${S.home.start&&S.home.start>todayISO()?"Cambiar el día de inicio":"Empezar el plan otro día"}</button></div>`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
   for(const start of weeks){
     const wk=S.plans[start], dates=weekDates(start);
     h+=`<div class="week"><div class="weekhead"><h2>${shortDate(start)} – ${shortDate(dates[6])}</h2>${wk&&wk.confirmed?`<span class="badge ok">Planificada</span>`:wk?`<span class="badge">Previsión</span>`:""}</div>`;
@@ -697,7 +697,7 @@ function openRecipe(id,sid){
       :`${v.tools&&v.tools.length?`<div class="needs"><b>Necesitas</b><div class="tools">${v.tools.map(t=>`<span>${toolIco(t)} ${esc(t)}</span>`).join("")}</div></div>`:""}
         <button class="cookrow" data-cook><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg></span><b>Cocinar paso a paso</b><svg class="chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
         <ol class="rsteps">${v.steps.map((s,i)=>{const tg=stepTags((v.info||[])[i]);return `<li>${esc(s)}${tg.length?`<div class="stags">${tg.map(x=>`<span>${esc(x)}</span>`).join("")}</div>`:""}</li>`}).join("")}</ol>`}
-      <div class="row" style="margin-top:8px"><button class="btn small" id="rShare">📤 Compartir</button><label class="btn ghost small">📷 ${MYPHOTOS[r.id]?"Cambiar mi foto":"Foto de mi plato"}<input type="file" accept="image/*" capture="environment" id="myPh" hidden></label>${MYPHOTOS[r.id]?`<button class="btn ghost small" id="myPhDel">Quitar mi foto</button>`:""}</div>
+      <div class="row" style="margin-top:8px"><button class="btn small" id="rShare">${ico("share")} Compartir</button><label class="btn ghost small">${ico("camera")} ${MYPHOTOS[r.id]?"Cambiar mi foto":"Foto de mi plato"}<input type="file" accept="image/*" capture="environment" id="myPh" hidden></label>${MYPHOTOS[r.id]?`<button class="btn ghost small" id="myPhDel">Quitar mi foto</button>`:""}</div>
       <div class="actions"><select id="rWho" style="width:auto">${S.people.map(p=>`<option value="${p.id}">${esc(personName(p))}</option>`).join("")}</select>
         <button class="btn ghost small" data-love2>❤️ Me encanta</button><button class="btn ghost small" data-hate>👎 No me gusta</button></div>
       <h3 style="margin-top:10px">Más como esta</h3><div>${similar(r).map(x=>`<button class="alt" data-sim="${x.id}"><b>${esc(x.name)}</b><small>${recipeTime(x)} min · ${x.prot||"?"} g proteína</small></button>`).join("")}</div></div>`);
@@ -899,7 +899,7 @@ function shopPlanCard(m){
   const {plans,cur,best,cheapest}=shopPlans(m);if(plans.length<2)return "";
   const curFees=cur?cur.fees:null, save=curFees!=null?curFees-best.fees:0;
   const isBest=cur&&cur.id===best.id;
-  return `<details class="card shopplan" ${isBest?"":"open"}><summary><b>💡 Cómo comprar más barato</b> <span class="small muted">· ${isBest?"ya usas la mejor opción":save>0.01?`puedes ahorrar ${eur(save)} este mes`:"compara las opciones"}</span></summary>
+  return `<details class="card shopplan"><summary><b>${ico("bulb")} Cómo comprar más barato</b> <span class="small muted">· ${isBest?"ya usas la mejor opción":save>0.01?`puedes ahorrar ${eur(save)} este mes`:"compara las opciones"}</span></summary>
     <p class="small muted" style="margin:8px 0">La compra del mes (despensa y congelados) y la de cada semana (fresco) se pueden hacer de forma distinta. Envíos de ${esc(superInfo().nombre||"tu supermercado")} en todo el mes:</p>
     ${plans.map(p=>`<div class="spl ${p.id===best.id?"best":""}"><span><b>${esc(p.t)}</b><small>${esc(p.d)}${p.orders?` · ${p.orders} ${p.orders===1?"pedido":"pedidos"}`:""}${p.trips?` · ${p.trips} ${p.trips===1?"viaje":"viajes"} a la tienda`:""}${p.below?` · <span class="up">${p.below} ${p.below===1?"no llega":"no llegan"} al mínimo</span>`:""}</small></span>
       <span class="r"><b>${p.fees?eur(p.fees):"0 €"}</b>${p.id===best.id?`<small class="okt">Recomendada</small>`:p.id===cheapest.id?`<small class="okt">Lo más barato</small>`:""}${cur&&p.id===cur.id?`<small>La tuya</small>`:""}</span>
@@ -914,7 +914,7 @@ function renderCompra(){
   let h=`<section class="view">${viewHead(monthName(month),"Tu *compra*")}<div class="seg" role="group" aria-label="Lista"><button aria-pressed="${listSel==="mes"}" data-list="mes">Compra del mes</button>`;
   sh.weeks.forEach((s,i)=>{if(S.home.start&&addDays(s,6)<S.home.start)return;h+=`<button aria-pressed="${listSel===String(i)}" data-list="${i}">Semana ${shortDate(s)}</button>`});
   h+=`</div><div class="listtotal"><h2>${listSel==="mes"?"Despensa, congelados y carne":"Fresco de la semana"}</h2><b>${eur(l.cost+l.fee)}</b></div>
-  <div class="modes chips">${Object.entries(SHOP_MODES).map(([m,t])=>chip("data-lm",m,l.mode===m,t)).join("")}</div>
+  <div class="modes chips">${Object.entries(SHOP_MODES).map(([m,t])=>chip("data-lm",m,l.mode===m,ico(SHOP_ICO[m])+" "+t)).join("")}</div>
   ${l.groups.length>1?`<p class="small muted" style="margin:4px 0">Repartido en ${l.groups.length} supermercados, cada producto donde sale más barato.${l.fee?` Envíos: ${eur(l.fee)}.`:""}</p>`
     :`<p class="small muted" style="margin:4px 0">${l.fee?`Envío: ${eur(l.fee)}`:"Sin envío"}${l.min?` · pedido mínimo ${eur(l.min)}`:""} (tarifa de ${esc(superById((l.groups[0]||{}).sup||mainSuper()).nombre||"tu supermercado")})</p>`}`;
   if(wi!=null)h+=`<p class="small muted" style="margin:0">Llega o se compra el ${esc(longDate(deliveryDate(sh.weeks[wi])))}. Lo que se cocina antes sale de lo que ya hay en casa.</p>`;
@@ -926,11 +926,11 @@ function renderCompra(){
     h+=`<div class="warnbox">${l.groups.length>1?esc(superById(bg.sup).nombre)+": n":"N"}o llegas al pedido mínimo (${eur(bg.min)}): faltan ${eur(bg.min-bg.cost)}.${wi!=null?` <button class="btn small" id="fillMin">Completar con cosas del mes</button>`:" Pásala a compra en tienda o junta compras."}</div>`;
   }
   {const bg=sh.bags[listSel]||[];if(bg.length){const done=bg.filter(b=>(S.bags||{})[b.id]).length;
-    h+=`<details class="frzcard" ${done<bg.length?"open":""}><summary><span class="fzi">🧊</span><span><b>Al llegar: ${bg.length} ${bg.length===1?"bolsa":"bolsas"} para congelar</b><small>${done===bg.length?"✓ Todas hechas":`${done} de ${bg.length} hechas · una bolsa por plato, con su día`}</small></span></summary>
+    h+=`<details class="frzcard"><summary><span class="fzi">${ico("snowflake")}</span><span><b>Al llegar: ${bg.length} ${bg.length===1?"bolsa":"bolsas"} para congelar</b><small>${done===bg.length?"✓ Todas hechas":`${done} de ${bg.length} hechas · una bolsa por plato, con su día`}</small></span></summary>
       ${bg.map(b=>{const r=RX[b.rid],on=!!(S.bags||{})[b.id];return `<label class="bag ${on?"done":""}"><input type="checkbox" data-bag="${esc(b.id)}" ${on?"checked":""}>${r?dishImg(r,"s"):prodImg(b.pid)}<span><b>${esc(P[b.pid].name)} · ${fmtQty(b.q,P[b.pid].unit)}</b><small>Etiqueta: ${esc(DAYS[dow(b.date)])} ${esc(shortDate(b.date))}${r?" · "+esc(r.name):""}</small></span></label>`}).join("")}
       <p class="small muted" style="margin:8px 2px 0">Aplana las bolsas para que se congelen y descongelen antes. La noche antes de cada día te aviso de pasarla a la nevera.</p></details>`}}
-  if(ticketDue().some(x=>x.m===month&&x.key===listSel))h+=`<div class="tkban"><span class="ti">📸</span><span><b>Sube el ticket de esta compra</b><small>+3 coins y me ayudas a afinar los precios</small></span><button class="btn small" id="tkBanner">Escanear</button><button class="tkx" id="tkSkip" aria-label="No tengo ticket">✕</button></div>`;
-  if(l.items.length)h+=`<div class="row" style="margin:4px 0"><button class="btn small" id="sendList">📤 Enviar la lista</button>${servidorOn()?`<button class="btn ghost small" id="shareMenuC">👥 ${S.share?"Compartida con alguien de casa":"Compartir con alguien de casa"}</button>`:""}</div>`;
+  if(ticketDue().some(x=>x.m===month&&x.key===listSel))h+=`<div class="tkban"><span class="ti">${ico("receipt")}</span><span><b>Sube el ticket de esta compra</b><small>+3 coins y me ayudas a afinar los precios</small></span><button class="btn small" id="tkBanner">Escanear</button><button class="tkx" id="tkSkip" aria-label="No tengo ticket">✕</button></div>`;
+  if(l.items.length)h+=`<div class="row" style="margin:4px 0"><button class="btn small" id="sendList">${ico("share")} Enviar la lista</button>${servidorOn()?`<button class="btn ghost small" id="shareMenuC">${ico("users")} ${S.share?"Compartida con alguien de casa":"Compartir con alguien de casa"}</button>`:""}</div>`;
   if(l.items.length&&!shopIsDone(month,l))h+=`<div class="row" style="margin:4px 0 8px"><button class="btn ghost small" id="shopDone">✓ Ya he hecho esta compra</button></div>`;
   else if(l.items.length)h+=`<p class="small okt" style="margin:4px 0 8px;color:var(--ok);font-weight:600">✓ Compra hecha</p>`;
   if(listSel==="mes")h+=shopPlanCard(month);
@@ -954,6 +954,7 @@ function renderCompra(){
       h+=`</div>`});
   }
   const sk=month+"|"+listSel;
+  h+=`<details class="card more2"><summary><b>${ico("chart-bar")} Gasto y resumen</b> <span class="small muted">· lo pagado, tickets y presupuesto</span></summary>`;
   h+=`<div class="card"><h2>Lo que he pagado</h2><div class="spend"><span class="small muted">Apunta el total del ticket o del pedido para comparar con lo previsto (${eur(l.cost+l.fee)}).</span><input type="number" min="0" step="0.01" id="spentIn" value="${S.spent[sk]??""}" placeholder="0,00"></div></div>`;
   if(listSel==="mes"){
     h+=`<p class="small muted">Básicos (aceite, sal, especias): ${eur(Number(S.home.budget.basics))}.${sh.extrasTotal?` Platos fijos sin receta: ${eur(sh.extrasTotal)}.`:""}</p>`;
@@ -962,6 +963,7 @@ function renderCompra(){
   if(listSel==="mes")h+=spendingHTML(month)+`<div class="card">${reviewHTML(monthReview(month),false)}</div>`;
   const wb=weekBudget(month);
   h+=`<div class="card"><h2>${budgetSet()?"Presupuesto por semana":"Gasto previsto por semana"}</h2><table class="wtable">${sh.weeks.map((s,i)=>S.home.start&&addDays(s,6)<S.home.start?"":`<tr><td>Semana del ${shortDate(s)}${i===mesWeek(sh.weeks)?" (con la compra del mes)":""}</td><td class="${budgetSet()&&sh.perWeek[i]>wb?"up":""}">${eur(sh.perWeek[i])}${budgetSet()?" / "+eur(wb):""}</td></tr>`).join("")}</table></div>`;
+  h+=`</details>`;
   main.innerHTML=h+`</section>`;
   main.querySelectorAll("[data-list]").forEach(b=>b.onclick=()=>{listSel=b.dataset.list;render()});
   document.getElementById("sendList")?.addEventListener("click",()=>shareList(month,l,listSel==="mes"?"Compra del mes":"Compra de la semana del "+shortDate(sh.weeks[wi])));
@@ -985,6 +987,8 @@ function renderCompra(){
 }
 
 /* ---------- Recetas ---------- */
+// Recetas por tandas: pintar las 500 de golpe pesa en móviles modestos
+let recLimit=36;
 function renderRecetas(){
   const a=me();
   const fl={todas:"Todas",fav:"Favoritas",nuevas:"Sin probar",no:"Descartadas",c:"⚡ Hidratos",l:"🥗 Ligeras",kid:"Gustan a niños"};
@@ -1012,16 +1016,17 @@ function renderRecetas(){
     switch(recFilter){case "pequenas":return r.small;case "comunidad":return !!r.sug;case "fav":return dp>=1.5;case "nuevas":return !tried.has(r.id);case "no":return dp<=-1;case "c":return r.type==="c";case "l":return r.type==="l";case "kid":return r.kid;case "todas":return true;default:return r.vars.some(v=>v.app===recFilter)}
   });
   h+=`<p class="small muted">${list.length} recetas</p><div class="rgrid">`;
-  for(const r of list){const dp=dishPref(a,r.id),can=!!variantFor(r);
+  for(const r of list.slice(0,recLimit)){const dp=dishPref(a,r.id),can=!!variantFor(r);
     if(!hasPack(r)){h+=`<button class="rtile locked" data-lockpack="${r.pack}"><span class="rtimg">${dishImg(r,"m")}<span class="lock">🔒 ${esc(SHOP["pack_"+r.pack]?SHOP["pack_"+r.pack].t:"Pack")}</span></span><span class="rtt"><b>${esc(r.name)}</b><small>Desbloquéalo en la tienda de coins</small></span></button>`;continue}
     h+=`<button class="rtile ${dp<=-1||!can?"no":""}" data-open="${r.id}"><span class="rtimg">${dishImg(r,"m")}${dp>=1.5?`<span class="rtfav">❤️</span>`:""}<span class="rtbad"><span>⏱ ${recipeTime(r)}′</span>${r.kcal?`<span>🔥 ${r.kcal}</span>`:""}</span></span>
       <span class="rtt"><b>${r.sug?"💡 ":""}${esc(r.name)}</b><small>${r.prot||"?"} g proteína · ${r.type==="c"?"con hidratos":"ligera"}${!can?" · no tienes el aparato":""}${dp<=-1?" · descartada":""}</small></span></button>`;continue;
     h+=`<button class="rcard ${dp<=-1||!can?"no":""}" data-open="${r.id}">${dishImg(r,"s")}<span class="t"><b>${dp>=1.5?"❤️ ":""}${r.sug?"💡 ":""}${esc(r.name)}</b><small>${recipeTime(r)} min · ${r.prot||"?"} g proteína${r.kcal?" · "+r.kcal+" kcal":""}${!can?" · no tienes el aparato":""}${dp<=-1?" · descartada":""}</small></span><span class="pill ${r.type==="c"?"carga":"ligera"}">${r.type==="c"?"⚡":"🥗"}</span></button>`}
-  main.innerHTML=h+"</div></section>";
+  main.innerHTML=h+`</div>${list.length>recLimit?`<button class="btn ghost wide" id="recMore" style="margin:14px 0">Ver más recetas (${list.length-recLimit})</button>`:""}</section>`;
+  document.getElementById("recMore")?.addEventListener("click",()=>{recLimit+=36;const y=scrollY;render();scrollTo(0,y)});
   main.querySelectorAll("[data-lockpack]").forEach(b=>b.onclick=()=>openShop());
-  main.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{recFilter=b.dataset.f;render()});
+  main.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{recFilter=b.dataset.f;recLimit=36;render()});
   document.getElementById("sugRec")?.addEventListener("click",openSuggestRecipe);
-  const rq=document.getElementById("rq");rq.oninput=()=>{recSearch=rq.value;clearTimeout(rq._t);rq._t=setTimeout(()=>{render();const x=document.getElementById("rq");x.focus();x.setSelectionRange(x.value.length,x.value.length)},250)};
+  const rq=document.getElementById("rq");rq.oninput=()=>{recSearch=rq.value;recLimit=36;clearTimeout(rq._t);rq._t=setTimeout(()=>{render();const x=document.getElementById("rq");x.focus();x.setSelectionRange(x.value.length,x.value.length)},250)};
   bindOpen();
 }
 
@@ -1093,9 +1098,9 @@ function knowHTML(p){
     <p class="small muted">${S.ratings.filter(x=>x.who===p.id).length} valoraciones hasta ahora.</p>
     <button class="btn ghost small" data-edit="gustos:${p.id}">Editar alergias e ingredientes</button></div>`;
 }
-let accOpen=new Set([me().id]);
+let accOpen=new Set();
 // Apartado desplegable del Perfil (recuerda si estaba abierto)
-const acc=(id,ico,title,sub,body)=>`<details class="acc" data-acc="${id}" ${accOpen.has(id)?"open":""}><summary><span class="ico">${ico}</span><span class="tx">${title}${sub?`<small>${esc(sub)}</small>`:""}</span></summary><div class="accbody">${body}</div></details>`;
+const acc=(id,ic,title,sub,body)=>`<details class="acc" data-acc="${id}" ${accOpen.has(id)?"open":""}><summary><span class="ico">${ICONS[ic]?ico(ic):ic}</span><span class="tx">${title}${sub?`<small>${esc(sub)}</small>`:""}</span></summary><div class="accbody">${body}</div></details>`;
 function renderPerfil(){
   const RV={2:"❤️",1:"👍",rare:"🙂","-1":"👎"};
   const fav=Object.values(me().tastes.dish).filter(v=>v>=1.5).length, rated=S.ratings.filter(x=>x.who===me().id).length, wks=Object.values(S.plans).filter(w=>w.confirmed).length;
@@ -1110,24 +1115,24 @@ function renderPerfil(){
       ${hist.length?`<table class="wtable">${hist.map(x=>`<tr><td>${DSHORT[dow(x.date)]} ${shortDate(x.date)} · ${x.meal}</td><td style="text-align:left;padding-left:8px">${esc(x.name)}${x.note?` <span class="small muted">${esc(x.note)}</span>`:""}</td><td>${x.v!=null?RV[x.v]:""}</td></tr>`).join("")}</table>`:`<p class="small muted">Aún no hay comidas pasadas.</p>`}</details>`;
     const likes=Object.values(p.tastes.dish).filter(v=>v>=1).length, nos=Object.values(p.tastes.ing).filter(v=>v<0).length;
     const sub=`${likes} ${likes===1?"plato favorito":"platos favoritos"} · ${nos} ${nos===1?"cosa":"cosas"} que no ${isMe(p)?"te":"le"} ${nos===1?"gusta":"gustan"}`;
-    if(isMe(p))h+=acc(p.id,"🙂","Lo que sé de ti",sub,body);
-    else fam+=acc(p.id,p.kind==="nino"?"🧒":"🧑",esc(personName(p)),sub,body);
+    if(isMe(p))h+=acc(p.id,"mood-smile","Lo que sé de ti",sub,body);
+    else fam+=acc(p.id,"user",esc(personName(p)),sub,body);
   }
-  if(fam)h+=acc("familia","👨‍👩‍👧","Tu familia",S.people.filter(p=>!isMe(p)).map(personName).join(", "),fam);
+  if(fam)h+=acc("familia","users-group","Tu familia",S.people.filter(p=>!isMe(p)).map(personName).join(", "),fam);
   const items=[["aparatos","Aparatos",Object.entries(APP).filter(([k])=>S.home.apps.includes(k)).map(([,v])=>v).join(", ")],["zona","Supermercados y zona",[chosenSupers().map(s=>superById(s).nombre).join(", ")+(cheapestMode()?" (lo más barato)":""),S.home.cp,S.home.municipio].filter(Boolean).join(" · ")||"Sin indicar"],["dieta","Dieta y alergias",S.people.map(p=>(p.id==="yo"?"Tú":personName(p))+": "+DIETS[dietOf(p)][1].toLowerCase()+((p.allergies||[]).length?" · "+p.allergies.length+" alergias":"")).join(" · ")],["familia","Quién come en casa",others().map(personName).join(", ")||"Solo tú"],
     ...kids().map(k=>["entreno:"+k.id,"Deporte de "+personName(k),k.trains?k.sports.map(s=>SPORTS[s]).join(", "):"No hace deporte"]),
     ...adults().flatMap(a=>[["objetivos:"+a.id,isMe(a)?"Tus objetivos":"Objetivos de "+personName(a),a.goals.map(g=>GOALS[g][0]).join(", ")],["entreno:"+a.id,isMe(a)?"Tu entrenamiento":"Entrenamiento de "+personName(a),a.trains?a.sports.map(s=>SPORTS[s]).join(", "):"No entrena"]]),["cocina","Tu semana, caprichos y horario",(S.home.cookMode==="lote"?"Por lotes":"Cada día")+" · "+S.fixed.length+" platos fijos"],
     ["plan","Planificación",(S.home.start&&S.home.start>todayISO()?"Empieza el "+shortDate(S.home.start)+" · ":"")+{diaria:"Cada día",semanal:"Cada semana",quincenal:"Cada dos semanas",mensual:"Cada mes"}[S.home.planFreq]+", "+DAYS[S.home.planDay].toLowerCase()+" a las "+S.home.planTime],
     ["dificultad","Dificultad de los platos",{facil:"Solo fáciles",moderada:"Fáciles y moderados",dificil:"Todas"}[maxDiff()]],
     ["compra","Compra y presupuesto",budgetSet()?eur(S.home.budget.month)+" al mes":"Sin presupuesto"]];
-  h+=acc("ajustes","⚙️","Ajustes","Familia, objetivos, entrenos, compra…",`<div class="settingslist">${items.map(([id,t,d])=>`<button data-edit="${id}">${t}<small>${esc(d)}</small></button>`).join("")}</div>`);
-  if(servidorOn())h+=acc("casa","🏠","Casa compartida",S.casa?adults().filter(a=>a.joined&&!isMe(a)).map(personName).concat(["tú"]).join(", ")+" · mismo menú y compra":"Invita a tu pareja a ver y cambiar el menú",casaCard());
-  h+=acc("avisos","🔔","Avisos en el móvil",S.notif&&S.notif.on?"Activados":"Desactivados",avisosCard().replace('<div class="card"><h2>Avisos en el móvil</h2>','<div>'));
-  h+=acc("coins","🪙","Invita y gana coins","Tu QR personal y tus coins",`<p class="small muted">Este es <b>tu</b> código: quien lo escanee con la cámara del móvil abre Táper y queda como invitado tuyo. Ganas coins solo cuando hay respuesta: alguien abre tu enlace (+1), empieza a usar Táper (+10) y cada semana que la sigue usando (+2).</p>
+  h+=acc("ajustes","settings","Ajustes","Familia, objetivos, entrenos, compra…",`<div class="settingslist">${items.map(([id,t,d])=>`<button data-edit="${id}">${t}<small>${esc(d)}</small></button>`).join("")}</div>`);
+  if(servidorOn())h+=acc("casa","home","Casa compartida",S.casa?adults().filter(a=>a.joined&&!isMe(a)).map(personName).concat(["tú"]).join(", ")+" · mismo menú y compra":"Invita a tu pareja a ver y cambiar el menú",casaCard());
+  h+=acc("avisos","bell","Avisos en el móvil",S.notif&&S.notif.on?"Activados":"Desactivados",avisosCard().replace('<div class="card"><h2>Avisos en el móvil</h2>','<div>'));
+  h+=acc("coins","coins","Invita y gana coins","Tu QR personal y tus coins",`<p class="small muted">Este es <b>tu</b> código: quien lo escanee con la cámara del móvil abre Táper y queda como invitado tuyo. Ganas coins solo cuando hay respuesta: alguien abre tu enlace (+1), empieza a usar Táper (+10) y cada semana que la sigue usando (+2).</p>
     <div id="coinsBox">${servidorOn()?`<p class="small muted">Cargando tus coins…</p>`:""}</div>
     <div id="qrBox" style="display:grid;place-items:center;margin:10px 0;background:#fff;border-radius:12px;padding:10px"></div>
     <div class="actions"><button class="btn" id="shareApp">Enviar el enlace</button><button class="btn ghost" id="copyApp">Copiar enlace</button></div>`);
-  h+=acc("privacidad","🔒","Tus datos y privacidad","Qué se queda en tu móvil y qué sale",`<p class="small"><b>Se queda solo en tu móvil:</b> tu familia, gustos, alergias, menús, lista de la compra, valoraciones y las fotos de tus platos. No hay cuenta ni contraseña.</p>
+  h+=acc("privacidad","lock","Tus datos y privacidad","Qué se queda en tu móvil y qué sale",`<p class="small"><b>Se queda solo en tu móvil:</b> tu familia, gustos, alergias, menús, lista de la compra, valoraciones y las fotos de tus platos. No hay cuenta ni contraseña.</p>
     <p class="small"><b>Sale del móvil solo si lo usas:</b></p>
     <ul class="small" style="margin:0 0 6px 18px;padding:0">
       <li><b>Avisos:</b> el texto de tus próximos avisos, para mandártelos a su hora.</li>
@@ -1137,13 +1142,13 @@ function renderPerfil(){
       <li><b>Invitaciones y coins:</b> un código anónimo (${esc(S.uid||"")}) con tus coins y a quién invitaste.</li>
       <li><b>Visitas:</b> un recuento anónimo, sin cookies, que puedes quitar en Sugerencias y opinión.</li></ul>
     <p class="small muted">Todo va a un servidor propio de Táper (Cloudflare). No se vende ni se comparte con nadie. Para llevarte tus datos o borrarlo todo, usa Copia y novedades.</p>`);
-  h+=acc("opinion","💡","Sugerencias y opinión","Ideas, recetas, encuesta y privacidad",`${suggestUrl()?`<p class="small muted">¿Se te ocurre una mejora, una receta o has visto un fallo? Cuéntamelo.</p><a class="btn" href="${esc(suggestUrl())}" target="_blank" rel="noopener">Enviar una sugerencia</a>`:`<p class="small muted">Pronto podrás enviar sugerencias desde aquí.</p>`}
+  h+=acc("opinion","message-circle","Sugerencias y opinión","Ideas, recetas, encuesta y privacidad",`${suggestUrl()?`<p class="small muted">¿Se te ocurre una mejora, una receta o has visto un fallo? Cuéntamelo.</p><a class="btn" href="${esc(suggestUrl())}" target="_blank" rel="noopener">Enviar una sugerencia</a>`:`<p class="small muted">Pronto podrás enviar sugerencias desde aquí.</p>`}
     <div class="actions">${recipeSuggestOn()?`<button class="btn ghost small" id="sugRec2">🍳 Sugerir una receta</button>`:""}${surveyOn()?`<button class="btn ghost small" id="svProfile">📋 Encuesta del mes</button>`:""}</div>
     <label class="row small"><input type="checkbox" id="noStats" ${S.noStats?"":"checked"} style="width:auto"> Contar mis visitas de forma anónima (sin cookies ni datos personales) para saber cuánta gente usa Táper</label>`);
-  h+=acc("festivos","📅","Festivos",`Cataluña${S.home.municipio?" y "+S.home.municipio:""}${S.home.festivosExtra.length?" · "+S.home.festivosExtra.length+" añadidos":""}`,`<p class="small muted">Se usan los de Cataluña${S.home.municipio&&FEST&&FEST.locales[S.home.municipio]?" y los locales de "+esc(S.home.municipio):""}. Añade los locales de tu municipio u otros días especiales.</p>
+  h+=acc("festivos","calendar-event","Festivos",`Cataluña${S.home.municipio?" y "+S.home.municipio:""}${S.home.festivosExtra.length?" · "+S.home.festivosExtra.length+" añadidos":""}`,`<p class="small muted">Se usan los de Cataluña${S.home.municipio&&FEST&&FEST.locales[S.home.municipio]?" y los locales de "+esc(S.home.municipio):""}. Añade los locales de tu municipio u otros días especiales.</p>
     ${S.home.festivosExtra.map(d=>`<div class="fixed"><span>${esc(longDate(d))}</span><button class="btn ghost small" data-delfest="${d}">Quitar</button></div>`).join("")}
     <div class="row"><input type="date" id="festIn" style="flex:1"><button class="btn small" id="festAdd">Añadir</button></div>`);
-  h+=acc("app","📦","Copia de seguridad y novedades",`Versión ${APP_VERSION} · tu código ${S.uid}`,`<p class="small muted">Todo se guarda solo en este móvil. Descarga una copia de vez en cuando y antes de cambiar de móvil.</p>
+  h+=acc("app","package","Copia de seguridad y novedades",`Versión ${APP_VERSION} · tu código ${S.uid}`,`<p class="small muted">Todo se guarda solo en este móvil. Descarga una copia de vez en cuando y antes de cambiar de móvil.</p>
     ${needsTransfer()?`<div class="okbox"><b>¿Vas a instalar Táper?</b> Tus datos pasarán solos a la app. Si no te los reconoce, usa este código de traspaso: <b style="letter-spacing:.15em">${esc(transferCode())}</b></div>`:""}
     ${isStandalone()&&servidorOn()?`<button class="btn ghost small" id="trBring" style="margin-bottom:8px">Traer mis datos de Safari</button>`:""}
     <div class="okbox small" style="margin-bottom:10px"><b>Probar el inicio de la app</b><br>Guardo tus datos en este móvil, empiezas de cero y, cuando quieras, los recuperas tal cual.
@@ -1262,6 +1267,24 @@ function openUseUp(){
     dlg.querySelector("#hvEdit").onclick=()=>{step=0;draw()};
   };
   draw();
+}
+
+// Al empezar: lo que ya hay en casa no se compra (se marca como cogido en la primera lista donde sale)
+function openHaveAtHome(){
+  const m=(S.home.start&&S.home.start>todayISO()?S.home.start:todayISO()).slice(0,7),sh=shopping(m);
+  const order=["mes",...sh.weeks.map((_,i)=>String(i)).filter(i=>{const s=sh.weeks[Number(i)];return !(S.home.start&&addDays(s,6)<S.home.start)})];
+  const first={};for(const k of order){const l=sh.lists[k];if(!l)continue;for(const it of l.items)if(!first[it.pid])first[it.pid]=k}
+  const pids=Object.keys(first);if(!pids.length){toast("Aún no hay lista de la compra");return}
+  const have=new Set(S.atHome||[]);
+  const groups={};for(const pid of pids)(groups[P[pid].sec]=groups[P[pid].sec]||[]).push(pid);
+  showDialog(`<div class="mod">${closeBtn}<h2>¿Qué tienes ya en casa?</h2><p class="small muted">Toca lo que ya tengas y no lo pongo en tu primera compra. Solo salen cosas que vas a necesitar.</p>
+    ${[...STORE_ORDER,...Object.keys(groups).filter(g=>!STORE_ORDER.includes(g))].filter(g=>groups[g]).map(g=>`<div class="group"><h3>${secIco(g)} ${esc(g)}</h3><div class="chips">${groups[g].sort((a,b)=>P[a].name.localeCompare(P[b].name)).map(pid=>chip("data-ah",pid,have.has(pid),esc(P[pid].name))).join("")}</div></div>`).join("")}
+    <div class="actions sticky"><button class="btn wide" id="ahOk">Guardar (${have.size})</button></div></div>`);
+  dlg.querySelectorAll("[data-ah]").forEach(b=>b.onclick=()=>{const id=b.dataset.ah;if(have.has(id))have.delete(id);else have.add(id);b.setAttribute("aria-pressed",have.has(id));dlg.querySelector("#ahOk").textContent=`Guardar (${have.size})`});
+  dlg.querySelector("#ahOk").onclick=()=>{
+    for(const pid of pids){const k=checkKey(m,first[pid],pid);if(have.has(pid))S.checks[k]=true;else if((S.atHome||[]).includes(pid))delete S.checks[k]}
+    S.atHome=[...have];S.pantry=[...new Set([...(S.pantry||[]),...have])];save();dlg.close();render();
+    toast(have.size?`Apuntado: ${have.size} ${have.size===1?"cosa que ya tienes":"cosas que ya tienes"}. Salen tachadas en la compra`:"Guardado")};
 }
 
 /* ---------- Centro de avisos (campanita) ---------- */

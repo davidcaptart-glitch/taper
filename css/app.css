@@ -965,3 +965,13 @@ button.kidcard.kfold{display:block;width:100%;text-align:left;border:0;cursor:po
 .kidcard.kfold .small:last-child{display:block;margin-top:4px}
 .kidcard.kfold.ok{opacity:.9}
 .kidcard.kopen{outline:2px solid var(--accent);outline-offset:-2px}
+
+details.more2>summary{cursor:pointer;padding:2px 0}
+details.more2[open]>summary{margin-bottom:8px}
+details.more2 .card{box-shadow:none;padding:10px 0;margin:0;border-top:1px solid var(--line);border-radius:0}
+
+/* Iconos de la interfaz (línea, como la barra de abajo) */
+.ic{width:1.15em;height:1.15em;vertical-align:-.22em;flex:none;display:inline-block}
+.acc summary .ico .ic{width:22px;height:22px;vertical-align:middle;color:var(--accent)}
+.afi .ic{color:var(--accent)}
+.fzi .ic,.tkban .ti .ic{width:26px;height:26px}

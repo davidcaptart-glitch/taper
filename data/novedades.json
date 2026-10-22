@@ -686,6 +686,18 @@
         "Las semanas del menú van de lunes a domingo. El día en que planificas sigue siendo el que tú elijas.",
         "Tus menús ya hechos se han reagrupado sin perder nada."
       ]
+    },
+    {
+      "version": 75,
+      "fecha": "2026-10-22",
+      "titulo": "Más rápida y más ordenada",
+      "cambios": [
+        "Preparar los menús es unas 5 veces más rápido.",
+        "Recetas se carga por tandas: va fluida también en móviles sencillos.",
+        "Compra y Perfil más cortas: lo secundario (cómo comprar más barato, bolsas para congelar, gasto y resumen) va plegado.",
+        "Al empezar puedes marcar lo que ya tienes en casa y no te lo pongo en la primera compra.",
+        "Iconos de línea iguales en botones y apartados."
+      ]
     }
   ]
 }

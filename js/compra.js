@@ -5,7 +5,8 @@
 function deliveryDate(start){let r=start;for(const d of weekDates(start))if(dow(d)===S.home.shop.delivery){r=d;break}
   const st=S.home.start;return st&&r<st&&st<=addDays(start,6)?st:r}
 // Formas de comprar y sus tarifas (las pone el supermercado, no el usuario)
-const SHOP_MODES={online:"🛒 Online",domicilio:"🚚 En tienda, te lo llevan",tienda:"🏪 En tienda"};
+const SHOP_MODES={online:"Online",domicilio:"En tienda, te lo llevan",tienda:"En tienda"};
+const SHOP_ICO={online:"shopping-cart",domicilio:"truck",tienda:"building-store"};
 const superInfo=()=>(SUPERS||[]).find(x=>x.id===S.home.super)||(SUPERS||[])[0]||{};
 // ¿Reparte este súper en tu código postal? (si no, solo se puede comprar en tienda)
 const delivers=sid=>!((superById(sid).sin_reparto||[]).includes(S.home.cp));

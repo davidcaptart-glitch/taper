@@ -96,9 +96,9 @@ async function invitePerson(pid){
 function casaCard(){
   if(!servidorOn()||!S.onboarded)return "";
   const ads=adults().filter(a=>!isMe(a));
-  return `<div class="card"><h2>🏠 Casa compartida</h2>
+  return `<div class="card"><h2>${ico("home")} Casa compartida</h2>
     <p class="small muted">${S.casa?"Los que estáis en la casa veis y cambiáis el mismo menú, la familia y la compra. Los gustos, la dieta y el deporte de cada uno los pone cada cual en su móvil.":"Invita a tu pareja (u otro adulto de casa): tendrá Táper en su móvil con el mismo menú y la misma compra, y podrá cambiar cosas. Cada uno pone sus propios gustos."}</p>
-    ${ads.length?ads.map(a=>`<div class="row" style="justify-content:space-between;margin:6px 0"><span>${esc(personName(a))}${a.joined?` <span class="pill ligera">✓ En la casa</span>`:""}</span><button class="btn ${a.joined?"ghost ":""}small" data-invite="${esc(a.id)}">${a.joined?"Reenviar enlace":"📩 Invitar"}</button></div>`).join("")
+    ${ads.length?ads.map(a=>`<div class="row" style="justify-content:space-between;margin:6px 0"><span>${esc(personName(a))}${a.joined?` <span class="pill ligera">✓ En la casa</span>`:""}</span><button class="btn ${a.joined?"ghost ":""}small" data-invite="${esc(a.id)}">${a.joined?"Reenviar enlace":ico("mail-forward")+" Invitar"}</button></div>`).join("")
       :`<p class="small">Primero añade a la otra persona en <b>Quién come en casa</b>, como adulto.</p><button class="btn ghost small" data-goedit="familia">Añadir adulto</button>`}
     ${S.casa?`<button class="btn ghost small" id="casaLeave" style="margin-top:6px">Salir de la casa compartida</button>`:""}</div>`;
 }

@@ -519,7 +519,7 @@ function genWeekFromScratch(start){
   // Varios intentos; se sortea entre los mejores (equilibrio y precio) para no repetir siempre el mismo
   const tries=[];
   const keep=S.plans[start]?{...S.plans[start]}:null;
-  for(let t=0;t<20;t++){
+  for(let t=0;t<8;t++){
     S.plans[start]=keep?{...keep,slots:Object.fromEntries(Object.entries(keep.slots||{}).filter(([,v])=>v.locked))}:{start,slots:{},training:null,confirmed:false,createdAt:todayISO()};
     const {wk,slots}=ensureWeek(start);
     // Coste real de la semana (paquetes enteros de lo fresco): así se nota el ahorro de compartir ingredientes
@@ -530,7 +530,7 @@ function genWeekFromScratch(start){
     tries.push({sc,slots:JSON.parse(JSON.stringify(wk.slots))});
   }
   tries.sort((a,b)=>b.sc-a.sc);
-  S.plans[start].slots=tries[Math.floor(Math.random()*Math.min(6,tries.length))].slots;
+  S.plans[start].slots=tries[Math.floor(Math.random()*Math.min(3,tries.length))].slots;
   // Comidas pequeñas: se rehacen las que no se eligieron a mano
   const sm=S.plans[start].small||{};for(const d of Object.keys(sm))for(const m of Object.keys(sm[d]))if(!sm[d][m].locked)delete sm[d][m];
   ensureSmall(start);
@@ -561,7 +561,7 @@ function fitBudget(start){
   const target=weekFoodTarget(start), slots=buildSlots(start);
   for(let it=0;it<12;it++){
     const cost=weekCost(start,slots);if(cost<=target)return {ok:true,cost,target};
-    let best=null;
+    let best=null;const pre=[];
     for(const sl of slots){
       if(sl.fixed)continue;const v=wk.slots[sl.id];if(!v||v.locked)continue;const cur=RX[v.recipe];if(!cur)continue;
       // Lo que se ha pedido para este mes (más de algo, o repetir un plato) no se cambia por ahorrar
@@ -570,14 +570,18 @@ function fitBudget(start){
       const ctx=makeCtx(start,sl.id);ctx.noise=0;
       const curS=scoreRecipe(cur,sl,ctx);
       const sameWeekOk=(S.home.repeat||"no")==="semana";
+      // Primero se estima el ahorro con el precio por ración (rápido)…
+      const cc=rationCost(cur)*sl.portions;
       for(const r of candidates(sl)){if(r.id===cur.id||(!sameWeekOk&&ctx.used.has(r.id)))continue;
-        // Ahorro real: coste de la semana con este cambio (cuenta los paquetes que se comparten)
-        const prev=wk.slots[sl.id];wk.slots[sl.id]={recipe:r.id};const after=weekCost(start,slots);wk.slots[sl.id]=prev;
-        const save=cost-after;if(save<=0.3)continue;
-        const loss=Math.max(0,curS-scoreRecipe(r,sl,ctx));
-        const val=save/(1+loss*0.6);
-        if(!best||val>best.val)best={val,id:sl.id,rid:r.id}}
+        const est=cc-rationCost(r)*sl.portions;if(est<=0.2)continue;
+        const loss=Math.max(0,curS-scoreRecipe(r,sl,ctx));pre.push({est:est/(1+loss*0.6),loss,sl,rid:r.id})}
     }
+    // …y solo los mejores se calculan de verdad: coste de la semana con el cambio (cuenta los paquetes que se comparten)
+    for(const c of pre.sort((a,b)=>b.est-a.est).slice(0,8)){
+      const prev=wk.slots[c.sl.id];wk.slots[c.sl.id]={recipe:c.rid};const after=weekCost(start,slots);wk.slots[c.sl.id]=prev;
+      const save=cost-after;if(save<=0.3)continue;
+      const val=save/(1+c.loss*0.6);
+      if(!best||val>best.val)best={val,id:c.sl.id,rid:c.rid}}
     if(!best)return {ok:false,cost,target};
     wk.slots[best.id]={recipe:best.rid};
   }

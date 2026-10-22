@@ -7,15 +7,15 @@ let wiz={i:0,single:null};   // single = id del paso cuando se edita uno suelto 
 const ONBOARD=[{id:"casa",eyebrow:"Casa",title:"¿Quién vive *en casa?*"},{id:"comer",eyebrow:"Cómo coméis",title:"¿Algo que *tener en cuenta?*"},{id:"super",eyebrow:"Tu súper",title:"¿Dónde haces *la compra?*"}];
 // Lo que se puede afinar después del primer menú: id, texto, pasos del asistente que lo preguntan
 const AFINAR=[
-  ["quien","🗓️ Quién come y cuándo (custodias, días fuera)",()=>["familia"]],
-  ["comidas","🥐 Desayunos, almuerzos y meriendas",()=>["familia"]],
-  ["gustos","😋 Gustos de cada uno",()=>S.people.map(p=>"gustos:"+p.id)],
-  ["planificar","📅 Cuándo planificas y compras",()=>["plan","compra"]],
-  ["cocinar","🍳 Cómo cocinas (cada día o tápers)",()=>["cocina"]],
-  ["deporte","🏃 Deporte y objetivos",()=>adults().map(a=>"objetivos:"+a.id).concat(S.people.filter(p=>p.trains).map(p=>"entreno:"+p.id))],
-  ["dificultad","👌 Dificultad de los platos",()=>["dificultad"]],
-  ["fijos","🍕 Platos fijos y caprichos",()=>["cocina"]],
-  ["invitar","📩 Que alguien de casa rellene sus preferencias",()=>[]]];
+  ["quien","calendar|Quién come y cuándo (custodias, días fuera)",()=>["familia"]],
+  ["comidas","coffee|Desayunos, almuerzos y meriendas",()=>["familia"]],
+  ["gustos","mood-smile|Gustos de cada uno",()=>S.people.map(p=>"gustos:"+p.id)],
+  ["planificar","clock|Cuándo planificas y compras",()=>["plan","compra"]],
+  ["cocinar","chef-hat|Cómo cocinas (cada día o tápers)",()=>["cocina"]],
+  ["deporte","run|Deporte y objetivos",()=>adults().map(a=>"objetivos:"+a.id).concat(S.people.filter(p=>p.trains).map(p=>"entreno:"+p.id))],
+  ["dificultad","stairs|Dificultad de los platos",()=>["dificultad"]],
+  ["fijos","pizza|Platos fijos y caprichos",()=>["cocina"]],
+  ["invitar","mail-forward|Que alguien de casa rellene sus preferencias",()=>[]]];
 
 function wizSteps(){
   // Afinar: solo los pasos de lo que se ha marcado
@@ -350,7 +350,7 @@ function stepBody(fullId){
       <div class="field"><label for="wzMPA">Si en esa semana ya cambia el mes, avísame antes, el día de la semana anterior</label>${dowSelect("wzMPA",H.monthPrepAlt??4)}</div>
       <div class="okbox small" id="mpPrev">${monthPrepPreview(H)}</div></div>`;
   if(id==="compra"){const sh=H.shop,b=H.budget;
-    const modeChips=(k,v)=>Object.entries(SHOP_MODES).map(([m,t])=>chip("data-mode",k+":"+m,v===m,t)).join("");
+    const modeChips=(k,v)=>Object.entries(SHOP_MODES).map(([m,t])=>chip("data-mode",k+":"+m,v===m,ico(SHOP_ICO[m])+" "+t)).join("");
     const tf=Object.entries(SHOP_MODES).map(([m,t])=>{const x=tarifa(m);return `${t}: ${x.envio?eur(x.envio)+" de envío":"sin envío"}${x.minimo?", pedido mínimo "+eur(x.minimo):""}`}).join(" · ");
     return `<div class="budget"><div class="bnum"><span id="bVal">${Math.round(b.month)}</span><sup>€</sup></div><div class="bsub">al mes · unos <b id="bWeek">${eur((Number(b.month)||0)/weeksInMonth(todayISO().slice(0,7)).length)}</b> a la semana</div>
       <input type="range" id="wzBM" min="40" max="900" step="5" value="${Math.min(900,Math.max(40,Number(b.month)||150))}" style="--p:${(Math.min(900,Math.max(40,Number(b.month)||150))-40)/8.6}%" aria-label="Presupuesto al mes">
@@ -569,14 +569,15 @@ function finishAfinar(){
 // En el Menú: después del primer menú, "¿Quieres afinarlo más?" (y luego, siempre a mano)
 function afinarCard(){
   const A=S.afinar;
-  if(!A||A.state!=="ask")return `<div class="row" style="justify-content:flex-start;margin:6px 0"><button class="btn ghost small" id="afinarOpen">✨ Afinar mi menú</button></div>`;
+  if(!A||A.state!=="ask")return `<div class="row" style="justify-content:flex-start;margin:6px 0"><button class="btn ghost small" id="afinarOpen">${ico("sparkles")} Afinar mi menú</button></div>`;
   return `<div class="afcard"><b class="aft">Tu menú está listo</b>
     <p class="small" style="margin:4px 0 8px">${A.cost?`Sale por unos <b>${eur(A.cost)} al mes</b>. `:""}He supuesto <b>comida y cena en casa todos los días</b>, que cocinas cada día y que compras en tienda.</p>
+    <button class="btn ghost small" id="haveHome" style="margin:2px 0 8px">${ico("basket")} ¿Ya tienes cosas en casa? No te las pongo en la compra${(S.atHome||[]).length?` (${S.atHome.length})`:""}</button>
     <details class="afdet"><summary>¿Quieres afinarlo más?</summary>${afinarList(true)}</details></div>`;
 }
 function afinarList(inDet){
   return `${inDet?"":`<h3 style="margin:6px 0 2px">¿Quieres afinarlo más?</h3>`}<p class="small muted" style="margin:0 0 6px">Marca lo que quieras ajustar y te pregunto solo eso.</p>
-    <div class="aflist">${AFINAR.filter(([k])=>k!=="invitar"||servidorOn()).map(([k,t])=>`<label class="afi"><input type="checkbox" data-af="${k}"> ${esc(t)}</label>`).join("")}</div>
+    <div class="aflist">${AFINAR.filter(([k])=>k!=="invitar"||servidorOn()).map(([k,t])=>`<label class="afi"><input type="checkbox" data-af="${k}"> ${ico(t.split("|")[0])} ${esc(t.split("|")[1])}</label>`).join("")}</div>
     <div class="actions"><button class="btn" id="afGo">Afinar</button>${S.afinar&&S.afinar.state==="ask"?`<button class="btn ghost" id="afNo">Así está bien</button>`:""}</div>`;
 }
 function bindAfinar(root){
@@ -585,5 +586,6 @@ function bindAfinar(root){
   root.querySelectorAll("[data-af]").forEach(i=>i.onchange=()=>upd(root));
   root.querySelector("#afGo")?.addEventListener("click",()=>go(root));
   root.querySelector("#afNo")?.addEventListener("click",()=>{S.afinar.state="done";save();render();toast("Perfecto. Cuando quieras, toca «Afinar mi menú»")});
+  root.querySelector("#haveHome")?.addEventListener("click",openHaveAtHome);
   root.querySelector("#afinarOpen")?.addEventListener("click",()=>{showDialog(`<div class="mod">${closeBtn}${afinarList()}</div>`);bindAfinar(dlg)});
 }
