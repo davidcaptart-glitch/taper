@@ -378,6 +378,16 @@
         "En Perfil › Ajustes › Quién come en casa marca qué hace cada uno: 🏠 en casa, 🎒 se lo lleva (cole o trabajo) o – no lo hace. Si se lo lleva, solo propongo cosas que aguantan en la mochila.",
         "Salen en el menú de cada día (puedes cambiarlos con ↻) y entran en la lista de la compra y el presupuesto. 26 productos nuevos de Mercadona: pan, avena, plátano, naranja, queso fresco, fiambre de pavo, frutos secos…"
       ]
+    },
+    {
+      "version": 40,
+      "fecha": "2026-10-22",
+      "titulo": "Utensilios, fuego y temperaturas",
+      "cambios": [
+        "Cada receta te dice qué necesitas sacar: sartén, cacerola, cazo, bandeja de horno, cesta de la air fryer…",
+        "Cada paso lleva su utensilio, el fuego (bajo, medio, medio-alto, fuerte), la temperatura y el modo del horno, los grados de la air fryer, los vatios del microondas y los minutos.",
+        "En el modo cocina, el temporizador ya trae el tiempo exacto de cada paso."
+      ]
     }
   ]
 }

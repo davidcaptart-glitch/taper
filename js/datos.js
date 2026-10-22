@@ -18,7 +18,7 @@ const STORE_ORDER=["Fruta y verdura","Panadería y pastelería","Charcutería y 
 // Acepta recetas.json v1 (un aparato) y v2 (variantes por aparato, nutrición y conservación)
 function setRecipes(list){
   R=list.map(r=>{
-    const vars=r.variantes?r.variantes.map(v=>({app:v.aparato,time:v.minutos,active:v.minutos_trabajo,steps:v.pasos}))
+    const vars=r.variantes?r.variantes.map(v=>({app:v.aparato,time:v.minutos,active:v.minutos_trabajo,steps:v.pasos,tools:v.utensilios||[],info:v.info||[]}))
       :[{app:r.aparato,time:r.minutos,active:r.minutos_trabajo,steps:r.pasos}];
     const n=r.nutricion||{kcal:null,proteina:r.proteina,hidratos:null,grasa:null};
     return {id:r.id,name:r.nombre,group:r.grupo,main:r.proteina_principal||r.grupo,type:r.tipo==="hidratos"?"c":"l",
@@ -71,6 +71,23 @@ function rise(pid){const x=mprice(pid);return x&&typeof x.anterior==="number"&&x
 const upTag=pid=>{const d=rise(pid);return d?` <span class="up" title="Ha subido respecto a la semana anterior">▲ +${eur(d)}</span>`:""};
 const packsFor=(pid,q)=>Math.max(1,Math.ceil(q/P[pid].env-0.03));
 // Coste de una ración de adulto (para el objetivo "ahorrar" y la ficha)
+/* ---------- Utensilios y detalles de cada paso ---------- */
+const TOOL_ICO=[["air fryer","🧺"],["airfryer","🧺"],["horno","🔥"],["bandeja","🔥"],["fuente","🔥"],["papel de horno","📜"],["microondas","📡"],["sartén","🍳"],["wok","🍳"],
+  ["olla exprés","♨️"],["olla","🍲"],["cacerola","🥘"],["cazo","🫕"],["tabla","🔪"],["cuchillo","🔪"],["bol","🥣"],["plato","🍽️"],["rallador","🧀"],["batidora","🌀"],
+  ["colador","🥢"],["espumadera","🥄"],["tostadora","🍞"],["vaso","🥛"],["tarro","🫙"],["táper","🥡"],["fiambrera","🥡"],["brocheta","🍢"],["molde","🧁"]];
+const toolIco=t=>{const l=String(t).toLowerCase();const m=TOOL_ICO.find(([k])=>l.includes(k));return m?m[1]:"🥄"};
+// Etiquetas cortas de un paso: utensilio, fuego / temperatura y modo, potencia, minutos
+function stepTags(x){
+  if(!x)return [];const t=[];
+  if(x.utensilio)t.push(toolIco(x.utensilio)+" "+x.utensilio.charAt(0).toUpperCase()+x.utensilio.slice(1));
+  if(x.fuego)t.push("🔥 Fuego "+x.fuego);
+  if(x.temp)t.push("🌡️ "+x.temp+" °C");
+  if(x.modo)t.push(x.modo.charAt(0).toUpperCase()+x.modo.slice(1));
+  if(x.potencia)t.push("⚡ "+x.potencia+" W");
+  if(x.min)t.push("⏱ "+x.min+" min");
+  if(x.nota)t.push(x.nota);
+  return t;
+}
 const rationCost=r=>r.ing.reduce((t,[p,q])=>t+q/P[p].env*price(p),0);
 
 /* ---------- Festivos ---------- */

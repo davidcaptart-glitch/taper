@@ -825,3 +825,13 @@ details.more summary{padding:12px 0;color:var(--ink);font-weight:600}
 .smi small{display:block;font-size:.7rem;color:var(--muted);font-weight:600}
 .smn{font-size:.88rem!important;font-weight:600!important;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .smre{border:0;background:var(--surface);width:30px;height:30px;border-radius:50%;flex:none;color:var(--muted);font-size:1rem}
+
+/* ---------- Utensilios y detalles de los pasos ---------- */
+.needs{background:var(--surface);border-radius:18px;padding:12px 14px;margin:0 0 12px;box-shadow:0 1px 2px rgba(20,23,28,.05)}
+.needs b{display:block;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px}
+.tools{display:flex;flex-wrap:wrap;gap:6px}
+.tools span{font-size:.84rem;font-weight:550;padding:6px 11px;border-radius:99px;background:var(--surface-2)}
+.stags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.stags span{font-size:.72rem;font-weight:650;padding:3px 9px;border-radius:99px;background:var(--accent-soft);color:var(--ink)}
+.needs.big .tools span{font-size:1rem;padding:8px 13px}
+.stags.big span{font-size:.95rem;padding:6px 12px}

@@ -573,8 +573,9 @@ function openRecipe(id,sid){
       ${r.vars.length>1?`<div class="vtabs">${r.vars.map((x,i)=>`<button class="chip" data-vi="${i}" aria-pressed="${i===vi}" ${ok.has(x.app)?"":"disabled"}>${APP[x.app]}</button>`).join("")}</div>`:""}
       <div class="segtab" role="tablist"><button role="tab" data-rt="ing" aria-selected="${recTab==="ing"}">Ingredientes</button><button role="tab" data-rt="prep" aria-selected="${recTab==="prep"}">Preparación</button></div>
       ${recTab==="ing"?`<table class="ingt">${r.ing.map(([p,q])=>`<tr><td>${prodImg(p)}${esc(P[p].name)}</td><td>${fmtQty(q*serv,P[p].unit)}</td></tr>`).join("")}<tr><td><span class="pimg ph">🧂</span>Aceite, sal y especias</td><td>al gusto</td></tr></table>`
-      :`<button class="cookrow" data-cook><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg></span><b>Cocinar paso a paso</b><svg class="chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
-        <ol class="rsteps">${v.steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol>`}
+      :`${v.tools&&v.tools.length?`<div class="needs"><b>Necesitas</b><div class="tools">${v.tools.map(t=>`<span>${toolIco(t)} ${esc(t)}</span>`).join("")}</div></div>`:""}
+        <button class="cookrow" data-cook><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg></span><b>Cocinar paso a paso</b><svg class="chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+        <ol class="rsteps">${v.steps.map((s,i)=>{const tg=stepTags((v.info||[])[i]);return `<li>${esc(s)}${tg.length?`<div class="stags">${tg.map(x=>`<span>${esc(x)}</span>`).join("")}</div>`:""}</li>`}).join("")}</ol>`}
       <div class="row" style="margin-top:8px"><label class="btn ghost small">📷 ${MYPHOTOS[r.id]?"Cambiar mi foto":"Foto de mi plato"}<input type="file" accept="image/*" capture="environment" id="myPh" hidden></label>${MYPHOTOS[r.id]?`<button class="btn ghost small" id="myPhDel">Quitar mi foto</button>`:""}</div>
       <div class="actions"><select id="rWho" style="width:auto">${S.people.map(p=>`<option value="${p.id}">${esc(personName(p))}</option>`).join("")}</select>
         <button class="btn ghost small" data-love2>❤️ Me encanta</button><button class="btn ghost small" data-hate>👎 No me gusta</button></div>
@@ -606,9 +607,11 @@ async function openCook(r,v,serv){
   let i=0;
   try{wakeLock=await navigator.wakeLock?.request("screen")}catch(e){}
   const draw=()=>{
-    const step=v.steps[i], m=step.match(/(\d+)(?:\s*[–-]\s*(\d+))?\s*min/);
+    const step=v.steps[i], x=(v.info||[])[i], mm=step.match(/(\d+)(?:\s*[–-]\s*(\d+))?\s*min/), m=x&&x.min?[null,String(x.min)]:mm;
     showDialog(`<div class="cook"><div class="top"><span class="n">Paso ${i+1} de ${v.steps.length} · ${esc(r.name)}</span><button class="close" data-x aria-label="Salir">✕</button></div>
+      ${i===0&&v.tools&&v.tools.length?`<div class="needs big"><b>Saca esto</b><div class="tools">${v.tools.map(t=>`<span>${toolIco(t)} ${esc(t)}</span>`).join("")}</div></div>`:""}
       <div class="txt">${esc(step)}</div>
+      ${stepTags(x).length?`<div class="stags big">${stepTags(x).map(t=>`<span>${esc(t)}</span>`).join("")}</div>`:""}
       ${i===0?`<div class="small muted">Para ${String(serv).replace(".",",")} raciones: ${r.ing.map(([p,q])=>esc(P[p].name.toLowerCase())+" "+fmtQty(q*serv,P[p].unit)).join(", ")}</div>`:""}
       ${m?`<div class="timer" id="tmr">${m[2]||m[1]}:00</div><button class="btn ghost wide" id="tmrBtn">⏱ Temporizador de ${m[2]||m[1]} min</button>`:""}
       <div class="bot" style="margin-top:14px"><button class="btn ghost" data-prev ${i===0?"disabled":""}>Anterior</button><button class="btn" data-next>${i===v.steps.length-1?"¡Terminado!":"Siguiente"}</button></div></div>`,true);
