@@ -1,22 +1,22 @@
 // Service worker de Táper: guarda la app para usarla sin conexión.
 // Al cambiar cualquier archivo de la app, sube VERSION aquí y el ?v= de index.html para que los móviles descarguen la nueva.
-const VERSION = "taper-v60";
+const VERSION = "taper-v61";
 const SHELL = [
   "./",
   "index.html",
-  "css/app.css?v=60", "css/esteticas.css?v=60",
-  "js/base.js?v=60",
-  "js/datos.js?v=60",
-  "js/fotos.js?v=60",
-  "js/gustos.js?v=60",
-  "js/plan.js?v=60",
-  "js/compra.js?v=60",
-  "js/tickets.js?v=60",
-  "js/congelador.js?v=60",
-  "js/avisos.js?v=60",
-  "js/compartir.js?v=60",
-  "js/bienvenida.js?v=60",
-  "js/ui.js?v=60",
+  "css/app.css?v=61", "css/esteticas.css?v=61",
+  "js/base.js?v=61",
+  "js/datos.js?v=61",
+  "js/fotos.js?v=61",
+  "js/gustos.js?v=61",
+  "js/plan.js?v=61",
+  "js/compra.js?v=61",
+  "js/tickets.js?v=61",
+  "js/congelador.js?v=61",
+  "js/avisos.js?v=61",
+  "js/compartir.js?v=61",
+  "js/bienvenida.js?v=61",
+  "js/ui.js?v=61",
   "manifest.webmanifest",
   "data/festivos.json",
   "data/supermercados.json",
@@ -77,7 +77,8 @@ self.addEventListener("notificationclick", e => {
     return;
   }
   const tipo = e.action === "hecho" ? "hecho" : "abrir";
-  if (d.tag && String(d.tag).startsWith("shop|")) {
+  // Compra y "¿Qué tal?": abre la app justo en esa pantalla
+  if (d.tag && /^(shop|rate)\|/.test(String(d.tag))) {
     e.waitUntil((async () => {
       const all = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
       if (all.length) { all[0].postMessage({ tipo, tag: d.tag }); if ("focus" in all[0]) return all[0].focus(); }

@@ -581,6 +581,14 @@
         "⭐ Al abrir la app te pregunto qué tal lo último que comisteis, también desayunos y meriendas. Solo la primera vez que coméis cada plato.",
         "Los platos parecidos a los que os encantan salen más en el menú."
       ]
+    },
+    {
+      "version": 61,
+      "fecha": "2026-10-22",
+      "titulo": "El aviso de «¿Qué tal?» te lleva a la pregunta",
+      "cambios": [
+        "Al tocar el aviso de «¿Qué tal?», la app se abre directamente en la pregunta. Puedes quitar este aviso en Perfil › Avisos."
+      ]
     }
   ]
 }
