@@ -1,0 +1,4 @@
+# Archivos locales que no se suben a GitHub
+.claude/
+__pycache__/
+Táper.html

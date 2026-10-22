@@ -1,0 +1,62 @@
+# Actualiza data/precios.json cada domingo a las 05:00 (hora de Madrid).
+# También se puede lanzar a mano: pestaña Actions > Actualizar precios > Run workflow.
+name: Actualizar precios
+
+on:
+  schedule:
+    # GitHub usa hora UTC. Las 05:00 de Madrid son las 03:00 UTC en verano y las 04:00 UTC en invierno,
+    # así que se programan las dos y el paso "Comprobar hora" deja seguir solo la que toca.
+    - cron: "0 3 * * 0"
+    - cron: "0 4 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: precios
+  cancel-in-progress: false
+
+jobs:
+  precios:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Comprobar hora
+        id: hora
+        run: |
+          offset=$(TZ=Europe/Madrid date +%z)   # +0200 en verano, +0100 en invierno
+          seguir=true
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            if [ "${{ github.event.schedule }}" = "0 3 * * 0" ] && [ "$offset" != "+0200" ]; then seguir=false; fi
+            if [ "${{ github.event.schedule }}" = "0 4 * * 0" ] && [ "$offset" != "+0100" ]; then seguir=false; fi
+          fi
+          echo "Hora de Madrid: $(TZ=Europe/Madrid date '+%A %H:%M') ($offset). Seguir: $seguir"
+          echo "seguir=$seguir" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        if: steps.hora.outputs.seguir == 'true'
+
+      - uses: actions/setup-python@v5
+        if: steps.hora.outputs.seguir == 'true'
+        with:
+          python-version: "3.12"
+
+      - name: Consultar precios en Mercadona
+        if: steps.hora.outputs.seguir == 'true'
+        env:
+          CODIGO_POSTAL: ${{ vars.CODIGO_POSTAL }}
+        run: python scripts/actualizar_precios.py
+
+      - name: Guardar precios.json si ha cambiado
+        if: steps.hora.outputs.seguir == 'true'
+        run: |
+          if git diff --quiet -- data/precios.json; then
+            echo "Sin cambios en precios.json"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/precios.json
+          git commit -m "Precios de Mercadona del $(TZ=Europe/Madrid date +%Y-%m-%d)"
+          git push

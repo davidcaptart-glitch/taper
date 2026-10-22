@@ -1,0 +1,1164 @@
+{
+  "version": 1,
+  "recetas": [
+    {
+      "id": "curry",
+      "nombre": "Pollo al curry con arroz",
+      "aparato": "vitro",
+      "minutos": 25,
+      "minutos_trabajo": 12,
+      "tipo": "hidratos",
+      "grupo": "carne",
+      "gusta_ninos": true,
+      "proteina": 45,
+      "ingredientes": [
+        {
+          "producto": "pechuga",
+          "cantidad": 180
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "coco",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 60
+        },
+        {
+          "producto": "guisantes",
+          "cantidad": 60
+        }
+      ],
+      "pasos": [
+        "Pon el arroz a cocer en agua con sal, unos 15 min.",
+        "Dora el pollo en dados con la cebolla picada.",
+        "Añade una cucharadita de curry, la leche de coco y los guisantes.",
+        "Deja 8 min a fuego medio y sirve con el arroz."
+      ]
+    },
+    {
+      "id": "bolo",
+      "nombre": "Macarrones a la boloñesa",
+      "aparato": "vitro",
+      "minutos": 25,
+      "minutos_trabajo": 10,
+      "tipo": "hidratos",
+      "grupo": "carne",
+      "gusta_ninos": true,
+      "proteina": 42,
+      "ingredientes": [
+        {
+          "producto": "picada",
+          "cantidad": 150
+        },
+        {
+          "producto": "pasta",
+          "cantidad": 90
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 150
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 50
+        },
+        {
+          "producto": "queso",
+          "cantidad": 15
+        }
+      ],
+      "pasos": [
+        "Pon la pasta a cocer.",
+        "Sofríe la cebolla y la zanahoria rallada 5 min.",
+        "Añade la carne y dórala.",
+        "Echa el tomate y deja 10 min.",
+        "Mezcla con la pasta y añade el queso."
+      ]
+    },
+    {
+      "id": "salmonbon",
+      "nombre": "Salmón con boniato y brócoli",
+      "aparato": "air",
+      "minutos": 25,
+      "minutos_trabajo": 7,
+      "tipo": "hidratos",
+      "grupo": "pescado",
+      "gusta_ninos": true,
+      "proteina": 35,
+      "ingredientes": [
+        {
+          "producto": "salmon",
+          "cantidad": 150
+        },
+        {
+          "producto": "boniato",
+          "cantidad": 200
+        },
+        {
+          "producto": "brocoli",
+          "cantidad": 150
+        }
+      ],
+      "pasos": [
+        "Corta el boniato en dados, alíñalo con aceite y sal: 10 min a 200 °C.",
+        "Añade el salmón y el brócoli con ajo en polvo.",
+        "Otros 12 min a 190 °C.",
+        "Un chorrito de limón al servir."
+      ]
+    },
+    {
+      "id": "arrozgam",
+      "nombre": "Arroz con gambas y verduras",
+      "aparato": "vitro",
+      "minutos": 25,
+      "minutos_trabajo": 10,
+      "tipo": "hidratos",
+      "grupo": "pescado",
+      "gusta_ninos": true,
+      "proteina": 35,
+      "ingredientes": [
+        {
+          "producto": "gambas",
+          "cantidad": 120
+        },
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "salteado",
+          "cantidad": 150
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        }
+      ],
+      "pasos": [
+        "Cuece el arroz 15 min y escúrrelo.",
+        "Saltea las verduras congeladas 5 min.",
+        "Añade las gambas 3 min.",
+        "Incorpora el arroz y el huevo batido, remueve 2 min."
+      ]
+    },
+    {
+      "id": "lentejas",
+      "nombre": "Lentejas con pollo y verduras",
+      "aparato": "vitro",
+      "minutos": 20,
+      "minutos_trabajo": 10,
+      "tipo": "hidratos",
+      "grupo": "legumbre",
+      "gusta_ninos": true,
+      "proteina": 45,
+      "ingredientes": [
+        {
+          "producto": "lentejas",
+          "cantidad": 200
+        },
+        {
+          "producto": "pechuga",
+          "cantidad": 100
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 60
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 60
+        }
+      ],
+      "pasos": [
+        "Sofríe cebolla y zanahoria picadas 5 min.",
+        "Añade el pollo en dados y dóralo.",
+        "Echa el tomate, pimentón y las lentejas lavadas.",
+        "Cubre con un poco de agua y deja 10 min."
+      ]
+    },
+    {
+      "id": "garbanzos",
+      "nombre": "Garbanzos con espinacas y huevo",
+      "aparato": "vitro",
+      "minutos": 15,
+      "minutos_trabajo": 8,
+      "tipo": "hidratos",
+      "grupo": "legumbre",
+      "gusta_ninos": false,
+      "proteina": 30,
+      "ingredientes": [
+        {
+          "producto": "garbanzos",
+          "cantidad": 200
+        },
+        {
+          "producto": "espinacas",
+          "cantidad": 150
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 5
+        }
+      ],
+      "pasos": [
+        "Cuece los huevos 10 min.",
+        "Sofríe el ajo con una cucharadita de pimentón.",
+        "Añade las espinacas y los garbanzos escurridos, 6 min.",
+        "Sirve con el huevo picado por encima."
+      ]
+    },
+    {
+      "id": "wraps",
+      "nombre": "Wraps de pollo y pimiento",
+      "aparato": "vitro",
+      "minutos": 20,
+      "minutos_trabajo": 12,
+      "tipo": "hidratos",
+      "grupo": "carne",
+      "gusta_ninos": true,
+      "proteina": 45,
+      "ingredientes": [
+        {
+          "producto": "tortillas",
+          "cantidad": 2
+        },
+        {
+          "producto": "pechuga",
+          "cantidad": 150
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 30
+        },
+        {
+          "producto": "queso",
+          "cantidad": 20
+        }
+      ],
+      "pasos": [
+        "Corta pollo, pimiento y cebolla en tiras.",
+        "Saltéalo todo 8 min con especias al gusto.",
+        "Calienta las tortillas 20 s en la sartén.",
+        "Rellena con el salteado, la ensalada y el queso."
+      ]
+    },
+    {
+      "id": "pastel",
+      "nombre": "Patatas gratinadas con carne picada",
+      "aparato": "horno",
+      "minutos": 30,
+      "minutos_trabajo": 10,
+      "tipo": "hidratos",
+      "grupo": "carne",
+      "gusta_ninos": true,
+      "proteina": 38,
+      "ingredientes": [
+        {
+          "producto": "patata",
+          "cantidad": 250
+        },
+        {
+          "producto": "picada",
+          "cantidad": 150
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 60
+        },
+        {
+          "producto": "queso",
+          "cantidad": 20
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        }
+      ],
+      "pasos": [
+        "Patata en rodajas finas: 6 min al microondas tapada.",
+        "Mientras, dora la carne con la cebolla y el tomate.",
+        "Capa de patata, capa de carne y queso por encima.",
+        "Horno 15 min a 200 °C."
+      ]
+    },
+    {
+      "id": "cuscus",
+      "nombre": "Cuscús con pollo y verduras",
+      "aparato": "vitro",
+      "minutos": 20,
+      "minutos_trabajo": 10,
+      "tipo": "hidratos",
+      "grupo": "carne",
+      "gusta_ninos": true,
+      "proteina": 42,
+      "ingredientes": [
+        {
+          "producto": "cuscus",
+          "cantidad": 80
+        },
+        {
+          "producto": "muslos",
+          "cantidad": 180
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 120
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 60
+        }
+      ],
+      "pasos": [
+        "Dora el pollo en dados con sal y comino.",
+        "Añade calabacín y pimiento en dados, 6 min.",
+        "Hidrata el cuscús con el mismo peso de agua hirviendo, 5 min tapado.",
+        "Mezcla todo."
+      ]
+    },
+    {
+      "id": "macatun",
+      "nombre": "Macarrones con atún y tomate",
+      "aparato": "vitro",
+      "minutos": 15,
+      "minutos_trabajo": 5,
+      "tipo": "hidratos",
+      "grupo": "pescado",
+      "gusta_ninos": true,
+      "proteina": 35,
+      "ingredientes": [
+        {
+          "producto": "pasta",
+          "cantidad": 90
+        },
+        {
+          "producto": "atun",
+          "cantidad": 65
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 80
+        },
+        {
+          "producto": "queso",
+          "cantidad": 15
+        }
+      ],
+      "pasos": [
+        "Cuece la pasta.",
+        "Escúrrela y mezcla con el tomate y el atún.",
+        "Queso por encima y listo."
+      ]
+    },
+    {
+      "id": "alubias",
+      "nombre": "Alubias con pollo y verduras",
+      "aparato": "vitro",
+      "minutos": 20,
+      "minutos_trabajo": 8,
+      "tipo": "hidratos",
+      "grupo": "legumbre",
+      "gusta_ninos": false,
+      "proteina": 42,
+      "ingredientes": [
+        {
+          "producto": "alubias",
+          "cantidad": 200
+        },
+        {
+          "producto": "pechuga",
+          "cantidad": 120
+        },
+        {
+          "producto": "salteado",
+          "cantidad": 120
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 5
+        }
+      ],
+      "pasos": [
+        "Dora el pollo en dados con el ajo.",
+        "Añade las verduras congeladas, 6 min.",
+        "Echa las alubias escurridas con pimentón y un poco de agua, 5 min."
+      ]
+    },
+    {
+      "id": "merlpat",
+      "nombre": "Merluza con patatas al horno",
+      "aparato": "horno",
+      "minutos": 30,
+      "minutos_trabajo": 8,
+      "tipo": "hidratos",
+      "grupo": "pescado",
+      "gusta_ninos": true,
+      "proteina": 38,
+      "ingredientes": [
+        {
+          "producto": "merluza",
+          "cantidad": 200
+        },
+        {
+          "producto": "patata",
+          "cantidad": 250
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        },
+        {
+          "producto": "limon",
+          "cantidad": 30
+        }
+      ],
+      "pasos": [
+        "Patata y cebolla en rodajas finas: 6 min al microondas.",
+        "Pásalas a una bandeja con aceite, 10 min a 200 °C.",
+        "Pon la merluza encima con sal, ajo y limón.",
+        "Otros 12 min."
+      ]
+    },
+    {
+      "id": "burger",
+      "nombre": "Hamburguesas de pollo con patatas",
+      "aparato": "air",
+      "minutos": 25,
+      "minutos_trabajo": 7,
+      "tipo": "hidratos",
+      "grupo": "carne",
+      "gusta_ninos": true,
+      "proteina": 40,
+      "ingredientes": [
+        {
+          "producto": "burger",
+          "cantidad": 2
+        },
+        {
+          "producto": "patata",
+          "cantidad": 200
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 40
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 80
+        }
+      ],
+      "pasos": [
+        "Patatas en bastones con un poco de aceite: 12 min a 200 °C.",
+        "Añade las hamburguesas, 10 min a 190 °C dándoles la vuelta.",
+        "Sirve con ensalada y tomate."
+      ]
+    },
+    {
+      "id": "tresdel",
+      "nombre": "Arroz tres delicias con gambas",
+      "aparato": "vitro",
+      "minutos": 25,
+      "minutos_trabajo": 10,
+      "tipo": "hidratos",
+      "grupo": "pescado",
+      "gusta_ninos": true,
+      "proteina": 32,
+      "ingredientes": [
+        {
+          "producto": "arroz",
+          "cantidad": 80
+        },
+        {
+          "producto": "guisantes",
+          "cantidad": 50
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 40
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        },
+        {
+          "producto": "gambas",
+          "cantidad": 60
+        }
+      ],
+      "pasos": [
+        "Cuece el arroz 15 min.",
+        "Haz una tortilla fina y córtala en tiras.",
+        "Saltea zanahoria picada, guisantes y gambas 5 min.",
+        "Mezcla con el arroz y la tortilla."
+      ]
+    },
+    {
+      "id": "espag",
+      "nombre": "Espaguetis con gambas al ajillo",
+      "aparato": "vitro",
+      "minutos": 15,
+      "minutos_trabajo": 8,
+      "tipo": "hidratos",
+      "grupo": "pescado",
+      "gusta_ninos": false,
+      "proteina": 38,
+      "ingredientes": [
+        {
+          "producto": "espaguetis",
+          "cantidad": 90
+        },
+        {
+          "producto": "gambas",
+          "cantidad": 150
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 8
+        }
+      ],
+      "pasos": [
+        "Cuece la pasta.",
+        "Dora el ajo laminado con guindilla en aceite.",
+        "Añade las gambas 3 min.",
+        "Mezcla con la pasta y perejil."
+      ]
+    },
+    {
+      "id": "pollohorno",
+      "nombre": "Contramuslos al horno con patata y pimiento",
+      "aparato": "horno",
+      "minutos": 30,
+      "minutos_trabajo": 7,
+      "tipo": "hidratos",
+      "grupo": "carne",
+      "gusta_ninos": true,
+      "proteina": 45,
+      "ingredientes": [
+        {
+          "producto": "muslos",
+          "cantidad": 220
+        },
+        {
+          "producto": "patata",
+          "cantidad": 200
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 80
+        }
+      ],
+      "pasos": [
+        "Patata en dados: 5 min al microondas.",
+        "Todo en una bandeja con aceite, sal, pimentón y orégano.",
+        "Horno 20 min a 210 °C."
+      ]
+    },
+    {
+      "id": "patatamic",
+      "nombre": "Patata rellena de atún",
+      "aparato": "micro",
+      "minutos": 15,
+      "minutos_trabajo": 5,
+      "tipo": "hidratos",
+      "grupo": "pescado",
+      "gusta_ninos": true,
+      "proteina": 30,
+      "ingredientes": [
+        {
+          "producto": "patata",
+          "cantidad": 300
+        },
+        {
+          "producto": "atun",
+          "cantidad": 65
+        },
+        {
+          "producto": "queso",
+          "cantidad": 20
+        },
+        {
+          "producto": "maiz",
+          "cantidad": 40
+        }
+      ],
+      "pasos": [
+        "Pincha la patata y métela 8–10 min al microondas.",
+        "Ábrela y mezcla la pulpa con el atún y el maíz.",
+        "Queso por encima, 1 min más."
+      ]
+    },
+    {
+      "id": "merlverd",
+      "nombre": "Merluza al horno con verduras",
+      "aparato": "horno",
+      "minutos": 25,
+      "minutos_trabajo": 7,
+      "tipo": "ligera",
+      "grupo": "pescado",
+      "gusta_ninos": true,
+      "proteina": 36,
+      "ingredientes": [
+        {
+          "producto": "merluza",
+          "cantidad": 200
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 150
+        },
+        {
+          "producto": "pimiento",
+          "cantidad": 80
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 50
+        }
+      ],
+      "pasos": [
+        "Verduras en tiras en una bandeja con aceite: 10 min a 200 °C.",
+        "Pon la merluza encima con sal y ajo.",
+        "Otros 12 min."
+      ]
+    },
+    {
+      "id": "revuelto",
+      "nombre": "Revuelto de gambas y espinacas",
+      "aparato": "vitro",
+      "minutos": 10,
+      "minutos_trabajo": 8,
+      "tipo": "ligera",
+      "grupo": "pescado",
+      "gusta_ninos": false,
+      "proteina": 40,
+      "ingredientes": [
+        {
+          "producto": "gambas",
+          "cantidad": 120
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        },
+        {
+          "producto": "espinacas",
+          "cantidad": 150
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 5
+        }
+      ],
+      "pasos": [
+        "Saltea el ajo y las espinacas congeladas 4 min.",
+        "Añade las gambas 2 min.",
+        "Echa los huevos batidos y remueve hasta que cuajen."
+      ]
+    },
+    {
+      "id": "salmonjud",
+      "nombre": "Salmón con judías verdes",
+      "aparato": "air",
+      "minutos": 18,
+      "minutos_trabajo": 5,
+      "tipo": "ligera",
+      "grupo": "pescado",
+      "gusta_ninos": true,
+      "proteina": 33,
+      "ingredientes": [
+        {
+          "producto": "salmon",
+          "cantidad": 150
+        },
+        {
+          "producto": "judias",
+          "cantidad": 180
+        },
+        {
+          "producto": "limon",
+          "cantidad": 20
+        }
+      ],
+      "pasos": [
+        "Judías con aceite y sal: 6 min a 200 °C.",
+        "Añade el salmón con limón y pimienta.",
+        "10 min más a 190 °C."
+      ]
+    },
+    {
+      "id": "pollosalt",
+      "nombre": "Pollo a la plancha con salteado de verduras",
+      "aparato": "vitro",
+      "minutos": 15,
+      "minutos_trabajo": 10,
+      "tipo": "ligera",
+      "grupo": "carne",
+      "gusta_ninos": true,
+      "proteina": 46,
+      "ingredientes": [
+        {
+          "producto": "pechuga",
+          "cantidad": 200
+        },
+        {
+          "producto": "salteado",
+          "cantidad": 200
+        }
+      ],
+      "pasos": [
+        "Haz el pollo a la plancha con sal y especias.",
+        "En la misma sartén saltea las verduras 6 min.",
+        "Un chorrito de soja opcional."
+      ]
+    },
+    {
+      "id": "tortilla",
+      "nombre": "Tortilla de calabacín con ensalada de atún",
+      "aparato": "vitro",
+      "minutos": 20,
+      "minutos_trabajo": 12,
+      "tipo": "ligera",
+      "grupo": "huevo",
+      "gusta_ninos": true,
+      "proteina": 36,
+      "ingredientes": [
+        {
+          "producto": "huevos",
+          "cantidad": 3
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 150
+        },
+        {
+          "producto": "cebolla",
+          "cantidad": 40
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 100
+        },
+        {
+          "producto": "atun",
+          "cantidad": 65
+        }
+      ],
+      "pasos": [
+        "Pocha el calabacín y la cebolla en dados 8 min.",
+        "Añade los huevos batidos y cuaja por los dos lados.",
+        "Ensalada con tomate y atún al lado."
+      ]
+    },
+    {
+      "id": "calamar",
+      "nombre": "Calamares a la plancha con ensalada",
+      "aparato": "vitro",
+      "minutos": 12,
+      "minutos_trabajo": 8,
+      "tipo": "ligera",
+      "grupo": "pescado",
+      "gusta_ninos": false,
+      "proteina": 34,
+      "ingredientes": [
+        {
+          "producto": "calamar",
+          "cantidad": 200
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 100
+        },
+        {
+          "producto": "limon",
+          "cantidad": 20
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 5
+        }
+      ],
+      "pasos": [
+        "Plancha muy caliente: calamar 4–5 min.",
+        "Al final, ajo picado y perejil.",
+        "Sirve con ensalada, tomate y limón."
+      ]
+    },
+    {
+      "id": "lomobroc",
+      "nombre": "Lomo con brócoli en air fryer",
+      "aparato": "air",
+      "minutos": 18,
+      "minutos_trabajo": 5,
+      "tipo": "ligera",
+      "grupo": "carne",
+      "gusta_ninos": true,
+      "proteina": 42,
+      "ingredientes": [
+        {
+          "producto": "lomo",
+          "cantidad": 180
+        },
+        {
+          "producto": "brocoli",
+          "cantidad": 200
+        }
+      ],
+      "pasos": [
+        "Brócoli con aceite y sal: 6 min a 200 °C.",
+        "Añade el lomo con pimentón.",
+        "8 min más a 190 °C."
+      ]
+    },
+    {
+      "id": "albond",
+      "nombre": "Albóndigas de pollo con judías verdes",
+      "aparato": "air",
+      "minutos": 25,
+      "minutos_trabajo": 10,
+      "tipo": "ligera",
+      "grupo": "carne",
+      "gusta_ninos": true,
+      "proteina": 38,
+      "ingredientes": [
+        {
+          "producto": "picada_pollo",
+          "cantidad": 180
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 100
+        },
+        {
+          "producto": "judias",
+          "cantidad": 150
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 3
+        }
+      ],
+      "pasos": [
+        "Forma bolitas con la carne, ajo y sal.",
+        "Air fryer 10 min a 190 °C.",
+        "Calienta el tomate en un cazo, añade las albóndigas.",
+        "Judías al vapor en el microondas 6 min."
+      ]
+    },
+    {
+      "id": "pimientos",
+      "nombre": "Pimientos rellenos de atún y huevo",
+      "aparato": "horno",
+      "minutos": 30,
+      "minutos_trabajo": 10,
+      "tipo": "ligera",
+      "grupo": "pescado",
+      "gusta_ninos": false,
+      "proteina": 30,
+      "ingredientes": [
+        {
+          "producto": "pimiento",
+          "cantidad": 250
+        },
+        {
+          "producto": "atun",
+          "cantidad": 65
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 1
+        },
+        {
+          "producto": "tomate_frito",
+          "cantidad": 40
+        }
+      ],
+      "pasos": [
+        "Cuece el huevo 10 min y pícalo.",
+        "Mezcla con el atún y el tomate.",
+        "Rellena los pimientos abiertos por la mitad.",
+        "Horno 20 min a 200 °C."
+      ]
+    },
+    {
+      "id": "ensgarb",
+      "nombre": "Ensalada templada de garbanzos y atún",
+      "aparato": "micro",
+      "minutos": 10,
+      "minutos_trabajo": 8,
+      "tipo": "ligera",
+      "grupo": "legumbre",
+      "gusta_ninos": false,
+      "proteina": 35,
+      "ingredientes": [
+        {
+          "producto": "garbanzos",
+          "cantidad": 150
+        },
+        {
+          "producto": "atun",
+          "cantidad": 65
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 100
+        }
+      ],
+      "pasos": [
+        "Templa los garbanzos 1 min al microondas con comino.",
+        "Monta la ensalada con tomate y atún.",
+        "Garbanzos por encima y aliña."
+      ]
+    },
+    {
+      "id": "champipollo",
+      "nombre": "Pollo al ajillo con champiñones",
+      "aparato": "vitro",
+      "minutos": 15,
+      "minutos_trabajo": 8,
+      "tipo": "ligera",
+      "grupo": "carne",
+      "gusta_ninos": false,
+      "proteina": 44,
+      "ingredientes": [
+        {
+          "producto": "pechuga",
+          "cantidad": 180
+        },
+        {
+          "producto": "champi",
+          "cantidad": 200
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 6
+        }
+      ],
+      "pasos": [
+        "Dora el pollo en dados.",
+        "Añade el ajo laminado y los champiñones, 6 min.",
+        "Perejil al final."
+      ]
+    },
+    {
+      "id": "muslosair",
+      "nombre": "Contramuslos especiados con ensalada",
+      "aparato": "air",
+      "minutos": 22,
+      "minutos_trabajo": 5,
+      "tipo": "ligera",
+      "grupo": "carne",
+      "gusta_ninos": true,
+      "proteina": 40,
+      "ingredientes": [
+        {
+          "producto": "muslos",
+          "cantidad": 220
+        },
+        {
+          "producto": "ensalada",
+          "cantidad": 60
+        },
+        {
+          "producto": "tomate",
+          "cantidad": 100
+        }
+      ],
+      "pasos": [
+        "Adoba el pollo con pimentón, ajo en polvo y sal.",
+        "Air fryer 18 min a 190 °C, a mitad dale la vuelta.",
+        "Sirve con ensalada y tomate."
+      ]
+    },
+    {
+      "id": "huevosplato",
+      "nombre": "Huevos al horno con espinacas y tomate",
+      "aparato": "horno",
+      "minutos": 20,
+      "minutos_trabajo": 6,
+      "tipo": "ligera",
+      "grupo": "huevo",
+      "gusta_ninos": false,
+      "proteina": 27,
+      "ingredientes": [
+        {
+          "producto": "huevos",
+          "cantidad": 3
+        },
+        {
+          "producto": "espinacas",
+          "cantidad": 150
+        },
+        {
+          "producto": "tomate_tri",
+          "cantidad": 100
+        },
+        {
+          "producto": "queso",
+          "cantidad": 20
+        }
+      ],
+      "pasos": [
+        "Saltea las espinacas 3 min y ponlas en una fuente con el tomate.",
+        "Casca los huevos encima y añade el queso.",
+        "Horno 10–12 min a 200 °C."
+      ]
+    },
+    {
+      "id": "gambasjud",
+      "nombre": "Gambas al ajillo con judías verdes",
+      "aparato": "vitro",
+      "minutos": 15,
+      "minutos_trabajo": 6,
+      "tipo": "ligera",
+      "grupo": "pescado",
+      "gusta_ninos": false,
+      "proteina": 36,
+      "ingredientes": [
+        {
+          "producto": "gambas",
+          "cantidad": 150
+        },
+        {
+          "producto": "judias",
+          "cantidad": 180
+        },
+        {
+          "producto": "ajo",
+          "cantidad": 6
+        }
+      ],
+      "pasos": [
+        "Judías al vapor en el microondas 6 min.",
+        "Dora el ajo, añade las gambas 3 min.",
+        "Mezcla con las judías."
+      ]
+    },
+    {
+      "id": "merlmicro",
+      "nombre": "Merluza al vapor con verduras",
+      "aparato": "micro",
+      "minutos": 12,
+      "minutos_trabajo": 5,
+      "tipo": "ligera",
+      "grupo": "pescado",
+      "gusta_ninos": true,
+      "proteina": 36,
+      "ingredientes": [
+        {
+          "producto": "merluza",
+          "cantidad": 200
+        },
+        {
+          "producto": "salteado",
+          "cantidad": 200
+        },
+        {
+          "producto": "limon",
+          "cantidad": 20
+        }
+      ],
+      "pasos": [
+        "Verduras en un estuche de silicona: 4 min.",
+        "Pon la merluza encima con sal y limón.",
+        "4 min más y reposa 1 min."
+      ]
+    },
+    {
+      "id": "pollomicro",
+      "nombre": "Pollo al vapor con calabacín y zanahoria",
+      "aparato": "micro",
+      "minutos": 15,
+      "minutos_trabajo": 6,
+      "tipo": "ligera",
+      "grupo": "carne",
+      "gusta_ninos": true,
+      "proteina": 42,
+      "ingredientes": [
+        {
+          "producto": "pechuga",
+          "cantidad": 180
+        },
+        {
+          "producto": "calabacin",
+          "cantidad": 150
+        },
+        {
+          "producto": "zanahoria",
+          "cantidad": 60
+        }
+      ],
+      "pasos": [
+        "Verduras en láminas en un estuche de silicona.",
+        "Pollo encima con sal, ajo y hierbas.",
+        "8–9 min al microondas, reposa 2 min."
+      ]
+    },
+    {
+      "id": "alubsalt",
+      "nombre": "Salteado de alubias, verduras y huevo",
+      "aparato": "vitro",
+      "minutos": 12,
+      "minutos_trabajo": 8,
+      "tipo": "ligera",
+      "grupo": "legumbre",
+      "gusta_ninos": false,
+      "proteina": 30,
+      "ingredientes": [
+        {
+          "producto": "alubias",
+          "cantidad": 150
+        },
+        {
+          "producto": "salteado",
+          "cantidad": 150
+        },
+        {
+          "producto": "huevos",
+          "cantidad": 2
+        }
+      ],
+      "pasos": [
+        "Saltea las verduras 5 min.",
+        "Añade las alubias escurridas 3 min.",
+        "Haz los huevos a la plancha y sírvelos encima."
+      ]
+    }
+  ]
+}
