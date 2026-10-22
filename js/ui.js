@@ -1064,6 +1064,8 @@ function renderPerfil(){
     <div class="actions"><button class="btn" id="exp">Exportar copia</button><button class="btn ghost" id="imp">Importar copia</button></div><input type="file" id="impFile" accept="application/json,.json" hidden>
     <div class="field"><label>Aspecto</label><div class="chips">${[["light","Claro"],["dark","Oscuro"],["auto","Como el móvil"]].map(([k,t])=>chip("data-theme-set",k,(S.home.theme||"light")===k,t)).join("")}</div></div>
     <div class="field"><label>Color</label><div class="chips">${chip("data-accent","rojo",!S.accent||S.accent==="rojo","🍅 Rojo")}${Object.keys(ACCENTS).filter(k=>k!=="rojo"&&owns("tema_"+k)).map(k=>chip("data-accent",k,S.accent===k,SHOP["tema_"+k].ico+" "+SHOP["tema_"+k].t.replace("Tema ",""))).join("")}<button class="chip" id="moreColors">🛍️ Más colores</button></div></div>
+    <div class="field"><label>Estética</label><div class="chips">${chip("data-skin","",!S.skin,"✨ Normal")}${Object.keys(SHOP).filter(k=>k.startsWith("skin_")&&owns(k)).map(k=>chip("data-skin",k.slice(5),S.skin===k.slice(5),SHOP[k].ico+" "+SHOP[k].t)).join("")}<button class="chip" id="moreSkins">🛍️ Más estéticas</button></div>
+      <div class="hint">Las estéticas cambian el fondo, las letras y las tarjetas. Con una estética puesta, manda su color.</div></div>
     <div class="actions"><button class="btn ghost small" id="newsAll">Ver todas las novedades</button><button class="btn ghost small" id="restartWiz">Repetir el asistente</button></div>`);
   h+=`</section>`;
   main.innerHTML=h;
@@ -1100,6 +1102,8 @@ function renderPerfil(){
     dlg.querySelectorAll("[data-av]").forEach(b=>b.onclick=()=>{S.avatar=b.dataset.av||null;save();dlg.close();render()});dlg.querySelector("#avShop").onclick=openShop});
   q("[data-accent]").forEach(b=>b.onclick=()=>{S.accent=b.dataset.accent;save();applyAccent();render()});
   document.getElementById("moreColors")?.addEventListener("click",openShop);
+  document.getElementById("moreSkins")?.addEventListener("click",openShop);
+  q("[data-skin]").forEach(b=>b.onclick=()=>{S.skin=b.dataset.skin||null;save();applySkin();render()});
   bindAvisos();
   document.getElementById("svProfile")?.addEventListener("click",openSurvey);
   document.getElementById("sugRec2")?.addEventListener("click",openSuggestRecipe);
@@ -1423,7 +1427,7 @@ async function boot(){
   else if(!S.onboarded){S.seenVersion=APP_VERSION;save()}
   checkUpdate();startCounter();
   if(avisosOn()&&S.notif&&S.notif.on){shareWithSW().catch(()=>{});queueSyncAvisos()}
-  trackOnBoot();checkAvisos();applyAccent();if(servidorOn())loadStats().then(()=>applyAccent()).catch(()=>{});
+  trackOnBoot();checkAvisos();applyAccent();applySkin();if(servidorOn())loadStats().then(()=>{applyAccent();applySkin()}).catch(()=>{});
   {const u=new URLSearchParams(location.search),t=u.get("hecho")||u.get("abrir");if(t){notifAction(u.get("hecho")?"hecho":"abrir",t);history.replaceState(null,"",location.pathname)}}
   navigator.serviceWorker&&navigator.serviceWorker.addEventListener("message",e=>{if(e.data&&e.data.tipo)notifAction(e.data.tipo,e.data.tag)});watchPermission();checkTransferOnBoot();queueTransfer();
 }

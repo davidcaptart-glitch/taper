@@ -270,6 +270,7 @@ function trackOnBoot(){
 }
 /* ---------- Tienda de coins ---------- */
 const SHOP={
+  skin_libreta:{t:"Libreta de la abuela",c:50,ico:"📓",g:"Estéticas",d:"Papel de cuaderno, letra a mano y notas con cinta"},skin_trattoria:{t:"Trattoria",c:50,ico:"🇮🇹",g:"Estéticas",d:"Mantel de cuadros y el menú en pizarra"},skin_mediterranea:{t:"Mediterránea",c:50,ico:"🌊",g:"Estéticas",d:"Azulejos, azul y blanco, limones y olivos"},skin_otono:{t:"Otoño acogedor",c:40,ico:"🍂",g:"Estéticas",d:"Papel kraft, tonos tierra y letra redondeada"},skin_neon:{t:"Noche neón",c:60,ico:"🌙",g:"Estéticas",d:"Fondo oscuro con luces de neón rosa y azul"},skin_pop:{t:"Pop infantil",c:40,ico:"🧒",g:"Estéticas",d:"Colores vivos, formas redondas y pegatinas"},skin_japon:{t:"Minimal japonés",c:40,ico:"🍣",g:"Estéticas",d:"Beige y negro, mucho aire y un sello rojo"},skin_navidad:{t:"Navidad",c:40,ico:"🎄",g:"Estéticas",d:"Nieve cayendo, rojo y verde"},
   av_chef:{t:"Avatar Chef",c:10,ico:"🧑‍🍳",g:"Avatares"},av_aguacate:{t:"Avatar Aguacate",c:10,ico:"🥑",g:"Avatares"},av_pizza:{t:"Avatar Pizza",c:10,ico:"🍕",g:"Avatares"},av_zorro:{t:"Avatar Zorro",c:10,ico:"🦊",g:"Avatares"},av_panda:{t:"Avatar Panda",c:10,ico:"🐼",g:"Avatares"},av_pulpo:{t:"Avatar Pulpo",c:10,ico:"🐙",g:"Avatares"},av_taco:{t:"Avatar Taco",c:10,ico:"🌮",g:"Avatares"},av_tomate:{t:"Avatar Tomate",c:10,ico:"🍅",g:"Avatares"},
   tema_oliva:{t:"Tema verde oliva",c:20,ico:"🫒",g:"Temas"},tema_marino:{t:"Tema azul marino",c:20,ico:"🌊",g:"Temas"},
   tema_mostaza:{t:"Tema mostaza",c:20,ico:"🌻",g:"Temas"},tema_berenjena:{t:"Tema berenjena",c:20,ico:"🍆",g:"Temas"},
@@ -293,16 +294,28 @@ async function openShop(){
     <div class="coinbig">🪙 <b>${coinsNow??"…"}</b> coins</div>
     <p class="small muted">Gánalas invitando a gente, usando Táper cada semana y subiendo los tickets de la compra. Lo que canjeas es para siempre.</p>
     ${Object.entries(groups).map(([g,its])=>`<h3 class="mq">${esc(g)}</h3>${its.map(([k,v])=>`<div class="shopit ${owns(k)?"own":""}"><span class="si">${v.ico}</span><span><b>${esc(v.t)}</b>${v.d?`<small>${esc(v.d)}</small>`:""}</span>
-      ${owns(k)?`<span class="okt">✓ Tuyo</span>`:`<button class="btn small" data-buy="${k}" ${coinsNow!=null&&coinsNow<v.c?"disabled":""}>🪙 ${v.c}</button>`}</div>`).join("")}`).join("")}</div>`);
+      ${owns(k)?`<span class="okt">✓ Tuyo</span>`:`<button class="btn small" data-buy="${k}" ${coinsNow!=null&&coinsNow<v.c?"disabled":""}>🪙 ${v.c}</button>`}</div>
+      ${k.startsWith("skin_")?`<div class="skinprev skin-${k.slice(5)}"><div class="pv-t">Qué <em>comemos</em></div><div class="pv-c"><span>🍝 Pasta al pesto</span><i>Hoy</i></div></div>`:""}`).join("")}`).join("")}</div>`);
+  loadSkinFonts();
   dlg.querySelectorAll("[data-buy]").forEach(b=>b.onclick=async()=>{const k=b.dataset.buy;b.disabled=true;
     try{const r=await fetch(CFG.avisos.url.replace(/\/$/,"")+"/canjear",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({uid:S.uid,clave:S.secret,item:k})});const j=await r.json();
       if(!r.ok){toast(j.error||"No se ha podido canjear");b.disabled=false;return}
       S.owned=j.compras;coinsNow=j.coins;save();
       if(k.startsWith("tema_")){S.accent=k.slice(5);applyAccent()}
       if(k.startsWith("av_"))S.avatar=k;
+      if(k.startsWith("skin_")){S.skin=k.slice(5);applySkin()}
       if(k.startsWith("pack_"))refreshPlansForPacks();
       toast(`${SHOP[k].ico} ${SHOP[k].t}: ¡es tuyo!`);openShop();render()}
     catch(e){toast("Sin conexión: inténtalo luego");b.disabled=false}});
+}
+// Estéticas compradas: clase en <body>; sus tipografías se cargan solo cuando hacen falta
+const SKIN_FONTS="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;600;700&family=Playfair+Display:ital,wght@0,700;1,500&display=swap";
+function loadSkinFonts(){if(document.getElementById("skinFonts"))return;const l=document.createElement("link");l.id="skinFonts";l.rel="stylesheet";l.href=SKIN_FONTS;document.head.appendChild(l)}
+function applySkin(){
+  document.body.className=document.body.className.replace(/\bskin-\S+/g,"").trim();
+  if(S.skin&&owns("skin_"+S.skin)){loadSkinFonts();document.body.classList.add("skin-"+S.skin);
+    const c=getComputedStyle(document.body).getPropertyValue("--accent").trim();if(c)document.querySelector('meta[name="theme-color"]')?.setAttribute("content",c)}
+  else applyAccent();
 }
 // Temas de color comprados
 const ACCENTS={rojo:["#D22F2A","#B42520","#FBE8E7"],oliva:["#5B7F2A","#4A6A20","#EEF4E3"],marino:["#1F4E8C","#173E70","#E6EEF9"],mostaza:["#B97F0F","#9C6A0B","#FBF1DC"],berenjena:["#6B2D5C","#56234A","#F4E6F0"]};

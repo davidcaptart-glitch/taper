@@ -1,0 +1,117 @@
+/* Táper · estéticas temáticas (se canjean en la tienda de coins)
+   Cada una es una clase .skin-<id> que se pone en <body> (toda la app) o en la vista previa de la tienda.
+   Cambia colores, fondo, tipografía, tarjetas y adornos. Todo dibujado con CSS: sin imágenes. */
+
+/* ---------- 📓 Libreta de la abuela ---------- */
+.skin-libreta{--bg:#F6EFDD;--surface:#FFFCF3;--surface-2:#F1E8D2;--surface-3:#E4D7B8;--line:#E0D2B0;--silver-1:#FBF6E8;--silver-2:#EDE2C8;--silver-3:#CDB98E;
+  --ink:#3B2F25;--ink-2:#5A4838;--muted:#8A7560;--accent:#9C4A2F;--accent-2:#7E3A24;--accent-soft:#F3DFD3;--serif:"Caveat",cursive;
+  background-color:var(--bg);background-image:linear-gradient(90deg,transparent 30px,#E7A9A0 30px,#E7A9A0 32px,transparent 32px),repeating-linear-gradient(transparent 0 29px,#CFDCEA 29px 30px)}
+.skin-libreta h1,.skin-libreta h2,.skin-libreta .vh,.skin-libreta .wh,.skin-libreta .rtitle{font-family:"Caveat",cursive;letter-spacing:0;font-weight:700}
+.skin-libreta .vh{font-size:2.9rem}
+.skin-libreta .card,.skin-libreta .slot,.skin-libreta .rtile,.skin-libreta .item,.skin-libreta .listtotal{border-radius:6px;box-shadow:0 2px 0 #E3D5B4,0 8px 18px -12px rgba(80,50,20,.35);position:relative}
+.skin-libreta .slot::before,.skin-libreta .card::before{content:"";position:absolute;top:-9px;left:50%;width:86px;height:20px;transform:translateX(-50%) rotate(-2deg);background:rgba(232,214,150,.75);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.skin-libreta nav.tabs{background:#4A3A2C}
+
+/* ---------- 🇮🇹 Trattoria ---------- */
+.skin-trattoria{--bg:#FBF5F0;--surface:#FFFFFF;--surface-2:#F4ECE4;--surface-3:#E7D9CB;--line:#EADBCD;--ink:#2B2522;--ink-2:#4A3F39;--muted:#86766B;
+  --accent:#2E7D32;--accent-2:#246428;--accent-soft:#E2F0E3;--serif:"Caveat",cursive;
+  background-color:#fff;background-image:linear-gradient(45deg,rgba(200,16,46,.10) 25%,transparent 25%,transparent 75%,rgba(200,16,46,.10) 75%),linear-gradient(45deg,rgba(200,16,46,.10) 25%,transparent 25%,transparent 75%,rgba(200,16,46,.10) 75%);
+  background-size:44px 44px;background-position:0 0,22px 22px}
+.skin-trattoria .vhead{background:#2A2B2A;color:#F4F1EA;border-radius:16px;padding:16px 18px;box-shadow:inset 0 0 0 6px #6B4A2E,0 10px 24px -14px rgba(0,0,0,.6)}
+.skin-trattoria .vhead .veb{color:#C9E7B8}
+.skin-trattoria .vh,.skin-trattoria .vh em{font-family:"Caveat",cursive;color:#F4F1EA;font-weight:700}
+.skin-trattoria .vh em{color:#F7C948}
+.skin-trattoria .wh,.skin-trattoria .rtitle,.skin-trattoria h2{font-family:"Caveat",cursive;font-weight:700;letter-spacing:0}
+.skin-trattoria .slot,.skin-trattoria .card{border-top:4px solid #C8102E}
+.skin-trattoria .btn:not(.ghost){background:#C8102E}
+
+/* ---------- 🌊 Mediterránea ---------- */
+.skin-mediterranea{--bg:#F3F8FC;--surface:#FFFFFF;--surface-2:#E7F0F8;--surface-3:#D3E3F1;--line:#D8E6F2;--ink:#0F2A44;--ink-2:#294A6B;--muted:#5F7A94;
+  --accent:#1F5FAD;--accent-2:#174C8C;--accent-soft:#E2EDFA;--serif:"Playfair Display",Georgia,serif;
+  background-color:var(--bg);
+  background-image:radial-gradient(circle at 50% 50%,rgba(31,95,173,.10) 0 9px,transparent 10px),radial-gradient(circle at 0 0,rgba(31,95,173,.07) 0 14px,transparent 15px),radial-gradient(circle at 100% 100%,rgba(31,95,173,.07) 0 14px,transparent 15px);
+  background-size:56px 56px}
+.skin-mediterranea .vh,.skin-mediterranea .wh,.skin-mediterranea .rtitle{font-family:"Playfair Display",Georgia,serif}
+.skin-mediterranea .vhead{padding-bottom:12px;border-bottom:8px solid transparent;border-image:repeating-linear-gradient(90deg,#1F5FAD 0 10px,#fff 10px 14px,#F2C14E 14px 20px,#fff 20px 24px) 8}
+.skin-mediterranea .vhead::after{content:"🍋🫒";font-size:1.6rem}
+.skin-mediterranea .slot,.skin-mediterranea .card{border-radius:14px}
+
+/* ---------- 🍂 Otoño acogedor ---------- */
+.skin-otono{--bg:#EADBC3;--surface:#FFF8EC;--surface-2:#F3E6D1;--surface-3:#E3CFB0;--line:#E2CEAE;--ink:#3E2A18;--ink-2:#5E4229;--muted:#8B6E50;
+  --accent:#C2571A;--accent-2:#9E4513;--accent-soft:#F8E1CF;--serif:"Fredoka",system-ui,sans-serif;
+  background-color:var(--bg);background-image:radial-gradient(rgba(120,80,40,.10) 1px,transparent 1.4px),radial-gradient(rgba(120,80,40,.07) 1px,transparent 1.4px);background-size:7px 7px,11px 11px;background-position:0 0,3px 5px}
+.skin-otono h1,.skin-otono h2,.skin-otono .vh,.skin-otono .wh,.skin-otono .rtitle{font-family:"Fredoka",system-ui,sans-serif;font-weight:600;letter-spacing:-.01em}
+.skin-otono .vh em{font-family:"Fredoka",system-ui,sans-serif;font-style:normal;font-weight:700}
+.skin-otono .vhead::after{content:"🍂";font-size:2rem;transform:rotate(-15deg)}
+.skin-otono .slot,.skin-otono .card,.skin-otono .rtile{border-radius:26px}
+
+/* ---------- 🌙 Noche neón ---------- */
+.skin-neon{color-scheme:dark;--bg:#0B0B16;--surface:#151528;--surface-2:#1E1E36;--surface-3:#2A2A48;--line:#2B2B4A;--silver-1:#1A1A30;--silver-2:#26264A;--silver-3:#4A4A7A;
+  --ink:#F3F2FF;--ink-2:#CFCDF2;--muted:#9C99C9;--accent:#FF3D9A;--accent-2:#E62C85;--accent-soft:#3A1630;
+  background-color:var(--bg);background-image:linear-gradient(rgba(32,227,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(32,227,255,.06) 1px,transparent 1px);background-size:32px 32px}
+.skin-neon .vh{text-transform:uppercase;letter-spacing:.02em;text-shadow:0 0 18px rgba(255,61,154,.55)}
+.skin-neon .vh em{color:#20E3FF;text-shadow:0 0 14px rgba(32,227,255,.8)}
+.skin-neon .card,.skin-neon .slot,.skin-neon .rtile,.skin-neon .item,.skin-neon .listtotal{box-shadow:0 0 0 1px rgba(255,61,154,.35),0 0 24px -10px rgba(255,61,154,.6)}
+.skin-neon nav.tabs{background:rgba(21,21,40,.92);box-shadow:0 0 0 1px rgba(32,227,255,.3),0 0 30px -10px rgba(32,227,255,.6)}
+.skin-neon .ticket{background:linear-gradient(135deg,#151528 55%,#3A1630)}
+.skin-neon .dish,.skin-neon .pimg{background:#fff}
+
+/* ---------- 🧒 Pop infantil ---------- */
+.skin-pop{--bg:#FFF6D6;--surface:#FFFFFF;--surface-2:#FFEFC2;--surface-3:#FFE1A0;--line:#FFE4A8;--ink:#2B2340;--ink-2:#4A3F66;--muted:#7D7396;
+  --accent:#FF5A5F;--accent-2:#E8474C;--accent-soft:#FFE1E2;--serif:"Fredoka",system-ui,sans-serif;
+  background-color:var(--bg);background-image:radial-gradient(#7BD3EA 2.2px,transparent 2.6px),radial-gradient(#FFB4C2 2.2px,transparent 2.6px),radial-gradient(#A1EEBD 2.2px,transparent 2.6px);
+  background-size:46px 46px,46px 46px,46px 46px;background-position:0 0,15px 23px,31px 8px}
+.skin-pop h1,.skin-pop h2,.skin-pop .vh,.skin-pop .wh,.skin-pop .rtitle{font-family:"Fredoka",system-ui,sans-serif;font-weight:700;letter-spacing:0}
+.skin-pop .vh em{font-family:"Fredoka",system-ui,sans-serif;font-style:normal;color:#7B61FF}
+.skin-pop .vhead::after{content:"🍕🍓🥕";font-size:1.5rem}
+.skin-pop .card,.skin-pop .slot,.skin-pop .rtile,.skin-pop .item,.skin-pop .listtotal{border-radius:30px;box-shadow:0 5px 0 #FFD166,0 10px 24px -14px rgba(0,0,0,.25)}
+.skin-pop .btn{border-radius:999px;box-shadow:0 4px 0 rgba(0,0,0,.15)}
+
+/* ---------- 🍣 Minimal japonés ---------- */
+.skin-japon{--bg:#F4EFE6;--surface:#FBF8F2;--surface-2:#EFE8DC;--surface-3:#E2D8C7;--line:#DED3C0;--ink:#1A1A1A;--ink-2:#3A3631;--muted:#7A7166;
+  --accent:#C0392B;--accent-2:#A33024;--accent-soft:#F4E2DE;background-color:var(--bg)}
+.skin-japon .vh{font-weight:500;letter-spacing:.02em}
+.skin-japon .vh em{font-style:normal;color:var(--ink)}
+.skin-japon .vhead::after{content:"食";display:grid;place-items:center;width:46px;height:46px;border-radius:10px;background:#C0392B;color:#FBF8F2;font-size:1.5rem;transform:rotate(-6deg)}
+.skin-japon .card,.skin-japon .slot,.skin-japon .rtile,.skin-japon .item,.skin-japon .listtotal{border-radius:4px;box-shadow:none;border:1px solid var(--line)}
+.skin-japon nav.tabs{background:#1A1A1A;border-radius:6px}
+
+/* ---------- 🎄 Navidad ---------- */
+.skin-navidad{--bg:#FBF6F1;--surface:#FFFFFF;--surface-2:#F5ECE3;--surface-3:#EAD9C9;--line:#EBDDCF;--ink:#26201C;--ink-2:#4A3E36;--muted:#86766B;
+  --accent:#B3122E;--accent-2:#930E25;--accent-soft:#F8DDE2;--serif:"Playfair Display",Georgia,serif;background-color:var(--bg)}
+.skin-navidad .vh,.skin-navidad .wh,.skin-navidad .rtitle{font-family:"Playfair Display",Georgia,serif}
+.skin-navidad .vh em{color:#1E6B3A}
+.skin-navidad .vhead::after{content:"🎄";font-size:2rem}
+.skin-navidad .slot,.skin-navidad .card{border-top:4px solid #1E6B3A}
+body.skin-navidad::before{content:"";position:fixed;inset:-40px 0 0;pointer-events:none;z-index:1;
+  background-image:radial-gradient(circle,#fff 0 2px,transparent 2.5px),radial-gradient(circle,#fff 0 1.5px,transparent 2px),radial-gradient(circle,rgba(200,215,230,.9) 0 2px,transparent 2.5px);
+  background-size:120px 120px,80px 80px,160px 160px;animation:nieve 14s linear infinite;opacity:.9}
+@keyframes nieve{to{background-position:30px 120px,-20px 80px,10px 160px}}
+@media (prefers-reduced-motion: reduce){body.skin-navidad::before{animation:none}}
+
+/* Adornos de cabecera: alineados a la derecha del título */
+[class*="skin-"] .vhead{align-items:center}
+
+/* ---------- Vista previa en la tienda ---------- */
+.skinprev{border-radius:16px;padding:10px;min-height:96px;width:100%;margin-top:8px;overflow:hidden;position:relative;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.skinprev .pv-t{font-size:1.5rem;font-weight:700;color:var(--ink);line-height:1}
+.skinprev .pv-t em{color:var(--accent)}
+.skinprev .pv-c{margin-top:8px;background:var(--surface);border-radius:12px;padding:8px 10px;font-size:.78rem;color:var(--ink-2);display:flex;justify-content:space-between;align-items:center}
+.skinprev .pv-c i{font-style:normal;background:var(--accent);color:#fff;border-radius:99px;padding:3px 9px;font-weight:650}
+.skin-libreta .pv-t,.skin-trattoria .pv-t{font-family:"Caveat",cursive}
+.skin-otono .pv-t,.skin-pop .pv-t{font-family:"Fredoka",system-ui,sans-serif}
+.skin-mediterranea .pv-t,.skin-navidad .pv-t{font-family:"Playfair Display",Georgia,serif}
+.skin-neon .pv-t{text-shadow:0 0 12px rgba(255,61,154,.6)}
+
+/* Noche neón: lo que normalmente es "tinta sobre blanco" se invierte */
+.skin-neon .tcbtns .btn:first-child{color:#0B0B16}
+.skin-neon .wp.on{background:var(--accent);color:#fff;box-shadow:0 0 18px -4px rgba(255,61,154,.7)}
+.skin-neon .wiz .chip.t-9,.skin-neon .chip.t-9{background:#F3F2FF;color:#0B0B16}
+.skin-neon .segtab button[aria-selected="true"],.skin-neon .seg button[aria-pressed="true"],.skin-neon .chip[aria-pressed="true"]{background:var(--accent);color:#fff}
+.skin-neon .dp[aria-pressed="true"] i{background:var(--accent)}
+
+/* Los adornos de la cabecera flotan en la esquina y no empujan el título */
+[class*="skin-"] .vhead{position:relative}
+.skin-mediterranea .vhead::after,.skin-otono .vhead::after,.skin-pop .vhead::after,.skin-japon .vhead::after,.skin-navidad .vhead::after{position:absolute;right:52px;top:-4px;pointer-events:none}
+.skin-pop .vhead::after,.skin-mediterranea .vhead::after{font-size:1.15rem}
+.skin-japon .vhead::after{width:34px;height:34px;font-size:1.1rem}

@@ -510,6 +510,15 @@
         "Menú imprimible (40 coins): el menú del mes y la lista de la compra en A4 (botón 🖨️ en el Menú).",
         "Pronto: packs de recetas temáticos (Navidad, oficina, deportistas, aprovechamiento)."
       ]
+    },
+    {
+      "version": 54,
+      "fecha": "2026-10-22",
+      "titulo": "✨ Estéticas temáticas",
+      "cambios": [
+        "Nuevas estéticas en la tienda de coins, que cambian toda la app (fondo, letras, tarjetas y adornos): 📓 Libreta de la abuela, 🇮🇹 Trattoria, 🌊 Mediterránea, 🍂 Otoño acogedor, 🌙 Noche neón, 🧒 Pop infantil, 🍣 Minimal japonés y 🎄 Navidad.",
+        "En la tienda ves una vista previa de cada una. Se eligen en Perfil › Aspecto › Estética."
+      ]
     }
   ]
 }
