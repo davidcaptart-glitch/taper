@@ -407,6 +407,16 @@
         "La sesión de cocina te dice para qué días cocinas y en cuántos tápers repartir cada plato, con las raciones y para quién es cada uno.",
         "Fuera el aviso de «no tienes táper» cuando cocinas por lotes."
       ]
+    },
+    {
+      "version": 43,
+      "fecha": "2026-10-22",
+      "titulo": "Cocina toda la sesión paso a paso",
+      "cambios": [
+        "La sesión de cocina enseña la foto de cada plato.",
+        "Nuevo «Cocinar todo paso a paso»: junta todos los platos de la sesión en una sola lista, en el orden más práctico. Lo que se hace solo (horno, air fryer, lo que hierve) va primero y, mientras, te doy los pasos de los otros platos.",
+        "Cada paso te dice de qué plato es (con su foto), el utensilio, el fuego o la temperatura y su temporizador. Al acabar cada plato, te dice en cuántos tápers repartirlo."
+      ]
     }
   ]
 }

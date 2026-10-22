@@ -623,6 +623,32 @@ async function openCook(r,v,serv){
   dlg.addEventListener("close",()=>{clearInterval(cookTimer);try{wakeLock&&wakeLock.release()}catch(e){};wakeLock=null},{once:true});
   draw();
 }
+// Modo cocina de una sesión: todos los platos en una sola lista de pasos
+async function openBatchCook(cd,items){
+  const plan=batchPlan(items).steps;let i=0;
+  try{wakeLock=await navigator.wakeLock?.request("screen")}catch(e){}
+  const draw=()=>{
+    const p=plan[i],r=p.o.r;
+    let body;
+    if(p.tupper){const sp=tupperSplit(p.o.sl),k=keepPlan(r,p.o.sl);
+      body=`<div class="txt">${esc(r.name)} está listo. Repártelo en ${sp.length} ${sp.length===1?"táper":"tápers"}${k.freeze?" y llévalo al congelador cuando se enfríe":" y, cuando se enfríe, a la nevera"}:</div>
+        <div class="tsplit">${sp.map(t=>`<div class="tsp"><span>🥡 ${esc(t.when)}</span><span>${String(t.rac).replace(".",",")} rac. · ${esc(t.who.join(", "))}</span></div>`).join("")}</div>`}
+    else{const tg=stepTags(p.info);
+      body=`<div class="txt">${esc(p.text)}</div>${tg.length?`<div class="stags big">${tg.map(t=>`<span>${esc(t)}</span>`).join("")}</div>`:""}
+        ${p.passive?`<div class="okbox small">Esto se hace solo: pon el temporizador y sigue con el siguiente paso.</div>`:""}
+        ${p.info&&p.info.min?`<div class="timer" id="tmr">${p.info.min}:00</div><button class="btn ghost wide" id="tmrBtn">⏱ Temporizador de ${p.info.min} min</button>`:""}`}
+    showDialog(`<div class="cook"><div class="top"><span class="n">Paso ${i+1} de ${plan.length} · minuto ${p.at}</span><button class="close" data-x aria-label="Salir">✕</button></div>
+      <div class="bcdish">${dishImg(r,"s")}<b>${esc(r.name)}</b></div>
+      ${i===0?`<div class="needs big"><b>Saca esto</b><div class="tools">${[...new Set(items.flatMap(o=>o.v.tools||[]))].map(t=>`<span>${toolIco(t)} ${esc(t)}</span>`).join("")}</div></div>`:""}
+      ${body}
+      <div class="bot" style="margin-top:14px"><button class="btn ghost" data-prev ${i===0?"disabled":""}>Anterior</button><button class="btn" data-next>${i===plan.length-1?"¡Terminado!":"Siguiente"}</button></div></div>`,true);
+    dlg.querySelector("[data-prev]").onclick=()=>{i--;draw()};
+    dlg.querySelector("[data-next]").onclick=()=>{if(i<plan.length-1){i++;draw()}else{dlg.close();toast("¡Sesión terminada! Tápers listos")}};
+    const tb=dlg.querySelector("#tmrBtn");if(tb)tb.onclick=()=>startTimer(Number(p.info.min)*60);
+  };
+  dlg.addEventListener("close",()=>{try{wakeLock&&wakeLock.release()}catch(e){};wakeLock=null},{once:true});
+  draw();
+}
 function startTimer(sec){
   clearInterval(cookTimer);const end=Date.now()+sec*1000;
   cookTimer=setInterval(()=>{const left=Math.max(0,Math.round((end-Date.now())/1000));const el=document.getElementById("tmr");
@@ -644,10 +670,12 @@ function openSession(cd){
   showDialog(`<div class="mod">${closeBtn}<div class="veb">Sesión de cocina</div><h2 class="vh" style="font-size:1.8rem">${esc(longDate(cd))}</h2>
     <div class="okbox"><b>Cocinas para ${cv.days} ${cv.days===1?"día":"días"}</b>: del ${esc(DAYS[dow(cv.from)].toLowerCase())} al ${esc(DAYS[dow(cv.to)].toLowerCase())}. ${out.length} platos repartidos en ${nTp} tápers.</div>
     <p class="small muted">Unos ${Math.max(active,longest)} min si vas encadenando. Empieza por el horno y, mientras, ve con la vitro. Pon una etiqueta a cada táper con el día.</p>
-    ${out.map((o,i)=>`<div class="session"><b>${i+1}. ${esc(o.r.name)}</b><div class="small muted">${APP[o.v.app]} · ${o.v.time} min (${o.v.active} de trabajo) · ${String(o.sl.portions).replace(".",",")} raciones</div>
+    ${out.length?`<button class="cookrow" id="cookAll"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg></span><b>Cocinar todo paso a paso</b><small class="muted" style="margin-left:auto">unos ${batchPlan(out).total} min</small></button>`:""}
+    ${out.map((o,i)=>`<div class="session sesscard">${dishImg(o.r,"s")}<div class="sessin"><b>${i+1}. ${esc(o.r.name)}</b><div class="small muted">${APP[o.v.app]} · ${o.v.time} min (${o.v.active} de trabajo) · ${String(o.sl.portions).replace(".",",")} raciones</div>
       <div class="tsplit"><b>Repártelo en ${tupperSplit(o.sl).length} ${tupperSplit(o.sl).length===1?"táper":"tápers"}${o.k.freeze?" · ❄️ al congelador":""}</b>
         ${tupperSplit(o.sl).map(t=>`<div class="tsp"><span>🥡 ${esc(t.when)}</span><span>${String(t.rac).replace(".",",")} rac. · ${esc(t.who.join(", "))}</span></div>`).join("")}</div>
-      <button class="btn ghost small" data-open2="${o.r.id}" data-sl="${o.sl.id}">Ver receta</button></div>`).join("")}</div>`);
+      <button class="btn ghost small" data-open2="${o.r.id}" data-sl="${o.sl.id}">Ver receta</button></div></div>`).join("")}</div>`);
+  document.getElementById("cookAll")?.addEventListener("click",()=>openBatchCook(cd,out));
   dlg.querySelectorAll("[data-open2]").forEach(b=>b.onclick=()=>openRecipe(b.dataset.open2,b.dataset.sl));
 }
 

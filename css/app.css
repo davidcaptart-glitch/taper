@@ -853,3 +853,11 @@ input.switch:checked::after{transform:translateX(20px)}
 .tsplit>b{display:block;font-size:.85rem;margin-bottom:6px}
 .tsp{display:flex;justify-content:space-between;gap:10px;font-size:.82rem;padding:6px 10px;border-radius:10px;background:var(--surface-2);margin:4px 0}
 .tsp span:last-child{color:var(--muted);text-align:right}
+
+/* ---------- Sesión de cocina ---------- */
+.sesscard{display:flex;gap:12px;align-items:flex-start}
+.sesscard .dish.s{width:64px;height:64px;border-radius:16px;flex:none}
+.sessin{flex:1;min-width:0}
+.bcdish{display:flex;align-items:center;gap:10px;margin:6px 0 10px}
+.bcdish .dish.s{width:46px;height:46px;border-radius:12px}
+.bcdish b{font-size:.95rem}

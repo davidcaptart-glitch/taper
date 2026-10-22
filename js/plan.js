@@ -236,6 +236,45 @@ function tupperSplit(sl){
   for(const a of sl.tupper)out.push({when:`Táper del ${DAYS[dow(addDays(sl.date,1))].toLowerCase()} · comida`,rac:adultFactor(a,sl),who:[a.id==="yo"?"tú":personName(a)]});
   return out;
 }
+/* ---------- Cocinar varios platos a la vez ----------
+   Junta los pasos de todos los platos de una sesión en una sola lista, en un orden práctico:
+   lo que se hace solo (horno, air fryer, microondas, algo que cuece o hierve un rato) se arranca cuanto antes
+   y, mientras, se avanza con los pasos que piden estar encima. Cada aparato solo hace una cosa a la vez
+   (fuegos: hasta 4). Al acabar cada plato, se reparte en sus tápers. */
+function stepKind(x){
+  if(!x)return {passive:false,dur:3,res:null};
+  const u=String(x.utensilio||"").toLowerCase(), m=Math.max(1,Number(x.min)||1);
+  if(u.includes("horno"))return {passive:true,dur:m,res:"horno"};
+  if(u.includes("air"))return {passive:true,dur:m,res:"air"};
+  if(u.includes("microondas"))return {passive:true,dur:m,res:"micro"};
+  if(x.fuego&&m>=8&&/(cazo|olla|cacerola)/.test(u))return {passive:true,dur:m,res:"fuego"};
+  return {passive:false,dur:m,res:x.fuego?"fuego":null};
+}
+function batchPlan(items){
+  // items: [{r, v, sl}]
+  const st=items.map((o,i)=>({o,i,next:0,ready:0,left:o.v.steps.reduce((t,_,j)=>t+stepKind((o.v.info||[])[j]).dur,0)}));
+  const busy={horno:0,air:0,micro:0}, fuegos=[0,0,0,0], out=[];let t=0,guard=0;
+  const free=(res,at)=>res==="fuego"?fuegos.some(f=>f<=at):res&&busy[res]!=null?busy[res]<=at:true;
+  const take=(res,until,at)=>{if(res==="fuego"){const i=fuegos.findIndex(f=>f<=at);if(i>=0)fuegos[i]=until}else if(res&&busy[res]!=null)busy[res]=until};
+  while(st.some(s=>s.next<=s.o.v.steps.length)&&guard++<400){
+    const cand=st.filter(s=>s.next<=s.o.v.steps.length&&s.ready<=t);
+    if(!cand.length){t=Math.min(...st.filter(s=>s.next<=s.o.v.steps.length).map(s=>s.ready));continue}
+    // Paso final de cada plato: repartirlo en tápers
+    const done=cand.find(s=>s.next===s.o.v.steps.length);
+    if(done){out.push({o:done.o,at:t,tupper:true});done.next++;t+=2;continue}
+    const opts=cand.map(s=>{const x=(s.o.v.info||[])[s.next],k=stepKind(x);return {s,x,k,ok:free(k.res,t)}});
+    const usable=opts.filter(c=>c.ok);
+    if(!usable.length){t=Math.min(...Object.values(busy).filter(v=>v>t).concat(fuegos.filter(f=>f>t)),t+1);continue}
+    usable.sort((a,b)=>(b.k.passive-a.k.passive)||(b.s.left-a.s.left));
+    const c=usable[0],s=c.s;
+    const waiting=st.filter(x=>x!==s&&x.ready>t).map(x=>x.o.r.name);
+    out.push({o:s.o,at:t,i:s.next,text:s.o.v.steps[s.next],info:c.x,passive:c.k.passive,dur:c.k.dur,meanwhile:waiting});
+    s.left-=c.k.dur;s.next++;
+    if(c.k.passive){take(c.k.res,t+c.k.dur,t);s.ready=t+c.k.dur;t+=1}
+    else{take(c.k.res,t+c.k.dur,t);t+=c.k.dur;s.ready=t}
+  }
+  return {steps:out,total:Math.max(t,...st.map(s=>s.ready))};
+}
 function keepPlan(r,slot){
   const cook=cookDayFor(slot.date), last=slot.tupper.length?addDays(slot.date,1):slot.date;
   const days=daysBetween(cook,last);
