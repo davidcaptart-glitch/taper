@@ -168,6 +168,15 @@
       "cambios": [
         "En Perfil › Tu familia puedes planificar vacaciones, cambios de turno o imprevistos: periodos en que esa persona está contigo (o no) aunque no le toque. El menú y la compra se recalculan solos."
       ]
+    },
+    {
+      "version": 18,
+      "fecha": "2026-10-22",
+      "titulo": "La campanita",
+      "cambios": [
+        "Arriba a la derecha, la campanita reúne todo lo pendiente: comidas por valorar, entrenos, descongelar, semanas por planificar, presupuesto, subidas de precio… Toca cada aviso para resolverlo.",
+        "También ves los próximos avisos que te llegarán al móvil."
+      ]
     }
   ]
 }

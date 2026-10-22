@@ -12,17 +12,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;650;700&display=swap" rel="stylesheet">
 <meta name="description" content="Menú semanal, tápers, lista de la compra y precios del súper, a tu medida.">
-<link rel="stylesheet" href="css/app.css?v=17">
+<link rel="stylesheet" href="css/app.css?v=18">
 </head>
 <body>
 <div class="wrap">
   <header class="top">
     <div class="brand">
       <h1>Táper</h1>
-      <div class="monthnav">
-        <button id="prevM" aria-label="Mes anterior">‹</button>
-        <span id="monthLabel"></span>
-        <button id="nextM" aria-label="Mes siguiente">›</button>
+      <div class="row" style="flex-wrap:nowrap;gap:8px">
+        <div class="monthnav">
+          <button id="prevM" aria-label="Mes anterior">‹</button>
+          <span id="monthLabel"></span>
+          <button id="nextM" aria-label="Mes siguiente">›</button>
+        </div>
+        <button class="bell" id="bell" aria-label="Avisos pendientes" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16.5V11a6 6 0 1 1 12 0v5.5l1.5 2h-15z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></svg><span class="bdg" id="bellN"></span></button>
       </div>
     </div>
     <div class="ticket" aria-live="polite" hidden>
@@ -43,16 +46,16 @@
 </div></nav>
 <dialog id="dlg"></dialog>
 <div class="toast" id="toast"></div>
-<script src="js/base.js?v=17"></script>
-<script src="js/datos.js?v=17"></script>
-<script src="js/fotos.js?v=17"></script>
-<script src="js/gustos.js?v=17"></script>
-<script src="js/plan.js?v=17"></script>
-<script src="js/compra.js?v=17"></script>
-<script src="js/tickets.js?v=17"></script>
-<script src="js/congelador.js?v=17"></script>
-<script src="js/avisos.js?v=17"></script>
-<script src="js/bienvenida.js?v=17"></script>
-<script src="js/ui.js?v=17"></script>
+<script src="js/base.js?v=18"></script>
+<script src="js/datos.js?v=18"></script>
+<script src="js/fotos.js?v=18"></script>
+<script src="js/gustos.js?v=18"></script>
+<script src="js/plan.js?v=18"></script>
+<script src="js/compra.js?v=18"></script>
+<script src="js/tickets.js?v=18"></script>
+<script src="js/congelador.js?v=18"></script>
+<script src="js/avisos.js?v=18"></script>
+<script src="js/bienvenida.js?v=18"></script>
+<script src="js/ui.js?v=18"></script>
 </body>
 </html>

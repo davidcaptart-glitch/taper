@@ -2,7 +2,7 @@
 "use strict";
 
 // Versión de la app: súbela (y el ?v= de index.html y VERSION de sw.js) en cada mejora, y añade sus novedades a data/novedades.json
-const APP_VERSION = 17;
+const APP_VERSION = 18;
 
 /* ---------- Utilidades ---------- */
 const DAYS = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];   // índice 0 = lunes
@@ -50,7 +50,7 @@ const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&
 const uid=p=>p+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 function shortDate(s){return parseISO(s).toLocaleDateString("es-ES",{day:"numeric",month:"short"}).replace(".","")}
 function longDate(s){return parseISO(s).toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"})}
-function monthName(m){const [y,mm]=m.split("-").map(Number);const t=new Date(y,mm-1,1).toLocaleDateString("es-ES",{month:"long",year:"numeric"});return t.charAt(0).toUpperCase()+t.slice(1)}
+function monthName(m){const [y,mm]=m.split("-").map(Number);const t=new Date(y,mm-1,1).toLocaleDateString("es-ES",{month:"long"});return t.charAt(0).toUpperCase()+t.slice(1)+" "+y}
 function fmtQty(q,u){if(u==="ud")return (Math.round(q*10)/10).toString().replace(".",",")+" ud";if(q>=1000)return (Math.round(q/100)/10).toString().replace(".",",")+(u==="g"?" kg":" l");return Math.round(q)+" "+u}
 function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("on");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("on"),2200)}
 // Ración según la edad (editable después)

@@ -9,7 +9,7 @@ let tab="menu", month=todayISO().slice(0,7), listSel="mes", recFilter="todas", r
 function renderHeader(){
   const onb=S.onboarded&&tab!=="wizard";
   document.querySelector(".top .ticket").hidden=!onb;
-  document.querySelector(".monthnav").style.visibility=onb&&(tab==="menu"||tab==="compra")?"visible":"hidden";
+  document.querySelector(".monthnav").style.display=onb&&(tab==="menu"||tab==="compra")?"":"none";
   document.querySelector(".top .ticket").hidden=!onb||!(tab==="menu"||tab==="compra");
   document.querySelector("nav.tabs").hidden=!onb;
   document.getElementById("monthLabel").textContent=monthName(month);
@@ -33,6 +33,7 @@ function renderHeader(){
 let lastView=null;
 function render(){
   if(!S.onboarded&&tab!=="wizard")tab="wizard";
+  setTimeout(renderBell,0);
   const vk=tab+"|"+(tab==="wizard"?(wiz.single||wiz.i):"")+"|"+month;
   main.classList.toggle("anim",vk!==lastView);lastView=vk;
   renderHeader();
@@ -796,6 +797,7 @@ document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>{
 });
 function shiftMonth(n){const [y,m]=month.split("-").map(Number);const d=new Date(y,m-1+n,1);month=iso(d).slice(0,7);listSel="mes";render()}
 document.getElementById("prevM").onclick=()=>shiftMonth(-1);
+document.getElementById("bell").onclick=openInbox;
 document.getElementById("nextM").onclick=()=>shiftMonth(1);
 dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
 
@@ -845,6 +847,38 @@ function openUseUp(){
     dlg.querySelector("#hvEdit").onclick=()=>{step=0;draw()};
   };
   draw();
+}
+
+/* ---------- Centro de avisos (campanita) ---------- */
+// Todo lo pendiente de la app en un solo sitio; cada elemento lleva a resolverlo
+function inboxItems(){
+  const out=[], today=todayISO(), go=(t,fn)=>()=>{dlg.close();tab=t;render();scrollTo(0,0);if(fn)setTimeout(fn,60)};
+  try{const n=pendingMeals().length;if(n)out.push({ico:"⭐",t:n===1?"1 comida por valorar":`${n} comidas por valorar`,s:"Así aprendo lo que os gusta",go:go("menu")})}catch(e){}
+  try{const n=pendingSports().length;if(n)out.push({ico:"🏃",t:n===1?"¿Hiciste el entreno?":`${n} entrenos por confirmar`,s:"Para recalcular lo que te conviene comer",go:go("menu")})}catch(e){}
+  try{if(thawCard())out.push({ico:"❄️",t:"¿Descongelaste lo de hoy?",s:"Si se te olvidó, tienes un plan B",go:go("menu")})}catch(e){}
+  try{const st=weekStartFor(today),nx=addDays(st,7);
+    for(const s of [st,nx]){if(S.home.start&&addDays(s,6)<S.home.start)continue;const wk=S.plans[s];
+      if(!wk||!wk.confirmed){if(s===nx&&daysBetween(today,s)>2)continue;out.push({ico:"🗓️",t:`Planifica la semana del ${shortDate(s)}`,s:"Entrenos, quién está, platos y compra",go:()=>{dlg.close();tab="menu";render();openWeekPlanner(s)}})}}}catch(e){}
+  try{const st=weekStartFor(today);if(S.plans[st]&&weekCost(st)>weekFoodTarget(st)+0.5)out.push({ico:"💶",t:"Esta semana te pasas del presupuesto",s:`${eur(weekCost(st))} de ${eur(weekFoodTarget(st))}`,go:()=>{dlg.close();openSacrifice(st)}})}catch(e){}
+  try{const ups=Object.keys(P).filter(rise);if(ups.length)out.push({ico:"📈",t:ups.length===1?"1 producto ha subido de precio":`${ups.length} productos han subido de precio`,s:ups.slice(0,3).map(p=>P[p].name.toLowerCase()).join(", "),go:go("compra")})}catch(e){}
+  try{const old=freezerState().filter(e=>e.days>FREEZER_MONTHS*30);if(old.length)out.push({ico:"🧊",t:"Gasta esto pronto",s:old.map(e=>P[e.pid].name.toLowerCase()).join(", "),go:go("congelador")})}catch(e){}
+  try{if(reviewCard())out.push({ico:"📊",t:"Resumen del mes pasado",s:"Cómo fue el presupuesto y qué ajustar",go:go("menu")})}catch(e){}
+  try{if(surveyCard())out.push({ico:"📋",t:"Encuesta del mes",s:"Un minuto",go:()=>{dlg.close();openSurvey()}})}catch(e){}
+  try{if(S.home.start&&S.home.start>today)out.push({ico:"🥫",t:`Tu plan empieza el ${shortDate(S.home.start)}`,s:"Mientras, ideas para gastar lo que tienes",go:()=>{dlg.close();openUseUp()}})}catch(e){}
+  return out;
+}
+function renderBell(){
+  const b=document.getElementById("bell");if(!b)return;b.hidden=!S.onboarded||tab==="wizard";
+  const n=S.onboarded?inboxItems().length:0, el=document.getElementById("bellN");el.textContent=n>9?"9+":String(n);el.hidden=!n;
+}
+function openInbox(){
+  const items=inboxItems();
+  let next=[];try{if(avisosOn()&&S.notif&&S.notif.on)next=buildSchedule().slice(0,5)}catch(e){}
+  showDialog(`<div class="mod">${closeBtn}<h2>Avisos</h2>
+    ${items.length?items.map((x,i)=>`<button class="alt altimg inbox" data-ib="${i}"><span class="ibico">${x.ico}</span><span><b>${esc(x.t)}</b><small>${esc(x.s||"")}</small></span></button>`).join(""):`<div class="empty" style="box-shadow:none;background:var(--surface-2)"><h2>Todo al día</h2><p>No tienes nada pendiente.</p></div>`}
+    ${next.length?`<h3 style="margin-top:16px">Próximos avisos en el móvil</h3>${next.map(a=>`<div class="fixed"><span>${esc(a.title)}<small>${esc(new Date(a.t).toLocaleString("es-ES",{weekday:"long",hour:"2-digit",minute:"2-digit"}))}</small></span></div>`).join("")}`
+      :`<p class="small muted" style="margin-top:14px">${avisosOn()?"Activa los avisos en el móvil desde Perfil para que te lleguen aunque no tengas la app abierta.":""}</p>`}</div>`);
+  dlg.querySelectorAll("[data-ib]").forEach(b=>b.onclick=()=>items[Number(b.dataset.ib)].go());
 }
 
 /* ---------- Instalar la app ---------- */
