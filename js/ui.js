@@ -854,6 +854,7 @@ function openUseUp(){
 // Todo lo pendiente de la app en un solo sitio; cada elemento lleva a resolverlo
 function inboxItems(){
   const out=[], today=todayISO(), go=(t,fn)=>()=>{dlg.close();tab=t;render();scrollTo(0,0);if(fn)setTimeout(fn,60)};
+  try{if(notifBlocked())out.push({ico:"🔕",t:"Tus avisos están bloqueados",s:"Te enseño cómo activarlos en 4 toques",go:()=>openPermHelp()})}catch(e){}
   try{const n=pendingMeals().length;if(n)out.push({ico:"⭐",t:n===1?"1 comida por valorar":`${n} comidas por valorar`,s:"Así aprendo lo que os gusta",go:go("menu")})}catch(e){}
   try{const n=pendingSports().length;if(n)out.push({ico:"🏃",t:n===1?"¿Hiciste el entreno?":`${n} entrenos por confirmar`,s:"Para recalcular lo que te conviene comer",go:go("menu")})}catch(e){}
   try{if(thawCard())out.push({ico:"❄️",t:"¿Descongelaste lo de hoy?",s:"Si se te olvidó, tienes un plan B",go:go("menu")})}catch(e){}
@@ -1039,7 +1040,9 @@ async function checkUpdate(){
   try{const n=await getJSON("data/novedades.json",true);const last=Math.max(...n.versiones.map(v=>v.version));
     if(last>APP_VERSION&&!sessionStorage.getItem("taper-reload-"+last)){sessionStorage.setItem("taper-reload-"+last,"1");location.reload()}}catch(e){}
 }
-document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")checkUpdate()});
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){checkUpdate();
+  // Al volver de los ajustes del móvil: si ya hay permiso, se activan los avisos
+  if(avisosOn()&&Notification.permission==="granted"&&dlg.open&&dlg.querySelector("#permRetry"))enableAvisos().catch(()=>{});else if(tab==="perfil")render();renderBell()}});
 async function getJSON(url,fresh){const r=await fetch(url,{cache:fresh?"no-store":"no-cache"});if(!r.ok)throw new Error(url+": "+r.status);return r.json()}
 async function boot(){
   try{
@@ -1074,7 +1077,7 @@ async function boot(){
   else if(!S.onboarded){S.seenVersion=APP_VERSION;save()}
   checkUpdate();startCounter();
   if(avisosOn()&&S.notif&&S.notif.on){shareWithSW().catch(()=>{});queueSyncAvisos()}
-  trackOnBoot();checkAvisos();
+  trackOnBoot();checkAvisos();watchPermission();
 }
 boot();
 if("serviceWorker" in navigator&&location.protocol!=="file:")navigator.serviceWorker.register("sw.js").catch(()=>{});

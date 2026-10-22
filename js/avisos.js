@@ -53,10 +53,39 @@ async function subscribeHere(){
   await shareWithSW();
   await postAvisos("/suscribir",{uid:S.uid,sub:sub.toJSON(),plan:buildSchedule()});
 }
+/* ---------- Permiso de avisos bloqueado ----------
+   Una web no puede abrir los ajustes del móvil por su cuenta: se explica el camino exacto según el móvil
+   y la app detecta sola cuándo vuelves con el permiso activado. */
+const notifBlocked=()=>avisosOn()&&"Notification" in window&&Notification.permission==="denied";
+function permSteps(){
+  const ua=navigator.userAgent, ios=/iPhone|iPad|iPod/.test(ua), samsung=/SamsungBrowser/.test(ua);
+  if(ios&&!isStandalone())return ["En Safari, toca <b>Compartir</b> (el cuadrado con la flecha ↑)","Toca <b>Añadir a pantalla de inicio</b>","Abre Táper desde su icono nuevo","Ve a Perfil › Avisos y actívalos: en iPhone solo funcionan con la app instalada"];
+  if(ios)return ["Abre <b>Ajustes</b> del iPhone","Baja hasta <b>Táper</b>","Toca <b>Notificaciones</b> y activa <b>Permitir notificaciones</b>","Vuelve aquí: lo detecto solo"];
+  if(isStandalone())return ["Mantén pulsado el icono de <b>Táper</b> en la pantalla de inicio","Toca <b>ⓘ Información de la aplicación</b>","Toca <b>Notificaciones</b> y activa <b>Permitir notificaciones</b>","Vuelve aquí: lo detecto solo"];
+  return [`Toca el <b>candado 🔒</b> (o el icono de ajustes) a la izquierda de la dirección, arriba`,`Toca <b>Permisos</b> o <b>Notificaciones</b>`,"Cámbialo a <b>Permitir</b>",`Vuelve aquí: lo detecto solo${samsung?"":" (si no, recarga la página)"}`];
+}
+function openPermHelp(){
+  showDialog(`<div class="mod">${closeBtn}<h2>Los avisos están bloqueados</h2>
+    <p class="small muted">Tu móvil tiene bloqueados los avisos de Táper. Las apps web no pueden abrir los ajustes por ti, pero son 4 toques:</p>
+    <ol class="steps">${permSteps().map(s=>`<li>${s}</li>`).join("")}</ol>
+    <div class="actions"><button class="btn wide" id="permRetry">Ya lo he activado</button></div>
+    <p class="small muted" style="margin-top:10px">Si no encuentras la opción: Ajustes del móvil › Aplicaciones › ${isStandalone()?"Táper":"Chrome"} › Notificaciones.</p></div>`);
+  dlg.querySelector("#permRetry").onclick=async()=>{
+    if(Notification.permission==="granted"){dlg.close();await enableAvisos()}
+    else if(Notification.permission==="default"){dlg.close();await enableAvisos()}
+    else toast("Sigue bloqueado. Revisa el paso 3 y vuelve a intentarlo");
+  };
+}
+// Cuando el permiso cambia (vuelves de los ajustes con él activado), se activan los avisos sin hacer nada más
+async function watchPermission(){
+  try{const st=await navigator.permissions.query({name:"notifications"});
+    st.onchange=()=>{if(st.state==="granted"&&avisosOn())enableAvisos().catch(()=>{});else render()}}catch(e){}
+}
 async function enableAvisos(){
   if(!avisosOn()){toast("Los avisos aún no están disponibles");return}
+  if(notifBlocked()){openPermHelp();return}
   const perm=await Notification.requestPermission();
-  if(perm!=="granted"){toast("Sin permiso no puedo avisarte. Puedes darlo en los ajustes del navegador");return}
+  if(perm!=="granted"){openPermHelp();return}
   await subscribeHere();
   notifCfg().on=true;S.notifSynced=Date.now();save();render();toast("Avisos activados");
 }
@@ -74,6 +103,7 @@ function queueSyncAvisos(){
 async function checkAvisos(){
   if(!avisosOn()||!S.notif||!S.notif.on)return;
   if(Notification.permission!=="granted"){S.notifProblem="permiso";return}
+  if(dlg.open&&dlg.querySelector("#permRetry"))dlg.close();
   try{
     const reg=await navigator.serviceWorker.ready;const local=await reg.pushManager.getSubscription();
     const st=await (await fetch(CFG.avisos.url.replace(/\/$/,"")+"/estado?uid="+encodeURIComponent(S.uid),{cache:"no-store"})).json();
@@ -85,8 +115,11 @@ const _saveBase=save;
 save=function(){_saveBase();queueSyncAvisos()};
 
 function avisosCard(){
-  if(!avisosOn())return `<div class="card"><h2>Avisos en el móvil</h2><p class="small muted">${"PushManager" in window?"Muy pronto podrás activar avisos: descongelar, qué cocinar, ¿qué tal?…":"Este navegador no admite avisos. En Android, abre Táper con Chrome e instálala."}</p></div>`;
+  if(!avisosOn())return `<div class="card"><h2>Avisos en el móvil</h2><p class="small muted">${"PushManager" in window?"Muy pronto podrás activar avisos: descongelar, qué cocinar, ¿qué tal?…":(/iPhone|iPad|iPod/.test(navigator.userAgent)?"En iPhone los avisos solo funcionan con Táper instalada: en Safari toca Compartir ↑ › Añadir a pantalla de inicio y ábrela desde su icono.":"Este navegador no admite avisos. En Android, abre Táper con Chrome e instálala.")}</p></div>`;
   const n=notifCfg(),next=n.on?buildSchedule().slice(0,3):[];
+  if(notifBlocked())return `<div class="card"><h2>Avisos en el móvil</h2>
+    <p class="small warnbox">⚠️ Tu móvil tiene bloqueados los avisos de Táper, así que no te llegará ninguno.</p>
+    <button class="btn" id="avPerm">Cómo activarlos</button></div>`;
   return `<div class="card"><h2>Avisos en el móvil</h2>
     ${n.on?`<p class="small okbox">✅ Activados. Próximos: ${next.length?next.map(a=>`${esc(new Date(a.t).toLocaleString("es-ES",{weekday:"short",hour:"2-digit",minute:"2-digit"}))} · ${esc(a.title)}`).join("<br>"):"ninguno esta semana"}</p>`
       :`<p class="small muted">Te avisa a su hora de lo que hay que hacer. Funciona aunque no tengas la app abierta.</p><button class="btn" id="avOn">🔔 Activar avisos</button>`}
@@ -98,10 +131,11 @@ function bindAvisos(){
   const n=notifCfg();
   document.getElementById("avOn")?.addEventListener("click",()=>enableAvisos().catch(e=>toast("No se ha podido activar: "+e.message)));
   document.getElementById("avOff")?.addEventListener("click",disableAvisos);
+  document.getElementById("avPerm")?.addEventListener("click",openPermHelp);
   document.querySelectorAll("[data-nt]").forEach(c=>c.onchange=()=>{n.types[c.dataset.nt]=c.checked;save()});
   const th=document.getElementById("avThaw");if(th)th.onchange=()=>{n.thaw=th.value||"21:30";save()};
   document.getElementById("avTest")?.addEventListener("click",async()=>{
-    try{if(Notification.permission!=="granted"){toast("El móvil tiene bloqueados los avisos de Táper: actívalos en Ajustes › Aplicaciones › Chrome › Notificaciones");return}
+    try{if(Notification.permission!=="granted"){openPermHelp();return}
       await subscribeHere();
       let r;try{r=await postAvisos("/probar",{uid:S.uid})}catch(e){r={status:0}}
       toast(r.status>=200&&r.status<300?"Enviado: debería aparecerte en unos segundos":"Google no ha aceptado el aviso (código "+r.status+"). Desactiva y vuelve a activar los avisos")}catch(e){toast("No se ha podido: "+e.message)}});
