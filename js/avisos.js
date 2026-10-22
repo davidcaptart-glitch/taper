@@ -42,7 +42,8 @@ function buildSchedule(){
     if(T.horas&&wk)for(const [m,v] of Object.entries(smallOf(d))){const r=RX[v.recipe];if(!r)continue;
       const ps=smallEaters(d,m),casa=ps.filter(p=>smallState(p,m,d)==="casa"),llevar=ps.filter(p=>smallState(p,m,d)==="llevar");
       if(llevar.length)push(at(d,smallTime("desayuno"),-15),`🎒 Prepara el ${m} para llevar`,`${r.name} para ${names(llevar)}.`,"pack|"+d+"|"+m);
-      if(casa.length)push(at(d,smallTime(m)),`${SMALL[m][0]} ${SMALL[m][1]}: ${r.name}`,`Para ${names(casa)}.`,"eat|"+d+"|"+m)}
+      if(casa.length)push(at(d,smallTime(m)),`${SMALL[m][0]} ${SMALL[m][1]}: ${r.name}`,`Para ${names(casa)}.`,"eat|"+d+"|"+m);
+      if(T.valorar&&ps.some(p=>!ratedBefore(p,r.id)))push(at(d,smallTime(m),60),`¿Qué tal ${r.name.toLowerCase()}?`,"Toca para valorarlo y que aprenda lo que os gusta.","rate|"+d+"|"+m)}
     if(wk)for(const sl of buildSlots(start)){
       if(sl.date!==d)continue;const v=wk.slots[sl.id],r=v&&RX[v.recipe];if(!r)continue;
       const mt=S.home.mealTimes[sl.meal]||"14:00";
@@ -56,7 +57,7 @@ function buildSchedule(){
       }else if(S.home.cookMode==="lote"){/* se avisa una vez al día de cocinar (abajo) */
       }else if(T.cocinar)push(at(d,mt,-60),`🍳 Hoy: ${r.name}`,`${recipeTime(r)} min · ${String(sl.portions).replace(".",",")} raciones${sl.tupper.length?" · haz el táper de mañana":""}.`,"cook|"+sl.id);
       if(T.horas){const who=sl.eaters.concat(sl.kids);if(who.length)push(at(d,mt),`${sl.meal==="comida"?"🍽️ A comer":"🌙 A cenar"}: ${r.name}`,`Para ${names(who)}${sl.guests?` y ${sl.guests} invitados`:""}.`,"eat|"+sl.id)}
-      if(T.valorar&&sl.eaters.length)push(at(d,mt,90),`¿Qué tal ${r.name.toLowerCase()}?`,"Toca para valorarlo y que aprenda lo que te gusta.","rate|"+sl.id);
+      if(T.valorar&&sl.eaters.concat(sl.kids).some(p=>!ratedBefore(p,r.id)))push(at(d,mt,90),`¿Qué tal ${r.name.toLowerCase()}?`,"Toca para valorarlo y que aprenda lo que te gusta.","rate|"+sl.id);
     }
     // Por lotes: el día de cocinar, un solo aviso con cuántos platos y para cuántos días
     if(T.cocinar&&S.home.cookMode==="lote"&&S.home.cookDays.includes(dow(d))){

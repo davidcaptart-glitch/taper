@@ -126,22 +126,28 @@ function setSport(d,i,st,type){S.sport=S.sport||{};const x=S.sport[d]=S.sport[d]
 
 /* ---------- ¿Qué tal? (después de cada comida) ---------- */
 // Comidas ya pasadas sin respuesta: se pregunta hora y media después de la hora de cada comida
+const MEAL_ART={desayuno:"el desayuno",almuerzo:"el almuerzo",comida:"la comida",merienda:"la merienda",cena:"la cena"};
+const mealClock=m=>m==="comida"||m==="cena"?S.home.mealTimes[m]||(m==="comida"?"14:00":"21:00"):(S.home.extraMeals||{})[m==="almuerzo"?"mediamanana":m]||{desayuno:"08:00",almuerzo:"11:00",merienda:"17:30"}[m];
 function pendingMeals(){
   const now=new Date(), today=todayISO(), mins=now.getHours()*60+now.getMinutes(), out=[];
-  const after=m=>{const [hh,mm]=(S.home.mealTimes[m]||"14:00").split(":").map(Number);return hh*60+mm+90};
+  const after=m=>{const [hh,mm]=String(mealClock(m)||"14:00").split(":").map(Number);return hh*60+(mm||0)+(m==="comida"||m==="cena"?90:45)};
   S.meals=S.meals||{};
   for(let i=4;i>=0;i--){
     const d=addDays(today,-i);
-    for(const meal of ["comida","cena"]){
+    for(const meal of ["desayuno","almuerzo","comida","merienda","cena"]){
       if(i===0&&mins<after(meal))continue;
       const key=d+"|"+meal;if(S.meals[key])continue;
       const wk=S.plans[weekStartFor(d)];if(!wk||d<(wk.createdAt||"9"))continue;
+      if(SMALL[meal]){const v=smallOf(d)[meal],r=v&&RX[v.recipe];if(!r)continue;
+        const who=smallEaters(d,meal).filter(p=>!ratedBefore(p,r.id));
+        if(!who.length){S.meals[key]={status:"ok"};continue}
+        out.push({key,d,meal,r,taper:false,who,small:true,cook:false});continue}
       const st=mealState(d,meal);
       if(st==="taper"){const x=dishOfMeal(d,"comida");if(x.recipe)out.push({key,d,meal,r:x.recipe,taper:true,who:[]});continue}
       if(st!=="cocinar")continue;
       const sl=buildSlots(weekStartFor(d)).find(s=>s.id===key);if(!sl)continue;
       const v=wk.slots[sl.id], r=v&&RX[v.recipe];if(!r)continue;
-      const who=sl.eaters.concat(sl.kids).filter(p=>!S.ratings.some(x=>x.slot===key&&x.who===p.id));
+      const who=sl.eaters.concat(sl.kids).filter(p=>!S.ratings.some(x=>x.slot===key&&x.who===p.id)&&!ratedBefore(p,r.id));
       // Quien cocina (el adulto) responde además si fue fácil y si lo repetiría
       const mine=S.ratings.find(x=>x.slot===key&&x.who===me().id);
       const cook=!!(mine&&(mine.ease==null||mine.again==null));
@@ -159,8 +165,8 @@ function dayCounter(d,pt){
 }
 function rateCard(){
   const list=pendingMeals();if(!list.length)return "";
-  const {key,d,meal,r,taper,who,cook}=list[list.length-1];
-  const when=(meal==="comida"?"la comida":"la cena")+" del "+longDate(d);
+  const {key,d,meal,r,taper,who,cook,small}=list[list.length-1];
+  const when=MEAL_ART[meal]+" del "+longDate(d);
   if(taper)return `<div class="rate"><h3>¿Te comiste el táper de ${esc(r.name.toLowerCase())}?</h3><div class="small muted">${esc(when)}${list.length>1?` · ${list.length-1} más pendientes`:""}</div>
     <div class="actions"><button class="btn small" data-ate="${key}">Sí</button><button class="btn ghost small" data-notate="${key}|${r.id}">No, otra cosa</button></div></div>`;
   return `<div class="rate"><h3>¿Qué tal ${esc(r.name.toLowerCase())}?</h3><div class="small muted">${esc(when)}${list.length>1?` · ${list.length-1} más pendientes`:""}</div>
@@ -171,8 +177,33 @@ function rateCard(){
       ${[["facil","😌 Fácil"],["normal","🙂 Normal"],["dificil","😓 Complicado"]].map(([v,t])=>`<button class="chip" data-ease="${key}~${v}" aria-pressed="${m.ease===v}">${t}</button>`).join("")}</div></div>
       <div class="who"><div class="small"><b>¿Lo repetirías?</b></div><div class="chips">
       ${[["menudo","🔁 Sí, a menudo"],["aveces","🗓️ De vez en cuando"],["no","🚫 No quiero repetirlo"]].map(([v,t])=>`<button class="chip" data-again="${key}~${v}" aria-pressed="${m.again===v}">${t}</button>`).join("")}</div></div>`})():""}
-    ${who.length?`<button class="btn ghost small" style="margin-top:8px" data-notate="${key}|${r.id}">No me lo comí o comí otra cosa</button>`:""}</div>`;
+    ${small?`<button class="btn ghost small" style="margin-top:8px" data-skipmeal="${key}">No lo comimos</button>`:who.length?`<button class="btn ghost small" style="margin-top:8px" data-notate="${key}|${r.id}">No me lo comí o comí otra cosa</button>`:""}
+    <p class="small muted" style="margin:8px 2px 0">Solo pregunto la primera vez que coméis cada plato. Así sé qué proponeros y busco platos parecidos a los que os encantan.</p></div>`;
 }
+// Respuestas al "¿Qué tal?" (en el Menú o en la ventana que sale al abrir la app)
+function bindRate(root,done){
+  root.querySelectorAll("[data-rate]").forEach(b=>b.onclick=()=>{const [sid,rid,who,v]=b.dataset.rate.split("~");
+    if(v==="-1"){openDislike(rid,who,sid);return}
+    addRating({slot:sid,rid,who,v:Number(v)});if(v==="2")setDish(S.people.find(p=>p.id===who),rid,2,who===me().id?"Te encantó":"Le encantó");done();toast("¡Apuntado!")});
+  const myRating=key=>S.ratings.find(x=>x.slot===key&&x.who===me().id);
+  root.querySelectorAll("[data-ease]").forEach(b=>b.onclick=()=>{const [k,v]=b.dataset.ease.split("~");const m=myRating(k);m.ease=v;save();done()});
+  root.querySelectorAll("[data-again]").forEach(b=>b.onclick=()=>{const [k,v]=b.dataset.again.split("~");const m=myRating(k);m.again=v;m.rare=v==="aveces";
+    if(v==="menudo")setDish(me(),m.rid,2,"Lo repetirías a menudo");
+    if(v==="no"){setDish(me(),m.rid,-1,"No lo repetirías");toast("No lo volveré a proponer")}
+    save();done()});
+  root.querySelectorAll("[data-ate]").forEach(b=>b.onclick=()=>{S.meals[b.dataset.ate]={status:"ok"};save();done()});
+  root.querySelectorAll("[data-skipmeal]").forEach(b=>b.onclick=()=>{S.meals[b.dataset.skipmeal]={status:"nada"};save();done()});
+  root.querySelectorAll("[data-notate]").forEach(b=>b.onclick=()=>{const v=b.dataset.notate;openNotEaten(v.slice(0,v.lastIndexOf("|")),v.slice(v.lastIndexOf("|")+1))});
+}
+// Al abrir la app (o volver a ella) pregunta qué tal lo último que se ha comido; si se cierra, no insiste con esa comida
+function openRateDialog(force){
+  if(!S.onboarded)return;const list=pendingMeals();if(!list.length){if(force&&dlg.open)dlg.close();return}
+  const key=list[list.length-1].key;if(!force&&(dlg.open||S.rateShown===key))return;
+  S.rateShown=key;save();
+  showDialog(`<div class="mod">${closeBtn}${rateCard()}</div>`);
+  bindRate(dlg,()=>{render();if(dlg.open&&!dlg.querySelector("[name=why]"))openRateDialog(true)});
+}
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")setTimeout(()=>openRateDialog(),600)});
 // Qué pasó si no se comió lo previsto
 function openNotEaten(key,rid){
   const d=key.slice(0,10), meal=key.slice(11), r=RX[rid], cooked=mealState(d,meal)==="cocinar";
@@ -322,6 +353,7 @@ function openShopReminder(r){
 }
 // Acciones que llegan desde una notificación ("Ya está" o tocarla)
 function notifAction(tipo,tag){
+  if(tag&&tag.startsWith("rate|")){tab="menu";render();openRateDialog(true);return}
   if(!tag||!tag.startsWith("shop|"))return;
   const [,m,key]=tag.split("|");
   if(tipo==="hecho"){markShopDone(m,key);render();toast("Compra marcada como hecha")}
@@ -414,7 +446,7 @@ function syncMenuWeek(){
 function renderMenu(){
   const ws=syncMenuWeek();
   const weeks=[weekSel];
-  let h=`<section class="view">`+viewHead(monthName(month),"Qué *comemos*",`<button class="btn ghost small" id="printMenu" title="Menú imprimible">🖨️</button>`)+monthPrepCard()+((n=>n&&weekStartFor(n.d)===weekSel)(nextMeal())?todayCard():"")+weekPicker(ws,weekSel)+dayStrip(weekSel)+useUpCard()+`<div class="row" style="justify-content:flex-end;margin:4px 0 -4px"><button class="btn ghost small" id="startDay">📅 ${S.home.start&&S.home.start>todayISO()?"Cambiar el día de inicio":"Empezar el plan otro día"}</button></div>`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
+  let h=`<section class="view">`+viewHead(monthName(month),"Qué *comemos*",`${servidorOn()?`<button class="btn ghost small" id="shareMenu" title="Compartir el menú con alguien de casa">👥</button>`:""}<button class="btn ghost small" id="printMenu" title="Menú imprimible">🖨️</button>`)+followChips()+monthPrepCard()+((n=>n&&weekStartFor(n.d)===weekSel)(nextMeal())?todayCard():"")+weekPicker(ws,weekSel)+dayStrip(weekSel)+useUpCard()+`<div class="row" style="justify-content:flex-end;margin:4px 0 -4px"><button class="btn ghost small" id="startDay">📅 ${S.home.start&&S.home.start>todayISO()?"Cambiar el día de inicio":"Empezar el plan otro día"}</button></div>`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
   for(const start of weeks){
     const wk=S.plans[start], dates=weekDates(start);
     h+=`<div class="week"><div class="weekhead"><h2>${shortDate(start)} – ${shortDate(dates[6])}</h2>${wk&&wk.confirmed?`<span class="badge ok">Planificada</span>`:wk?`<span class="badge">Previsión</span>`:""}</div>`;
@@ -457,19 +489,11 @@ function renderMenu(){
   document.getElementById("startDay")?.addEventListener("click",openStartDay);
   main.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>openDay(b.dataset.day));
   main.querySelectorAll("[data-session]").forEach(b=>b.onclick=()=>openSession(b.dataset.session));
-  main.querySelectorAll("[data-rate]").forEach(b=>b.onclick=()=>{const [sid,rid,who,v]=b.dataset.rate.split("~");
-    if(v==="-1"){openDislike(rid,who,sid);return}
-    addRating({slot:sid,rid,who,v:Number(v)});if(v==="2")setDish(S.people.find(p=>p.id===who),rid,2,who===me().id?"Te encantó":"Le encantó");render();toast("¡Apuntado!")});
+  bindRate(main,render);
+  document.getElementById("shareMenu")?.addEventListener("click",openShareMenu);
+  main.querySelectorAll("[data-follow]").forEach(b=>b.onclick=()=>openFollowed(b.dataset.follow));
   main.querySelectorAll("[data-sp]").forEach(b=>b.onclick=()=>{const [d,i,st,type]=b.dataset.sp.split("|");withRecalc(()=>setSport(d,Number(i),st,type))});
   main.querySelectorAll("[data-spother]").forEach(b=>b.onclick=()=>document.getElementById("spOther").classList.toggle("hidden"));
-  const myRating=key=>S.ratings.find(x=>x.slot===key&&x.who===me().id);
-  main.querySelectorAll("[data-ease]").forEach(b=>b.onclick=()=>{const [k,v]=b.dataset.ease.split("~");const m=myRating(k);m.ease=v;save();render()});
-  main.querySelectorAll("[data-again]").forEach(b=>b.onclick=()=>{const [k,v]=b.dataset.again.split("~");const m=myRating(k);m.again=v;m.rare=v==="aveces";
-    if(v==="menudo")setDish(me(),m.rid,2,"Lo repetirías a menudo");
-    if(v==="no"){setDish(me(),m.rid,-1,"No lo repetirías");toast("No lo volveré a proponer")}
-    save();render()});
-  main.querySelectorAll("[data-ate]").forEach(b=>b.onclick=()=>{S.meals[b.dataset.ate]={status:"ok"};save();render()});
-  main.querySelectorAll("[data-notate]").forEach(b=>b.onclick=()=>{const v=b.dataset.notate;openNotEaten(v.slice(0,v.lastIndexOf("|")),v.slice(v.lastIndexOf("|")+1))});
   bindOpen();
 }
 
@@ -644,13 +668,14 @@ function openRecipe(id,sid){
       :`${v.tools&&v.tools.length?`<div class="needs"><b>Necesitas</b><div class="tools">${v.tools.map(t=>`<span>${toolIco(t)} ${esc(t)}</span>`).join("")}</div></div>`:""}
         <button class="cookrow" data-cook><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg></span><b>Cocinar paso a paso</b><svg class="chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
         <ol class="rsteps">${v.steps.map((s,i)=>{const tg=stepTags((v.info||[])[i]);return `<li>${esc(s)}${tg.length?`<div class="stags">${tg.map(x=>`<span>${esc(x)}</span>`).join("")}</div>`:""}</li>`}).join("")}</ol>`}
-      <div class="row" style="margin-top:8px"><label class="btn ghost small">📷 ${MYPHOTOS[r.id]?"Cambiar mi foto":"Foto de mi plato"}<input type="file" accept="image/*" capture="environment" id="myPh" hidden></label>${MYPHOTOS[r.id]?`<button class="btn ghost small" id="myPhDel">Quitar mi foto</button>`:""}</div>
+      <div class="row" style="margin-top:8px"><button class="btn small" id="rShare">📤 Compartir</button><label class="btn ghost small">📷 ${MYPHOTOS[r.id]?"Cambiar mi foto":"Foto de mi plato"}<input type="file" accept="image/*" capture="environment" id="myPh" hidden></label>${MYPHOTOS[r.id]?`<button class="btn ghost small" id="myPhDel">Quitar mi foto</button>`:""}</div>
       <div class="actions"><select id="rWho" style="width:auto">${S.people.map(p=>`<option value="${p.id}">${esc(personName(p))}</option>`).join("")}</select>
         <button class="btn ghost small" data-love2>❤️ Me encanta</button><button class="btn ghost small" data-hate>👎 No me gusta</button></div>
       <h3 style="margin-top:10px">Más como esta</h3><div>${similar(r).map(x=>`<button class="alt" data-sim="${x.id}"><b>${esc(x.name)}</b><small>${recipeTime(x)} min · ${x.prot||"?"} g proteína</small></button>`).join("")}</div></div>`);
     dlg.querySelectorAll("[data-vi]").forEach(b=>b.onclick=()=>{vi=Number(b.dataset.vi);draw()});
     dlg.querySelector("#myPh").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{await saveMyPhoto(r.id,f);draw();render();toast("¡Qué buena pinta! Foto guardada")}catch(x){toast("No se ha podido guardar la foto")}};
     dlg.querySelector("#myPhDel")?.addEventListener("click",async()=>{await deleteMyPhoto(r.id);draw();render()});
+    dlg.querySelector("#rShare").onclick=()=>shareRecipe(r,r.vars[vi],serv);
     dlg.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{serv=Math.max(0.5,serv+Number(b.dataset.s));draw()});
     dlg.querySelector("[data-cook]")?.addEventListener("click",()=>openCook(r,r.vars[vi],serv));
     dlg.querySelectorAll("[data-rt]").forEach(b=>b.onclick=()=>{recTab=b.dataset.rt;const y=dlg.scrollTop;draw();dlg.scrollTop=y});
@@ -866,6 +891,7 @@ function renderCompra(){
       ${bg.map(b=>{const r=RX[b.rid],on=!!(S.bags||{})[b.id];return `<label class="bag ${on?"done":""}"><input type="checkbox" data-bag="${esc(b.id)}" ${on?"checked":""}>${r?dishImg(r,"s"):prodImg(b.pid)}<span><b>${esc(P[b.pid].name)} · ${fmtQty(b.q,P[b.pid].unit)}</b><small>Etiqueta: ${esc(DAYS[dow(b.date)])} ${esc(shortDate(b.date))}${r?" · "+esc(r.name):""}</small></span></label>`}).join("")}
       <p class="small muted" style="margin:8px 2px 0">Aplana las bolsas para que se congelen y descongelen antes. La noche antes de cada día te aviso de pasarla a la nevera.</p></details>`}}
   if(ticketDue().some(x=>x.m===month&&x.key===listSel))h+=`<div class="tkban"><span class="ti">📸</span><span><b>Sube el ticket de esta compra</b><small>+3 coins y me ayudas a afinar los precios</small></span><button class="btn small" id="tkBanner">Escanear</button><button class="tkx" id="tkSkip" aria-label="No tengo ticket">✕</button></div>`;
+  if(l.items.length)h+=`<div class="row" style="margin:4px 0"><button class="btn small" id="sendList">📤 Enviar la lista</button>${servidorOn()?`<button class="btn ghost small" id="shareMenuC">👥 ${S.share?"Compartida con alguien de casa":"Compartir con alguien de casa"}</button>`:""}</div>`;
   if(l.items.length&&!shopIsDone(month,l))h+=`<div class="row" style="margin:4px 0 8px"><button class="btn ghost small" id="shopDone">✓ Ya he hecho esta compra</button></div>`;
   else if(l.items.length)h+=`<p class="small okt" style="margin:4px 0 8px;color:var(--ok);font-weight:600">✓ Compra hecha</p>`;
   if(listSel==="mes")h+=shopPlanCard(month);
@@ -899,6 +925,8 @@ function renderCompra(){
   h+=`<div class="card"><h2>Presupuesto por semana</h2><table class="wtable">${sh.weeks.map((s,i)=>`<tr><td>Semana del ${shortDate(s)}${i===0?" (con la compra del mes)":""}</td><td class="${sh.perWeek[i]>wb?"up":""}">${eur(sh.perWeek[i])} / ${eur(wb)}</td></tr>`).join("")}</table></div>`;
   main.innerHTML=h+`</section>`;
   main.querySelectorAll("[data-list]").forEach(b=>b.onclick=()=>{listSel=b.dataset.list;render()});
+  document.getElementById("sendList")?.addEventListener("click",()=>shareList(month,l,listSel==="mes"?"Compra del mes":"Compra de la semana del "+shortDate(sh.weeks[wi])));
+  document.getElementById("shareMenuC")?.addEventListener("click",openShareMenu);
   document.getElementById("shopDone")?.addEventListener("click",()=>{const m=month,k=listSel;markShopDone(m,k);render();askTicket(m,k)});
   document.getElementById("tkBanner")?.addEventListener("click",()=>openTicketScan());
   document.getElementById("tkSkip")?.addEventListener("click",()=>{S.ticketSkip=S.ticketSkip||{};S.ticketSkip[shopKey(month,listSel)]=todayISO();save();render()});
@@ -908,7 +936,7 @@ function renderCompra(){
     save();render();toast("Hecho: "+p.t.toLowerCase())});
   main.querySelectorAll("[data-strat]").forEach(b=>b.onclick=()=>{S.home.shop.strategy=b.dataset.strat;save();render();toast(b.dataset.strat==="barato"?"Cada producto, donde sale más barato":"Todo en "+superById(mainSuper()).nombre)});
   main.querySelectorAll("[data-lm]").forEach(b=>b.onclick=()=>{S.modes[month+"|"+listSel]=b.dataset.lm;save();render()});
-  main.querySelectorAll("[data-ck]").forEach(i=>i.onchange=()=>{S.checkedAt=S.checkedAt||{};if(i.checked){S.checks[i.dataset.ck]=true;S.checkedAt[i.dataset.ck]=todayISO()}else{delete S.checks[i.dataset.ck];delete S.checkedAt[i.dataset.ck]}i.closest(".item").classList.toggle("done",i.checked);save();
+  main.querySelectorAll("[data-ck]").forEach(i=>i.onchange=()=>{S.checkedAt=S.checkedAt||{};if(i.checked){S.checks[i.dataset.ck]=true;S.checkedAt[i.dataset.ck]=todayISO()}else{delete S.checks[i.dataset.ck];delete S.checkedAt[i.dataset.ck]}i.closest(".item").classList.toggle("done",i.checked);save();if(S.share)markShared(S.share.codigo,i.dataset.ck,i.checked);
     // Lista completa: se pide el ticket
     if(i.checked&&l.items.every(it=>S.checks[checkKey(month,l.key,it.pid)])&&!(S.tickets||[]).some(t=>t.m===month&&t.list===l.key))setTimeout(()=>askTicket(month,l.key),400)});
   document.getElementById("spentIn").onchange=e=>{const v=e.target.value;if(v==="")delete S.spent[sk];else S.spent[sk]=Number(v);save();renderHeader()};
@@ -1433,6 +1461,7 @@ async function boot(){
   if(avisosOn()&&S.notif&&S.notif.on){shareWithSW().catch(()=>{});queueSyncAvisos()}
   trackOnBoot();checkAvisos();applyAccent();applySkin();if(servidorOn())loadStats().then(()=>{applyAccent();applySkin()}).catch(()=>{});
   {const u=new URLSearchParams(location.search),t=u.get("hecho")||u.get("abrir");if(t){notifAction(u.get("hecho")?"hecho":"abrir",t);history.replaceState(null,"",location.pathname)}}
+  if(!shareOnBoot())setTimeout(()=>openRateDialog(),1500);
   navigator.serviceWorker&&navigator.serviceWorker.addEventListener("message",e=>{if(e.data&&e.data.tipo)notifAction(e.data.tipo,e.data.tag)});watchPermission();checkTransferOnBoot();queueTransfer();
 }
 boot();

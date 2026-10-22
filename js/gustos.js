@@ -16,6 +16,18 @@ function dishPref(p,rid){
   const rs=ratingsOf(p,rid);if(!rs.length)return 0;
   return rs.reduce((t,x)=>t+x.v,0)/rs.length;
 }
+// ¿Ya dijo qué tal este plato alguna vez? Entonces no se le vuelve a preguntar
+const ratedBefore=(p,rid)=>p.tastes.dish[rid]!=null||S.ratings.some(x=>x.who===p.id&&x.rid===rid);
+// Platos parecidos a los que le han encantado suben; los parecidos a los que no le gustaron, bajan
+const _likeC={};
+function likeBoost(p,r){
+  const k=S.ratings.length+"|"+Object.keys(p.tastes.dish).length+"|"+R.length;let c=_likeC[p.id];
+  if(!c||c.k!==k){const love=[],hate=[];for(const x of R){const v=dishPref(p,x.id);if(v>=1.5)love.push(x);else if(v<=-0.5)hate.push(x)}c=_likeC[p.id]={k,love,hate,memo:{}}}
+  if(c.memo[r.id]!=null)return c.memo[r.id];
+  const sim=a=>{if(a.id===r.id)return 0;const ia=new Set(a.ing.map(([x])=>x).filter(x=>!COMMON.has(x)));return (a.main&&a.main===r.main?1:0)+Math.min(3,r.ing.filter(([x])=>ia.has(x)).length)*0.5};
+  const best=xs=>xs.reduce((m,x)=>Math.max(m,sim(x)),0);
+  return c.memo[r.id]=Math.min(1.2,best(c.love)*0.5)-Math.min(0.8,best(c.hate)*0.3);
+}
 const isRare=(p,rid)=>S.ratings.some(x=>x.who===p.id&&x.rid===rid&&x.rare);
 
 // Lo aprendido: media de las valoraciones de los platos que llevan cada ingrediente
@@ -37,7 +49,8 @@ function learnedMap(p){return Object.fromEntries(learned(p).map(x=>[x.pid,x.v*0.
 
 // Puntuación de gusto de una receta para una persona (positivo = le gusta)
 function tasteScore(p,r,lm){
-  let s=dishPref(p,r.id)*1.6;
+  const dp=dishPref(p,r.id);let s=dp*1.6;
+  if(!dp)s+=likeBoost(p,r);
   // Flexitariano: más platos vegetales, menos carne (sin prohibirla)
   if(dietOf(p)==="flexi"){const d=recipeDiet(r);s+=d==="vegano"||d==="vege"?1.4:d==="omni"?-0.8:0}
   let ing=0;for(const [pid] of r.ing){const v=ingPref(p,pid);ing+=v===-9?-20:v!==0?v:(lm&&lm[pid])||0}

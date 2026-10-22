@@ -569,6 +569,18 @@
         "9 crudiveganos sin fuego: gazpacho, ajoblanco, poke, zoodles al pesto…",
         "Tofu, seitán, soja texturizada y otros productos nuevos con precio de Mercadona."
       ]
+    },
+    {
+      "version": 60,
+      "fecha": "2026-10-22",
+      "titulo": "Comparte y cuéntame qué tal",
+      "cambios": [
+        "📤 Comparte cualquier plato por WhatsApp: ingredientes, pasos y un enlace que abre la receta.",
+        "🛒 Envía la lista de la compra con lo que falta por coger, ordenada por secciones.",
+        "👥 Comparte el menú con alguien de casa: lo ve siempre al día y lo que tacha de la lista se tacha también en tu móvil.",
+        "⭐ Al abrir la app te pregunto qué tal lo último que comisteis, también desayunos y meriendas. Solo la primera vez que coméis cada plato.",
+        "Los platos parecidos a los que os encantan salen más en el menú."
+      ]
     }
   ]
 }

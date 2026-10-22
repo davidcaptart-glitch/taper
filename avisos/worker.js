@@ -8,6 +8,8 @@
    tr:<código> = copia de los datos de quien usa Táper en Safari, para pasarlos a la app instalada (iPhone
    guarda por separado los datos de Safari y los de la app); trm:<huella> = código del último móvil con esa
    conexión y modelo, para reconocerlo solo.
+   cm:<código> = menú compartido {clave (hash), nombre, at, datos, marcas:{clave de la lista: {on, at}}}: quien lo
+   comparte lo actualiza con su clave; quien tiene el código solo puede verlo y tachar la lista.
 */
 
 const ORIGENES = ["https://davidcaptart-glitch.github.io", "http://localhost:8765"];
@@ -135,6 +137,44 @@ export default {
         const d = await env.TAPER.get("tr:" + codigo, "json");
         if (!d) return json(req, { error: "no encontrado" }, 404);
         return json(req, { nombre: d.nombre, at: d.at, estado: d.estado });
+      }
+      // Menú compartido con alguien de casa
+      if (req.method === "POST" && url.pathname === "/compartir") {
+        const txt = await req.text();
+        if (txt.length > 400_000) return json(req, { error: "demasiado grande" }, 413);
+        const b = JSON.parse(txt);
+        if (!codigoOk(b.codigo) || typeof b.clave !== "string" || b.clave.length < 12 || !b.datos) return json(req, { error: "datos no válidos" }, 400);
+        const prev = await env.TAPER.get("cm:" + b.codigo, "json"), h = await sha(b.clave);
+        if (prev && prev.clave !== h) return json(req, { error: "código en uso" }, 409);
+        await env.TAPER.put("cm:" + b.codigo, JSON.stringify({ clave: h, nombre: String(b.datos.nombre || "").slice(0, 40), at: Date.now(), datos: b.datos, marcas: (prev && prev.marcas) || {} }), { expirationTtl: COMPARTIR_TTL });
+        return json(req, { ok: true });
+      }
+      if (req.method === "GET" && url.pathname === "/compartido") {
+        const codigo = (url.searchParams.get("codigo") || "").toUpperCase();
+        if (!codigoOk(codigo)) return json(req, { error: "código no válido" }, 400);
+        const d = await env.TAPER.get("cm:" + codigo, "json");
+        if (!d) return json(req, { error: "no encontrado" }, 404);
+        return json(req, { nombre: d.nombre, at: d.at, datos: d.datos, marcas: d.marcas });
+      }
+      if (req.method === "POST" && url.pathname === "/compartido/marcar") {
+        const b = await req.json();
+        if (!codigoOk(b.codigo) || typeof b.key !== "string" || b.key.length > 90) return json(req, { error: "datos no válidos" }, 400);
+        const d = await env.TAPER.get("cm:" + b.codigo, "json");
+        if (!d) return json(req, { error: "no encontrado" }, 404);
+        d.marcas = d.marcas || {};
+        d.marcas[b.key] = { on: !!b.on, at: Date.now() };
+        const ks = Object.keys(d.marcas);
+        if (ks.length > 3000) for (const k of ks.sort((x, y) => d.marcas[x].at - d.marcas[y].at).slice(0, ks.length - 3000)) delete d.marcas[k];
+        await env.TAPER.put("cm:" + b.codigo, JSON.stringify(d), { expirationTtl: COMPARTIR_TTL });
+        return json(req, { ok: true });
+      }
+      if (req.method === "POST" && url.pathname === "/compartir/parar") {
+        const b = await req.json();
+        if (!codigoOk(b.codigo)) return json(req, { error: "datos no válidos" }, 400);
+        const d = await env.TAPER.get("cm:" + b.codigo, "json");
+        if (d && d.clave !== (await sha(String(b.clave || "")))) return json(req, { error: "clave incorrecta" }, 403);
+        await env.TAPER.delete("cm:" + b.codigo);
+        return json(req, { ok: true });
       }
       if (req.method === "POST" && url.pathname === "/evento") return json(req, await evento(env, await req.json(), req));
       // Canjear coins: hace falta la clave secreta del móvil (la primera vez queda registrada)
@@ -281,6 +321,7 @@ async function recalcularAjustes(env, nuevo) {
   await env.TAPER.put("ajustes", JSON.stringify({ calculado: new Date().toISOString(), productos }));
 }
 const TRASPASO_TTL = 60 * 60 * 24 * 30;
+const COMPARTIR_TTL = 60 * 60 * 24 * 90;   // un menú compartido que nadie actualiza en 3 meses se borra
 const codigoOk = (c) => typeof c === "string" && /^[A-Z2-9]{6}$/.test(c);
 // Huella del móvil: conexión + modelo/sistema. Safari y la app instalada del mismo iPhone dan la misma.
 async function huellaMovil(req) {
