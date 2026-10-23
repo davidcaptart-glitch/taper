@@ -7,7 +7,7 @@ let wiz={i:0,single:null};   // single = id del paso cuando se edita uno suelto 
 const ONBOARD=[{id:"casa",eyebrow:"Casa",title:"¿Quién vive *en casa?*"},{id:"comer",eyebrow:"Cómo coméis",title:"¿Algo que *tener en cuenta?*"},{id:"super",eyebrow:"Tu súper",title:"¿Dónde haces *la compra?*"}];
 // Lo que se puede afinar después del primer menú: id, texto, pasos del asistente que lo preguntan
 const AFINAR=[
-  ["quien","calendar|Custodias y quién come cada día",()=>["familia"]],
+  ["quien","calendar|Custodias y quién come cada día",()=>others().length?["custodia"]:["familia"]],
   ["comidas","coffee|Desayunos, almuerzos y meriendas",()=>["familia"]],
   ["gustos","mood-smile|Gustos de cada uno",()=>S.people.map(p=>"gustos:"+p.id)],
   ["planificar","clock|Cuándo planificas y compras",()=>["plan","compra"]],
@@ -45,6 +45,7 @@ function fullSteps(){
     {id:"compra",eyebrow:"Presupuesto",title:"Fija tu *presupuesto*"},
     ...S.people.map(p=>({id:"gustos:"+p.id,eyebrow:"Dieta y gustos",title:isMe(p)?"¿Cómo *comes?*":"¿Cómo come *"+personName(p)+"?*"})),
     {id:"dificultad",eyebrow:"Dificultad",title:"¿Qué platos te *propongo?*"},
+    {id:"custodia",eyebrow:"Quién come y cuándo",title:"¿Cuándo está *cada uno?*"},
     {id:"listo",eyebrow:"Todo listo",title:"¡A *cocinar!*"}
   ];
   return st;
@@ -257,6 +258,11 @@ function stepBody(fullId){
     <h3 class="kith">Marca los supermercados que te vengan bien</h3><p class="small muted" style="margin:-4px 0 10px">Aunque solo vayas a la tienda: comparo sus precios cada semana.</p>
     <div class="supgrid">${SUPERS.filter(ok).map(tile).join("")}</div>
     <details class="more"><summary>Ver más supermercados</summary><div class="supgrid" style="margin-top:8px">${SUPERS.filter(x=>!ok(x)).map(tile).join("")}</div></details>`}
+  if(id==="custodia"){
+    let h=`<p class="lead">Para cada persona: si está siempre contigo o en semanas alternas (custodia), y qué comidas hace en casa. El menú y la compra se ajustan solos.</p>`;
+    for(const k of others())h+=`<div class="kidcard" data-kc="${esc(k.id)}"><div class="row"><b>${esc(personName(k))}</b><span class="small muted">${esc(ageLabel(k.ageRange)||(k.kind==="nino"?"niño o niña":"adulto"))}</span></div>${presenceEditor(k)}</div>`;
+    return h+(others().length?"":`<p class="small muted">Solo estás tú en casa. Añade a alguien en Perfil › Personas.</p>`);
+  }
   if(id==="dificultad"){const cur=maxDiff(),n=k=>R.filter(r=>!r.small&&!r.cap&&diffRank(r.diff)<=diffRank(k)&&S.people.every(p=>canEat(p,r))).length;
     return `<p class="lead">Elige hasta dónde quieres complicarte. Siempre podrás elegir a mano cualquier receta.</p>
     <div>${[["facil","👌 Solo fáciles","Pocos pasos y nada de rebozar, masas ni bechamel"],["moderada","🧑‍🍳 Fáciles y moderados","Algún plato con más pasos de vez en cuando"],["dificil","🔥 Me atrevo con todo","También croquetas, masas y bechamel caseras"]].map(([k,t,d])=>`<button type="button" class="alt" data-maxd="${k}" style="${cur===k?"outline:2px solid var(--tomato)":""}"><b>${t}</b><small>${d} · ${n(k)} platos</small></button>`).join("")}</div>`}
@@ -512,6 +518,7 @@ USUARIO: ${S.uid}`);fd.append(c.campos.contacto,[me().name,S.uid].filter(Boolean
   const setRep=(m,f)=>{const rm=S.home.repeatMeals=S.home.repeatMeals||{};rm[m]={days:1,who:"todas",...(rm[m]||{}),...f};H._repChanged=true;rerender()};
   qa("[data-repd]").forEach(b=>b.onclick=()=>{const [m,n]=b.dataset.repd.split("|");setRep(m,{days:Number(n)})});
   qa("[data-repw]").forEach(b=>b.onclick=()=>{const [m,w]=b.dataset.repw.split("|");setRep(m,{who:w})});
+  qa("[data-kc]").forEach(c=>{const k=S.people.find(p=>p.id===c.dataset.kc);if(k)bindPresence(c,k,()=>{const y=scrollY;render();scrollTo(0,y)})});
   qa("[data-maxd]").forEach(b=>b.onclick=()=>{H.maxDiff=b.dataset.maxd;rerender()});
   qa("[data-startpick]").forEach(b=>b.onclick=()=>{H.startPick=b.dataset.startpick;rerender()});
   q("#wzStartO")&&(q("#wzStartO").onchange=e=>{H.startOther=e.target.value;rerender()});

@@ -821,6 +821,14 @@
         "En Perfil › Personas, toca a tu hijo o hija › «Cuándo está»: ahí mismo eliges si está siempre, en semanas alternas, fines de semana alternos o días concretos, el día del cambio y qué comidas hace en casa.",
         "Cada persona dice en su fila si está siempre en casa o en custodia."
       ]
+    },
+    {
+      "version": 106,
+      "fecha": "2026-10-23",
+      "titulo": "Custodias desde Afinar",
+      "cambios": [
+        "En «Afinar mi menú › Custodias y quién come cada día» sale una pantalla solo para eso: para cada persona, si está siempre o en semanas alternas, el día del cambio y qué comidas hace en casa."
+      ]
     }
   ]
 }
