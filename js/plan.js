@@ -311,7 +311,14 @@ function weekRecipes(start,exceptId){
   const wk=S.plans[start];if(!wk)return [];
   return Object.entries(wk.slots||{}).filter(([id])=>id!==exceptId).map(([,v])=>v.recipe).filter(Boolean);
 }
+// candMemo: mientras se rehace el menú, las recetas que encajan en cada tipo de comida no cambian (se piden cientos de veces)
+let candMemo=null;
+const withCandMemo=f=>{const own=!candMemo;if(own)candMemo={};try{return f()}finally{if(own)candMemo=null}};
 function candidates(slot,opts={}){
+  let key=null;
+  if(candMemo&&!opts.only){const ids=a=>a.map(p=>p.id).join(",");
+    key=[ids(slot.eaters),ids(slot.kids),ids(slot.tupper),slot.need&&slot.need.noHeavy?1:0,opts.cap?1:0,S.home.cookMode==="lote"?slot.date+"|"+cookDayFor(slot.date):""].join("|");
+    if(candMemo[key])return candMemo[key].slice()}
   const out=[];
   for(const r of R){
     if(r.small||(r.cap&&!opts.cap)||!variantFor(r)||!hasPhoto(r)||!hasPack(r))continue;
@@ -329,6 +336,7 @@ function candidates(slot,opts={}){
     if(opts.only&&!opts.only(r))continue;
     out.push(r);
   }
+  if(key)candMemo[key]=out.slice();
   return out;
 }
 function scoreRecipe(r,slot,ctx){
@@ -540,11 +548,11 @@ function rerollSmall(d,m){const wk=S.plans[weekStartFor(d)];if(!wk||!wk.small||!
   ensureSmall(weekStartFor(d));
 }
 
-function genWeekFromScratch(start){
+function genWeekFromScratch(start,nTries=6){
   // Varios intentos; se sortea entre los mejores (equilibrio y precio) para no repetir siempre el mismo
   const tries=[];
   const keep=S.plans[start]?{...S.plans[start]}:null;
-  for(let t=0;t<8;t++){
+  for(let t=0;t<nTries;t++){
     S.plans[start]=keep?{...keep,slots:Object.fromEntries(Object.entries(keep.slots||{}).filter(([,v])=>v.locked))}:{start,slots:{},training:null,confirmed:false,createdAt:todayISO()};
     const {wk,slots}=ensureWeek(start);
     // Coste real de la semana (paquetes enteros de lo fresco): así se nota el ahorro de compartir ingredientes
@@ -578,39 +586,54 @@ function weekFoodTarget(start){
   // Sin presupuesto fijado (alta nueva): sin tope; se propone lo razonable y luego se dice lo que cuesta
   if(!Number(S.home.budget.month)&&!Number(S.home.budget.week)&&!Number(((S.monthPrep||{})[m]||{}).budget))return Infinity;
   const fee=tarifa(S.home.shop.weekMode).envio, monthFee=tarifa(S.home.shop.monthMode).envio/n;
-  return weekBudget(m)-fee-monthFee-(Number(S.home.budget.basics)||0)/n;
+  // tscale: cuánto se aprietan las semanas para que la compra real del mes (con la despensa en paquetes enteros) quepa
+  return (weekBudget(m)-fee-monthFee-(Number(S.home.budget.basics)||0)/n)*(((S.home.tscale||{})[m])||1);
 }
 // Cambia los platos más caros por otros más baratos que sigan encajando, hasta llegar al presupuesto
 function fitBudget(start){
   const wk=S.plans[start];if(!wk)return {ok:true};
   const target=weekFoodTarget(start), slots=buildSlots(start);
-  for(let it=0;it<12;it++){
+  const ownMemo=!priceMemo;if(ownMemo)priceMemo={};
+  // Por cada comida, sus alternativas con su coste y su puntuación: se calculan una sola vez
+  const info={};
+  const getInfo=sl=>{if(info[sl.id])return info[sl.id];const ctx=makeCtx(start,sl.id);ctx.noise=0;
+    const list=candidates(sl).map(r=>({r,rc:rationCost(r)*sl.portions,sc:scoreRecipe(r,sl,ctx)}));
+    return info[sl.id]={ctx,list,by:Object.fromEntries(list.map(x=>[x.r.id,x]))}};
+  const free=x=>{const v=wk.slots[x.id];return v&&!v.locked&&!v.rep&&!x.fixed&&!Object.values(wk.slots).some(y=>y.rep===x.id)};
+  const sameWeekOk=(S.home.repeat||"no")==="semana";
+  try{
+  // Con presupuesto se apura de verdad: se siguen cambiando platos mientras alguno abarate la semana
+  for(let it=0;it<60;it++){
     const cost=weekCost(start,slots);if(cost<=target)return {ok:true,cost,target};
+    const used=new Set(Object.values(wk.slots).map(v=>v.recipe));
     let best=null;const pre=[];
     for(const sl of slots){
-      if(sl.fixed)continue;const v=wk.slots[sl.id];if(!v||v.locked||v.rep||Object.values(wk.slots).some(x=>x.rep===sl.id))continue;const cur=RX[v.recipe];if(!cur)continue;
+      if(!free(sl))continue;const cur=RX[wk.slots[sl.id].recipe];if(!cur)continue;
       // Lo que se ha pedido para este mes (más de algo, o repetir un plato) no se cambia por ahorrar
       {const mp=monthPrefs(sl.date);if(mp&&((mp.favs||[]).includes(cur.id)||(mp.more||[]).some(k=>prefMatch[k]&&prefMatch[k](cur))))continue}
       if(cur.pack&&hasPack(cur))continue;   // lo que has desbloqueado en la tienda tampoco
-      const ctx=makeCtx(start,sl.id);ctx.noise=0;
-      const curS=scoreRecipe(cur,sl,ctx);
-      const sameWeekOk=(S.home.repeat||"no")==="semana";
-      // Primero se estima el ahorro con el precio por ración (rápido)…
-      const cc=rationCost(cur)*sl.portions;
-      for(const r of candidates(sl)){if(r.id===cur.id||(!sameWeekOk&&ctx.used.has(r.id)))continue;
-        const est=cc-rationCost(r)*sl.portions;if(est<=0.2)continue;
-        const loss=Math.max(0,curS-scoreRecipe(r,sl,ctx));pre.push({est:est/(1+loss*0.6),loss,sl,rid:r.id})}
+      const I=getInfo(sl),curS=I.by[cur.id]?I.by[cur.id].sc:scoreRecipe(cur,sl,I.ctx),cc=rationCost(cur)*sl.portions;
+      for(const x of I.list){if(x.r.id===cur.id||(!sameWeekOk&&used.has(x.r.id)))continue;
+        // Si se puede repetir en la semana, un plato que ya está ahorra aunque la ración no sea más barata (comparte paquetes)
+        const est=cc-x.rc+(sameWeekOk&&used.has(x.r.id)?x.rc*0.6:0);if(est<=0.2)continue;
+        const loss=Math.max(0,curS-x.sc);pre.push({est:est/(1+loss*0.6),loss,sl,rid:x.r.id})}
     }
-    // …y solo los mejores se calculan de verdad: coste de la semana con el cambio (cuenta los paquetes que se comparten)
-    for(const c of pre.sort((a,b)=>b.est-a.est).slice(0,8)){
-      const prev=wk.slots[c.sl.id];wk.slots[c.sl.id]={recipe:c.rid};const after=weekCost(start,slots);wk.slots[c.sl.id]=prev;
-      const save=cost-after;if(save<=0.3)continue;
-      const val=save/(1+c.loss*0.6);
-      if(!best||val>best.val)best={val,id:c.sl.id,rid:c.rid}}
+    // Los mejores se calculan de verdad (coste de la semana con el cambio: cuenta los paquetes que se comparten),
+    // de 14 en 14; y si el plato sale varias veces, también cambiándolas todas a la vez
+    pre.sort((a,b)=>b.est-a.est);
+    for(let from=0;from<pre.length&&from<42&&!best;from+=14)for(const c of pre.slice(from,from+14)){
+      const curId=wk.slots[c.sl.id].recipe,r=RX[c.rid];
+      const group=slots.filter(x=>free(x)&&wk.slots[x.id].recipe===curId&&slotPeople(x).every(p=>canEat(p,r)));
+      for(const ids of group.length>1?[[c.sl],group]:[[c.sl]]){
+        const prev=ids.map(x=>wk.slots[x.id]);ids.forEach(x=>wk.slots[x.id]={recipe:c.rid});const after=weekCost(start,slots);ids.forEach((x,k)=>wk.slots[x.id]=prev[k]);
+        const save=cost-after;if(save<=0.3)continue;
+        const val=save/(1+c.loss*0.6*ids.length);
+        if(!best||val>best.val)best={val,ids:ids.map(x=>x.id),rid:c.rid}}}
     if(!best)return {ok:false,cost,target};
-    wk.slots[best.id]={recipe:best.rid};
+    for(const id of best.ids)wk.slots[id]={recipe:best.rid};
   }
   const cost=weekCost(start,slots);return {ok:cost<=target,cost,target};
+  }finally{if(ownMemo)priceMemo=null}
 }
 function balanceOf(wk){const c={};for(const v of Object.values(wk.slots)){const r=RX[v.recipe];if(r){c[r.group]=(c[r.group]||0)+1;if(r.red)c.red=(c.red||0)+1}}
   return Math.min(c.legumbre||0,2)+Math.min(c.pescado||0,2)-Math.max(0,(c.carne||0)-3)-Math.max(0,(c.red||0)-1)-Math.max(0,(c.huevo||0)-2)}
@@ -624,14 +647,48 @@ function startToday(){
 function setPlanStart(st,from){S.home.start=st;S.home.startFrom=from||null;S.home.startedAt=Date.now()}
 function replanFrom(d){for(const s of Object.keys(S.plans))if(addDays(s,6)>=d)ensureWeek(s)}
 // Rehace el menú desde hoy con lo que se sabe ahora (tras afinar): lo elegido a mano se respeta
-function redoFromToday(){
+function redoFromToday(){return withCandMemo(redoFromToday_)}
+function redoFromToday_(){
   const today=todayISO(),cur=weekStartFor(today);
   for(const s of Object.keys(S.plans).sort()){if(addDays(s,6)<today)continue;const wk=S.plans[s];
     if(s>cur){genWeekFromScratch(s);continue}
     for(const [id,v] of Object.entries(wk.slots))if(id.slice(0,10)>=today&&!v.locked)delete wk.slots[id];
     for(const [d,dd] of Object.entries(wk.small||{}))if(d>=today)for(const [m,v] of Object.entries(dd))if(!v.locked)delete dd[m];
-    ensureWeek(s)}
-  ensureHorizon();save();
+    ensureWeek(s);wk.budget=fitBudget(s)}
+  ensureHorizon();
+  if(budgetSet())for(const m of budgetMonths())fitMonthBudget(m);
+  save();
+}
+// Ajusta un mes entero a su presupuesto: si la compra real (con la despensa) se pasa, aprieta las semanas y vuelve a probar
+function fitMonthBudget(m){
+  if(!budgetSet())return;const ts=S.home.tscale=S.home.tscale||{},today=todayISO();
+  for(let i=0;i<4;i++){const total=shopping(m).total,b=monthBudget(m);if(total<=b+0.5)break;
+    ts[m]=Math.max(0.3,(ts[m]||1)*Math.max(0.6,b/total));
+    for(const s of weeksInMonth(m))if(S.plans[s]&&addDays(s,6)>=today)S.plans[s].budget=fitBudget(s)}
+  // Si aun así no cabe, lo más barato posible: se aprieta del todo (nunca se salta la dieta, las alergias ni lo elegido a mano)
+  if(shopping(m).total>monthBudget(m)+0.5){ts[m]=0.01;const cur=weekStartFor(today);
+    for(const s of weeksInMonth(m))if(S.plans[s]&&addDays(s,6)>=today){
+      // Según cómo empiece, el ajuste se queda en un punto u otro: se prueban varios menús y se queda el más barato
+      S.plans[s].budget=fitBudget(s);if(s>cur&&weekCost(s)>weekFoodTarget(s)+0.5)bestOfRestarts(s,2)}}
+}
+function bestOfRestarts(s,n){
+  let best={cost:weekCost(s),slots:JSON.stringify(S.plans[s].slots),small:JSON.stringify(S.plans[s].small||{})};
+  for(let i=0;i<n;i++){genWeekFromScratch(s,3);const c=weekCost(s);if(c<best.cost-0.01)best={cost:c,slots:JSON.stringify(S.plans[s].slots),small:JSON.stringify(S.plans[s].small||{})}}
+  S.plans[s].slots=JSON.parse(best.slots);S.plans[s].small=JSON.parse(best.small);S.plans[s].budget=fitBudget(s);
+}
+// ¿Se cumple el presupuesto del mes? Si no, se guarda lo más ajustado que se ha podido y por qué (se enseña en el Menú)
+const budgetMonths=()=>{const m=(S.home.start&&S.home.start>todayISO()?S.home.start:todayISO()).slice(0,7),[y,mo]=m.split("-").map(Number);return [m,mo===12?`${y+1}-01`:`${y}-${String(mo+1).padStart(2,"0")}`]};
+function checkBudget(){
+  if(!budgetSet()){delete S.budgetInfo;save();return}
+  S.budgetInfo={};for(const m of budgetMonths())checkBudgetMonth(m);save();
+}
+function checkBudgetMonth(m){
+  const sh=shopping(m),cost=Math.round(sh.total),budget=Math.round(monthBudget(m));
+  const ws=activeWeeks(m).filter(s=>S.plans[s]);let meals=0,rac=0,food=0;
+  for(const s of ws){food+=weekCost(s);for(const sl of buildSlots(s))if(S.plans[s].slots[sl.id]){meals++;rac+=sl.portions}}
+  S.budgetInfo[m]={m,cost,budget,ok:cost<=budget+1,meals:Math.round(meals/Math.max(1,ws.length)),perRac:rac?food/rac:0,
+    leftover:Object.values(sh.lists).reduce((t,l)=>t+l.items.filter(it=>P[it.pid].keep==="despensa").reduce((u,it)=>u+Math.max(0,it.packs*P[it.pid].env-it.q)/P[it.pid].env*price(it.pid),0),0),
+    basics:Number(S.home.budget.basics)||0,fees:Object.values(sh.lists).reduce((t,l)=>t+l.fee,0),extras:sh.extrasTotal||0,at:todayISO()};
 }
 // Lo que cuesta al mes el menú que hay (para proponer el presupuesto cuando aún no se ha fijado)
 function estimateMonthBudget(){
@@ -644,7 +701,8 @@ function estimateMonthBudget(){
 
 /* ---------- Previsión ---------- */
 // Siempre hay menú preparado hasta el final del mes siguiente (o del mes en que empieza el plan, si es más tarde)
-function ensureHorizon(){
+function ensureHorizon(){return withCandMemo(ensureHorizon_)}
+function ensureHorizon_(){
   const today=todayISO(), from=S.home.start&&S.home.start>today?S.home.start:today;
   const base=parseISO(from), end=iso(new Date(base.getFullYear(),base.getMonth()+(from===today?2:1),0));
   let s=weekStartFor(from),n=0;

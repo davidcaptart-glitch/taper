@@ -374,6 +374,24 @@ function notifAction(tipo,tag){
   else {month=m;tab="compra";listSel=key;render();scrollTo(0,0)}
 }
 
+// Presupuesto que no se alcanza: lo más ajustado posible, por qué y qué hacer
+function budgetCard(){
+  const b=(S.budgetInfo||{})[month];if(!b||!budgetSet())return "";
+  const now=Math.round(shopping(month).total);if(now<=b.budget+1)return "";
+  const ppl=S.people.length,kidsN=kids().length;
+  // Si cada semana cabe y solo se pasa por la despensa (paquetes enteros que sobran), se dice así, sin alarmar
+  const weeksOk=activeWeeks(month).every(s=>!S.plans[s]||weekCost(s)<=weekFoodTarget(s)+0.5);
+  if(weeksOk&&b.leftover>=now-b.budget-1)return `<div class="okbox bcard"><b>${ico("coin-euro")} El menú cabe en tus ${eur(b.budget)}</b>
+    <p class="small" style="margin:6px 0 0">Este mes la compra sale por ${eur(now)} porque unos ${eur(b.leftover)} son despensa en paquetes enteros (arroz, aceite, legumbres…) que te sobrará para el mes siguiente.</p></div>`;
+  return `<div class="warnbox bcard"><b>${ico("coin-euro")} Con ${eur(b.budget)} este mes no llego</b>
+    <p class="small" style="margin:6px 0">He buscado lo más barato que encaja con vuestra casa${(S.home.repeat||"no")==="semana"?", repitiendo platos en la semana":""}: sale por unos <b>${eur(now)}</b> (${eur(now-b.budget)} más).</p>
+    <p class="small" style="margin:0 0 4px"><b>Por qué:</b></p><ul class="small" style="margin:0 0 6px 18px;padding:0">
+      ${b.leftover>=3?`<li><b>Unos ${eur(b.leftover)} son despensa que te sobrará</b> para el mes siguiente: arroz, aceite, legumbres… se compran en paquetes enteros.</li>`:""}
+      <li>${b.meals} comidas a la semana para ${ppl} ${ppl===1?"persona":"personas"}${kidsN?` (${kidsN} ${kidsN===1?"niño":"niños"})`:""}, a unos ${eur(b.perRac)} la ración de media, que ya es de lo más barato posible con vuestra dieta y gustos.</li>
+      ${b.basics?`<li>Básicos (aceite, sal, especias): ${eur(b.basics)}.</li>`:""}${b.fees?`<li>Envíos: ${eur(b.fees)}.</li>`:""}${b.extras?`<li>Platos fijos sin receta: ${eur(b.extras)}.</li>`:""}</ul>
+    <p class="small" style="margin:0 0 8px">Para bajar más: comer fuera o no cocinar algunas comidas, raciones más ajustadas, menos carne y pescado, o repetir platos.</p>
+    <div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn small" id="bSacr">¿Qué sacrificamos?</button><button class="btn ghost small" id="bRaise">Poner ${eur(Math.ceil(now/10)*10)} de presupuesto</button></div></div>`;
+}
 // Platos quitados por alergias o dieta: se dice cuáles y por qué, hasta que se lee
 function safetyCard(){
   if(!safetyNotes.length)return "";
@@ -473,7 +491,7 @@ function syncMenuWeek(){
 function renderMenu(){
   const ws=syncMenuWeek();
   const weeks=[weekSel];
-  let h=`<section class="view">`+viewHead(monthName(month),"Qué *comemos*",`${servidorOn()?`<button class="btn ghost small" id="shareMenu" title="Compartir el menú con alguien de casa" aria-label="Compartir el menú">${ico("users")}</button>`:""}<button class="btn ghost small" id="printMenu" title="Menú imprimible" aria-label="Menú imprimible">${ico("printer")}</button>`)+followChips()+safetyCard()+afinarCard()+monthPrepCard()+((n=>n&&weekStartFor(n.d)===weekSel)(nextMeal())?todayCard():"")+weekPicker(ws,weekSel)+dayStrip(weekSel)+useUpCard()+`<div class="row" style="justify-content:flex-end;margin:4px 0 -4px"><button class="btn ghost small" id="startDay">📅 ${S.home.start&&S.home.start>todayISO()?"Cambiar el día de inicio":"Empezar el plan otro día"}</button></div>`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
+  let h=`<section class="view">`+viewHead(monthName(month),"Qué *comemos*",`${servidorOn()?`<button class="btn ghost small" id="shareMenu" title="Compartir el menú con alguien de casa" aria-label="Compartir el menú">${ico("users")}</button>`:""}<button class="btn ghost small" id="printMenu" title="Menú imprimible" aria-label="Menú imprimible">${ico("printer")}</button>`)+followChips()+safetyCard()+budgetCard()+afinarCard()+monthPrepCard()+((n=>n&&weekStartFor(n.d)===weekSel)(nextMeal())?todayCard():"")+weekPicker(ws,weekSel)+dayStrip(weekSel)+useUpCard()+`<div class="row" style="justify-content:flex-end;margin:4px 0 -4px"><button class="btn ghost small" id="startDay">📅 ${S.home.start&&S.home.start>todayISO()?"Cambiar el día de inicio":"Empezar el plan otro día"}</button></div>`+installCard()+reviewCard()+surveyCard()+thawCard()+sportCard()+rateCard();
   for(const start of weeks){
     const wk=S.plans[start], dates=weekDates(start);
     h+=`<div class="week"><div class="weekhead"><h2>${shortDate(start)} – ${shortDate(dates[6])}</h2>${wk&&wk.confirmed?`<span class="badge ok">Planificada</span>`:wk?`<span class="badge">Previsión</span>`:""}</div>`;
@@ -517,6 +535,8 @@ function renderMenu(){
   main.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>openDay(b.dataset.day));
   main.querySelectorAll("[data-session]").forEach(b=>b.onclick=()=>openSession(b.dataset.session));
   bindRate(main,render);
+  document.getElementById("bSacr")?.addEventListener("click",()=>{const ws=weeksInMonth(month).filter(s=>S.plans[s]&&addDays(s,6)>=todayISO());const w=ws.find(s=>weekCost(s)>weekFoodTarget(s)+0.5)||ws[0];if(w)openSacrifice(w)});
+  document.getElementById("bRaise")?.addEventListener("click",()=>{const v=Math.ceil(shopping(month).total/10)*10;S.home.budget.month=v;S.home.budget.week=null;S.home.budgetConfirmed=true;S.home.tscale={};save();redoFromToday();checkBudget();render();toast("Presupuesto: "+eur(v)+" al mes")});
   bindAfinar(main);
   document.getElementById("safetyOk")?.addEventListener("click",()=>{safetyNotes=[];render()});
   document.getElementById("shareMenu")?.addEventListener("click",openShareMenu);
@@ -580,7 +600,7 @@ function openSacrifice(start){
     if(dlg.querySelector("#raiseB").checked)S.home.budget.week=need;
     if(dlg.querySelector("#toShop")?.checked)S.home.shop.weekMode="tienda";
     S.home.repeat=dlg.querySelector("#repSel").value;
-    for(const s of Object.keys(S.plans))if(s>=weekStartFor(todayISO())&&!S.plans[s].confirmed||s===start)genWeekFromScratch(s);
+    S.home.tscale={};redoFromToday();checkBudget();
     save();dlg.close();render();
     const c2=weekCost(start),t2=weekFoodTarget(start);toast(c2<=t2+0.5?"Listo: "+eur(c2)+" de "+eur(t2):"Más cerca: "+eur(c2)+" de "+eur(t2)+". Puedes sacrificar algo más");
   };
@@ -1658,6 +1678,8 @@ async function boot(){
   else if(!S.onboarded){S.seenVersion=APP_VERSION;save()}
   checkUpdate();startCounter();
   if(avisosOn()&&S.notif&&S.notif.on){shareWithSW().catch(()=>{});queueSyncAvisos()}
+  // Quien ya tenía presupuesto puesto (de antes de que se rehiciera el menú al ponerlo): se ajusta una vez
+  if(S.onboarded&&budgetSet()&&!(S.budgetInfo&&S.budgetInfo[todayISO().slice(0,7)])){try{redoFromToday();checkBudget();render()}catch(e){console.error(e)}}
   trackOnBoot();checkAvisos();applyAccent();applySkin();if(servidorOn())loadStats().then(()=>{applyAccent();applySkin()}).catch(()=>{});
   {const u=new URLSearchParams(location.search),t=u.get("hecho")||u.get("abrir");if(t){notifAction(u.get("hecho")?"hecho":"abrir",t);history.replaceState(null,"",location.pathname)}}
   checkSharedTicket().then(t=>{if(!t)casaOnBoot().then(j=>{if(!j&&!shareOnBoot())setTimeout(()=>openRateDialog(),1500)})});

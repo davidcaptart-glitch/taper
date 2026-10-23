@@ -793,6 +793,17 @@
       "cambios": [
         "«Enviar una sugerencia» se abre dentro de la app: eliges si es una mejora, un fallo, una receta u otra cosa, escribes y listo."
       ]
+    },
+    {
+      "version": 103,
+      "fecha": "2026-10-23",
+      "titulo": "Tu presupuesto se cumple (o te digo por qué no)",
+      "cambios": [
+        "Al poner o cambiar el presupuesto, el menú se rehace entero para cumplirlo, contando la compra real del mes (también la despensa).",
+        "Si te importa poco repetir, se aprovecha para compartir paquetes y abaratar.",
+        "Si el presupuesto no se puede alcanzar, busco lo más barato posible que encaja con vuestra casa y te explico por qué no llego y qué puedes cambiar.",
+        "Preparar los menús es mucho más rápido."
+      ]
     }
   ]
 }

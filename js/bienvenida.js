@@ -557,8 +557,11 @@ function validateStep(fullId){
     // Los menús de semanas que ya no cuentan (antes del inicio) se borran
     if(H.start)for(const s of Object.keys(S.plans))if(addDays(s,6)<H.start)delete S.plans[s];
     H.planFreq=v("#wzFreq");H.planDay=Number(v("#wzPDay"));H.planTime=v("#wzPTime")||"17:00"}
-  if(id==="compra"){H.shop.delivery=Number(v("#wzDel"));
-    H.budget.month=Number(v("#wzBM"))||0;H.budgetConfirmed=true;H.budget.week=v("#wzBW")===""?null:Number(v("#wzBW"));H.budget.basics=Number(v("#wzBB"))||0}
+  if(id==="compra"){const before=JSON.stringify([H.budget,H.repeat,H.sacrifice,H.shop]);
+    H.shop.delivery=Number(v("#wzDel"));
+    H.budget.month=Number(v("#wzBM"))||0;H.budgetConfirmed=true;H.budget.week=v("#wzBW")===""?null:Number(v("#wzBW"));H.budget.basics=Number(v("#wzBB"))||0;
+    if(before!==JSON.stringify([H.budget,H.repeat,H.sacrifice,H.shop]))H.tscale={};
+    if(before!==JSON.stringify([H.budget,H.repeat,H.sacrifice,H.shop])&&!wiz.afinar)setTimeout(()=>preparingScreen(()=>{redoFromToday();checkBudget()},()=>{render();const b=(S.budgetInfo||{})[month];toast(!b||b.ok?"Menú rehecho con tu presupuesto":"No llego del todo: te explico por qué en el Menú")}),0)}
   return true;
 }
 
@@ -571,7 +574,7 @@ function startAfinar(keys){
 }
 function finishAfinar(){
   const inv=S.afinar&&S.afinar.invite;wiz={i:0,single:null};
-  preparingScreen(()=>{redoFromToday()},()=>{
+  preparingScreen(()=>{redoFromToday();checkBudget()},()=>{
     if(inv){S.afinar.invite=false;tab="perfil";accOpen.add("compartir");render();toast("Invita desde aquí a tu familiar")}
     else{tab="menu";render();toast("Menú rehecho con lo que me has contado")}});
 }
