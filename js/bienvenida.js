@@ -7,7 +7,7 @@ let wiz={i:0,single:null};   // single = id del paso cuando se edita uno suelto 
 const ONBOARD=[{id:"casa",eyebrow:"Casa",title:"¿Quién vive *en casa?*"},{id:"comer",eyebrow:"Cómo coméis",title:"¿Algo que *tener en cuenta?*"},{id:"super",eyebrow:"Tu súper",title:"¿Dónde haces *la compra?*"}];
 // Lo que se puede afinar después del primer menú: id, texto, pasos del asistente que lo preguntan
 const AFINAR=[
-  ["quien","calendar|Quién come y cuándo (custodias, días fuera)",()=>["familia"]],
+  ["quien","calendar|Custodias y quién come cada día",()=>["familia"]],
   ["comidas","coffee|Desayunos, almuerzos y meriendas",()=>["familia"]],
   ["gustos","mood-smile|Gustos de cada uno",()=>S.people.map(p=>"gustos:"+p.id)],
   ["planificar","clock|Cuándo planificas y compras",()=>["plan","compra"]],

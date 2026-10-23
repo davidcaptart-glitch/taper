@@ -1141,7 +1141,7 @@ function personLine(p){
   const al=(p.allergies||[]).length,pr=(p.presence||{}).type;
   return [p.ageRange?ageLabel(p.ageRange)+" años":p.kind==="nino"&&p.age?p.age+" años":p.kind==="adulto"?"adulto":"",
     DIETS[dietOf(p)][1].toLowerCase(),al?al+(al===1?" alergia":" alergias"):"sin alergias",
-    !isMe(p)&&pr&&pr!=="siempre"?{alternas:"semanas alternas",findes:"fines de semana alternos",dias:"algunos días",manual:"lo marcas cada semana"}[pr]:"",
+    !isMe(p)?{siempre:"siempre en casa",alternas:"semanas alternas",findes:"fines de semana alternos",dias:"algunos días",manual:"lo marcas cada semana"}[pr||"siempre"]:"",
     p.trains?"hace deporte":""].filter(Boolean).join(" · ");
 }
 // Ficha de una persona: todo lo suyo en un solo sitio, en 3 pestañas
@@ -1155,9 +1155,7 @@ function openPerson(pid){
       ${hist.length?`<table class="wtable">${hist.map(x=>`<tr><td>${DSHORT[dow(x.date)]} ${shortDate(x.date)} · ${x.meal}</td><td style="text-align:left;padding-left:8px">${esc(x.name)}${x.note?` <span class="small muted">${esc(x.note)}</span>`:""}</td><td>${x.v!=null?RV[x.v]:""}</td></tr>`).join("")}</table>`:`<p class="small muted">Aún no hay comidas pasadas.</p>`}</details>`;
     if(personTab==="cuando"){
       if(y)body=`<p class="small">Tú estás siempre en casa para el menú. Lo que cambia de cada día (comes fuera, no cocinas…) se marca en el Menú tocando «Cambiar este día».</p>${smallSummary(p)}<button class="btn ghost small" data-edit="familia">Cambiar desayunos, almuerzos y meriendas</button>`;
-      else body=`<div class="small muted">${p.kind==="nino"?"niño o niña":"adulto"} · ración ${String(p.factor).replace(".",",")}${p.tupper?" · se lleva táper":""}</div>
-        ${turnText(p)?`<div class="small" style="margin-top:6px">${esc(turnText(p))}</div>`:""}${mealsAwayText(p)?`<div class="small" style="margin-top:4px">🍽️ ${esc(mealsAwayText(p))}</div>`:""}
-        ${smallSummary(p)}<button class="btn ghost small" data-edit="familia" style="margin-top:8px">Cambiar cuándo está y qué comidas hace</button>${kidCalendar(p)}${changesHTML(p)}`}
+      else body=presenceEditor(p)+`${smallSummary(p)}<button class="btn ghost small" data-edit="familia" style="margin-top:4px">Desayunos, almuerzos y meriendas</button>${kidCalendar(p)}${changesHTML(p)}`}
     if(personTab==="deporte"){
       const ad=p.kind==="adulto";
       body=`${ad?`<h3>Objetivos</h3><p class="small">${esc(p.goals.map(g=>GOALS[g][0]).join(", ")||"Sin indicar")}</p><button class="btn ghost small" data-edit="objetivos:${p.id}">Cambiar objetivos</button>`:""}
@@ -1170,8 +1168,36 @@ function openPerson(pid){
       <div class="pbody">${body}</div></div>`,true);
     dlg.querySelectorAll("[data-ptab]").forEach(b=>b.onclick=()=>{personTab=b.dataset.ptab;draw()});
     bindPersonStuff(dlg,draw);
+    if(personTab==="cuando"&&!y){const sy=dlg.scrollTop;bindPresence(dlg,p,()=>{draw();dlg.scrollTop=sy})}
   };
   draw();
+}
+// Cuándo está contigo (custodia) y qué comidas hace en casa: se cambia en su ficha, sin ir a otra pantalla
+const PTYPES=[["siempre","Siempre"],["alternas","Semanas alternas"],["findes","Fines de semana alternos"],["dias","Días concretos"],["manual","Lo marco cada semana"]];
+function presenceEditor(k){
+  const pr=k.presence||{type:"siempre"},aw=k.away||{};
+  let h=`<div class="field"><label>¿Cuándo está contigo?</label><div class="chips">${PTYPES.map(([v,t])=>chip("data-pp",v,pr.type===v,t)).join("")}</div></div>`;
+  if(pr.type==="alternas"||pr.type==="findes"){const t=turnInfo(pr);
+    h+=`<div class="field"><label>Un día en que empieza su turno contigo (el día del cambio)</label><input type="date" data-pf="anchor" value="${esc(t.anchor)}"></div>
+      <div class="row"><div class="field" style="flex:1"><label>Ese día llega para</label><select data-pf="arrive"><option value="comida" ${t.arrive==="comida"?"selected":""}>la comida</option><option value="cena" ${t.arrive==="cena"?"selected":""}>la cena</option></select></div>
+      <div class="field" style="flex:1"><label>El último día se va</label><select data-pf="leave"><option value="cena" ${t.leave==="cena"?"selected":""}>después de cenar</option><option value="comida" ${t.leave==="comida"?"selected":""}>después de comer</option></select></div></div>
+      <div class="okbox small">${esc(turnText(k))}</div>`}
+  if(pr.type==="dias")h+=`<div class="field"><label>Días que está contigo</label>${dayPills("data-pday",pr.days||[])}</div>`;
+  if(pr.type!=="manual")h+=`<div class="field"><label>Cuando está contigo, ¿qué comidas hace en casa?</label>
+    <table class="mealgrid"><tr><th></th>${DSHORT.map(d=>`<th>${d}</th>`).join("")}</tr>
+    ${["comida","cena"].map(m=>`<tr><td>${m==="comida"?"Comida":"Cena"}</td>${DSHORT.map((_,i)=>{const home=!(aw[m]||[]).includes(i);return `<td><button type="button" class="mg" data-paway="${m}|${i}" aria-pressed="${home}" aria-label="${m} ${DAYS[i]}: ${home?"en casa":"fuera"}">${home?"✓":""}</button></td>`}).join("")}</tr>`).join("")}</table>
+    <div class="chips" style="margin-top:8px">${chip("data-pawq","cole",(aw.comida||[]).join()==="0,1,2,3,4"&&!(aw.cena||[]).length,"Entre semana solo cena")}${chip("data-pawq","todo",!(aw.comida||[]).length&&!(aw.cena||[]).length,"Todas en casa")}</div>
+    <label class="row small" style="margin-top:6px"><input type="checkbox" data-pf="awayhol" ${k.awayHolidays?"":"checked"} style="width:auto"> Los festivos come en casa</label></div>`;
+  return h;
+}
+function bindPresence(root,k,redraw){
+  const done=()=>{k.mealsSet=true;save();replanFrom(todayISO());save();redraw()};
+  root.querySelectorAll("[data-pp]").forEach(b=>b.onclick=()=>{const v=b.dataset.pp,fri=addDays(mondayOf(todayISO()),4);
+    k.presence={...(k.presence||{}),type:v,anchor:(k.presence||{}).anchor||fri,arrive:(k.presence||{}).arrive||(v==="findes"?"cena":"comida"),leave:(k.presence||{}).leave||"cena"};done()});
+  root.querySelectorAll("[data-pf]").forEach(i=>i.onchange=()=>{const f=i.dataset.pf;if(f==="awayhol")k.awayHolidays=!i.checked;else k.presence[f]=i.value;done()});
+  root.querySelectorAll("[data-pday]").forEach(b=>b.onclick=()=>{const d=Number(b.dataset.pday),ds=k.presence.days||[];k.presence.days=ds.includes(d)?ds.filter(x=>x!==d):[...ds,d];done()});
+  root.querySelectorAll("[data-paway]").forEach(b=>b.onclick=()=>{const [m,d]=b.dataset.paway.split("|"),n=Number(d);k.away=k.away||{};const ds=k.away[m]||[];k.away[m]=ds.includes(n)?ds.filter(x=>x!==n):[...ds,n];done()});
+  root.querySelectorAll("[data-pawq]").forEach(b=>b.onclick=()=>{k.away=b.dataset.pawq==="cole"?{comida:[0,1,2,3,4],cena:[]}:{};done()});
 }
 // Desayunos, almuerzos y meriendas de una persona, en una línea
 function smallSummary(p){

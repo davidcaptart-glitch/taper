@@ -812,6 +812,15 @@
       "cambios": [
         "Cuando rehago el menú (presupuesto, afinar, sacrificios, repetir platos) sale su propia pantalla animada: los platos de tu menú van cambiando y, si tienes presupuesto, las monedas van a la hucha."
       ]
+    },
+    {
+      "version": 105,
+      "fecha": "2026-10-23",
+      "titulo": "Custodias, más a mano",
+      "cambios": [
+        "En Perfil › Personas, toca a tu hijo o hija › «Cuándo está»: ahí mismo eliges si está siempre, en semanas alternas, fines de semana alternos o días concretos, el día del cambio y qué comidas hace en casa.",
+        "Cada persona dice en su fila si está siempre en casa o en custodia."
+      ]
     }
   ]
 }
