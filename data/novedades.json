@@ -804,6 +804,14 @@
         "Si el presupuesto no se puede alcanzar, busco lo más barato posible que encaja con vuestra casa y te explico por qué no llego y qué puedes cambiar.",
         "Preparar los menús es mucho más rápido."
       ]
+    },
+    {
+      "version": 104,
+      "fecha": "2026-10-23",
+      "titulo": "Rehaciendo tu menú",
+      "cambios": [
+        "Cuando rehago el menú (presupuesto, afinar, sacrificios, repetir platos) sale su propia pantalla animada: los platos de tu menú van cambiando y, si tienes presupuesto, las monedas van a la hucha."
+      ]
     }
   ]
 }

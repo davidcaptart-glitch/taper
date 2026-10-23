@@ -536,7 +536,7 @@ function renderMenu(){
   main.querySelectorAll("[data-session]").forEach(b=>b.onclick=()=>openSession(b.dataset.session));
   bindRate(main,render);
   document.getElementById("bSacr")?.addEventListener("click",()=>{const ws=weeksInMonth(month).filter(s=>S.plans[s]&&addDays(s,6)>=todayISO());const w=ws.find(s=>weekCost(s)>weekFoodTarget(s)+0.5)||ws[0];if(w)openSacrifice(w)});
-  document.getElementById("bRaise")?.addEventListener("click",()=>{const v=Math.ceil(shopping(month).total/10)*10;S.home.budget.month=v;S.home.budget.week=null;S.home.budgetConfirmed=true;S.home.tscale={};save();redoFromToday();checkBudget();render();toast("Presupuesto: "+eur(v)+" al mes")});
+  document.getElementById("bRaise")?.addEventListener("click",()=>{const v=Math.ceil(shopping(month).total/10)*10;S.home.budget.month=v;S.home.budget.week=null;S.home.budgetConfirmed=true;S.home.tscale={};save();redoScreen(()=>toast("Presupuesto: "+eur(v)+" al mes"))});
   bindAfinar(main);
   document.getElementById("safetyOk")?.addEventListener("click",()=>{safetyNotes=[];render()});
   document.getElementById("shareMenu")?.addEventListener("click",openShareMenu);
@@ -600,9 +600,8 @@ function openSacrifice(start){
     if(dlg.querySelector("#raiseB").checked)S.home.budget.week=need;
     if(dlg.querySelector("#toShop")?.checked)S.home.shop.weekMode="tienda";
     S.home.repeat=dlg.querySelector("#repSel").value;
-    S.home.tscale={};redoFromToday();checkBudget();
-    save();dlg.close();render();
-    const c2=weekCost(start),t2=weekFoodTarget(start);toast(c2<=t2+0.5?"Listo: "+eur(c2)+" de "+eur(t2):"Más cerca: "+eur(c2)+" de "+eur(t2)+". Puedes sacrificar algo más");
+    S.home.tscale={};save();dlg.close();
+    redoScreen(()=>{const c2=weekCost(start),t2=weekFoodTarget(start);toast(c2<=t2+0.5?"Listo: "+eur(c2)+" de "+eur(t2):"Más cerca: "+eur(c2)+" de "+eur(t2)+". Puedes sacrificar algo más")});
   };
 }
 function showDialog(html,full){dlg.className=full?"full":"";dlg.innerHTML=html;if(!dlg.open)dlg.showModal();dlg.querySelectorAll("[data-x]").forEach(b=>b.onclick=()=>dlg.close())}
@@ -1679,7 +1678,7 @@ async function boot(){
   checkUpdate();startCounter();
   if(avisosOn()&&S.notif&&S.notif.on){shareWithSW().catch(()=>{});queueSyncAvisos()}
   // Quien ya tenía presupuesto puesto (de antes de que se rehiciera el menú al ponerlo): se ajusta una vez
-  if(S.onboarded&&budgetSet()&&!(S.budgetInfo&&S.budgetInfo[todayISO().slice(0,7)])){try{redoFromToday();checkBudget();render()}catch(e){console.error(e)}}
+  if(S.onboarded&&budgetSet()&&!(S.budgetInfo&&S.budgetInfo[todayISO().slice(0,7)])){try{redoScreen()}catch(e){console.error(e)}}
   trackOnBoot();checkAvisos();applyAccent();applySkin();if(servidorOn())loadStats().then(()=>{applyAccent();applySkin()}).catch(()=>{});
   {const u=new URLSearchParams(location.search),t=u.get("hecho")||u.get("abrir");if(t){notifAction(u.get("hecho")?"hecho":"abrir",t);history.replaceState(null,"",location.pathname)}}
   checkSharedTicket().then(t=>{if(!t)casaOnBoot().then(j=>{if(!j&&!shareOnBoot())setTimeout(()=>openRateDialog(),1500)})});

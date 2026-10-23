@@ -1036,3 +1036,25 @@ details.aisle{margin-top:10px}
 .sugt{border:0;background:var(--surface-2);border-radius:14px;padding:10px;text-align:left;font:inherit;color:inherit;display:flex;flex-direction:column;gap:2px;cursor:pointer}
 .sugt .ic{color:var(--accent);width:22px;height:22px}.sugt small{color:var(--muted);font-size:.75rem}
 .sugt.on{outline:2px solid var(--accent);background:var(--accent-soft)}
+
+/* «Rehaciendo tu menú»: su propia pantalla (la de «Preparando tu semana» no cambia) */
+.redoart{position:relative;height:230px;margin:18px auto;width:min(280px,80vw)}
+.rmenu{position:absolute;left:0;top:10px;width:72%;background:var(--surface);border-radius:20px;box-shadow:var(--sh-2);padding:14px 14px 10px;transform:rotate(-3deg)}
+.rmh{font-family:var(--serif,serif);font-style:italic;color:var(--accent);font-size:1.25rem;margin-bottom:6px}
+.rmr{display:flex;align-items:center;gap:8px;padding:6px 0;border-top:1px dashed var(--line)}
+.rme{position:relative;width:30px;height:30px;overflow:hidden;flex:none}
+.rme i{position:absolute;inset:0;display:grid;place-items:center;font-style:normal;font-size:1.3rem;animation:rmswap 2.4s var(--ease) infinite;animation-delay:var(--d)}
+.rme i:last-child{transform:translateY(100%);animation-name:rmswap2}
+.rml{flex:1;height:8px;border-radius:4px;background:var(--line)}
+.rmk{color:var(--ok,#2f8a4a);font-weight:700;opacity:0;animation:rmok 2.4s var(--ease) infinite;animation-delay:var(--d)}
+@keyframes rmswap{0%,30%{transform:none}50%,100%{transform:translateY(-100%)}}
+@keyframes rmswap2{0%,30%{transform:translateY(100%)}50%,100%{transform:none}}
+@keyframes rmok{0%,45%{opacity:0;transform:scale(.6)}60%,100%{opacity:1;transform:none}}
+.piggy{position:absolute;right:0;bottom:6px;width:86px;height:86px;border-radius:26px;background:var(--surface);box-shadow:var(--sh-1);display:grid;place-items:center;font-size:2.8rem;animation:pig 1.2s var(--ease) infinite alternate}
+.piggy.sp{font-size:2.4rem}
+.rcoin{position:absolute;right:30px;top:20px;font-weight:400;font-size:1.3rem;opacity:0;animation:coindrop 1.65s ease-in infinite;animation-delay:var(--d);margin-right:var(--x)}
+@keyframes coindrop{0%{transform:translateY(-10px);opacity:0}20%{opacity:1}85%{transform:translateY(120px);opacity:1}100%{transform:translateY(130px) scale(.6);opacity:0}}
+@keyframes pig{from{transform:translateY(0) rotate(-3deg)}to{transform:translateY(-4px) rotate(3deg)}}
+#prepTxt.in{animation:msgin .35s var(--ease)}
+@keyframes msgin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.redoart *{animation:none!important}.rme i:last-child{display:none}}

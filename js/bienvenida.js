@@ -131,17 +131,30 @@ function finishOnboarding(){
   preparingScreen(()=>{ensureHorizon();if(quick)S.afinar.cost=estimateMonthBudget();save()},()=>{tab="menu";if(S.home.start&&S.home.start>todayISO())month=S.home.start.slice(0,7);render();toast("Menú generado. Puedes cambiar lo que quieras")});
 }
 // Pantalla "Preparando tu semana": hace el trabajo y enseña lo que va haciendo
-function preparingScreen(work,done){
+function preparingScreen(work,done,opts={}){
   const b=Number(S.home.budget.week)||weekBudget((S.home.start&&S.home.start>todayISO()?S.home.start:todayISO()).slice(0,7));
-  const msgs=["Ajustando a vuestros gustos…","Teniendo en cuenta quién come cada día…",b?`Manteniendo la compra por debajo de ${b} € a la semana…`:"Buscando lo más barato…","Preparando tu lista de la compra…"];
-  const ov=document.createElement("div");ov.className="prep";
-  ov.innerHTML=`<div class="prepin"><h2 class="wh">Preparando <em>tu semana</em></h2><p>Un momento, nos encargamos.</p>
-    <div class="prepart" aria-hidden="true"><span>🍲</span><span>🥗</span><span>🍝</span><span>🐟</span><span>🥘</span><div class="pot">🍳</div></div>
+  const msgs=opts.msgs||["Ajustando a vuestros gustos…","Teniendo en cuenta quién come cada día…",b?`Manteniendo la compra por debajo de ${b} € a la semana…`:"Buscando lo más barato…","Preparando tu lista de la compra…"];
+  const ov=document.createElement("div");ov.className="prep"+(opts.redo?" redo":"");
+  ov.innerHTML=`<div class="prepin"><h2 class="wh">${opts.title?accentTitle(opts.title):"Preparando <em>tu semana</em>"}</h2><p>${esc(opts.sub||"Un momento, nos encargamos.")}</p>
+    ${opts.redo?redoArt(opts.coins):`<div class="prepart" aria-hidden="true"><span>🍲</span><span>🥗</span><span>🍝</span><span>🐟</span><span>🥘</span><div class="pot">🍳</div></div>`}
     <div class="prepbar"><i></i></div><p class="prepmsg"><span class="dot"></span><span id="prepTxt">${msgs[0]}</span></p></div>`;
   document.body.appendChild(ov);
-  let i=0;const t=setInterval(()=>{i++;if(i<msgs.length)ov.querySelector("#prepTxt").textContent=msgs[i]},750);
+  const step=opts.redo?Math.max(600,Math.round(2900/msgs.length)):750;let i=0;const t=setInterval(()=>{i++;if(i<msgs.length){const x=ov.querySelector("#prepTxt");x.classList.remove("in");void x.offsetWidth;x.textContent=msgs[i];if(opts.redo)x.classList.add("in")}},step);
   setTimeout(()=>{try{work()}catch(e){console.error(e)}},60);
   setTimeout(()=>{clearInterval(t);ov.classList.add("out");done();setTimeout(()=>ov.remove(),350)},3100);
+}
+// Dibujo de «Rehaciendo tu menú»: una tarjeta de menú cuyos platos se van cambiando, y monedas a la hucha si hay presupuesto
+function redoArt(coins){
+  const rows=[["🥩","🫘"],["🍕","🥗"],["🍤","🐟"],["🍖","🍳"]];
+  return `<div class="redoart" aria-hidden="true"><div class="rmenu"><div class="rmh">Menú</div>
+    ${rows.map(([a,b],i)=>`<div class="rmr" style="--d:${i*.45}s"><span class="rme"><i>${a}</i><i>${b}</i></span><span class="rml"></span><span class="rmk">✓</span></div>`).join("")}</div>
+    ${coins?`<div class="piggy">🐷</div>${[0,1,2].map(i=>`<b class="rcoin" style="--d:${i*.55}s;--x:${i*14-14}px">🪙</b>`).join("")}`:`<div class="piggy sp">✨</div>`}</div>`;
+}
+// «Rehaciendo tu menú»: su propia pantalla, con lo que va haciendo al recalcular (presupuesto, afinar, sacrificios…)
+function redoScreen(after){
+  const m=(S.home.start&&S.home.start>todayISO()?S.home.start:todayISO()).slice(0,7),bs=budgetSet();
+  preparingScreen(()=>{redoFromToday();checkBudget()},()=>{render();after&&after()},{redo:true,coins:bs,title:"Rehaciendo *tu menú*",sub:bs?`Lo ajusto a tus ${eur(monthBudget(m))} al mes.`:"Un momento, lo dejo a tu medida.",
+    msgs:[bs?`Cuadrando con tus ${eur(monthBudget(m))} al mes…`:"Ajustando a vuestros gustos…","Buscando platos más baratos que os gusten…","Aprovechando paquetes que ya compras…","Repasando alergias y dietas…","Rehaciendo la lista de la compra…"]});
 }
 // Cocina dibujada: cada aparato se toca para elegirlo (se ilumina en rojo con su etiqueta)
 function kitchenSVG(apps){
@@ -552,7 +565,7 @@ function validateStep(fullId){
     if(sin){toast(`Marca qué comidas hace ${personName(sin)} en casa`);return false}}
   if(id==="objetivos"){if(!a.goals.length){toast("Elige al menos un objetivo");return false}a.weight=Number(v("#wzW"))||null}
   if(id==="cocina"&&H.cookMode==="lote"&&!H.cookDays.length){toast("Elige al menos un día para cocinar");return false}
-  if(id==="cocina"&&H._repChanged){delete H._repChanged;if(!wiz.afinar)setTimeout(()=>{redoFromToday();render()},0)}
+  if(id==="cocina"&&H._repChanged){delete H._repChanged;if(!wiz.afinar)setTimeout(()=>redoScreen(()=>toast("Menú rehecho")),0)}
   if(id==="plan"){const st=v("#wzStart");H.start=st&&st>todayISO()?st:(H.start&&H.start<=todayISO()?H.start:null);
     // Los menús de semanas que ya no cuentan (antes del inicio) se borran
     if(H.start)for(const s of Object.keys(S.plans))if(addDays(s,6)<H.start)delete S.plans[s];
@@ -561,7 +574,7 @@ function validateStep(fullId){
     H.shop.delivery=Number(v("#wzDel"));
     H.budget.month=Number(v("#wzBM"))||0;H.budgetConfirmed=true;H.budget.week=v("#wzBW")===""?null:Number(v("#wzBW"));H.budget.basics=Number(v("#wzBB"))||0;
     if(before!==JSON.stringify([H.budget,H.repeat,H.sacrifice,H.shop]))H.tscale={};
-    if(before!==JSON.stringify([H.budget,H.repeat,H.sacrifice,H.shop])&&!wiz.afinar)setTimeout(()=>preparingScreen(()=>{redoFromToday();checkBudget()},()=>{render();const b=(S.budgetInfo||{})[month];toast(!b||b.ok?"Menú rehecho con tu presupuesto":"No llego del todo: te explico por qué en el Menú")}),0)}
+    if(before!==JSON.stringify([H.budget,H.repeat,H.sacrifice,H.shop])&&!wiz.afinar)setTimeout(()=>redoScreen(()=>{const b=(S.budgetInfo||{})[month];toast(!b||b.ok?"Menú rehecho con tu presupuesto":"No llego del todo: te explico por qué en el Menú")}),0)}
   return true;
 }
 
@@ -576,7 +589,7 @@ function finishAfinar(){
   const inv=S.afinar&&S.afinar.invite;wiz={i:0,single:null};
   preparingScreen(()=>{redoFromToday();checkBudget()},()=>{
     if(inv){S.afinar.invite=false;tab="perfil";accOpen.add("compartir");render();toast("Invita desde aquí a tu familiar")}
-    else{tab="menu";render();toast("Menú rehecho con lo que me has contado")}});
+    else{tab="menu";render();toast("Menú rehecho con lo que me has contado")}},{redo:true,title:"Rehaciendo *tu menú*",sub:"Con lo que me has contado.",msgs:["Teniendo en cuenta lo nuevo…","Buscando platos que encajen…","Repasando alergias y dietas…","Rehaciendo la lista de la compra…"]});
 }
 // En el Menú: después del primer menú, "¿Quieres afinarlo más?" (y luego, siempre a mano)
 function afinarCard(){
