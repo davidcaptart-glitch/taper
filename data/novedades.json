@@ -848,6 +848,17 @@
         "Te pregunto si lo compras también otros meses (cada semana o cada mes) y, si dices que sí, lo añado a tu compra y al presupuesto desde el mes siguiente. Lo ves y lo quitas en Compra del mes › «Lo que compras siempre».",
         "Al abrir la app ya no se cambia ningún plato que tengas planificado ni se rehace el menú solo."
       ]
+    },
+    {
+      "version": 109,
+      "fecha": "2026-10-31",
+      "titulo": "El escáner de tickets lee mucho mejor",
+      "cambios": [
+        "Fotos: busca el ticket dentro de la foto (aunque haya mantel o sombras), lo pasa a blanco y negro zona por zona y comprueba que las líneas sumen el total. Si algo no cuadra, lo vuelve a leer de otra manera.",
+        "Tickets en catalán: TRUITA, OUS, PASTANAGA, FORMATGE… se relacionan con el producto real de Mercadona.",
+        "PDF de la compra online: lee todos los productos, el coste de preparación (que no cuenta como comida) y el total. Tu dirección y tus datos del pedido no se guardan.",
+        "Puedes corregir la fecha del ticket si la foto no la lee bien, y lo que compras de más sale con el nombre del producto real."
+      ]
     }
   ]
 }
