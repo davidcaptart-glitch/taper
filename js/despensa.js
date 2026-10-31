@@ -29,6 +29,8 @@ function despensaEvents(){
     for(const u of monthUses(m))if(u.pid&&P[u.pid]&&u.date>=start&&eatenUse(u))ev.push({pid:u.pid,d:u.date,k:1,q:u.q,out:true,u});
   }
   for(const t of S.tickets||[])if(t.date>=start)for(const l of t.lines)if(l.food&&l.pid&&P[l.pid])ev.push({pid:l.pid,d:t.date,k:0,q:lineQty(l),src:"ticket"});
+  // Comidas «de la despensa» ya comidas
+  for(const x of despSlots())if(x.k.startsWith("p:")&&P[x.k.slice(2)]&&x.date>=start&&slotEaten(x.id))ev.push({pid:x.k.slice(2),d:x.date,k:1,q:despItemQty(x),out:true,u:{slot:{id:x.id,date:x.date,meal:x.meal},r:null,label:"De la despensa"}});
   for(const [pid,s] of Object.entries(D.set))if(P[pid])ev.push({pid,d:s.d,k:2,q:s.q,set:true});
   for(const a of D.adj)if(P[a.pid])ev.push({pid:a.pid,d:a.d,k:3,q:a.q,adj:true});
   return ev.sort((a,b)=>a.d.localeCompare(b.d)||a.k-b.k);
@@ -47,6 +49,10 @@ function despensaState(){
       mm.cost+=e.q*unitCost(e.pid);mm.items.push({pid:e.pid,q:e.q})}
     else stock[e.pid]=s+e.q}
   for(const [p,q] of Object.entries(stock))if(q<1)delete stock[p];
+  // Lo del ticket sin receta que se comió: cuenta lo que costó
+  for(const x of despSlots())if(x.k.startsWith("t:")&&slotEaten(x.id)&&x.date>=despensaData().start){const tl=despTicketLine(x.k);if(!tl)continue;
+    const mm=meals[x.id]=meals[x.id]||{key:x.id,date:x.date,meal:x.meal,r:null,cost:0,items:[]};mm.cost+=tl.l.amount/Math.max(1,tl.l.qty||1)*x.n}
+  for(const mm of Object.values(meals))if(!mm.r)mm.name="🧺 "+[...new Set(despSlots().filter(x=>x.id===mm.key).map(x=>despItemName(x.k)))].join(", ");
   const v={stock,meals:Object.values(meals).sort((a,b)=>b.date.localeCompare(a.date)||(a.meal<b.meal?1:-1))};
   despCache={k,v};return v;
 }
@@ -57,6 +63,8 @@ function upcomingNeed(from,to){
     if(!u.pid||!P[u.pid]||u.date<from||u.date>=to||eatenUse(u))continue;
     const st=u.slot&&u.slot.id?((S.meals||{})[u.slot.id]||{}).status:null;if(st==="fuera"||st==="nada")continue;
     need[u.pid]=(need[u.pid]||0)+u.q;if(!first[u.pid]||u.date<first[u.pid].date)first[u.pid]={date:u.date,r:u.r,meal:u.slot.meal}}
+  for(const x of despSlots())if(x.k.startsWith("p:")&&P[x.k.slice(2)]&&x.date>=from&&x.date<to&&!slotEaten(x.id)){const pid=x.k.slice(2);need[pid]=(need[pid]||0)+despItemQty(x);
+    if(!first[pid]||x.date<first[pid].date)first[pid]={date:x.date,r:{name:"de la despensa"},meal:x.meal}}
   return {need,first};
 }
 // Te falta: lo que necesitan los platos de los próximos 7 días y no tienes en casa
@@ -112,12 +120,12 @@ function renderDespensa(){
   for(const p of pids){const g=KEEP_GROUP[P[p].keep]||"Despensa";if(despFilter!=="todo"&&despFilter!==g)continue;const f=first[p];
     h+=`<button class="item dpi" data-dpe="${p}">${prodImg(p)}<span class="t">${esc(P[p].name)}<small>${esc(fmtQty(stock[p],P[p].unit))} · ${eur(stock[p]*unitCost(p))}${f?` · para el ${esc(DSHORT[dow(f.date)]+" "+shortDate(f.date))}`:spareSet.has(p)?" · sin plato previsto":""}</small></span><span class="p">${ico("chevron-right")}</span></button>`}
   // Otras cosas de los tickets (sin receta)
-  const otros=[];for(const t of S.tickets||[])if(t.date>=D.start)t.lines.forEach((l,i)=>{if(l.food&&!l.pid&&!D.gone[t.id+"|"+i])otros.push({k:t.id+"|"+i,l,t})});
+  const otros=ticketOtros();
   if(otros.length&&(despFilter==="todo"))h+=`<div class="card"><h2>Otras cosas de tus tickets</h2><p class="small muted">Comida que no va en ninguna receta (pizzas, caprichos…). Márcala cuando se acabe.</p>
-    ${otros.map(o=>`<div class="fixed"><span>${esc(o.l.name||o.l.desc)}<small>${o.l.kg?String(o.l.kg).replace(".",",")+" kg":o.l.qty+" ud"} · ${eur(o.l.amount)} · ${esc(shortDate(o.t.date))}</small></span><button class="btn ghost small" data-dpgone="${esc(o.k)}">Se acabó</button></div>`).join("")}</div>`;
+    ${otros.map(o=>`<div class="fixed"><span>${esc(despItemName(o.k))}<small>${o.l.kg?String(o.l.kg).replace(".",",")+" kg":`quedan ${o.left} de ${o.total}`} · ${eur(o.l.amount)} · ${esc(shortDate(o.t.date))}${o.res.length?` · para el ${esc(o.res.map(x=>despSlotLabel(x.id)).join("; "))}`:""}</small></span><span class="row" style="gap:6px;flex-wrap:nowrap"><button class="btn small" data-dpday="${esc(o.k)}">Comerlo un día</button><button class="btn ghost small" data-dpgone="${esc(o.k.slice(2))}">Se acabó</button></span></div>`).join("")}</div>`;
   // Lo que se ha gastado
   h+=`<div class="card"><h2>${ico("chef-hat")} Lo que vas gastando</h2><p class="small muted">Cada comida cocinada, a precio del súper. Cuenta las de días pasados salvo las que marcaste como comida fuera o no hecha.</p>`;
-  h+=meals.length?meals.slice(0,12).map(x=>`<div class="fixed"><span>${esc(x.r?x.r.name:"Comida")}<small>${esc(DSHORT[dow(x.date)]+" "+shortDate(x.date))} · ${esc(SMALL[x.meal]?SMALL[x.meal][1].toLowerCase():x.meal)}</small></span><b>${eur(x.cost)}</b></div>`).join(""):`<p class="small muted">Aún no hay comidas cocinadas desde el ${esc(shortDate(D.start))}.</p>`;
+  h+=meals.length?meals.slice(0,12).map(x=>`<div class="fixed"><span>${esc(x.r?x.r.name:x.name||"Comida")}<small>${esc(DSHORT[dow(x.date)]+" "+shortDate(x.date))} · ${esc(SMALL[x.meal]?SMALL[x.meal][1].toLowerCase():x.meal)}</small></span><b>${eur(x.cost)}</b></div>`).join(""):`<p class="small muted">Aún no hay comidas cocinadas desde el ${esc(shortDate(D.start))}.</p>`;
   h+=`</div>`;
   // Añadir a mano
   const all=Object.values(P).sort((a,b)=>a.name.localeCompare(b.name));
@@ -130,6 +138,7 @@ function renderDespensa(){
   main.querySelectorAll("[data-dpf]").forEach(b=>b.onclick=()=>{despFilter=b.dataset.dpf;render()});
   main.querySelectorAll("[data-dpe]").forEach(b=>b.onclick=()=>openDespensaItem(b.dataset.dpe));
   main.querySelectorAll("[data-dpgone]").forEach(b=>b.onclick=()=>{D.gone[b.dataset.dpgone]=true;save();render()});
+  main.querySelectorAll("[data-dpday]").forEach(b=>b.onclick=()=>openPickDay(b.dataset.dpday,1));
   main.querySelectorAll("[data-dpuse]").forEach(b=>b.onclick=()=>useInMenu(b.dataset.dpuse));
   document.getElementById("dpBuy")?.addEventListener("click",()=>addMissingToShop(miss.filter(x=>!x.inList)));
   document.getElementById("dpRedo")?.addEventListener("click",confirmRedoWithStock);
@@ -145,7 +154,9 @@ function openDespensaItem(pid){
     <p class="small muted">Envase de ${esc(fmtQty(p.env,p.unit))} · ${eur(price(pid))}${f?` · lo usa ${esc(f.r.name.toLowerCase())} el ${esc(DSHORT[dow(f.date)]+" "+shortDate(f.date))}`:""}</p>
     <div class="field"><label for="dpIn">¿Cuánto te queda? (${esc(p.unit)})</label><input type="number" id="dpIn" min="0" step="any" value="${q}"></div>
     <div class="chips">${[["0","Se acabó"],[String(Math.round(p.env/2)),"Medio envase"],[String(p.env),"1 envase"],[String(p.env*2),"2 envases"]].map(([v,t])=>`<button type="button" class="chip" data-dpq="${v}">${t}</button>`).join("")}</div>
-    <div class="actions"><button class="btn wide" id="dpSave">Guardar</button></div></div>`);
+    <div class="actions"><button class="btn wide" id="dpSave">Guardar</button></div>
+    ${q?`<div class="actions"><button class="btn ghost wide" id="dpDay">🧺 Comerlo un día (sin receta)</button></div>`:""}</div>`);
+  dlg.querySelector("#dpDay")?.addEventListener("click",()=>openPickDay("p:"+pid,1));
   dlg.querySelectorAll("[data-dpq]").forEach(b=>b.onclick=()=>{dlg.querySelector("#dpIn").value=b.dataset.dpq});
   dlg.querySelector("#dpSave").onclick=()=>{const v=Number(dlg.querySelector("#dpIn").value);if(!(v>=0)){toast("Pon una cantidad");return}
     const D=despensaData();D.set[pid]={q:v,d:todayISO()};D.adj=D.adj.filter(a=>!(a.pid===pid&&a.d<=todayISO()));save();dlg.close();render();toast(v?"Apuntado: "+fmtQty(v,p.unit):"Quitado de la despensa")};
@@ -192,4 +203,60 @@ function redoWithStock(){
     for(const [pid,q] of slotIng(r,sl)){const t=Math.min(q,stk[pid]||0);used+=t*unitCost(pid);stk[pid]=(stk[pid]||0)-t}}
   for(const s of new Set(slots.map(sl=>weekStartFor(sl.date))))ensureWeek(s);
   save();render();toast(changed?`He cambiado ${changed} ${changed===1?"plato":"platos"}: aprovechan ${eur(used)} de lo que tienes`:"Ya estaban aprovechando lo que tienes");
+}
+
+/* ---------- Comer algo de la despensa ----------
+   Un hueco del menú puede ser «de la despensa»: las pizzas del viernes, algo que sobra, lo que compraste sin receta…
+   No lleva receta ni se compra nada; al comerlo se descuenta. Hueco = {despensa:[{k,n}],locked:true}
+   k = "p:producto" (n = envases) o "t:ticket|línea" (n = unidades del ticket) */
+const despSlots=()=>{const out=[];for(const wk of Object.values(S.plans))for(const [id,v] of Object.entries(wk.slots||{}))if(v&&v.despensa)for(const it of v.despensa)out.push({id,date:id.slice(0,10),meal:id.slice(11),k:it.k,n:Number(it.n)||0});return out};
+function slotEaten(id){const st=((S.meals||{})[id]||{}).status;if(st==="fuera"||st==="nada"||st==="otro")return false;const d=id.slice(0,10),t=todayISO();return d<t||(d===t&&!!st)}
+function despTicketLine(k){const [tid,i]=k.slice(2).split("|");const t=(S.tickets||[]).find(x=>x.id===tid);return t&&t.lines[Number(i)]?{t,l:t.lines[Number(i)]}:null}
+function despItemName(k){if(k.startsWith("p:"))return P[k.slice(2)]?P[k.slice(2)].name:"Producto";const x=despTicketLine(k);return x?(x.l.name||x.l.desc.charAt(0)+x.l.desc.slice(1).toLowerCase()):"Algo de un ticket"}
+const despItemQty=it=>it.k.startsWith("p:")&&P[it.k.slice(2)]?it.n*P[it.k.slice(2)].env:it.n;
+// Lo del ticket (sin receta): cuántas unidades quedan, cuántas ya se comieron y cuántas están reservadas para un día
+function ticketOtros(){
+  const D=despensaData(),out=[],used={},res={};
+  for(const x of despSlots())if(x.k.startsWith("t:")){if(slotEaten(x.id))used[x.k]=(used[x.k]||0)+x.n;else(res[x.k]=res[x.k]||[]).push(x)}
+  for(const t of S.tickets||[])if(t.date>=D.start)t.lines.forEach((l,i)=>{const k="t:"+t.id+"|"+i;if(!l.food||l.pid||D.gone[t.id+"|"+i])return;
+    const total=Math.max(1,l.qty||1),left=total-(used[k]||0);if(left<=0)return;out.push({k,l,t,total,left,res:res[k]||[]})});
+  return out;
+}
+function despSlotLabel(id){const d=id.slice(0,10);return DSHORT[dow(d)]+" "+shortDate(d)+", "+id.slice(11)}
+// Elegir qué comer de la despensa en un hueco (desde «Cambiar plato»)
+function openDespensaPick(sid,preset){
+  const d=sid.slice(0,10),meal=sid.slice(11),start=weekStartFor(d),wk=S.plans[start];if(!wk)return;
+  const cur=wk.slots[sid]&&wk.slots[sid].despensa?wk.slots[sid].despensa:[],n={};for(const it of cur)n[it.k]=it.n;if(preset)n[preset.k]=(n[preset.k]||0)+preset.n;
+  const {stock}=despensaState(),otros=ticketOtros();
+  const rows=[...otros.map(o=>({k:o.k,name:despItemName(o.k),sub:`${o.left} de ${o.total} · del ticket del ${shortDate(o.t.date)}`,max:o.left,step:1,unit:"ud"})),
+    ...Object.keys(stock).sort((a,b)=>P[a].name.localeCompare(P[b].name)).map(pid=>({k:"p:"+pid,name:P[pid].name,sub:`tienes ${fmtQty(stock[pid],P[pid].unit)} · envase de ${fmtQty(P[pid].env,P[pid].unit)}`,max:Math.max(1,Math.ceil(stock[pid]/P[pid].env*2)/2),step:.5,unit:"env."}))];
+  for(const k of Object.keys(n))if(!rows.some(r=>r.k===k))rows.unshift({k,name:despItemName(k),sub:"ya elegido",max:Math.max(n[k],1),step:k.startsWith("p:")?.5:1,unit:k.startsWith("p:")?"env.":"ud"});
+  const draw=()=>{
+    showDialog(`<div class="mod">${closeBtn}<div class="veb">${esc(DAYS[dow(d)]+" "+shortDate(d))} · ${esc(meal)}</div><h2 class="vh" style="font-size:1.7rem">Comer algo de <em>tu despensa</em></h2>
+      <p class="small muted">Elige lo que vais a comer de lo que ya tienes. No hace falta comprar nada y, cuando pase, lo descuento de la despensa.</p>
+      ${rows.length?rows.map(r=>`<div class="dprow"><span><b>${esc(r.name)}</b><small>${esc(r.sub)}</small></span><span class="step"><button type="button" data-dpm="${esc(r.k)}|-1" aria-label="Menos">−</button><b>${String(n[r.k]||0).replace(".",",")}</b><button type="button" data-dpm="${esc(r.k)}|1" aria-label="Más">+</button><small>${r.unit}</small></span></div>`).join("")
+        :`<p>Tu despensa está vacía. Marca lo que compras o sube los tickets y aparecerá aquí.</p>`}
+      <div class="actions"><button class="btn wide" id="dpkOk">Guardar</button></div>
+      ${cur.length?`<div class="actions"><button class="btn ghost" id="dpkBack">${mealState(d,meal)==="libre"?"Quitar":"Volver a poner una receta"}</button></div>`:""}</div>`);
+    dlg.querySelectorAll("[data-dpm]").forEach(b=>b.onclick=()=>{const i=b.dataset.dpm.lastIndexOf("|"),k=b.dataset.dpm.slice(0,i),dir=Number(b.dataset.dpm.slice(i+1)),r=rows.find(x=>x.k===k);
+      n[k]=Math.max(0,Math.min(r.max,Math.round(((n[k]||0)+dir*r.step)*2)/2));const y=dlg.scrollTop;draw();dlg.scrollTop=y});
+    dlg.querySelector("#dpkOk").onclick=()=>{const items=Object.entries(n).filter(([,v])=>v>0).map(([k,v])=>({k,n:v}));
+      if(!items.length){toast("Elige al menos una cosa");return}
+      wk.slots[sid]={despensa:items,locked:true};save();dlg.close();render();toast(`${DAYS[dow(d)]} ${meal}: ${items.map(it=>despItemName(it.k).toLowerCase()).join(", ")}`)};
+    dlg.querySelector("#dpkBack")?.addEventListener("click",()=>{delete wk.slots[sid];ensureWeek(start);save();dlg.close();render();toast(mealState(d,meal)==="libre"?"Quitado":"Vuelve a tener receta")});
+  };
+  draw();
+}
+// Desde la despensa: ¿qué día te lo comes? (los próximos 14 días)
+function openPickDay(k,nDefault){
+  const today=todayISO(),opts=[];
+  // Las comidas que se cocinan y también las «libres» (sin plan: el viernes de pizza, por ejemplo)
+  for(let i=0;i<15;i++){const dd=addDays(today,i),wk=S.plans[weekStartFor(dd)];if(!wk)continue;const sls=buildSlots(weekStartFor(dd));
+    for(const meal of ["comida","cena"]){const id=dd+"|"+meal;if(slotEaten(id))continue;const st=mealState(dd,meal),sl=sls.find(s=>s.id===id);
+      if(!sl&&st!=="libre")continue;const v=wk.slots[id];
+      opts.push({sl:sl||{id,date:dd,meal},txt:v&&v.despensa?"🧺 "+v.despensa.map(it=>despItemName(it.k)).join(", "):v&&RX[v.recipe]?RX[v.recipe].name:sl&&sl.fixed?sl.fixed.name:st==="libre"?"libre (sin plan)":"—"})}}
+  showDialog(`<div class="mod">${closeBtn}<h2 class="vh" style="font-size:1.6rem">¿Cuándo os coméis <em>${esc(despItemName(k).toLowerCase())}</em>?</h2>
+    <p class="small muted">Lo pongo en esa comida en lugar del plato que hay y no se compra nada para ese día.</p>
+    ${opts.map((o,i)=>`<button class="alt" data-pday="${i}"><b>${esc(DAYS[dow(o.sl.date)]+" "+shortDate(o.sl.date))} · ${esc(o.sl.meal)}</b><small>Ahora: ${esc(o.txt)}</small></button>`).join("")||"<p>No hay comidas planificadas en los próximos días.</p>"}</div>`);
+  dlg.querySelectorAll("[data-pday]").forEach(b=>b.onclick=()=>openDespensaPick(opts[Number(b.dataset.pday)].sl.id,{k,n:nDefault}));
 }

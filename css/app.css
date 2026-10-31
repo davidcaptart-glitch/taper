@@ -1085,3 +1085,12 @@ details.aisle{margin-top:10px}
 .dsum b{display:block;font-size:1.15rem;letter-spacing:-.02em}.dsum small{color:var(--muted);font-size:.72rem}
 .item.dpi{width:100%;border:0;text-align:left;font:inherit;color:inherit;cursor:pointer}
 .item.dpi .p{color:var(--muted);width:18px;height:18px}
+
+/* Comer algo de la despensa: cada cosa con su − cantidad + */
+.dprow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.dprow small{display:block;color:var(--muted);font-size:.75rem}
+.dprow .step{display:flex;align-items:center;gap:6px;flex:none}
+.dprow .step button{width:34px;height:34px;border-radius:50%;border:0;background:var(--surface-2);font:inherit;font-size:1.1rem;color:inherit;cursor:pointer}
+.dprow .step b{min-width:22px;text-align:center}
+.dpdish{display:grid;place-items:center;font-size:1.6rem;background:var(--accent-soft)}
+.alt.dpalt{background:var(--accent-soft);margin-top:10px}

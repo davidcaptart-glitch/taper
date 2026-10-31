@@ -34,7 +34,8 @@ function monthUses(m,exceptId){
     for(const sl of buildSlots(start)){
       if(sl.id===exceptId)continue;
       const v=wk.slots[sl.id], r=v&&RX[v.recipe];
-      if(!r){if(sl.fixed&&!sl.fixed.recipe)out.push({extra:Number(sl.fixed.cost)||0,wi,slot:sl});continue}
+      // De la despensa: ya está comprado (no suma nada a la compra)
+      if(!r){if(sl.fixed&&!sl.fixed.recipe&&!(v&&v.despensa))out.push({extra:Number(sl.fixed.cost)||0,wi,slot:sl});continue}
       const cook=cookDayFor(v.rep?v.rep.slice(0,10):sl.date);   // si repite el plato de otro día, se compra para aquel día
       // Lo fresco para lo que se cocina antes de que llegue el pedido sale del pedido de la semana anterior
       const freshWi=wi>0&&cook<deliv?wi-1:wi;

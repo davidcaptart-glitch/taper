@@ -429,12 +429,12 @@ function ensureWeek(start,regen){
       const fr=sl.fixed.recipe&&RX[sl.fixed.recipe];
       // Un plato fijo que alguien de los que comen ya no puede tomar no se pone: se elige otro
       if(!(fr&&unsafeFor(slotPeople(sl),fr).length)){
-        if(fr&&(!wk.slots[sl.id]||wk.slots[sl.id].recipe!==sl.fixed.recipe)){wk.slots[sl.id]={recipe:sl.fixed.recipe,locked:true};changed=true}
+        if(fr&&!(wk.slots[sl.id]&&wk.slots[sl.id].despensa)&&(!wk.slots[sl.id]||wk.slots[sl.id].recipe!==sl.fixed.recipe)){wk.slots[sl.id]={recipe:sl.fixed.recipe,locked:true};changed=true}
         continue;
       }
     }
     const cur=wk.slots[sl.id];
-    if(cur&&RX[cur.recipe])continue;
+    if(cur&&(RX[cur.recipe]||cur.despensa))continue;   // con receta o con algo de la despensa
     // Cocinar una vez para varios días: mismo plato que el día anterior si toca
     const rp=repeatFrom(wk,sl,slots);if(rp){wk.slots[sl.id]=rp;changed=true;continue}
     const r=pickFor(sl,ctx);if(!r)continue;
@@ -575,7 +575,7 @@ function genWeekFromScratch(start,nTries=6){
 function weekCost(start,slotsIn){
   const wk=S.plans[start];if(!wk)return 0;let t=0;const q={};
   for(const sl of slotsIn||buildSlots(start)){const v=wk.slots[sl.id],r=v&&RX[v.recipe];
-    if(r)for(const [p,c] of slotIng(r,sl))q[p]=(q[p]||0)+c;else if(sl.fixed&&!sl.fixed.recipe)t+=Number(sl.fixed.cost)||0}
+    if(r)for(const [p,c] of slotIng(r,sl))q[p]=(q[p]||0)+c;else if(sl.fixed&&!sl.fixed.recipe&&!(v&&v.despensa))t+=Number(sl.fixed.cost)||0}
   for(const [d,dd] of Object.entries(wk.small||{}))for(const [m,v] of Object.entries(dd)){const r=RX[v.recipe];if(r)for(const [p,c] of r.ing)q[p]=(q[p]||0)+c*smallPortions(d,m)}
   for(const [p,c] of Object.entries(q))t+=P[p].keep==="despensa"?c/P[p].env*price(p):packsFor(p,c)*price(p);
   return Math.round(t*100)/100;

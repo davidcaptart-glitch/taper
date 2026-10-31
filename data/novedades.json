@@ -872,6 +872,16 @@
         "«Lo que vas gastando»: lo que cuesta cada comida que cocinas y el total del mes.",
         "El congelador sigue dentro de la Despensa."
       ]
+    },
+    {
+      "version": 111,
+      "fecha": "2026-10-31",
+      "titulo": "Comer algo de la despensa",
+      "cambios": [
+        "En cualquier comida puedes poner algo que ya tienes en lugar de una receta: las pizzas del viernes, algo que te sobra o lo que compraste sin receta. No hay que comprar nada y, cuando pasa, se descuenta de la despensa.",
+        "Desde el menú: «Cambiar plato › Comer algo de tu despensa». En las comidas libres (sin plan) sale el botón «Algo de la despensa».",
+        "Desde la Despensa: toca un producto o lo de tus tickets y elige «Comerlo un día». Lo reservado sale con su día y lo que cuesta cada comida se suma a lo que vas gastando."
+      ]
     }
   ]
 }
