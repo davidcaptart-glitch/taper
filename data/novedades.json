@@ -882,6 +882,16 @@
         "Desde el menú: «Cambiar plato › Comer algo de tu despensa». En las comidas libres (sin plan) sale el botón «Algo de la despensa».",
         "Desde la Despensa: toca un producto o lo de tus tickets y elige «Comerlo un día». Lo reservado sale con su día y lo que cuesta cada comida se suma a lo que vas gastando."
       ]
+    },
+    {
+      "version": 112,
+      "fecha": "2026-10-31",
+      "titulo": "Tickets de cualquier súper y compras sueltas",
+      "cambios": [
+        "Sube el ticket de una compra improvisada: en la Despensa («Subir un ticket») o en Compra («¿Compra improvisada o de otro súper?»). Se guarda como «Compra suelta», cuenta en lo que has gastado y lo que compraste entra en tu despensa.",
+        "El lector entiende tickets de otros supermercados (Lidl, Carrefour, Dia, Bonpreu, Condis, Consum…): cantidades, peso, descuentos y total. Si el súper no lo conozco, guardo su nombre.",
+        "Cada producto se relaciona con el más parecido de Mercadona para saber qué es (y si es comida). Los precios de otros súper no se mezclan con los de Mercadona."
+      ]
     }
   ]
 }

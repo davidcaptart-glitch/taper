@@ -969,7 +969,8 @@ function renderCompra(){
     const tki=tks.length?`<span class="small muted">🧾 ${tks.length===1?"Ticket subido":tks.length+" tickets subidos"}: ${eur(tks.reduce((t,x)=>t+x.food,0))} en comida</span>`:"";
     if(l.items.length&&!shopIsDone(month,l))h+=`<div class="row" style="margin:4px 0 8px"><button class="btn ghost small" id="shopDone">✓ Ya he hecho esta compra</button>${tkb}</div>`;
     else if(l.items.length||tks.length)h+=`<div class="row" style="margin:4px 0 8px;align-items:center"><span class="small okt" style="color:var(--ok);font-weight:600">✓ Compra hecha</span>${tkb}${tki}</div>`;
-    else if(tkb)h+=`<div class="row" style="margin:4px 0 8px">${tkb}</div>`;}
+    else if(tkb)h+=`<div class="row" style="margin:4px 0 8px">${tkb}</div>`;
+    h+=`<p class="small" style="margin:-2px 0 8px"><button class="linkbtn" id="tkLoose">¿Compra improvisada o de otro súper? Sube su ticket</button></p>`;}
   if(listSel==="mes")h+=shopPlanCard(month)+recurringHTML(month);
   if(l.items.length&&l.groups.length===1&&l.groups[0].sup==="mercadona")h+=orderBlock(l,listSel==="mes"?"mes":"semana");
   if(l.items.length&&chosenSupers().length>1)h+=compareCard(l);
@@ -1017,6 +1018,7 @@ function renderCompra(){
   document.getElementById("shopDone")?.addEventListener("click",()=>{const m=month,k=listSel;markShopDone(m,k);render();askTicket(m,k)});
   document.getElementById("tkBanner")?.addEventListener("click",()=>openTicketScan(l.mode!=="tienda",null,{m:month,key:listSel}));
   document.getElementById("tkAny")?.addEventListener("click",()=>openTicketScan(l.mode!=="tienda",null,{m:month,key:listSel}));
+  document.getElementById("tkLoose")?.addEventListener("click",()=>openTicketScan(false,null,{m:todayISO().slice(0,7),key:"suelta"}));
   document.getElementById("tkSkip")?.addEventListener("click",()=>{S.ticketSkip=S.ticketSkip||{};S.ticketSkip[shopKey(month,listSel)]=todayISO();save();render()});
   main.querySelectorAll("[data-bag]").forEach(i=>i.onchange=()=>{S.bags=S.bags||{};if(i.checked)S.bags[i.dataset.bag]=todayISO();else delete S.bags[i.dataset.bag];save();render()});
   main.querySelectorAll("[data-splan]").forEach(b=>b.onclick=()=>{const p=SHOP_PLANS.find(x=>x.id===b.dataset.splan);

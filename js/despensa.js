@@ -99,6 +99,7 @@ function renderDespensa(){
   const {first}=upcomingNeed(today,addDays(today,28)),miss=despensaMissing(),spare=despensaSpare(),spareSet=new Set(spare.map(x=>x.pid));
   let h=`<section class="view">${viewHead(pids.length+" "+(pids.length===1?"producto":"productos")+" en casa","Tu *despensa*")}
     <p class="small muted">Se llena con lo que marcas como comprado y con tus tickets, y se gasta al cocinar cada plato. Si algo no cuadra, tócalo y pon lo que te queda.</p>
+    <button class="btn wide" id="dpTicket">${ico("receipt")} Subir un ticket (compra suelta o de otro súper)</button>
     <div class="dsum"><div><b>${eur(value)}</b><small>vale lo que tienes</small></div><div><b>${eur(spentM)}</b><small>cocinado en ${esc(monthName(cm).split(" ")[0].toLowerCase())}</small></div><div><b>${monthMeals.length}</b><small>${monthMeals.length===1?"comida hecha":"comidas hechas"}</small></div></div>`;
   if(!D.checked)h+=`<div class="infobox">🧺 <b>Primera vez:</b> he juntado lo que has comprado este mes y he restado lo que ya habéis cocinado. Como el menú ha ido cambiando, seguro que algo no cuadra: repasa la lista y toca lo que esté mal. <button class="btn small" id="dpChecked" style="margin-top:6px">Ya lo he repasado</button></div>`;
   // Te falta
@@ -134,6 +135,7 @@ function renderDespensa(){
     <button class="btn small" id="dpAdd" style="margin-top:8px">Añadir</button>
     <p class="small muted" style="margin-top:10px">${ico("snowflake")} Lo congelado, con los días que lleva dentro: <button class="btn ghost small" id="dpFz">Ver el congelador</button></p></div></section>`;
   main.innerHTML=h;
+  document.getElementById("dpTicket").onclick=()=>openTicketScan(false,null,{m:today.slice(0,7),key:"suelta"});
   document.getElementById("dpChecked")?.addEventListener("click",()=>{D.checked=todayISO();save();render();toast("Perfecto. A partir de ahora se va ajustando sola")});
   main.querySelectorAll("[data-dpf]").forEach(b=>b.onclick=()=>{despFilter=b.dataset.dpf;render()});
   main.querySelectorAll("[data-dpe]").forEach(b=>b.onclick=()=>openDespensaItem(b.dataset.dpe));
