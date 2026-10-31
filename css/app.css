@@ -1075,3 +1075,6 @@ details.aisle{margin-top:10px}
 @keyframes barloop{from{transform:translateX(-110%)}to{transform:translateX(280%)}}
 #entryTxt.in{animation:msgin .35s var(--ease)}
 @media (prefers-reduced-motion:reduce){.entart *,.prepbar.loop i{animation:none!important}.entart span{opacity:1;transform:translate(calc(-50% + var(--x)),var(--y))}.tlid{transform:translate(-2px,-26px) rotate(-13deg)}}
+
+/* Compras de más de un ticket: una fila por producto con «Solo esta vez / Cada semana / Cada mes» */
+.exrow{padding:10px 0;border-top:1px solid var(--line)}.exrow .chips{margin-top:6px}

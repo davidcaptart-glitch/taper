@@ -838,6 +838,16 @@
         "Puedes subir el ticket de cualquier compra cuando quieras, aunque sea días después: en Compra, cada lista tiene su botón «Subir el ticket» (y «Subir otro ticket» si ya subiste uno).",
         "Al abrir la app sale «Entrando en Táper» mientras se cargan las recetas, los precios y tu menú. «Rehaciendo tu menú» ya solo sale cuando de verdad lo rehaces."
       ]
+    },
+    {
+      "version": 108,
+      "fecha": "2026-10-31",
+      "titulo": "Lo que compras de más cuenta",
+      "cambios": [
+        "Al subir un ticket, lo que no estaba en la lista sale marcado como «fuera de la lista»: cuenta en lo que has gastado y, si es comida que conozco, como que la tienes en casa.",
+        "Te pregunto si lo compras también otros meses (cada semana o cada mes) y, si dices que sí, lo añado a tu compra y al presupuesto desde el mes siguiente. Lo ves y lo quitas en Compra del mes › «Lo que compras siempre».",
+        "Al abrir la app ya no se cambia ningún plato que tengas planificado ni se rehace el menú solo."
+      ]
     }
   ]
 }

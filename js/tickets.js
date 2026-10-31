@@ -131,6 +131,7 @@ function openTicketReview(tk,text,ctx){
   const date=tk.date||todayISO();let dest=ctx&&ctx.m?{m:ctx.m,key:String(ctx.key),weeks:weeksInMonth(ctx.m)}:ticketListFor(date);
   const prods=Object.values(P).sort((a,b)=>a.name.localeCompare(b.name));
   const draw=()=>{
+    const inList=listPids(dest.m);
     const food=tk.lines.filter(l=>l.food), foodT=food.reduce((t,l)=>t+l.amount,0), nonT=tk.lines.filter(l=>!l.food).reduce((t,l)=>t+l.amount,0);
     const diff=tk.total!=null?Math.round((tk.total-tk.sum)*100)/100:0;
     showDialog(`<div class="mod">${closeBtn}<h2>Ticket del ${esc(longDate(date))}</h2>
@@ -140,13 +141,13 @@ function openTicketReview(tk,text,ctx){
         <div class="field" style="flex:1.4"><label>Tienda</label><input type="text" id="tkStore" value="${esc(tk.store)}" placeholder="Dirección o barrio"></div></div>
       <div class="field"><label>¿De qué compra es?</label><select id="tkList"><option value="mes" ${dest.key==="mes"?"selected":""}>Compra del mes</option>${dest.weeks.map((s,i)=>`<option value="${i}" ${dest.key===String(i)?"selected":""}>Semana del ${shortDate(s)}</option>`).join("")}</select></div>
       <table class="wtable">${tk.lines.map((l,i)=>`<tr><td>${l.qty} × ${esc(l.desc)}${l.kg?` <span class="small muted">${String(l.kg).replace(".",",")} kg</span>`:""}
-        <div class="small muted">${esc(l.match?l.match.name:"Sin identificar")} · ${esc(l.group)}</div>
+        <div class="small muted">${esc(l.match?l.match.name:"Sin identificar")} · ${esc(l.group)}${l.food&&!(l.pid&&inList.has(l.pid))?` · <b style="color:var(--accent)">fuera de la lista</b>`:""}</div>
         <select data-tkp="${i}" style="margin-top:4px;padding:4px 6px"><option value="">${l.food?"Comida (otro producto)":"No es comida"}</option>${prods.map(p=>`<option value="${p.id}" ${l.pid===p.id?"selected":""}>${esc(p.name)}</option>`).join("")}</select></td>
         <td style="vertical-align:top">${eur(l.amount)}<br><button class="chip" data-tkf="${i}" aria-pressed="${l.food}" style="margin-top:4px;font-size:.75rem">${l.food?"🍽️ Comida":"🧴 No"}</button></td></tr>`).join("")}</table>
       <div class="actions"><button class="btn" id="tkSave">Guardar ticket</button></div>
       <details class="small muted"><summary>Texto leído</summary><pre style="white-space:pre-wrap">${esc(text.slice(0,3000))}</pre></details></div>`);
     dlg.querySelectorAll("[data-tkf]").forEach(b=>b.onclick=()=>{const l=tk.lines[b.dataset.tkf];l.food=!l.food;if(!l.food)l.pid=null;draw()});
-    dlg.querySelectorAll("[data-tkp]").forEach(s=>s.onchange=()=>{const l=tk.lines[s.dataset.tkp];l.pid=s.value||null;if(l.pid){l.food=true;l.group=P[l.pid].aisle}});
+    dlg.querySelectorAll("[data-tkp]").forEach(s=>s.onchange=()=>{const l=tk.lines[s.dataset.tkp];l.pid=s.value||null;if(l.pid){l.food=true;l.group=P[l.pid].aisle}draw()});
     dlg.querySelector("#tkList").onchange=e=>{dest={...dest,key:e.target.value}};
     dlg.querySelector("#tkSuper").onchange=e=>{tk.super=e.target.value==="otro"?null:e.target.value};
     dlg.querySelector("#tkStore").onchange=e=>{tk.store=e.target.value.trim()};
@@ -184,7 +185,9 @@ async function rewardTicket(t){
 }
 function saveTicket(tk,date,dest){
   S.tickets=S.tickets||[];
-  const lines=tk.lines.map(l=>({qty:l.qty,desc:l.desc,amount:l.amount,kg:l.kg||null,food:l.food,pid:l.pid||null,mid:l.match?l.match.mid:null,group:l.pid?P[l.pid].aisle:l.group}));
+  // Comida que no estaba en ninguna lista del mes: compra de más (cuenta como gastado y como que la tienes en casa)
+  const inList=listPids(dest.m);
+  const lines=tk.lines.map(l=>({qty:l.qty,desc:l.desc,amount:l.amount,kg:l.kg||null,food:l.food,pid:l.pid||null,mid:l.match?l.match.mid:null,group:l.pid?P[l.pid].aisle:l.group,extra:!!(l.food&&!(l.pid&&inList.has(l.pid)))}));
   const t={id:uid("t"),date,m:dest.m,list:dest.key,super:tk.super||"otro",store:tk.store||"",total:tk.total,food:Math.round(lines.filter(l=>l.food).reduce((s,l)=>s+l.amount,0)*100)/100,lines};
   S.tickets.push(t);
   if(S.ticketSkip)delete S.ticketSkip[dest.m+"|"+dest.key];
@@ -193,8 +196,43 @@ function saveTicket(tk,date,dest){
   // Lo pagado de esa lista = suma de sus tickets (solo comida)
   S.spent[dest.m+"|"+dest.key]=Math.round(S.tickets.filter(x=>x.m===dest.m&&x.list===dest.key).reduce((s,x)=>s+x.food,0)*100)/100;
   // Marca como comprado lo de la lista que aparece en el ticket
-  for(const l of lines)if(l.pid)S.checks[checkKey(dest.m,dest.key,l.pid)]=true;
-  save();dlg.close();render();toast("Ticket guardado: "+eur(t.food)+" en comida");
+  for(const l of lines)if(l.pid&&!l.extra)S.checks[checkKey(dest.m,dest.key,l.pid)]=true;
+  save();dlg.close();render();
+  const ex=lines.filter(l=>l.extra&&l.amount>0);
+  if(ex.length)setTimeout(()=>askExtras(t,ex),250);else toast("Ticket guardado: "+eur(t.food)+" en comida");
+}
+// Productos de las listas de un mes (para saber qué del ticket estaba fuera)
+function listPids(m){const out=new Set();try{for(const l of Object.values(shopping(m).lists))for(const it of l.items)out.add(it.pid)}catch(e){}return out}
+const nextMonthKey=m=>{const [y,mo]=m.split("-").map(Number);return mo===12?`${y+1}-01`:`${y}-${String(mo+1).padStart(2,"0")}`};
+// Lo comprado de más: ya cuenta como gastado; se pregunta si se va a comprar también otros meses
+function askExtras(t,ex){
+  const choice=ex.map(l=>{const same=(S.recurring||[]).find(r=>r.pid?r.pid===l.pid:r.desc===l.desc);return same?same.freq:"no"});
+  const name=l=>l.pid?P[l.pid].name:l.desc.charAt(0)+l.desc.slice(1).toLowerCase();
+  const draw=()=>{
+    showDialog(`<div class="mod">${closeBtn}<div class="veb">Ticket guardado · ${eur(t.food)} en comida</div><h2 class="vh" style="font-size:1.7rem">Has comprado cosas <em>fuera de la lista</em></h2>
+      <p class="small">Ya cuentan en lo que has gastado (${eur(ex.reduce((s,l)=>s+l.amount,0))})${ex.some(l=>l.pid)?" y las que conozco las apunto como que las tienes en casa":""}. Tu menú no cambia.</p>
+      <p><b>¿Las vas a comprar también otros meses?</b> Si me dices que sí, las añado a la lista de la compra a partir de ${esc(monthName(nextMonthKey(t.m)).toLowerCase())} y las cuento en el presupuesto.</p>
+      ${ex.map((l,i)=>`<div class="exrow"><div><b>${esc(name(l))}</b> <span class="small muted">· ${l.kg?String(l.kg).replace(".",",")+" kg":l.qty+" ud"} · ${eur(l.amount)}</span></div>
+        <div class="chips">${[["no","Solo esta vez"],["semana","Cada semana"],["mes","Cada mes"]].map(([k,tx])=>chip("data-exf",i+"|"+k,choice[i]===k,tx)).join("")}</div></div>`).join("")}
+      <div class="actions"><button class="btn wide" id="exOk">Guardar</button></div></div>`);
+    dlg.querySelectorAll("[data-exf]").forEach(b=>b.onclick=()=>{const [i,k]=b.dataset.exf.split("|");choice[i]=k;const y=dlg.scrollTop;draw();dlg.scrollTop=y});
+    dlg.querySelector("#exOk").onclick=()=>{
+      S.recurring=S.recurring||[];let n=0;
+      ex.forEach((l,i)=>{const k=choice[i];S.recurring=S.recurring.filter(r=>!(r.pid?r.pid===l.pid:r.desc===l.desc));
+        if(k==="no")return;n++;
+        S.recurring.push({id:uid("r"),pid:l.pid||null,desc:l.desc,amount:l.amount,q:l.pid?lineQty(l):0,freq:k,from:nextMonthKey(t.m)})});
+      save();dlg.close();render();toast(n?`Añadido a tu compra a partir de ${monthName(nextMonthKey(t.m)).toLowerCase()}`:"Apuntado solo esta vez")};
+  };
+  draw();
+}
+// En la compra del mes: lo que compras siempre fuera del menú, para poder quitarlo
+function recurringHTML(m){
+  const rs=recurringFor(m);if(!rs.length)return "";
+  return `<div class="card"><h2>Lo que compras siempre</h2><p class="small muted">Cosas fuera del menú que me dijiste al subir un ticket. Ya están en la lista y en el presupuesto.</p>
+    ${rs.map(r=>`<div class="fixed"><span>${esc(r.pid&&P[r.pid]?P[r.pid].name:r.desc.charAt(0)+r.desc.slice(1).toLowerCase())}<small>${r.freq==="semana"?"Cada semana":"Cada mes"} · unos ${eur(r.pid&&P[r.pid]?packsFor(r.pid,r.q)*price(r.pid):r.amount)}${r.pid&&P[r.pid]?"":" (no lo tengo en el catálogo: lo sumo al gasto)"}</small></span><button class="btn ghost small" data-rdel="${r.id}">Quitar</button></div>`).join("")}</div>`;
+}
+function bindRecurring(){
+  document.querySelectorAll("[data-rdel]").forEach(b=>b.onclick=()=>{S.recurring=(S.recurring||[]).filter(r=>r.id!==b.dataset.rdel);save();render();toast("Quitado de tu compra")});
 }
 
 /* ---------- En qué se va el dinero ---------- */

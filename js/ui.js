@@ -388,7 +388,7 @@ function budgetCard(){
     <p class="small" style="margin:0 0 4px"><b>Por qué:</b></p><ul class="small" style="margin:0 0 6px 18px;padding:0">
       ${b.leftover>=3?`<li><b>Unos ${eur(b.leftover)} son despensa que te sobrará</b> para el mes siguiente: arroz, aceite, legumbres… se compran en paquetes enteros.</li>`:""}
       <li>${b.meals} comidas a la semana para ${ppl} ${ppl===1?"persona":"personas"}${kidsN?` (${kidsN} ${kidsN===1?"niño":"niños"})`:""}, a unos ${eur(b.perRac)} la ración de media, que ya es de lo más barato posible con vuestra dieta y gustos.</li>
-      ${b.basics?`<li>Básicos (aceite, sal, especias): ${eur(b.basics)}.</li>`:""}${b.fees?`<li>Envíos: ${eur(b.fees)}.</li>`:""}${b.extras?`<li>Platos fijos sin receta: ${eur(b.extras)}.</li>`:""}</ul>
+      ${b.basics?`<li>Básicos (aceite, sal, especias): ${eur(b.basics)}.</li>`:""}${b.fees?`<li>Envíos: ${eur(b.fees)}.</li>`:""}${b.extras?`<li>Platos fijos sin receta: ${eur(b.extras)}.</li>`:""}${b.recur?`<li>Lo que compras siempre fuera del menú: ${eur(b.recur)}.</li>`:""}</ul>
     <p class="small" style="margin:0 0 8px">Para bajar más: comer fuera o no cocinar algunas comidas, raciones más ajustadas, menos carne y pescado, o repetir platos.</p>
     <div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn small" id="bSacr">¿Qué sacrificamos?</button><button class="btn ghost small" id="bRaise">Poner ${eur(Math.ceil(now/10)*10)} de presupuesto</button></div></div>`;
 }
@@ -960,7 +960,7 @@ function renderCompra(){
     if(l.items.length&&!shopIsDone(month,l))h+=`<div class="row" style="margin:4px 0 8px"><button class="btn ghost small" id="shopDone">✓ Ya he hecho esta compra</button>${tkb}</div>`;
     else if(l.items.length||tks.length)h+=`<div class="row" style="margin:4px 0 8px;align-items:center"><span class="small okt" style="color:var(--ok);font-weight:600">✓ Compra hecha</span>${tkb}${tki}</div>`;
     else if(tkb)h+=`<div class="row" style="margin:4px 0 8px">${tkb}</div>`;}
-  if(listSel==="mes")h+=shopPlanCard(month);
+  if(listSel==="mes")h+=shopPlanCard(month)+recurringHTML(month);
   if(l.items.length&&l.groups.length===1&&l.groups[0].sup==="mercadona")h+=orderBlock(l,listSel==="mes"?"mes":"semana");
   if(l.items.length&&chosenSupers().length>1)h+=compareCard(l);
   // Un bloque por supermercado; dentro, por secciones en el orden en que se recorre la tienda
@@ -984,7 +984,7 @@ function renderCompra(){
       for(const it of bySec[sec].sort((a,b)=>P[a.pid].name.localeCompare(P[b.pid].name))){
         const key=checkKey(month,listSel,it.pid),done=!!S.checks[key],moved=(S.assign[month]||{})[it.pid]!=null&&listSel!=="mes";
         const sx=it.sup!=="mercadona"&&PS&&PS.supers[it.sup]?PS.supers[it.sup].productos[it.pid]:null;
-        h+=`<label class="item ${done?"done":""}"><input type="checkbox" data-ck="${key}" ${done?"checked":""}>${prodImg(it.pid)}<span class="t">${it.packs} × ${esc(P[it.pid].name)}<small>Necesitas ${fmtQty(it.q,P[it.pid].unit)}${P[it.pid].keep==="congelar"?", para congelar":""}${moved?" · adelantado de la compra del mes":""}${sx?` · ${esc(sx.nombre)}`:""}</small></span><span class="p">${eur(it.cost)}${upTag(it.pid)}</span>${l.mode==="online"&&prodUrl(it)?`<a class="mlink" href="${esc(prodUrl(it))}" target="_blank" rel="noopener" aria-label="Abrir ${esc(P[it.pid].name)} en ${esc(superById(it.sup).nombre||"el súper")}">🛒</a>`:""}</label>`}
+        h+=`<label class="item ${done?"done":""}"><input type="checkbox" data-ck="${key}" ${done?"checked":""}>${prodImg(it.pid)}<span class="t">${it.packs} × ${esc(P[it.pid].name)}<small>Necesitas ${fmtQty(it.q,P[it.pid].unit)}${P[it.pid].keep==="congelar"?", para congelar":""}${recurringFor(month).some(r=>r.pid===it.pid&&(r.freq==="semana")===(listSel!=="mes"))?" · lo compras siempre":""}${moved?" · adelantado de la compra del mes":""}${sx?` · ${esc(sx.nombre)}`:""}</small></span><span class="p">${eur(it.cost)}${upTag(it.pid)}</span>${l.mode==="online"&&prodUrl(it)?`<a class="mlink" href="${esc(prodUrl(it))}" target="_blank" rel="noopener" aria-label="Abrir ${esc(P[it.pid].name)} en ${esc(superById(it.sup).nombre||"el súper")}">🛒</a>`:""}</label>`}
       h+=`</details>`});
   }
   h+=`</details>`;
@@ -1022,7 +1022,7 @@ function renderCompra(){
     if(i.checked&&l.items.every(it=>S.checks[checkKey(month,l.key,it.pid)])&&!(S.tickets||[]).some(t=>t.m===month&&t.list===l.key))setTimeout(()=>askTicket(month,l.key),400)});
   document.getElementById("spentIn").onchange=e=>{const v=e.target.value;if(v==="")delete S.spent[sk];else S.spent[sk]=Number(v);save();renderHeader()};
   main.querySelectorAll("[data-saveorder]").forEach(b=>b.onclick=()=>{const items={};for(const it of l.items)items[it.pid]=it.packs;S.orders[b.dataset.saveorder]={items,savedAt:todayISO()};save();render();toast("Pedido guardado")});
-  bindReview(main);bindSpending();
+  bindReview(main);bindSpending();bindRecurring();
   const fm=document.getElementById("fillMin");if(fm)fm.onclick=()=>{const r=fillToMinimum(month,wi);render();toast(r.moved.length?(r.ok?"Completado con: ":"No llega del todo. Añadido: ")+r.moved.join(", ").toLowerCase():"No hay nada del mes que se pueda adelantar")};
 }
 
@@ -1706,13 +1706,12 @@ async function boot(){
   try{if(CFG.avisos&&CFG.avisos.url){const a=await (await fetch(CFG.avisos.url.replace(/\/$/,"")+"/ajustes",{cache:"no-store"})).json();if(a&&a.productos){AJ=a;try{localStorage.setItem("taper-ajustes",JSON.stringify(AJ))}catch(e){}}}}catch(e){}
   // Al abrir, la semana actual y la siguiente tienen menú si ya se había planificado alguna
   if(S.onboarded){
-    // Platos ya planificados sin foto (y no elegidos a mano): se cambian por otros
-    for(const [s,wk] of Object.entries(S.plans))if(addDays(s,6)>=todayISO())for(const [id,v] of Object.entries(wk.slots||{}))if(v.recipe&&RX[v.recipe]&&!hasPhoto(RX[v.recipe])&&!v.locked)delete wk.slots[id];
+    // Al abrir no se cambia ningún plato ya planificado: solo se rellenan los huecos vacíos (y lo que no se pueda comer por alergias)
     ensureHorizon();for(const s of Object.keys(S.plans))if(addDays(s,6)>=todayISO())ensureWeek(s);save();
     // Si el plan aún no ha empezado, el Menú abre directamente en el mes en que empieza
     if(S.home.start&&S.home.start>todayISO()&&!weeksInMonth(month).some(s=>addDays(s,6)>=S.home.start))month=S.home.start.slice(0,7);
-    // Mes nuevo con presupuesto (o de antes de que se ajustara al ponerlo): se cuadra aquí mismo, mientras se entra, sin «Rehaciendo tu menú»
-    if(budgetSet()&&!(S.budgetInfo&&S.budgetInfo[budgetMonths()[0]])){try{redoFromToday();checkBudget()}catch(e){console.error(e)}}}
+    // Mes nuevo con presupuesto: solo se calcula si llega (se enseña en el Menú); el menú no se rehace solo, solo si lo pides
+    if(budgetSet()&&!(S.budgetInfo&&S.budgetInfo[budgetMonths()[0]])){try{checkBudget()}catch(e){console.error(e)}}}
   await entryReady();
   render();hideEntry();
   // Tras actualizar: explica qué ha mejorado (no a quien acaba de empezar); y avisa si su receta sugerida ya está

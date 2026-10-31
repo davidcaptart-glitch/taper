@@ -64,7 +64,13 @@ function shopping(m){
       const id=m+"|"+key+"|"+u.pid+"|"+u.slot.date+"|"+u.r.id, b=(bags[key]=bags[key]||{});
       if(b[id])b[id].q+=u.q;else b[id]={id,pid:u.pid,q:u.q,date:u.slot.date,rid:u.r.id}}
   }
-  const out={weeks,lists:{},first,freezeGuide,extras,bags:Object.fromEntries(Object.entries(bags).map(([k,v])=>[k,Object.values(v).sort((a,b)=>a.date.localeCompare(b.date))]))};
+  // Lo que compras siempre aunque no esté en el menú (lo dijiste al subir un ticket): cada mes o cada semana, desde el mes siguiente
+  const recur=weeks.map(()=>0),recurOff=[],act=weeks.map((s,i)=>i).filter(i=>(!S.home.start||addDays(weeks[i],6)>=S.home.start)&&S.plans[weeks[i]]);
+  for(const r of recurringFor(m)){
+    const idx=r.freq==="semana"?act:[mesWeek(weeks)];
+    if(r.pid&&P[r.pid])for(const i of idx){const key=r.freq==="semana"?String(i):"mes";lists[key][r.pid]=(lists[key][r.pid]||0)+r.q}
+    else{for(const i of idx)recur[i]+=r.amount;recurOff.push(r)}}
+  const out={weeks,lists:{},first,freezeGuide,extras,recurOff,bags:Object.fromEntries(Object.entries(bags).map(([k,v])=>[k,Object.values(v).sort((a,b)=>a.date.localeCompare(b.date))]))};
   for(const key of Object.keys(lists)){
     const items=Object.entries(lists[key]).map(([pid,q])=>({pid,q,packs:packsFor(pid,q),cost:packsFor(pid,q)*price(pid),sup:superFor(pid)}));
     const cost=items.reduce((t,i)=>t+i.cost,0);
@@ -83,10 +89,10 @@ function shopping(m){
     out.lists[key]={key,items,cost,...L};
   }
   const listsTotal=Object.values(out.lists).reduce((t,l)=>t+l.cost+l.fee,0);
-  out.extrasTotal=extras.reduce((a,b)=>a+b,0);
-  out.total=listsTotal+out.extrasTotal+(Number(S.home.budget.basics)||0);
+  out.extrasTotal=extras.reduce((a,b)=>a+b,0);out.recurTotal=recur.reduce((a,b)=>a+b,0);
+  out.total=listsTotal+out.extrasTotal+out.recurTotal+(Number(S.home.budget.basics)||0);
   // Gasto previsto por semana (la compra del mes se cuenta en la primera)
-  out.perWeek=weeks.map((s,i)=>{const l=out.lists[i];return (l?l.cost+l.fee:0)+extras[i]+(i===mesWeek(weeks)?out.lists.mes.cost+out.lists.mes.fee+(Number(S.home.budget.basics)||0):0)});
+  out.perWeek=weeks.map((s,i)=>{const l=out.lists[i];return (l?l.cost+l.fee:0)+extras[i]+recur[i]+(i===mesWeek(weeks)?out.lists.mes.cost+out.lists.mes.fee+(Number(S.home.budget.basics)||0):0)});
   return out;
 }
 const checkKey=(m,key,pid)=>m+"|"+key+"|"+pid;
@@ -144,11 +150,17 @@ function askTicket(m,key){
   dlg.querySelector("#atLater").onclick=()=>dlg.close();
   dlg.querySelector("#atNo").onclick=()=>{S.ticketSkip=S.ticketSkip||{};S.ticketSkip[shopKey(m,key)]=todayISO();save();dlg.close();render()};
 }
+// Cantidad de una línea de ticket en la unidad del producto (al peso: los kilos; si no, envases)
+const lineQty=l=>{const p=P[l.pid];return l.kg&&p.unit==="g"?l.kg*1000:Math.max(1,l.qty||1)*p.env};
+// Compras fuera del menú que se repiten (S.recurring): {id,pid,desc,amount,q,freq:"mes"|"semana",from:"AAAA-MM"}
+const recurringFor=m=>(S.recurring||[]).filter(r=>r.from<=m);
 function markShopDone(m,key){S.shopDone=S.shopDone||{};S.shopDone[shopKey(m,key)]=todayISO();save()}
 // Lo que tienes en casa: lo comprado (marcado) menos lo que necesitan los demás platos del mes
 function inventory(m,exceptId){
   const sh=shopping(m);let any=false;const bought={};
   for(const l of Object.values(sh.lists))for(const it of l.items)if(S.checks[checkKey(m,l.key,it.pid)]){any=true;bought[it.pid]=(bought[it.pid]||0)+it.packs*P[it.pid].env}
+  // Lo comprado fuera de la lista (según los tickets) también lo tienes en casa
+  for(const t of (S.tickets||[]).filter(t=>t.m===m))for(const l of t.lines)if(l.extra&&l.pid&&P[l.pid]){any=true;bought[l.pid]=(bought[l.pid]||0)+lineQty(l)}
   if(!any)return null;
   const need={};for(const u of monthUses(m,exceptId))if(u.pid)need[u.pid]=(need[u.pid]||0)+u.q;
   const inv={};for(const [pid,q] of Object.entries(bought))inv[pid]=q-(need[pid]||0);

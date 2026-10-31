@@ -688,7 +688,7 @@ function checkBudgetMonth(m){
   for(const s of ws){food+=weekCost(s);for(const sl of buildSlots(s))if(S.plans[s].slots[sl.id]){meals++;rac+=sl.portions}}
   S.budgetInfo[m]={m,cost,budget,ok:cost<=budget+1,meals:Math.round(meals/Math.max(1,ws.length)),perRac:rac?food/rac:0,
     leftover:Object.values(sh.lists).reduce((t,l)=>t+l.items.filter(it=>P[it.pid].keep==="despensa").reduce((u,it)=>u+Math.max(0,it.packs*P[it.pid].env-it.q)/P[it.pid].env*price(it.pid),0),0),
-    basics:Number(S.home.budget.basics)||0,fees:Object.values(sh.lists).reduce((t,l)=>t+l.fee,0),extras:sh.extrasTotal||0,at:todayISO()};
+    basics:Number(S.home.budget.basics)||0,fees:Object.values(sh.lists).reduce((t,l)=>t+l.fee,0),extras:sh.extrasTotal||0,recur:sh.recurTotal||0,at:todayISO()};
 }
 // Lo que cuesta al mes el menú que hay (para proponer el presupuesto cuando aún no se ha fijado)
 function estimateMonthBudget(){
