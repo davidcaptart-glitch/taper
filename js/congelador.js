@@ -51,7 +51,7 @@ function nextUses(pid){
 
 function renderCongelador(){
   const st=freezerState();
-  let h=`<section class="view">${viewHead(st.length+" "+(st.length===1?"cosa":"cosas")+" dentro","Tu *congelador*")}
+  let h=`<section class="view"><button class="btn ghost small" id="fzBack" style="margin-bottom:8px">‹ Despensa</button>${viewHead(st.length+" "+(st.length===1?"cosa":"cosas")+" dentro","Tu *congelador*")}
     <p class="small muted">Se llena solo al marcar como comprado lo que va al congelador y se vacía al cocinar los platos que lo usan. Si algo no cuadra, corrígelo aquí.</p>`;
   const old=st.filter(e=>e.days>FREEZER_MONTHS*30);
   if(old.length)h+=`<div class="warnbox">🕒 ${old.length===1?"Esto lleva":"Estas cosas llevan"} más de ${FREEZER_MONTHS} meses congelado: ${old.map(e=>esc(P[e.pid].name.toLowerCase())).join(", ")}. Mejor gastarlo pronto; te lo propondré en los próximos menús.</div>`;
@@ -67,6 +67,7 @@ function renderCongelador(){
     <button class="btn small" id="fzAdd" style="margin-top:8px">Añadir</button></div>
     <div class="guide"><h3>Descongelar bien</h3><p>Lo más seguro es pasarlo del congelador a la nevera la noche anterior. Si se te olvida: en una bolsa cerrada dentro de agua fría (cambiándola cada 30 minutos), 1–2 horas; o en el microondas en modo descongelar, justo antes de cocinarlo. Nunca a temperatura ambiente.</p></div></section>`;
   main.innerHTML=h;
+  document.getElementById("fzBack").onclick=()=>{tab="despensa";render();scrollTo(0,0)};
   const sel=document.getElementById("fzP");sel.onchange=()=>{document.getElementById("fzU").textContent=P[sel.value].unit};
   document.getElementById("fzAdd").onclick=()=>{const q=Number(document.getElementById("fzQ").value);if(!q){toast("Indica la cantidad");return}
     S.freezer=S.freezer||[];S.freezer.push({id:uid("fz"),pid:sel.value,qty:q,at:todayISO()});save();render();toast("Añadido al congelador")};

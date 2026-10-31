@@ -1078,3 +1078,10 @@ details.aisle{margin-top:10px}
 
 /* Compras de más de un ticket: una fila por producto con «Solo esta vez / Cada semana / Cada mes» */
 .exrow{padding:10px 0;border-top:1px solid var(--line)}.exrow .chips{margin-top:6px}
+
+/* Despensa: resumen de arriba y cada producto (se toca para corregir lo que queda) */
+.dsum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0}
+.dsum div{background:var(--surface);border-radius:16px;padding:12px 10px;box-shadow:var(--sh-1);text-align:center}
+.dsum b{display:block;font-size:1.15rem;letter-spacing:-.02em}.dsum small{color:var(--muted);font-size:.72rem}
+.item.dpi{width:100%;border:0;text-align:left;font:inherit;color:inherit;cursor:pointer}
+.item.dpi .p{color:var(--muted);width:18px;height:18px}

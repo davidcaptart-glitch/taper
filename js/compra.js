@@ -70,6 +70,8 @@ function shopping(m){
     const idx=r.freq==="semana"?act:[mesWeek(weeks)];
     if(r.pid&&P[r.pid])for(const i of idx){const key=r.freq==="semana"?String(i):"mes";lists[key][r.pid]=(lists[key][r.pid]||0)+r.q}
     else{for(const i of idx)recur[i]+=r.amount;recurOff.push(r)}}
+  // Lo que te faltaba en la despensa y añadiste a una lista
+  for(const [k,its] of Object.entries((S.extraBuy||{})[m]||{}))if(lists[k])for(const [pid,q] of Object.entries(its))if(P[pid])lists[k][pid]=(lists[k][pid]||0)+q;
   const out={weeks,lists:{},first,freezeGuide,extras,recurOff,bags:Object.fromEntries(Object.entries(bags).map(([k,v])=>[k,Object.values(v).sort((a,b)=>a.date.localeCompare(b.date))]))};
   for(const key of Object.keys(lists)){
     const items=Object.entries(lists[key]).map(([pid,q])=>({pid,q,packs:packsFor(pid,q),cost:packsFor(pid,q)*price(pid),sup:superFor(pid)}));

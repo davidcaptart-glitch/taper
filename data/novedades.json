@@ -859,6 +859,19 @@
         "PDF de la compra online: lee todos los productos, el coste de preparación (que no cuenta como comida) y el total. Tu dirección y tus datos del pedido no se guardan.",
         "Puedes corregir la fecha del ticket si la foto no la lee bien, y lo que compras de más sale con el nombre del producto real."
       ]
+    },
+    {
+      "version": 110,
+      "fecha": "2026-10-31",
+      "titulo": "Tu despensa",
+      "cambios": [
+        "Nueva pestaña Despensa: todo lo que tienes en casa, con lo que vale. Se llena con lo que marcas como comprado y con tus tickets, y se gasta sola al cocinar cada plato.",
+        "Toca cualquier producto para poner lo que te queda de verdad (o «Se acabó»). Lo que no está, lo añades abajo.",
+        "«Te falta»: lo que piden los platos de los próximos 7 días y no tienes, con un botón para añadirlo a la compra de la semana.",
+        "«Te sobra»: lo que tienes y ningún plato va a usar. Puedes ponerlo en el menú o rehacer los próximos 7 días con lo que tienes (solo si lo pides).",
+        "«Lo que vas gastando»: lo que cuesta cada comida que cocinas y el total del mes.",
+        "El congelador sigue dentro de la Despensa."
+      ]
     }
   ]
 }

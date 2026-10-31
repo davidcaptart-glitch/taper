@@ -13,7 +13,8 @@ function renderHeader(){
   document.querySelector(".top .ticket").hidden=!onb||!(tab==="menu"||tab==="compra");
   document.querySelector("nav.tabs").hidden=!onb;
   document.getElementById("monthLabel").textContent=monthName(month);
-  document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-current",b.dataset.tab===tab?"page":"false"));
+  // El congelador está dentro de la despensa
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-current",b.dataset.tab===(tab==="congelador"?"despensa":tab)?"page":"false"));
   const pd=document.getElementById("priceDate");
   if(PR&&PR.fecha){const ups=Object.keys(P).filter(rise).length;
     pd.innerHTML=`Precios del <b>${esc(longDate(PR.fecha).replace(/^\w+, /,""))}</b>${prOffline?" (última copia guardada)":""}${ups?` · <span class="up">▲ ${ups} ${ups===1?"producto ha subido":"productos han subido"}</span>`:""}`}
@@ -53,6 +54,7 @@ function render(){
   if(tab==="compra")renderCompra();
   if(tab==="recetas")renderRecetas();
   if(tab==="congelador")renderCongelador();
+  if(tab==="despensa")renderDespensa();
   if(tab==="perfil")renderPerfil();
 }
 
@@ -984,7 +986,7 @@ function renderCompra(){
       for(const it of bySec[sec].sort((a,b)=>P[a.pid].name.localeCompare(P[b.pid].name))){
         const key=checkKey(month,listSel,it.pid),done=!!S.checks[key],moved=(S.assign[month]||{})[it.pid]!=null&&listSel!=="mes";
         const sx=it.sup!=="mercadona"&&PS&&PS.supers[it.sup]?PS.supers[it.sup].productos[it.pid]:null;
-        h+=`<label class="item ${done?"done":""}"><input type="checkbox" data-ck="${key}" ${done?"checked":""}>${prodImg(it.pid)}<span class="t">${it.packs} × ${esc(P[it.pid].name)}<small>Necesitas ${fmtQty(it.q,P[it.pid].unit)}${P[it.pid].keep==="congelar"?", para congelar":""}${recurringFor(month).some(r=>r.pid===it.pid&&(r.freq==="semana")===(listSel!=="mes"))?" · lo compras siempre":""}${moved?" · adelantado de la compra del mes":""}${sx?` · ${esc(sx.nombre)}`:""}</small></span><span class="p">${eur(it.cost)}${upTag(it.pid)}</span>${l.mode==="online"&&prodUrl(it)?`<a class="mlink" href="${esc(prodUrl(it))}" target="_blank" rel="noopener" aria-label="Abrir ${esc(P[it.pid].name)} en ${esc(superById(it.sup).nombre||"el súper")}">🛒</a>`:""}</label>`}
+        h+=`<label class="item ${done?"done":""}"><input type="checkbox" data-ck="${key}" ${done?"checked":""}>${prodImg(it.pid)}<span class="t">${it.packs} × ${esc(P[it.pid].name)}<small>Necesitas ${fmtQty(it.q,P[it.pid].unit)}${P[it.pid].keep==="congelar"?", para congelar":""}${recurringFor(month).some(r=>r.pid===it.pid&&(r.freq==="semana")===(listSel!=="mes"))?" · lo compras siempre":""}${(((S.extraBuy||{})[month]||{})[listSel]||{})[it.pid]?" · te faltaba en la despensa":""}${moved?" · adelantado de la compra del mes":""}${sx?` · ${esc(sx.nombre)}`:""}</small></span><span class="p">${eur(it.cost)}${upTag(it.pid)}</span>${l.mode==="online"&&prodUrl(it)?`<a class="mlink" href="${esc(prodUrl(it))}" target="_blank" rel="noopener" aria-label="Abrir ${esc(P[it.pid].name)} en ${esc(superById(it.sup).nombre||"el súper")}">🛒</a>`:""}</label>`}
       h+=`</details>`});
   }
   h+=`</details>`;
