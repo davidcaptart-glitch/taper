@@ -892,6 +892,16 @@
         "El lector entiende tickets de otros supermercados (Lidl, Carrefour, Dia, Bonpreu, Condis, Consum…): cantidades, peso, descuentos y total. Si el súper no lo conozco, guardo su nombre.",
         "Cada producto se relaciona con el más parecido de Mercadona para saber qué es (y si es comida). Los precios de otros súper no se mezclan con los de Mercadona."
       ]
+    },
+    {
+      "version": 113,
+      "fecha": "2026-10-31",
+      "titulo": "Cada ticket, con los precios de su súper",
+      "cambios": [
+        "Un ticket de Condis, Bonpreu, Consum, Eroski o DIA se reconoce primero con los productos de ese súper (su nombre real) y, si no, con el más parecido de Mercadona.",
+        "Al revisar el ticket ves lo que costaba en ese súper y si pagaste más o menos. Si cambias el súper, cada línea se vuelve a reconocer.",
+        "En la Despensa, lo que compraste con ticket vale lo que pagaste (y lo que cocinas con ello también)."
+      ]
     }
   ]
 }

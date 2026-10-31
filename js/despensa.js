@@ -28,7 +28,7 @@ function despensaEvents(){
         if(at&&at>=start&&at<=today)ev.push({pid:it.pid,d:at,k:0,q:it.packs*P[it.pid].env,src:"compra"})}}
     for(const u of monthUses(m))if(u.pid&&P[u.pid]&&u.date>=start&&eatenUse(u))ev.push({pid:u.pid,d:u.date,k:1,q:u.q,out:true,u});
   }
-  for(const t of S.tickets||[])if(t.date>=start)for(const l of t.lines)if(l.food&&l.pid&&P[l.pid])ev.push({pid:l.pid,d:t.date,k:0,q:lineQty(l),src:"ticket"});
+  for(const t of S.tickets||[])if(t.date>=start)for(const l of t.lines)if(l.food&&l.pid&&P[l.pid]){const q=lineQty(l);ev.push({pid:l.pid,d:t.date,k:0,q,src:"ticket",uc:l.amount>0&&q>0?l.amount/q:null})}
   // Comidas «de la despensa» ya comidas
   for(const x of despSlots())if(x.k.startsWith("p:")&&P[x.k.slice(2)]&&x.date>=start&&slotEaten(x.id))ev.push({pid:x.k.slice(2),d:x.date,k:1,q:despItemQty(x),out:true,u:{slot:{id:x.id,date:x.date,meal:x.meal},r:null,label:"De la despensa"}});
   for(const [pid,s] of Object.entries(D.set))if(P[pid])ev.push({pid,d:s.d,k:2,q:s.q,set:true});
@@ -39,21 +39,22 @@ const unitCost=pid=>price(pid)/P[pid].env;
 let despCache={k:null,v:null};
 function despensaState(){
   const k=S.updatedAt+"|"+todayISO()+"|"+(PR&&PR.fecha);if(despCache.k===k)return despCache.v;
-  const stock={},meals={};
-  for(const e of despensaEvents()){const s=stock[e.pid]||0;
+  // paid: lo que pagaste por unidad en tu último ticket de cada producto (si no hay ticket, el precio del súper)
+  const stock={},meals={},paid={};const uc=pid=>paid[pid]??unitCost(pid);
+  for(const e of despensaEvents()){const s=stock[e.pid]||0;if(e.uc)paid[e.pid]=e.uc;
     if(e.set)stock[e.pid]=e.q;
     else if(e.adj)stock[e.pid]=Math.max(0,s+e.q);
     else if(e.out){stock[e.pid]=Math.max(0,s-e.q);
       // Lo que cuesta cada comida: lo que lleva el plato a precio del súper (se haya comprado o no)
       const key=e.u.slot.id||e.u.slot.date+"|"+e.u.slot.meal,mm=meals[key]=meals[key]||{key,date:e.u.slot.date,meal:e.u.slot.meal,r:e.u.r,cost:0,items:[]};
-      mm.cost+=e.q*unitCost(e.pid);mm.items.push({pid:e.pid,q:e.q})}
+      mm.cost+=e.q*uc(e.pid);mm.items.push({pid:e.pid,q:e.q})}
     else stock[e.pid]=s+e.q}
   for(const [p,q] of Object.entries(stock))if(q<1)delete stock[p];
   // Lo del ticket sin receta que se comió: cuenta lo que costó
   for(const x of despSlots())if(x.k.startsWith("t:")&&slotEaten(x.id)&&x.date>=despensaData().start){const tl=despTicketLine(x.k);if(!tl)continue;
     const mm=meals[x.id]=meals[x.id]||{key:x.id,date:x.date,meal:x.meal,r:null,cost:0,items:[]};mm.cost+=tl.l.amount/Math.max(1,tl.l.qty||1)*x.n}
   for(const mm of Object.values(meals))if(!mm.r)mm.name="🧺 "+[...new Set(despSlots().filter(x=>x.id===mm.key).map(x=>despItemName(x.k)))].join(", ");
-  const v={stock,meals:Object.values(meals).sort((a,b)=>b.date.localeCompare(a.date)||(a.meal<b.meal?1:-1))};
+  const v={stock,uc,meals:Object.values(meals).sort((a,b)=>b.date.localeCompare(a.date)||(a.meal<b.meal?1:-1))};
   despCache={k,v};return v;
 }
 // Lo que piden los platos que vienen (sin comer aún), del día from al to (sin incluir)
@@ -92,9 +93,9 @@ function despensaSpare(){
 const KEEP_GROUP={fresco:"Nevera, fruta y verdura",despensa:"Despensa",congelar:"Congelador",congelado:"Congelador"};
 let despFilter="todo";
 function renderDespensa(){
-  const D=despensaData(),{stock,meals}=despensaState(),today=todayISO();
+  const D=despensaData(),{stock,meals,uc}=despensaState(),today=todayISO();
   const pids=Object.keys(stock).sort((a,b)=>P[a].name.localeCompare(P[b].name));
-  const value=pids.reduce((t,p)=>t+stock[p]*unitCost(p),0);
+  const value=pids.reduce((t,p)=>t+stock[p]*uc(p),0);
   const cm=today.slice(0,7),monthMeals=meals.filter(x=>x.date.slice(0,7)===cm),spentM=monthMeals.reduce((t,x)=>t+x.cost,0);
   const {first}=upcomingNeed(today,addDays(today,28)),miss=despensaMissing(),spare=despensaSpare(),spareSet=new Set(spare.map(x=>x.pid));
   let h=`<section class="view">${viewHead(pids.length+" "+(pids.length===1?"producto":"productos")+" en casa","Tu *despensa*")}
@@ -111,15 +112,15 @@ function renderDespensa(){
     (toAdd.length?`<div class="actions"><button class="btn small" id="dpBuy">${ico("plus")} Añadir ${toAdd.length===miss.length?"":toAdd.length+" "}a la compra de esta semana</button></div>`:`<p class="small muted">Todo está ya en tu lista de la compra: solo falta comprarlo.</p>`)}
   h+=`</div>`;
   // Te sobra
-  if(spare.length)h+=`<div class="card"><h2>${ico("package")} Te sobra</h2><p class="small muted">Lo tienes en casa y ningún plato de las próximas 4 semanas lo usa (unos ${eur(spare.reduce((t,x)=>t+x.q*unitCost(x.pid),0))}).</p>
-    ${spare.slice(0,12).map(x=>`<div class="fixed"><span>${esc(P[x.pid].name)}<small>${esc(fmtQty(x.q,P[x.pid].unit))} · ${eur(x.q*unitCost(x.pid))}</small></span><button class="btn ghost small" data-dpuse="${x.pid}">Ponerlo en el menú</button></div>`).join("")}
+  if(spare.length)h+=`<div class="card"><h2>${ico("package")} Te sobra</h2><p class="small muted">Lo tienes en casa y ningún plato de las próximas 4 semanas lo usa (unos ${eur(spare.reduce((t,x)=>t+x.q*uc(x.pid),0))}).</p>
+    ${spare.slice(0,12).map(x=>`<div class="fixed"><span>${esc(P[x.pid].name)}<small>${esc(fmtQty(x.q,P[x.pid].unit))} · ${eur(x.q*uc(x.pid))}</small></span><button class="btn ghost small" data-dpuse="${x.pid}">Ponerlo en el menú</button></div>`).join("")}
     <div class="actions"><button class="btn small" id="dpRedo">${ico("repeat")} Rehacer los próximos 7 días con lo que tengo</button></div></div>`;
   // Lo que tienes
   const groups=[...new Set(pids.map(p=>KEEP_GROUP[P[p].keep]||"Despensa"))];
   h+=`<h2 style="margin:18px 0 8px">Lo que tienes</h2><div class="chips" style="margin-bottom:8px">${["todo",...groups].map(g=>chip("data-dpf",g,despFilter===g,g==="todo"?"Todo":g)).join("")}</div>`;
   if(!pids.length)h+=`<div class="empty"><p>Aún no hay nada. Marca lo que compras en la lista o sube el ticket, o añádelo abajo.</p></div>`;
   for(const p of pids){const g=KEEP_GROUP[P[p].keep]||"Despensa";if(despFilter!=="todo"&&despFilter!==g)continue;const f=first[p];
-    h+=`<button class="item dpi" data-dpe="${p}">${prodImg(p)}<span class="t">${esc(P[p].name)}<small>${esc(fmtQty(stock[p],P[p].unit))} · ${eur(stock[p]*unitCost(p))}${f?` · para el ${esc(DSHORT[dow(f.date)]+" "+shortDate(f.date))}`:spareSet.has(p)?" · sin plato previsto":""}</small></span><span class="p">${ico("chevron-right")}</span></button>`}
+    h+=`<button class="item dpi" data-dpe="${p}">${prodImg(p)}<span class="t">${esc(P[p].name)}<small>${esc(fmtQty(stock[p],P[p].unit))} · ${eur(stock[p]*uc(p))}${f?` · para el ${esc(DSHORT[dow(f.date)]+" "+shortDate(f.date))}`:spareSet.has(p)?" · sin plato previsto":""}</small></span><span class="p">${ico("chevron-right")}</span></button>`}
   // Otras cosas de los tickets (sin receta)
   const otros=ticketOtros();
   if(otros.length&&(despFilter==="todo"))h+=`<div class="card"><h2>Otras cosas de tus tickets</h2><p class="small muted">Comida que no va en ninguna receta (pizzas, caprichos…). Márcala cuando se acabe.</p>

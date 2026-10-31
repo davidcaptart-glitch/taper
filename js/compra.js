@@ -154,7 +154,8 @@ function askTicket(m,key){
   dlg.querySelector("#atNo").onclick=()=>{S.ticketSkip=S.ticketSkip||{};S.ticketSkip[shopKey(m,key)]=todayISO();save();dlg.close();render()};
 }
 // Cantidad de una línea de ticket en la unidad del producto (al peso: los kilos; si no, envases)
-const lineQty=l=>{const p=P[l.pid];return l.kg&&p.unit==="g"?l.kg*1000:Math.max(1,l.qty||1)*p.env};
+// (si era un producto con su envase en ese súper, su envase)
+const lineQty=l=>{const p=P[l.pid];return l.kg&&p.unit==="g"?l.kg*1000:Math.max(1,l.qty||1)*(l.env||p.env)};
 // Compras fuera del menú que se repiten (S.recurring): {id,pid,desc,amount,q,freq:"mes"|"semana",from:"AAAA-MM"}
 const recurringFor=m=>(S.recurring||[]).filter(r=>r.from<=m);
 function markShopDone(m,key){S.shopDone=S.shopDone||{};S.shopDone[shopKey(m,key)]=todayISO();save()}

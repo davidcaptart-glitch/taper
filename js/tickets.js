@@ -268,18 +268,48 @@ async function loadCatalog(){
   toks.forEach((ts,i)=>{for(const t of ts){const k=t.slice(0,4);if(!idx.has(k))idx.set(k,new Set());idx.get(k).add(i)}});
   MC={...d,toks,idx};return MC;
 }
-function matchLine(desc){
-  const ours=new Set(Object.values(P).map(p=>p.mid).filter(Boolean));
-  const ts=normTxt(desc).split(" ").map(t=>CAT[t]||ABBR[t]||t).filter(t=>t.length>=3);
+// Dos palabras son la misma si son iguales o una empieza por la otra (abreviada), con al menos 4 letras («MAC» no es «MACARRONES»)
+const tokSame=(c,t)=>c===t||c.length>=4&&t.length>=4&&(c.startsWith(t)||t.startsWith(c));
+// Palabras que no dicen qué producto es
+const NOISE=new Set(["PACK","UNIDADES","UNIDAD","UDS","APROX","BANDEJA","MALLA","GRS","CLASICO","CLASICA","FORMATO","AHORRO","OFERTA"]);
+// Palabras de una línea del ticket, ya en castellano y sin abreviaturas
+function lineTokens(desc){
+  // Sin tamaños ni cantidades («500G», «1KG», «12U»): no dicen qué producto es
+  const ts=normTxt(desc).split(" ").map(t=>CAT[t]||ABBR[t]||t).filter(t=>t.length>=3&&!/^\d/.test(t));
   // Huevos: en la foto «OUS» sale a veces como «OS», «QUS»…; la docena y el tamaño lo delatan
   if(!ts.includes("HUEVOS")&&/\b(6|12|18|24|30|17)\b/.test(normTxt(desc))&&ts.some(t=>/^(MEDIANOS|GRANDES|MITJANS|GRANS)$/.test(t)))ts.push("HUEVOS");
   // La talla de los huevos con una letra: M, L, XL
   if(ts.includes("HUEVOS")&&!ts.some(t=>/^(MEDIANOS|GRANDES)$/.test(t))){const sz=normTxt(desc).match(/\b(XL|L|M)\b/);if(sz)ts.push({M:"MEDIANOS",L:"GRANDES",XL:"SUPER"}[sz[1]])}
+  return ts;
+}
+// Productos de Táper con su nombre real en otro súper (los que tienen precio): se miran antes que el catálogo de Mercadona
+const SUPIDX={};
+function superIndex(sid){
+  if(SUPIDX[sid])return SUPIDX[sid];
+  const ps=PS&&PS.supers&&PS.supers[sid]&&PS.supers[sid].productos;if(!ps)return null;
+  const brand=new Set(normTxt(superById(sid).nombre).split(" "));
+  return SUPIDX[sid]=Object.entries(ps).filter(([pid,x])=>P[pid]&&x.nombre).map(([pid,x])=>({pid,x,ct:lineTokens(x.nombre).filter(t=>!brand.has(t)&&!NOISE.has(t))}));   // igual que las líneas (la talla de los huevos, sin tamaños)
+}
+function superMatch(ts,sid){
+  const idx=superIndex(sid);if(!idx)return null;const brand=new Set(normTxt(superById(sid).nombre).split(" "));
+  const tt=ts.filter(t=>!brand.has(t)&&!/^\d/.test(t));if(!tt.length)return null;let best=null;
+  for(const e of idx){let hit=0;for(const t of tt)if(e.ct.some(c=>tokSame(c,t)))hit++;if(!hit)continue;
+    const sc=hit/tt.length+0.15*hit/Math.max(1,e.ct.length);if(!best||sc>best.sc)best={sc,e}}
+  if(!best||best.sc<0.6)return null;
+  return {mid:null,name:best.e.x.nombre,group:P[best.e.pid].aisle,food:true,pid:best.e.pid,score:Math.round(best.sc*100)/100,sup:sid};
+}
+// sid: el súper del ticket. Primero sus productos (nombre real) y, si no, el más parecido de Mercadona
+function matchLine(desc,sid){
+  const ours=new Set(Object.values(P).map(p=>p.mid).filter(Boolean));
+  // Las marcas de los súper («CONDIS», «DIA»…) no dicen qué producto es
+  const brands=new Set((SUPERS||[]).flatMap(x=>normTxt(x.nombre).split(" ")).filter(t=>t.length>=3&&t!=="MERCADONA"));
+  const ts=lineTokens(desc).filter(t=>!brands.has(t)&&!NOISE.has(t));
   if(!ts.length)return null;
+  if(sid&&sid!=="mercadona"){const m=superMatch(ts,sid);if(m)return m}
   const cand=new Set();for(const t of ts){const s=MC.idx.get(t.slice(0,4));if(s)for(const i of s)cand.add(i)}
   let best=null;
   for(const i of cand){const ct=MC.toks[i];
-    let hit=0;for(const t of ts)if(ct.some(c=>c.startsWith(t)||t.startsWith(c)))hit++;
+    let hit=0;for(const t of ts)if(ct.some(c=>tokSame(c,t)))hit++;
     const sc=hit/ts.length+0.15*hit/Math.max(1,ct.length)+(ours.has(MC.p[i][0])?0.12:0);
     if(!best||sc>best.sc)best={sc,i}}
   if(!best||best.sc<0.55)return null;
@@ -310,7 +340,7 @@ function openTicketScan(online,shared,ctx){
       for(const l of tk.lines){
         // Bolsas de la caja y costes del pedido (preparación, envío): no son comida
         if(l.fee||/^(BOSSA|BOLSA)\b/i.test(l.desc)&&l.amount/Math.max(1,l.qty)<=0.5){l.match=null;l.food=false;l.pid=null;l.group=l.fee?"Preparación y envío":"Bolsas";continue}
-        l.match=matchLine(l.desc);l.food=l.match?l.match.food:true;l.pid=l.match?l.match.pid:null;l.group=l.match?l.match.group:"Sin identificar"}
+        l.match=matchLine(l.desc,tk.super);l.food=l.match?l.match.food:true;l.pid=l.match?l.match.pid:null;l.group=l.match?l.match.group:"Sin identificar"}
       openTicketReview(tk,text,ctx);
     }catch(e){st.textContent="No se ha podido leer: "+e.message+". Comprueba la conexión (la primera vez se descarga el lector)."}};
   dlg.querySelector("#tkImg").onchange=e=>go(e.target.files[0]);
@@ -338,20 +368,39 @@ function openTicketReview(tk,text,ctx){
       <div class="field"><label for="tkDate">Fecha de la compra</label><input type="date" id="tkDate" value="${esc(date)}" max="${todayISO()}"></div>
       <div class="field"><label>¿De qué compra es?</label><select id="tkList"><option value="suelta" ${dest.key==="suelta"?"selected":""}>Compra suelta (fuera de la lista)</option><option value="mes" ${dest.key==="mes"?"selected":""}>Compra del mes</option>${dest.weeks.map((s,i)=>`<option value="${i}" ${dest.key===String(i)?"selected":""}>Semana del ${shortDate(s)}</option>`).join("")}</select></div>
       <table class="wtable">${tk.lines.map((l,i)=>`<tr><td>${l.qty} × ${esc(l.desc)}${l.kg?` <span class="small muted">${String(l.kg).replace(".",",")} kg</span>`:""}
-        <div class="small muted">${esc(l.match?l.match.name:"Sin identificar")} · ${esc(l.group)}${l.food&&!(l.pid&&inList.has(l.pid))?` · <b style="color:var(--accent)">fuera de la lista</b>`:""}</div>
+        <div class="small muted">${esc(l.match?l.match.name:"Sin identificar")} · ${esc(l.group)}${priceCheckHTML(l,tk.super)}${l.food&&!(l.pid&&inList.has(l.pid))?` · <b style="color:var(--accent)">fuera de la lista</b>`:""}</div>
         <select data-tkp="${i}" style="margin-top:4px;padding:4px 6px"><option value="">${l.food?"Comida (otro producto)":"No es comida"}</option>${prods.map(p=>`<option value="${p.id}" ${l.pid===p.id?"selected":""}>${esc(p.name)}</option>`).join("")}</select></td>
         <td style="vertical-align:top">${eur(l.amount)}<br><button class="chip" data-tkf="${i}" aria-pressed="${l.food}" style="margin-top:4px;font-size:.75rem">${l.food?"🍽️ Comida":"🧴 No"}</button></td></tr>`).join("")}</table>
       <div class="actions"><button class="btn" id="tkSave">Guardar ticket</button></div>
       <details class="small muted"><summary>Texto leído</summary><pre style="white-space:pre-wrap">${esc(text.slice(0,3000))}</pre></details></div>`);
     dlg.querySelectorAll("[data-tkf]").forEach(b=>b.onclick=()=>{const l=tk.lines[b.dataset.tkf];l.food=!l.food;if(!l.food)l.pid=null;draw()});
-    dlg.querySelectorAll("[data-tkp]").forEach(s=>s.onchange=()=>{const l=tk.lines[s.dataset.tkp];l.pid=s.value||null;if(l.pid){l.food=true;l.group=P[l.pid].aisle}draw()});
+    dlg.querySelectorAll("[data-tkp]").forEach(s=>s.onchange=()=>{const l=tk.lines[s.dataset.tkp];l.pid=s.value||null;l.manual=true;if(l.match&&l.match.pid!==l.pid)l.match={...l.match,sup:null};if(l.pid){l.food=true;l.group=P[l.pid].aisle}draw()});
     dlg.querySelector("#tkList").onchange=e=>{dest={...dest,key:e.target.value}};
     dlg.querySelector("#tkDate").onchange=e=>{if(!e.target.value)return;date=e.target.value;tk.date=date;if(!(ctx&&ctx.m))dest=ticketListFor(date);const y=dlg.scrollTop;draw();dlg.scrollTop=y};
-    dlg.querySelector("#tkSuper").onchange=e=>{tk.super=e.target.value==="otro"?null:e.target.value};
+    // Otro súper: se vuelve a reconocer cada línea con sus productos (menos las que has cambiado a mano)
+    dlg.querySelector("#tkSuper").onchange=e=>{tk.super=e.target.value==="otro"?null:e.target.value;
+      for(const l of tk.lines)if(!l.manual&&!l.fee&&l.group!=="Bolsas"){l.match=matchLine(l.desc,tk.super);l.food=l.match?l.match.food:true;l.pid=l.match?l.match.pid:null;l.group=l.match?l.match.group:"Sin identificar"}
+      const y=dlg.scrollTop;draw();dlg.scrollTop=y};
     dlg.querySelector("#tkStore").onchange=e=>{tk.store=e.target.value.trim()};
     dlg.querySelector("#tkSave").onclick=()=>saveTicket(tk,date,dest);
   };
   draw();
+}
+// Envase del producto en ese súper (en la unidad de Táper)
+const supEnv=(sid,pid)=>{const x=PS&&PS.supers&&PS.supers[sid]&&PS.supers[sid].productos[pid];return x&&x.envase>0?x.envase:null};
+// Lo pagado por envase y el precio que tenemos de ese súper para el mismo envase (si la línea es de un producto suyo, su envase; si no, el de Táper)
+function ticketRef(l,sid){
+  if(!l.pid||!P[l.pid]||!(l.amount>0)||!sid)return null;const p=P[l.pid];
+  const own=l.env||(l.match&&l.match.sup===sid&&l.match.pid===l.pid?supEnv(sid,l.pid):null);
+  if(own&&sid!=="mercadona"){const x=PS.supers[sid].productos[l.pid];const paid=l.kg&&p.unit==="g"?l.amount/l.kg*(own/1000):l.amount/Math.max(1,l.qty||1);return {paid,ref:x.precio}}
+  const ref=superPrice(sid,l.pid);if(!(ref>0))return null;
+  const paid=l.kg&&p.unit==="g"?l.amount/l.kg*(p.env/1000):l.amount/Math.max(1,l.qty||1);
+  return {paid,ref};
+}
+// En la revisión: lo que costaba en ese súper y si pagaste más o menos
+function priceCheckHTML(l,sid){
+  const rc=ticketRef(l,sid);if(!rc)return "";const d=(rc.paid-rc.ref)/rc.ref,nm=esc(superById(sid).nombre.split(" /")[0]);
+  return ` · en ${nm} ${eur(rc.ref)}${Math.abs(d)>=0.08?` <b style="color:${d>0?"var(--accent)":"var(--ok)"}">${d>0?"▲":"▼"} pagaste ${Math.round(Math.abs(d)*100)} % ${d>0?"más":"menos"}</b>`:" ✓"}`;
 }
 // Revisión interna de precios: si lo pagado no cuadra con el precio que usa la app, se manda al servidor
 // para revisarlo. No cambia nada en la app de nadie.
@@ -359,10 +408,7 @@ function reportTicketPrices(t){
   if(typeof servidorOn!=="function"||!servidorOn())return;
   const sid=(SUPERS||[]).some(x=>x.id===t.super)?t.super:null, items=[];if(!sid)return;   // de un súper que no conozco no se comparan precios
   for(const l of t.lines){
-    if(!l.pid||!(l.amount>0))continue;const p=P[l.pid];
-    const ours=sid?superPrice(sid,l.pid):price(l.pid);if(!(ours>0))continue;
-    // Precio pagado por un envase como el de la app (al peso: el kilo pasado a su envase)
-    const paid=l.kg&&p.unit==="g"?l.amount/l.kg*(p.env/1000):l.amount/Math.max(1,l.qty||1);
+    const rc=ticketRef(l,sid);if(!rc)continue;const {paid,ref:ours}=rc;
     const dif=(paid-ours)/ours;
     if(Math.abs(dif)>=0.08)items.push({pid:l.pid,desc:String(l.desc).slice(0,60),pagado:Math.round(paid*100)/100,app:Math.round(ours*100)/100,dif:Math.round(dif*100)});
   }
@@ -385,7 +431,7 @@ function saveTicket(tk,date,dest){
   S.tickets=S.tickets||[];
   // Comida que no estaba en ninguna lista del mes: compra de más (cuenta como gastado y como que la tienes en casa)
   const inList=listPids(dest.m);
-  const lines=tk.lines.map(l=>({qty:l.qty,desc:l.desc,amount:l.amount,kg:l.kg||null,food:l.food,pid:l.pid||null,mid:l.match?l.match.mid:null,name:l.match?l.match.name:null,group:l.pid?P[l.pid].aisle:l.group,extra:!!(l.food&&!(l.pid&&inList.has(l.pid)))}));
+  const lines=tk.lines.map(l=>({qty:l.qty,desc:l.desc,amount:l.amount,kg:l.kg||null,food:l.food,pid:l.pid||null,mid:l.match?l.match.mid:null,name:l.match?l.match.name:null,env:l.match&&l.match.sup&&l.match.pid===l.pid?supEnv(l.match.sup,l.pid):null,group:l.pid?P[l.pid].aisle:l.group,extra:!!(l.food&&!(l.pid&&inList.has(l.pid)))}));
   const t={id:uid("t"),date,m:dest.m,list:dest.key,super:tk.super||"otro",store:tk.store||"",total:tk.total,food:Math.round(lines.filter(l=>l.food).reduce((s,l)=>s+l.amount,0)*100)/100,lines};
   S.tickets.push(t);
   if(S.ticketSkip)delete S.ticketSkip[dest.m+"|"+dest.key];
