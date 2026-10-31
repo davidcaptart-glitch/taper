@@ -953,8 +953,13 @@ function renderCompra(){
       <p class="small muted" style="margin:8px 2px 0">Aplana las bolsas para que se congelen y descongelen antes. La noche antes de cada día te aviso de pasarla a la nevera.</p></details>`}}
   if(ticketDue().some(x=>x.m===month&&x.key===listSel))h+=`<div class="tkban"><span class="ti">${ico("receipt")}</span><span><b>Sube el ticket de esta compra</b><small>+3 coins y me ayudas a afinar los precios</small></span><button class="btn small" id="tkBanner">Subir</button><button class="tkx" id="tkSkip" aria-label="No tengo ticket">✕</button></div>`;
   if(l.items.length)h+=`<div class="row" style="margin:4px 0"><button class="btn small" id="sendList">${ico("share")} Enviar la lista</button>${servidorOn()?`<button class="btn ghost small" id="shareMenuC">${ico("users")} ${S.share?"Compartida con alguien de casa":"Compartir con alguien de casa"}</button>`:""}</div>`;
-  if(l.items.length&&!shopIsDone(month,l))h+=`<div class="row" style="margin:4px 0 8px"><button class="btn ghost small" id="shopDone">✓ Ya he hecho esta compra</button></div>`;
-  else if(l.items.length)h+=`<p class="small okt" style="margin:4px 0 8px;color:var(--ok);font-weight:600">✓ Compra hecha</p>`;
+  // El ticket se puede subir siempre, también días después (o aunque se dijera «No tengo ticket»)
+  {const tks=(S.tickets||[]).filter(t=>t.m===month&&t.list===listSel),banner=ticketDue().some(x=>x.m===month&&x.key===listSel);
+    const tkb=banner?"":`<button class="btn ghost small" id="tkAny">${ico("receipt")} ${tks.length?"Subir otro ticket":"Subir el ticket"}</button>`;
+    const tki=tks.length?`<span class="small muted">🧾 ${tks.length===1?"Ticket subido":tks.length+" tickets subidos"}: ${eur(tks.reduce((t,x)=>t+x.food,0))} en comida</span>`:"";
+    if(l.items.length&&!shopIsDone(month,l))h+=`<div class="row" style="margin:4px 0 8px"><button class="btn ghost small" id="shopDone">✓ Ya he hecho esta compra</button>${tkb}</div>`;
+    else if(l.items.length||tks.length)h+=`<div class="row" style="margin:4px 0 8px;align-items:center"><span class="small okt" style="color:var(--ok);font-weight:600">✓ Compra hecha</span>${tkb}${tki}</div>`;
+    else if(tkb)h+=`<div class="row" style="margin:4px 0 8px">${tkb}</div>`;}
   if(listSel==="mes")h+=shopPlanCard(month);
   if(l.items.length&&l.groups.length===1&&l.groups[0].sup==="mercadona")h+=orderBlock(l,listSel==="mes"?"mes":"semana");
   if(l.items.length&&chosenSupers().length>1)h+=compareCard(l);
@@ -1000,7 +1005,8 @@ function renderCompra(){
   document.getElementById("sendList")?.addEventListener("click",()=>shareList(month,l,listSel==="mes"?"Compra del mes":"Compra de la semana del "+shortDate(sh.weeks[wi])));
   document.getElementById("shareMenuC")?.addEventListener("click",openShareMenu);
   document.getElementById("shopDone")?.addEventListener("click",()=>{const m=month,k=listSel;markShopDone(m,k);render();askTicket(m,k)});
-  document.getElementById("tkBanner")?.addEventListener("click",()=>openTicketScan(l.mode!=="tienda"));
+  document.getElementById("tkBanner")?.addEventListener("click",()=>openTicketScan(l.mode!=="tienda",null,{m:month,key:listSel}));
+  document.getElementById("tkAny")?.addEventListener("click",()=>openTicketScan(l.mode!=="tienda",null,{m:month,key:listSel}));
   document.getElementById("tkSkip")?.addEventListener("click",()=>{S.ticketSkip=S.ticketSkip||{};S.ticketSkip[shopKey(month,listSel)]=todayISO();save();render()});
   main.querySelectorAll("[data-bag]").forEach(i=>i.onchange=()=>{S.bags=S.bags||{};if(i.checked)S.bags[i.dataset.bag]=todayISO();else delete S.bags[i.dataset.bag];save();render()});
   main.querySelectorAll("[data-splan]").forEach(b=>b.onclick=()=>{const p=SHOP_PLANS.find(x=>x.id===b.dataset.splan);
@@ -1659,7 +1665,17 @@ document.addEventListener("visibilitychange",()=>{if(document.visibilityState===
   // Al volver de los ajustes del móvil: si ya hay permiso, se activan los avisos
   if(avisosOn()&&Notification.permission==="granted"&&dlg.open&&dlg.querySelector("#permRetry"))enableAvisos().catch(()=>{});else if(tab==="perfil")render();renderBell()}});
 async function getJSON(url,fresh){const r=await fetch(url,{cache:fresh?"no-store":"no-cache"});if(!r.ok)throw new Error(url+": "+r.status);return r.json()}
+// «Entrando en Táper»: la pantalla de entrada va contando lo que hace y se quita cuando la app está lista
+const entryT0=performance.now();let entryTimer=null;
+function entryMsgs(){
+  const msgs=S.onboarded?["Abriendo tu táper…","Trayendo los precios de esta semana…","Poniendo al día tu menú…","Casi listo…"]:["Abriendo tu táper…","Preparando la cocina…"];
+  let i=0;entryTimer=setInterval(()=>{const x=document.getElementById("entryTxt");if(!x||++i>=msgs.length)return clearInterval(entryTimer);x.classList.remove("in");void x.offsetWidth;x.textContent=msgs[i];x.classList.add("in")},700);
+}
+// Se queda al menos un momento para que se lea (y no parpadee); luego se desvanece
+const entryReady=()=>new Promise(r=>setTimeout(r,Math.max(0,1300-(performance.now()-entryT0))));
+function hideEntry(){const ov=document.getElementById("entry");clearInterval(entryTimer);if(!ov||ov.classList.contains("out"))return;ov.classList.add("out");setTimeout(()=>ov.remove(),350)}
 async function boot(){
+  entryMsgs();
   try{
     const [prods,recs]=await Promise.all([getJSON("data/productos.json"),getJSON("data/recetas.json")]);
     setProducts(prods.productos);setRecipes(recs.recetas);
@@ -1694,8 +1710,11 @@ async function boot(){
     for(const [s,wk] of Object.entries(S.plans))if(addDays(s,6)>=todayISO())for(const [id,v] of Object.entries(wk.slots||{}))if(v.recipe&&RX[v.recipe]&&!hasPhoto(RX[v.recipe])&&!v.locked)delete wk.slots[id];
     ensureHorizon();for(const s of Object.keys(S.plans))if(addDays(s,6)>=todayISO())ensureWeek(s);save();
     // Si el plan aún no ha empezado, el Menú abre directamente en el mes en que empieza
-    if(S.home.start&&S.home.start>todayISO()&&!weeksInMonth(month).some(s=>addDays(s,6)>=S.home.start))month=S.home.start.slice(0,7)}
-  render();
+    if(S.home.start&&S.home.start>todayISO()&&!weeksInMonth(month).some(s=>addDays(s,6)>=S.home.start))month=S.home.start.slice(0,7);
+    // Mes nuevo con presupuesto (o de antes de que se ajustara al ponerlo): se cuadra aquí mismo, mientras se entra, sin «Rehaciendo tu menú»
+    if(budgetSet()&&!(S.budgetInfo&&S.budgetInfo[budgetMonths()[0]])){try{redoFromToday();checkBudget()}catch(e){console.error(e)}}}
+  await entryReady();
+  render();hideEntry();
   // Tras actualizar: explica qué ha mejorado (no a quien acaba de empezar); y avisa si su receta sugerida ya está
   const approved=checkApprovedSuggestions();
   if(approved)showApproved(approved);
@@ -1703,12 +1722,10 @@ async function boot(){
   else if(!S.onboarded){S.seenVersion=APP_VERSION;save()}
   checkUpdate();startCounter();
   if(avisosOn()&&S.notif&&S.notif.on){shareWithSW().catch(()=>{});queueSyncAvisos()}
-  // Quien ya tenía presupuesto puesto (de antes de que se rehiciera el menú al ponerlo): se ajusta una vez
-  if(S.onboarded&&budgetSet()&&!(S.budgetInfo&&S.budgetInfo[todayISO().slice(0,7)])){try{redoScreen()}catch(e){console.error(e)}}
   trackOnBoot();checkAvisos();applyAccent();applySkin();if(servidorOn())loadStats().then(()=>{applyAccent();applySkin()}).catch(()=>{});
   {const u=new URLSearchParams(location.search),t=u.get("hecho")||u.get("abrir");if(t){notifAction(u.get("hecho")?"hecho":"abrir",t);history.replaceState(null,"",location.pathname)}}
   checkSharedTicket().then(t=>{if(!t)casaOnBoot().then(j=>{if(!j&&!shareOnBoot())setTimeout(()=>openRateDialog(),1500)})});
   navigator.serviceWorker&&navigator.serviceWorker.addEventListener("message",e=>{if(e.data&&e.data.tipo)notifAction(e.data.tipo,e.data.tag)});watchPermission();checkTransferOnBoot();queueTransfer();
 }
-boot();
+boot().catch(e=>console.error(e)).finally(hideEntry);
 if("serviceWorker" in navigator&&location.protocol!=="file:")navigator.serviceWorker.register("sw.js").catch(()=>{});

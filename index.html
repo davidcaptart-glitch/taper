@@ -12,10 +12,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;650;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <meta name="description" content="Menú semanal, tápers, lista de la compra y precios del súper, a tu medida.">
-<link rel="stylesheet" href="css/app.css?v=106">
-<link rel="stylesheet" href="css/esteticas.css?v=106">
+<link rel="stylesheet" href="css/app.css?v=107">
+<link rel="stylesheet" href="css/esteticas.css?v=107">
 </head>
 <body>
+<!-- Pantalla de entrada: se ve mientras se abre la app (recetas, precios, menú al día) y se va sola -->
+<div class="prep entry" id="entry" role="status" aria-live="polite"><div class="prepin">
+  <h2 class="wh">Entrando en <em>Táper</em></h2><p>Un segundo, abro tu cocina.</p>
+  <div class="entart" aria-hidden="true"><div class="tlid"></div><div class="tbox"></div><span>🥦</span><span>🍅</span><span>🧀</span><span>🍗</span></div>
+  <div class="prepbar loop"><i></i></div><p class="prepmsg"><span class="dot"></span><span id="entryTxt">Abriendo tu táper…</span></p></div></div>
 <div class="wrap">
   <header class="top">
     <div class="brand">
@@ -36,7 +41,7 @@
     </div>
     <div class="pricedate" id="priceDate"></div>
   </header>
-  <main id="main"><p class="loading">Cargando…</p></main>
+  <main id="main"></main>
 </div>
 <nav class="tabs" aria-label="Secciones" hidden><div class="in">
   <button data-tab="menu"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg></span>Menú</button>
@@ -47,19 +52,19 @@
 </div></nav>
 <dialog id="dlg"></dialog>
 <div class="toast" id="toast"></div>
-<script src="js/base.js?v=106"></script>
-<script src="js/iconos.js?v=106"></script>
-<script src="js/datos.js?v=106"></script>
-<script src="js/fotos.js?v=106"></script>
-<script src="js/gustos.js?v=106"></script>
-<script src="js/plan.js?v=106"></script>
-<script src="js/compra.js?v=106"></script>
-<script src="js/tickets.js?v=106"></script>
-<script src="js/congelador.js?v=106"></script>
-<script src="js/avisos.js?v=106"></script>
-<script src="js/compartir.js?v=106"></script>
-<script src="js/casa.js?v=106"></script>
-<script src="js/bienvenida.js?v=106"></script>
-<script src="js/ui.js?v=106"></script>
+<script src="js/base.js?v=107"></script>
+<script src="js/iconos.js?v=107"></script>
+<script src="js/datos.js?v=107"></script>
+<script src="js/fotos.js?v=107"></script>
+<script src="js/gustos.js?v=107"></script>
+<script src="js/plan.js?v=107"></script>
+<script src="js/compra.js?v=107"></script>
+<script src="js/tickets.js?v=107"></script>
+<script src="js/congelador.js?v=107"></script>
+<script src="js/avisos.js?v=107"></script>
+<script src="js/compartir.js?v=107"></script>
+<script src="js/casa.js?v=107"></script>
+<script src="js/bienvenida.js?v=107"></script>
+<script src="js/ui.js?v=107"></script>
 </body>
 </html>

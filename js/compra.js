@@ -140,7 +140,7 @@ function askTicket(m,key){
     <p>Así sé lo que has gastado de verdad y corrijo los precios para todos. <b>+3 coins</b> por ticket.</p>
     <div class="actions"><button class="btn wide" id="atScan">${ico("receipt")} Subir el ticket</button></div>
     <div class="actions"><button class="btn ghost" id="atLater">Luego</button><button class="btn ghost" id="atNo">No tengo ticket</button></div></div>`);
-  dlg.querySelector("#atScan").onclick=()=>openTicketScan(listMode(m,key)!=="tienda");
+  dlg.querySelector("#atScan").onclick=()=>openTicketScan(listMode(m,key)!=="tienda",null,{m,key});
   dlg.querySelector("#atLater").onclick=()=>dlg.close();
   dlg.querySelector("#atNo").onclick=()=>{S.ticketSkip=S.ticketSkip||{};S.ticketSkip[shopKey(m,key)]=todayISO();save();dlg.close();render()};
 }

@@ -829,6 +829,15 @@
       "cambios": [
         "En «Afinar mi menú › Custodias y quién come cada día» sale una pantalla solo para eso: para cada persona, si está siempre o en semanas alternas, el día del cambio y qué comidas hace en casa."
       ]
+    },
+    {
+      "version": 107,
+      "fecha": "2026-10-31",
+      "titulo": "Tickets cuando quieras y pantalla de entrada",
+      "cambios": [
+        "Puedes subir el ticket de cualquier compra cuando quieras, aunque sea días después: en Compra, cada lista tiene su botón «Subir el ticket» (y «Subir otro ticket» si ya subiste uno).",
+        "Al abrir la app sale «Entrando en Táper» mientras se cargan las recetas, los precios y tu menú. «Rehaciendo tu menú» ya solo sale cuando de verdad lo rehaces."
+      ]
     }
   ]
 }

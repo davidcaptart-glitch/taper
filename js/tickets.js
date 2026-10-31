@@ -98,11 +98,12 @@ function matchLine(desc){
 
 /* ---------- Ver el ticket, corregirlo y guardarlo ---------- */
 // online: la compra se hizo por internet, así que el ticket es un PDF o una captura (se ofrece primero subirlo)
-function openTicketScan(online,shared){
+// ctx {m,key}: la compra desde la que se sube (si no, se deduce de la fecha del ticket). Se puede subir cuando sea, también días después
+function openTicketScan(online,shared,ctx){
   const up=`<label class="btn ${online?"":"ghost"} wide">${ico("receipt")} Subir PDF o captura<input type="file" accept="application/pdf,.pdf,image/*" id="tkFile" hidden></label>`;
   const ph=`<label class="btn ${online?"ghost":""} wide">${ico("camera")} Hacer foto al ticket<input type="file" accept="image/*" capture="environment" id="tkImg" hidden></label>`;
   showDialog(`<div class="mod">${closeBtn}<h2>Sube tu ticket</h2>
-    <p class="small muted">${online?"Si compraste online, sube el PDF del ticket o la factura que te enviaron por correo (o que descargas en su app), o una captura de pantalla.":"Hazle una foto al ticket de papel, bien plano y con luz. Si es un ticket digital, sube el PDF o una captura."} Se lee en tu móvil. Solo se envían, sin datos personales, los precios que no cuadran, para corregirlos para todos. Cada ticket nuevo te da 3 coins.</p>
+    <p class="small muted">${online?"Si compraste online, sube el PDF del ticket o la factura que te enviaron por correo (o que descargas en su app), o una captura de pantalla.":"Hazle una foto al ticket de papel, bien plano y con luz. Si es un ticket digital, sube el PDF o una captura."} Se lee en tu móvil. Solo se envían, sin datos personales, los precios que no cuadran, para corregirlos para todos. Puedes subirlo cuando quieras, aunque sea días después. Los de los últimos 10 días te dan 3 coins.</p>
     <div class="actions" style="flex-direction:column;align-items:stretch">${online?up+ph:ph+up}</div>
     ${online&&!isIOS()?`<p class="small muted">También puedes compartirlo directamente: en el correo o en la app del súper, toca Compartir en el PDF y elige Táper.</p>`:""}
     <div id="tkState" class="small muted"></div></div>`);
@@ -115,7 +116,7 @@ function openTicketScan(online,shared){
       const tk=parseTicket(text);
       if(!tk.lines.length){st.innerHTML="No he encontrado líneas de productos. Prueba con otra foto más nítida y plana, o con el PDF.";return}
       for(const l of tk.lines){l.match=matchLine(l.desc);l.food=l.match?l.match.food:true;l.pid=l.match?l.match.pid:null;l.group=l.match?l.match.group:"Sin identificar"}
-      openTicketReview(tk,text);
+      openTicketReview(tk,text,ctx);
     }catch(e){st.textContent="No se ha podido leer: "+e.message+". Comprueba la conexión (la primera vez se descarga el lector)."}};
   dlg.querySelector("#tkImg").onchange=e=>go(e.target.files[0]);
   if(shared)go(shared);
@@ -126,8 +127,8 @@ function ticketListFor(date){
   const wi=weeks.findIndex(s=>date>=s&&date<addDays(s,7));
   return {m,key:wi>=0?String(wi):"mes",weeks};
 }
-function openTicketReview(tk,text){
-  const date=tk.date||todayISO();let dest=ticketListFor(date);
+function openTicketReview(tk,text,ctx){
+  const date=tk.date||todayISO();let dest=ctx&&ctx.m?{m:ctx.m,key:String(ctx.key),weeks:weeksInMonth(ctx.m)}:ticketListFor(date);
   const prods=Object.values(P).sort((a,b)=>a.name.localeCompare(b.name));
   const draw=()=>{
     const food=tk.lines.filter(l=>l.food), foodT=food.reduce((t,l)=>t+l.amount,0), nonT=tk.lines.filter(l=>!l.food).reduce((t,l)=>t+l.amount,0);
@@ -186,6 +187,7 @@ function saveTicket(tk,date,dest){
   const lines=tk.lines.map(l=>({qty:l.qty,desc:l.desc,amount:l.amount,kg:l.kg||null,food:l.food,pid:l.pid||null,mid:l.match?l.match.mid:null,group:l.pid?P[l.pid].aisle:l.group}));
   const t={id:uid("t"),date,m:dest.m,list:dest.key,super:tk.super||"otro",store:tk.store||"",total:tk.total,food:Math.round(lines.filter(l=>l.food).reduce((s,l)=>s+l.amount,0)*100)/100,lines};
   S.tickets.push(t);
+  if(S.ticketSkip)delete S.ticketSkip[dest.m+"|"+dest.key];
   reportTicketPrices(t);
   rewardTicket(t);
   // Lo pagado de esa lista = suma de sus tickets (solo comida)
@@ -225,7 +227,7 @@ function spendingHTML(m){
   return h;
 }
 function bindSpending(){
-  const b=document.getElementById("tkScan");if(b)b.onclick=openTicketScan;
+  const b=document.getElementById("tkScan");if(b)b.onclick=()=>openTicketScan(true);
   document.querySelectorAll("[data-tkdel]").forEach(x=>x.onclick=()=>{if(!confirm("¿Borrar este ticket?"))return;
     const t=S.tickets.find(t=>t.id===x.dataset.tkdel);S.tickets=S.tickets.filter(y=>y!==t);
     const k=t.m+"|"+t.list,rest=S.tickets.filter(y=>y.m===t.m&&y.list===t.list);if(rest.length)S.spent[k]=rest.reduce((s,y)=>s+y.food,0);else delete S.spent[k];
