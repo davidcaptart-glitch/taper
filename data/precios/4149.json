@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-10-25",
+  "fecha": "2026-11-01",
   "codigo_postal_almacen": "4149",
   "productos": {
     "arroz": {
@@ -9,25 +9,25 @@
       "precio": 1.15,
       "anterior": 1.15,
       "precio_kilo": 1.15,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pasta": {
       "mercadona_id": "6250",
       "nombre_mercadona": "Macarrón Hacendado",
       "formato": "Paquete 1.0 kg",
-      "precio": 1.15,
+      "precio": 1.2,
       "anterior": 1.15,
-      "precio_kilo": 1.15,
-      "fecha": "2026-10-25"
+      "precio_kilo": 1.2,
+      "fecha": "2026-11-01"
     },
     "espaguetis": {
       "mercadona_id": "6245",
       "nombre_mercadona": "Spaghetti Hacendado",
       "formato": "Paquete 1.0 kg",
-      "precio": 1.15,
+      "precio": 1.2,
       "anterior": 1.15,
-      "precio_kilo": 1.15,
-      "fecha": "2026-10-25"
+      "precio_kilo": 1.2,
+      "fecha": "2026-11-01"
     },
     "cuscus": {
       "mercadona_id": "9395",
@@ -36,7 +36,7 @@
       "precio": 1.95,
       "anterior": 1.95,
       "precio_kilo": 1.95,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "lentejas": {
       "mercadona_id": "26030",
@@ -45,7 +45,7 @@
       "precio": 0.9,
       "anterior": 0.9,
       "precio_kilo": 1.58,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "garbanzos": {
       "mercadona_id": "26029",
@@ -54,7 +54,7 @@
       "precio": 0.8,
       "anterior": 0.8,
       "precio_kilo": 1.4,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "alubias": {
       "mercadona_id": "26019",
@@ -63,7 +63,7 @@
       "precio": 0.75,
       "anterior": 0.75,
       "precio_kilo": 1.32,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "tomate_tri": {
       "mercadona_id": "16043",
@@ -72,7 +72,7 @@
       "precio": 1.0,
       "anterior": 1.0,
       "precio_kilo": 1.25,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "tomate_frito": {
       "mercadona_id": "17108",
@@ -81,7 +81,7 @@
       "precio": 0.9,
       "anterior": 0.9,
       "precio_kilo": 1.61,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "atun": {
       "mercadona_id": "18092",
@@ -90,7 +90,7 @@
       "precio": 2.7,
       "anterior": 2.7,
       "precio_kilo": 11.25,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "coco": {
       "mercadona_id": "17174",
@@ -99,7 +99,7 @@
       "precio": 1.3,
       "anterior": 1.3,
       "precio_kilo": 3.25,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "maiz": {
       "mercadona_id": "16712",
@@ -108,7 +108,7 @@
       "precio": 1.55,
       "anterior": 1.55,
       "precio_kilo": 3.44,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "tortillas": {
       "mercadona_id": "80859",
@@ -117,7 +117,7 @@
       "precio": 1.15,
       "anterior": 1.15,
       "precio_kilo": 3.19,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "cebolla": {
       "mercadona_id": "69089",
@@ -126,7 +126,7 @@
       "precio": 1.5,
       "anterior": 1.5,
       "precio_kilo": 1.5,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "patata": {
       "mercadona_id": "69166",
@@ -135,7 +135,7 @@
       "precio": 4.65,
       "anterior": 4.65,
       "precio_kilo": 1.55,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "boniato": {
       "mercadona_id": "69239",
@@ -144,7 +144,7 @@
       "precio": 0.72,
       "anterior": 0.72,
       "precio_kilo": 1.7,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "ajo": {
       "mercadona_id": "69297",
@@ -153,7 +153,7 @@
       "precio": 1.85,
       "anterior": 1.85,
       "precio_kilo": 7.4,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pechuga": {
       "mercadona_id": "2787",
@@ -162,7 +162,7 @@
       "precio": 5.0,
       "anterior": 5.0,
       "precio_kilo": 7.7,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "muslos": {
       "mercadona_id": "2789",
@@ -171,7 +171,7 @@
       "precio": 3.74,
       "anterior": 3.74,
       "precio_kilo": 6.8,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "picada": {
       "mercadona_id": "2869",
@@ -180,7 +180,7 @@
       "precio": 4.1,
       "anterior": 4.1,
       "precio_kilo": 8.2,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "picada_pollo": {
       "mercadona_id": "35774",
@@ -189,7 +189,7 @@
       "precio": 3.95,
       "anterior": 3.95,
       "precio_kilo": 7.9,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "lomo": {
       "mercadona_id": "86395",
@@ -198,7 +198,7 @@
       "precio": 3.91,
       "anterior": 3.91,
       "precio_kilo": 7.1,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "burger": {
       "mercadona_id": "2622",
@@ -207,7 +207,7 @@
       "precio": 3.8,
       "anterior": 3.8,
       "precio_kilo": 7.04,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "salmon": {
       "mercadona_id": "24511",
@@ -216,7 +216,7 @@
       "precio": 5.95,
       "anterior": 5.95,
       "precio_kilo": 23.8,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "merluza": {
       "mercadona_id": "62228",
@@ -225,7 +225,7 @@
       "precio": 5.6,
       "anterior": 5.6,
       "precio_kilo": 9.33,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "gambas": {
       "mercadona_id": "24181",
@@ -234,7 +234,7 @@
       "precio": 4.9,
       "anterior": 4.9,
       "precio_kilo": 13.61,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "calamar": {
       "mercadona_id": "24242",
@@ -243,7 +243,7 @@
       "precio": 5.9,
       "anterior": 5.9,
       "precio_kilo": 12.42,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "brocoli": {
       "mercadona_id": "61261",
@@ -252,7 +252,7 @@
       "precio": 1.8,
       "anterior": 1.8,
       "precio_kilo": 1.8,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "espinacas": {
       "mercadona_id": "61279",
@@ -261,7 +261,7 @@
       "precio": 0.95,
       "anterior": 0.95,
       "precio_kilo": 2.11,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "judias": {
       "mercadona_id": "61282",
@@ -270,7 +270,7 @@
       "precio": 1.3,
       "anterior": 1.3,
       "precio_kilo": 1.3,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "salteado": {
       "mercadona_id": "61065",
@@ -279,7 +279,7 @@
       "precio": 1.55,
       "anterior": 1.55,
       "precio_kilo": 2.58,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "guisantes": {
       "mercadona_id": "61215",
@@ -288,7 +288,7 @@
       "precio": 1.55,
       "anterior": 1.55,
       "precio_kilo": 1.55,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "huevos": {
       "mercadona_id": "31504",
@@ -297,7 +297,7 @@
       "precio": 3.05,
       "anterior": 3.05,
       "precio_kilo": 0.25,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "queso": {
       "mercadona_id": "51110",
@@ -306,7 +306,7 @@
       "precio": 1.6,
       "anterior": 1.6,
       "precio_kilo": 8.0,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pimiento": {
       "mercadona_id": "69310",
@@ -315,7 +315,7 @@
       "precio": 0.58,
       "anterior": 0.58,
       "precio_kilo": 2.9,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "calabacin": {
       "mercadona_id": "69338",
@@ -324,7 +324,7 @@
       "precio": 0.56,
       "anterior": 0.56,
       "precio_kilo": 1.4,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "zanahoria": {
       "mercadona_id": "69586",
@@ -333,7 +333,7 @@
       "precio": 1.0,
       "anterior": 1.0,
       "precio_kilo": 1.0,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "tomate": {
       "mercadona_id": "69975",
@@ -342,7 +342,7 @@
       "precio": 2.3,
       "anterior": 2.3,
       "precio_kilo": 2.3,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "ensalada": {
       "mercadona_id": "69706",
@@ -351,7 +351,7 @@
       "precio": 0.85,
       "anterior": 0.85,
       "precio_kilo": 3.4,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "champi": {
       "mercadona_id": "69519",
@@ -360,7 +360,7 @@
       "precio": 2.11,
       "anterior": 2.11,
       "precio_kilo": 6.6,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "limon": {
       "mercadona_id": "3210",
@@ -369,7 +369,7 @@
       "precio": 0.44,
       "anterior": 0.44,
       "precio_kilo": 2.6,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "yogur": {
       "mercadona_id": "22313",
@@ -378,7 +378,7 @@
       "precio": 1.0,
       "anterior": 1.0,
       "precio_kilo": 1.33,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pan_rallado": {
       "mercadona_id": "82219",
@@ -387,7 +387,7 @@
       "precio": 0.85,
       "anterior": 0.85,
       "precio_kilo": 1.13,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "jamon": {
       "mercadona_id": "60329",
@@ -396,7 +396,7 @@
       "precio": 2.0,
       "anterior": 2.0,
       "precio_kilo": 10.0,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "fideos": {
       "mercadona_id": "6261",
@@ -405,7 +405,7 @@
       "precio": 0.85,
       "anterior": 0.85,
       "precio_kilo": 1.7,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "caldo_pollo": {
       "mercadona_id": "7313",
@@ -414,7 +414,7 @@
       "precio": 0.75,
       "anterior": 0.75,
       "precio_kilo": 0.75,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "caldo_pescado": {
       "mercadona_id": "7325",
@@ -423,7 +423,7 @@
       "precio": 0.95,
       "anterior": 0.95,
       "precio_kilo": 0.95,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pavo": {
       "mercadona_id": "2794",
@@ -432,7 +432,7 @@
       "precio": 5.69,
       "anterior": 5.69,
       "precio_kilo": 8.75,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "burger_pavo": {
       "mercadona_id": "3976",
@@ -441,7 +441,7 @@
       "precio": 2.4,
       "anterior": 2.4,
       "precio_kilo": 10.0,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "fideos_arroz": {
       "mercadona_id": "35981",
@@ -450,7 +450,7 @@
       "precio": 1.45,
       "anterior": 1.45,
       "precio_kilo": 7.25,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "solomillo": {
       "mercadona_id": "4570",
@@ -459,7 +459,7 @@
       "precio": 3.9,
       "anterior": 3.9,
       "precio_kilo": 7.8,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "ternera": {
       "mercadona_id": "2900",
@@ -468,7 +468,7 @@
       "precio": 9.1,
       "anterior": 9.1,
       "precio_kilo": 18.2,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "alubias_rojas": {
       "mercadona_id": "26000",
@@ -477,7 +477,7 @@
       "precio": 1.2,
       "anterior": 1.2,
       "precio_kilo": 2.11,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "lasana": {
       "mercadona_id": "6856",
@@ -486,7 +486,7 @@
       "precio": 1.65,
       "anterior": 1.65,
       "precio_kilo": 8.25,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "bacalao": {
       "mercadona_id": "62049",
@@ -495,7 +495,7 @@
       "precio": 7.7,
       "anterior": 7.7,
       "precio_kilo": 19.25,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "emperador": {
       "mercadona_id": "24345",
@@ -504,7 +504,7 @@
       "precio": 4.47,
       "anterior": 4.47,
       "precio_kilo": 14.9,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "teriyaki": {
       "mercadona_id": "17362",
@@ -513,7 +513,7 @@
       "precio": 1.7,
       "anterior": 1.7,
       "precio_kilo": 6.8,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "nata": {
       "mercadona_id": "10199",
@@ -522,7 +522,7 @@
       "precio": 1.85,
       "anterior": 1.85,
       "precio_kilo": 3.08,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "mostaza": {
       "mercadona_id": "17228",
@@ -531,7 +531,7 @@
       "precio": 1.25,
       "anterior": 1.25,
       "precio_kilo": 6.25,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "edamame": {
       "mercadona_id": "70740",
@@ -540,7 +540,7 @@
       "precio": 1.75,
       "anterior": 1.75,
       "precio_kilo": 3.5,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "esparragos": {
       "mercadona_id": "69656",
@@ -549,7 +549,7 @@
       "precio": 2.95,
       "anterior": 2.95,
       "precio_kilo": 11.8,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "bonito": {
       "mercadona_id": "16812",
@@ -558,7 +558,7 @@
       "precio": 2.9,
       "anterior": 2.9,
       "precio_kilo": 12.08,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "caballa": {
       "mercadona_id": "13628",
@@ -567,7 +567,7 @@
       "precio": 2.95,
       "anterior": 2.95,
       "precio_kilo": 12.29,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "sardinas": {
       "mercadona_id": "18225",
@@ -576,7 +576,7 @@
       "precio": 2.25,
       "anterior": 2.25,
       "precio_kilo": 9.62,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pan_integral": {
       "mercadona_id": "82328",
@@ -585,7 +585,7 @@
       "precio": 0.9,
       "anterior": 0.9,
       "precio_kilo": 1.96,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "langostinos": {
       "mercadona_id": "24486",
@@ -594,7 +594,7 @@
       "precio": 3.95,
       "anterior": 3.95,
       "precio_kilo": 17.95,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "masa_empanadilla": {
       "mercadona_id": "63440",
@@ -603,7 +603,7 @@
       "precio": 1.25,
       "anterior": 1.25,
       "precio_kilo": 7.81,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pasta_lentejas": {
       "mercadona_id": "6106",
@@ -612,7 +612,7 @@
       "precio": 1.65,
       "anterior": 1.65,
       "precio_kilo": 6.6,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "hummus": {
       "mercadona_id": "80858",
@@ -621,7 +621,7 @@
       "precio": 1.05,
       "anterior": 1.05,
       "precio_kilo": 4.38,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "noquis": {
       "mercadona_id": "6175",
@@ -630,7 +630,7 @@
       "precio": 1.0,
       "anterior": 1.0,
       "precio_kilo": 2.0,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "berenjena": {
       "mercadona_id": "69326",
@@ -639,7 +639,7 @@
       "precio": 0.81,
       "anterior": 0.81,
       "precio_kilo": 2.2,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "quinoa": {
       "mercadona_id": "22278",
@@ -648,7 +648,7 @@
       "precio": 1.45,
       "anterior": 1.45,
       "precio_kilo": 5.8,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "dorada": {
       "mercadona_id": "87302",
@@ -657,7 +657,7 @@
       "precio": 4.5,
       "anterior": 4.5,
       "precio_kilo": 22.5,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "copos_maiz": {
       "mercadona_id": "22966",
@@ -666,7 +666,7 @@
       "precio": 1.5,
       "anterior": 1.5,
       "precio_kilo": 3.0,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pesto": {
       "mercadona_id": "35438",
@@ -675,7 +675,7 @@
       "precio": 1.95,
       "anterior": 1.95,
       "precio_kilo": 10.26,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "salchichas": {
       "mercadona_id": "53056",
@@ -684,7 +684,7 @@
       "precio": 1.5,
       "anterior": 1.5,
       "precio_kilo": 3.75,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pina": {
       "mercadona_id": "15203",
@@ -693,7 +693,7 @@
       "precio": 2.1,
       "anterior": 2.1,
       "precio_kilo": 3.08,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "leche": {
       "mercadona_id": "10382",
@@ -702,7 +702,7 @@
       "precio": 0.83,
       "anterior": 0.83,
       "precio_kilo": 0.83,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "calabaza": {
       "mercadona_id": "3527",
@@ -711,7 +711,7 @@
       "precio": 1.57,
       "anterior": 1.57,
       "precio_kilo": 3.5,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "gazpacho": {
       "mercadona_id": "15604",
@@ -720,7 +720,7 @@
       "precio": 1.6,
       "anterior": 1.6,
       "precio_kilo": 1.6,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "tinta": {
       "mercadona_id": "24256",
@@ -729,7 +729,7 @@
       "precio": 2.75,
       "anterior": 2.75,
       "precio_kilo": 85.94,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "anacardos": {
       "mercadona_id": "23365",
@@ -738,7 +738,7 @@
       "precio": 2.7,
       "anterior": 2.7,
       "precio_kilo": 13.5,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "feta": {
       "mercadona_id": "51197",
@@ -747,7 +747,7 @@
       "precio": 2.4,
       "anterior": 2.4,
       "precio_kilo": 6.49,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "manzana": {
       "mercadona_id": "3028",
@@ -756,7 +756,7 @@
       "precio": 0.38,
       "anterior": 0.38,
       "precio_kilo": 2.0,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pan_burger": {
       "mercadona_id": "17665",
@@ -765,7 +765,7 @@
       "precio": 0.95,
       "anterior": 0.95,
       "precio_kilo": 4.32,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pan_barra": {
       "mercadona_id": "83202.1",
@@ -774,7 +774,7 @@
       "precio": 0.5,
       "anterior": 0.5,
       "precio_kilo": 2.0,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "avena": {
       "mercadona_id": "86341",
@@ -783,7 +783,7 @@
       "precio": 1.3,
       "anterior": 1.3,
       "precio_kilo": 1.63,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "platano": {
       "mercadona_id": "3824",
@@ -792,7 +792,7 @@
       "precio": 0.23,
       "anterior": 0.23,
       "precio_kilo": 1.25,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "naranja": {
       "mercadona_id": "3235",
@@ -801,7 +801,7 @@
       "precio": 0.71,
       "anterior": 0.71,
       "precio_kilo": 2.5,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "mandarina": {
       "mercadona_id": "3238",
@@ -810,7 +810,7 @@
       "precio": 0.3,
       "anterior": 0.3,
       "precio_kilo": 2.55,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "kiwi": {
       "mercadona_id": "3820",
@@ -819,7 +819,7 @@
       "precio": 0.51,
       "anterior": 0.51,
       "precio_kilo": 4.65,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pera": {
       "mercadona_id": "3119",
@@ -828,7 +828,7 @@
       "precio": 0.42,
       "anterior": 0.42,
       "precio_kilo": 2.5,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "aguacate": {
       "mercadona_id": "3830",
@@ -837,16 +837,16 @@
       "precio": 1.42,
       "anterior": 1.42,
       "precio_kilo": 5.6,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pepino": {
       "mercadona_id": "69584",
       "nombre_mercadona": "Pepino",
       "formato": "Pieza 0.204 kg",
-      "precio": 0.35,
+      "precio": 0.38,
       "anterior": 0.35,
-      "precio_kilo": 1.7,
-      "fecha": "2026-10-25"
+      "precio_kilo": 1.85,
+      "fecha": "2026-11-01"
     },
     "fresas": {
       "mercadona_id": "61092",
@@ -855,7 +855,7 @@
       "precio": 1.9,
       "anterior": 1.9,
       "precio_kilo": 6.33,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "frutos_rojos": {
       "mercadona_id": "61089",
@@ -864,7 +864,7 @@
       "precio": 1.9,
       "anterior": 1.9,
       "precio_kilo": 6.33,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "queso_batido": {
       "mercadona_id": "51071",
@@ -873,7 +873,7 @@
       "precio": 1.1,
       "anterior": 1.1,
       "precio_kilo": 2.2,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "queso_fresco": {
       "mercadona_id": "52408",
@@ -882,7 +882,7 @@
       "precio": 1.15,
       "anterior": 1.15,
       "precio_kilo": 4.6,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "queso_lonchas": {
       "mercadona_id": "50543",
@@ -891,7 +891,7 @@
       "precio": 2.5,
       "anterior": 2.5,
       "precio_kilo": 8.33,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pavo_fiambre": {
       "mercadona_id": "67972",
@@ -900,7 +900,7 @@
       "precio": 3.95,
       "anterior": 3.95,
       "precio_kilo": 9.88,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "serrano": {
       "mercadona_id": "15628",
@@ -909,7 +909,7 @@
       "precio": 2.4,
       "anterior": 2.4,
       "precio_kilo": 26.67,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "kefir": {
       "mercadona_id": "15662",
@@ -918,7 +918,7 @@
       "precio": 0.9,
       "anterior": 0.9,
       "precio_kilo": 3.6,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "crema_cacahuete": {
       "mercadona_id": "16883",
@@ -927,7 +927,7 @@
       "precio": 2.65,
       "anterior": 2.65,
       "precio_kilo": 5.3,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "cacao": {
       "mercadona_id": "22580",
@@ -936,7 +936,7 @@
       "precio": 4.4,
       "anterior": 4.4,
       "precio_kilo": 16.6,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "miel": {
       "mercadona_id": "15430",
@@ -945,7 +945,7 @@
       "precio": 3.2,
       "anterior": 3.2,
       "precio_kilo": 6.4,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "mermelada": {
       "mercadona_id": "15093",
@@ -954,7 +954,7 @@
       "precio": 1.6,
       "anterior": 1.6,
       "precio_kilo": 4.21,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "nueces": {
       "mercadona_id": "34024",
@@ -963,7 +963,7 @@
       "precio": 2.4,
       "anterior": 2.4,
       "precio_kilo": 12.0,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "almendras": {
       "mercadona_id": "34865",
@@ -972,7 +972,7 @@
       "precio": 2.3,
       "anterior": 2.3,
       "precio_kilo": 11.5,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pasas": {
       "mercadona_id": "23010",
@@ -981,7 +981,7 @@
       "precio": 1.65,
       "anterior": 1.65,
       "precio_kilo": 6.6,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "chia": {
       "mercadona_id": "5464",
@@ -999,7 +999,7 @@
       "precio": 1.1,
       "anterior": 1.1,
       "precio_kilo": 8.87,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "tofu": {
       "mercadona_id": "51097",
@@ -1008,7 +1008,7 @@
       "precio": 1.75,
       "anterior": 1.75,
       "precio_kilo": 4.38,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "soja_texturizada": {
       "mercadona_id": "13926",
@@ -1017,7 +1017,7 @@
       "precio": 2.7,
       "anterior": 2.7,
       "precio_kilo": 13.5,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "caldo_verduras": {
       "mercadona_id": "15592",
@@ -1026,7 +1026,7 @@
       "precio": 0.85,
       "anterior": 0.85,
       "precio_kilo": 7.08,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "salsa_soja": {
       "mercadona_id": "17360",
@@ -1035,7 +1035,7 @@
       "precio": 1.2,
       "anterior": 1.2,
       "precio_kilo": 4.8,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "harina_garbanzo": {
       "mercadona_id": "29373",
@@ -1044,7 +1044,7 @@
       "precio": 2.0,
       "anterior": 2.0,
       "precio_kilo": 4.0,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "crema_soja": {
       "mercadona_id": "10376",
@@ -1053,7 +1053,7 @@
       "precio": 1.1,
       "anterior": 1.1,
       "precio_kilo": 5.5,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "seitan": {
       "mercadona_id": "19974",
@@ -1062,7 +1062,7 @@
       "precio": 3.7,
       "anterior": 3.7,
       "precio_kilo": 12.33,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "bebida_soja": {
       "mercadona_id": "14707",
@@ -1071,7 +1071,7 @@
       "precio": 0.65,
       "anterior": 0.65,
       "precio_kilo": 0.65,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "harina": {
       "mercadona_id": "29100",
@@ -1080,7 +1080,7 @@
       "precio": 0.72,
       "anterior": 0.72,
       "precio_kilo": 0.72,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "tahini": {
       "mercadona_id": "17441",
@@ -1089,7 +1089,7 @@
       "precio": 2.95,
       "anterior": 2.95,
       "precio_kilo": 14.75,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "coliflor": {
       "mercadona_id": "61231",
@@ -1098,7 +1098,7 @@
       "precio": 1.8,
       "anterior": 1.8,
       "precio_kilo": 1.8,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "setas": {
       "mercadona_id": "61025",
@@ -1107,7 +1107,7 @@
       "precio": 1.61,
       "anterior": 1.61,
       "precio_kilo": 3.58,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "alcachofa": {
       "mercadona_id": "13865",
@@ -1116,7 +1116,7 @@
       "precio": 2.55,
       "anterior": 2.55,
       "precio_kilo": 6.38,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "repollo": {
       "mercadona_id": "68462",
@@ -1125,7 +1125,7 @@
       "precio": 1.94,
       "anterior": 1.94,
       "precio_kilo": 2.15,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pan_pita": {
       "mercadona_id": "14378",
@@ -1134,7 +1134,7 @@
       "precio": 2.0,
       "anterior": 2.0,
       "precio_kilo": 6.67,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "aceitunas": {
       "mercadona_id": "8309",
@@ -1143,7 +1143,7 @@
       "precio": 1.9,
       "anterior": 1.9,
       "precio_kilo": 12.84,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "alcaparras": {
       "mercadona_id": "33190",
@@ -1152,7 +1152,7 @@
       "precio": 1.35,
       "anterior": 1.35,
       "precio_kilo": 10.0,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "cacahuetes": {
       "mercadona_id": "13451",
@@ -1161,7 +1161,7 @@
       "precio": 1.05,
       "anterior": 1.05,
       "precio_kilo": 5.25,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "masa_empanada": {
       "mercadona_id": "63476",
@@ -1170,7 +1170,7 @@
       "precio": 2.4,
       "anterior": 2.4,
       "precio_kilo": 5.22,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pipas_calabaza": {
       "mercadona_id": "18259",
@@ -1179,7 +1179,7 @@
       "precio": 2.2,
       "anterior": 2.2,
       "precio_kilo": 11.0,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "cogollos": {
       "mercadona_id": "69581",
@@ -1188,7 +1188,7 @@
       "precio": 1.05,
       "anterior": 1.05,
       "precio_kilo": 0.35,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "tomate_cherry": {
       "mercadona_id": "69990",
@@ -1197,7 +1197,7 @@
       "precio": 2.2,
       "anterior": 2.2,
       "precio_kilo": 4.4,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "rucula": {
       "mercadona_id": "69753",
@@ -1206,7 +1206,7 @@
       "precio": 0.85,
       "anterior": 0.85,
       "precio_kilo": 17.0,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "alcachofa_bote": {
       "mercadona_id": "16040",
@@ -1215,7 +1215,7 @@
       "precio": 1.8,
       "anterior": 1.8,
       "precio_kilo": 6.21,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "mango": {
       "mercadona_id": "3050",
@@ -1224,7 +1224,7 @@
       "precio": 1.44,
       "anterior": 1.44,
       "precio_kilo": 2.9,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "remolacha": {
       "mercadona_id": "69523",
@@ -1233,7 +1233,7 @@
       "precio": 1.05,
       "anterior": 1.05,
       "precio_kilo": 2.33,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "piquillo": {
       "mercadona_id": "16005",
@@ -1242,7 +1242,7 @@
       "precio": 1.45,
       "anterior": 1.45,
       "precio_kilo": 4.26,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pizza_jyq": {
       "mercadona_id": "63581",
@@ -1251,7 +1251,7 @@
       "precio": 2.5,
       "anterior": 2.5,
       "precio_kilo": 6.02,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pizza_barbacoa": {
       "mercadona_id": "63613",
@@ -1260,7 +1260,7 @@
       "precio": 2.5,
       "anterior": 2.5,
       "precio_kilo": 6.02,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pizza_4quesos": {
       "mercadona_id": "63580",
@@ -1269,7 +1269,7 @@
       "precio": 2.9,
       "anterior": 2.9,
       "precio_kilo": 7.07,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pizza_carbonara": {
       "mercadona_id": "63653",
@@ -1278,7 +1278,7 @@
       "precio": 2.9,
       "anterior": 2.9,
       "precio_kilo": 6.74,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pizza_pepperoni": {
       "mercadona_id": "63556",
@@ -1287,7 +1287,7 @@
       "precio": 2.9,
       "anterior": 2.9,
       "precio_kilo": 7.07,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pizza_atunbacon": {
       "mercadona_id": "63582",
@@ -1296,7 +1296,7 @@
       "precio": 2.9,
       "anterior": 2.9,
       "precio_kilo": 6.99,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pizza_pollobacon": {
       "mercadona_id": "63645",
@@ -1305,7 +1305,7 @@
       "precio": 2.9,
       "anterior": 2.9,
       "precio_kilo": 6.9,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pizza_serrana": {
       "mercadona_id": "63551",
@@ -1314,7 +1314,7 @@
       "precio": 2.9,
       "anterior": 2.9,
       "precio_kilo": 7.25,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pizza_frankfurt": {
       "mercadona_id": "14246",
@@ -1323,7 +1323,7 @@
       "precio": 2.9,
       "anterior": 2.9,
       "precio_kilo": 6.9,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pizza_margarita": {
       "mercadona_id": "63597",
@@ -1332,7 +1332,7 @@
       "precio": 2.4,
       "anterior": 2.4,
       "precio_kilo": 4.21,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "patatas_fritas": {
       "mercadona_id": "7879",
@@ -1341,7 +1341,7 @@
       "precio": 1.9,
       "anterior": 1.9,
       "precio_kilo": 2.53,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pan_brioche": {
       "mercadona_id": "52602",
@@ -1350,7 +1350,7 @@
       "precio": 1.1,
       "anterior": 1.1,
       "precio_kilo": 7.33,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pan_perrito": {
       "mercadona_id": "82332",
@@ -1359,7 +1359,7 @@
       "precio": 0.9,
       "anterior": 0.9,
       "precio_kilo": 2.73,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "frankfurt": {
       "mercadona_id": "53141",
@@ -1368,7 +1368,7 @@
       "precio": 1.8,
       "anterior": 1.8,
       "precio_kilo": 2.56,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "cheddar": {
       "mercadona_id": "8180",
@@ -1377,7 +1377,7 @@
       "precio": 1.95,
       "anterior": 1.95,
       "precio_kilo": 9.75,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "bacon": {
       "mercadona_id": "21628",
@@ -1386,7 +1386,7 @@
       "precio": 2.05,
       "anterior": 2.05,
       "precio_kilo": 9.11,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "guanciale": {
       "mercadona_id": "21892",
@@ -1395,7 +1395,7 @@
       "precio": 3.75,
       "anterior": 3.75,
       "precio_kilo": 15.0,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "nachos": {
       "mercadona_id": "17754",
@@ -1404,7 +1404,7 @@
       "precio": 1.1,
       "anterior": 1.1,
       "precio_kilo": 5.5,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "guacamole": {
       "mercadona_id": "3852",
@@ -1413,7 +1413,7 @@
       "precio": 1.8,
       "anterior": 1.8,
       "precio_kilo": 9.0,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "jalapenos": {
       "mercadona_id": "33189",
@@ -1422,7 +1422,7 @@
       "precio": 1.65,
       "anterior": 1.65,
       "precio_kilo": 12.22,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "salsa_barbacoa": {
       "mercadona_id": "17346",
@@ -1431,7 +1431,7 @@
       "precio": 1.15,
       "anterior": 1.15,
       "precio_kilo": 3.29,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "san_jacobos": {
       "mercadona_id": "63321",
@@ -1440,7 +1440,7 @@
       "precio": 1.45,
       "anterior": 1.45,
       "precio_kilo": 4.14,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "masa_pizza": {
       "mercadona_id": "13985",
@@ -1449,7 +1449,7 @@
       "precio": 2.2,
       "anterior": 2.2,
       "precio_kilo": 3.93,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "mozzarella_fresca": {
       "mercadona_id": "51050",
@@ -1458,7 +1458,7 @@
       "precio": 0.9,
       "anterior": 0.9,
       "precio_kilo": 3.6,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "alas_pollo": {
       "mercadona_id": "2785",
@@ -1467,7 +1467,7 @@
       "precio": 3.12,
       "anterior": 3.12,
       "precio_kilo": 5.2,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "burger_vacuno": {
       "mercadona_id": "3547",
@@ -1476,7 +1476,7 @@
       "precio": 5.4,
       "anterior": 5.4,
       "precio_kilo": 15.0,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "aceite_girasol": {
       "mercadona_id": "4040",
@@ -1485,7 +1485,7 @@
       "precio": 1.85,
       "anterior": 1.85,
       "precio_kilo": 1.85,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "ketchup": {
       "mercadona_id": "23579",
@@ -1494,7 +1494,7 @@
       "precio": 1.05,
       "anterior": 1.05,
       "precio_kilo": 1.75,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "mayonesa": {
       "mercadona_id": "52728",
@@ -1503,7 +1503,7 @@
       "precio": 1.05,
       "anterior": 1.05,
       "precio_kilo": 4.38,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "alioli": {
       "mercadona_id": "7973",
@@ -1512,7 +1512,7 @@
       "precio": 1.45,
       "anterior": 1.45,
       "precio_kilo": 4.68,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "salsa_yogur": {
       "mercadona_id": "17327",
@@ -1521,7 +1521,7 @@
       "precio": 1.2,
       "anterior": 1.2,
       "precio_kilo": 3.87,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "relleno_kebab": {
       "mercadona_id": "13778",
@@ -1530,7 +1530,7 @@
       "precio": 3.15,
       "anterior": 3.15,
       "precio_kilo": 10.5,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "tortillas_maxi": {
       "mercadona_id": "80870",
@@ -1539,7 +1539,7 @@
       "precio": 1.5,
       "anterior": 1.5,
       "precio_kilo": 4.17,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "chorizo": {
       "mercadona_id": "54209",
@@ -1548,7 +1548,7 @@
       "precio": 2.49,
       "anterior": 2.49,
       "precio_kilo": 8.89,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "mantequilla": {
       "mercadona_id": "20716",
@@ -1557,7 +1557,7 @@
       "precio": 2.05,
       "anterior": 2.05,
       "precio_kilo": 8.2,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "grana_padano": {
       "mercadona_id": "51146",
@@ -1566,7 +1566,7 @@
       "precio": 1.65,
       "anterior": 1.65,
       "precio_kilo": 16.5,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pan_molde": {
       "mercadona_id": "13810",
@@ -1575,7 +1575,7 @@
       "precio": 0.8,
       "anterior": 0.8,
       "precio_kilo": 1.74,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "pepinillos": {
       "mercadona_id": "11565",
@@ -1584,7 +1584,7 @@
       "precio": 1.45,
       "anterior": 1.45,
       "precio_kilo": 3.45,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "salsa_burger": {
       "mercadona_id": "17347",
@@ -1593,7 +1593,7 @@
       "precio": 1.4,
       "anterior": 1.4,
       "precio_kilo": 5.6,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "cebolla_frita": {
       "mercadona_id": "34208",
@@ -1602,7 +1602,7 @@
       "precio": 1.15,
       "anterior": 1.15,
       "precio_kilo": 7.67,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "sazonador_fajitas": {
       "mercadona_id": "23353",
@@ -1611,7 +1611,7 @@
       "precio": 0.9,
       "anterior": 0.9,
       "precio_kilo": 52.94,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "calamares_romana": {
       "mercadona_id": "63163",
@@ -1620,7 +1620,7 @@
       "precio": 5.25,
       "anterior": 5.25,
       "precio_kilo": 10.5,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "jamoncitos": {
       "mercadona_id": "2778",
@@ -1629,7 +1629,7 @@
       "precio": 3.5,
       "anterior": 3.5,
       "precio_kilo": 3.8,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "gallina": {
       "mercadona_id": "3795",
@@ -1638,7 +1638,7 @@
       "precio": 2.61,
       "anterior": 2.61,
       "precio_kilo": 5.8,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     },
     "carcasa_pollo": {
       "mercadona_id": "2853",
@@ -1647,7 +1647,7 @@
       "precio": 1.3,
       "anterior": 1.3,
       "precio_kilo": 1.3,
-      "fecha": "2026-10-25"
+      "fecha": "2026-11-01"
     }
   },
   "fallos_ultima_vez": [
@@ -1658,7 +1658,12 @@
       "fecha": "2026-10-25",
       "producto": "chia",
       "motivo": "error al consultar el id 5464: HTTP Error 404: Not Found"
+    },
+    {
+      "fecha": "2026-11-01",
+      "producto": "chia",
+      "motivo": "error al consultar el id 5464: HTTP Error 404: Not Found"
     }
   ],
-  "ejecutado": "2026-10-25T09:16:55+00:00"
+  "ejecutado": "2026-11-01T11:22:19+00:00"
 }
