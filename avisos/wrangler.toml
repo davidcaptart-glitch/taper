@@ -3,7 +3,7 @@ name = "taper-avisos"
 main = "worker.js"
 compatibility_date = "2026-10-01"
 
-# Cada 10 minutos busca los avisos que ya tocan
+# Cada 10 minutos manda los avisos que caen en esos 10 minutos
 [triggers]
 crons = ["*/10 * * * *"]
 
@@ -11,10 +11,25 @@ crons = ["*/10 * * * *"]
 VAPID_PUBLIC = "BBt_pdF9LNXTil3nPVc_RX6itc-JIQw1fOF-1yiDgCNY097PNXKuci7kCSwlIW9mapPWuK6OixrUIRGlaivuIWE"
 VAPID_SUBJECT = "https://davidcaptart-glitch.github.io/taper/"
 
-# Espacio de datos (KV): suscripciones y avisos pendientes
+# Espacio de datos (KV): suscripciones, planes de avisos y lo demás
 [[kv_namespaces]]
 binding = "TAPER"
 id = "4c4b0fed5d744e5d8c4befeffce38c50"
 
-# La clave privada VAPID NO va aquí: se guarda como secreto con
-#   npx wrangler secret put VAPID_PRIVATE_JWK
+# Límite de peticiones por IP (gratis, no gasta escrituras de KV). namespace_id: cualquier número propio de la cuenta.
+# LIMITE: todas las rutas · LIMITE_ALTAS: las que crean o cambian cosas (suscribir, traspaso, tickets, eventos…)
+# Si la versión de wrangler no reconoce [[ratelimits]], el servidor usa un contador en memoria (más flojo).
+[[ratelimits]]
+name = "LIMITE"
+namespace_id = "1001"
+simple = { limit = 120, period = 60 }
+
+[[ratelimits]]
+name = "LIMITE_ALTAS"
+namespace_id = "1002"
+simple = { limit = 20, period = 60 }
+
+# Secretos (NO van aquí):
+#   npx wrangler secret put VAPID_PRIVATE_JWK   clave privada VAPID (ya existente)
+#   npx wrangler secret put ADMIN_KEY           clave de /admin (ya existente)
+#   npx wrangler secret put TP_SAL              sal secreta para el seudónimo de quien sube tickets (texto largo al azar)
