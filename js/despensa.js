@@ -29,7 +29,7 @@ function despensaEvents(){
         if(at&&at>=start&&at<=today)ev.push({pid:it.pid,d:at,k:0,q:it.packs*P[it.pid].env,src:"compra"})}}
     for(const u of monthUses(m))if(u.pid&&P[u.pid]&&u.date>=start&&eatenUse(u))ev.push({pid:u.pid,d:u.date,k:1,q:u.q,out:true,u});
   }
-  for(const t of S.tickets||[])if(t.date>=start)for(const l of t.lines)if(l.food&&l.pid&&P[l.pid]){const q=lineQty(l);ev.push({pid:l.pid,d:t.date,k:0,q,src:"ticket",uc:l.amount>0&&q>0?l.amount/q:null})}
+  for(const t of S.tickets||[])if(t.date>=start)for(const l of t.lines)if(l.food&&l.pid&&P[l.pid]&&!l.dev&&l.amount>0){const q=lineQty(l);ev.push({pid:l.pid,d:t.date,k:0,q,src:"ticket",uc:l.amount>0&&q>0?l.amount/q:null})}
   // Comidas «de la despensa» ya comidas
   for(const x of despSlots())if(x.k.startsWith("p:")&&P[x.k.slice(2)]&&x.date>=start&&slotEaten(x.id))ev.push({pid:x.k.slice(2),d:x.date,k:1,q:despItemQty(x),out:true,u:{slot:{id:x.id,date:x.date,meal:x.meal},r:null,label:"De la despensa"}});
   for(const [pid,s] of Object.entries(D.set))if(P[pid])ev.push({pid,d:s.d,k:2,q:s.q,set:true});
@@ -224,7 +224,7 @@ const despItemQty=it=>it.k.startsWith("p:")&&P[it.k.slice(2)]?it.n*P[it.k.slice(
 function ticketOtros(){
   const D=despensaData(),out=[],used={},res={};
   for(const x of despSlots())if(x.k.startsWith("t:")){if(slotEaten(x.id))used[x.k]=(used[x.k]||0)+x.n;else(res[x.k]=res[x.k]||[]).push(x)}
-  for(const t of S.tickets||[])if(t.date>=D.start)t.lines.forEach((l,i)=>{const k="t:"+t.id+"|"+i;if(!l.food||l.pid||D.gone[t.id+"|"+i])return;
+  for(const t of S.tickets||[])if(t.date>=D.start)t.lines.forEach((l,i)=>{const k="t:"+t.id+"|"+i;if(!l.food||l.pid||l.dev||!(l.amount>0)||D.gone[t.id+"|"+i])return;
     const total=Math.max(1,l.qty||1),left=total-(used[k]||0);if(left<=0)return;out.push({k,l,t,total,left,res:res[k]||[]})});
   return out;
 }

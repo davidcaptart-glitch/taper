@@ -16,9 +16,15 @@ const tarifa=(mode,sid)=>{const sp=sid?superById(sid):superInfo();if(mode!=="tie
 const listMode=(m,key)=>S.modes[m+"|"+key]||(key==="mes"?S.home.shop.monthMode:S.home.shop.weekMode);
 // Presupuesto de un mes: el que se puso al prepararlo (Navidad, vacaciones…) o el normal
 // ¿Ha puesto presupuesto? (en el alta nueva no se pregunta: hasta que lo ponga, no hay tope ni avisos de "te pasas")
-const budgetSet=()=>Number(S.home.budget.month)>0||Number(S.home.budget.week)>0;
-const monthBudgetFull=m=>Number(((S.monthPrep||{})[m]||{}).budget)||Number(S.home.budget.month)||0;
-const weekBudget=m=>(((S.monthPrep||{})[m]||{}).budget?0:Number(S.home.budget.week))||Math.round(monthBudgetFull(m)/Math.max(1,weeksInMonth(m).length)*100)/100;
+// También cuenta el que se puso al preparar el mes, aunque no haya presupuesto general
+const budgetMonthNow=()=>{try{return month}catch(e){return todayISO().slice(0,7)}};
+const budgetSet=m=>Number(S.home.budget.month)>0||Number(S.home.budget.week)>0||Number(((S.monthPrep||{})[m||budgetMonthNow()]||{}).budget)>0;
+// Si solo hay semanal, el del mes es la semana × las semanas del mes. Con mensual y semanal, manda el mensual (la semana sale de él)
+const monthBudgetFull=m=>Number(((S.monthPrep||{})[m]||{}).budget)||Number(S.home.budget.month)||(Number(S.home.budget.week)>0?Math.round(Number(S.home.budget.week)*weeksInMonth(m).length*100)/100:0);
+const weekBudget=m=>Math.round(monthBudgetFull(m)/Math.max(1,weeksInMonth(m).length)*100)/100;
+// Antes, con los dos puestos, el menú usaba el semanal y la cabecera el mensual. Si el semanal era más alto (se subió al
+// rehacer una semana), el mensual pasa a ser ese semanal × las semanas del mes; y se queda solo el mensual
+if(Number(S.home.budget.month)>0&&Number(S.home.budget.week)>0){const b=S.home.budget,w=Math.ceil(Number(b.week)*weeksInMonth(todayISO().slice(0,7)).length/5)*5;if(w>Number(b.month))b.month=w;b.week=null;try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}
 // Semanas del mes que cuentan (las de antes de empezar el plan no)
 // La compra del mes va con la primera semana del plan (no con semanas de antes de empezar)
 const mesWeek=weeks=>Math.max(0,weeks.findIndex(s=>!S.home.start||addDays(s,6)>=S.home.start));
@@ -223,8 +229,9 @@ function shopPlans(m){
 // Analiza un mes: presupuesto previsto y real, por qué se desvió, objetivos y propuesta para el siguiente
 function monthReview(m){
   const sh=shopping(m), budget=monthBudget(m), weeks=sh.weeks;
-  const realEntries=Object.entries(S.spent).filter(([k])=>k.startsWith(m+"|"));
-  const real=realEntries.reduce((t,[,v])=>t+(Number(v)||0),0);
+  // Lo pagado de verdad: como en la cabecera y el historial (tickets por la fecha de la compra + lo apuntado a mano)
+  const realEntries=Object.values(sh.lists).filter(l=>l.items.length&&((S.tickets||[]).some(t=>t.m===m&&t.list===l.key)||Number((S.spent||{})[m+"|"+l.key])>0));
+  const real=typeof paidOf==="function"?paidOf(m).total:0;
   const listsWith=Object.values(sh.lists).filter(l=>l.items.length).length;
   const fees=Object.values(sh.lists).reduce((t,l)=>t+l.fee,0);
   const eaten=weeks.reduce((t,st)=>t+(S.plans[st]?weekCost(st):0),0);

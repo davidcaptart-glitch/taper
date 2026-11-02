@@ -383,7 +383,7 @@ function stepBody(fullId){
       <div class="brange"><span>40 €</span><span>900 €</span></div>
       <div class="bcount"><span class="ico">👥</span><span><b>Cocinas para</b><small>${S.people.length===1?"Solo tú":S.people.map(personName).join(", ")}</small></span><span class="bn">${S.people.length}</span></div></div>
     <details class="more"><summary>Más ajustes del presupuesto</summary>
-    <div class="field"><label for="wzBW">Presupuesto a la semana (€)</label><input id="wzBW" type="number" min="0" step="1" value="${b.week??""}" placeholder="Automático: el del mes entre las semanas"></div>
+    <div class="field"><label for="wzBW">Presupuesto a la semana (€)</label><input id="wzBW" type="number" min="0" step="1" value="${b.week??""}" placeholder="Automático: el del mes entre las semanas"><div class="hint">Manda el del mes: cada semana es el del mes entre sus semanas. Si prefieres pensar por semanas, ponlo aquí y el del mes pasa a ser esto × las semanas del mes.</div></div>
     <div class="field"><label for="wzBB">Básicos al mes: aceite, sal, especias (€)</label><input id="wzBB" type="number" min="0" step="1" value="${b.basics}"></div></details>
     <p class="small muted" style="margin:18px 0 0">💡 Truco: la compra del mes (lo que pesa y aguanta) online y el fresco de cada semana en tienda suele salir más barato: un solo envío al mes. En la lista de la compra te comparo las opciones.</p>
     <div class="group"><h3>Compra del mes (despensa, carne para congelar y congelados)</h3><div class="chips">${modeChips("monthMode",sh.monthMode)}</div></div>
@@ -581,7 +581,7 @@ function validateStep(fullId){
     H.planFreq=v("#wzFreq");H.planDay=Number(v("#wzPDay"));H.planTime=v("#wzPTime")||"17:00"}
   if(id==="compra"){const before=JSON.stringify([H.budget,H.repeat,H.sacrifice,H.shop]);
     H.shop.delivery=Number(v("#wzDel"));
-    H.budget.month=Number(v("#wzBM"))||0;H.budgetConfirmed=true;H.budget.week=v("#wzBW")===""?null:Number(v("#wzBW"));H.budget.basics=Number(v("#wzBB"))||0;
+    H.budget.month=Number(v("#wzBM"))||0;H.budgetConfirmed=true;H.budget.week=v("#wzBW")===""?null:Number(v("#wzBW"));if(Number(H.budget.week)>0){H.budget.month=Math.round(H.budget.week*weeksInMonth(todayISO().slice(0,7)).length);H.budget.week=null}   // un solo presupuesto: el semanal pasa a mensualH.budget.basics=Number(v("#wzBB"))||0;
     if(before!==JSON.stringify([H.budget,H.repeat,H.sacrifice,H.shop]))H.tscale={};
     if(before!==JSON.stringify([H.budget,H.repeat,H.sacrifice,H.shop])&&!wiz.afinar)setTimeout(()=>redoScreen(()=>{const b=(S.budgetInfo||{})[month];toast(!b||b.ok?"Menú rehecho con tu presupuesto":"No llego del todo: te explico por qué en el Menú")}),0)}
   return true;
