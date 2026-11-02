@@ -382,14 +382,14 @@ export default {
         if (txt.length > 20000) return json(req, { error: "demasiado grande" }, 413);
         const b = JSON.parse(txt);
         if (!Array.isArray(b.items)) return json(req, { error: "datos no válidos" }, 400);
-        const sup = String(b.super || "").slice(0, 20), fecha = String(b.fecha || ""), mes = /^\d{4}-\d{2}/.test(fecha) ? fecha.slice(0, 7) : hoy().slice(0, 7);
+        const sup = String(b.super || "").slice(0, 20), fecha = String(b.fecha || ""), mes = /^\d{4}-\d{2}$/.test(String(b.mes || "")) ? String(b.mes) : /^\d{4}-\d{2}/.test(fecha) ? fecha.slice(0, 7) : hoy().slice(0, 7);
         const items = b.items.slice(0, 40).map((x) => ({ pid: String(x.pid).slice(0, 30), desc: String(x.desc || "").slice(0, 60), pagado: Number(x.pagado) || 0, app: Number(x.app) || 0, dif: Number(x.dif) || 0 }));
         // Huella del ticket (con la fecha y la tienda, que luego no se guardan): el mismo ticket subido dos veces cuenta una
         const huella = /^[a-f0-9]{16,64}$/.test(String(b.hash || "")) ? String(b.hash).slice(0, 32)
           : hex(await crypto.subtle.digest("SHA-256", new TextEncoder().encode([sup, fecha, String(b.tienda || ""), items.map((x) => x.pid + ":" + x.pagado).sort().join(",")].join("#")))).slice(0, 32);
         const clave = "tp:" + mes + ":" + huella;
         if (await env.TAPER.get(clave)) return json(req, { ok: true, repetido: true });
-        const limpio = { at: Date.now(), mes, cp: /^\d{5}$/.test(String(b.cp || "")) ? String(b.cp) : "", muni: String(b.muni || "").slice(0, 40), super: sup,
+        const limpio = { at: Date.now(), mes, cp: /^\d{5}$/.test(String(b.cp || "")) ? String(b.cp) : "", muni: String(b.muni || b.municipio || "").slice(0, 40), super: sup,
           u: await seudonimo(env, uidOk(b.uid) ? b.uid : "ip:" + (req.headers.get("CF-Connecting-IP") || "")), items };
         await env.TAPER.put(clave, JSON.stringify(limpio), { expirationTtl: 60 * 60 * 24 * 120 });
         await recalcularAjustes(env, { clave, t: limpio });
