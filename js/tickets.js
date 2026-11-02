@@ -440,7 +440,7 @@ function saveTicket(tk,date,dest){
   // Lo pagado de esa lista = suma de sus tickets (solo comida)
   S.spent[dest.m+"|"+dest.key]=Math.round(S.tickets.filter(x=>x.m===dest.m&&x.list===dest.key).reduce((s,x)=>s+x.food,0)*100)/100;
   // Marca como comprado lo de la lista que aparece en el ticket
-  if(dest.key!=="suelta")for(const l of lines)if(l.pid&&!l.extra)S.checks[checkKey(dest.m,dest.key,l.pid)]=true;
+  if(dest.key!=="suelta")for(const l of lines)if(l.pid&&!l.extra){const k=checkKey(dest.m,dest.key,l.pid);S.checks[k]=true;S.checkedAt=S.checkedAt||{};S.checkedAt[k]=S.checkedAt[k]||date}
   save();dlg.close();render();
   const ex=lines.filter(l=>l.extra&&l.amount>0);
   if(ex.length)setTimeout(()=>askExtras(t,ex),250);else toast("Ticket guardado: "+eur(t.food)+" en comida");

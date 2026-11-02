@@ -49,8 +49,9 @@ function monthUses(m,exceptId){
   });
   return out;
 }
-function shopping(m){
-  const weeks=weeksInMonth(m), uses=monthUses(m);
+// raw: la lista sin restar lo que ya tienes en casa (para apuntar lo comprado de antes sin dar vueltas)
+function shopping(m,raw){
+  const weeks=weeksInMonth(m), uses=monthUses(m), today=todayISO(), fu={};
   const lists={mes:{}};weeks.forEach((_,i)=>lists[i]={});
   const first={}, freezeGuide={}, bags={}, extras=weeks.map(()=>0);
   const assign=S.assign[m]||{};
@@ -60,6 +61,7 @@ function shopping(m){
     let key=keep==="fresco"?String(u.freshWi):"mes";
     if(key==="mes"){if(!first[u.pid]||u.date<first[u.pid])first[u.pid]=u.date;if(assign[u.pid]!=null)key=String(assign[u.pid])}
     lists[key][u.pid]=(lists[key][u.pid]||0)+u.q;
+    if(u.date>=today){const f=fu[key]=fu[key]||{};if(!f[u.pid]||u.date<f[u.pid])f[u.pid]=u.date}   // primer plato que lo usa desde hoy
     if(keep==="congelar"){(freezeGuide[u.pid]=freezeGuide[u.pid]||[]).push({q:u.q,label:DSHORT[dow(u.slot.date)]+" "+shortDate(u.slot.date),name:u.r.name});
       // Bolsas para congelar de esta lista: una por producto, día y plato
       const id=m+"|"+key+"|"+u.pid+"|"+u.slot.date+"|"+u.r.id, b=(bags[key]=bags[key]||{});
@@ -72,10 +74,15 @@ function shopping(m){
     if(r.pid&&P[r.pid])for(const i of idx){const key=r.freq==="semana"?String(i):"mes";lists[key][r.pid]=(lists[key][r.pid]||0)+r.q}
     else{for(const i of idx)recur[i]+=r.amount;recurOff.push(r)}}
   // Lo que te faltaba en la despensa y añadiste a una lista
-  for(const [k,its] of Object.entries((S.extraBuy||{})[m]||{}))if(lists[k])for(const [pid,q] of Object.entries(its))if(P[pid])lists[k][pid]=(lists[k][pid]||0)+q;
+  for(const [k,its] of Object.entries((S.extraBuy||{})[m]||{}))if(lists[k])for(const [pid,q] of Object.entries(its))if(P[pid]&&q>0)lists[k][pid]=(lists[k][pid]||0)+q;
+  // Lo que ya tienes en casa no se vuelve a comprar (en las listas que aún están por comprar)
+  const net=raw?{have:{},gone:{}}:netStock(m,weeks,lists,fu);
   const out={weeks,lists:{},first,freezeGuide,extras,recurOff,bags:Object.fromEntries(Object.entries(bags).map(([k,v])=>[k,Object.values(v).sort((a,b)=>a.date.localeCompare(b.date))]))};
+  const B=S.bought||{};
   for(const key of Object.keys(lists)){
-    const items=Object.entries(lists[key]).map(([pid,q])=>({pid,q,packs:packsFor(pid,q),cost:packsFor(pid,q)*price(pid),sup:superFor(pid)}));
+    // Lo ya marcado como comprado se queda con los envases que compraste (aunque luego cambie el menú)
+    const items=Object.entries(lists[key]).map(([pid,q])=>{const b=B[checkKey(m,key,pid)],pk=b&&b.q>0?Math.max(1,Math.round(b.q/P[pid].env)):packsFor(pid,q);
+      return {pid,q,packs:pk,cost:pk*price(pid),sup:superFor(pid),have:(net.have[key]||{})[pid]||0}});
     const cost=items.reduce((t,i)=>t+i.cost,0);
     // Un grupo por supermercado: cada uno con su envío y su pedido mínimo
     const build=mode=>{
@@ -89,7 +96,7 @@ function shopping(m){
     let L=build(listMode(m,key));
     // No llega al mínimo para pedir (y no lo ha elegido a mano): se pasa a comprar en tienda, que sí se puede
     if(L.belowMin&&L.mode!=="tienda"&&!S.modes[m+"|"+key]){const was=L;L=build("tienda");L.autoStore={mode:was.mode,min:was.min,short:Math.max(0,was.min-cost)}}
-    out.lists[key]={key,items,cost,...L};
+    out.lists[key]={key,items,cost,...L,covered:net.gone[key]||[]};
   }
   const listsTotal=Object.values(out.lists).reduce((t,l)=>t+l.cost+l.fee,0);
   out.extrasTotal=extras.reduce((a,b)=>a+b,0);out.recurTotal=recur.reduce((a,b)=>a+b,0);
@@ -99,12 +106,40 @@ function shopping(m){
   return out;
 }
 const checkKey=(m,key,pid)=>m+"|"+key+"|"+pid;
+// ¿La semana de esta lista (o el mes, la del mes) aún no ha pasado?
+function listCurrent(m,key,weeks){weeks=weeks||weeksInMonth(m);const ws=key==="mes"?weeks[weeks.length-1]:weeks[Number(key)];return !!ws&&addDays(ws,6)>=todayISO()}
+// ¿Está esta lista aún por comprar? (ni hecha, ni con ticket, y su semana no ha pasado)
+const listToBuy=(m,key,weeks)=>!(S.shopDone||{})[shopKey(m,key)]&&!(S.tickets||[]).some(t=>t.m===m&&t.list===key)&&listCurrent(m,key,weeks);
+// Resta de las listas de esta semana en adelante lo que ya hay en casa: lo que tienes hoy, menos lo que se gastará antes del
+// primer plato de esa lista que lo usa. Lo comprado para listas aún a medias es para ellas (no se resta de otras).
+// Lo marcado como comprado no se toca (se queda con lo que compraste).
+let netBusy=false;
+function netStock(m,weeks,lists,fu){
+  const res={have:{},gone:{}},D=S.despensa||{};if(netBusy||typeof despensaState!=="function")return res;
+  // Sin nada apuntado (cuenta nueva) no hay despensa que mirar
+  if(!Object.keys(S.checks||{}).length&&!Object.keys(S.shopDone||{}).length&&!(S.tickets||[]).length&&!(S.freezer||[]).length&&!(S.bolsas||[]).length&&!(D.adj||[]).length&&!Object.keys(D.set||{}).length)return res;
+  const open=Object.keys(lists).filter(k=>listCurrent(m,k,weeks)&&Object.keys(lists[k]).length);if(!open.length)return res;
+  netBusy=true;
+  try{const st=despensaState().stock;if(!Object.keys(st).length)return res;
+    const today=todayISO(),B=S.bought||{},own={};
+    for(const [k,b] of Object.entries(B)){const [bm,bk]=k.split("|");if(b&&b.q>0&&listToBuy(bm,bk))own[b.pid]=(own[b.pid]||0)+b.q}
+    const line=needByDay(today,addDays(nextMonthOf(m)+"-01",7)),before=(pid,x)=>(line[pid]||[]).reduce((t,[d,q])=>d<x?t+q:t,0);
+    for(const k of open){const ws=weeks[k==="mes"?mesWeek(weeks):Number(k)],deliv=ws?deliveryDate(ws):today;
+      for(const [pid,q] of Object.entries(lists[k])){if(!P[pid]||B[checkKey(m,k,pid)]||!(st[pid]>0))continue;
+        const x=(fu[k]||{})[pid]||(deliv>today?deliv:today),c=Math.min(q,Math.max(0,st[pid]-(own[pid]||0)-before(pid,x)));
+        if(c<dpEps(pid))continue;
+        if(q-c<dpEps(pid)){delete lists[k][pid];(res.gone[k]=res.gone[k]||[]).push({pid,q:c})}
+        else{lists[k][pid]=q-c;(res.have[k]=res.have[k]||{})[pid]=c}}}
+  }catch(e){console.error(e)}finally{netBusy=false}
+  return res;
+}
 
 /* ---------- Recordatorios de compra ----------
    Cada lista (la del mes y la de cada semana) tiene su día: en tienda, el mismo día; online o con entrega,
    el día antes (hay que hacer el pedido). Se recuerda cada día hasta que se hace o se pospone. */
 const shopKey=(m,key)=>m+"|"+key;
 function shopIsDone(m,l){
+  if(!l)return false;
   if((S.shopDone||{})[shopKey(m,l.key)])return true;
   if((S.tickets||[]).some(t=>t.m===m&&t.list===l.key))return true;
   return l.items.length>0&&l.items.every(it=>S.checks[checkKey(m,l.key,it.pid)]);
@@ -145,7 +180,10 @@ function ticketDue(){
   return out;
 }
 function askTicket(m,key){
+  // Si acabas de decir «Ya he hecho esta compra», lo que no habías marcado se dio por comprado: se dice qué
+  const as=lastAssumed&&lastAssumed.k===shopKey(m,key)?lastAssumed.pids.filter(p=>P[p]):[];lastAssumed=null;
   showDialog(`<div class="mod">${closeBtn}<div class="veb">Compra hecha</div><h2 class="vh" style="font-size:1.8rem">¿Subes el <em>ticket</em>?</h2>
+    ${as.length?`<p class="small infobox">He dado por comprado lo que no habías marcado: ${esc(as.slice(0,8).map(p=>P[p].name.toLowerCase()).join(", "))}${as.length>8?` y ${as.length-8} más`:""}. Si algo no lo encontraste, desmárcalo en la lista y no contará en tu despensa. Con el ticket se corrige solo.</p>`:""}
     <p>Así sé lo que has gastado de verdad y corrijo los precios para todos. <b>+3 coins</b> por ticket.</p>
     <div class="actions"><button class="btn wide" id="atScan">${ico("receipt")} Subir el ticket</button></div>
     <div class="actions"><button class="btn ghost" id="atLater">Luego</button><button class="btn ghost" id="atNo">No tengo ticket</button></div></div>`);
@@ -158,16 +196,24 @@ function askTicket(m,key){
 const lineQty=l=>{const p=P[l.pid];return l.kg&&p.unit==="g"?l.kg*1000:Math.max(1,l.qty||1)*(l.env||p.env)};
 // Compras fuera del menú que se repiten (S.recurring): {id,pid,desc,amount,q,freq:"mes"|"semana",from:"AAAA-MM"}
 const recurringFor=m=>(S.recurring||[]).filter(r=>r.from<=m);
-function markShopDone(m,key){S.shopDone=S.shopDone||{};S.shopDone[shopKey(m,key)]=todayISO();save()}
-// Lo que tienes en casa: lo comprado (marcado) menos lo que necesitan los demás platos del mes
+// «Ya he hecho esta compra»: lo que no habías marcado se da por comprado y se marca (así se ve y se puede desmarcar);
+// se apunta qué fue para decirlo (askTicket). Devuelve esos productos
+let lastAssumed=null;
+function markShopDone(m,key){
+  const as=[];let l=null;try{l=shopping(m).lists[key]}catch(e){console.error(e)}
+  S.shopDone=S.shopDone||{};S.shopDone[shopKey(m,key)]=todayISO();
+  try{S.checkedAt=S.checkedAt||{};
+    for(const it of l?l.items:[]){const k=checkKey(m,key,it.pid);if(S.checks[k])continue;S.checks[k]=true;S.checkedAt[k]=todayISO();snapBought(k,it);as.push(it.pid);
+      if(S.share&&typeof markShared==="function")markShared(S.share.codigo,k,true)}
+    despensaData().snap[shopKey(m,key)]=1}catch(e){console.error(e)}
+  lastAssumed={k:shopKey(m,key),pids:as};save();return as;
+}
+// Lo que tienes en casa (la despensa) menos lo que piden los demás platos que vienen; null si la despensa está vacía
 function inventory(m,exceptId){
-  const sh=shopping(m);let any=false;const bought={};
-  for(const l of Object.values(sh.lists))for(const it of l.items)if(S.checks[checkKey(m,l.key,it.pid)]){any=true;bought[it.pid]=(bought[it.pid]||0)+it.packs*P[it.pid].env}
-  // Lo comprado fuera de la lista (según los tickets) también lo tienes en casa
-  for(const t of (S.tickets||[]).filter(t=>t.m===m))for(const l of t.lines)if(l.extra&&l.pid&&P[l.pid]){any=true;bought[l.pid]=(bought[l.pid]||0)+lineQty(l)}
-  if(!any)return null;
-  const need={};for(const u of monthUses(m,exceptId))if(u.pid)need[u.pid]=(need[u.pid]||0)+u.q;
-  const inv={};for(const [pid,q] of Object.entries(bought))inv[pid]=q-(need[pid]||0);
+  let st;try{st=despensaState().stock}catch(e){return null}
+  if(!Object.keys(st).length)return null;
+  const today=todayISO(),{need}=upcomingNeed(today,addDays(today,35),exceptId);
+  const inv={};for(const [pid,q] of Object.entries(st))inv[pid]=q-(need[pid]||0);
   return inv;
 }
 // Completa un pedido online que no llega al mínimo adelantando cosas de la compra del mes

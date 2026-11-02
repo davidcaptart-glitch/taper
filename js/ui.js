@@ -1020,10 +1020,11 @@ function renderCompra(){
       for(const it of bySec[sec].sort((a,b)=>P[a.pid].name.localeCompare(P[b.pid].name))){
         const key=checkKey(month,listSel,it.pid),done=!!S.checks[key],moved=(S.assign[month]||{})[it.pid]!=null&&listSel!=="mes";
         const sx=it.sup!=="mercadona"&&PS&&PS.supers[it.sup]?PS.supers[it.sup].productos[it.pid]:null;
-        h+=`<label class="item ${done?"done":""}"><input type="checkbox" data-ck="${key}" ${done?"checked":""}>${prodImg(it.pid)}<span class="t">${it.packs} × ${esc(P[it.pid].name)}<small>Necesitas ${fmtQty(it.q,P[it.pid].unit)}${P[it.pid].keep==="congelar"?", para congelar":""}${recurringFor(month).some(r=>r.pid===it.pid&&(r.freq==="semana")===(listSel!=="mes"))?" · lo compras siempre":""}${(((S.extraBuy||{})[month]||{})[listSel]||{})[it.pid]?" · te faltaba en la despensa":""}${moved?" · adelantado de la compra del mes":""}${sx?` · ${esc(sx.nombre)}`:""}</small></span><span class="p">${eur(it.cost)}${upTag(it.pid)}</span>${l.mode==="online"&&prodUrl(it)?`<a class="mlink" href="${esc(prodUrl(it))}" target="_blank" rel="noopener" aria-label="Abrir ${esc(P[it.pid].name)} en ${esc(superById(it.sup).nombre||"el súper")}">🛒</a>`:""}</label>`}
+        h+=`<label class="item ${done?"done":""}"><input type="checkbox" data-ck="${key}" ${done?"checked":""}>${prodImg(it.pid)}<span class="t">${it.packs} × ${esc(P[it.pid].name)}<small>Necesitas ${fmtQty(it.q,P[it.pid].unit)}${it.have&&!done?` (ya tienes ${fmtQty(it.have,P[it.pid].unit)} en casa)`:""}${P[it.pid].keep==="congelar"?", para congelar":""}${recurringFor(month).some(r=>r.pid===it.pid&&(r.freq==="semana")===(listSel!=="mes"))?" · lo compras siempre":""}${(((S.extraBuy||{})[month]||{})[listSel]||{})[it.pid]?" · te faltaba en la despensa":""}${moved?" · adelantado de la compra del mes":""}${sx?` · ${esc(sx.nombre)}`:""}</small></span><span class="p">${eur(it.cost)}${upTag(it.pid)}</span>${l.mode==="online"&&prodUrl(it)?`<a class="mlink" href="${esc(prodUrl(it))}" target="_blank" rel="noopener" aria-label="Abrir ${esc(P[it.pid].name)} en ${esc(superById(it.sup).nombre||"el súper")}">🛒</a>`:""}</label>`}
       h+=`</details>`});
   }
   h+=`</details>`;
+  if((l.covered||[]).length)h+=`<p class="small muted" style="margin:6px 2px">🧺 No lo compro porque ya lo tienes en casa: ${esc(l.covered.map(x=>P[x.pid].name.toLowerCase()).join(", "))}.</p>`;
   const sk=month+"|"+listSel;
   h+=`<details class="card more2"><summary><b>${ico("chart-bar")} Gasto y resumen</b> <span class="small muted">· lo pagado, tickets y presupuesto</span></summary>`;
   h+=`<div class="card"><h2>Lo que he pagado</h2><div class="spend"><span class="small muted">Apunta el total del ticket o del pedido para comparar con lo previsto (${eur(l.cost+l.fee)}).</span><input type="number" min="0" step="0.01" id="spentIn" value="${S.spent[sk]??""}" placeholder="0,00"></div></div>`;
@@ -1054,7 +1055,7 @@ function renderCompra(){
   {const AO=aisleOpen[month+"|"+listSel]||{};
     main.querySelectorAll("details[data-aisle]").forEach(d=>d.addEventListener("toggle",()=>{AO[d.dataset.aisle]=d.open}));
     main.querySelector("details.shoplist")?.addEventListener("toggle",e=>{AO.__all=e.target.open})}
-  main.querySelectorAll("[data-ck]").forEach(i=>i.onchange=()=>{S.checkedAt=S.checkedAt||{};if(i.checked){S.checks[i.dataset.ck]=true;S.checkedAt[i.dataset.ck]=todayISO()}else{delete S.checks[i.dataset.ck];delete S.checkedAt[i.dataset.ck]}i.closest(".item").classList.toggle("done",i.checked);save();if(S.share)markShared(S.share.codigo,i.dataset.ck,i.checked);
+  main.querySelectorAll("[data-ck]").forEach(i=>i.onchange=()=>{S.checkedAt=S.checkedAt||{};const ck=i.dataset.ck;if(i.checked){S.checks[ck]=true;S.checkedAt[ck]=todayISO();snapBought(ck,l.items.find(it=>checkKey(month,l.key,it.pid)===ck))}else{delete S.checks[ck];delete S.checkedAt[ck];if(S.bought)delete S.bought[ck]}i.closest(".item").classList.toggle("done",i.checked);save();if(S.share)markShared(S.share.codigo,i.dataset.ck,i.checked);
     // Lista completa: se pide el ticket
     if(i.checked&&l.items.every(it=>S.checks[checkKey(month,l.key,it.pid)])&&!(S.tickets||[]).some(t=>t.m===month&&t.list===l.key))setTimeout(()=>askTicket(month,l.key),400)});
   document.getElementById("spentIn").onchange=e=>{const v=e.target.value;if(v==="")delete S.spent[sk];else S.spent[sk]=Number(v);save();renderHeader()};
@@ -1448,7 +1449,7 @@ function openOrderSteps(m,l){
       <a class="btn wide" id="osOpen" href="${esc(url)}" target="_blank" rel="noopener" style="margin-top:14px">${ico("shopping-cart")} Abrir en ${esc(sn)}</a>
       <button class="btn wide" id="osOk" style="margin-top:8px">✓ Añadido, siguiente</button>
       <div class="actions"><button class="btn ghost" id="osPrev" ${i===0?"disabled":""}>Anterior</button><button class="btn ghost" id="osSkip">Saltar</button></div></div>`);
-    dlg.querySelector("#osOk").onclick=()=>{S.checks[checkKey(m,l.key,it.pid)]=true;S.checkedAt=S.checkedAt||{};S.checkedAt[checkKey(m,l.key,it.pid)]=todayISO();save();
+    dlg.querySelector("#osOk").onclick=()=>{S.checks[checkKey(m,l.key,it.pid)]=true;S.checkedAt=S.checkedAt||{};S.checkedAt[checkKey(m,l.key,it.pid)]=todayISO();snapBought(checkKey(m,l.key,it.pid),it);save();
       if(S.share)markShared(S.share.codigo,checkKey(m,l.key,it.pid),true);
       const nx=withLink.findIndex((x,j)=>j>i&&!done(x));i=nx<0?withLink.length:nx;draw()};
     dlg.querySelector("#osSkip").onclick=()=>{i++;draw()};
@@ -1471,7 +1472,8 @@ function openHaveAtHome(){
     <div class="actions sticky"><button class="btn wide" id="ahOk">Guardar (${have.size})</button></div></div>`);
   dlg.querySelectorAll("[data-ah]").forEach(b=>b.onclick=()=>{const id=b.dataset.ah;if(have.has(id))have.delete(id);else have.add(id);b.setAttribute("aria-pressed",have.has(id));dlg.querySelector("#ahOk").textContent=`Guardar (${have.size})`});
   dlg.querySelector("#ahOk").onclick=()=>{
-    for(const pid of pids){const k=checkKey(m,first[pid],pid);if(have.has(pid))S.checks[k]=true;else if((S.atHome||[]).includes(pid))delete S.checks[k]}
+    S.checkedAt=S.checkedAt||{};S.bought=S.bought||{};
+    for(const pid of pids){const k=checkKey(m,first[pid],pid);if(have.has(pid)){if(!S.checks[k]){S.checks[k]=true;S.checkedAt[k]=todayISO();snapBought(k,(sh.lists[first[pid]].items||[]).find(it=>it.pid===pid))}}else if((S.atHome||[]).includes(pid)){delete S.checks[k];delete S.checkedAt[k];delete S.bought[k]}}
     S.atHome=[...have];S.pantry=[...new Set([...(S.pantry||[]),...have])];save();dlg.close();render();
     toast(have.size?`Apuntado: ${have.size} ${have.size===1?"cosa que ya tienes":"cosas que ya tienes"}. Salen tachadas en la compra`:"Guardado")};
 }
