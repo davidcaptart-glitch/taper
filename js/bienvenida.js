@@ -251,7 +251,7 @@ function stepBody(fullId){
       <div class="hint">${H.municipio&&H.cp===H.cpLooked?`📍 ${esc(H.municipio)} · tus precios y tus festivos`:"Con él sé tus precios, qué súper te lo lleva a casa y tus festivos."}</div></div>
     ${(H.cpPlaces||[]).length>1&&H.cp===H.cpLooked?`<div class="field"><label>¿Cuál es tu pueblo?</label><div class="chips">${H.cpPlaces.map(p=>chip("data-place",p,H.municipio===p,esc(p))).join("")}</div></div>`:""}
     ${(()=>{const pk=H.startPick||"hoy",t=startToday(),mon=(()=>{let d=addDays(todayISO(),1);while(dow(d)!==0)d=addDays(d,1);return d})();
-      const txt=pk==="hoy"?(t.start>todayISO()?"Ya es tarde: empiezas mañana.":t.from==="cena"?"Empiezas hoy con la cena.":"Empiezas hoy con la comida."):pk==="manana"?"Empiezas mañana.":pk==="lunes"?"Empiezas el lunes "+Number(mon.slice(8))+".":H.startOther?"Empiezas el "+longDate(H.startOther).replace(/^\w+, /,"")+".":"Elige el día.";
+      const txt=pk==="hoy"?(t.start>todayISO()?"Ya es tarde: empiezas mañana.":t.from==="cena"?"Empiezas hoy con la cena: necesitarás sus ingredientes esta misma tarde. Si no te da tiempo a comprar, elige «Mañana».":"Empiezas hoy con la comida: necesitarás sus ingredientes ya. Si no te da tiempo a comprar, elige «Mañana»."):pk==="manana"?"Empiezas mañana.":pk==="lunes"?"Empiezas el lunes "+Number(mon.slice(8))+".":H.startOther?"Empiezas el "+longDate(H.startOther).replace(/^\w+, /,"")+".":"Elige el día.";
       return `<div class="field"><label>¿Cuándo empiezas con el menú?</label><div class="chips">${[["hoy","Hoy"],["manana","Mañana"],["lunes","El lunes"],["otro","Otro día"]].map(([k,t2])=>chip("data-startpick",k,pk===k,t2)).join("")}</div>
         ${pk==="otro"?`<input type="date" id="wzStartO" min="${todayISO()}" value="${esc(H.startOther||"")}" style="margin-top:8px">`:""}
         <div class="hint">${esc(txt)} Hasta entonces no preparo menú ni compra, y no te pregunto qué tal.</div></div>`})()}
@@ -555,15 +555,16 @@ function validateStep(fullId){
   if(id==="hola"||id==="unirse"){a.name=(v("#wzName")||"").trim()}
   if(id==="casa"){const yo=S.people.find(p=>p.id==="yo");
     // Si ha escrito a alguien y no ha tocado "+", se añade igual
-    if((v("#cName")||"").trim()&&v("#cAge")){main.querySelector("#cAdd").click();return false}
+    if((v("#cName")||"").trim()&&v("#cAge")){main.querySelector("#cAdd").click();if((v("#cName")||"").trim())return false;return validateStep(fullId)}
     if(!yo||!yo.name){toast("Empieza por ti: tu nombre y tu edad");document.getElementById("cName")?.focus();return false}
     const sin=S.people.find(p=>p.name&&!p.ageRange&&!(p.kind==="nino"&&p.age));if(sin){toast("Falta la edad de "+sin.name+": tócalo para ponerla");return false}
     S.people=S.people.filter(p=>p.id==="yo"||p.name);
     if(!H.apps.filter(k=>k!=="ninguno").length){toast("Marca al menos un aparato de tu cocina");return false}}
-  if(id==="comer"){const nx=S.people.find(p=>!(wiz.comerDone||{})[p.id]);if(nx){
-    // Lo que tenga abierto cuenta como revisado; si queda alguien sin mirar, se abre
-    if(wiz.comerOpen===nx.id&&S.people.filter(p=>!(wiz.comerDone||{})[p.id]).length===1){wiz.comerDone={...(wiz.comerDone||{}),[nx.id]:true}}
-    else{wiz.comerOpen=nx.id;render();toast("Falta "+personName(nx));return false}}}
+  if(id==="comer"){
+    // Lo que tenga abierto cuenta como revisado; si queda alguien sin mirar, se abre (sus alergias no se dan por supuestas)
+    if(wiz.comerOpen&&S.people.some(p=>p.id===wiz.comerOpen))wiz.comerDone={...(wiz.comerDone||{}),[wiz.comerOpen]:true};
+    const nx=S.people.find(p=>!(wiz.comerDone||{})[p.id]);
+    if(nx){wiz.comerOpen=nx.id;save();render();scrollTo(0,0);toast("Ahora, "+personName(nx)+": revisa lo suyo");return false}}
   if(id==="super"&&H.startPick==="otro"&&!(H.startOther&&H.startOther>=todayISO())){toast("Elige el día en que empiezas");return false}
   if(id==="super"){const cp=(v("#wzCp")||"").trim();if(!/^\d{5}$/.test(cp)){toast(cp?"El código postal tiene 5 números":"Pon tu código postal: lo necesito para tus precios");document.getElementById("wzCp")?.focus();return false}H.cp=cp}
   if(id==="aparatos"&&!H.apps.length){toast("Elige al menos uno");return false}
@@ -611,7 +612,7 @@ function afinarCard(){
 }
 function afinarList(inDet){
   return `${inDet?"":`<h3 style="margin:6px 0 2px">¿Quieres afinarlo más?</h3>`}<p class="small muted" style="margin:0 0 6px">Marca lo que quieras ajustar y te pregunto solo eso.</p>
-    <div class="aflist">${AFINAR.filter(([k])=>k!=="invitar"||servidorOn()).map(([k,t])=>`<label class="afi"><input type="checkbox" data-af="${k}"> ${ico(t.split("|")[0])} ${esc(t.split("|")[1])}</label>`).join("")}</div>
+    <div class="aflist">${AFINAR.filter(([k])=>k!=="invitar"||servidorOn()).map(([k,t])=>`<label class="afi"><input type="checkbox" data-af="${k}" aria-label="${esc(t.split("|")[1])}"> ${ico(t.split("|")[0])} ${esc(t.split("|")[1])}</label>`).join("")}</div>
     <div class="actions"><button class="btn" id="afGo">Afinar</button>${S.afinar&&S.afinar.state==="ask"?`<button class="btn ghost" id="afNo">Así está bien</button>`:""}</div>`;
 }
 function bindAfinar(root){

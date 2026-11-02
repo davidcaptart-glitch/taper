@@ -150,8 +150,8 @@ if(!S.weekMon){const np={};
   S.plans=np;S.weekMon=true;try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}
 // v66 tomaba lo que costaba el primer menú como presupuesto sin que nadie lo pusiera: se quita
 if(S.afinar&&S.afinar.cost&&Number(S.home.budget.month)===S.afinar.cost&&!S.home.budgetConfirmed){S.home.budget.month=0;try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}
-function applyTheme(){const t=(S.home&&S.home.theme)||"light";if(t==="auto")delete document.documentElement.dataset.theme;else document.documentElement.dataset.theme=t;
-  const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=document.documentElement.dataset.theme==="dark"?"#101215":"#D22F2A"}
+function applyTheme(){const t=(S.home&&S.home.theme)||"auto";if(t==="auto")delete document.documentElement.dataset.theme;else document.documentElement.dataset.theme=t;
+  const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=(document.documentElement.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))==="dark"?"#101215":"#D22F2A"}
 applyTheme();
 // Código de usuario anónimo: se crea una vez por móvil (sirve para identificar sus sugerencias)
 if(!S.uid){S.uid="U-"+Math.random().toString(36).slice(2,7).toUpperCase();try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}

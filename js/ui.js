@@ -1070,14 +1070,14 @@ let aisleOpen={};   // secciones de la compra abiertas o cerradas (mientras la a
 function renderRecetas(){
   const a=me();
   const fl={todas:"Todas",fav:"Favoritas",nuevas:"Sin probar",no:"Descartadas",c:"⚡ Hidratos",l:"🥗 Ligeras",kid:"Gustan a niños"};
-  if(R.some(r=>r.cap))fl.guarreo="🍔 Guarreo";
+  if(R.some(r=>r.cap))fl.guarreo="🍔 Caprichos";
   fl.faciles="👌 Fáciles";
   fl.d_vegano="🌱 Veganas";fl.d_vege="🥚 Vegetarianas";
   if(R.some(r=>r.small))fl.pequenas="🥐 Desayunos y meriendas";
   for(const pk of [...new Set(R.filter(r=>r.pack).map(r=>r.pack))])if(SHOP["pack_"+pk])fl["pack_"+pk]=SHOP["pack_"+pk].ico+" "+SHOP["pack_"+pk].t.replace("Pack ","");
   if(R.some(r=>r.sug))fl.comunidad="💡 De la comunidad";
   for(const k of S.home.apps)fl[k]=APP[k];
-  let h=`<section class="view">${viewHead(R.length+" recetas","Tus *recetas*")}${recipeSuggestOn()?`<button class="btn ghost small" id="sugRec" style="margin:4px 0 10px">💡 Sugerir una receta</button>`:""}<div class="field"><input type="text" id="rq" placeholder="Buscar receta o ingrediente" value="${esc(recSearch)}"></div><div class="filters">`+Object.entries(fl).map(([k,v])=>`<button class="btn ${recFilter===k?"":"ghost"} small" data-f="${k}">${v}</button>`).join("")+`</div>`;
+  let h=`<section class="view">${viewHead(R.filter(hasPhoto).length+" recetas","Tus *recetas*")}${recipeSuggestOn()?`<button class="btn ghost small" id="sugRec" style="margin:4px 0 10px">💡 Sugerir una receta</button>`:""}<div class="field"><input type="text" id="rq" placeholder="Buscar receta o ingrediente" value="${esc(recSearch)}"></div><div class="filters">`+Object.entries(fl).map(([k,v])=>`<button class="btn ${recFilter===k?"":"ghost"} small" data-f="${k}">${v}</button>`).join("")+`</div>`;
   const ms=S.mySug||[];
   if(ms.length)h+=`<details class="card" style="margin-top:0"><summary><b>Mis recetas sugeridas</b> <span class="small muted">(${ms.length})</span></summary>${ms.slice().reverse().map(x=>`<div class="fixed"><span><b>${esc(x.name)}</b><small>${x.code} · ${x.status==="aprobada"?"✅ Aprobada y publicada":"⏳ Enviada el "+esc(shortDate(x.at))+", pendiente de revisar"}</small></span>${x.status==="aprobada"&&x.rid&&RX[x.rid]?`<button class="btn ghost small" data-open="${x.rid}">Ver</button>`:""}</div>`).join("")}</details>`;
   const qn=recSearch.toLowerCase();
@@ -1093,7 +1093,7 @@ function renderRecetas(){
     if(recFilter==="d_vege")return ["vegano","vege"].includes(recipeDiet(r));
     switch(recFilter){case "pequenas":return r.small;case "comunidad":return !!r.sug;case "fav":return dp>=1.5;case "nuevas":return !tried.has(r.id);case "no":return dp<=-1;case "c":return r.type==="c";case "l":return r.type==="l";case "kid":return r.kid;case "todas":return true;default:return r.vars.some(v=>v.app===recFilter)}
   });
-  h+=`<p class="small muted">${list.length} recetas</p><div class="rgrid">`;
+  h+=`${recFilter!=="todas"||qn?`<p class="small muted">${list.length} ${list.length===1?"receta":"recetas"}</p>`:""}<div class="rgrid">`;
   for(const r of list.slice(0,recLimit)){const dp=dishPref(a,r.id),can=!!variantFor(r);
     if(!hasPack(r)){h+=`<button class="rtile locked" data-lockpack="${r.pack}"><span class="rtimg">${dishImg(r,"m")}<span class="lock">🔒 ${esc(SHOP["pack_"+r.pack]?SHOP["pack_"+r.pack].t:"Pack")}</span></span><span class="rtt"><b>${esc(r.name)}</b><small>Desbloquéalo en la tienda de coins</small></span></button>`;continue}
     h+=`<button class="rtile ${dp<=-1||!can?"no":""}" data-open="${r.id}"><span class="rtimg">${dishImg(r,"m")}${dp>=1.5?`<span class="rtfav">❤️</span>`:""}<span class="rtbad"><span>⏱ ${recipeTime(r)}′</span>${r.kcal?`<span>🔥 ${r.kcal}</span>`:""}</span></span>
@@ -1291,7 +1291,7 @@ function renderPerfil(){
   h+=acc("coins","coins","Coins y aspecto","Tus coins, la tienda, colores y estéticas",`<div id="coinsBox">${servidorOn()?`<p class="small muted">Cargando tus coins…</p>`:""}</div>
     <details class="more"><summary>${ico("share")} Invitar a usar Táper (tu QR y tu enlace)</summary><div id="qrBox" style="display:grid;place-items:center;margin:10px 0;background:#fff;border-radius:12px;padding:10px"></div>
       <div class="actions">${servidorOn()?`<button class="btn small" id="shareApp">${ico("share")} Enviar el enlace</button>`:""}<button class="btn ghost small" id="copyApp">Copiar enlace</button></div></details>
-    <div class="field"><label>Tema</label><div class="chips">${[["light","Claro"],["dark","Oscuro"],["auto","Como el móvil"]].map(([k,t])=>chip("data-theme-set",k,(S.home.theme||"light")===k,t)).join("")}</div></div>
+    <div class="field"><label>Tema</label><div class="chips">${[["light","Claro"],["dark","Oscuro"],["auto","Como el móvil"]].map(([k,t])=>chip("data-theme-set",k,(S.home.theme||"auto")===k,t)).join("")}</div></div>
     <div class="field"><label>Color</label><div class="colgrid">${Object.keys(ACCENTS).map(k=>{const own=k==="rojo"||owns("tema_"+k),on=(S.accent||"rojo")===k,t=k==="rojo"?"Rojo":SHOP["tema_"+k].t.replace("Tema ","");
       return `<button class="colsw ${on?"on":""} ${own?"":"lock"}" ${own?`data-accent="${k}"`:`data-buyk="tema_${k}"`} aria-label="${esc(t)}${own?"":" · "+SHOP["tema_"+k].c+" coins"}"><span class="dot" style="background:${ACCENTS[k][0]}"></span><small>${esc(t)}</small>${own?"":`<em>🪙 ${SHOP["tema_"+k].c}</em>`}</button>`}).join("")}</div></div>
     <div class="field"><label>Estética</label><div class="chips">${chip("data-skin","",!S.skin,"✨ Normal")}${Object.keys(SHOP).filter(k=>k.startsWith("skin_")).map(k=>owns(k)?chip("data-skin",k.slice(5),S.skin===k.slice(5),SHOP[k].ico+" "+SHOP[k].t):`<button class="chip lockchip" data-buyk="${k}">${SHOP[k].ico} ${esc(SHOP[k].t)} <em>🪙 ${SHOP[k].c}</em></button>`).join("")}</div>
@@ -1361,7 +1361,7 @@ function renderPerfil(){
 document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>{
   if(tab===b.dataset.tab){scrollTo({top:0,behavior:"smooth"});return}
   try{navigator.vibrate&&navigator.vibrate(8)}catch(e){}
-  const go=()=>{tab=b.dataset.tab;render();scrollTo(0,0)};
+  const go=()=>{if(b.dataset.tab==="menu"&&tab!=="menu")daySel=null;tab=b.dataset.tab;render();scrollTo(0,0)};
   if(document.startViewTransition&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.startViewTransition(go);else go();
 });
 function shiftMonth(n){const [y,m]=month.split("-").map(Number);const d=new Date(y,m-1+n,1);month=iso(d).slice(0,7);listSel="mes";render()}
