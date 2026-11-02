@@ -1094,3 +1094,7 @@ details.aisle{margin-top:10px}
 .dprow .step b{min-width:22px;text-align:center}
 .dpdish{display:grid;place-items:center;font-size:1.6rem;background:var(--accent-soft)}
 .alt.dpalt{background:var(--accent-soft);margin-top:10px}
+/* Avisos que se contestan desde la campanita (¿Entrenaste?, ¿Descongelaste?, compra) */
+.ibq{background:var(--surface-2);border-radius:var(--r-md);margin-bottom:8px}
+.ibq .alt{margin:0;background:transparent}
+.ibq .ibacts{margin:0;padding:0 14px 12px 64px}

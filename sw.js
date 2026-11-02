@@ -1,25 +1,25 @@
 // Service worker de Táper: guarda la app para usarla sin conexión.
 // Al cambiar cualquier archivo de la app, sube VERSION aquí y el ?v= de index.html para que los móviles descarguen la nueva.
-const VERSION = "taper-v113";
+const VERSION = "taper-v114";
 const SHELL = [
   "./",
   "index.html",
-  "css/app.css?v=113", "css/esteticas.css?v=113",
-  "js/base.js?v=113",
-  "js/iconos.js?v=113",
-  "js/datos.js?v=113",
-  "js/fotos.js?v=113",
-  "js/gustos.js?v=113",
-  "js/plan.js?v=113",
-  "js/compra.js?v=113",
-  "js/tickets.js?v=113",
-  "js/congelador.js?v=113",
-  "js/despensa.js?v=113",
-  "js/avisos.js?v=113",
-  "js/compartir.js?v=113",
-  "js/casa.js?v=113",
-  "js/bienvenida.js?v=113",
-  "js/ui.js?v=113",
+  "css/app.css?v=114", "css/esteticas.css?v=114",
+  "js/base.js?v=114",
+  "js/iconos.js?v=114",
+  "js/datos.js?v=114",
+  "js/fotos.js?v=114",
+  "js/gustos.js?v=114",
+  "js/plan.js?v=114",
+  "js/compra.js?v=114",
+  "js/tickets.js?v=114",
+  "js/congelador.js?v=114",
+  "js/despensa.js?v=114",
+  "js/avisos.js?v=114",
+  "js/compartir.js?v=114",
+  "js/casa.js?v=114",
+  "js/bienvenida.js?v=114",
+  "js/ui.js?v=114",
   "manifest.webmanifest",
   "data/festivos.json",
   "data/supermercados.json",
@@ -59,10 +59,13 @@ self.addEventListener("push", e => {
     } catch (err) { /* sin conexión: se muestra un aviso genérico */ }
     if (!list.length) list = [{ title: "Táper", body: "Tienes avisos pendientes en Táper.", tag: "taper" }];
     for (const a of list) {
-      const shop = String(a.tag || "").startsWith("shop|");
+      // Los avisos que son una pregunta llevan sus respuestas como botones
+      const tag = String(a.tag || ""), shop = tag.startsWith("shop|"), sport = tag.startsWith("sport|"), thaw = tag.startsWith("thaw|");
       await self.registration.showNotification(a.title, { body: a.body, tag: a.tag || undefined, icon: "icons/icon-192.png", badge: "icons/icon-192.png",
-        data: { tag: a.tag, title: a.title, body: a.body }, requireInteraction: shop,
-        actions: shop ? [{ action: "hecho", title: "✓ Ya está" }, { action: "luego", title: "⏰ En 3 horas" }] : [] });
+        data: { tag: a.tag, title: a.title, body: a.body }, requireInteraction: shop || sport,
+        actions: shop ? [{ action: "hecho", title: "✓ Ya está" }, { action: "luego", title: "⏰ En 3 horas" }]
+          : sport ? [{ action: "si", title: "✓ Sí" }, { action: "no", title: "✗ No" }]
+          : thaw ? [{ action: "hecho", title: "✓ Ya está" }] : [] });
     }
     // Número en el icono donde el sistema lo permite (en Android sale el puntito de la notificación)
     try { const n = (await self.registration.getNotifications()).length; if (self.navigator.setAppBadge) await self.navigator.setAppBadge(n); } catch (err) {}
@@ -79,9 +82,9 @@ self.addEventListener("notificationclick", e => {
     } catch (err) {} })());
     return;
   }
-  const tipo = e.action === "hecho" ? "hecho" : "abrir";
-  // Compra y "¿Qué tal?": abre la app justo en esa pantalla
-  if (d.tag && /^(shop|rate)\|/.test(String(d.tag))) {
+  const tipo = ["hecho", "si", "no"].includes(e.action) ? e.action : "abrir";
+  // Compra, "¿Qué tal?", entrenos y descongelar: abre la app justo en esa pantalla (y apunta la respuesta)
+  if (d.tag && /^(shop|rate|sport|thaw)\|/.test(String(d.tag))) {
     e.waitUntil((async () => {
       const all = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
       if (all.length) { all[0].postMessage({ tipo, tag: d.tag }); if ("focus" in all[0]) return all[0].focus(); }

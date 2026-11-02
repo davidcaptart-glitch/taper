@@ -76,31 +76,37 @@ function renderCongelador(){
 
 /* ---------- ¿Descongelaste? (plan B) ---------- */
 // El día de un plato con carne o pescado congelado, pregunta si se pasó a la nevera la noche anterior
-function thawCard(){
-  if(S.home.cookMode==="lote")return "";
+function thawPending(){
+  if(S.home.cookMode==="lote")return null;
   const d=todayISO(),now=new Date(),mins=now.getHours()*60+now.getMinutes();
-  if(mins<7*60||mins>toMin(S.home.mealTimes.cena))return "";
-  const wk=S.plans[weekStartFor(d)];if(!wk)return "";
+  if(mins<7*60||mins>toMin(S.home.mealTimes.cena))return null;
+  const wk=S.plans[weekStartFor(d)];if(!wk)return null;
   for(const sl of buildSlots(weekStartFor(d))){
     if(sl.date!==d||(S.thawChecked||{})[sl.id])continue;
     const v=wk.slots[sl.id],r=v&&RX[v.recipe];if(!r)continue;
     const th=r.ing.filter(([p])=>P[p].thaw).map(([p])=>P[p].name.toLowerCase());if(!th.length)continue;
-    return `<div class="rate"><h3>❄️ ¿Pasaste ${esc(th.join(" y "))} a la nevera anoche?</h3><div class="small muted">Para ${esc(r.name.toLowerCase())} (${sl.meal} de hoy)</div>
-      <div class="actions"><button class="btn small" data-thaw="${sl.id}~si">Sí</button><button class="btn ghost small" data-thaw="${sl.id}~no">No, se me olvidó</button></div></div>`;
+    return {sl,r,th};
   }
-  return "";
+  return null;
+}
+function thawCard(){
+  const x=thawPending();if(!x)return "";const {sl,r,th}=x;
+  return `<div class="rate"><h3>❄️ ¿Pasaste ${esc(th.join(" y "))} a la nevera anoche?</h3><div class="small muted">Para ${esc(r.name.toLowerCase())} (${sl.meal} de hoy)</div>
+    <div class="actions"><button class="btn small" data-thaw="${sl.id}~si">Sí</button><button class="btn ghost small" data-thaw="${sl.id}~no">No, se me olvidó</button></div></div>`;
 }
 function bindThaw(){
-  document.querySelectorAll("[data-thaw]").forEach(b=>b.onclick=()=>{const [sid,ans]=b.dataset.thaw.split("~");
-    S.thawChecked=S.thawChecked||{};S.thawChecked[sid]=true;save();
-    if(ans==="si"){render();return}
-    const sl=slotFor(sid.slice(0,10),sid.slice(11));
-    const alts=alternatives(sl,8).filter(({r})=>!r.ing.some(([p])=>P[p].thaw)).slice(0,4);
-    showDialog(`<div class="mod">${closeBtn}<h2>Plan B</h2>
-      <p><b>Descongelar rápido:</b> en una bolsa bien cerrada dentro de agua fría, cambiando el agua cada 30 minutos (1–2 horas), o en el microondas en modo descongelar justo antes de cocinarlo.</p>
-      <p><b>O cambia el plato</b> por uno que no necesita descongelar:</p>
-      ${alts.map(({r,miss})=>`<button class="alt" data-pb="${r.id}"><b>${esc(r.name)}</b><small>${recipeTime(r)} min${miss?(miss.length?" · te falta: "+esc(miss.slice(0,2).map(p=>P[p].name.toLowerCase()).join(", ")):" · tienes todo"):""}</small></button>`).join("")||"<p class='small muted'>No hay alternativas sin descongelar con tus filtros.</p>"}
-      <div class="actions"><button class="btn ghost" data-x>Lo descongelo rápido</button></div></div>`);
-    dlg.querySelectorAll("[data-pb]").forEach(x=>x.onclick=()=>{setSlotRecipe(sl,x.dataset.pb);dlg.close();render();toast("Cambiado por "+RX[x.dataset.pb].name)});
-  });
+  document.querySelectorAll("[data-thaw]").forEach(b=>b.onclick=()=>{const [sid,ans]=b.dataset.thaw.split("~");answerThaw(sid,ans)});
+}
+// Sí: se apunta y ya. No: plan B (descongelar rápido o cambiar el plato)
+function answerThaw(sid,ans){
+  S.thawChecked=S.thawChecked||{};S.thawChecked[sid]=true;save();
+  if(ans==="si"){render();return}
+  const sl=slotFor(sid.slice(0,10),sid.slice(11));
+  const alts=alternatives(sl,8).filter(({r})=>!r.ing.some(([p])=>P[p].thaw)).slice(0,4);
+  showDialog(`<div class="mod">${closeBtn}<h2>Plan B</h2>
+    <p><b>Descongelar rápido:</b> en una bolsa bien cerrada dentro de agua fría, cambiando el agua cada 30 minutos (1–2 horas), o en el microondas en modo descongelar justo antes de cocinarlo.</p>
+    <p><b>O cambia el plato</b> por uno que no necesita descongelar:</p>
+    ${alts.map(({r,miss})=>`<button class="alt" data-pb="${r.id}"><b>${esc(r.name)}</b><small>${recipeTime(r)} min${miss?(miss.length?" · te falta: "+esc(miss.slice(0,2).map(p=>P[p].name.toLowerCase()).join(", ")):" · tienes todo"):""}</small></button>`).join("")||"<p class='small muted'>No hay alternativas sin descongelar con tus filtros.</p>"}
+    <div class="actions"><button class="btn ghost" data-x>Lo descongelo rápido</button></div></div>`);
+  dlg.querySelectorAll("[data-pb]").forEach(x=>x.onclick=()=>{setSlotRecipe(sl,x.dataset.pb);dlg.close();render();toast("Cambiado por "+RX[x.dataset.pb].name)});
 }

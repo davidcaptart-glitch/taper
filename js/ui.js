@@ -375,6 +375,11 @@ function openShopReminder(r){
 // Acciones que llegan desde una notificación ("Ya está" o tocarla)
 function notifAction(tipo,tag){
   if(tag&&tag.startsWith("rate|")){tab="menu";render();openRateDialog(true);return}
+  // ¿Entrenaste? Sí / No desde la notificación (si ya estaba contestado, no se cambia)
+  if(tag&&tag.startsWith("sport|")){const [,d,i]=tag.split("|");tab="menu";
+    if((tipo==="si"||tipo==="no")&&!((((S.sport||{})[d]||{}).res||{})[i]))withRecalc(()=>setSport(d,Number(i),tipo));else render();return}
+  if(tag&&tag.startsWith("thaw|")){tab="menu";
+    if(tipo==="hecho"){S.thawChecked=S.thawChecked||{};S.thawChecked[tag.slice(5)]=true;save();toast("Apuntado: descongelado")}render();return}
   if(!tag||!tag.startsWith("shop|"))return;
   const [,m,key]=tag.split("|");
   if(tipo==="hecho"){markShopDone(m,key);render();toast("Compra marcada como hecha")}
@@ -1467,11 +1472,14 @@ function inboxItems(){
   try{for(const k of others())if(!k.mealsSet&&(k.presence||{}).type!=="manual")out.push({ico:"🍽️",t:`¿Qué comidas hace ${personName(k)} en casa?`,s:"Comida y cena de cada día: así no cocino de más",go:()=>{dlg.close();openWizard("familia");scrollTo(0,0)}})}catch(e){}
   try{if(S.onboarded&&!/^\d{5}$/.test(S.home.cp||""))out.push({ico:"📍",t:"Pon tu código postal",s:"Para tus precios, los supermercados que te reparten y tus festivos",go:()=>{dlg.close();openWizard("zona");scrollTo(0,0)}})}catch(e){}
   try{for(const x of ticketDue())out.push({ico:"📸",t:`Sube el ticket de ${x.title}`,s:"+3 coins · y afino los precios para todos",go:()=>{dlg.close();askTicket(x.m,x.key)}})}catch(e){}
-  try{for(const r of shopDueNow())out.push({ico:"🛒",t:r.title.replace("🛒 ",""),s:r.body,go:()=>openShopReminder(r)})}catch(e){}
+  try{for(const r of shopDueNow())out.push({ico:"🛒",t:r.title.replace("🛒 ",""),s:r.body,go:()=>openShopReminder(r),
+    btns:[["✓ Ya está",()=>{markShopDone(r.m,r.key);render();askTicket(r.m,r.key)}],["⏰ Mañana",()=>{S.shopSnooze=S.shopSnooze||{};S.shopSnooze[shopKey(r.m,r.key)]=addDays(todayISO(),1);save();render();toast("Te lo recuerdo mañana")}]]})}catch(e){}
   try{const nx=monthPrepDue();if(nx)out.push({ico:"📋",t:`Prepara ${mName(nx)}`,s:"5 preguntas y te dejo el menú y el pedido del mes listos",go:()=>{dlg.close();openMonthPrep(nx)}})}catch(e){}
   try{const n=pendingMeals().length;if(n)out.push({ico:"⭐",t:n===1?"1 comida por valorar":`${n} comidas por valorar`,s:"Así aprendo lo que os gusta",go:go("menu")})}catch(e){}
-  try{const n=pendingSports().length;if(n)out.push({ico:"🏃",t:n===1?"¿Hiciste el entreno?":`${n} entrenos por confirmar`,s:"Para recalcular lo que te conviene comer",go:go("menu")})}catch(e){}
-  try{if(thawCard())out.push({ico:"❄️",t:"¿Descongelaste lo de hoy?",s:"Si se te olvidó, tienes un plan B",go:go("menu")})}catch(e){}
+  try{for(const {d,i,s} of pendingSports().reverse())out.push({ico:"🏃",t:`¿Hiciste ${(SPORTS[s.type]||s.type).toLowerCase()}${d===today?" hoy":" el "+longDate(d)}?`,s:`A las ${sessTime(s)} · para recalcular lo que te conviene comer`,go:go("menu"),
+    btns:[["Sí",()=>withRecalc(()=>setSport(d,i,"si"))],["No",()=>withRecalc(()=>setSport(d,i,"no"))]]})}catch(e){}
+  try{const x=thawPending();if(x)out.push({ico:"❄️",t:`¿Pasaste ${x.th.join(" y ")} a la nevera anoche?`,s:`Para ${x.r.name.toLowerCase()} (${x.sl.meal} de hoy)`,go:go("menu"),
+    btns:[["Sí",()=>answerThaw(x.sl.id,"si")],["No, se me olvidó",()=>answerThaw(x.sl.id,"no")]]})}catch(e){}
   try{const st=weekStartFor(today),nx=addDays(st,7);
     for(const s of [st,nx]){if(S.home.start&&addDays(s,6)<S.home.start)continue;const wk=S.plans[s];
       if(!wk||!wk.confirmed){if(s===nx&&daysBetween(today,s)>2)continue;out.push({ico:"🗓️",t:`Planifica la semana del ${shortDate(s)}`,s:"Entrenos, quién está, platos y compra",go:()=>{dlg.close();tab="menu";render();openWeekPlanner(s)}})}}}catch(e){}
@@ -1490,11 +1498,15 @@ function renderBell(){
 function openInbox(){
   const items=inboxItems();
   let next=[];try{if(avisosOn()&&S.notif&&S.notif.on)next=buildSchedule().slice(0,5)}catch(e){}
-  showDialog(`<div class="mod">${closeBtn}<h2>Avisos</h2>
-    ${items.length?items.map((x,i)=>`<button class="alt altimg inbox" data-ib="${i}"><span class="ibico">${x.ico}</span><span><b>${esc(x.t)}</b><small>${esc(x.s||"")}</small></span></button>`).join(""):`<div class="empty" style="box-shadow:none;background:var(--surface-2)"><h2>Todo al día</h2><p>No tienes nada pendiente.</p></div>`}
+  const row=(x,i)=>`<button class="alt altimg inbox" data-ib="${i}"><span class="ibico">${x.ico}</span><span><b>${esc(x.t)}</b><small>${esc(x.s||"")}</small></span></button>`;
+  showDialog(`<div class="mod" id="inboxDlg">${closeBtn}<h2>Avisos</h2>
+    ${items.length?items.map((x,i)=>x.btns?`<div class="ibq">${row(x,i)}<div class="actions ibacts">${x.btns.map(([l],k)=>`<button class="btn small${k?" ghost":""}" data-ibb="${i}|${k}">${esc(l)}</button>`).join("")}</div></div>`:row(x,i)).join(""):`<div class="empty" style="box-shadow:none;background:var(--surface-2)"><h2>Todo al día</h2><p>No tienes nada pendiente.</p></div>`}
     ${next.length?`<h3 style="margin-top:16px">Próximos avisos en el móvil</h3>${next.map(a=>`<div class="fixed"><span>${esc(a.title)}<small>${esc(new Date(a.t).toLocaleString("es-ES",{weekday:"long",hour:"2-digit",minute:"2-digit"}))}</small></span></div>`).join("")}`
       :`<p class="small muted" style="margin-top:14px">${avisosOn()?"Activa los avisos en el móvil desde Perfil para que te lleguen aunque no tengas la app abierta.":""}</p>`}</div>`);
   dlg.querySelectorAll("[data-ib]").forEach(b=>b.onclick=()=>items[Number(b.dataset.ib)].go());
+  // Contestar sin salir: si la respuesta no abre otra ventana, se vuelve a la lista ya sin ese aviso
+  dlg.querySelectorAll("[data-ibb]").forEach(b=>b.onclick=()=>{const [i,k]=b.dataset.ibb.split("|").map(Number);items[i].btns[k][1]();
+    if(dlg.open&&dlg.querySelector("#inboxDlg"))openInbox()});
 }
 
 /* ---------- Instalar la app ---------- */
@@ -1734,7 +1746,7 @@ async function boot(){
   checkUpdate();startCounter();
   if(avisosOn()&&S.notif&&S.notif.on){shareWithSW().catch(()=>{});queueSyncAvisos()}
   trackOnBoot();checkAvisos();applyAccent();applySkin();if(servidorOn())loadStats().then(()=>{applyAccent();applySkin()}).catch(()=>{});
-  {const u=new URLSearchParams(location.search),t=u.get("hecho")||u.get("abrir");if(t){notifAction(u.get("hecho")?"hecho":"abrir",t);history.replaceState(null,"",location.pathname)}}
+  {const u=new URLSearchParams(location.search),k=["hecho","si","no","abrir"].find(x=>u.get(x));if(k){notifAction(k,u.get(k));history.replaceState(null,"",location.pathname)}}
   checkSharedTicket().then(t=>{if(!t)casaOnBoot().then(j=>{if(!j&&!shareOnBoot())setTimeout(()=>openRateDialog(),1500)})});
   navigator.serviceWorker&&navigator.serviceWorker.addEventListener("message",e=>{if(e.data&&e.data.tipo)notifAction(e.data.tipo,e.data.tag)});watchPermission();checkTransferOnBoot();queueTransfer();
 }

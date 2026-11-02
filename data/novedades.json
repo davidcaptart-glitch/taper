@@ -902,6 +902,16 @@
         "Al revisar el ticket ves lo que costaba en ese súper y si pagaste más o menos. Si cambias el súper, cada línea se vuelve a reconocer.",
         "En la Despensa, lo que compraste con ticket vale lo que pagaste (y lo que cocinas con ello también)."
       ]
+    },
+    {
+      "version": 114,
+      "fecha": "2026-11-02",
+      "titulo": "Contesta los avisos con un toque",
+      "cambios": [
+        "El aviso de «¿Hiciste el entreno?» trae los botones Sí y No: tócalos en la propia notificación y queda apuntado (y recalculo lo que te conviene comer).",
+        "En la campanita de la app, las preguntas se contestan ahí mismo: ¿entrenaste?, ¿descongelaste?, ¿ya hiciste la compra?",
+        "El aviso de descongelar trae «Ya está» para apuntarlo sin abrir nada más."
+      ]
     }
   ]
 }
