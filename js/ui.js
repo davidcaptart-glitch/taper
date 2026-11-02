@@ -22,21 +22,27 @@ function renderHeader(){
   if(zoneMissing)pd.innerHTML+=` · <span class="up">precios de otra zona (tu código postal aún no está)</span>`;
   if(!onb)return;
   const sh=shopping(month), budget=monthBudget(month), spent=sh.total;
-  const real=Object.entries(S.spent).filter(([k])=>k.startsWith(month+"|")).reduce((t,[,v])=>t+(Number(v)||0),0);
+  // Lo pagado de verdad (en comida, como el historial): tickets por la fecha de la compra + lo apuntado a mano
+  const paid=paidOf(month),real=paid.total,realTxt=real?`Gastado de verdad en comida: ${eur(real)}${paid.tk&&paid.man?` (tickets ${eur(paid.tk)} + a mano ${eur(paid.man)})`:""}`:"";
   document.getElementById("spent").textContent=eur(spent);
+  const bar=document.getElementById("bar");let rs=bar.querySelector("b.real");if(!rs){rs=document.createElement("b");rs.className="real";bar.appendChild(rs)}
   if(!budgetSet()){
     document.getElementById("budgetOf").textContent="previsto este mes";
-    const bar0=document.getElementById("bar");bar0.classList.remove("over");bar0.firstElementChild.style.width="0%";
+    bar.classList.remove("over");bar.firstElementChild.style.width="0%";rs.style.width="0%";
     const n0=document.getElementById("budgetNote");n0.classList.remove("over");
-    n0.innerHTML=`<button class="btn small" id="setBudget">${ico("coin-euro")} Indicar presupuesto mensual</button>${real?` <span class="small">· Gastado de verdad: ${eur(real)}</span>`:""}`;
+    n0.innerHTML=`<button class="btn small" id="setBudget">${ico("coin-euro")} Indicar presupuesto mensual</button>${real?` <span class="small">· ${realTxt}</span>`:""}`;
     document.getElementById("setBudget").onclick=()=>openWizard("compra","menu");
     return;
   }
   document.getElementById("budgetOf").textContent="de "+eur(budget);
-  const bar=document.getElementById("bar");bar.classList.toggle("over",spent>budget);
+  // Dos marcas: lo previsto (la barra) y lo gastado de verdad (la raya de debajo); en rojo si cualquiera pasa del presupuesto
+  const over=spent>budget,realOver=real>budget+0.005;
+  bar.classList.toggle("over",over||realOver);
   bar.firstElementChild.style.width=Math.min(100,budget?spent/budget*100:0)+"%";
-  const note=document.getElementById("budgetNote");note.classList.toggle("over",spent>budget);
-  note.textContent=(spent>budget?"Te pasas "+eur(spent-budget)+" con lo previsto. Cambia algún plato o revisa el presupuesto.":"Previsto este mes · te sobran "+eur(budget-spent))+(real?` · Gastado de verdad: ${eur(real)}`:"");
+  rs.style.width=Math.min(100,budget?real/budget*100:0)+"%";rs.title=realTxt;
+  const note=document.getElementById("budgetNote");note.classList.toggle("over",over||realOver);
+  note.textContent=realOver?`Has gastado ${eur(real)} de verdad en comida: te pasas ${eur(real-budget)} del presupuesto${paid.tk&&paid.man?` (tickets ${eur(paid.tk)} + a mano ${eur(paid.man)})`:""}. Previsto: ${eur(spent)}.`
+    :(over?"Te pasas "+eur(spent-budget)+" con lo previsto. Cambia algún plato o revisa el presupuesto.":"Previsto este mes · te sobran "+eur(budget-spent))+(real?` · ${realTxt}`:"");
 }
 // Las animaciones de entrada solo al cambiar de pestaña (o de paso del asistente), no en cada toque
 let lastView=null;
@@ -616,7 +622,7 @@ function openSacrifice(start){
     <div class="actions"><button class="btn" id="sacOk">Rehacer el menú</button></div></div>`);
   dlg.querySelector("#sacOk").onclick=()=>{
     dlg.querySelectorAll("[data-sk]").forEach(c=>{if(c.checked)sc[c.dataset.sk]=true;else delete sc[c.dataset.sk]});
-    if(dlg.querySelector("#raiseB").checked)S.home.budget.week=need;
+    if(dlg.querySelector("#raiseB").checked){const b=S.home.budget;if(Number(b.month)>0)b.month=Math.ceil(need*weeksInMonth(m).length/5)*5;else b.week=need}   // manda el mensual: se sube él
     if(dlg.querySelector("#toShop")?.checked)S.home.shop.weekMode="tienda";
     S.home.repeat=dlg.querySelector("#repSel").value;
     S.home.tscale={};save();dlg.close();
@@ -1026,7 +1032,8 @@ function renderCompra(){
   h+=`</details>`;
   const sk=month+"|"+listSel;
   h+=`<details class="card more2"><summary><b>${ico("chart-bar")} Gasto y resumen</b> <span class="small muted">· lo pagado, tickets y presupuesto</span></summary>`;
-  h+=`<div class="card"><h2>Lo que he pagado</h2><div class="spend"><span class="small muted">Apunta el total del ticket o del pedido para comparar con lo previsto (${eur(l.cost+l.fee)}).</span><input type="number" min="0" step="0.01" id="spentIn" value="${S.spent[sk]??""}" placeholder="0,00"></div></div>`;
+  {const tkf=Math.round((S.tickets||[]).filter(t=>t.m===month&&t.list===listSel).reduce((s,t)=>s+(Number(t.food)||0),0)*100)/100;   // lo apuntado a mano se suma a los tickets (no los sustituye)
+  h+=`<div class="card"><h2>Lo que he pagado</h2><div class="spend"><span class="small muted">${tkf?`Con los tickets: ${eur(tkf)} en comida. Apunta aquí solo lo que pagaste sin ticket: se suma.`:`Apunta lo que pagaste sin ticket para comparar con lo previsto (${eur(l.cost+l.fee)}). Si subes el ticket, se suma.`}</span><input type="number" min="0" step="0.01" id="spentIn" value="${S.spent[sk]??""}" placeholder="0,00" aria-label="Pagado sin ticket"></div></div>`;}
   if(listSel==="mes"){
     h+=`<p class="small muted">Básicos (aceite, sal, especias): ${eur(Number(S.home.budget.basics))}.${sh.extrasTotal?` Platos fijos sin receta: ${eur(sh.extrasTotal)}.`:""}</p>`;
 

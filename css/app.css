@@ -1124,6 +1124,11 @@ details.aisle{margin-top:10px}
 /* Tus tickets: historial e informe */
 .tkmonth{justify-content:space-between;margin:12px 0 6px}.tkmonth b{text-transform:capitalize}
 .tkf{display:flex;flex-direction:column;gap:8px;margin:8px 0}
+.tkf input[type=search]{width:100%;border:1.5px solid transparent;background:var(--surface-2);border-radius:12px;padding:11px 13px;transition:border-color .2s,background .2s;-webkit-appearance:none;appearance:none;font:inherit;color:inherit}
+.tkf input[type=search]:focus{outline:none;border-color:var(--accent);background:var(--surface)}
+/* Cabecera: lo gastado de verdad, como raya bajo lo previsto */
+.bar{position:relative}.bar b.real{position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--ink);opacity:.55;border-radius:99px;transition:width .6s var(--ease)}
+.toast.undo.on{pointer-events:auto}.toast .tkundo{border:0;background:none;color:inherit;font:inherit;font-weight:700;text-decoration:underline;margin-left:8px;cursor:pointer;padding:0}
 .tkday{font-size:.9rem;margin:16px 0 6px;color:var(--muted)}
 .tkc{background:var(--surface);border-radius:16px;padding:12px 14px;box-shadow:var(--sh-1);margin-bottom:8px}
 .tkc>summary{display:flex;justify-content:space-between;gap:10px;align-items:center;cursor:pointer;list-style:none}
