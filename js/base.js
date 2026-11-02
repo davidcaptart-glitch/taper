@@ -83,7 +83,8 @@ function monthName(m){const [y,mm]=m.split("-").map(Number);const t=new Date(y,m
 function fmtQty(q,u){if(u==="ud")return (Math.round(q*10)/10).toString().replace(".",",")+" ud";if(q>=1000)return (Math.round(q/100)/10).toString().replace(".",",")+(u==="g"?" kg":" l");return Math.round(q)+" "+u}
 function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("on");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("on"),2200)}
 // Ración según la edad (editable después)
-function factorForAge(a){a=Number(a);if(!a)return 0.6;if(a<=5)return 0.5;if(a<=9)return 0.6;if(a<=13)return 0.75;return 1}
+// 0–2 años: un tercio escaso de la ración de un adulto (antes contaba como 3–5 años)
+function factorForAge(a){a=Number(a);if(!a)return 0.6;if(a<=2)return 0.3;if(a<=5)return 0.5;if(a<=9)return 0.6;if(a<=13)return 0.75;return 1}
 
 /* ---------- Estado ---------- */
 // Semana tipo por defecto: cena cocinada de domingo a jueves (doble, para el táper), viernes y sábado libres
@@ -150,6 +151,9 @@ if(!S.weekMon){const np={};
   S.plans=np;S.weekMon=true;try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}
 // v66 tomaba lo que costaba el primer menú como presupuesto sin que nadie lo pusiera: se quita
 if(S.afinar&&S.afinar.cost&&Number(S.home.budget.month)===S.afinar.cost&&!S.home.budgetConfirmed){S.home.budget.month=0;try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}
+// Antes un bebé (0–2 años) contaba media ración, como uno de 3–5: si conserva la ración por defecto, pasa a 0,3 (la editada a mano se respeta)
+if(!S.babyFactor){for(const p of S.people||[])if(p.kind==="nino"&&Number(p.age)>0&&Number(p.age)<=2&&Number(p.factor)===0.5)p.factor=0.3;
+  S.babyFactor=true;try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}
 function applyTheme(){const t=(S.home&&S.home.theme)||"auto";if(t==="auto")delete document.documentElement.dataset.theme;else document.documentElement.dataset.theme=t;
   const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=(document.documentElement.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))==="dark"?"#101215":"#D22F2A"}
 applyTheme();

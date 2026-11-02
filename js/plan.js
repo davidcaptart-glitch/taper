@@ -168,7 +168,9 @@ function adultFactor(a,slot){
 const PREF_OPTS={rapido:"⚡ Rápido",ligero:"🥗 Ligero",proteina:"💪 Proteína",legumbre:"🫘 Legumbre",pescado:"🐟 Pescado",verdura:"🥦 Verdura",ninos:"🧒 Para niños",nuevo:"✨ Platos nuevos",barato:"💶 Barato",horno:"🔥 Horno"};
 const prefMatch={rapido:r=>recipeTime(r)<=20,ligero:r=>r.type==="l",proteina:r=>(r.prot||0)>=35,legumbre:r=>r.group==="legumbre",pescado:r=>r.group==="pescado",
   verdura:r=>r.group==="vegetal",ninos:r=>!!r.kid,nuevo:r=>!S.ratings.some(x=>x.rid===r.id),barato:r=>rationCost(r)<=2,horno:r=>r.vars.some(v=>v.app==="horno")};
-const monthPrefs=d=>(S.monthPrep||{})[String(d).slice(0,7)]||null;
+// Una semana a caballo entre dos meses es del mes en que empieza (el lunes), igual que su presupuesto y su compra
+const _prefMonth={};
+const monthPrefs=d=>{if(!S.monthPrep)return null;const k=String(d).slice(0,10);return S.monthPrep[_prefMonth[k]||(_prefMonth[k]=monthOfWeek(weekStartFor(k)))]||null};
 function monthPrefScore(r,slot,ctx){
   const mp=monthPrefs(slot.date);if(!mp)return 0;let s=0;
   for(const k of mp.more||[])if(prefMatch[k]&&prefMatch[k](r))s+=3.6;
@@ -181,13 +183,16 @@ const guestsAt=(d,meal)=>Number((((S.days[d]||{}).guests)||{})[meal])||0;
 
 // Calcula los huecos (comidas que se cocinan) de una semana a partir de la semana tipo y los cambios
 function buildSlots(start){
-  const slots=[];
+  const slots=[],wk=S.plans[start],today=todayISO();
   for(const d of weekDates(start)){
     if(S.home.start&&d<S.home.start)continue;   // antes de empezar el plan no se planifica
     for(const meal of ["comida","cena"]){
       if(meal==="comida"&&S.home.startFrom==="cena"&&d===S.home.start)continue;   // empezó por la tarde: ese día solo la cena
       const st=mealState(d,meal);
-      if(st!=="cocinar"&&st!=="solotaper")continue;
+      // Lo ya pasado no cambia: si después cambia la semana tipo, ese día se cocinó igual (salvo que se dijera a mano que no)
+      if(st!=="cocinar"&&st!=="solotaper"){const v=d<today&&wk&&wk.slots[d+"|"+meal];
+        if(v&&v.p!=null&&RX[v.recipe]&&!(S.days[d]||{})[meal])slots.push({id:d+"|"+meal,date:d,meal,eaters:[],kids:[],tupper:[],fixed:null,need:{carbs:false,prot:false,noHeavy:false,why:[]},guests:0,portions:v.p,past:true});
+        continue}
       const ks=st==="solotaper"?[]:kidsAt(d,meal);
       const as=st==="solotaper"?[]:adultsAt(d,meal);
       // Táper para el día siguiente: los adultos que estén y se lleven táper
@@ -198,6 +203,8 @@ function buildSlots(start){
       slot.need=f&&f.capricho?{carbs:false,prot:false,noHeavy:false,why:[]}:needsFor(slot);
       slot.guests=st==="solotaper"?0:guestsAt(d,meal);
       slot.portions=Math.round((as.concat(tupper).reduce((t,a)=>t+adultFactor(a,slot),0)+ks.reduce((t,k)=>t+kidFactor(k,slot),0)+slot.guests)*100)/100;
+      // Al pasar el día se guardan sus raciones (v.p): si luego cambia la familia, lo ya comido no se reescribe
+      if(d<today&&wk){const v=wk.slots[slot.id];if(v&&RX[v.recipe]){if(v.p==null)v.p=slot.portions;else slot.portions=v.p}}
       slots.push(slot);
     }
   }
@@ -208,11 +215,20 @@ function tupperGaps(start){
   const out=[];
   if(S.home.cookMode==="lote")return out;   // por lotes, los tápers salen de la sesión de cocina
   for(const d of weekDates(start)){
-    if(mealState(d,"comida")!=="taper")continue;
+    if(mealState(d,"comida")!=="taper"||(S.home.start&&d<S.home.start))continue;
     const prev=addDays(d,-1), st=mealState(prev,"cena");
-    if(st!=="cocinar"&&st!=="solotaper")out.push(d);
+    // La víspera del primer día del plan no hay cena planificada (no hay táper aunque la semana tipo diga que se cocina)
+    if((st!=="cocinar"&&st!=="solotaper")||(S.home.start&&prev<S.home.start))out.push(d);
   }
   return out;
+}
+/* ---------- Lo que ya pasó no se toca ----------
+   Días anteriores a hoy, la comida o cena de hoy si ya es su hora, lo que ya se cocinó y lo que ya se ha contestado («¿qué tal?»).
+   Rehacer el menú, ajustarlo al presupuesto o aplicar medidas nunca cambia estos huecos. */
+function slotDone(id){
+  const d=id.slice(0,10),t=todayISO(),meal=id.slice(11);if(d<t||(S.cooked||{})[id])return true;if(d>t)return false;
+  if((S.meals||{})[id])return true;
+  const n=new Date();return n.getHours()*60+n.getMinutes()>=toMin((S.home.mealTimes||{})[meal]||(meal==="comida"?"14:00":"21:00"));
 }
 
 /* ---------- Cocinar por lotes ---------- */
@@ -333,6 +349,8 @@ function candidates(slot,opts={}){
     }
     if(slot.need.noHeavy&&r.heavy)continue;
     if(S.home.cookMode==="lote"&&!keepPlan(r,slot).ok)continue;
+    // Cocinando cada día: si sale táper para mañana, el plato tiene que aguantar una noche en la nevera (o congelarse)
+    if(S.home.cookMode!=="lote"&&slot.tupper.length&&!(r.fridge>=1||r.freeze))continue;
     if(opts.only&&!opts.only(r))continue;
     out.push(r);
   }
@@ -371,6 +389,9 @@ function scoreRecipe(r,slot,ctx){
   // Aprovechar paquetes: si se acepta repetir, premia los platos que comparten ingredientes con la semana
   if(rep!=="no"&&ctx.ingUsed){const sh=r.ing.filter(([p])=>ctx.ingUsed.has(p)&&!COMMON.has(p)).length;s+=sh*(rep==="semana"?0.9:0.5)}
   if(slot.eaters.some(a=>isRare(a,r.id))&&ago!=null)s-=5;
+  // Niños pequeños: mejor un plato caliente y de los que suelen gustar; en la primera comida del plan, sobre todo
+  if(slot.kids.some(k=>(Number(k.age)||8)<10)){const first=slot.date===S.home.start,cold=r.tags.includes("frio")||r.tags.includes("sin_cocinar");
+    if(cold)s-=first?6:1.5;if(first&&r.kid)s+=2}
   // Equilibrio semanal: algo de legumbre y pescado, sin pasarse, y variando la proteína principal
   const c=ctx.counts, wantMore=k=>((monthPrefs(slot.date)||{}).more||[]).includes(k);
   if(sacrifice("proteina")){if(r.group==="legumbre"||r.group==="huevo")s+=1.2;if(r.main==="pescado_azul"||r.main==="marisco"||r.main==="ternera")s-=1.5}
@@ -401,44 +422,85 @@ function makeCtx(start,exceptId){
   const lm=Object.fromEntries(S.people.map(p=>[p.id,learnedMap(p)]));
   // Lo que lleva más de 3 meses en el congelador: mejor gastarlo pronto
   let oldFrozen=null;try{if(typeof freezerState==="function")oldFrozen=new Set(freezerState().filter(e=>e.days>FREEZER_MONTHS*30).map(e=>e.pid))}catch(e){}
-  return {used,hist,counts,mains,lm,oldFrozen,ingUsed};
+  return {used,hist,counts,mains,lm,oldFrozen,ingUsed,...baseCounts(S.plans[start],exceptId)};
+}
+/* ---------- Variedad ----------
+   Pasta y arroz: como mucho 3 platos de cada uno a la semana y nunca dos de la misma base el mismo día.
+   El mismo plato, como mucho una vez cada 2 semanas (salvo que se acepte repetir). Solo se salta si nada más encaja
+   o si el presupuesto obliga (y entonces se dice en la semana). Los días que repiten el plato de otro no cuentan. */
+const BASE_MAX=3;
+function carbBase(r){
+  if(r._base!==undefined)return r._base;let b=null;
+  for(const [p,q] of r.ing){const x=P[p];if(!x||q<30||!/arroz, legumbres y pasta/i.test(x.sec||""))continue;
+    const nm=lowName(x.name);if(/^arroz/.test(nm)){b="arroz";break}if(/^(macarr|espagu|fideo|placas de lasa|pasta|noqui|tallar|penne|tortell)/.test(nm)){b="pasta";break}}
+  return r._base=b;
+}
+const lowName=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+function baseCounts(wk,exceptId){
+  const bases={},dayBases={};
+  if(wk)for(const [id,v] of Object.entries(wk.slots||{})){if(id===exceptId||v.rep)continue;const r=RX[v.recipe],b=r&&carbBase(r);
+    if(b){bases[b]=(bases[b]||0)+1;(dayBases[id.slice(0,10)]=dayBases[id.slice(0,10)]||[]).push(b)}}
+  return {bases,dayBases};
+}
+// ¿Rompe la variedad poner r en este hueco?
+function breaksVariety(r,slot,ctx){
+  const b=carbBase(r),rep=S.home.repeat||"no";
+  if(b&&((ctx.bases[b]||0)>=BASE_MAX||(ctx.dayBases[slot.date]||[]).includes(b)))return true;
+  if(rep!=="semana"&&ctx.used.has(r.id))return true;
+  return rep==="no"&&ctx.hist[r.id]===1;   // ni la semana anterior ni la siguiente
+}
+// Cuánto se salta la variedad una semana (platos de más de pasta o arroz y días con dos de la misma base)
+function varietyOver(wk){const {bases,dayBases}=baseCounts(wk);return Object.values(bases).reduce((t,n)=>t+Math.max(0,n-BASE_MAX),0)+Object.values(dayBases).reduce((t,a)=>t+a.length-new Set(a).size,0)}
+function varietyNote(start){
+  const wk=S.plans[start];if(!wk)return "";const {bases,dayBases}=baseCounts(wk),t=[];
+  for(const [b,n] of Object.entries(bases))if(n>BASE_MAX)t.push(`${n} platos de ${b}`);
+  const dd=Object.values(dayBases).filter(a=>a.length>new Set(a).size).length;if(dd)t.push(`${dd} ${dd===1?"día":"días"} con dos platos de la misma base`);
+  return t.join(" y ");
 }
 function pickFor(slot,ctx){
   let c=candidates(slot);
   if(!c.length)c=candidates({...slot,need:{...slot.need,noHeavy:false}});
-  // Si nada encaja, se relaja todo (gustos de los niños, pesado, nevera…) menos la dieta y las alergias, que no se saltan nunca
-  const all=slot.eaters.concat(slot.kids,slot.tupper);
-  if(!c.length)c=R.filter(r=>!r.small&&variantFor(r)&&hasPhoto(r)&&hasPack(r)&&all.every(p=>canEat(p,r)));
+  // Si nada encaja, se relaja casi todo (gustos de los niños, pesado, nevera…) menos la dieta y las alergias, que no se saltan nunca;
+  // tampoco salen caprichos, platos más difíciles de lo que quieres cocinar ni picante para los niños
+  const all=slot.eaters.concat(slot.kids,slot.tupper),young=slot.kids.some(k=>(Number(k.age)||8)<10);
+  if(!c.length)c=R.filter(r=>!r.small&&!r.cap&&diffRank(r.diff)<=diffRank(maxDiff())&&!(young&&r.tags.includes("picante"))&&variantFor(r)&&hasPhoto(r)&&hasPack(r)&&all.every(p=>canEat(p,r)));
   if(!c.length)return null;
+  // Variedad: primero lo que no repite ni se pasa de pasta o arroz; si no queda nada, lo que haya
+  const v=c.filter(r=>!breaksVariety(r,slot,ctx));if(v.length)c=v;
   let best=null,bs=-1e9;for(const r of c){const s=scoreRecipe(r,slot,ctx);if(s>bs){bs=s;best=r}}
   return best;
 }
-function addToCtx(ctx,r){ctx.used.add(r.id);if(ctx.ingUsed)for(const [p] of r.ing)ctx.ingUsed.add(p);ctx.counts[r.group]=(ctx.counts[r.group]||0)+1;ctx.mains[r.main]=(ctx.mains[r.main]||0)+1;if(r.red)ctx.counts.red=(ctx.counts.red||0)+1}
+function addToCtx(ctx,r,slot){ctx.used.add(r.id);if(ctx.ingUsed)for(const [p] of r.ing)ctx.ingUsed.add(p);ctx.counts[r.group]=(ctx.counts[r.group]||0)+1;ctx.mains[r.main]=(ctx.mains[r.main]||0)+1;if(r.red)ctx.counts.red=(ctx.counts.red||0)+1;
+  const b=carbBase(r);if(b&&ctx.bases){ctx.bases[b]=(ctx.bases[b]||0)+1;if(slot)(ctx.dayBases[slot.date]=ctx.dayBases[slot.date]||[]).push(b)}}
 
 // Asegura que la semana existe y que todos sus huecos tienen plato (respeta los ya elegidos)
 function ensureWeek(start,regen){
   const wk=S.plans[start]=S.plans[start]||{start,slots:{},training:null,confirmed:false,createdAt:todayISO()};
-  if(regen){for(const [id,v] of Object.entries(wk.slots))if(!v.locked)delete wk.slots[id];wk.confirmed=false}
-  const slots=buildSlots(start);
+  if(regen){for(const [id,v] of Object.entries(wk.slots))if(!v.locked&&!slotDone(id))delete wk.slots[id];wk.confirmed=false}
+  const slots=buildSlots(start),today=todayISO(),isNew=!Object.keys(wk.slots).length;
   let changed=safetySweep(start,slots);
-  // Un hueco que repetía el plato de otro, si ese otro ha cambiado, se vuelve a elegir
-  for(const [id,v] of Object.entries(wk.slots))if(v.rep&&(!wk.slots[v.rep]||wk.slots[v.rep].recipe!==v.recipe)){delete wk.slots[id];changed=true}
+  // Un hueco que repetía el plato de otro, si ese otro ha cambiado, se vuelve a elegir (si no ha pasado ya)
+  for(const [id,v] of Object.entries(wk.slots))if(v.rep&&!slotDone(id)&&(!wk.slots[v.rep]||wk.slots[v.rep].recipe!==v.recipe)){delete wk.slots[id];changed=true}
   const ctx=makeCtx(start);
   for(const sl of slots){
-    if(sl.fixed){
-      const fr=sl.fixed.recipe&&RX[sl.fixed.recipe];
+    // Días ya pasados: no se rellenan a posteriori (salvo la primera vez que se hace la semana)
+    if(sl.date<today&&!isNew)continue;
+    if(sl.fixed&&!slotDone(sl.id)){
+      const fr=sl.fixed.recipe&&RX[sl.fixed.recipe],cur=wk.slots[sl.id];
       // Un plato fijo que alguien de los que comen ya no puede tomar no se pone: se elige otro
+      // Si ese día elegiste otro plato a mano (manual), se respeta
       if(!(fr&&unsafeFor(slotPeople(sl),fr).length)){
-        if(fr&&!(wk.slots[sl.id]&&wk.slots[sl.id].despensa)&&(!wk.slots[sl.id]||wk.slots[sl.id].recipe!==sl.fixed.recipe)){wk.slots[sl.id]={recipe:sl.fixed.recipe,locked:true};changed=true}
+        if(fr&&!(cur&&(cur.despensa||(cur.manual&&RX[cur.recipe])))&&(!cur||cur.recipe!==sl.fixed.recipe)){wk.slots[sl.id]={recipe:sl.fixed.recipe,locked:true};changed=true}
         continue;
       }
     }
     const cur=wk.slots[sl.id];
     if(cur&&(RX[cur.recipe]||cur.despensa))continue;   // con receta o con algo de la despensa
+    if(slotDone(sl.id)&&cur)continue;
     // Cocinar una vez para varios días: mismo plato que el día anterior si toca
     const rp=repeatFrom(wk,sl,slots);if(rp){wk.slots[sl.id]=rp;changed=true;continue}
     const r=pickFor(sl,ctx);if(!r)continue;
-    wk.slots[sl.id]={recipe:r.id};addToCtx(ctx,r);changed=true;
+    wk.slots[sl.id]={recipe:r.id};addToCtx(ctx,r,sl);changed=true;
   }
   ensureSmall(start);
   if(safetySweep(start,slots,true)){ensureSmall(start);changed=true}
@@ -458,6 +520,7 @@ function whyCant(p,r){
   const ing=r.ing.find(([pid])=>ingPref(p,pid)===-9);if(ing)return P[ing[0]].name.toLowerCase();
   const bad=r.ing.find(([pid])=>!dietAllows(p,pid));if(bad)return P[bad[0]].name.toLowerCase()+" ("+DIETS[dietOf(p)][1].toLowerCase()+")";
   if(!rawOk(p,r))return "platos cocinados (crudivegano)";
+  if(isBaby(p)){const b=r.ing.find(([pid])=>babyNo(pid));if(b)return P[b[0]].name.toLowerCase()+" (menores de 3 años)"}
   return "algún ingrediente";
 }
 function safetySweep(start,slots,small){
@@ -488,7 +551,9 @@ function presentSmall(p,d,m){
   const k={...p,away:null};return presentByRule(k,d,m==="merienda"?"cena":"comida");
 }
 function smallEaters(d,m){
-  return S.people.filter(p=>smallState(p,m,d)!=="no"&&presentSmall(p,d,m)&&!(m!=="merienda"&&(S.days[d]||{}).comida==="fuera"&&p.id==="yo"));
+  // Días fuera de casa (vacaciones, «días fuera» al preparar el mes): ni desayunos ni meriendas para nadie, tampoco los niños
+  const o=S.days[d]||{};if(o.away||(o.comida==="fuera"&&o.cena==="fuera"))return [];
+  return S.people.filter(p=>smallState(p,m,d)!=="no"&&presentSmall(p,d,m)&&!(m!=="merienda"&&o.comida==="fuera"&&p.id==="yo"));
 }
 function smallCandidates(eaters,m){
   return R.filter(r=>r.small&&r.moments.includes(m)&&variantFor(r)&&hasPhoto(r)&&hasPack(r)&&eaters.every(p=>canEat(p,r)));
@@ -499,6 +564,7 @@ function ensureSmall(start){
   for(const d of weekDates(start)){
     if(S.home.start&&d<S.home.start)continue;
     if(S.home.startFrom==="cena"&&d===S.home.start)continue;
+    if(d<todayISO()&&wk.small[d])continue;   // lo ya pasado no se toca
     for(const m of Object.keys(SMALL)){
       const eaters=smallEaters(d,m);const cur=(wk.small[d]||{})[m];
       if(!eaters.length){if(cur&&!cur.locked)delete wk.small[d][m];continue}
@@ -553,7 +619,8 @@ function genWeekFromScratch(start,nTries=6){
   const tries=[];
   const keep=S.plans[start]?{...S.plans[start]}:null;
   for(let t=0;t<nTries;t++){
-    S.plans[start]=keep?{...keep,slots:Object.fromEntries(Object.entries(keep.slots||{}).filter(([,v])=>v.locked))}:{start,slots:{},training:null,confirmed:false,createdAt:todayISO()};
+    // Se quedan los elegidos a mano y lo que ya pasó (días anteriores, lo de hoy si ya es la hora, lo cocinado)
+    S.plans[start]=keep?{...keep,slots:JSON.parse(JSON.stringify(Object.fromEntries(Object.entries(keep.slots||{}).filter(([id,v])=>v.locked||slotDone(id)))))}:{start,slots:{},training:null,confirmed:false,createdAt:todayISO()};
     const {wk,slots}=ensureWeek(start);
     // Coste real de la semana (paquetes enteros de lo fresco): así se nota el ahorro de compartir ingredientes
     const cost=weekCost(start), rep=S.home.repeat||"no";
@@ -565,7 +632,7 @@ function genWeekFromScratch(start,nTries=6){
   tries.sort((a,b)=>b.sc-a.sc);
   S.plans[start].slots=tries[Math.floor(Math.random()*Math.min(3,tries.length))].slots;
   // Comidas pequeñas: se rehacen las que no se eligieron a mano
-  const sm=S.plans[start].small||{};for(const d of Object.keys(sm))for(const m of Object.keys(sm[d]))if(!sm[d][m].locked)delete sm[d][m];
+  const sm=S.plans[start].small||{};for(const d of Object.keys(sm))if(d>=todayISO())for(const m of Object.keys(sm[d]))if(!sm[d][m].locked)delete sm[d][m];
   ensureSmall(start);
   S.plans[start].budget=fitBudget(start);
 }
@@ -600,13 +667,13 @@ function fitBudget(start){
   const getInfo=sl=>{if(info[sl.id])return info[sl.id];const ctx=makeCtx(start,sl.id);ctx.noise=0;
     const list=candidates(sl).map(r=>({r,rc:rationCost(r)*sl.portions,sc:scoreRecipe(r,sl,ctx)}));
     return info[sl.id]={ctx,list,by:Object.fromEntries(list.map(x=>[x.r.id,x]))}};
-  const free=x=>{const v=wk.slots[x.id];return v&&!v.locked&&!v.rep&&!x.fixed&&!Object.values(wk.slots).some(y=>y.rep===x.id)};
-  const sameWeekOk=(S.home.repeat||"no")==="semana";
-  try{
-  // Con presupuesto se apura de verdad: se siguen cambiando platos mientras alguno abarate la semana
-  for(let it=0;it<60;it++){
-    const cost=weekCost(start,slots);if(cost<=target)return {ok:true,cost,target};
-    const used=new Set(Object.values(wk.slots).map(v=>v.recipe));
+  // Solo se cambia lo que se puede cambiar: ni lo elegido a mano, ni los fijos, ni lo que ya pasó o ya se cocinó
+  const free=x=>{const v=wk.slots[x.id];return v&&!v.locked&&!v.rep&&!x.fixed&&!x.past&&!slotDone(x.id)&&!Object.values(wk.slots).some(y=>y.rep===x.id)};
+  // relaxed: el presupuesto ha obligado a saltarse la variedad (se mantiene mientras la semana siga saltándosela)
+  const rep=S.home.repeat||"no",sameWeekOk=rep==="semana";let relaxed=!!(wk.budget&&wk.budget.relaxed&&varietyOver(wk)>0);
+  // Primero sin saltarse la variedad (pasta/arroz y repetir platos); si así no se llega, se salta y se avisa (relaxed)
+  const search=(cost,strict)=>{
+    const used=new Set(Object.values(wk.slots).map(v=>v.recipe)),over=strict?varietyOver(wk):0,bc=baseCounts(wk);
     let best=null;const pre=[];
     for(const sl of slots){
       if(!free(sl))continue;const cur=RX[wk.slots[sl.id].recipe];if(!cur)continue;
@@ -615,25 +682,37 @@ function fitBudget(start){
       if(cur.pack&&hasPack(cur))continue;   // lo que has desbloqueado en la tienda tampoco
       const I=getInfo(sl),curS=I.by[cur.id]?I.by[cur.id].sc:scoreRecipe(cur,sl,I.ctx),cc=rationCost(cur)*sl.portions;
       for(const x of I.list){if(x.r.id===cur.id||(!sameWeekOk&&used.has(x.r.id)))continue;
+        if(strict&&rep==="no"&&I.ctx.hist[x.r.id]===1)continue;   // ni el plato de la semana anterior o la siguiente
+        if(strict){const b=carbBase(x.r);if(b&&b!==carbBase(cur)&&((bc.bases[b]||0)>=BASE_MAX||(bc.dayBases[sl.date]||[]).includes(b)))continue}
         // Si se puede repetir en la semana, un plato que ya está ahorra aunque la ración no sea más barata (comparte paquetes)
         const est=cc-x.rc+(sameWeekOk&&used.has(x.r.id)?x.rc*0.6:0);if(est<=0.2)continue;
         const loss=Math.max(0,curS-x.sc);pre.push({est:est/(1+loss*0.6),loss,sl,rid:x.r.id})}
     }
     // Los mejores se calculan de verdad (coste de la semana con el cambio: cuenta los paquetes que se comparten),
     // de 14 en 14; y si el plato sale varias veces, también cambiándolas todas a la vez
+    // (solo en los días en que ese plato también encaja: niños, picante, gustos, dificultad…)
     pre.sort((a,b)=>b.est-a.est);
     for(let from=0;from<pre.length&&from<42&&!best;from+=14)for(const c of pre.slice(from,from+14)){
-      const curId=wk.slots[c.sl.id].recipe,r=RX[c.rid];
-      const group=slots.filter(x=>free(x)&&wk.slots[x.id].recipe===curId&&slotPeople(x).every(p=>canEat(p,r)));
+      const curId=wk.slots[c.sl.id].recipe;
+      const group=slots.filter(x=>free(x)&&wk.slots[x.id].recipe===curId&&getInfo(x).by[c.rid]);
       for(const ids of group.length>1?[[c.sl],group]:[[c.sl]]){
-        const prev=ids.map(x=>wk.slots[x.id]);ids.forEach(x=>wk.slots[x.id]={recipe:c.rid});const after=weekCost(start,slots);ids.forEach((x,k)=>wk.slots[x.id]=prev[k]);
+        const prev=ids.map(x=>wk.slots[x.id]);ids.forEach(x=>wk.slots[x.id]={recipe:c.rid});const ov=strict?varietyOver(wk):0,after=strict&&ov>over?null:weekCost(start,slots);ids.forEach((x,k)=>wk.slots[x.id]=prev[k]);
+        if(after==null)continue;
         const save=cost-after;if(save<=0.3)continue;
         const val=save/(1+c.loss*0.6*ids.length);
         if(!best||val>best.val)best={val,ids:ids.map(x=>x.id),rid:c.rid}}}
-    if(!best)return {ok:false,cost,target};
+    return best;
+  };
+  try{
+  // Con presupuesto se apura de verdad: se siguen cambiando platos mientras alguno abarate la semana
+  for(let it=0;it<60;it++){
+    const cost=weekCost(start,slots);if(cost<=target)return {ok:true,cost,target,relaxed};
+    // Cuando ya no queda ningún cambio que respete la variedad, se deja de buscarlo (no vuelve a aparecer al abaratar)
+    let best=relaxed?null:search(cost,true);if(!best){best=search(cost,false);if(best)relaxed=true}
+    if(!best)return {ok:false,cost,target,relaxed};
     for(const id of best.ids)wk.slots[id]={recipe:best.rid};
   }
-  const cost=weekCost(start,slots);return {ok:cost<=target,cost,target};
+  const cost=weekCost(start,slots);return {ok:cost<=target,cost,target,relaxed};
   }finally{if(ownMemo)priceMemo=null}
 }
 function balanceOf(wk){const c={};for(const v of Object.values(wk.slots)){const r=RX[v.recipe];if(r){c[r.group]=(c[r.group]||0)+1;if(r.red)c.red=(c.red||0)+1}}
@@ -651,26 +730,38 @@ function replanFrom(d){for(const s of Object.keys(S.plans))if(addDays(s,6)>=d)en
 function redoFromToday(){return withCandMemo(redoFromToday_)}
 function redoFromToday_(){
   const today=todayISO(),cur=weekStartFor(today);
+  // Se rehace desde cero: el apretón anterior (tscale) se vuelve a calcular con el menú nuevo
+  if(S.home.tscale)for(const m of budgetMonths())delete S.home.tscale[m];
   for(const s of Object.keys(S.plans).sort()){if(addDays(s,6)<today)continue;const wk=S.plans[s];
     if(s>cur){genWeekFromScratch(s);continue}
-    for(const [id,v] of Object.entries(wk.slots))if(id.slice(0,10)>=today&&!v.locked)delete wk.slots[id];
-    for(const [d,dd] of Object.entries(wk.small||{}))if(d>=today)for(const [m,v] of Object.entries(dd))if(!v.locked)delete dd[m];
+    // Lo de hoy que ya se ha comido o cocinado tampoco se rehace
+    for(const [id,v] of Object.entries(wk.slots))if(id.slice(0,10)>=today&&!v.locked&&!slotDone(id))delete wk.slots[id];
+    for(const [d,dd] of Object.entries(wk.small||{}))if(d>today)for(const [m,v] of Object.entries(dd))if(!v.locked)delete dd[m];
     ensureWeek(s);wk.budget=fitBudget(s)}
   ensureHorizon();
   if(budgetSet())for(const m of budgetMonths())fitMonthBudget(m);
   save();
 }
-// Ajusta un mes entero a su presupuesto: si la compra real (con la despensa) se pasa, aprieta las semanas y vuelve a probar
+// Ajusta un mes entero a su presupuesto: si la compra real (con la despensa) se pasa, aprieta las semanas (tscale) y vuelve a probar.
+// Siempre se prueba primero sin apretar, y si hace falta se busca el apretón más suave que cabe: si sube el presupuesto, se recupera
 function fitMonthBudget(m){
-  if(!budgetSet())return;const ts=S.home.tscale=S.home.tscale||{},today=todayISO();
-  for(let i=0;i<4;i++){const total=shopping(m).total,b=monthBudget(m);if(total<=b+0.5)break;
-    ts[m]=Math.max(0.3,(ts[m]||1)*Math.max(0.6,b/total));
-    for(const s of weeksInMonth(m))if(S.plans[s]&&addDays(s,6)>=today)S.plans[s].budget=fitBudget(s)}
-  // Si aun así no cabe, lo más barato posible: se aprieta del todo (nunca se salta la dieta, las alergias ni lo elegido a mano)
-  if(shopping(m).total>monthBudget(m)+0.5){ts[m]=0.01;const cur=weekStartFor(today);
-    for(const s of weeksInMonth(m))if(S.plans[s]&&addDays(s,6)>=today){
-      // Según cómo empiece, el ajuste se queda en un punto u otro: se prueban varios menús y se queda el más barato
-      S.plans[s].budget=fitBudget(s);if(s>cur&&weekCost(s)>weekFoodTarget(s)+0.5)bestOfRestarts(s,2)}}
+  if(!budgetSet())return;const ts=S.home.tscale=S.home.tscale||{},today=todayISO(),cur=weekStartFor(today);
+  const ws=weeksInMonth(m).filter(s=>S.plans[s]&&addDays(s,6)>=today);
+  const fits=()=>shopping(m).total<=monthBudget(m)+0.5;
+  const refit=x=>{ts[m]=x;for(const s of ws)S.plans[s].budget=fitBudget(s)};
+  const snap=()=>JSON.stringify(ws.map(s=>S.plans[s].slots)),back=j=>JSON.parse(j).forEach((sl,i)=>{S.plans[ws[i]].slots=sl});
+  refit(1);if(fits())return;
+  const base=snap();refit(0.01);
+  if(!fits()){
+    // Ni apretando del todo cabe: lo más barato posible (nunca se salta la dieta, las alergias ni lo elegido a mano).
+    // Según cómo empiece, el ajuste se queda en un punto u otro: se prueban varios menús y se queda el más barato
+    for(const s of ws)if(s>cur&&weekCost(s)>weekFoodTarget(s)+0.5)bestOfRestarts(s,2);
+    return}
+  // Cabe apretando: búsqueda binaria del apretón más suave que cabe, empezando cada vez desde el mismo menú (el ajuste solo abarata)
+  let lo=0.01,hi=1,ok={x:0.01,j:snap(),b:ws.map(s=>S.plans[s].budget)};
+  for(let i=0;i<5;i++){const mid=Math.round((lo+hi)/2*1000)/1000;back(base);refit(mid);
+    if(fits()){ok={x:mid,j:snap(),b:ws.map(s=>S.plans[s].budget)};lo=mid}else hi=mid}
+  back(ok.j);ts[m]=ok.x;ws.forEach((s,i)=>{S.plans[s].budget=ok.b[i]});
 }
 function bestOfRestarts(s,n){
   let best={cost:weekCost(s),slots:JSON.stringify(S.plans[s].slots),small:JSON.stringify(S.plans[s].small||{})};
@@ -724,13 +815,18 @@ function missingFor(r,slot,inv){return r.ing.filter(([pid,q])=>(inv[pid]||0)<q*s
 function setSlotRecipe(slot,rid){
   const start=weekStartFor(slot.date);const wk=S.plans[start];
   // Elegido a mano: deja de repetir el plato de otro día (los días que lo repetían se rehacen solos)
-  wk.slots[slot.id]={recipe:rid,locked:true};save();
+  // manual: lo has elegido tú (también manda sobre un plato fijo); p: raciones ya guardadas de un día pasado
+  const old=wk.slots[slot.id];wk.slots[slot.id]={recipe:rid,locked:true,manual:true,...(old&&old.p!=null?{p:old.p}:{})};save();
 }
-// Pasa el plato de un hueco al siguiente, y así sucesivamente (el último se descarta)
+// Pasa el plato de un hueco al siguiente, y así sucesivamente (el último se descarta). Se mueve el hueco entero
+// (bloqueo incluido); los que no se pueden mover (fijos, elegidos a mano, de la despensa, ya cocinados o pasados) se saltan
 function shiftForward(start,fromId){
-  const wk=S.plans[start];const slots=buildSlots(start).filter(s=>!s.fixed);
+  const wk=S.plans[start];
+  const movable=s=>{const v=wk.slots[s.id];return !s.fixed&&!s.past&&!slotDone(s.id)&&!(v&&(v.locked||v.despensa))};
+  const slots=buildSlots(start).filter(s=>s.id===fromId||(s.id>fromId&&movable(s)));
   const i=slots.findIndex(s=>s.id===fromId);if(i<0)return;
-  for(let j=slots.length-1;j>i;j--){const a=wk.slots[slots[j-1].id];if(a)wk.slots[slots[j].id]={recipe:a.recipe}}
+  const take=v=>{const x=JSON.parse(JSON.stringify(v));delete x.rep;delete x.p;return x};
+  for(let j=slots.length-1;j>i;j--){const a=wk.slots[slots[j-1].id];if(a)wk.slots[slots[j].id]=take(a);else delete wk.slots[slots[j].id]}
   delete wk.slots[fromId];
 }
 

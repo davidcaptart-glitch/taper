@@ -66,8 +66,12 @@ function recipeDiet(r){const o=new Set(r.ing.flatMap(([pid])=>(P[pid]&&P[pid].or
   if(!o.size)return "vegano";if(!o.has("carne")&&!o.has("pescado")&&!o.has("marisco"))return "vege";if(!o.has("carne"))return "pesce";return "omni"}
 // Alérgenos de una receta (de sus ingredientes)
 const recipeAllergens=r=>[...new Set(r.ing.flatMap(([pid])=>(P[pid]&&P[pid].alg)||[]))];
+// Bebés (0–2 años): nada de miel, frutos secos enteros, embutidos ni cosas muy saladas (salsa de soja, pastillas de caldo, encurtidos…)
+const isBaby=p=>p.kind==="nino"&&Number(p.age)>0&&Number(p.age)<=2;
+const BABY_NO=new Set(["miel","nueces","almendras","anacardos","cacahuetes","pipas_calabaza","jamon","serrano","chorizo","bacon","guanciale","pavo_fiambre","frankfurt","salsa_soja","teriyaki","caldo_verduras","alcaparras","aceitunas","pepinillos","jalapenos","sazonador_fajitas"]);
+const babyNo=pid=>BABY_NO.has(pid)||((P[pid]&&P[pid].org)||[]).includes("miel")||/\b(anchoa|salaz|embutido|fuet|salami|salchich[oó]n)/i.test((P[pid]&&P[pid].name)||"");
 // ¿Puede comerlo? (alergias e intolerancias de la persona e ingredientes marcados como "no puede")
-const canEat=(p,r)=>{const al=p.allergies||[];if(!rawOk(p,r))return false;return !r.ing.some(([pid])=>ingPref(p,pid)===-9||!dietAllows(p,pid)||(al.length&&((P[pid]&&P[pid].alg)||[]).some(a=>al.includes(a))))};
+const canEat=(p,r)=>{const al=p.allergies||[],baby=isBaby(p);if(!rawOk(p,r))return false;return !r.ing.some(([pid])=>ingPref(p,pid)===-9||!dietAllows(p,pid)||(baby&&babyNo(pid))||(al.length&&((P[pid]&&P[pid].alg)||[]).some(a=>al.includes(a))))};
 
 /* ---------- Valoraciones ---------- */
 function addRating(o){
