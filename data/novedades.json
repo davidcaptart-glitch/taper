@@ -967,6 +967,27 @@
         "Al fijar el presupuesto, el deslizador empieza en lo que calculo que cuesta tu menú y enseña esa cifra (antes ponía 0 € y guardaba 150 €).",
         "«Tu menú está listo» dice lo mismo que la cabecera, y deja de dar la cifra cuando ya tienes presupuesto."
       ]
+    },
+    {
+      "version": 120,
+      "fecha": "2026-11-02",
+      "titulo": "Revisión a fondo: todo cuadra",
+      "cambios": [
+        "Lo que ya comiste no cambia: rehacer platos o ajustar el presupuesto solo toca lo que viene.",
+        "Más variedad: como mucho 3 platos de pasta y 3 de arroz a la semana, y sin repetir plato la semana siguiente. Si el presupuesto no da para más, te lo digo.",
+        "Al terminar de cocinar: «✓ Cocinado», «Deshacer» y «¿Qué tal?». Se descuenta lo que cocinaste de verdad, con las raciones que elegiste.",
+        "Cantidades de cocina: «1 huevo», «3½ pastillas de caldo», gramos redondeados.",
+        "Bebés de 0 a 2 años: raciones más pequeñas y sin miel, frutos secos enteros, embutido ni cosas muy saladas.",
+        "Despensa y congelador son un solo inventario: lo congelado cuenta, y «Ya he hecho esta compra» llena también el congelador.",
+        "La lista de la compra resta lo que ya tienes en casa y te dice qué no compras por eso.",
+        "Bolsas de congelado: «Usar una» ya no gasta dos, y «Comerla un día» te propone recetas con lo que hay dentro.",
+        "Buscador al añadir algo a la despensa o al congelador.",
+        "Tickets: aviso si subes el mismo dos veces, se leen bien devoluciones, descuentos, packs y fotos difíciles, y se pueden editar o borrar con «Deshacer».",
+        "Lo gastado de verdad se ve en la barra del presupuesto y es la misma cifra en todas partes.",
+        "Avisos: menos y mejores (como mucho 5 al día, nada de 22:00 a 08:00), con su icono, que abren su pantalla y que no se repiten si ya lo has hecho.",
+        "Tus avisos van protegidos con una clave propia de tu móvil.",
+        "El tema sigue al del móvil (claro u oscuro) si no eliges otro."
+      ]
     }
   ]
 }
