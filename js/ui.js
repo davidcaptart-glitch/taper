@@ -14,7 +14,7 @@ function renderHeader(){
   document.querySelector("nav.tabs").hidden=!onb;
   document.getElementById("monthLabel").textContent=monthName(month);
   // El congelador está dentro de la despensa
-  document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-current",b.dataset.tab===(tab==="congelador"?"despensa":tab)?"page":"false"));
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-current",b.dataset.tab===(tab==="congelador"||tab==="tickets"?"despensa":tab)?"page":"false"));
   const pd=document.getElementById("priceDate");
   if(PR&&PR.fecha){const ups=Object.keys(P).filter(rise).length;
     pd.innerHTML=`Precios del <b>${esc(longDate(PR.fecha).replace(/^\w+, /,""))}</b>${prOffline?" (última copia guardada)":""}${ups?` · <span class="up">▲ ${ups} ${ups===1?"producto ha subido":"productos han subido"}</span>`:""}`}
@@ -55,6 +55,7 @@ function render(){
   if(tab==="recetas")renderRecetas();
   if(tab==="congelador")renderCongelador();
   if(tab==="despensa")renderDespensa();
+  if(tab==="tickets")renderTickets();
   if(tab==="perfil")renderPerfil();
 }
 

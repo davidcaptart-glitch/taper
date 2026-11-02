@@ -315,7 +315,7 @@ function matchLine(desc,sid){
   if(!best||best.sc<0.55)return null;
   const [mid,name,ci]=MC.p[best.i],cat=MC.cats[ci];
   const pid=Object.values(P).find(p=>p.mid===mid)?.id||null;
-  return {mid,name,group:cat.g,food:cat.food,pid,score:Math.round(best.sc*100)/100};
+  return {mid,name,group:cat.g,cat:cat.n,food:cat.food,pid,score:Math.round(best.sc*100)/100};
 }
 
 /* ---------- Ver el ticket, corregirlo y guardarlo ---------- */
@@ -431,8 +431,8 @@ function saveTicket(tk,date,dest){
   S.tickets=S.tickets||[];
   // Comida que no estaba en ninguna lista del mes: compra de más (cuenta como gastado y como que la tienes en casa)
   const inList=listPids(dest.m);
-  const lines=tk.lines.map(l=>({qty:l.qty,desc:l.desc,amount:l.amount,kg:l.kg||null,food:l.food,pid:l.pid||null,mid:l.match?l.match.mid:null,name:l.match?l.match.name:null,env:l.match&&l.match.sup&&l.match.pid===l.pid?supEnv(l.match.sup,l.pid):null,group:l.pid?P[l.pid].aisle:l.group,extra:!!(l.food&&!(l.pid&&inList.has(l.pid)))}));
-  const t={id:uid("t"),date,m:dest.m,list:dest.key,super:tk.super||"otro",store:tk.store||"",total:tk.total,food:Math.round(lines.filter(l=>l.food).reduce((s,l)=>s+l.amount,0)*100)/100,lines};
+  const lines=tk.lines.map(l=>({qty:l.qty,desc:l.desc,amount:l.amount,kg:l.kg||null,food:l.food,pid:l.pid||null,mid:l.match?l.match.mid:null,name:l.match?l.match.name:null,cat:l.match&&l.match.cat||null,g:l.match&&!l.match.sup?l.match.group:null,env:l.match&&l.match.sup&&l.match.pid===l.pid?supEnv(l.match.sup,l.pid):null,group:l.pid?P[l.pid].aisle:l.group,extra:!!(l.food&&!(l.pid&&inList.has(l.pid)))}));
+  const t={id:uid("t"),at:todayISO(),date,m:dest.m,list:dest.key,super:tk.super||"otro",store:tk.store||"",total:tk.total,food:Math.round(lines.filter(l=>l.food).reduce((s,l)=>s+l.amount,0)*100)/100,lines};
   S.tickets.push(t);
   if(S.ticketSkip)delete S.ticketSkip[dest.m+"|"+dest.key];
   reportTicketPrices(t);
@@ -498,7 +498,7 @@ function spendingOf(m){
 }
 function spendingHTML(m){
   const sp=spendingOf(m);
-  let h=`<div class="card"><h2>Tickets</h2><button class="btn wide" id="tkScan">${ico("receipt")} Subir un ticket (foto, captura o PDF)</button>`;
+  let h=`<div class="card"><h2>Tickets</h2><button class="btn wide" id="tkScan">${ico("receipt")} Subir un ticket (foto, captura o PDF)</button><button class="btn ghost wide" id="tkAll" style="margin-top:6px">${ico("chart-bar")} Todos tus tickets e informe del mes</button>`;
   if(!sp)return h+`<p class="small muted">Sube tus tickets (foto, captura o PDF) y verás en qué se va el dinero. Lo que no es comida se descarta solo.</p></div>`;
   const max=sp.groups[0][1];
   h+=`<p style="margin-top:10px">${sp.tickets} ${sp.tickets===1?"ticket":"tickets"} · comida <b>${eur(sp.food)}</b>${sp.non?` · no comida (no cuenta) ${eur(sp.non)}`:""}</p>
@@ -511,6 +511,7 @@ function spendingHTML(m){
 }
 function bindSpending(){
   const b=document.getElementById("tkScan");if(b)b.onclick=()=>openTicketScan(true);
+  document.getElementById("tkAll")?.addEventListener("click",()=>{tab="tickets";render();scrollTo(0,0)});
   document.querySelectorAll("[data-tkdel]").forEach(x=>x.onclick=()=>{if(!confirm("¿Borrar este ticket?"))return;
     const t=S.tickets.find(t=>t.id===x.dataset.tkdel);S.tickets=S.tickets.filter(y=>y!==t);
     const k=t.m+"|"+t.list,rest=S.tickets.filter(y=>y.m===t.m&&y.list===t.list);if(rest.length)S.spent[k]=rest.reduce((s,y)=>s+y.food,0);else delete S.spent[k];

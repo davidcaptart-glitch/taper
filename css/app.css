@@ -1119,3 +1119,15 @@ details.aisle{margin-top:10px}
 .psh{font-size:1rem;margin:14px 0 6px}
 .sing{margin:10px 0;background:var(--surface);border-radius:16px;padding:10px 12px;box-shadow:var(--sh-1)}
 .sing summary{cursor:pointer}.sing .fixed small{display:block}
+
+/* Tus tickets: historial e informe */
+.tkmonth{justify-content:space-between;margin:12px 0 6px}.tkmonth b{text-transform:capitalize}
+.tkf{display:flex;flex-direction:column;gap:8px;margin:8px 0}
+.tkday{font-size:.9rem;margin:16px 0 6px;color:var(--muted)}
+.tkc{background:var(--surface);border-radius:16px;padding:12px 14px;box-shadow:var(--sh-1);margin-bottom:8px}
+.tkc>summary{display:flex;justify-content:space-between;gap:10px;align-items:center;cursor:pointer;list-style:none}
+.tkc>summary::-webkit-details-marker{display:none}
+.tkc>summary small{display:block;color:var(--muted);font-size:.75rem;font-weight:400}
+.tkl{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-top:1px solid var(--line);font-size:.9rem}
+.tkl small{display:block;color:var(--muted);font-size:.72rem}
+.spbar.rep{grid-template-columns:minmax(7em,10em) 1fr auto}.spbar.rep b{text-align:right}.spbar b small{display:block;font-weight:600;font-size:.72rem}

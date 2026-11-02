@@ -944,6 +944,16 @@
         "En cada paso, las cantidades exactas para todas las raciones y tápers: «Usa: 9 huevos · 450 g de calabacín», el arroz también en vasos y el ajo en dientes.",
         "Al terminar un plato (o al repartirlo en tápers) se descuenta de la despensa en ese momento."
       ]
+    },
+    {
+      "version": 118,
+      "fecha": "2026-11-02",
+      "titulo": "Tus tickets e informe del mes",
+      "cambios": [
+        "Nueva pantalla «Tus tickets» (en la Despensa y en Compra › Gasto y resumen): todos los tickets guardados, agrupados por día, con cada línea y su tipo.",
+        "Filtra por el día en que lo subiste o por el día de la compra, por un día concreto, por supermercado o buscando un producto o una tienda.",
+        "«Informe del mes»: cuánto has gastado, en comida y en lo demás, y en qué se va el dinero por tipo: fruta y verdura, carne y pescado, lácteos, despensa… y también limpieza, higiene, bebé, mascotas, bolsas o envío. Con lo que ha cambiado respecto al mes anterior, lo que más has comprado y dónde."
+      ]
     }
   ]
 }
