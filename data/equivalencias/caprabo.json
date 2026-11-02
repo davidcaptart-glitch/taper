@@ -1,0 +1,1039 @@
+{
+  "super": "caprabo",
+  "comprobado": "2026-11-02",
+  "productos": {
+    "arroz": {
+      "ref": "300434",
+      "nombre": "Arroz extra EROSKI basic, paquete 1 kg",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/300434-x/"
+    },
+    "pasta": {
+      "ref": "349183",
+      "nombre": "Macarrones EROSKI basic, paquete 1 kg",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/349183-x/"
+    },
+    "espaguetis": {
+      "ref": "367391",
+      "nombre": "Spaghetti EROSKI basic, paquete 500 g",
+      "envase": 500,
+      "url": "https://www.capraboacasa.com/es/productdetail/367391-x/"
+    },
+    "cuscus": {
+      "ref": "24300741",
+      "nombre": "Cous cous bio EROSKI BIO/ECO, caja 500 g",
+      "envase": 500,
+      "url": "https://www.capraboacasa.com/es/productdetail/24300741-x/"
+    },
+    "lentejas": {
+      "ref": "25948431",
+      "nombre": "Lentejas cocidas EROSKI, frasco 400 g",
+      "envase": 400,
+      "url": "https://www.capraboacasa.com/es/productdetail/25948431-x/"
+    },
+    "garbanzos": {
+      "ref": "25948423",
+      "nombre": "Garbanzo cocido EROSKI, frasco 400 g",
+      "envase": 400,
+      "url": "https://www.capraboacasa.com/es/productdetail/25948423-x/"
+    },
+    "alubias": {
+      "ref": "25948407",
+      "nombre": "Alubia blanca cocida EROSKI, frasco 400 g",
+      "envase": 400,
+      "url": "https://www.capraboacasa.com/es/productdetail/25948407-x/"
+    },
+    "tomate_tri": {
+      "ref": "320267",
+      "nombre": "Tomate triturado EROSKI basic, lata 800 g",
+      "envase": 800,
+      "url": "https://www.capraboacasa.com/es/productdetail/320267-x/"
+    },
+    "tomate_frito": {
+      "ref": "316216",
+      "nombre": "Tomate frito EROSKI, frasco 550 g",
+      "envase": 550,
+      "url": "https://www.capraboacasa.com/es/productdetail/316216-x/"
+    },
+    "atun": {
+      "ref": "26994376",
+      "nombre": "Atún claro en aceite de girasol EROSKI, pack 3x70 g",
+      "envase": 210,
+      "url": "https://www.capraboacasa.com/es/productdetail/26994376-x/"
+    },
+    "coco": {
+      "ref": "22520217",
+      "nombre": "Leche de coco TERRA SANA, lata 400 ml",
+      "envase": 400,
+      "url": "https://www.capraboacasa.com/es/productdetail/22520217-x/"
+    },
+    "maiz": {
+      "ref": "22578157",
+      "nombre": "Maíz dulce EROSKI, pack 3x140 g",
+      "envase": 420,
+      "url": "https://www.capraboacasa.com/es/productdetail/22578157-x/"
+    },
+    "tortillas": {
+      "ref": "24552002",
+      "nombre": "Tortillas de trigo EROSKI, paquete 320 g",
+      "envase": 8,
+      "url": "https://www.capraboacasa.com/es/productdetail/24552002-x/",
+      "aprox": true
+    },
+    "cebolla": {
+      "ref": "1934785",
+      "nombre": "Cebolla blanca Buti EROSKI, malla 1 kg",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/1934785-x/"
+    },
+    "patata": {
+      "ref": "7114903",
+      "nombre": "Patata común EROSKI, malla 5 kg",
+      "envase": 5000,
+      "url": "https://www.capraboacasa.com/es/productdetail/7114903-x/"
+    },
+    "boniato": {
+      "ref": "179481",
+      "nombre": "Boniato, al peso, compra mínima 1 kg",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/179481-x/",
+      "aprox": true
+    },
+    "ajo": {
+      "ref": "26201855",
+      "nombre": "Ajo, malla 250 g",
+      "envase": 250,
+      "url": "https://www.capraboacasa.com/es/productdetail/26201855-x/"
+    },
+    "pechuga": {
+      "ref": "19230580",
+      "nombre": "Pechuga de pollo fileteada extrafina EROSKI, bandeja aprox. 450 g",
+      "envase": 450,
+      "url": "https://www.capraboacasa.com/es/productdetail/19230580-x/",
+      "aprox": true
+    },
+    "picada": {
+      "ref": "18960674",
+      "nombre": "Picada mixta cerdo-vacuno burger meat XXL EROSKI, bandeja 1 kg",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/18960674-x/"
+    },
+    "picada_pollo": {
+      "ref": "26527705",
+      "nombre": "Picada de pollo EROSKI, bandeja 500 g",
+      "envase": 500,
+      "url": "https://www.capraboacasa.com/es/productdetail/26527705-x/"
+    },
+    "lomo": {
+      "ref": "11033040",
+      "nombre": "Lomo extrafino de cerdo, bandeja aprox. 340 g",
+      "envase": 340,
+      "url": "https://www.capraboacasa.com/es/productdetail/11033040-x/",
+      "aprox": true
+    },
+    "burger": {
+      "ref": "22396832",
+      "nombre": "Hamburguesa de pollo EROSKI, bandeja 360 g",
+      "envase": 4,
+      "url": "https://www.capraboacasa.com/es/productdetail/22396832-x/",
+      "aprox": true
+    },
+    "salmon": {
+      "ref": "27501089",
+      "nombre": "Supremas de salmón ASC apto consumo crudo KOLD FIN, sobre 250 g",
+      "envase": 250,
+      "url": "https://www.capraboacasa.com/es/productdetail/27501089-x/"
+    },
+    "merluza": {
+      "ref": "13116058",
+      "nombre": "Filete de merluza sin piel EROSKI BASIC, bolsa 900 g",
+      "envase": 900,
+      "url": "https://www.capraboacasa.com/es/productdetail/13116058-x/"
+    },
+    "gambas": {
+      "ref": "17816141",
+      "nombre": "Gamba pelada mediana EROSKI BASIC, bolsa 320 g",
+      "envase": 320,
+      "url": "https://www.capraboacasa.com/es/productdetail/17816141-x/"
+    },
+    "calamar": {
+      "ref": "26810887",
+      "nombre": "Calamar troceado EROSKI, bolsa 450 g",
+      "envase": 450,
+      "url": "https://www.capraboacasa.com/es/productdetail/26810887-x/"
+    },
+    "brocoli": {
+      "ref": "25904806",
+      "nombre": "Brocoli EROSKI, bolsa 1 kg",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/25904806-x/"
+    },
+    "espinacas": {
+      "ref": "25903402",
+      "nombre": "Espinacas cortadas FINDUS, bolsa 400 g",
+      "envase": 400,
+      "url": "https://www.capraboacasa.com/es/productdetail/25903402-x/"
+    },
+    "judias": {
+      "ref": "19519115",
+      "nombre": "Judías verdes redondas EROSKI, bolsa 1 kg",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/19519115-x/"
+    },
+    "salteado": {
+      "ref": "8555559",
+      "nombre": "Salteado de judía-berenjena-zanahoria EROSKI, bolsa 450 g",
+      "envase": 450,
+      "url": "https://www.capraboacasa.com/es/productdetail/8555559-x/"
+    },
+    "guisantes": {
+      "ref": "19519073",
+      "nombre": "Guisante EROSKI, bolsa 1 kg",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/19519073-x/"
+    },
+    "huevos": {
+      "ref": "19550037",
+      "nombre": "Huevo fresco L suelo Cataluña EROSKI, cartón 1 docena",
+      "envase": 12,
+      "url": "https://www.capraboacasa.com/es/productdetail/19550037-x/"
+    },
+    "pimiento": {
+      "ref": "26794008",
+      "nombre": "Pimiento lamuyo rojo, al peso, compra mínima 500 g",
+      "envase": 500,
+      "url": "https://www.capraboacasa.com/es/productdetail/26794008-x/",
+      "aprox": true
+    },
+    "calabacin": {
+      "ref": "26794016",
+      "nombre": "Calabacín verde, al peso, compra mínima 500 g",
+      "envase": 500,
+      "url": "https://www.capraboacasa.com/es/productdetail/26794016-x/",
+      "aprox": true
+    },
+    "zanahoria": {
+      "ref": "4501508",
+      "nombre": "Zanahoria EROSKI, bolsa 1 kg",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/4501508-x/"
+    },
+    "tomate": {
+      "ref": "63016",
+      "nombre": "Tomate de Pera, al peso, compra mínima 500 g",
+      "envase": 500,
+      "url": "https://www.capraboacasa.com/es/productdetail/63016-x/",
+      "aprox": true
+    },
+    "ensalada": {
+      "ref": "18297986",
+      "nombre": "Ensalada 4 estaciones EROSKI, bolsa 250 g",
+      "envase": 250,
+      "url": "https://www.capraboacasa.com/es/productdetail/18297986-x/"
+    },
+    "champi": {
+      "ref": "1404",
+      "nombre": "Champiñón laminado EROSKI, bandeja 250 g",
+      "envase": 250,
+      "url": "https://www.capraboacasa.com/es/productdetail/1404-x/"
+    },
+    "limon": {
+      "ref": "10935534",
+      "nombre": "Limón, malla 1 kg",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/10935534-x/"
+    },
+    "yogur": {
+      "ref": "4810149",
+      "nombre": "Yogur natural EROSKI BASIC, pack 8x125 g",
+      "envase": 8,
+      "url": "https://www.capraboacasa.com/es/productdetail/4810149-x/"
+    },
+    "pan_rallado": {
+      "ref": "11798063",
+      "nombre": "Pan rallado EROSKI BASIC, paquete 750 g",
+      "envase": 750,
+      "url": "https://www.capraboacasa.com/es/productdetail/11798063-x/"
+    },
+    "jamon": {
+      "ref": "16845380",
+      "nombre": "Jamón cocido extra EROSKI MAESTRO MAESTRO, sobre 200 g",
+      "envase": 200,
+      "url": "https://www.capraboacasa.com/es/productdetail/16845380-x/"
+    },
+    "fideos": {
+      "ref": "2685840",
+      "nombre": "Fideo grueso EROSKI, paquete 500 g",
+      "envase": 500,
+      "url": "https://www.capraboacasa.com/es/productdetail/2685840-x/"
+    },
+    "caldo_pollo": {
+      "ref": "27187707",
+      "nombre": "Caldo de pollo EROSKI, brik 1 litro",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/27187707-x/"
+    },
+    "caldo_pescado": {
+      "ref": "8581928",
+      "nombre": "Caldo de pescado EROSKI, brik 1 litro",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/8581928-x/"
+    },
+    "pavo": {
+      "ref": "5848916",
+      "nombre": "Filete de pechuga de pavo EROSKI, bandeja al peso aprox. 550 g",
+      "envase": 550,
+      "url": "https://www.capraboacasa.com/es/productdetail/5848916-x/",
+      "aprox": true
+    },
+    "fideos_arroz": {
+      "ref": "11323110",
+      "nombre": "Fideos de arroz GO-TAN, paquete 250 g",
+      "envase": 250,
+      "url": "https://www.capraboacasa.com/es/productdetail/11323110-x/"
+    },
+    "solomillo": {
+      "ref": "2946119",
+      "nombre": "Solomillo de cerdo al vacío, sobre aprox. 500 g",
+      "envase": 500,
+      "url": "https://www.capraboacasa.com/es/productdetail/2946119-x/",
+      "aprox": true
+    },
+    "alubias_rojas": {
+      "ref": "11851607",
+      "nombre": "Alubia roja cocida LUENGO, frasco 400 g",
+      "envase": 400,
+      "url": "https://www.capraboacasa.com/es/productdetail/11851607-x/"
+    },
+    "lasana": {
+      "ref": "19640317",
+      "nombre": "Placas precocidas para lasaña EROSKI, caja 250 g",
+      "envase": 250,
+      "url": "https://www.capraboacasa.com/es/productdetail/19640317-x/"
+    },
+    "bacalao": {
+      "ref": "26787630",
+      "nombre": "Filete de bacalao congelado EROSKI, bandeja 360 g",
+      "envase": 360,
+      "url": "https://www.capraboacasa.com/es/productdetail/26787630-x/"
+    },
+    "teriyaki": {
+      "ref": "22311468",
+      "nombre": "Salsa teriyaki BLUE DRAGON, frasco 150 ml",
+      "envase": 150,
+      "url": "https://www.capraboacasa.com/es/productdetail/22311468-x/"
+    },
+    "nata": {
+      "ref": "27368190",
+      "nombre": "Nata para cocinar textura espesa ASTURIANA, brik 500 ml",
+      "envase": 500,
+      "url": "https://www.capraboacasa.com/es/productdetail/27368190-x/"
+    },
+    "mostaza": {
+      "ref": "382226",
+      "nombre": "Mostaza de Dijon MAILLE, frasco 215 g",
+      "envase": 215,
+      "url": "https://www.capraboacasa.com/es/productdetail/382226-x/"
+    },
+    "edamame": {
+      "ref": "23492341",
+      "nombre": "Edamame  LA SIRENA, bolsa 400 g",
+      "envase": 400,
+      "url": "https://www.capraboacasa.com/es/productdetail/23492341-x/"
+    },
+    "esparragos": {
+      "ref": "8521759",
+      "nombre": "Espárrago verde fino, manojo 250 g",
+      "envase": 250,
+      "url": "https://www.capraboacasa.com/es/productdetail/8521759-x/"
+    },
+    "bonito": {
+      "ref": "1391739",
+      "nombre": "Bonito del norte en aceite de oliva EROSKI, frasco 400 g",
+      "envase": 400,
+      "url": "https://www.capraboacasa.com/es/productdetail/1391739-x/"
+    },
+    "caballa": {
+      "ref": "26015693",
+      "nombre": "Caballa del sur en aceite de girasol EROSKI, lata 85 g",
+      "envase": 85,
+      "url": "https://www.capraboacasa.com/es/productdetail/26015693-x/"
+    },
+    "sardinas": {
+      "ref": "2294171",
+      "nombre": "Sardina en aceite de oliva 3/5 piezas EROSKI, lata 115 g",
+      "envase": 115,
+      "url": "https://www.capraboacasa.com/es/productdetail/2294171-x/"
+    },
+    "pan_integral": {
+      "ref": "22444046",
+      "nombre": "Pan de molde integral con corteza EROSKI, paquete 460 g",
+      "envase": 16,
+      "url": "https://www.capraboacasa.com/es/productdetail/22444046-x/",
+      "aprox": true
+    },
+    "langostinos": {
+      "ref": "25268434",
+      "nombre": "Langostino vannamei pelado crudo PESCANOVA, bandeja 180 g",
+      "envase": 180,
+      "url": "https://www.capraboacasa.com/es/productdetail/25268434-x/"
+    },
+    "hummus": {
+      "ref": "26460402",
+      "nombre": "Hummus EROSKI BASIC, tarrina 240 g",
+      "envase": 240,
+      "url": "https://www.capraboacasa.com/es/productdetail/26460402-x/"
+    },
+    "berenjena": {
+      "ref": "26793992",
+      "nombre": "Berenjena negra, al peso, compra mínima 500 g",
+      "envase": 500,
+      "url": "https://www.capraboacasa.com/es/productdetail/26793992-x/",
+      "aprox": true
+    },
+    "quinoa": {
+      "ref": "19100874",
+      "nombre": "Vasito de quinoa 100% BRILLANTE, pack 2x125 g",
+      "envase": 250,
+      "url": "https://www.capraboacasa.com/es/productdetail/19100874-x/"
+    },
+    "dorada": {
+      "ref": "26810861",
+      "nombre": "Dorada en filete con piel y sin espinas EROSKI, sobre 180 g",
+      "envase": 180,
+      "url": "https://www.capraboacasa.com/es/productdetail/26810861-x/"
+    },
+    "copos_maiz": {
+      "ref": "23116858",
+      "nombre": "Corn flakes EROSKI BASIC, caja 500 g",
+      "envase": 500,
+      "url": "https://www.capraboacasa.com/es/productdetail/23116858-x/"
+    },
+    "pesto": {
+      "ref": "27268515",
+      "nombre": "Pesto genovese EROSKI, frasco 190 g",
+      "envase": 190,
+      "url": "https://www.capraboacasa.com/es/productdetail/27268515-x/"
+    },
+    "salchichas": {
+      "ref": "206995",
+      "nombre": "Salchichas de pollo OSCAR MAYER TODO AVE, sobre 200 g",
+      "envase": 200,
+      "url": "https://www.capraboacasa.com/es/productdetail/206995-x/"
+    },
+    "pina": {
+      "ref": "8544769",
+      "nombre": "Piña en rodaja en su jugo EROSKI, pack 3x137 g",
+      "envase": 411,
+      "url": "https://www.capraboacasa.com/es/productdetail/8544769-x/"
+    },
+    "leche": {
+      "ref": "26084368",
+      "nombre": "Leche semidesnatada BOMILK, brik 1 litro",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/26084368-x/"
+    },
+    "calabaza": {
+      "ref": "23689490",
+      "nombre": "Calabaza limpia en trozos EROSKI, bolsa 750 g",
+      "envase": 750,
+      "url": "https://www.capraboacasa.com/es/productdetail/23689490-x/"
+    },
+    "gazpacho": {
+      "ref": "26092049",
+      "nombre": "Gazpacho EROSKI BASIC, brik 1 litro",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/26092049-x/"
+    },
+    "anacardos": {
+      "ref": "23245947",
+      "nombre": "Anacardo crudo EROSKI, bolsa 200 g",
+      "envase": 200,
+      "url": "https://www.capraboacasa.com/es/productdetail/23245947-x/"
+    },
+    "feta": {
+      "ref": "27689058",
+      "nombre": "Queso Feta DO PATROS, tarrina 150 g",
+      "envase": 150,
+      "url": "https://www.capraboacasa.com/es/productdetail/27689058-x/"
+    },
+    "manzana": {
+      "ref": "24918120",
+      "nombre": "Manzana Golden, bolsa 1,5 kg",
+      "envase": 1500,
+      "url": "https://www.capraboacasa.com/es/productdetail/24918120-x/",
+      "aprox": true
+    },
+    "pan_burger": {
+      "ref": "15700891",
+      "nombre": "Pan hamburguesa Maxiburguers EROSKI, 4 unid., paquete 300 g",
+      "envase": 4,
+      "url": "https://www.capraboacasa.com/es/productdetail/15700891-x/"
+    },
+    "pan_barra": {
+      "ref": "587352",
+      "nombre": "Baguette, 220 g",
+      "envase": 220,
+      "url": "https://www.capraboacasa.com/es/productdetail/587352-x/"
+    },
+    "avena": {
+      "ref": "26747618",
+      "nombre": "Copos de avena integrales suaves EROSKI, paquete 500 g",
+      "envase": 500,
+      "url": "https://www.capraboacasa.com/es/productdetail/26747618-x/"
+    },
+    "platano": {
+      "ref": "14382832",
+      "nombre": "Banana, al peso, compra mínima 1 kg",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/14382832-x/",
+      "aprox": true
+    },
+    "naranja": {
+      "ref": "1537",
+      "nombre": "Naranja para postre, al peso, compra mínima 1 kg",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/1537-x/",
+      "aprox": true
+    },
+    "mandarina": {
+      "ref": "6155",
+      "nombre": "Mandarina, malla 1 kg",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/6155-x/"
+    },
+    "kiwi": {
+      "ref": "12063319",
+      "nombre": "Kiwi Zespri Green, al peso, compra mínima 500 g",
+      "envase": 500,
+      "url": "https://www.capraboacasa.com/es/productdetail/12063319-x/",
+      "aprox": true
+    },
+    "pera": {
+      "ref": "19239862",
+      "nombre": "Pera Conferencia de Cataluña, al peso, compra mínima 1 kg",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/19239862-x/",
+      "aprox": true
+    },
+    "aguacate": {
+      "ref": "18374611",
+      "nombre": "Aguacate, al peso, compra mínima 500 g",
+      "envase": 500,
+      "url": "https://www.capraboacasa.com/es/productdetail/18374611-x/",
+      "aprox": true
+    },
+    "pepino": {
+      "ref": "90514",
+      "nombre": "Pepino negro, al peso, compra mínima 500 g",
+      "envase": 500,
+      "url": "https://www.capraboacasa.com/es/productdetail/90514-x/",
+      "aprox": true
+    },
+    "fresas": {
+      "ref": "27117977",
+      "nombre": "Fresas EROSKI, bolsa 300 g",
+      "envase": 300,
+      "url": "https://www.capraboacasa.com/es/productdetail/27117977-x/"
+    },
+    "frutos_rojos": {
+      "ref": "27117944",
+      "nombre": "Frutos rojos EROSKI, bolsa 300 g",
+      "envase": 300,
+      "url": "https://www.capraboacasa.com/es/productdetail/27117944-x/"
+    },
+    "queso_batido": {
+      "ref": "26711028",
+      "nombre": "Queso fresco batido 0% ASTURIANA, tarrina 400 g",
+      "envase": 400,
+      "url": "https://www.capraboacasa.com/es/productdetail/26711028-x/"
+    },
+    "queso_fresco": {
+      "ref": "937243",
+      "nombre": "Queso fresco natural BURGO DE ARIAS, pack 3x72 g",
+      "envase": 216,
+      "url": "https://www.capraboacasa.com/es/productdetail/937243-x/"
+    },
+    "queso_lonchas": {
+      "ref": "26620781",
+      "nombre": "Queso tierno EROSKI, lonchas, bandeja 200 g",
+      "envase": 200,
+      "url": "https://www.capraboacasa.com/es/productdetail/26620781-x/"
+    },
+    "pavo_fiambre": {
+      "ref": "26527812",
+      "nombre": "Pechuga de pavo ELPOZO, lonchas, bandeja 120 g",
+      "envase": 120,
+      "url": "https://www.capraboacasa.com/es/productdetail/26527812-x/"
+    },
+    "serrano": {
+      "ref": "6002067",
+      "nombre": "Jamón serrano EROSKI, sobre 150 g",
+      "envase": 150,
+      "url": "https://www.capraboacasa.com/es/productdetail/6002067-x/"
+    },
+    "kefir": {
+      "ref": "26715508",
+      "nombre": "Kéfir líquido 0% natural EROSKI, botella 250 g",
+      "envase": 250,
+      "url": "https://www.capraboacasa.com/es/productdetail/26715508-x/"
+    },
+    "crema_cacahuete": {
+      "ref": "24978785",
+      "nombre": "Crema de cacahuete EROSKI, bote 400 g",
+      "envase": 400,
+      "url": "https://www.capraboacasa.com/es/productdetail/24978785-x/"
+    },
+    "cacao": {
+      "ref": "15334279",
+      "nombre": "Cacao puro VALOR, lata 250 g",
+      "envase": 250,
+      "url": "https://www.capraboacasa.com/es/productdetail/15334279-x/"
+    },
+    "miel": {
+      "ref": "6300669",
+      "nombre": "Miel de panal cero goteo EROSKI, dosificador 500 g",
+      "envase": 500,
+      "url": "https://www.capraboacasa.com/es/productdetail/6300669-x/"
+    },
+    "mermelada": {
+      "ref": "20345492",
+      "nombre": "Confitura de fresa HERO DIET, frasco 280 g",
+      "envase": 280,
+      "url": "https://www.capraboacasa.com/es/productdetail/20345492-x/"
+    },
+    "nueces": {
+      "ref": "27261528",
+      "nombre": "Nuez mondada EROSKI, bolsa 200 g",
+      "envase": 200,
+      "url": "https://www.capraboacasa.com/es/productdetail/27261528-x/"
+    },
+    "pasas": {
+      "ref": "290585",
+      "nombre": "Pasas sultana EROSKI, bolsa 250 g",
+      "envase": 250,
+      "url": "https://www.capraboacasa.com/es/productdetail/290585-x/"
+    },
+    "chia": {
+      "ref": "23157563",
+      "nombre": "Semillas de chia EROSKI BIO, bolsa 250 g",
+      "envase": 250,
+      "url": "https://www.capraboacasa.com/es/productdetail/23157563-x/"
+    },
+    "tortitas_arroz": {
+      "ref": "23350309",
+      "nombre": "Tortita de arroz EROSKI, paquete 130 g",
+      "envase": 130,
+      "url": "https://www.capraboacasa.com/es/productdetail/23350309-x/"
+    },
+    "tofu": {
+      "ref": "24563223",
+      "nombre": "Tofú fresco EROSKI VEGGIE, paquete 250 g",
+      "envase": 250,
+      "url": "https://www.capraboacasa.com/es/productdetail/24563223-x/"
+    },
+    "soja_texturizada": {
+      "ref": "23466162",
+      "nombre": "Soja texturizada LUENGO, paquete 200 g",
+      "envase": 200,
+      "url": "https://www.capraboacasa.com/es/productdetail/23466162-x/"
+    },
+    "caldo_verduras": {
+      "ref": "19842566",
+      "nombre": "Caldo de verdura AVECREM, 8 pastillas, caja 80 g",
+      "envase": 8,
+      "url": "https://www.capraboacasa.com/es/productdetail/19842566-x/"
+    },
+    "salsa_soja": {
+      "ref": "768689",
+      "nombre": "Salsa de soja KIKKOMAN, frasco 250 g",
+      "envase": 250,
+      "url": "https://www.capraboacasa.com/es/productdetail/768689-x/"
+    },
+    "harina_garbanzo": {
+      "ref": "24246332",
+      "nombre": "Harina de garbanzo sin gluten HARIMSA, caja 400 g",
+      "envase": 400,
+      "url": "https://www.capraboacasa.com/es/productdetail/24246332-x/"
+    },
+    "seitan": {
+      "ref": "26423533",
+      "nombre": "Seitan fresco bio VEGETALIA, sobre 250 g",
+      "envase": 250,
+      "url": "https://www.capraboacasa.com/es/productdetail/26423533-x/"
+    },
+    "bebida_soja": {
+      "ref": "26619809",
+      "nombre": "Bebida vegetal de soja 0% azúcares EROSKI BIO, brik 1 litro",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/26619809-x/"
+    },
+    "harina": {
+      "ref": "362442",
+      "nombre": "Harina de trigo EROSKI BASIC, paquete 1 kg",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/362442-x/"
+    },
+    "coliflor": {
+      "ref": "25904830",
+      "nombre": "Coliflor EROSKI, bolsa 1 kg",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/25904830-x/"
+    },
+    "setas": {
+      "ref": "12264644",
+      "nombre": "Setas mezcla EROSKI, bolsa 450 g",
+      "envase": 450,
+      "url": "https://www.capraboacasa.com/es/productdetail/12264644-x/"
+    },
+    "alcachofa": {
+      "ref": "21835632",
+      "nombre": "Corazones de alcachofa troceados FINDUS, bolsa 300 g",
+      "envase": 300,
+      "url": "https://www.capraboacasa.com/es/productdetail/21835632-x/"
+    },
+    "pan_pita": {
+      "ref": "20141339",
+      "nombre": "Pan de pita griego LA BOULANGERE, 4 uds., paquete 320 g",
+      "envase": 4,
+      "url": "https://www.capraboacasa.com/es/productdetail/20141339-x/"
+    },
+    "aceitunas": {
+      "ref": "22395669",
+      "nombre": "Aceitunas negras en rodajas EROSKI, frasco 85 g",
+      "envase": 85,
+      "url": "https://www.capraboacasa.com/es/productdetail/22395669-x/"
+    },
+    "alcaparras": {
+      "ref": "25583378",
+      "nombre": "Alcaparras en vinagre EROSKI, frasco 80 g",
+      "envase": 80,
+      "url": "https://www.capraboacasa.com/es/productdetail/25583378-x/"
+    },
+    "cacahuetes": {
+      "ref": "25944042",
+      "nombre": "Cacahuete tostado sin sal EROSKI, bolsa 200 g",
+      "envase": 200,
+      "url": "https://www.capraboacasa.com/es/productdetail/25944042-x/"
+    },
+    "masa_empanada": {
+      "ref": "11880531",
+      "nombre": "Masa para empanada BUITONI, paquete 280 g",
+      "envase": 280,
+      "url": "https://www.capraboacasa.com/es/productdetail/11880531-x/"
+    },
+    "pipas_calabaza": {
+      "ref": "25944018",
+      "nombre": "Pipas de calabaza peladas cruda EROSKI, bolsa 150 g",
+      "envase": 150,
+      "url": "https://www.capraboacasa.com/es/productdetail/25944018-x/"
+    },
+    "cogollos": {
+      "ref": "26188482",
+      "nombre": "Cogollos EROSKI, bandeja 3 uds",
+      "envase": 3,
+      "url": "https://www.capraboacasa.com/es/productdetail/26188482-x/"
+    },
+    "tomate_cherry": {
+      "ref": "24940132",
+      "nombre": "Tomate cherry EROSKI, bandeja 500 g",
+      "envase": 500,
+      "url": "https://www.capraboacasa.com/es/productdetail/24940132-x/"
+    },
+    "rucula": {
+      "ref": "11013653",
+      "nombre": "Rúcula EROSKI, bolsa 100 g",
+      "envase": 100,
+      "url": "https://www.capraboacasa.com/es/productdetail/11013653-x/"
+    },
+    "alcachofa_bote": {
+      "ref": "22439236",
+      "nombre": "Corazones de alcachofa sin sal EROSKI, frasco 175 g",
+      "envase": 175,
+      "url": "https://www.capraboacasa.com/es/productdetail/22439236-x/"
+    },
+    "mango": {
+      "ref": "8426736",
+      "nombre": "Mango, pieza al peso aprox. 900 g",
+      "envase": 900,
+      "url": "https://www.capraboacasa.com/es/productdetail/8426736-x/",
+      "aprox": true
+    },
+    "remolacha": {
+      "ref": "91033",
+      "nombre": "Remolacha cocida-pelada EROSKI, bolsa 450 g",
+      "envase": 450,
+      "url": "https://www.capraboacasa.com/es/productdetail/91033-x/"
+    },
+    "piquillo": {
+      "ref": "379479",
+      "nombre": "Pimiento de piquillo entero EROSKI, frasco 225 g",
+      "envase": 225,
+      "url": "https://www.capraboacasa.com/es/productdetail/379479-x/"
+    },
+    "pizza_jyq": {
+      "ref": "505552",
+      "nombre": "Pizza de jamón-queso CASA TARRADELLAS, 1 ud., 405 g",
+      "envase": 1,
+      "url": "https://www.capraboacasa.com/es/productdetail/505552-x/"
+    },
+    "pizza_barbacoa": {
+      "ref": "2633246",
+      "nombre": "Pizza barbacoa CASA TARRADELLAS, 1 ud., 440 g",
+      "envase": 1,
+      "url": "https://www.capraboacasa.com/es/productdetail/2633246-x/"
+    },
+    "pizza_4quesos": {
+      "ref": "500652",
+      "nombre": "Pizza de 4 quesos CASA TARRADELLAS, 1 ud., 390 g",
+      "envase": 1,
+      "url": "https://www.capraboacasa.com/es/productdetail/500652-x/"
+    },
+    "pizza_carbonara": {
+      "ref": "2633238",
+      "nombre": "Pizza carbonara CASA TARRADELLAS, 1 ud., 400 g",
+      "envase": 1,
+      "url": "https://www.capraboacasa.com/es/productdetail/2633238-x/"
+    },
+    "pizza_pepperoni": {
+      "ref": "1439124",
+      "nombre": "Pizza de pepperoni CASA TARRADELLAS, 1 ud., 400 g",
+      "envase": 1,
+      "url": "https://www.capraboacasa.com/es/productdetail/1439124-x/"
+    },
+    "pizza_atunbacon": {
+      "ref": "505677",
+      "nombre": "Pizza de atún-bacón CASA TARRADELLAS, 1 ud., 405 g",
+      "envase": 1,
+      "url": "https://www.capraboacasa.com/es/productdetail/505677-x/"
+    },
+    "pizza_serrana": {
+      "ref": "9780297",
+      "nombre": "Pizza de jamón serrano CASA TARRADELLAS, 1 ud., 390 g",
+      "envase": 1,
+      "url": "https://www.capraboacasa.com/es/productdetail/9780297-x/"
+    },
+    "patatas_fritas": {
+      "ref": "211326",
+      "nombre": "Patata prefrita EROSKI basic, bolsa 1 kg",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/211326-x/"
+    },
+    "pan_brioche": {
+      "ref": "26774331",
+      "nombre": "Burguer brioche ST PIERRE, paquete 250 g",
+      "envase": 4,
+      "url": "https://www.capraboacasa.com/es/productdetail/26774331-x/"
+    },
+    "pan_perrito": {
+      "ref": "15700917",
+      "nombre": "Hot dog EROSKI, 6 uds., paquete 330 g",
+      "envase": 6,
+      "url": "https://www.capraboacasa.com/es/productdetail/15700917-x/"
+    },
+    "frankfurt": {
+      "ref": "17779620",
+      "nombre": "Salchichas Frankfurt EROSKI basic, pack 4x160 g",
+      "envase": 640,
+      "url": "https://www.capraboacasa.com/es/productdetail/17779620-x/"
+    },
+    "cheddar": {
+      "ref": "10841435",
+      "nombre": "Queso Cheddar EROSKI, lonchas, bandeja 200 g",
+      "envase": 200,
+      "url": "https://www.capraboacasa.com/es/productdetail/10841435-x/"
+    },
+    "bacon": {
+      "ref": "24251910",
+      "nombre": "Bacón cocido y ahumado EROSKI BASIC, sobre 220 g",
+      "envase": 220,
+      "url": "https://www.capraboacasa.com/es/productdetail/24251910-x/"
+    },
+    "guanciale": {
+      "ref": "26780098",
+      "nombre": "Tiras de guanciale FERRARINI, bandeja 100 g",
+      "envase": 100,
+      "url": "https://www.capraboacasa.com/es/productdetail/26780098-x/"
+    },
+    "nachos": {
+      "ref": "24551996",
+      "nombre": "Nachos naturales EROSKI, bolsa 150 g",
+      "envase": 150,
+      "url": "https://www.capraboacasa.com/es/productdetail/24551996-x/"
+    },
+    "guacamole": {
+      "ref": "24929135",
+      "nombre": "Guacamole suave EROSKI, tarrina 200 g",
+      "envase": 200,
+      "url": "https://www.capraboacasa.com/es/productdetail/24929135-x/"
+    },
+    "jalapenos": {
+      "ref": "13209846",
+      "nombre": "Jalapeños cortados ZANUY, frasco 225 g",
+      "envase": 225,
+      "url": "https://www.capraboacasa.com/es/productdetail/13209846-x/"
+    },
+    "salsa_barbacoa": {
+      "ref": "25557208",
+      "nombre": "Salsa barbacoa EROSKI, bote 320 g",
+      "envase": 320,
+      "url": "https://www.capraboacasa.com/es/productdetail/25557208-x/"
+    },
+    "san_jacobos": {
+      "ref": "25552258",
+      "nombre": "San jacobo EROSKI BASIC, pack 4x80 g",
+      "envase": 320,
+      "url": "https://www.capraboacasa.com/es/productdetail/25552258-x/"
+    },
+    "masa_pizza": {
+      "ref": "26171926",
+      "nombre": "Masa de pizza finissima maxi BUITONI, caja 350 g",
+      "envase": 350,
+      "url": "https://www.capraboacasa.com/es/productdetail/26171926-x/"
+    },
+    "mozzarella_fresca": {
+      "ref": "10995181",
+      "nombre": "Queso Mozzarella EROSKI, bolsa 125 g",
+      "envase": 125,
+      "url": "https://www.capraboacasa.com/es/productdetail/10995181-x/"
+    },
+    "alas_pollo": {
+      "ref": "19228519",
+      "nombre": "Alas de pollo partidas EROSKI, bandeja aprox. 500 g",
+      "envase": 500,
+      "url": "https://www.capraboacasa.com/es/productdetail/19228519-x/",
+      "aprox": true
+    },
+    "burger_vacuno": {
+      "ref": "20990347",
+      "nombre": "Hamburguesa vacuno gruesa B. Meat EROSKI, 2 uds., bandeja 300 g",
+      "envase": 300,
+      "url": "https://www.capraboacasa.com/es/productdetail/20990347-x/"
+    },
+    "aceite_girasol": {
+      "ref": "377150",
+      "nombre": "Aceite de girasol EROSKI, botella 1 litro",
+      "envase": 1000,
+      "url": "https://www.capraboacasa.com/es/productdetail/377150-x/"
+    },
+    "ketchup": {
+      "ref": "26505891",
+      "nombre": "Ketchup EROSKI, bote 560 g",
+      "envase": 560,
+      "url": "https://www.capraboacasa.com/es/productdetail/26505891-x/"
+    },
+    "mayonesa": {
+      "ref": "15993017",
+      "nombre": "Mayonesa EROSKI, bote 430 ml",
+      "envase": 430,
+      "url": "https://www.capraboacasa.com/es/productdetail/15993017-x/"
+    },
+    "alioli": {
+      "ref": "901330",
+      "nombre": "Salsa alioli EROSKI, bote 300 ml",
+      "envase": 300,
+      "url": "https://www.capraboacasa.com/es/productdetail/901330-x/"
+    },
+    "salsa_yogur": {
+      "ref": "11980521",
+      "nombre": "Salsa de yogur EROSKI, bote 300 g",
+      "envase": 300,
+      "url": "https://www.capraboacasa.com/es/productdetail/11980521-x/"
+    },
+    "relleno_kebab": {
+      "ref": "22837470",
+      "nombre": "Kebab loncheado de pollo asado OZTURK, bolsa 250 g",
+      "envase": 250,
+      "url": "https://www.capraboacasa.com/es/productdetail/22837470-x/"
+    },
+    "tortillas_maxi": {
+      "ref": "15071251",
+      "nombre": "Wrap tortilla ZANUY, 6 unid., paquete 375 g",
+      "envase": 6,
+      "url": "https://www.capraboacasa.com/es/productdetail/15071251-x/"
+    },
+    "chorizo": {
+      "ref": "474056",
+      "nombre": "Chorizo extra dulce PALACIOS, sarta 250 g",
+      "envase": 250,
+      "url": "https://www.capraboacasa.com/es/productdetail/474056-x/"
+    },
+    "mantequilla": {
+      "ref": "24107559",
+      "nombre": "Mantequilla sin sal KERRYGOLD, pastilla 200 g",
+      "envase": 200,
+      "url": "https://www.capraboacasa.com/es/productdetail/24107559-x/"
+    },
+    "grana_padano": {
+      "ref": "16036287",
+      "nombre": "Queso rallado Grana Padano EROSKI SELEQTIA, bolsa 100 g",
+      "envase": 100,
+      "url": "https://www.capraboacasa.com/es/productdetail/16036287-x/"
+    },
+    "pan_molde": {
+      "ref": "22625248",
+      "nombre": "Pan de molde con corteza EROSKI, paquete 460 g",
+      "envase": 16,
+      "url": "https://www.capraboacasa.com/es/productdetail/22625248-x/",
+      "aprox": true
+    },
+    "pepinillos": {
+      "ref": "24139016",
+      "nombre": "Pepinillos en vinagre EROSKI, cubeta 300 g",
+      "envase": 300,
+      "url": "https://www.capraboacasa.com/es/productdetail/24139016-x/"
+    },
+    "salsa_burger": {
+      "ref": "6647002",
+      "nombre": "Salsa burger HELLMANN'S, bocabajo 250 g",
+      "envase": 250,
+      "url": "https://www.capraboacasa.com/es/productdetail/6647002-x/"
+    },
+    "cebolla_frita": {
+      "ref": "25980467",
+      "nombre": "Cebolla frita crujiente CHIQUILÍN, tarrina 130 g",
+      "envase": 130,
+      "url": "https://www.capraboacasa.com/es/productdetail/25980467-x/"
+    },
+    "sazonador_fajitas": {
+      "ref": "919787",
+      "nombre": "Sazonador para fajitas OLD EL PASO, sobre 30 g",
+      "envase": 30,
+      "url": "https://www.capraboacasa.com/es/productdetail/919787-x/"
+    },
+    "calamares_romana": {
+      "ref": "227603",
+      "nombre": "Anillas a la romana EROSKI, bolsa 300 g",
+      "envase": 300,
+      "url": "https://www.capraboacasa.com/es/productdetail/227603-x/"
+    },
+    "jamoncitos": {
+      "ref": "19229079",
+      "nombre": "Jamoncito de pollo formato ahorro XXL EROSKI, bandeja aprox. 800 g",
+      "envase": 800,
+      "url": "https://www.capraboacasa.com/es/productdetail/19229079-x/",
+      "aprox": true
+    }
+  },
+  "sin_equivalente": [
+    "almendras",
+    "burger_pavo",
+    "carcasa_pollo",
+    "crema_soja",
+    "emperador",
+    "gallina",
+    "masa_empanadilla",
+    "muslos",
+    "noquis",
+    "pasta_lentejas",
+    "pizza_frankfurt",
+    "pizza_margarita",
+    "pizza_pollobacon",
+    "queso",
+    "repollo",
+    "tahini",
+    "ternera",
+    "tinta"
+  ]
+}

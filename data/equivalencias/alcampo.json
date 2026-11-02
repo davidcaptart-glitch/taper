@@ -1,0 +1,799 @@
+{
+ "super": "alcampo",
+ "comprobado": "2026-11-02",
+ "productos": {
+  "arroz": {
+   "ref": "0ad9642d-1950-4d20-bbe3-96a11cd942e9",
+   "codigo": "18165",
+   "nombre": "PRODUCTO ALCAMPO Arroz redondo extra paquete de 1 kg.",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-arroz-redondo-extra-paquete-de-1-kg/18165"
+  },
+  "pasta": {
+   "ref": "6bca97e0-99cf-4bf1-9886-90d288a140b3",
+   "codigo": "16539",
+   "nombre": "PRODUCTO ALCAMPO Pasta macarrón paquete de 500 g.",
+   "envase": 500,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-pasta-macarron-paquete-de-500-g/16539"
+  },
+  "espaguetis": {
+   "ref": "3b7f6c9f-4e0e-4fe1-b824-ccde7a13b12d",
+   "codigo": "16542",
+   "nombre": "PRODUCTO ALCAMPO Pasta spaguetti paquete de 500 g.",
+   "envase": 500,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-pasta-spaguetti-paquete-de-500-g/16542"
+  },
+  "lentejas": {
+   "ref": "de6a46cc-b361-4003-ad37-24a6c39303f5",
+   "codigo": "28665",
+   "nombre": "PRODUCTO ALCAMPO Lentejas extra, ya cocidas bote 210 g.",
+   "envase": 210,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-lentejas-extra-ya-cocidas-bote-210-g/28665"
+  },
+  "garbanzos": {
+   "ref": "a029d4b6-395d-4772-b199-793db33f9fa2",
+   "codigo": "24455",
+   "nombre": "PRODUCTO ALCAMPO Garbanzos extra, cocidos bote 400 g.",
+   "envase": 400,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-garbanzos-extra-cocidos-bote-400-g/24455"
+  },
+  "alubias": {
+   "ref": "e44e867c-d6ee-4ee5-9bac-4aa3aaa5b5d3",
+   "codigo": "24457",
+   "nombre": "PRODUCTO ALCAMPO Alubias blancas (judias) extra, cocidas bote 400 g.",
+   "envase": 400,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-alubias-blancas-judias-extra-cocidas-bote-400-g/24457"
+  },
+  "tomate_tri": {
+   "ref": "f973bc1f-00d8-4304-8d36-17ae5df84ff7",
+   "codigo": "10074",
+   "nombre": "PRODUCTO ALCAMPO Tomate triturado lata de 800 g.",
+   "envase": 800,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-tomate-triturado-lata-de-800-g/10074"
+  },
+  "tomate_frito": {
+   "ref": "763a7531-b45e-4c51-baa8-aa9fa5b22568",
+   "codigo": "26530",
+   "nombre": "PRODUCTO ALCAMPO Tomate frito, elaborado sin gluten frasco de 550 g.",
+   "envase": 550,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-tomate-frito-elaborado-sin-gluten-frasco-de-550-g/26530"
+  },
+  "atun": {
+   "ref": "334e5a98-ad72-4ef6-955e-a0c39c370e1d",
+   "codigo": "22039",
+   "nombre": "PRODUCTO ALCAMPO Atún claro en aceite de girasol pack 3 latas 52 g.",
+   "envase": 156,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-atun-claro-en-aceite-de-girasol-pack-3-latas-52-g/22039"
+  },
+  "maiz": {
+   "ref": "5a2558b5-2e98-4a7d-bb01-203d68053a33",
+   "codigo": "28059",
+   "nombre": "PRODUCTO ALCAMPO Maíz dulce 3 uds x 140 g.",
+   "envase": 420,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-maiz-dulce-3-uds-x-140-g/28059"
+  },
+  "tortillas": {
+   "ref": "d1a178f0-6fd3-4236-95b5-6216f29efe9f",
+   "codigo": "23384",
+   "nombre": "PRODUCTO ALCAMPO Tortillas de trigo 8 uds. 320 g.",
+   "envase": 8,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-tortillas-de-trigo-8-uds-320-g/23384"
+  },
+  "patata": {
+   "ref": "20f1eb3c-c83f-4225-91f9-c0d0ea3f1d88",
+   "codigo": "202272",
+   "nombre": "ALCAMPO CULTIVAMOS LO BUENO Patatas para cocer malla 2 kg.",
+   "envase": 2000,
+   "url": "https://www.compraonline.alcampo.es/products/alcampo-cultivamos-lo-bueno-patatas-para-cocer-malla-2-kg/202272"
+  },
+  "pechuga": {
+   "ref": "abdcdb21-1982-45fa-be5e-7fd00f756085",
+   "codigo": "24024",
+   "nombre": "AUCHAN Pechuga de pollo fileteada 6-8 uds Producto Alcampo.",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-pechuga-de-pollo-fileteada-6-8-uds-producto-alcampo/24024",
+   "precio_por": "kilo",
+   "aprox": true
+  },
+  "muslos": {
+   "ref": "e894d774-0fb6-42ac-9d38-feaf5c35d9a3",
+   "codigo": "42695",
+   "nombre": "ALCAMPO CULTIVAMOS LO BUENO  Escalopes de pollo certificado (contramuslo deshuesado) Bandeja.",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/alcampo-cultivamos-lo-bueno-escalopes-de-pollo-certificado-contramuslo-deshuesado-bandeja/42695",
+   "precio_por": "kilo",
+   "aprox": true
+  },
+  "picada": {
+   "ref": "75b4b3ee-e9b8-4939-82c5-b4db1f55d76d",
+   "codigo": "909820",
+   "nombre": "Bandeja de preparado de carne picada mixta (vacuno-cerdo) ROLER 500 g.",
+   "envase": 500,
+   "url": "https://www.compraonline.alcampo.es/products/bandeja-de-preparado-de-carne-picada-mixta-vacuno-cerdo-roler-500-g/909820"
+  },
+  "lomo": {
+   "ref": "08623f50-bec3-42cc-85df-3ff0d067421f",
+   "codigo": "77351",
+   "nombre": "Filetes de cinta de lomo de cerdo con corte fino.",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/filetes-de-cinta-de-lomo-de-cerdo-con-corte-fino/77351",
+   "precio_por": "kilo",
+   "aprox": true
+  },
+  "burger": {
+   "ref": "ab7b8f0b-2491-413c-aa57-df670b16ad40",
+   "codigo": "524458",
+   "nombre": "ROLER Burger meat de pollo elaboradas sin gluten 6 x 90 g.",
+   "envase": 6,
+   "url": "https://www.compraonline.alcampo.es/products/roler-burger-meat-de-pollo-elaboradas-sin-gluten-6-x-90-g/524458"
+  },
+  "salmon": {
+   "ref": "08435d2c-3845-49e7-961a-8804b1585bce",
+   "codigo": "549980",
+   "nombre": "KRUSTASUR Lomos de salmón sin piel, congelados 2 x 125 g.",
+   "envase": 250,
+   "url": "https://www.compraonline.alcampo.es/products/krustasur-lomos-de-salmon-sin-piel-congelados-2-x-125-g/549980"
+  },
+  "merluza": {
+   "ref": "b64fa533-25a1-4c10-a3a2-ba26a32b4777",
+   "codigo": "67612",
+   "nombre": "AUCHAN Filetes de merluza del cabo, ultracongelados y sin piel 400 g. Producto Alcampo",
+   "envase": 400,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-filetes-de-merluza-del-cabo-ultracongelados-y-sin-piel-400-g-producto-alcampo/67612"
+  },
+  "gambas": {
+   "ref": "6e382603-79da-4eb9-8e50-48bf52126c23",
+   "codigo": "99293",
+   "nombre": "AMURA Gamba pelada cruda, ultracongelada P.N.E 600 g.",
+   "envase": 600,
+   "url": "https://www.compraonline.alcampo.es/products/amura-gamba-pelada-cruda-ultracongelada-p-n-e-600-g/99293"
+  },
+  "brocoli": {
+   "ref": "812f3e25-0fda-40e1-be1b-7b4afb64e9c0",
+   "codigo": "67876",
+   "nombre": "AUCHAN Brócoli seleccionado y ultracongelado 1 Kg. Producto Alcampo",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-brocoli-seleccionado-y-ultracongelado-1-kg-producto-alcampo/67876"
+  },
+  "espinacas": {
+   "ref": "9b9a86b4-4c34-40a7-8ca2-5d074d008e26",
+   "codigo": "20483",
+   "nombre": "PRODUCTO ECONÓMICO ALCAMPO Espinacas ultracongeladas en porciones PRODUCTO ECONÓMICO ALCAMPO 750 g.",
+   "envase": 750,
+   "url": "https://www.compraonline.alcampo.es/products/producto-economico-alcampo-espinacas-ultracongeladas-en-porciones-producto-economico-alcampo-750-g/20483"
+  },
+  "judias": {
+   "ref": "353a32e7-b6eb-418f-962a-4b54ca7ebc04",
+   "codigo": "69554",
+   "nombre": "AUCHAN Judías verdes redondas troceadas y ultracongeladas 1 kg. Producto Alcampo",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-judias-verdes-redondas-troceadas-y-ultracongeladas-1-kg-producto-alcampo/69554"
+  },
+  "guisantes": {
+   "ref": "d66e0f5f-c71e-4d7a-86f2-b0649a38ec58",
+   "codigo": "20463",
+   "nombre": "PRODUCTO ECONÓMICO ALCAMPO Guisantes ultracongelados PRODUCTO ECONÓMICO ALCAMPO 750 g.",
+   "envase": 750,
+   "url": "https://www.compraonline.alcampo.es/products/producto-economico-alcampo-guisantes-ultracongelados-producto-economico-alcampo-750-g/20463"
+  },
+  "huevos": {
+   "ref": "38b00f81-540a-445d-86cd-2a85271e8ac3",
+   "codigo": "804318",
+   "nombre": "AUCHAN Huevos de gallinas sueltas en el gallinero clase L y cat. A 12 uds Producto Alcampo.",
+   "envase": 12,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-huevos-de-gallinas-sueltas-en-el-gallinero-clase-l-y-cat-a-12-uds-producto-alcampo/804318"
+  },
+  "queso": {
+   "ref": "b519c59b-4fb2-4e0f-a7c5-bd56a3b5702a",
+   "codigo": "51626",
+   "nombre": "AUCHAN Queso mozzarella rallado especial pizzas 200 g Producto Alcampo.",
+   "envase": 200,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-queso-mozzarella-rallado-especial-pizzas-200-g-producto-alcampo/51626"
+  },
+  "zanahoria": {
+   "ref": "cc70833d-5e73-476d-a638-9d8ee8604bb9",
+   "codigo": "58166",
+   "nombre": "ALCAMPO CULTIVAMOS LO BUENO Zanahorias tiernas  bandeja de 500 g.",
+   "envase": 500,
+   "url": "https://www.compraonline.alcampo.es/products/alcampo-cultivamos-lo-bueno-zanahorias-tiernas-bandeja-de-500-g/58166"
+  },
+  "tomate": {
+   "ref": "93178364-abe7-46ae-8624-298c056dc1d8",
+   "codigo": "55530",
+   "nombre": "Tomate pera al peso.",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/tomate-pera-al-peso/55530",
+   "precio_por": "kilo",
+   "aprox": true
+  },
+  "ensalada": {
+   "ref": "fa437b4d-3f75-43e0-b573-8b5775f6b4f2",
+   "codigo": "57759",
+   "nombre": "AUCHAN Ensalada maxi 4 estaciones bolsa de 450 g. Producto Alcampo",
+   "envase": 450,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-ensalada-maxi-4-estaciones-bolsa-de-450-g-producto-alcampo/57759"
+  },
+  "champi": {
+   "ref": "65735d79-8188-487f-b7ab-a86c1518c095",
+   "codigo": "57687",
+   "nombre": "ALCAMPO CULTIVAMOS LO BUENO Champiñón laminado  Bandeja de 250 g.",
+   "envase": 250,
+   "url": "https://www.compraonline.alcampo.es/products/alcampo-cultivamos-lo-bueno-champinon-laminado-bandeja-de-250-g/57687"
+  },
+  "limon": {
+   "ref": "adc1908f-a929-4dff-995c-d31ec699799c",
+   "codigo": "57229",
+   "nombre": "Limones, malla 750 g.",
+   "envase": 750,
+   "url": "https://www.compraonline.alcampo.es/products/limones-malla-750-g/57229"
+  },
+  "yogur": {
+   "ref": "5b11180a-726c-4358-8312-c807b4946772",
+   "codigo": "51414",
+   "nombre": "AUCHAN Yogur natural 4 x 125 g. Producto Alcampo",
+   "envase": 4,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-yogur-natural-4-x-125-g-producto-alcampo/51414"
+  },
+  "pan_rallado": {
+   "ref": "5cc9f0a3-baef-40c3-8ae2-dfc2132e7299",
+   "codigo": "804840",
+   "nombre": "PRODUCTO ALCAMPO Pan rallado 750 g.",
+   "envase": 750,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-pan-rallado-750-g/804840"
+  },
+  "jamon": {
+   "ref": "c042d491-5ba7-4100-a506-0f594e095efb",
+   "codigo": "80746",
+   "nombre": "AUCHAN Jamón cocido de categoria extra, cortado en finas lonchas 150 g. Producto Alcampo",
+   "envase": 150,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-jamon-cocido-de-categoria-extra-cortado-en-finas-lonchas-150-g-producto-alcampo/80746"
+  },
+  "caldo_pollo": {
+   "ref": "dc586d1f-ba98-4861-9e0b-17e47fd18ca4",
+   "codigo": "95260",
+   "nombre": "GALLINA BLANCA Caldo de pollo suave brik de 1 l",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/gallina-blanca-caldo-de-pollo-suave-brik-de-1-l/95260"
+  },
+  "caldo_pescado": {
+   "ref": "de361ab4-4b83-4461-a174-16c02a9a384b",
+   "codigo": "95715",
+   "nombre": "GALLINA BLANCA Caldo de pescado brik de 1 l.",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/gallina-blanca-caldo-de-pescado-brik-de-1-l/95715"
+  },
+  "pavo": {
+   "ref": "43b21f61-ac64-436d-b2a1-c1b63881b1ba",
+   "codigo": "24845",
+   "nombre": "AUCHAN Filetes de pechuga de pavo Producto Alcampo.",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-filetes-de-pechuga-de-pavo-producto-alcampo/24845",
+   "precio_por": "kilo",
+   "aprox": true
+  },
+  "fideos_arroz": {
+   "ref": "6f8ac25c-a9a6-4f8c-a92b-4f1a1bccf1fc",
+   "codigo": "207810",
+   "nombre": "TIGER KHAN Pasta fideos de arroz sin gluten TIGER KHAN 250 g.",
+   "envase": 250,
+   "url": "https://www.compraonline.alcampo.es/products/tiger-khan-pasta-fideos-de-arroz-sin-gluten-tiger-khan-250-g/207810"
+  },
+  "solomillo": {
+   "ref": "c9630161-bf38-4032-96ad-1907ed7da882",
+   "codigo": "71153",
+   "nombre": "Solomillo fresco de cerdo blanco.",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/solomillo-fresco-de-cerdo-blanco/71153",
+   "precio_por": "kilo",
+   "aprox": true
+  },
+  "emperador": {
+   "ref": "167d2a43-a922-46a7-893e-efca6d859f46",
+   "codigo": "837854",
+   "nombre": "WOFCO Emperador (pez espada) congelado cortado en rodajas 600 g.",
+   "envase": 600,
+   "url": "https://www.compraonline.alcampo.es/products/wofco-emperador-pez-espada-congelado-cortado-en-rodajas-600-g/837854"
+  },
+  "teriyaki": {
+   "ref": "ee043c6f-f29f-47ca-9e0f-0fb3b3286f71",
+   "codigo": "63785",
+   "nombre": "TIGER KHAN Salsa teriyaki 300 ml.",
+   "envase": 300,
+   "url": "https://www.compraonline.alcampo.es/products/tiger-khan-salsa-teriyaki-300-ml/63785"
+  },
+  "nata": {
+   "ref": "f24bb48a-c3ef-4aab-8439-54bb08cd3213",
+   "codigo": "249379",
+   "nombre": "AUCHAN Nata para cocinar 3 x 200 ml Producto Alcampo.",
+   "envase": 600,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-nata-para-cocinar-3-x-200-ml-producto-alcampo/249379"
+  },
+  "edamame": {
+   "ref": "946b2247-0560-4f44-8dd2-8b25065fff68",
+   "codigo": "794014",
+   "nombre": "LA CUERVA Edamame ultracongelado sin conservantes ni colorantes 300 g.",
+   "envase": 300,
+   "url": "https://www.compraonline.alcampo.es/products/la-cuerva-edamame-ultracongelado-sin-conservantes-ni-colorantes-300-g/794014"
+  },
+  "pan_integral": {
+   "ref": "964fc299-3a70-4019-9fc0-381b2cb0e77e",
+   "codigo": "475429",
+   "nombre": "PRODUCTO ALCAMPO Pan de molde 100% integral de trigo, 0 % azúcares añadidos 460 g.",
+   "envase": 16,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-pan-de-molde-100-integral-de-trigo-0-azucares-anadidos-460-g/475429",
+   "aprox": true
+  },
+  "hummus": {
+   "ref": "15e89bde-d7fd-4394-b192-5cfba81d94cb",
+   "codigo": "728707",
+   "nombre": "PRODUCTO ALCAMPO Hummus de garbanzo vegano 175g",
+   "envase": 175,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-hummus-de-garbanzo-vegano-175g/728707"
+  },
+  "noquis": {
+   "ref": "7347909f-8a51-4f71-99ab-8c6c8c8f49f3",
+   "codigo": "62685",
+   "nombre": "GALLO Pasta ñoquis de patata 400 g.",
+   "envase": 400,
+   "url": "https://www.compraonline.alcampo.es/products/gallo-pasta-noquis-de-patata-400-g/62685"
+  },
+  "pesto": {
+   "ref": "0f9cd93d-4135-4e74-aa82-fcfa944b1664",
+   "codigo": "312946",
+   "nombre": "PRODUCTO ALCAMPO Salsa de pesto verde 185 g.",
+   "envase": 185,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-salsa-de-pesto-verde-185-g/312946"
+  },
+  "salchichas": {
+   "ref": "83e9d495-d0cf-4f6c-8929-5396e340bfcf",
+   "codigo": "579648",
+   "nombre": "MILSABOR Salchichas cocidas mixtas (pavo, pollo y cerdo) con sabor ahumado, tipo Viena 200 g.",
+   "envase": 200,
+   "url": "https://www.compraonline.alcampo.es/products/milsabor-salchichas-cocidas-mixtas-pavo-pollo-y-cerdo-con-sabor-ahumado-tipo-viena-200-g/579648"
+  },
+  "leche": {
+   "ref": "920847ab-0577-4132-a6e2-ad2d5f62f8c3",
+   "codigo": "53549",
+   "nombre": "AUCHAN Leche semidesnatada de vaca 1 l. Producto Alcampo",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-leche-semidesnatada-de-vaca-1-l-producto-alcampo/53549"
+  },
+  "manzana": {
+   "ref": "9c878ad5-703d-4005-9840-f237a2c05e1b",
+   "codigo": "74694",
+   "nombre": "Manzanas golden al peso.",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/manzanas-golden-al-peso/74694",
+   "precio_por": "kilo",
+   "aprox": true
+  },
+  "pan_burger": {
+   "ref": "33b00919-5201-4464-83c7-796e0a8da25a",
+   "codigo": "946871",
+   "nombre": "PRODUCTO ALCAMPO Pan rústico para hamburguesa 4 x 75 g.",
+   "envase": 4,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-pan-rustico-para-hamburguesa-4-x-75-g/946871"
+  },
+  "pan_barra": {
+   "ref": "ce6eb1fb-d446-4e04-8367-51b9ee0b1fb2",
+   "codigo": "78854",
+   "nombre": "Barra de pan común 250 g.",
+   "envase": 250,
+   "url": "https://www.compraonline.alcampo.es/products/barra-de-pan-comun-250-g/78854"
+  },
+  "avena": {
+   "ref": "87e89d56-241d-42fa-a632-f485ed97abd8",
+   "codigo": "15697",
+   "nombre": "PRODUCTO ALCAMPO Copos de avena integrales 500 g.",
+   "envase": 500,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-copos-de-avena-integrales-500-g/15697"
+  },
+  "mandarina": {
+   "ref": "1740c1b8-948c-48c1-b36c-7594ed7ac9b4",
+   "codigo": "57509",
+   "nombre": "Mandarinas malla 1 kg.",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/mandarinas-malla-1-kg/57509"
+  },
+  "kiwi": {
+   "ref": "b14720a8-aa15-4d8d-a333-13d95a0219ea",
+   "codigo": "75101",
+   "nombre": "Kiwis 1 kg.",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/kiwis-1-kg/75101"
+  },
+  "pera": {
+   "ref": "df985d5d-8601-4015-a23c-5928e8c4e4ae",
+   "codigo": "56915",
+   "nombre": "Pera conferencia cesta de 1 kg.",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/pera-conferencia-cesta-de-1-kg/56915"
+  },
+  "aguacate": {
+   "ref": "02ee0db3-f42e-43cb-86bd-0390a2f09981",
+   "codigo": "766535",
+   "nombre": "Aguacate malla de 500 g.",
+   "envase": 500,
+   "url": "https://www.compraonline.alcampo.es/products/aguacate-malla-de-500-g/766535"
+  },
+  "fresas": {
+   "ref": "c9d41c35-d75b-4d7a-831a-ada62dd038f8",
+   "codigo": "801645",
+   "nombre": "LA CUERVA Fresas dulces ultracongeladas y 100% naturales LA CUERVA 300 g.",
+   "envase": 300,
+   "url": "https://www.compraonline.alcampo.es/products/la-cuerva-fresas-dulces-ultracongeladas-y-100-naturales-la-cuerva-300-g/801645"
+  },
+  "frutos_rojos": {
+   "ref": "7ac81e06-c1ef-482f-a60f-1f8dc2c88160",
+   "codigo": "630981",
+   "nombre": "AUCHAN Mezcla de frutos rojos ultracongelados 450 g Producto Alcampo.",
+   "envase": 450,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-mezcla-de-frutos-rojos-ultracongelados-450-g-producto-alcampo/630981"
+  },
+  "queso_batido": {
+   "ref": "a5d6b72e-8a3a-406e-9b58-fa98b1cfdb5f",
+   "codigo": "637752",
+   "nombre": "LA ASTURIANA Queso fresco batido 0% 400g",
+   "envase": 400,
+   "url": "https://www.compraonline.alcampo.es/products/la-asturiana-queso-fresco-batido-0-400g/637752"
+  },
+  "queso_fresco": {
+   "ref": "a321b1c5-06b0-4e2e-a3ef-20d2cb23e176",
+   "codigo": "85269",
+   "nombre": "FLOR DE BURGOS Queso fresco FLOR DE BURGOS tarrina 500 g.",
+   "envase": 500,
+   "url": "https://www.compraonline.alcampo.es/products/flor-de-burgos-queso-fresco-flor-de-burgos-tarrina-500-g/85269"
+  },
+  "queso_lonchas": {
+   "ref": "50d1fefe-f9b9-4bd1-be94-b4493cfcd908",
+   "codigo": "527219",
+   "nombre": "AUCHAN Queso tierno mezcla en lonchas 200 g. Producto Alcampo",
+   "envase": 200,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-queso-tierno-mezcla-en-lonchas-200-g-producto-alcampo/527219"
+  },
+  "pavo_fiambre": {
+   "ref": "cabfb3f3-02f6-453a-90b7-d5240723ac20",
+   "codigo": "80359",
+   "nombre": "AUCHAN Pechuga cocida de pavo, sin gluten y sin lactosa y cortadas en lonchas 200 g. Producto Alcampo",
+   "envase": 200,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-pechuga-cocida-de-pavo-sin-gluten-y-sin-lactosa-y-cortadas-en-lonchas-200-g-producto-alcampo/80359"
+  },
+  "kefir": {
+   "ref": "eaedd5cf-4b35-4006-88df-f0a321ae9abc",
+   "codigo": "95413",
+   "nombre": "PASTORET Kéfir natural de leche de vaca de pasto 500 g.",
+   "envase": 500,
+   "url": "https://www.compraonline.alcampo.es/products/pastoret-kefir-natural-de-leche-de-vaca-de-pasto-500-g/95413"
+  },
+  "crema_cacahuete": {
+   "ref": "3e77158d-875f-4447-b4b1-6c07e5236048",
+   "codigo": "475221",
+   "nombre": "PRODUCTO ALCAMPO Crema de cacahuete (100% cacahuete molido en molino de piedra) 500 g",
+   "envase": 500,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-crema-de-cacahuete-100-cacahuete-molido-en-molino-de-piedra-500-g/475221"
+  },
+  "cacao": {
+   "ref": "136456cf-fae1-4faf-afda-996969c31c15",
+   "codigo": "474465",
+   "nombre": "PRODUCTO ALCAMPO Cacao en polvo puro 100 % cacao 250 g.",
+   "envase": 250,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-cacao-en-polvo-puro-100-cacao-250-g/474465"
+  },
+  "miel": {
+   "ref": "1e6b1813-af89-4e1f-8c63-59e2e97d6217",
+   "codigo": "455932",
+   "nombre": "PRODUCTO ALCAMPO Miel de flores 1 kg.",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-miel-de-flores-1-kg/455932"
+  },
+  "nueces": {
+   "ref": "cddb5abe-a4c5-48ef-a405-aa2ea96080e6",
+   "codigo": "237121",
+   "nombre": "FRUMESA Nueces peladas 150 g.",
+   "envase": 150,
+   "url": "https://www.compraonline.alcampo.es/products/frumesa-nueces-peladas-150-g/237121"
+  },
+  "pasas": {
+   "ref": "7d2de582-93fc-4677-af40-089cd93ee11b",
+   "codigo": "524039",
+   "nombre": "PRODUCTO ALCAMPO Pasas sultanas 200 g.",
+   "envase": 200,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-pasas-sultanas-200-g/524039"
+  },
+  "tortitas_arroz": {
+   "ref": "b7f2a4e7-444c-4749-8be4-83b61e3e6bae",
+   "codigo": "28824",
+   "nombre": "PRODUCTO ALCAMPO Tortitas de arroz AUCHAN 130 gramos.",
+   "envase": 130,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-tortitas-de-arroz-auchan-130-gramos/28824"
+  },
+  "caldo_verduras": {
+   "ref": "c16ec6d4-f70e-44b2-b284-6691e8c2dddd",
+   "codigo": "44019",
+   "nombre": "PRODUCTO ALCAMPO Pastillas de caldo de verduras 12 uds. 120 g.",
+   "envase": 12,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-pastillas-de-caldo-de-verduras-12-uds-120-g/44019"
+  },
+  "salsa_soja": {
+   "ref": "3565fd1f-1170-44ed-a356-5b0f2ef333df",
+   "codigo": "510795",
+   "nombre": "IPPON Salsa de soja receta original 250 ml.",
+   "envase": 250,
+   "url": "https://www.compraonline.alcampo.es/products/ippon-salsa-de-soja-receta-original-250-ml/510795"
+  },
+  "harina_garbanzo": {
+   "ref": "256bdcb0-df71-4dc8-9e00-1f8596a454cf",
+   "codigo": "625169",
+   "nombre": "DON PEDRO Harina de garbanzo 400 gr",
+   "envase": 400,
+   "url": "https://www.compraonline.alcampo.es/products/don-pedro-harina-de-garbanzo-400-gr/625169"
+  },
+  "harina": {
+   "ref": "ce5a6148-5f7a-48c7-a5da-f1b32981dd49",
+   "codigo": "13643",
+   "nombre": "PRODUCTO ECONÓMICO ALCAMPO Harina de trigo 1 kg",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/producto-economico-alcampo-harina-de-trigo-1-kg/13643"
+  },
+  "coliflor": {
+   "ref": "99f041c9-f2f2-4f34-8f30-7909390e74ca",
+   "codigo": "69556",
+   "nombre": "AUCHAN Coliflor seleccionada y ultracongelada 1 Kg. Producto Alcampo",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-coliflor-seleccionada-y-ultracongelada-1-kg-producto-alcampo/69556"
+  },
+  "pan_pita": {
+   "ref": "3a0ad4dc-9db3-4812-8195-622dfe2d629a",
+   "codigo": "99016",
+   "nombre": "NORA Panes de pita 6 uds. 350 g.",
+   "envase": 6,
+   "url": "https://www.compraonline.alcampo.es/products/nora-panes-de-pita-6-uds-350-g/99016"
+  },
+  "masa_empanada": {
+   "ref": "f9ceb259-f736-45a6-a384-46a6f9d2276d",
+   "codigo": "989918",
+   "nombre": "CASA TARRADELLAS Masa fresca cuadrada para elaborar empanadas CASA TARRADELLAS 230 g.",
+   "envase": 230,
+   "url": "https://www.compraonline.alcampo.es/products/casa-tarradellas-masa-fresca-cuadrada-para-elaborar-empanadas-casa-tarradellas-230-g/989918"
+  },
+  "pipas_calabaza": {
+   "ref": "217689e2-fe39-47e7-a044-cf4f259288cf",
+   "codigo": "862100",
+   "nombre": "MEDINA Pipas de calabaza peladas crudas MEDINA Frutos secos crudos 125 g,",
+   "envase": 125,
+   "url": "https://www.compraonline.alcampo.es/products/medina-pipas-de-calabaza-peladas-crudas-medina-frutos-secos-crudos-125-g/862100"
+  },
+  "tomate_cherry": {
+   "ref": "3550171f-9298-40b1-9114-eb97d3a6d8a5",
+   "codigo": "57324",
+   "nombre": "Tomates cherry bandeja de 500 g.",
+   "envase": 500,
+   "url": "https://www.compraonline.alcampo.es/products/tomates-cherry-bandeja-de-500-g/57324"
+  },
+  "rucula": {
+   "ref": "9a256370-7c2d-4285-9752-06b4b7bfd353",
+   "codigo": "57762",
+   "nombre": "AUCHAN Rúcula bolsa de 100 g. Producto Alcampo",
+   "envase": 100,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-rucula-bolsa-de-100-g-producto-alcampo/57762"
+  },
+  "pizza_jyq": {
+   "ref": "0a7d9719-3ee1-46aa-9f1a-fbff9c2dc998",
+   "codigo": "636009",
+   "nombre": "PALACIOS Pizza refrigerada de jamón y queso PALACIOS 330 g.",
+   "envase": 1,
+   "url": "https://www.compraonline.alcampo.es/products/palacios-pizza-refrigerada-de-jamon-y-queso-palacios-330-g/636009"
+  },
+  "pan_brioche": {
+   "ref": "0c4ce5e8-b832-4bbf-b836-64f11c305be8",
+   "codigo": "201319",
+   "nombre": "ST. PIERRE Pan de hamburguesa brioche 4 uds 250 g.",
+   "envase": 4,
+   "url": "https://www.compraonline.alcampo.es/products/st-pierre-pan-de-hamburguesa-brioche-4-uds-250-g/201319"
+  },
+  "pan_perrito": {
+   "ref": "effde82e-6843-4db4-ada8-bbd9e624fe32",
+   "codigo": "28518",
+   "nombre": "PRODUCTO ALCAMPO Pan para perritos calientes (hot dogs)  6 uds. 330 g.",
+   "envase": 6,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-pan-para-perritos-calientes-hot-dogs-6-uds-330-g/28518"
+  },
+  "frankfurt": {
+   "ref": "bc39701a-3f2d-4d91-9586-436caab4a1f0",
+   "codigo": "54326",
+   "nombre": "CAMPOFRÍO Salchichas cocidas tipo Frankfurt, sabor ahumado CAMPOFRÍO 4 x 140 g.",
+   "envase": 560,
+   "url": "https://www.compraonline.alcampo.es/products/campofrio-salchichas-cocidas-tipo-frankfurt-sabor-ahumado-campofrio-4-x-140-g/54326"
+  },
+  "cheddar": {
+   "ref": "87cf80c9-9179-416f-b57b-a8a3874ee3ea",
+   "codigo": "97310",
+   "nombre": "TGT La Bocatería Queso en lonchas Cheddar 200 g.",
+   "envase": 200,
+   "url": "https://www.compraonline.alcampo.es/products/tgt-la-bocateria-queso-en-lonchas-cheddar-200-g/97310"
+  },
+  "bacon": {
+   "ref": "ecf4b12e-cbb1-4a3d-872f-1e2c59e0e332",
+   "codigo": "54130",
+   "nombre": "AUCHAN Bacon cocido ahumado en lonchas 200 g Producto Alcampo.",
+   "envase": 200,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-bacon-cocido-ahumado-en-lonchas-200-g-producto-alcampo/54130"
+  },
+  "guacamole": {
+   "ref": "ac9eed63-51a5-49d5-97ba-bd49aa44a05b",
+   "codigo": "569085",
+   "nombre": "PRODUCTO ALCAMPO Guacamole suave elaborado con aguacates frescos 200 g.",
+   "envase": 200,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-guacamole-suave-elaborado-con-aguacates-frescos-200-g/569085"
+  },
+  "salsa_barbacoa": {
+   "ref": "eb2e1cf4-165c-4f40-9ac8-24ff766d517f",
+   "codigo": "549279",
+   "nombre": "PRODUCTO ALCAMPO Salsa barbacoa 340 g.",
+   "envase": 340,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-salsa-barbacoa-340-g/549279"
+  },
+  "mozzarella_fresca": {
+   "ref": "bbca48bf-1631-492a-af22-e5db028cf608",
+   "codigo": "53007",
+   "nombre": "AUCHAN Mozzarella fresca 125 g. Producto Alcampo",
+   "envase": 125,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-mozzarella-fresca-125-g-producto-alcampo/53007"
+  },
+  "aceite_girasol": {
+   "ref": "777acb0e-91a8-4b03-b47a-1b545f994044",
+   "codigo": "19818",
+   "nombre": "PRODUCTO ALCAMPO Aceite de girasol botella de 1 l.",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-aceite-de-girasol-botella-de-1-l/19818"
+  },
+  "ketchup": {
+   "ref": "6ef05c7d-cd5c-40bf-b26b-0b1044612cc2",
+   "codigo": "629975",
+   "nombre": "PRODUCTO ALCAMPO Ketchup 560 g",
+   "envase": 560,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-ketchup-560-g/629975"
+  },
+  "mayonesa": {
+   "ref": "68f67ed6-f8b8-4417-9529-33b9776932f1",
+   "codigo": "16647",
+   "nombre": "PRODUCTO ALCAMPO Mayonesa clásica frasco de 450 ml.",
+   "envase": 450,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-mayonesa-clasica-frasco-de-450-ml/16647"
+  },
+  "alioli": {
+   "ref": "a69c34ae-7f38-4bab-bc86-8b4ed07caed1",
+   "codigo": "24675",
+   "nombre": "PRODUCTO ALCAMPO Salsa alioli bote de 300 ml.",
+   "envase": 300,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-salsa-alioli-bote-de-300-ml/24675"
+  },
+  "salsa_yogur": {
+   "ref": "d08ccc27-4769-4d77-832c-b0292cf91cae",
+   "codigo": "25123",
+   "nombre": "PRODUCTO ALCAMPO Salsa de yogur bote de 300 g.",
+   "envase": 300,
+   "url": "https://www.compraonline.alcampo.es/products/producto-alcampo-salsa-de-yogur-bote-de-300-g/25123"
+  },
+  "chorizo": {
+   "ref": "a4e355e2-8f20-4f2b-91fe-f35c95e63bf0",
+   "codigo": "80099",
+   "nombre": "AUCHAN Sarta de chorizo dulce de categoria extra 280 g. Producto Alcampo",
+   "envase": 280,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-sarta-de-chorizo-dulce-de-categoria-extra-280-g-producto-alcampo/80099"
+  },
+  "grana_padano": {
+   "ref": "18b34543-7c97-4244-b92c-645010227b5a",
+   "codigo": "84634",
+   "nombre": "AUCHAN Queso rallado Grana Padano DOP 100 g. Producto Alcampo",
+   "envase": 100,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-queso-rallado-grana-padano-dop-100-g-producto-alcampo/84634"
+  },
+  "salsa_burger": {
+   "ref": "88d2b33e-138a-4e1e-a8ad-0ded4c1c05e4",
+   "codigo": "23080",
+   "nombre": "HELLMANN\"S Salsa burger 250 ml.",
+   "envase": 250,
+   "url": "https://www.compraonline.alcampo.es/products/hellmann-s-salsa-burger-250-ml/23080"
+  },
+  "jamoncitos": {
+   "ref": "d6861c97-7ff5-45b4-9a75-40595cbd7327",
+   "codigo": "23807",
+   "nombre": "AUCHAN Jamoncitos de pollo, bandeja al peso Producto Alcampo.",
+   "envase": 1000,
+   "url": "https://www.compraonline.alcampo.es/products/auchan-jamoncitos-de-pollo-bandeja-al-peso-producto-alcampo/23807",
+   "precio_por": "kilo",
+   "aprox": true
+  }
+ },
+ "sin_equivalente": [
+  "cuscus",
+  "cebolla",
+  "picada_pollo",
+  "burger_pavo",
+  "ternera",
+  "masa_empanadilla",
+  "platano",
+  "cacahuetes",
+  "mango",
+  "pizza_margarita",
+  "mantequilla",
+  "pan_molde"
+ ],
+ "nota": "sin_buscar: productos que aún no se han buscado bien en Alcampo (su web corta tras unas pocas búsquedas seguidas); no quiere decir que no existan.",
+ "sin_buscar": [
+  "coco",
+  "boniato",
+  "ajo",
+  "calamar",
+  "salteado",
+  "pimiento",
+  "calabacin",
+  "fideos",
+  "alubias_rojas",
+  "lasana",
+  "bacalao",
+  "mostaza",
+  "esparragos",
+  "bonito",
+  "caballa",
+  "sardinas",
+  "langostinos",
+  "pasta_lentejas",
+  "berenjena",
+  "quinoa",
+  "dorada",
+  "copos_maiz",
+  "pina",
+  "calabaza",
+  "gazpacho",
+  "tinta",
+  "anacardos",
+  "feta",
+  "naranja",
+  "pepino",
+  "serrano",
+  "mermelada",
+  "almendras",
+  "chia",
+  "tofu",
+  "soja_texturizada",
+  "crema_soja",
+  "seitan",
+  "bebida_soja",
+  "tahini",
+  "setas",
+  "alcachofa",
+  "repollo",
+  "aceitunas",
+  "alcaparras",
+  "cogollos",
+  "alcachofa_bote",
+  "remolacha",
+  "piquillo",
+  "pizza_barbacoa",
+  "pizza_4quesos",
+  "pizza_carbonara",
+  "pizza_pepperoni",
+  "pizza_atunbacon",
+  "pizza_pollobacon",
+  "pizza_serrana",
+  "pizza_frankfurt",
+  "patatas_fritas",
+  "guanciale",
+  "nachos",
+  "jalapenos",
+  "san_jacobos",
+  "masa_pizza",
+  "alas_pollo",
+  "burger_vacuno",
+  "relleno_kebab",
+  "tortillas_maxi",
+  "pepinillos",
+  "cebolla_frita",
+  "sazonador_fajitas",
+  "calamares_romana",
+  "gallina",
+  "carcasa_pollo"
+ ]
+}

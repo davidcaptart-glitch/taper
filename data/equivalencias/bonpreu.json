@@ -1,6 +1,6 @@
 {
   "super": "bonpreu",
-  "comprobado": "2026-10-22",
+  "comprobado": "2026-11-02",
   "productos": {
     "arroz": {
       "ref": "3a34dd8e-b825-4f4d-a3d7-0923875b2b41",
@@ -854,9 +854,450 @@
       "nombre": "VEGETALIA Seitan ecològic",
       "envase": 250,
       "url": "https://www.compraonline.bonpreuesclat.cat/products/vegetalia-seitan-ecologic/56072"
+    },
+    "bebida_soja": {
+      "ref": "2f78ea2b-9867-4bb0-8590-1de6273ab50f",
+      "codigo": "67596",
+      "nombre": "BONPREU Beguda de soja UHT 0% sucres",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-beguda-de-soja-uht-0-sucres/67596"
+    },
+    "harina": {
+      "ref": "a3f9510b-1afc-46e4-8de8-bc7d3ae8f13b",
+      "codigo": "87095",
+      "nombre": "BONPREU Farina de blat",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-farina-de-blat/87095"
+    },
+    "tahini": {
+      "ref": "c8394d2c-2ee8-4e38-b669-91e3afbd3e78",
+      "codigo": "88975",
+      "nombre": "BONPREU Crema Tahina",
+      "envase": 200,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-crema-tahina/88975"
+    },
+    "coliflor": {
+      "ref": "ce20a690-f3cf-40d5-bc7b-7c26805f9006",
+      "codigo": "04754",
+      "nombre": "BONPREU Coliflor",
+      "envase": 750,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-coliflor/04754"
+    },
+    "setas": {
+      "ref": "b5b60066-cad8-48a3-88a8-5cf955e95839",
+      "codigo": "32286",
+      "nombre": "BONPREU Saltat de bolets",
+      "envase": 450,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-saltat-de-bolets/32286"
+    },
+    "alcachofa": {
+      "ref": "7eb2968f-746b-4f05-a30a-07e0e26c6bde",
+      "codigo": "32277",
+      "nombre": "BONPREU Carxofa trossejada",
+      "envase": 400,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-carxofa-trossejada/32277"
+    },
+    "alcachofa_bote": {
+      "ref": "86831b08-e1cd-4582-994f-1366c879b936",
+      "codigo": "37142",
+      "nombre": "BONPREU Cors de carxofa sencers 6-8 unitats",
+      "envase": 240,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-cors-de-carxofa-sencers-6-8-unitats/37142"
+    },
+    "pizza_jyq": {
+      "ref": "93261b04-e9ac-4450-996e-279e069008e9",
+      "codigo": "55167",
+      "nombre": "BONPREU Pizza fresca de pernil i formatge",
+      "envase": 1,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pizza-fresca-de-pernil-i-formatge/55167"
+    },
+    "pizza_4quesos": {
+      "ref": "ab1efcfa-e439-4510-98bf-119bccd8d37a",
+      "codigo": "55173",
+      "nombre": "BONPREU Pizza fresca 4 formatges",
+      "envase": 1,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pizza-fresca-4-formatges/55173"
+    },
+    "pizza_barbacoa": {
+      "ref": "ec93432b-da34-4d62-87a0-8cbae58aec7f",
+      "codigo": "51164",
+      "nombre": "BONPREU Pizza fresca barbacoa",
+      "envase": 1,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pizza-fresca-barbacoa/51164"
+    },
+    "pizza_pollobacon": {
+      "ref": "bb84b5ba-3378-4d78-a48a-1e71f1cbaac0",
+      "codigo": "98482",
+      "nombre": "BONPREU Pizza de pollastre i bacó",
+      "envase": 1,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pizza-de-pollastre-i-baco/98482"
+    },
+    "pizza_carbonara": {
+      "ref": "6cee6b28-35ce-4eaa-b622-da4da7bb48c6",
+      "codigo": "78406",
+      "nombre": "CASA TARRADELLAS Pizza fresca Carbonara",
+      "envase": 1,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/casa-tarradellas-pizza-fresca-carbonara/78406"
+    },
+    "pizza_pepperoni": {
+      "ref": "36e418f7-5fb3-4c65-b8e2-961eb5ab526b",
+      "codigo": "61521",
+      "nombre": "CASA TARRADELLAS Pizza fresca Pepperoni",
+      "envase": 1,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/casa-tarradellas-pizza-fresca-pepperoni/61521"
+    },
+    "pizza_atunbacon": {
+      "ref": "8df9a4d3-40c8-4c5c-8165-5adb3a9a58a4",
+      "codigo": "48425",
+      "nombre": "CASA TARRADELLAS Pizza fresca de tonyina i bacó",
+      "envase": 1,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/casa-tarradellas-pizza-fresca-de-tonyina-i-baco/48425"
+    },
+    "pizza_serrana": {
+      "ref": "94cd144c-cc62-40d9-975d-1faddc82935b",
+      "codigo": "43102",
+      "nombre": "CASA TARRADELLAS Pizza fresca de pernil serrano",
+      "envase": 1,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/casa-tarradellas-pizza-fresca-de-pernil-serrano/43102"
+    },
+    "pizza_frankfurt": {
+      "ref": "82c197c8-a975-481d-a325-7d8eff32eeb3",
+      "codigo": "12775",
+      "nombre": "CASA TARRADELLAS Pizza fresca Frankfurt",
+      "envase": 1,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/casa-tarradellas-pizza-fresca-frankfurt/12775"
+    },
+    "repollo": {
+      "ref": "60613c9a-ae4b-4583-95c6-5ab6df4eab3e",
+      "codigo": "02215",
+      "nombre": "LA COLLITA Col valenciana enfilmada de 450 g",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-col-valenciana-enfilmada-de-450-g/02215",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "aceitunas": {
+      "ref": "744b46d2-7ca2-42c5-b9b8-15b61900f42a",
+      "codigo": "41863",
+      "nombre": "BONPREU Olives negres a rodanxes",
+      "envase": 120,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-olives-negres-a-rodanxes/41863"
+    },
+    "alcaparras": {
+      "ref": "41341248-ba8c-4319-99c8-8ea023b0865b",
+      "codigo": "07077",
+      "nombre": "SERPIS Tàperes en vinagre",
+      "envase": 60,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/serpis-taperes-en-vinagre/07077"
+    },
+    "cacahuetes": {
+      "ref": "16589357-a186-400e-b641-6c57b3e99a99",
+      "codigo": "55354",
+      "nombre": "BONPREU Cacauets repelats torrats sense sal afegida",
+      "envase": 200,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-cacauets-repelats-torrats-sense-sal-afegida/55354"
+    },
+    "masa_empanada": {
+      "ref": "c33c8b11-d602-446f-91d4-1d7b4969fea0",
+      "codigo": "30057",
+      "nombre": "CASA TARRADELLAS Base quadrada per Empanada",
+      "envase": 230,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/casa-tarradellas-base-quadrada-per-empanada/30057"
+    },
+    "masa_pizza": {
+      "ref": "a3164b2b-e93e-4313-8458-97d8e142bbb1",
+      "codigo": "21561",
+      "nombre": "BONPREU Base rodona per a pizza",
+      "envase": 260,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-base-rodona-per-a-pizza/21561"
+    },
+    "alas_pollo": {
+      "ref": "5ff1f81e-c9c8-445c-b73a-27eb7add7dc5",
+      "codigo": "01509",
+      "nombre": "BONPREU Ales de pollastre partides",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-ales-de-pollastre-partides/01509",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "jamoncitos": {
+      "ref": "e4220592-4b07-405f-9560-28c2d86a3b40",
+      "codigo": "04346",
+      "nombre": "BONPREU Cuixetes de pollastre en format familiar",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-cuixetes-de-pollastre-en-format-familiar/04346",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "pipas_calabaza": {
+      "ref": "e119c807-0e17-4287-b0e6-de6189bd4e8c",
+      "codigo": "31961",
+      "nombre": "BONPREU Pipes de carbassa crues",
+      "envase": 150,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pipes-de-carbassa-crues/31961"
+    },
+    "tomate_cherry": {
+      "ref": "3ea9fd5f-b5e7-4dff-a749-208dde4e0960",
+      "codigo": "00944",
+      "nombre": "LA COLLITA Tomàquet cirerol pera en safata de 250 g",
+      "envase": 250,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-tomaquet-cirerol-pera-en-safata-de-250-g/00944"
+    },
+    "rucula": {
+      "ref": "3a97131b-95c4-445b-9a9e-bb6190f6934e",
+      "codigo": "47387",
+      "nombre": "LA COLLITA Brots de ruca",
+      "envase": 50,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/la-collita-brots-de-ruca/47387"
+    },
+    "remolacha": {
+      "ref": "8f29f4b0-a592-4aed-9821-65ac12dfed0f",
+      "codigo": "39449",
+      "nombre": "HUERCASA Remolatxa al vapor en bossa de 2 u",
+      "envase": 500,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/huercasa-remolatxa-al-vapor-en-bossa-de-2-u/39449"
+    },
+    "piquillo": {
+      "ref": "f79cbede-c57d-4895-95eb-2c3a5076aa82",
+      "codigo": "00535",
+      "nombre": "BONPREU Pebrots del piquillo sencers extra",
+      "envase": 350,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pebrots-del-piquillo-sencers-extra/00535"
+    },
+    "patatas_fritas": {
+      "ref": "7f9eb037-2b46-460a-a63a-0e3729b69905",
+      "codigo": "06983",
+      "nombre": "IFA Patates per al forn",
+      "envase": 750,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/ifa-patates-per-al-forn/06983"
+    },
+    "frankfurt": {
+      "ref": "bbb1329c-cbc9-4b1b-913e-9c2fda41e67c",
+      "codigo": "20315",
+      "nombre": "CAMPOFRÍO Salsitxes frankfurt",
+      "envase": 560,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/campofrio-salsitxes-frankfurt/20315"
+    },
+    "cheddar": {
+      "ref": "27177635-6795-4004-bcb1-290256af2b8f",
+      "codigo": "58429",
+      "nombre": "BONPREU Formatge cheddar a talls",
+      "envase": 200,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-formatge-cheddar-a-talls/58429"
+    },
+    "bacon": {
+      "ref": "318a1f95-78ac-47f0-a7bf-891d18330fcd",
+      "codigo": "46101",
+      "nombre": "BONPREU Bacó cuit fumat",
+      "envase": 150,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-baco-cuit-fumat/46101"
+    },
+    "guanciale": {
+      "ref": "52fdf16b-3d42-429b-a205-249f65642fb3",
+      "codigo": "77953",
+      "nombre": "FERRARINI Guanciale a cintes",
+      "envase": 100,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/ferrarini-guanciale-a-cintes/77953"
+    },
+    "nachos": {
+      "ref": "7163b86c-cbd9-482d-86bf-84e9b26d3f58",
+      "codigo": "62594",
+      "nombre": "BONPREU Natxos de blat de moro",
+      "envase": 150,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-natxos-de-blat-de-moro/62594"
+    },
+    "guacamole": {
+      "ref": "81489d7a-5400-42c7-b73d-8ac36e68b132",
+      "codigo": "26333",
+      "nombre": "TROPS Guacamole",
+      "envase": 200,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/trops-guacamole/26333"
+    },
+    "jalapenos": {
+      "ref": "c63a88b8-a1e9-4a7c-b416-e27a092cd94c",
+      "codigo": "80646",
+      "nombre": "DANI Jalapeños a rodanxes",
+      "envase": 235,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/dani-jalapenos-a-rodanxes/80646"
+    },
+    "salsa_barbacoa": {
+      "ref": "bda3c6db-aa35-4e9c-bcad-b4e44c1ba615",
+      "codigo": "88768",
+      "nombre": "HEINZ Salsa Barbacoa Classic",
+      "envase": 480,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/heinz-salsa-barbacoa-classic/88768"
+    },
+    "san_jacobos": {
+      "ref": "17c62f0c-0031-4382-b171-8b8719c44095",
+      "codigo": "52193",
+      "nombre": "BONPREU San Jacobos",
+      "envase": 320,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-san-jacobos/52193"
+    },
+    "mozzarella_fresca": {
+      "ref": "29d4c0cf-cbed-4290-874a-abda878c2fa3",
+      "codigo": "85955",
+      "nombre": "SPIGA Mozzarella fresca",
+      "envase": 125,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/spiga-mozzarella-fresca/85955"
+    },
+    "burger_vacuno": {
+      "ref": "a0f86bad-525c-438b-a32f-1ff1715c3737",
+      "codigo": "43136",
+      "nombre": "BONPREU Burger meat de vedella",
+      "envase": 400,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-burger-meat-de-vedella/43136"
+    },
+    "aceite_girasol": {
+      "ref": "be4a62e1-e572-4c36-aeba-8dc016438fe0",
+      "codigo": "81048",
+      "nombre": "BONPREU Oli refinat de gira-sol",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-oli-refinat-de-gira-sol/81048"
+    },
+    "ketchup": {
+      "ref": "48f9c18d-d445-45a6-a2ce-6bc4e25dc41c",
+      "codigo": "03705",
+      "nombre": "BONPREU Quètxup",
+      "envase": 560,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-quetxup/03705"
+    },
+    "mayonesa": {
+      "ref": "16573a2a-10eb-40e2-b0b2-0c76fabb2ff2",
+      "codigo": "05488",
+      "nombre": "HELLMANN'S Maionesa",
+      "envase": 225,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/hellmann-s-maionesa/05488"
+    },
+    "alioli": {
+      "ref": "f0615acc-19de-4cbb-ad29-f9524ed5d7a5",
+      "codigo": "55202",
+      "nombre": "CHOVI Allioli",
+      "envase": 180,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/chovi-allioli/55202"
+    },
+    "salsa_yogur": {
+      "ref": "31377b70-75f1-4eec-a796-e7a7f1ed2539",
+      "codigo": "66467",
+      "nombre": "IFA Salsa iogurt",
+      "envase": 300,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/ifa-salsa-iogurt/66467"
+    },
+    "relleno_kebab": {
+      "ref": "ed676199-0c2d-4e72-833e-e9955991fa8e",
+      "codigo": "49349",
+      "nombre": "GOURMET Kebab de pollastre",
+      "envase": 250,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/gourmet-kebab-de-pollastre/49349"
+    },
+    "chorizo": {
+      "ref": "c0ca4741-8998-4260-88fe-416666c3e64c",
+      "codigo": "24374",
+      "nombre": "BONPREU Xoriço dolç extra",
+      "envase": 280,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-xorico-dolc-extra/24374"
+    },
+    "mantequilla": {
+      "ref": "8da20654-60bc-49f3-b037-f4628c8f7196",
+      "codigo": "10647",
+      "nombre": "BONPREU Mantega",
+      "envase": 250,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-mantega/10647"
+    },
+    "grana_padano": {
+      "ref": "b03fe411-2df6-46c6-bd3c-950a83d0093e",
+      "codigo": "33958",
+      "nombre": "ZANETTI Formatge grana padano en pols",
+      "envase": 100,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/zanetti-formatge-grana-padano-en-pols/33958"
+    },
+    "pan_brioche": {
+      "ref": "63cd421c-18ee-4d69-9abb-40304c4e3b9b",
+      "codigo": "10167",
+      "nombre": "BONPREU Panet de brioix per hamburguesa",
+      "envase": 4,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-panet-de-brioix-per-hamburguesa/10167"
+    },
+    "pan_perrito": {
+      "ref": "39f63958-e3dc-49a1-92f1-95e7f36c2976",
+      "codigo": "10166",
+      "nombre": "BONPREU Panet llarg Hot Dog",
+      "envase": 6,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-panet-llarg-hot-dog/10166"
+    },
+    "tortillas_maxi": {
+      "ref": "e799d5a4-1236-4b0d-bb05-d61bf874ec58",
+      "codigo": "81927",
+      "nombre": "BONPREU Wrap de farina de blat",
+      "envase": 6,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-wrap-de-farina-de-blat/81927"
+    },
+    "pan_molde": {
+      "ref": "a211d336-d040-41e9-be05-fc3dfadd0fbd",
+      "codigo": "59855",
+      "nombre": "BONPREU Pa de motlle",
+      "envase": 14,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-pa-de-motlle/59855"
+    },
+    "pepinillos": {
+      "ref": "0a88feb2-ea1f-4e84-9e9f-ef164a5664b4",
+      "codigo": "39444",
+      "nombre": "IFA Cogombres mitjans",
+      "envase": 190,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/ifa-cogombres-mitjans/39444"
+    },
+    "salsa_burger": {
+      "ref": "cb9be549-b460-4e3a-8704-27383a281f17",
+      "codigo": "85993",
+      "nombre": "HELLMANN'S Salsa Burger",
+      "envase": 250,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/hellmann-s-salsa-burger/85993"
+    },
+    "cebolla_frita": {
+      "ref": "01310260-66a1-4133-a085-31050accc048",
+      "codigo": "82539",
+      "nombre": "BONPREU Ceba fregida cruixent",
+      "envase": 100,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-ceba-fregida-cruixent/82539"
+    },
+    "sazonador_fajitas": {
+      "ref": "fd60d896-4226-41b2-a37f-2f380b8e7d0f",
+      "codigo": "39736",
+      "nombre": "IFA Condiment per fajita",
+      "envase": 30,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/ifa-condiment-per-fajita/39736"
+    },
+    "calamares_romana": {
+      "ref": "41cf6cff-90ff-477c-bf9e-b8d154d07163",
+      "codigo": "53560",
+      "nombre": "BONPREU Anelles de pota argentina a la romana",
+      "envase": 500,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-anelles-de-pota-argentina-a-la-romana/53560"
+    },
+    "gallina": {
+      "ref": "85d96245-ecc5-4e3d-a2af-10f9c646094e",
+      "codigo": "04095",
+      "nombre": "BONPREU Mitja gallina",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-mitja-gallina/04095",
+      "precio_por": "kilo",
+      "aprox": true
+    },
+    "carcasa_pollo": {
+      "ref": "9f13db06-0507-42ab-b89a-0f8ac206d00d",
+      "codigo": "08156",
+      "nombre": "BONPREU Carcasses de pollastre",
+      "envase": 1000,
+      "url": "https://www.compraonline.bonpreuesclat.cat/products/bonpreu-carcasses-de-pollastre/08156",
+      "precio_por": "kilo",
+      "aprox": true
     }
   },
   "sin_equivalente": [
-    "crema_soja"
+    "cogollos",
+    "crema_soja",
+    "mango",
+    "pan_pita",
+    "pizza_margarita"
   ]
 }

@@ -1,6 +1,6 @@
 {
   "super": "consum",
-  "comprobado": "2026-10-22",
+  "comprobado": "2026-10-31",
   "productos": {
     "arroz": {
       "ref": "7022762",
@@ -402,10 +402,10 @@
       "url": "https://tienda.consum.es/es/p/bonito-del-norte-en-aceite-de-oliva/7462906"
     },
     "caballa": {
-      "ref": "7387595",
-      "nombre": "Filetes de Caballa en Aceite de Oliva 84 Gr",
-      "envase": 84,
-      "url": "https://tienda.consum.es/es/p/filetes-de-caballa-en-aceite-de-oliva/7387595"
+      "ref": "7200199",
+      "nombre": "Filete de Caballa Sur Aceite de Oliva 80 Gr",
+      "envase": 80,
+      "url": "https://tienda.consum.es/es/p/filete-de-caballa-sur-aceite-de-oliva/7200199"
     },
     "sardinas": {
       "ref": "7325793",
@@ -545,7 +545,602 @@
       "nombre": "Pan Maxi Burger 4 Unidades 300 Gr",
       "envase": 4,
       "url": "https://tienda.consum.es/es/p/pan-maxi-burger-4-unidades/7069821"
+    },
+    "pan_barra": {
+      "ref": "7370323",
+      "nombre": "Barra de Pan . 250 Gr",
+      "envase": 250,
+      "url": "https://tienda.consum.es/es/p/barra-de-pan-/7370323"
+    },
+    "avena": {
+      "ref": "7427933",
+      "nombre": "Copos de Avena 500 Gr",
+      "envase": 500,
+      "url": "https://tienda.consum.es/es/p/copos-de-avena/7427933"
+    },
+    "platano": {
+      "ref": "7243525",
+      "nombre": "Banana",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/banana/7243525",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "naranja": {
+      "ref": "7149755",
+      "nombre": "Naranja",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/naranja/7149755",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "mandarina": {
+      "ref": "489831",
+      "nombre": "Mandarina Granel",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/mandarina-granel/489831",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "kiwi": {
+      "ref": "1934918",
+      "nombre": "Kiwi",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/kiwi/1934918",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "pera": {
+      "ref": "17210",
+      "nombre": "Pera Conferencia",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/pera-conferencia/17210",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "aguacate": {
+      "ref": "53017",
+      "nombre": "Aguacate  Premadurado",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/aguacate-premadurado/53017",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "pepino": {
+      "ref": "53512",
+      "nombre": "Pepino",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/pepino/53512",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "fresas": {
+      "ref": "7463214",
+      "nombre": "Fresa Entera 300 Gr",
+      "envase": 300,
+      "url": "https://tienda.consum.es/es/p/fresa-entera/7463214"
+    },
+    "frutos_rojos": {
+      "ref": "7317035",
+      "nombre": "Frutos del Bosque 300 Gr",
+      "envase": 300,
+      "url": "https://tienda.consum.es/es/p/frutos-del-bosque/7317035"
+    },
+    "queso_batido": {
+      "ref": "7452782",
+      "nombre": "Queso Fresco Batido 400 Gr",
+      "envase": 400,
+      "url": "https://tienda.consum.es/es/p/queso-fresco-batido/7452782"
+    },
+    "queso_fresco": {
+      "ref": "7061252",
+      "nombre": "Queso Fresco Pack de 2 Unidades 2 x 250 Gr",
+      "envase": 500,
+      "url": "https://tienda.consum.es/es/p/queso-fresco-pack-de-2-unidades/7061252"
+    },
+    "queso_lonchas": {
+      "ref": "7142052",
+      "nombre": "Queso Tierno Mezcla Lonchas 200 Gr",
+      "envase": 200,
+      "url": "https://tienda.consum.es/es/p/queso-tierno-mezcla-lonchas/7142052"
+    },
+    "pavo_fiambre": {
+      "ref": "7069305",
+      "nombre": "Pechuga de Pavo Finas Lonchas 200 Gr",
+      "envase": 200,
+      "url": "https://tienda.consum.es/es/p/pechuga-de-pavo-finas-lonchas/7069305"
+    },
+    "serrano": {
+      "ref": "7446115",
+      "nombre": "Jamón Gran Reserva Finas Lonchas 120 Gr",
+      "envase": 120,
+      "url": "https://tienda.consum.es/es/p/jamon-gran-reserva-finas-lonchas/7446115"
+    },
+    "kefir": {
+      "ref": "7357460",
+      "nombre": "Kéfir Natural Líquido 500 Gr",
+      "envase": 500,
+      "url": "https://tienda.consum.es/es/p/kefir-natural-liquido/7357460"
+    },
+    "crema_cacahuete": {
+      "ref": "7345820",
+      "nombre": "Crema de Cacahuete 500 Gr",
+      "envase": 500,
+      "url": "https://tienda.consum.es/es/p/crema-de-cacahuete/7345820"
+    },
+    "cacao": {
+      "ref": "7114630",
+      "nombre": "Cacao Puro en Polvo sin Azúcar 250 Gr",
+      "envase": 250,
+      "url": "https://tienda.consum.es/es/p/cacao-puro-en-polvo-sin-azucar/7114630"
+    },
+    "miel": {
+      "ref": "7028280",
+      "nombre": "Miel Milflores Dosificador 500 Gr",
+      "envase": 500,
+      "url": "https://tienda.consum.es/es/p/miel-milflores-dosificador/7028280"
+    },
+    "mermelada": {
+      "ref": "7185288",
+      "nombre": "Mermelada Fresa 0% Azúcares Añadidos 280 Gr",
+      "envase": 280,
+      "url": "https://tienda.consum.es/es/p/mermelada-fresa-0-azucares-anadidos/7185288"
+    },
+    "nueces": {
+      "ref": "7375595",
+      "nombre": "Nuez Grano Doypack 200 Gr",
+      "envase": 200,
+      "url": "https://tienda.consum.es/es/p/nuez-grano-doypack/7375595"
+    },
+    "almendras": {
+      "ref": "7368699",
+      "nombre": "Almendra Natural Piel Doy Pack 200 Gr",
+      "envase": 200,
+      "url": "https://tienda.consum.es/es/p/almendra-natural-piel-doy-pack/7368699"
+    },
+    "pasas": {
+      "ref": "7452931",
+      "nombre": "Pasas Sultanas 250 Gr",
+      "envase": 250,
+      "url": "https://tienda.consum.es/es/p/pasas-sultanas/7452931"
+    },
+    "chia": {
+      "ref": "7450166",
+      "nombre": "Semillas De Chía 250 Gr",
+      "envase": 250,
+      "url": "https://tienda.consum.es/es/p/semillas-de-chia/7450166"
+    },
+    "tortitas_arroz": {
+      "ref": "7220833",
+      "nombre": "Tortitas Arroz Vitalday 115,2 Gr",
+      "envase": 115,
+      "url": "https://tienda.consum.es/es/p/tortitas-arroz-vitalday/7220833"
+    },
+    "tofu": {
+      "ref": "7300015",
+      "nombre": "Tofu Bio 400 Gr",
+      "envase": 400,
+      "url": "https://tienda.consum.es/es/p/tofu-bio/7300015"
+    },
+    "soja_texturizada": {
+      "ref": "7312049",
+      "nombre": "Soja Texturizada Paquete 350 Gr",
+      "envase": 350,
+      "url": "https://tienda.consum.es/es/p/soja-texturizada-paquete/7312049"
+    },
+    "caldo_verduras": {
+      "ref": "7421407",
+      "nombre": "Caldo Vegetal 12 Pastillas 120 Gr",
+      "envase": 12,
+      "url": "https://tienda.consum.es/es/p/caldo-vegetal-12-pastillas/7421407"
+    },
+    "salsa_soja": {
+      "ref": "7468861",
+      "nombre": "SALSA SOJA 250 ml",
+      "envase": 250,
+      "url": "https://tienda.consum.es/es/p/salsa-soja/7468861"
+    },
+    "harina_garbanzo": {
+      "ref": "7321276",
+      "nombre": "Harina de Garbanzo Paquete 400 Gr",
+      "envase": 400,
+      "url": "https://tienda.consum.es/es/p/harina-de-garbanzo-paquete/7321276"
+    },
+    "crema_soja": {
+      "ref": "7279511",
+      "nombre": "Preparado para Cocinar Vegetal Soja 250 ml",
+      "envase": 250,
+      "url": "https://tienda.consum.es/es/p/preparado-para-cocinar-vegetal-soja/7279511"
+    },
+    "seitan": {
+      "ref": "7374882",
+      "nombre": "Seitán Bio 300 Gr",
+      "envase": 300,
+      "url": "https://tienda.consum.es/es/p/seitan-bio/7374882"
+    },
+    "bebida_soja": {
+      "ref": "7113764",
+      "nombre": "Bebida de Soja con Calcio Brik 1 L",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/bebida-de-soja-con-calcio-brik/7113764"
+    },
+    "harina": {
+      "ref": "7426091",
+      "nombre": "Harina de Trigo Clásica 1 Kg",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/harina-de-trigo-clasica/7426091"
+    },
+    "tahini": {
+      "ref": "7370930",
+      "nombre": "Crema de Sesamo Tahini Tarro 200 Gr",
+      "envase": 200,
+      "url": "https://tienda.consum.es/es/p/crema-de-sesamo-tahini-tarro/7370930"
+    },
+    "setas": {
+      "ref": "7392509",
+      "nombre": "Salteado Setas 450 Gr",
+      "envase": 450,
+      "url": "https://tienda.consum.es/es/p/salteado-setas/7392509"
+    },
+    "alcachofa": {
+      "ref": "7219504",
+      "nombre": "Alcachofa Troceada 400 Gr",
+      "envase": 400,
+      "url": "https://tienda.consum.es/es/p/alcachofa-troceada/7219504"
+    },
+    "repollo": {
+      "ref": "7156334",
+      "nombre": "Repollo Liso Partido",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/repollo-liso-partido/7156334",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "pan_pita": {
+      "ref": "7247294",
+      "nombre": "Pan de Pita Pack de 6 Unidades 400 Gr",
+      "envase": 6,
+      "url": "https://tienda.consum.es/es/p/pan-de-pita-pack-de-6-unidades/7247294"
+    },
+    "aceitunas": {
+      "ref": "7318426",
+      "nombre": "Aceitunas Negras en Rodajas Tarro 110 Gr",
+      "envase": 110,
+      "url": "https://tienda.consum.es/es/p/aceitunas-negras-en-rodajas-tarro/7318426"
+    },
+    "alcaparras": {
+      "ref": "7242634",
+      "nombre": "Alcaparras en Vinagre Tarro 80 Gr",
+      "envase": 80,
+      "url": "https://tienda.consum.es/es/p/alcaparras-en-vinagre-tarro/7242634"
+    },
+    "cacahuetes": {
+      "ref": "7408474",
+      "nombre": "Cacahuete Tostado Sin Sal Bolsa 200 Gr",
+      "envase": 200,
+      "url": "https://tienda.consum.es/es/p/cacahuete-tostado-sin-sal-bolsa/7408474"
+    },
+    "masa_empanada": {
+      "ref": "7451805",
+      "nombre": "Masa Empanada 230 Gr",
+      "envase": 230,
+      "url": "https://tienda.consum.es/es/p/masa-empanada/7451805"
+    },
+    "pipas_calabaza": {
+      "ref": "7483852",
+      "nombre": "Pipa Calabaza Pelada Cruda 150 Gr",
+      "envase": 150,
+      "url": "https://tienda.consum.es/es/p/pipa-calabaza-pelada-cruda/7483852"
+    },
+    "cogollos": {
+      "ref": "2124386",
+      "nombre": "Cogollos 3 Unidades Peso Aprox. 330  Gr. 0,33 Kg",
+      "envase": 3,
+      "url": "https://tienda.consum.es/es/p/cogollos-3-unidades-peso-aprox-330-gr/2124386"
+    },
+    "tomate_cherry": {
+      "ref": "7218167",
+      "nombre": "Tomate Cherry Cubeta 500 Gr",
+      "envase": 500,
+      "url": "https://tienda.consum.es/es/p/tomate-cherry-cubeta/7218167"
+    },
+    "rucula": {
+      "ref": "7216125",
+      "nombre": "Rúcula Bolsa 50 Gr",
+      "envase": 50,
+      "url": "https://tienda.consum.es/es/p/rucula-bolsa/7216125"
+    },
+    "alcachofa_bote": {
+      "ref": "7443195",
+      "nombre": "Corazones Alcachofa 6/8 Unidades 175 Gr",
+      "envase": 175,
+      "url": "https://tienda.consum.es/es/p/corazones-alcachofa-6-8-unidades/7443195"
+    },
+    "mango": {
+      "ref": "54346",
+      "nombre": "Mango",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/mango/54346",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "remolacha": {
+      "ref": "7099880",
+      "nombre": "Remolacha Cocida y Pelada 500 Gr",
+      "envase": 500,
+      "url": "https://tienda.consum.es/es/p/remolacha-cocida-y-pelada/7099880"
+    },
+    "piquillo": {
+      "ref": "7044121",
+      "nombre": "Pimientos Piquillo Entero 8/12 Piezas Frasco 225 Gr",
+      "envase": 225,
+      "url": "https://tienda.consum.es/es/p/pimientos-piquillo-entero-8-12-piezas-frasco/7044121"
+    },
+    "pizza_jyq": {
+      "ref": "7151343",
+      "nombre": "Pizza Jamón y Queso 380 Gr",
+      "envase": 1,
+      "url": "https://tienda.consum.es/es/p/pizza-jamon-y-queso/7151343"
+    },
+    "pizza_barbacoa": {
+      "ref": "7168011",
+      "nombre": "Pizza Barbacoa al Horno de Piedra 400 Gr",
+      "envase": 1,
+      "url": "https://tienda.consum.es/es/p/pizza-barbacoa-al-horno-de-piedra/7168011"
+    },
+    "pizza_4quesos": {
+      "ref": "7142479",
+      "nombre": "Pizza 4 Quesos al Horno de Piedra 400 Gr",
+      "envase": 1,
+      "url": "https://tienda.consum.es/es/p/pizza-4-quesos-al-horno-de-piedra/7142479"
+    },
+    "pizza_carbonara": {
+      "ref": "7203813",
+      "nombre": "Pizza Carbonara Masa Fina 400 Gr",
+      "envase": 1,
+      "url": "https://tienda.consum.es/es/p/pizza-carbonara-masa-fina/7203813"
+    },
+    "pizza_pepperoni": {
+      "ref": "7423965",
+      "nombre": "Pizza Pepperoni 340 Gr",
+      "envase": 1,
+      "url": "https://tienda.consum.es/es/p/pizza-pepperoni/7423965"
+    },
+    "pizza_atunbacon": {
+      "ref": "7142482",
+      "nombre": "Pizza Atún y Bacón 400 Gr",
+      "envase": 1,
+      "url": "https://tienda.consum.es/es/p/pizza-atun-y-bacon/7142482"
+    },
+    "pizza_pollobacon": {
+      "ref": "7317253",
+      "nombre": "Pizza Pollo y Bacón con Masa 5 Semillas 410 Gr",
+      "envase": 1,
+      "url": "https://tienda.consum.es/es/p/pizza-pollo-y-bacon-con-masa-5-semillas/7317253"
+    },
+    "pizza_serrana": {
+      "ref": "7070753",
+      "nombre": "Pizza Jamón Serrano 390 Gr",
+      "envase": 1,
+      "url": "https://tienda.consum.es/es/p/pizza-jamon-serrano/7070753"
+    },
+    "patatas_fritas": {
+      "ref": "7417413",
+      "nombre": "Patatas Horno Extra Crujiente 1 Kg",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/patatas-horno-extra-crujiente/7417413"
+    },
+    "pan_brioche": {
+      "ref": "7356173",
+      "nombre": "P. Hamburguesa Brioche con Mantequilla 4 Und. 300 Gr",
+      "envase": 4,
+      "url": "https://tienda.consum.es/es/p/p-hamburguesa-brioche-con-mantequilla-4-und/7356173"
+    },
+    "pan_perrito": {
+      "ref": "7069826",
+      "nombre": "Pan Hot Dog 6 Unidades 330 Gr",
+      "envase": 6,
+      "url": "https://tienda.consum.es/es/p/pan-hot-dog-6-unidades/7069826"
+    },
+    "frankfurt": {
+      "ref": "7404408",
+      "nombre": "Salchichas Frankfurt sabor Ahumado 3 x 165 Gr",
+      "envase": 495,
+      "url": "https://tienda.consum.es/es/p/salchichas-frankfurt-sabor-ahumado/7404408"
+    },
+    "cheddar": {
+      "ref": "7399249",
+      "nombre": "Queso Cheddar en Lonchas 200 Gr",
+      "envase": 200,
+      "url": "https://tienda.consum.es/es/p/queso-cheddar-en-lonchas/7399249"
+    },
+    "bacon": {
+      "ref": "7154487",
+      "nombre": "Bacón en Lonchas 200 Gr",
+      "envase": 200,
+      "url": "https://tienda.consum.es/es/p/bacon-en-lonchas/7154487"
+    },
+    "guanciale": {
+      "ref": "7467582",
+      "nombre": "Guanciale 100 Gr",
+      "envase": 100,
+      "url": "https://tienda.consum.es/es/p/guanciale/7467582"
+    },
+    "nachos": {
+      "ref": "7391829",
+      "nombre": "Nachos Blancos Bolsa 150 Gr",
+      "envase": 150,
+      "url": "https://tienda.consum.es/es/p/nachos-blancos-bolsa/7391829"
+    },
+    "guacamole": {
+      "ref": "7145688",
+      "nombre": "Guacamole Cat 200 Gr",
+      "envase": 200,
+      "url": "https://tienda.consum.es/es/p/guacamole-cat/7145688"
+    },
+    "jalapenos": {
+      "ref": "7392231",
+      "nombre": "Jalapeños en Rodajas Bote 125 Gr",
+      "envase": 125,
+      "url": "https://tienda.consum.es/es/p/jalapenos-en-rodajas-bote/7392231"
+    },
+    "salsa_barbacoa": {
+      "ref": "7438518",
+      "nombre": "Salsa Barbacoa 360 Gr",
+      "envase": 360,
+      "url": "https://tienda.consum.es/es/p/salsa-barbacoa/7438518"
+    },
+    "san_jacobos": {
+      "ref": "7069859",
+      "nombre": "San Jacobos 4 Unidades 320 Gr",
+      "envase": 320,
+      "url": "https://tienda.consum.es/es/p/san-jacobos-4-unidades/7069859"
+    },
+    "masa_pizza": {
+      "ref": "7195449",
+      "nombre": "Masa de Pizza Redonda 260 Gr",
+      "envase": 260,
+      "url": "https://tienda.consum.es/es/p/masa-de-pizza-redonda/7195449"
+    },
+    "mozzarella_fresca": {
+      "ref": "7173094",
+      "nombre": "Queso Mozzarella Fresca 125 Gr",
+      "envase": 125,
+      "url": "https://tienda.consum.es/es/p/queso-mozzarella-fresca/7173094"
+    },
+    "alas_pollo": {
+      "ref": "7112365",
+      "nombre": "Alas Partidas de Pollo",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/alas-partidas-de-pollo/7112365",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "burger_vacuno": {
+      "ref": "7098734",
+      "nombre": "Burger de Vacuno 4 Unidades 360 Gr",
+      "envase": 360,
+      "url": "https://tienda.consum.es/es/p/burger-de-vacuno-4-unidades/7098734"
+    },
+    "aceite_girasol": {
+      "ref": "7285166",
+      "nombre": "Aceite de Girasol Botella 1 L",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/aceite-de-girasol-botella/7285166"
+    },
+    "ketchup": {
+      "ref": "7309383",
+      "nombre": "Kétchup 560 Gr",
+      "envase": 560,
+      "url": "https://tienda.consum.es/es/p/ketchup/7309383"
+    },
+    "mayonesa": {
+      "ref": "7399301",
+      "nombre": "Mayonesa Tarro 225 ml",
+      "envase": 225,
+      "url": "https://tienda.consum.es/es/p/mayonesa-tarro/7399301"
+    },
+    "alioli": {
+      "ref": "7262413",
+      "nombre": "Salsa Allioli Pet 250 ml",
+      "envase": 250,
+      "url": "https://tienda.consum.es/es/p/salsa-allioli-pet/7262413"
+    },
+    "salsa_yogur": {
+      "ref": "7309412",
+      "nombre": "Salsa Yogur 300 ml",
+      "envase": 300,
+      "url": "https://tienda.consum.es/es/p/salsa-yogur/7309412"
+    },
+    "relleno_kebab": {
+      "ref": "7337280",
+      "nombre": "Kebab Loncheado Pollo 250 Gr",
+      "envase": 250,
+      "url": "https://tienda.consum.es/es/p/kebab-loncheado-pollo/7337280"
+    },
+    "tortillas_maxi": {
+      "ref": "7392264",
+      "nombre": "Tortillas Wrap de Trigo 6 Unidades 360 Gr",
+      "envase": 6,
+      "url": "https://tienda.consum.es/es/p/tortillas-wrap-de-trigo-6-unidades/7392264"
+    },
+    "chorizo": {
+      "ref": "7189769",
+      "nombre": "Chorizo  Extra 280 Gr",
+      "envase": 280,
+      "url": "https://tienda.consum.es/es/p/chorizo-extra/7189769"
+    },
+    "mantequilla": {
+      "ref": "7104599",
+      "nombre": "Mantequilla Pastilla 250 Gr",
+      "envase": 250,
+      "url": "https://tienda.consum.es/es/p/mantequilla-pastilla/7104599"
+    },
+    "pan_molde": {
+      "ref": "7069797",
+      "nombre": "Pan de Molde Clasico 16 Rebanadas. 460 Gr",
+      "envase": 16,
+      "url": "https://tienda.consum.es/es/p/pan-de-molde-clasico-16-rebanadas/7069797"
+    },
+    "pepinillos": {
+      "ref": "7083327",
+      "nombre": "Pepinillos Finos Vinagre Frasco 230 Gr",
+      "envase": 230,
+      "url": "https://tienda.consum.es/es/p/pepinillos-finos-vinagre-frasco/7083327"
+    },
+    "salsa_burger": {
+      "ref": "7479129",
+      "nombre": "Salsa Burger Champions 250 ml",
+      "envase": 250,
+      "url": "https://tienda.consum.es/es/p/salsa-burger-champions/7479129"
+    },
+    "cebolla_frita": {
+      "ref": "7196520",
+      "nombre": "Cebolla Crujiente Bote 100 Gr",
+      "envase": 100,
+      "url": "https://tienda.consum.es/es/p/cebolla-crujiente-bote/7196520"
+    },
+    "sazonador_fajitas": {
+      "ref": "7392244",
+      "nombre": "Sazonador para Fajitas 30 Gr",
+      "envase": 30,
+      "url": "https://tienda.consum.es/es/p/sazonador-para-fajitas/7392244"
+    },
+    "calamares_romana": {
+      "ref": "7366636",
+      "nombre": "Anillas a la Romana 400 Gr",
+      "envase": 400,
+      "url": "https://tienda.consum.es/es/p/anillas-a-la-romana/7366636"
+    },
+    "jamoncitos": {
+      "ref": "220707",
+      "nombre": "Muslitos de Pollo",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/muslitos-de-pollo/220707",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "gallina": {
+      "ref": "5154539",
+      "nombre": "Gallina para Caldo",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/gallina-para-caldo/5154539",
+      "aprox": true,
+      "por_kilo": true
+    },
+    "carcasa_pollo": {
+      "ref": "224972",
+      "nombre": "Carcasas de Pollo",
+      "envase": 1000,
+      "url": "https://tienda.consum.es/es/p/carcasas-de-pollo/224972",
+      "aprox": true,
+      "por_kilo": true
     }
   },
-  "sin_equivalente": []
+  "sin_equivalente": [
+    "coliflor",
+    "pizza_frankfurt",
+    "grana_padano",
+    "pizza_margarita"
+  ]
 }

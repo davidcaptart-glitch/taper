@@ -1,6 +1,6 @@
 {
  "super": "eroski",
- "comprobado": "2026-10-22",
+ "comprobado": "2026-10-31",
  "productos": {
   "arroz": {
    "ref": "300434",
@@ -517,10 +517,579 @@
    "nombre": "Pan hamburguesa Maxiburguers EROSKI, 4 unid., paquete 300 g",
    "envase": 4,
    "url": "https://supermercado.eroski.es/es/productdetail/15700891-pan-hamburguesa-maxiburguers-eroski-4-unid-paquete-300-g/"
+  },
+  "pan_barra": {
+   "ref": "587352",
+   "nombre": "Baguette, 220 g",
+   "envase": 220,
+   "url": "https://supermercado.eroski.es/es/productdetail/587352-baguette-220-g/"
+  },
+  "avena": {
+   "ref": "26747618",
+   "nombre": "Copos de avena integrales suaves EROSKI, paquete 500 g",
+   "envase": 500,
+   "url": "https://supermercado.eroski.es/es/productdetail/26747618-copos-de-avena-integrales-suaves-eroski-paquete-500-g/"
+  },
+  "platano": {
+   "ref": "14382832",
+   "nombre": "Banana, al peso, compra mínima 1 kg",
+   "envase": 1000,
+   "url": "https://supermercado.eroski.es/es/productdetail/14382832-banana-al-peso-compra-minima-1-kg/",
+   "aprox": true
+  },
+  "naranja": {
+   "ref": "1537",
+   "nombre": "Naranja para postre, al peso, compra mínima 1 kg",
+   "envase": 1000,
+   "url": "https://supermercado.eroski.es/es/productdetail/1537-naranja-para-postre-al-peso-compra-minima-1-kg/",
+   "aprox": true
+  },
+  "mandarina": {
+   "ref": "6155",
+   "nombre": "Mandarina, malla 1 kg",
+   "envase": 1000,
+   "url": "https://supermercado.eroski.es/es/productdetail/6155-mandarina-malla-1-kg/"
+  },
+  "kiwi": {
+   "ref": "12063319",
+   "nombre": "Kiwi Zespri Green, al peso, compra mínima 500 g",
+   "envase": 500,
+   "url": "https://supermercado.eroski.es/es/productdetail/12063319-kiwi-zespri-green-al-peso-compra-minima-500-g/",
+   "aprox": true
+  },
+  "pera": {
+   "ref": "17533",
+   "nombre": "Pera Conferencia, cubeta 1 kg",
+   "envase": 1000,
+   "url": "https://supermercado.eroski.es/es/productdetail/17533-pera-conferencia-cubeta-1-kg/"
+  },
+  "aguacate": {
+   "ref": "27349778",
+   "nombre": "Aguacate EROSKI, bandeja al peso aprox. 750 g",
+   "envase": 750,
+   "url": "https://supermercado.eroski.es/es/productdetail/27349778-aguacate-eroski-bandeja-al-peso-aprox-750-g/",
+   "aprox": true
+  },
+  "pepino": {
+   "ref": "12862041",
+   "nombre": "Pepino blanco, al peso, compra mínima 500 g",
+   "envase": 500,
+   "url": "https://supermercado.eroski.es/es/productdetail/12862041-pepino-blanco-al-peso-compra-minima-500-g/",
+   "aprox": true
+  },
+  "frutos_rojos": {
+   "ref": "27117944",
+   "nombre": "Frutos rojos EROSKI, bolsa 300 g",
+   "envase": 300,
+   "url": "https://supermercado.eroski.es/es/productdetail/27117944-frutos-rojos-eroski-bolsa-300-g/"
+  },
+  "queso_batido": {
+   "ref": "23154651",
+   "nombre": "Queso batido 0% EROSKI, tarrina 500 g",
+   "envase": 500,
+   "url": "https://supermercado.eroski.es/es/productdetail/23154651-queso-batido-0-eroski-tarrina-500-g/"
+  },
+  "queso_fresco": {
+   "ref": "20037180",
+   "nombre": "Queso fresco EROSKI BASIC, pack 2x250 g",
+   "envase": 500,
+   "url": "https://supermercado.eroski.es/es/productdetail/20037180-queso-fresco-eroski-basic-pack-2x250-g/"
+  },
+  "queso_lonchas": {
+   "ref": "26620781",
+   "nombre": "Queso tierno EROSKI, lonchas, bandeja 200 g",
+   "envase": 200,
+   "url": "https://supermercado.eroski.es/es/productdetail/26620781-queso-tierno-eroski-lonchas-bandeja-200-g/"
+  },
+  "pavo_fiambre": {
+   "ref": "24928152",
+   "nombre": "Pechuga de pavo EROSKI, pack 2x200 g",
+   "envase": 400,
+   "url": "https://supermercado.eroski.es/es/productdetail/24928152-pechuga-de-pavo-eroski-pack-2x200-g/"
+  },
+  "serrano": {
+   "ref": "9169798",
+   "nombre": "Jamón serrano lonchas finas EROSKI, bandeja 120 g",
+   "envase": 120,
+   "url": "https://supermercado.eroski.es/es/productdetail/9169798-jamon-serrano-lonchas-finas-eroski-bandeja-120-g/"
+  },
+  "kefir": {
+   "ref": "26715508",
+   "nombre": "Kéfir líquido 0% natural EROSKI, botella 250 g",
+   "envase": 250,
+   "url": "https://supermercado.eroski.es/es/productdetail/26715508-kefir-liquido-0-natural-eroski-botella-250-g/"
+  },
+  "crema_cacahuete": {
+   "ref": "24978785",
+   "nombre": "Crema de cacahuete EROSKI, bote 400 g",
+   "envase": 400,
+   "url": "https://supermercado.eroski.es/es/productdetail/24978785-crema-de-cacahuete-eroski-bote-400-g/"
+  },
+  "cacao": {
+   "ref": "575449",
+   "nombre": "Cacao puro sin azúcar PEDRO MAYO, paquete 250 g",
+   "envase": 250,
+   "url": "https://supermercado.eroski.es/es/productdetail/575449-cacao-puro-sin-azucar-pedro-mayo-paquete-250-g/"
+  },
+  "miel": {
+   "ref": "26514950",
+   "nombre": "Miel milflores GRANJA SAN FRANCISCO, dosificador 350 g",
+   "envase": 350,
+   "url": "https://supermercado.eroski.es/es/productdetail/26514950-miel-milflores-granja-san-francisco-dosificador-350-g/"
+  },
+  "mermelada": {
+   "ref": "25960881",
+   "nombre": "Mermelada de fresa 0% EROSKI, frasco 290 g",
+   "envase": 290,
+   "url": "https://supermercado.eroski.es/es/productdetail/25960881-mermelada-de-fresa-0-eroski-frasco-290-g/"
+  },
+  "nueces": {
+   "ref": "27261528",
+   "nombre": "Nuez mondada EROSKI, bolsa 200 g",
+   "envase": 200,
+   "url": "https://supermercado.eroski.es/es/productdetail/27261528-nuez-mondada-eroski-bolsa-200-g/"
+  },
+  "almendras": {
+   "ref": "27261452",
+   "nombre": "Almendra con piel cruda EROSKI, bolsa 200 g",
+   "envase": 200,
+   "url": "https://supermercado.eroski.es/es/productdetail/27261452-almendra-con-piel-cruda-eroski-bolsa-200-g/"
+  },
+  "pasas": {
+   "ref": "290585",
+   "nombre": "Pasas sultana EROSKI, bolsa 250 g",
+   "envase": 250,
+   "url": "https://supermercado.eroski.es/es/productdetail/290585-pasas-sultana-eroski-bolsa-250-g/"
+  },
+  "chia": {
+   "ref": "23157563",
+   "nombre": "Semillas de chia EROSKI BIO, bolsa 250 g",
+   "envase": 250,
+   "url": "https://supermercado.eroski.es/es/productdetail/23157563-semillas-de-chia-eroski-bio-bolsa-250-g/"
+  },
+  "tortitas_arroz": {
+   "ref": "23350309",
+   "nombre": "Tortita de arroz EROSKI, paquete 130 g",
+   "envase": 130,
+   "url": "https://supermercado.eroski.es/es/productdetail/23350309-tortita-de-arroz-eroski-paquete-130-g/"
+  },
+  "tofu": {
+   "ref": "24563223",
+   "nombre": "Tofú fresco EROSKI VEGGIE, paquete 250 g",
+   "envase": 250,
+   "url": "https://supermercado.eroski.es/es/productdetail/24563223-tofu-fresco-eroski-veggie-paquete-250-g/"
+  },
+  "soja_texturizada": {
+   "ref": "23466162",
+   "nombre": "Soja texturizada LUENGO, paquete 200 g",
+   "envase": 200,
+   "url": "https://supermercado.eroski.es/es/productdetail/23466162-soja-texturizada-luengo-paquete-200-g/"
+  },
+  "caldo_verduras": {
+   "ref": "26226829",
+   "nombre": "Caldo de verduras EROSKI, 12 pastillas, caja 120 g",
+   "envase": 12,
+   "url": "https://supermercado.eroski.es/es/productdetail/26226829-caldo-de-verduras-eroski-12-pastillas-caja-120-g/"
+  },
+  "salsa_soja": {
+   "ref": "22534267",
+   "nombre": "Salsa de soja sin gluten YANG-TSE, botellín 150 ml",
+   "envase": 150,
+   "url": "https://supermercado.eroski.es/es/productdetail/22534267-salsa-de-soja-sin-gluten-yang-tse-botellin-150-ml/"
+  },
+  "harina_garbanzo": {
+   "ref": "24246332",
+   "nombre": "Harina de garbanzo sin gluten HARIMSA, caja 400 g",
+   "envase": 400,
+   "url": "https://supermercado.eroski.es/es/productdetail/24246332-harina-de-garbanzo-sin-gluten-harimsa-caja-400-g/"
+  },
+  "crema_soja": {
+   "ref": "15484223",
+   "nombre": "Crema para cocinar vegetal SOJASUN, brik 200 ml",
+   "envase": 200,
+   "url": "https://supermercado.eroski.es/es/productdetail/15484223-crema-para-cocinar-vegetal-sojasun-brik-200-ml/"
+  },
+  "seitan": {
+   "ref": "17847385",
+   "nombre": "Seitan GERBLÉ BIO, bandeja 250 g",
+   "envase": 250,
+   "url": "https://supermercado.eroski.es/es/productdetail/17847385-seitan-gerble-bio-bandeja-250-g/"
+  },
+  "bebida_soja": {
+   "ref": "24637332",
+   "nombre": "Bebida de soja con calcio EROSKI, brik 1 litro",
+   "envase": 1000,
+   "url": "https://supermercado.eroski.es/es/productdetail/24637332-bebida-de-soja-con-calcio-eroski-brik-1-litro/"
+  },
+  "harina": {
+   "ref": "362442",
+   "nombre": "Harina de trigo EROSKI BASIC, paquete 1 kg",
+   "envase": 1000,
+   "url": "https://supermercado.eroski.es/es/productdetail/362442-harina-de-trigo-eroski-basic-paquete-1-kg/"
+  },
+  "tahini": {
+   "ref": "25951336",
+   "nombre": "Tahin blanco eco VERITAS, frasco 225 g",
+   "envase": 225,
+   "url": "https://supermercado.eroski.es/es/productdetail/25951336-tahin-blanco-eco-veritas-frasco-225-g/"
+  },
+  "coliflor": {
+   "ref": "25904830",
+   "nombre": "Coliflor EROSKI, bolsa 1 kg",
+   "envase": 1000,
+   "url": "https://supermercado.eroski.es/es/productdetail/25904830-coliflor-eroski-bolsa-1-kg/"
+  },
+  "setas": {
+   "ref": "12264644",
+   "nombre": "Setas mezcla EROSKI, bolsa 450 g",
+   "envase": 450,
+   "url": "https://supermercado.eroski.es/es/productdetail/12264644-setas-mezcla-eroski-bolsa-450-g/"
+  },
+  "alcachofa": {
+   "ref": "19838317",
+   "nombre": "Alcachofas cortadas EROSKI, bolsa 450 g",
+   "envase": 450,
+   "url": "https://supermercado.eroski.es/es/productdetail/19838317-alcachofas-cortadas-eroski-bolsa-450-g/"
+  },
+  "repollo": {
+   "ref": "26765909",
+   "nombre": "Repollo liso partido, pieza al peso aprox. 900 g",
+   "envase": 900,
+   "url": "https://supermercado.eroski.es/es/productdetail/26765909-repollo-liso-partido-pieza-al-peso-aprox-900-g/",
+   "aprox": true
+  },
+  "pan_pita": {
+   "ref": "20141339",
+   "nombre": "Pan de pita griego LA BOULANGERE, 4 uds., paquete 320 g",
+   "envase": 4,
+   "url": "https://supermercado.eroski.es/es/productdetail/20141339-pan-de-pita-griego-la-boulangere-4-uds-paquete-320-g/"
+  },
+  "aceitunas": {
+   "ref": "22395669",
+   "nombre": "Aceitunas negras en rodajas EROSKI, frasco 85 g",
+   "envase": 85,
+   "url": "https://supermercado.eroski.es/es/productdetail/22395669-aceitunas-negras-en-rodajas-eroski-frasco-85-g/"
+  },
+  "alcaparras": {
+   "ref": "26256545",
+   "nombre": "Alcaparras en vinagre FRAGATA, frasco 99 g",
+   "envase": 99,
+   "url": "https://supermercado.eroski.es/es/productdetail/26256545-alcaparras-en-vinagre-fragata-frasco-99-g/"
+  },
+  "cacahuetes": {
+   "ref": "25944042",
+   "nombre": "Cacahuete tostado sin sal EROSKI, bolsa 200 g",
+   "envase": 200,
+   "url": "https://supermercado.eroski.es/es/productdetail/25944042-cacahuete-tostado-sin-sal-eroski-bolsa-200-g/"
+  },
+  "pipas_calabaza": {
+   "ref": "25944018",
+   "nombre": "Pipas de calabaza peladas cruda EROSKI, bolsa 150 g",
+   "envase": 150,
+   "url": "https://supermercado.eroski.es/es/productdetail/25944018-pipas-de-calabaza-peladas-cruda-eroski-bolsa-150-g/"
+  },
+  "cogollos": {
+   "ref": "26188482",
+   "nombre": "Cogollos EROSKI, bandeja 3 uds",
+   "envase": 3,
+   "url": "https://supermercado.eroski.es/es/productdetail/26188482-cogollos-eroski-bandeja-3-uds/"
+  },
+  "tomate_cherry": {
+   "ref": "24940132",
+   "nombre": "Tomate cherry EROSKI, bandeja 500 g",
+   "envase": 500,
+   "url": "https://supermercado.eroski.es/es/productdetail/24940132-tomate-cherry-eroski-bandeja-500-g/"
+  },
+  "rucula": {
+   "ref": "11013653",
+   "nombre": "Rúcula EROSKI, bolsa 100 g",
+   "envase": 100,
+   "url": "https://supermercado.eroski.es/es/productdetail/11013653-rucula-eroski-bolsa-100-g/"
+  },
+  "alcachofa_bote": {
+   "ref": "2179323",
+   "nombre": "Corazón alcachofa al natural 10/12 frutos EROSKI, lata 240 g",
+   "envase": 240,
+   "url": "https://supermercado.eroski.es/es/productdetail/2179323-corazon-alcachofa-al-natural-1012-frutos-eroski-lata-240-g/"
+  },
+  "mango": {
+   "ref": "8426736",
+   "nombre": "Mango, pieza al peso aprox. 900 g",
+   "envase": 900,
+   "url": "https://supermercado.eroski.es/es/productdetail/8426736-mango-pieza-al-peso-aprox-900-g/",
+   "aprox": true
+  },
+  "remolacha": {
+   "ref": "91033",
+   "nombre": "Remolacha cocida-pelada EROSKI, bolsa 450 g",
+   "envase": 450,
+   "url": "https://supermercado.eroski.es/es/productdetail/91033-remolacha-cocida-pelada-eroski-bolsa-450-g/"
+  },
+  "piquillo": {
+   "ref": "25010943",
+   "nombre": "Pimiento de piquillo entero EROSKI, frasco 350 g",
+   "envase": 350,
+   "url": "https://supermercado.eroski.es/es/productdetail/25010943-pimiento-de-piquillo-entero-eroski-frasco-350-g/"
+  },
+  "pizza_jyq": {
+   "ref": "26211011",
+   "nombre": "Pizza de jamón y queso EROSKI, 1 ud, 350 g",
+   "envase": 1,
+   "url": "https://supermercado.eroski.es/es/productdetail/26211011-pizza-de-jamon-y-queso-eroski-1-ud-350-g/"
+  },
+  "pizza_barbacoa": {
+   "ref": "26791251",
+   "nombre": "Pizza barbacoa EROSKI, 1 ud, 350 g",
+   "envase": 1,
+   "url": "https://supermercado.eroski.es/es/productdetail/26791251-pizza-barbacoa-eroski-1-ud-350-g/"
+  },
+  "pizza_4quesos": {
+   "ref": "8452278",
+   "nombre": "Pizza 5 quesos EROSKI, caja 345 g",
+   "envase": 1,
+   "url": "https://supermercado.eroski.es/es/productdetail/8452278-pizza-5-quesos-eroski-caja-345-g/"
+  },
+  "pizza_carbonara": {
+   "ref": "2633238",
+   "nombre": "Pizza carbonara CASA TARRADELLAS, 1 ud., 400 g",
+   "envase": 1,
+   "url": "https://supermercado.eroski.es/es/productdetail/2633238-pizza-carbonara-casa-tarradellas-1-ud-400-g/"
+  },
+  "pizza_pepperoni": {
+   "ref": "25302779",
+   "nombre": "Pizza pepperoni EROSKI, caja 345 g",
+   "envase": 1,
+   "url": "https://supermercado.eroski.es/es/productdetail/25302779-pizza-pepperoni-eroski-caja-345-g/"
+  },
+  "pizza_atunbacon": {
+   "ref": "505677",
+   "nombre": "Pizza de atún-bacón CASA TARRADELLAS, 1 ud., 405 g",
+   "envase": 1,
+   "url": "https://supermercado.eroski.es/es/productdetail/505677-pizza-de-atun-bacon-casa-tarradellas-1-ud-405-g/"
+  },
+  "pizza_pollobacon": {
+   "ref": "21139217",
+   "nombre": "Pizza 5 cereales de pollo-bacón TARRADELLAS, 1 unid., 410 g",
+   "envase": 1,
+   "url": "https://supermercado.eroski.es/es/productdetail/21139217-pizza-5-cereales-de-pollo-bacon-tarradellas-1-unid-410-g/"
+  },
+  "pizza_serrana": {
+   "ref": "9780297",
+   "nombre": "Pizza de jamón serrano CASA TARRADELLAS, 1 ud., 390 g",
+   "envase": 1,
+   "url": "https://supermercado.eroski.es/es/productdetail/9780297-pizza-de-jamon-serrano-casa-tarradellas-1-ud-390-g/"
+  },
+  "patatas_fritas": {
+   "ref": "211326",
+   "nombre": "Patata prefrita EROSKI basic, bolsa 1 kg",
+   "envase": 1000,
+   "url": "https://supermercado.eroski.es/es/productdetail/211326-patata-prefrita-eroski-basic-bolsa-1-kg/"
+  },
+  "pan_brioche": {
+   "ref": "24880619",
+   "nombre": "Pan burger brioche EROSKI, 4 uds, paquete 340 g",
+   "envase": 4,
+   "url": "https://supermercado.eroski.es/es/productdetail/24880619-pan-burger-brioche-eroski-4-uds-paquete-340-g/"
+  },
+  "pan_perrito": {
+   "ref": "15700917",
+   "nombre": "Hot dog EROSKI, 6 uds., paquete 330 g",
+   "envase": 6,
+   "url": "https://supermercado.eroski.es/es/productdetail/15700917-hot-dog-eroski-6-uds-paquete-330-g/"
+  },
+  "frankfurt": {
+   "ref": "17779620",
+   "nombre": "Salchichas Frankfurt EROSKI basic, pack 4x160 g",
+   "envase": 640,
+   "url": "https://supermercado.eroski.es/es/productdetail/17779620-salchichas-frankfurt-eroski-basic-pack-4x160-g/"
+  },
+  "cheddar": {
+   "ref": "10841435",
+   "nombre": "Queso Cheddar EROSKI, lonchas, bandeja 200 g",
+   "envase": 200,
+   "url": "https://supermercado.eroski.es/es/productdetail/10841435-queso-cheddar-eroski-lonchas-bandeja-200-g/"
+  },
+  "bacon": {
+   "ref": "24251910",
+   "nombre": "Bacón cocido y ahumado EROSKI BASIC, sobre 220 g",
+   "envase": 220,
+   "url": "https://supermercado.eroski.es/es/productdetail/24251910-bacon-cocido-y-ahumado-eroski-basic-sobre-220-g/"
+  },
+  "guanciale": {
+   "ref": "26780098",
+   "nombre": "Tiras de guanciale FERRARINI, bandeja 100 g",
+   "envase": 100,
+   "url": "https://supermercado.eroski.es/es/productdetail/26780098-tiras-de-guanciale-ferrarini-bandeja-100-g/"
+  },
+  "nachos": {
+   "ref": "24551996",
+   "nombre": "Nachos naturales EROSKI, bolsa 150 g",
+   "envase": 150,
+   "url": "https://supermercado.eroski.es/es/productdetail/24551996-nachos-naturales-eroski-bolsa-150-g/"
+  },
+  "guacamole": {
+   "ref": "24929135",
+   "nombre": "Guacamole suave EROSKI, tarrina 200 g",
+   "envase": 200,
+   "url": "https://supermercado.eroski.es/es/productdetail/24929135-guacamole-suave-eroski-tarrina-200-g/"
+  },
+  "jalapenos": {
+   "ref": "13209846",
+   "nombre": "Jalapeños cortados ZANUY, frasco 225 g",
+   "envase": 225,
+   "url": "https://supermercado.eroski.es/es/productdetail/13209846-jalapenos-cortados-zanuy-frasco-225-g/"
+  },
+  "salsa_barbacoa": {
+   "ref": "25557208",
+   "nombre": "Salsa barbacoa EROSKI, bote 320 g",
+   "envase": 320,
+   "url": "https://supermercado.eroski.es/es/productdetail/25557208-salsa-barbacoa-eroski-bote-320-g/"
+  },
+  "san_jacobos": {
+   "ref": "25552258",
+   "nombre": "San jacobo EROSKI BASIC, pack 4x80 g",
+   "envase": 320,
+   "url": "https://supermercado.eroski.es/es/productdetail/25552258-san-jacobo-eroski-basic-pack-4x80-g/"
+  },
+  "masa_pizza": {
+   "ref": "27304021",
+   "nombre": "Masa pizza familiar EROSKI, paquete 400 g",
+   "envase": 400,
+   "url": "https://supermercado.eroski.es/es/productdetail/27304021-masa-pizza-familiar-eroski-paquete-400-g/"
+  },
+  "mozzarella_fresca": {
+   "ref": "10995181",
+   "nombre": "Queso Mozzarella EROSKI, bolsa 125 g",
+   "envase": 125,
+   "url": "https://supermercado.eroski.es/es/productdetail/10995181-queso-mozzarella-eroski-bolsa-125-g/"
+  },
+  "alas_pollo": {
+   "ref": "22307342",
+   "nombre": "Alas de pollo partidas EROSKI, bandeja aprox. 600 g",
+   "envase": 600,
+   "url": "https://supermercado.eroski.es/es/productdetail/22307342-alas-de-pollo-partidas-eroski-bandeja-aprox-600-g/",
+   "aprox": true
+  },
+  "burger_vacuno": {
+   "ref": "20990347",
+   "nombre": "Hamburguesa vacuno gruesa B. Meat EROSKI, 2 uds., bandeja 300 g",
+   "envase": 300,
+   "url": "https://supermercado.eroski.es/es/productdetail/20990347-hamburguesa-vacuno-gruesa-b-meat-eroski-2-uds-bandeja-300-g/"
+  },
+  "aceite_girasol": {
+   "ref": "317826",
+   "nombre": "Aceite de girasol LANISOL, botella 1 litro",
+   "envase": 1000,
+   "url": "https://supermercado.eroski.es/es/productdetail/317826-aceite-de-girasol-lanisol-botella-1-litro/"
+  },
+  "ketchup": {
+   "ref": "26505891",
+   "nombre": "Ketchup EROSKI, bote 560 g",
+   "envase": 560,
+   "url": "https://supermercado.eroski.es/es/productdetail/26505891-ketchup-eroski-bote-560-g/"
+  },
+  "mayonesa": {
+   "ref": "26144121",
+   "nombre": "Mayonesa EROSKI, frasco 450 ml",
+   "envase": 450,
+   "url": "https://supermercado.eroski.es/es/productdetail/26144121-mayonesa-eroski-frasco-450-ml/"
+  },
+  "alioli": {
+   "ref": "901330",
+   "nombre": "Salsa alioli EROSKI, bote 300 ml",
+   "envase": 300,
+   "url": "https://supermercado.eroski.es/es/productdetail/901330-salsa-alioli-eroski-bote-300-ml/"
+  },
+  "salsa_yogur": {
+   "ref": "11980521",
+   "nombre": "Salsa de yogur EROSKI, bote 300 g",
+   "envase": 300,
+   "url": "https://supermercado.eroski.es/es/productdetail/11980521-salsa-de-yogur-eroski-bote-300-g/"
+  },
+  "relleno_kebab": {
+   "ref": "22837470",
+   "nombre": "Kebab loncheado de pollo asado OZTURK, bolsa 250 g",
+   "envase": 250,
+   "url": "https://supermercado.eroski.es/es/productdetail/22837470-kebab-loncheado-de-pollo-asado-ozturk-bolsa-250-g/"
+  },
+  "chorizo": {
+   "ref": "4093837",
+   "nombre": "Chorizo extra dulce EROSKI, sarta 250 g",
+   "envase": 250,
+   "url": "https://supermercado.eroski.es/es/productdetail/4093837-chorizo-extra-dulce-eroski-sarta-250-g/"
+  },
+  "mantequilla": {
+   "ref": "15636475",
+   "nombre": "Mantequilla EROSKI, pastilla 250 g",
+   "envase": 250,
+   "url": "https://supermercado.eroski.es/es/productdetail/15636475-mantequilla-eroski-pastilla-250-g/"
+  },
+  "grana_padano": {
+   "ref": "16036287",
+   "nombre": "Queso rallado Grana Padano EROSKI SELEQTIA, bolsa 100 g",
+   "envase": 100,
+   "url": "https://supermercado.eroski.es/es/productdetail/16036287-queso-rallado-grana-padano-eroski-seleqtia-bolsa-100-g/"
+  },
+  "pepinillos": {
+   "ref": "945485",
+   "nombre": "Pepinillos grandes EROSKI, frasco 180 g",
+   "envase": 180,
+   "url": "https://supermercado.eroski.es/es/productdetail/945485-pepinillos-grandes-eroski-frasco-180-g-/"
+  },
+  "salsa_burger": {
+   "ref": "6647002",
+   "nombre": "Salsa burger HELLMANN'S, bocabajo 250 g",
+   "envase": 250,
+   "url": "https://supermercado.eroski.es/es/productdetail/6647002-salsa-burger-hellmanns-bocabajo-250-g/"
+  },
+  "cebolla_frita": {
+   "ref": "25980467",
+   "nombre": "Cebolla frita crujiente CHIQUILÍN, tarrina 130 g",
+   "envase": 130,
+   "url": "https://supermercado.eroski.es/es/productdetail/25980467-cebolla-frita-crujiente-chiquilin-tarrina-130-g/"
+  },
+  "sazonador_fajitas": {
+   "ref": "16622243",
+   "nombre": "Sazonador para fajitas MEXIFOODS, paquete 30 g",
+   "envase": 30,
+   "url": "https://supermercado.eroski.es/es/productdetail/16622243-sazonador-para-fajitas-mexifoods-paquete-30-g/"
+  },
+  "calamares_romana": {
+   "ref": "227603",
+   "nombre": "Anillas a la romana EROSKI, bolsa 300 g",
+   "envase": 300,
+   "url": "https://supermercado.eroski.es/es/productdetail/227603-anillas-a-la-romana-eroski-bolsa-300-g/"
+  },
+  "jamoncitos": {
+   "ref": "20971040",
+   "nombre": "Jamoncitos de pollo EROSKI, 6-9 uds, bandeja peso aprox. 950 g",
+   "envase": 950,
+   "url": "https://supermercado.eroski.es/es/productdetail/20971040-jamoncitos-de-pollo-eroski-6-9-uds-bandeja-peso-aprox-950-g/",
+   "aprox": true
+  },
+  "gallina": {
+   "ref": "5154539",
+   "nombre": "Media gallina partida EROSKI, bandeja al peso aprox. 400 g",
+   "envase": 400,
+   "url": "https://supermercado.eroski.es/es/productdetail/5154539-media-gallina-partida-eroski-bandeja-al-peso-aprox-400-g/",
+   "aprox": true
+  },
+  "carcasa_pollo": {
+   "ref": "22307268",
+   "nombre": "Carcasas de pollo EROSKI, bandeja al peso aprox. 950 g",
+   "envase": 950,
+   "url": "https://supermercado.eroski.es/es/productdetail/22307268-carcasas-de-pollo-eroski-bandeja-al-peso-aprox-950-g/",
+   "aprox": true
   }
  },
  "sin_equivalente": [
   "brocoli",
-  "edamame"
+  "edamame",
+  "fresas",
+  "masa_empanada",
+  "pizza_frankfurt",
+  "pizza_margarita",
+  "tortillas_maxi",
+  "pan_molde"
  ]
 }
