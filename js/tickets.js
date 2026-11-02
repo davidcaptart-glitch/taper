@@ -574,8 +574,8 @@ function saveTicket(tk,date,dest,force){
   S.tickets.push(t);
   if(S.ticketSkip)delete S.ticketSkip[dest.m+"|"+dest.key];
   if(!old){reportTicketPrices(t);rewardTicket(t)}
-  // Marca como comprado lo de la lista que aparece en el ticket (y apunta qué marcó, para quitarlo si se borra)
-  t.checks=[];if(dest.key!=="suelta")for(const l of lines)if(l.pid&&!l.extra&&!l.dev&&l.amount>0){const k=checkKey(dest.m,dest.key,l.pid);if(!S.checks[k]){S.checks[k]=true;t.checks.push(k)}}
+  // Marca como comprado lo de la lista que aparece en el ticket, con la fecha de la compra (y apunta qué marcó, para quitarlo si se borra)
+  t.checks=[];if(dest.key!=="suelta")for(const l of lines)if(l.pid&&!l.extra&&!l.dev&&l.amount>0){const k=checkKey(dest.m,dest.key,l.pid);if(!S.checks[k]){S.checks[k]=true;S.checkedAt=S.checkedAt||{};S.checkedAt[k]=S.checkedAt[k]||date;t.checks.push(k)}}
   save();dlg.close();render();
   const ex=old?[]:lines.filter(l=>l.extra&&l.amount>0);
   if(ex.length)setTimeout(()=>askExtras(t,ex),250);else toast((old?"Ticket cambiado: ":"Ticket guardado: ")+eur(t.food)+" en comida");

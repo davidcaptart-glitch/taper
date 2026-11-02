@@ -81,7 +81,7 @@ function queueShare(now){
 async function pullShareMarks(){
   if(!S.share||!servidorOn())return;
   try{const d=await (await fetch(srv()+"/compartido?codigo="+S.share.codigo,{cache:"no-store"})).json();if(!d||!d.marcas)return;
-    let ch=false;for(const [k,v] of Object.entries(d.marcas)){if(!!S.checks[k]!==!!v.on){ch=true;if(v.on)S.checks[k]=true;else delete S.checks[k]}}
+    let ch=false;for(const [k,v] of Object.entries(d.marcas)){if(!!S.checks[k]!==!!v.on){ch=true;S.checkedAt=S.checkedAt||{};if(v.on){S.checks[k]=true;S.checkedAt[k]=todayISO();if(typeof snapBought==="function")snapBought(k)}else{delete S.checks[k];delete S.checkedAt[k];if(S.bought)delete S.bought[k]}}}
     if(ch){save();if(tab==="compra")render()}}catch(e){}
 }
 function markShared(codigo,key,on){if(!servidorOn())return;fetch(srv()+"/compartido/marcar",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({codigo,key,on})}).catch(()=>{})}

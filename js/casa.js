@@ -3,7 +3,8 @@
    - Quien lo abre entra en la casa como esa persona y solo contesta lo suyo: objetivos, deporte, dieta y gustos.
    - Lo de la casa se guarda en el servidor (cs:<código>) con un número de versión. Al guardar, cada móvil manda sus
      cambios; si otro móvil cambió algo mientras tanto, se juntan: lo que solo cambió uno se queda, y si los dos
-     cambiaron lo mismo gana el último.
+     cambiaron lo mismo gana el último. Las listas de cosas con id (ajustes de la despensa, usos de las bolsas, congelador,
+     tickets…) se juntan cosa a cosa: si los dos móviles añaden algo a la vez, se quedan las dos.
    - Lo de cada móvil no se comparte: quién eres tú, avisos, estética, coins, encuestas… (LOCAL_KEYS). */
 "use strict";
 
@@ -14,6 +15,8 @@ const sharedPart=s=>{const o={};for(const k of Object.keys(s))if(!LOCAL_KEYS.has
 const jeq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const isObj=x=>x&&typeof x==="object"&&!Array.isArray(x);
 const byId=a=>Array.isArray(a)&&a.length>0&&a.every(x=>isObj(x)&&x.id!=null);
+// Clave de cada cosa de una lista: su id o, si no tiene (de una versión anterior), su contenido
+const itemKey=x=>isObj(x)&&x.id!=null?"i:"+x.id:"j:"+JSON.stringify(x);
 // Junta tres versiones: la última que se sincronizó (b), la de este móvil (l) y la del servidor (r)
 function merge3(b,l,r,depth=0){
   if(jeq(l,b))return r;            // aquí no se tocó: vale lo del servidor
@@ -22,8 +25,8 @@ function merge3(b,l,r,depth=0){
     for(const k of new Set([...Object.keys(bb),...Object.keys(l),...Object.keys(r)])){const v=merge3(bb[k],l[k],r[k],depth+1);if(v!==undefined)o[k]=v}
     return o}
   if(depth<4&&(byId(l)||byId(r))&&Array.isArray(l)&&Array.isArray(r)){
-    const m=a=>Object.fromEntries((Array.isArray(a)?a:[]).filter(isObj).map(x=>[x.id,x])),bm=m(b),lm=m(l),rm=m(r),out=[];
-    for(const id of [...new Set([...r.map(x=>x.id),...l.map(x=>x.id)])]){const v=merge3(bm[id],lm[id],rm[id],depth+1);if(v!==undefined)out.push(v)}
+    const m=a=>Object.fromEntries((Array.isArray(a)?a:[]).map(x=>[itemKey(x),x])),bm=m(b),lm=m(l),rm=m(r),out=[];
+    for(const id of [...new Set([...r.map(itemKey),...l.map(itemKey)])]){const v=merge3(bm[id],lm[id],rm[id],depth+1);if(v!==undefined)out.push(v)}
     return out}
   return l;                        // los dos cambiaron lo mismo: gana este móvil, que es el último en guardar
 }
