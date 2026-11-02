@@ -14,6 +14,7 @@ const prevMonthOf=m=>{const [y,mm]=m.split("-").map(Number);return mm===1?`${y-1
 function eatenUse(u){
   const today=todayISO(),st=u.slot&&u.slot.id?((S.meals||{})[u.slot.id]||{}).status:null;
   if(st==="fuera"||st==="nada"||st==="otro")return false;
+  if(u.slot&&u.slot.id&&(S.cooked||{})[u.slot.id])return true;   // lo marcaste como cocinado: ya se gastó
   return u.date<today||(u.date===today&&!!st);
 }
 // Lo que entra (compras marcadas, compras hechas, tickets, a mano) y lo que sale (platos cocinados), en orden

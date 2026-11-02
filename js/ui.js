@@ -746,7 +746,7 @@ function openRecipe(id,sid){
     dlg.querySelector("#myPhDel")?.addEventListener("click",async()=>{await deleteMyPhoto(r.id);draw();render()});
     dlg.querySelector("#rShare").onclick=()=>shareRecipe(r,r.vars[vi],serv);
     dlg.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{serv=Math.max(0.5,serv+Number(b.dataset.s));draw()});
-    dlg.querySelector("[data-cook]")?.addEventListener("click",()=>openCook(r,r.vars[vi],serv));
+    dlg.querySelector("[data-cook]")?.addEventListener("click",()=>openCook(r,r.vars[vi],serv,sid));
     dlg.querySelectorAll("[data-choice]").forEach(x=>x.onchange=()=>{const [pid,g]=x.dataset.choice.split("|"),p=S.people.find(y=>y.id===pid);p.choices={...(p.choices||{}),[g]:x.value};save();toast("Apuntado para "+(isMe(p)?"ti":personName(p)))});
     dlg.querySelectorAll("[data-rt]").forEach(b=>b.onclick=()=>{recTab=b.dataset.rt;const y=dlg.scrollTop;draw();dlg.scrollTop=y});
     const who=()=>S.people.find(p=>p.id===dlg.querySelector("#rWho").value);
@@ -774,20 +774,25 @@ function similar(r){
 
 /* ---------- Modo cocina ---------- */
 let wakeLock=null, cookTimer=null;
-async function openCook(r,v,serv){
-  let i=0;
+async function openCook(r,v,serv,sid){
+  // Antes de los pasos: la preparación (si la receta tiene algo que picar, cortar, batir o pesar)
+  const plan=prepPlan([{r,v,serv,label:r.name}]);let i=plan.tasks.length?-1:0;
   try{wakeLock=await navigator.wakeLock?.request("screen")}catch(e){}
   const draw=()=>{
+    if(i===-1){showDialog(`<div class="cook"><div class="top"><span class="n">Antes de empezar · ${esc(r.name)}</span><button class="close" data-x aria-label="Salir">✕</button></div>
+      ${v.tools&&v.tools.length?`<div class="needs big"><b>Saca esto</b><div class="tools">${v.tools.map(t=>`<span>${toolIco(t)} ${esc(t)}</span>`).join("")}</div></div>`:""}
+      <div class="txt" style="font-size:1.2rem">Deja esto preparado (para ${String(serv).replace(".",",")} raciones):</div>${prepHTML(plan,false)}
+      <div class="bot" style="margin-top:14px"><button class="btn wide" data-next>Empezar a cocinar</button></div></div>`,true);
+      dlg.querySelector("[data-next]").onclick=()=>{i=0;draw()};return}
     const step=v.steps[i], x=(v.info||[])[i], mm=step.match(/(\d+)(?:\s*[–-]\s*(\d+))?\s*min/), m=x&&x.min?[null,String(x.min)]:mm;
     showDialog(`<div class="cook"><div class="top"><span class="n">Paso ${i+1} de ${v.steps.length} · ${esc(r.name)}</span><button class="close" data-x aria-label="Salir">✕</button></div>
-      ${i===0&&v.tools&&v.tools.length?`<div class="needs big"><b>Saca esto</b><div class="tools">${v.tools.map(t=>`<span>${toolIco(t)} ${esc(t)}</span>`).join("")}</div></div>`:""}
-      <div class="txt">${esc(step)}</div>
+      ${i===0&&!plan.tasks.length&&v.tools&&v.tools.length?`<div class="needs big"><b>Saca esto</b><div class="tools">${v.tools.map(t=>`<span>${toolIco(t)} ${esc(t)}</span>`).join("")}</div></div>`:""}
+      <div class="txt">${esc(step)}</div>${stepUsesHTML(r,v,i,serv)}
       ${stepTags(x).length?`<div class="stags big">${stepTags(x).map(t=>`<span>${esc(t)}</span>`).join("")}</div>`:""}
-      ${i===0?`<div class="small muted">Para ${String(serv).replace(".",",")} raciones: ${r.ing.map(([p,q])=>esc(P[p].name.toLowerCase())+" "+fmtQty(q*serv,P[p].unit)).join(", ")}</div>`:""}
       ${m?`<div class="timer" id="tmr">${m[2]||m[1]}:00</div><button class="btn ghost wide" id="tmrBtn">⏱ Temporizador de ${m[2]||m[1]} min</button>`:""}
-      <div class="bot" style="margin-top:14px"><button class="btn ghost" data-prev ${i===0?"disabled":""}>Anterior</button><button class="btn" data-next>${i===v.steps.length-1?"¡Terminado!":"Siguiente"}</button></div></div>`,true);
+      <div class="bot" style="margin-top:14px"><button class="btn ghost" data-prev ${i===0&&!plan.tasks.length?"disabled":""}>Anterior</button><button class="btn" data-next>${i===v.steps.length-1?"¡Terminado!":"Siguiente"}</button></div></div>`,true);
     dlg.querySelector("[data-prev]").onclick=()=>{i--;draw()};
-    dlg.querySelector("[data-next]").onclick=()=>{if(i<v.steps.length-1){i++;draw()}else{dlg.close();toast("¡Que aproveche!")}};
+    dlg.querySelector("[data-next]").onclick=()=>{if(i<v.steps.length-1){i++;draw()}else{const sl=sid?slotFor(sid.slice(0,10),sid.slice(11)):null;markCooked(sl);dlg.close();if(sl)render();toast(sl?"¡Que aproveche! Lo he descontado de la despensa":"¡Que aproveche!")}};
     const tb=dlg.querySelector("#tmrBtn");if(tb)tb.onclick=()=>startTimer(Number(m[2]||m[1])*60);
   };
   dlg.addEventListener("close",()=>{clearInterval(cookTimer);try{wakeLock&&wakeLock.release()}catch(e){};wakeLock=null},{once:true});
@@ -795,25 +800,31 @@ async function openCook(r,v,serv){
 }
 // Modo cocina de una sesión: todos los platos en una sola lista de pasos
 async function openBatchCook(cd,items){
-  const plan=batchPlan(items).steps;let i=0;
+  const plan=batchPlan(items).steps,prep=prepPlan(items.map(o=>({r:o.r,v:o.v,serv:cookPortions(o.sl),label:o.r.name})));let i=prep.tasks.length?-1:0;
   try{wakeLock=await navigator.wakeLock?.request("screen")}catch(e){}
   const draw=()=>{
+    if(i===-1){showDialog(`<div class="cook"><div class="top"><span class="n">Antes de encender nada · ${items.length} platos</span><button class="close" data-x aria-label="Salir">✕</button></div>
+      <div class="needs big"><b>Saca esto</b><div class="tools">${[...new Set(items.flatMap(o=>o.v.tools||[]))].map(t=>`<span>${toolIco(t)} ${esc(t)}</span>`).join("")}</div></div>
+      <div class="txt" style="font-size:1.2rem">Prepáralo todo junto: lo que piden varios platos, de una vez.</div>${prepHTML(prep,true)}
+      <div class="bot" style="margin-top:14px"><button class="btn wide" data-next>Empezar a cocinar</button></div></div>`,true);
+      dlg.querySelector("[data-next]").onclick=()=>{i=0;draw()};return}
     const p=plan[i],r=p.o.r;
     let body;
     if(p.tupper){const sp=tupperSplit(p.o.sl),k=keepPlan(r,p.o.sl);
       body=`<div class="txt">${esc(r.name)} está listo. Repártelo en ${sp.length} ${sp.length===1?"táper":"tápers"}${k.freeze?" y llévalo al congelador cuando se enfríe":" y, cuando se enfríe, a la nevera"}:</div>
         <div class="tsplit">${sp.map(t=>`<div class="tsp"><span>🥡 ${esc(t.when)}</span><span>${String(t.rac).replace(".",",")} rac. · ${esc(t.who.join(", "))}</span></div>`).join("")}</div>`}
     else{const tg=stepTags(p.info);
-      body=`<div class="txt">${esc(p.text)}</div>${tg.length?`<div class="stags big">${tg.map(t=>`<span>${esc(t)}</span>`).join("")}</div>`:""}
+      body=`<div class="txt">${esc(p.text)}</div>${stepUsesHTML(r,p.o.v,p.i,cookPortions(p.o.sl))}${tg.length?`<div class="stags big">${tg.map(t=>`<span>${esc(t)}</span>`).join("")}</div>`:""}
         ${p.passive?`<div class="okbox small">Esto se hace solo: pon el temporizador y sigue con el siguiente paso.</div>`:""}
         ${p.info&&p.info.min?`<div class="timer" id="tmr">${p.info.min}:00</div><button class="btn ghost wide" id="tmrBtn">⏱ Temporizador de ${p.info.min} min</button>`:""}`}
     showDialog(`<div class="cook"><div class="top"><span class="n">Paso ${i+1} de ${plan.length} · minuto ${p.at}</span><button class="close" data-x aria-label="Salir">✕</button></div>
       <div class="bcdish">${dishImg(r,"s")}<b>${esc(r.name)}</b></div>
-      ${i===0?`<div class="needs big"><b>Saca esto</b><div class="tools">${[...new Set(items.flatMap(o=>o.v.tools||[]))].map(t=>`<span>${toolIco(t)} ${esc(t)}</span>`).join("")}</div></div>`:""}
+      ${i===0&&!prep.tasks.length?`<div class="needs big"><b>Saca esto</b><div class="tools">${[...new Set(items.flatMap(o=>o.v.tools||[]))].map(t=>`<span>${toolIco(t)} ${esc(t)}</span>`).join("")}</div></div>`:""}
       ${body}
-      <div class="bot" style="margin-top:14px"><button class="btn ghost" data-prev ${i===0?"disabled":""}>Anterior</button><button class="btn" data-next>${i===plan.length-1?"¡Terminado!":"Siguiente"}</button></div></div>`,true);
+      <div class="bot" style="margin-top:14px"><button class="btn ghost" data-prev ${i===0&&!prep.tasks.length?"disabled":""}>Anterior</button><button class="btn" data-next>${i===plan.length-1?"¡Terminado!":"Siguiente"}</button></div></div>`,true);
     dlg.querySelector("[data-prev]").onclick=()=>{i--;draw()};
-    dlg.querySelector("[data-next]").onclick=()=>{if(i<plan.length-1){i++;draw()}else{dlg.close();toast("¡Sesión terminada! Tápers listos")}};
+    // Al repartir un plato en tápers ya está cocinado: se descuenta de la despensa en ese momento
+    dlg.querySelector("[data-next]").onclick=()=>{if(p.tupper)markCooked(p.o.sl);if(i<plan.length-1){i++;draw()}else{dlg.close();render();toast("¡Sesión terminada! Tápers listos y descontado de la despensa")}};
     const tb=dlg.querySelector("#tmrBtn");if(tb)tb.onclick=()=>startTimer(Number(p.info.min)*60);
   };
   dlg.addEventListener("close",()=>{try{wakeLock&&wakeLock.release()}catch(e){};wakeLock=null},{once:true});
@@ -840,6 +851,7 @@ function openSession(cd){
   showDialog(`<div class="mod">${closeBtn}<div class="veb">Sesión de cocina</div><h2 class="vh" style="font-size:1.8rem">${esc(longDate(cd))}</h2>
     <div class="okbox"><b>Cocinas para ${cv.days} ${cv.days===1?"día":"días"}</b>: del ${esc(DAYS[dow(cv.from)].toLowerCase())} al ${esc(DAYS[dow(cv.to)].toLowerCase())}. ${out.length} platos repartidos en ${nTp} tápers.</div>
     <p class="small muted">Unos ${Math.max(active,longest)} min si vas encadenando. Empieza por el horno y, mientras, ve con la vitro. Pon una etiqueta a cada táper con el día.</p>
+    ${(pp=>out.length?sessionIngsHTML(pp)+(pp.tasks.length?`<h3 class="psh">1. Antes de encender nada: preparación</h3><p class="small muted" style="margin:0 0 6px">Lo que piden varios platos se hace todo junto. Toca «Cómo» si no sabes hacerlo.</p>${prepHTML(pp,true)}<h3 class="psh">2. A cocinar</h3>`:""):"")(prepPlan(out.map(o=>({r:o.r,v:o.v,serv:cookPortions(o.sl),label:o.r.name}))))}
     ${out.length?`<button class="cookrow" id="cookAll"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg></span><b>Cocinar todo paso a paso</b><small class="muted" style="margin-left:auto">unos ${batchPlan(out).total} min</small></button>`:""}
     ${out.map((o,i)=>`<div class="session sesscard">${dishImg(o.r,"s")}<div class="sessin"><b>${i+1}. ${esc(o.r.name)}</b><div class="small muted">${APP[o.v.app]} · ${o.v.time} min (${o.v.active} de trabajo) · ${String(cookPortions(o.sl)).replace(".",",")} raciones</div>
       <div class="tsplit"><b>Repártelo en ${tupperSplit(o.sl).length} ${tupperSplit(o.sl).length===1?"táper":"tápers"}${o.k.freeze?" · ❄️ al congelador":""}</b>

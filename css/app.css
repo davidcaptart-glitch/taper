@@ -1103,3 +1103,19 @@ details.aisle{margin-top:10px}
 .bgh{font-size:.95rem;margin:12px 0 2px}
 .bgrow small{display:block;color:var(--muted);font-size:.75rem}
 .bgrow{flex-wrap:wrap}.bgrow>span:first-child{flex:1 1 100%}.bgrow>span:last-child{width:100%;justify-content:flex-end}
+
+/* Preparación: lo que se deja listo antes de cocinar y lo que se usa en cada paso */
+.prep2{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+.ptask{display:flex;gap:10px;align-items:flex-start;background:var(--surface-2);border-radius:14px;padding:10px 12px;text-align:left}
+.ptask input{width:auto;margin-top:3px;flex:none}
+.ptask small{display:block;color:var(--muted);font-size:.78rem}
+.ptask details{margin-top:4px;font-size:.85rem}.ptask details summary{color:var(--accent);cursor:pointer;font-weight:600}
+.ptask details p{margin:4px 0 0;color:var(--ink-2)}
+.ptask:has(input:checked) b{text-decoration:line-through;opacity:.55}
+.phand{margin-top:4px;font-size:.88rem}.phand div{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.phand span{background:var(--surface-2);border-radius:99px;padding:4px 10px}
+.uses{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0}
+.uses span{color:var(--muted);font-size:.85rem}.uses b{background:var(--accent-soft);color:var(--ink);border-radius:99px;padding:5px 12px;font-size:.95rem}
+.psh{font-size:1rem;margin:14px 0 6px}
+.sing{margin:10px 0;background:var(--surface);border-radius:16px;padding:10px 12px;box-shadow:var(--sh-1)}
+.sing summary{cursor:pointer}.sing .fixed small{display:block}

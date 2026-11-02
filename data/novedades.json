@@ -932,6 +932,18 @@
         "Se descuentan al usarlas: con «Usar una», al comerla un día desde la despensa o, si dices de qué producto es, solas cuando cocinas un plato que lo lleva y no lo tenías en la despensa.",
         "Lo más antiguo se gasta primero y te aviso de lo que lleva más de 3 meses."
       ]
+    },
+    {
+      "version": 117,
+      "fecha": "2026-11-02",
+      "titulo": "Preparación del menú con cantidades",
+      "cambios": [
+        "Antes de cocinar, una lista de preparación: lavar, pelar, batir los huevos, picar la cebolla, cortar en dados, abrir y escurrir los botes, pesar el arroz… con la cantidad total y «Cómo» se hace cada cosa. Puedes ir marcando lo hecho.",
+        "En la sesión de la semana, lo que piden varios platos se prepara todo junto (por ejemplo, toda la cebolla de una vez) y se dice para qué plato es cada cosa.",
+        "«Lo que vas a usar»: todos los ingredientes de la sesión con su cantidad y si los tienes en la despensa.",
+        "En cada paso, las cantidades exactas para todas las raciones y tápers: «Usa: 9 huevos · 450 g de calabacín», el arroz también en vasos y el ajo en dientes.",
+        "Al terminar un plato (o al repartirlo en tápers) se descuenta de la despensa en ese momento."
+      ]
     }
   ]
 }
