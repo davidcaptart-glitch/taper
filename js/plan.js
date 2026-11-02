@@ -580,14 +580,15 @@ function weekCost(start,slotsIn){
   for(const [p,c] of Object.entries(q))t+=P[p].keep==="despensa"?c/P[p].env*price(p):packsFor(p,c)*price(p);
   return Math.round(t*100)/100;
 }
-// Lo que se puede gastar en comida esa semana: presupuesto semanal menos envío y la parte de básicos
-function weekFoodTarget(start){
+// Lo que se puede gastar en comida esa semana: presupuesto semanal menos envío y la parte de básicos.
+// raw: la parte del presupuesto que le toca a la semana, sin el apretón interno (tscale); es la que se enseña
+function weekFoodTarget(start,raw){
   const m=monthOfWeek(start), n=Math.max(1,weeksInMonth(m).length);
   // Sin presupuesto fijado (alta nueva): sin tope; se propone lo razonable y luego se dice lo que cuesta
   if(!Number(S.home.budget.month)&&!Number(S.home.budget.week)&&!Number(((S.monthPrep||{})[m]||{}).budget))return Infinity;
   const fee=tarifa(S.home.shop.weekMode).envio, monthFee=tarifa(S.home.shop.monthMode).envio/n;
   // tscale: cuánto se aprietan las semanas para que la compra real del mes (con la despensa en paquetes enteros) quepa
-  return (weekBudget(m)-fee-monthFee-(Number(S.home.budget.basics)||0)/n)*(((S.home.tscale||{})[m])||1);
+  return (weekBudget(m)-fee-monthFee-(Number(S.home.budget.basics)||0)/n)*(raw?1:(((S.home.tscale||{})[m])||1));
 }
 // Cambia los platos más caros por otros más baratos que sigan encajando, hasta llegar al presupuesto
 function fitBudget(start){

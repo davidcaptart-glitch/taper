@@ -954,6 +954,19 @@
         "Filtra por el día en que lo subiste o por el día de la compra, por un día concreto, por supermercado o buscando un producto o una tienda.",
         "«Informe del mes»: cuánto has gastado, en comida y en lo demás, y en qué se va el dinero por tipo: fruta y verdura, carne y pescado, lácteos, despensa… y también limpieza, higiene, bebé, mascotas, bolsas o envío. Con lo que ha cambiado respecto al mes anterior, lo que más has comprado y dónde."
       ]
+    },
+    {
+      "version": 119,
+      "fecha": "2026-11-02",
+      "titulo": "El presupuesto cuadra y cocinar cuenta",
+      "cambios": [
+        "El botón «▶ Cocinar» del plato de hoy ya lo da por cocinado y lo descuenta de la despensa, con las raciones que de verdad cocinas (también las de otros días).",
+        "Lo cocinado se ve: «✓ Cocinado» en el plato de hoy y en el del día.",
+        "Cada semana se compara con su parte del presupuesto del mes: se acabaron avisos como «tu presupuesto deja 0,29 €» cuando el mes cabe.",
+        "Sin presupuesto puesto ya no sale «te pasas»: al planificar la semana ves lo previsto del mes, igual que arriba.",
+        "Al fijar el presupuesto, el deslizador empieza en lo que calculo que cuesta tu menú y enseña esa cifra (antes ponía 0 € y guardaba 150 €).",
+        "«Tu menú está listo» dice lo mismo que la cabecera, y deja de dar la cifra cuando ya tienes presupuesto."
+      ]
     }
   ]
 }

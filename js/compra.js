@@ -232,8 +232,8 @@ function monthReview(m){
   const reasons=[];
   if(fees>0)reasons.push({eur:fees,txt:`Envíos a domicilio: ${eur(fees)}`,fix:{weekMode:"tienda"},fixTxt:"Compra semanal en tienda, llevándotela tú"});
   if(sh.extrasTotal>0)reasons.push({eur:sh.extrasTotal,txt:`Caprichos y platos fijos sin receta: ${eur(sh.extrasTotal)}`});
-  const over=weeks.filter(st=>S.plans[st]&&weekCost(st)>weekFoodTarget(st)+0.5);
-  if(over.length)reasons.push({eur:over.reduce((t,st)=>t+weekCost(st)-weekFoodTarget(st),0),txt:`${over.length} ${over.length===1?"semana se pasó":"semanas se pasaron"} incluso con los platos más baratos que encajaban`,fix:{sacrifice:"proteina"},fixTxt:"Menos pescado y carne"});
+  const over=weeks.filter(st=>S.plans[st]&&weekCost(st)>weekFoodTarget(st,true)+0.5);
+  if(over.length)reasons.push({eur:over.reduce((t,st)=>t+weekCost(st)-weekFoodTarget(st,true),0),txt:`${over.length} ${over.length===1?"semana se pasó":"semanas se pasaron"} incluso con los platos más baratos que encajaban`,fix:{sacrifice:"proteina"},fixTxt:"Menos pescado y carne"});
   const stock=sh.total-fees-sh.extrasTotal-(Number(S.home.budget.basics)||0)-eaten;
   if(stock>5)reasons.push({eur:stock,txt:`Envases enteros: ${eur(stock)} de comida que queda en casa para otras semanas (arroz, aceite de los botes, congelados…)`});
   if(real&&realEntries.length>=listsWith&&real>sh.total+3)reasons.push({eur:real-sh.total,txt:`Pagaste ${eur(real-sh.total)} más de lo previsto en la lista: compras fuera de la lista o precios distintos`});

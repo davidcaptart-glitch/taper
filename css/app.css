@@ -849,6 +849,7 @@ input.switch:checked::after{transform:translateX(20px)}
 
 /* ---------- Por lotes ---------- */
 .batchtag{display:inline-block;font-size:.76rem;font-weight:650;padding:4px 10px;border-radius:99px;background:#FDE1C9;color:#7a3d0c;margin:4px 0 2px}
+.batchtag.done{background:#DDF1E3;color:#1f6b3a}
 .tsplit{margin:8px 0}
 .tsplit>b{display:block;font-size:.85rem;margin-bottom:6px}
 .tsp{display:flex;justify-content:space-between;gap:10px;font-size:.82rem;padding:6px 10px;border-radius:10px;background:var(--surface-2);margin:4px 0}

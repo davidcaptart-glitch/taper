@@ -374,10 +374,12 @@ function stepBody(fullId){
       <div class="field"><label for="wzMPA">Si en esa semana ya cambia el mes, avísame antes, el día de la semana anterior</label>${dowSelect("wzMPA",H.monthPrepAlt??4)}</div>
       <div class="okbox small" id="mpPrev">${monthPrepPreview(H)}</div></div>`;
   if(id==="compra"){const sh=H.shop,b=H.budget;
+    // Sin presupuesto aún: el deslizador empieza (y se ve) en lo que calculo que cuesta el menú
+    const bm=Math.min(900,Math.max(40,Number(b.month)||Math.round((estimateMonthBudget()||150)/5)*5));
     const modeChips=(k,v)=>Object.entries(SHOP_MODES).map(([m,t])=>chip("data-mode",k+":"+m,v===m,ico(SHOP_ICO[m])+" "+t)).join("");
     const tf=Object.entries(SHOP_MODES).map(([m,t])=>{const x=tarifa(m);return `${t}: ${x.envio?eur(x.envio)+" de envío":"sin envío"}${x.minimo?", pedido mínimo "+eur(x.minimo):""}`}).join(" · ");
-    return `<div class="budget"><div class="bnum"><span id="bVal">${Math.round(b.month)}</span><sup>€</sup></div><div class="bsub">al mes · unos <b id="bWeek">${eur((Number(b.month)||0)/weeksInMonth(todayISO().slice(0,7)).length)}</b> a la semana</div>
-      <input type="range" id="wzBM" min="40" max="900" step="5" value="${Math.min(900,Math.max(40,Number(b.month)||150))}" style="--p:${(Math.min(900,Math.max(40,Number(b.month)||150))-40)/8.6}%" aria-label="Presupuesto al mes">
+    return `<div class="budget"><div class="bnum"><span id="bVal">${bm}</span><sup>€</sup></div><div class="bsub">al mes · unos <b id="bWeek">${eur(bm/weeksInMonth(todayISO().slice(0,7)).length)}</b> a la semana</div>
+      <input type="range" id="wzBM" min="40" max="900" step="5" value="${bm}" style="--p:${(bm-40)/8.6}%" aria-label="Presupuesto al mes">
       <div class="brange"><span>40 €</span><span>900 €</span></div>
       <div class="bcount"><span class="ico">👥</span><span><b>Cocinas para</b><small>${S.people.length===1?"Solo tú":S.people.map(personName).join(", ")}</small></span><span class="bn">${S.people.length}</span></div></div>
     <details class="more"><summary>Más ajustes del presupuesto</summary>
@@ -603,7 +605,7 @@ function afinarCard(){
   const A=S.afinar;
   if(!A||A.state!=="ask")return `<div class="row" style="justify-content:flex-start;margin:6px 0"><button class="btn ghost small" id="afinarOpen">${ico("sparkles")} Afinar mi menú</button></div>`;
   return `<div class="afcard"><b class="aft">Tu menú está listo</b>
-    <p class="small" style="margin:4px 0 8px">${A.cost?`Sale por unos <b>${eur(A.cost)} al mes</b>. `:""}He supuesto <b>comida y cena en casa todos los días</b>, que cocinas cada día y que compras en tienda.</p>
+    <p class="small" style="margin:4px 0 8px">${budgetSet()?"":`Este mes sale por unos <b>${eur(shopping(month).total)}</b>. `}He supuesto <b>comida y cena en casa todos los días</b>, que cocinas cada día y que compras en tienda.</p>
     <button class="btn ghost small" id="haveHome" style="margin:2px 0 8px">${ico("basket")} ¿Ya tienes cosas en casa? No te las pongo en la compra${(S.atHome||[]).length?` (${S.atHome.length})`:""}</button>
     <details class="afdet"><summary>¿Quieres afinarlo más?</summary>${afinarList(true)}</details></div>`;
 }
