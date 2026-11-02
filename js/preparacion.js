@@ -8,20 +8,25 @@ const lowTxt=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,
 const ING_STOP=new Set(["hacendado","bote","bolsa","pack","malla","latas","lata","fileteada","fileteado","congelado","congelada","congelados","ultracongelado","ultracongelada","natural","fresco","fresca","entero","entera","grande","grandes","medianos","docena","cocido","cocida","cocidos","cocidas","para","con","sin","del","las","los","una","unos","sobres","brik","bandeja","envase","tarro"]);
 const stemOf=w=>w.length>=4?w.replace(/(es|s)$/,""):w;
 // Cómo se llama en las recetas lo que en la tienda tiene otro nombre
-const ING_ALIAS=[[/macarr|espagueti|spaghetti|fideo|tallarin|penne|tortellini|lasa|pasta/,"pasta"],[/contramuslo|muslo|pechuga|alas de pollo|jamoncito/,"pollo"],[/merluza|bacalao|salmon|dorada|lubina|abadejo/,"pescado"],[/carne picada|picada/,"carne"]];
+const ING_ALIAS=[[/macarr|espagueti|spaghetti|fideo|tallarin|penne|tortellini|lasa|pasta/,"pasta"],[/contramuslo|muslo|pechuga|alas de pollo|jamoncito/,"pollo"],[/merluza|bacalao|salmon|dorada|lubina|abadejo/,"pescado"],[/carne picada|picada/,"carne"],
+  [/burger|hamburguesa/,"hamburguesa"],[/^ensalada/,"lechuga"],[/pan de molde/,"rebanada"],[/pan de molde/,"sandwich"],[/pan de molde/,"tostada"],[/pez espada/,"emperador"],[/alas de pollo/,"alita"],
+  [/pechuga de pollo/,"filete"],[/^repollo/,"col"],[/queso fresco/,"fresco"]];
+// La fruta y la verdura frescas también se encuentran por el grupo («corta las verduras», «pela la fruta»)
+const FRUIT_RE=/^(platano|kiwi|pera|manzana|mandarina|naranja|fresa|melon|sandia|mango|uva|melocoton|nectarina|ciruela|frambuesa|arandano)/;
+const groupAlias=(pid,nm)=>(P[pid].sec||"")!=="Fruta y verdura"?[]:FRUIT_RE.test(nm.trim())?["fruta"]:/^(limon|lima|ajo|perejil|cilantro|albahaca|hierbabuena|aguacate|patata|boniato|ensalada)/.test(nm.trim())?[]:["verdura"];
 // Cómo encontrar cada ingrediente de una receta en sus pasos (sin las palabras que comparte con otro ingrediente)
 // Si las palabras propias de un ingrediente no salen en los pasos (contramuslo → «el pollo»), vale también la compartida
 function ingKeyMap(r){
   const words={};for(const [pid] of r.ing){const nm=lowTxt(P[pid].name).replace(/\(.*?\)/g," ");
-    words[pid]=[...new Set(nm.split(/[^a-zñ]+/).filter(w=>w.length>=3&&!ING_STOP.has(w)).map(stemOf).concat(ING_ALIAS.filter(([re])=>re.test(nm)).map(([,a])=>a)))]}
+    words[pid]=[...new Set(nm.split(/[^a-zñ]+/).filter(w=>w.length>=3&&!ING_STOP.has(w)).map(stemOf).concat(ING_ALIAS.filter(([re])=>re.test(nm)).map(([,a])=>a),groupAlias(pid,nm)))]}
   const cnt={};for(const ws of Object.values(words))for(const w of ws)cnt[w]=(cnt[w]||0)+1;
-  const all=lowTxt(r.vars.flatMap(v=>v.steps).join(" ")).split(/[^a-zñ]+/),inSteps=k=>all.some(w=>k.length<4?w===k||w===k+"s":w.startsWith(k));
+  const all=lowTxt(r.vars.flatMap(v=>v.steps).join(" ")).split(/[^a-zñ]+/),inSteps=k=>all.some(w=>k.length<4?w===k||w===k+"s"||w===k+"es":w.startsWith(k));
   const out={};for(const [pid,ws] of Object.entries(words)){const own=ws.filter(w=>cnt[w]===1),useOwn=own.some(inSteps);out[pid]={own:useOwn?own:[],shared:useOwn?[]:ws.filter(w=>cnt[w]>1).concat(own)}}
   return out;
 }
 // ¿Qué ingredientes salen en este texto?
 function ingsIn(text,r,km){
-  const ws=lowTxt(text).split(/[^a-zñ]+/).filter(Boolean),has=k=>ws.some(w=>k.length<4?w===k||w===k+"s":w.startsWith(k));
+  const ws=lowTxt(text).split(/[^a-zñ]+/).filter(Boolean),has=k=>ws.some(w=>k.length<4?w===k||w===k+"s"||w===k+"es":w.startsWith(k));
   const own=r.ing.map(([p])=>p).filter(p=>km[p].own.some(has));
   // «tomate» suelto no cuenta si en la frase ya está el «tomate triturado»
   const shared=r.ing.map(([p])=>p).filter(p=>!own.includes(p)&&km[p].shared.some(has)&&!own.some(o=>km[p].shared.some(s=>lowTxt(P[o].name).includes(s))));
@@ -31,12 +36,21 @@ function ingsIn(text,r,km){
 const cleanName=pid=>P[pid].name.replace(/\s*\(.*?\)/g,"").replace(/\s+(xl|l|m|s)$/i,"").toLowerCase();
 const vasos=n=>{const v=Math.max(0.5,Math.round(n*2)/2);return `${String(v).replace(".",",")} ${v===1?"vaso":"vasos"}`};
 const canPk=pid=>P[pid].unit==="g"&&(P[pid].name.match(/\b(bote|lata|latas|tarro)\b/i)||[])[1];
+// Números de cocina: de medio en medio («½», «1½», «2»); las raciones se dicen igual («para 2½»), por dentro se guardan con decimales
+const halfTxt=n=>{const v=Math.max(0.5,Math.round(Number(n)*2)/2),i=Math.floor(v);return (i?String(i):"")+(v%1?"½":"")};
+const racTxt=n=>halfTxt(n);
+// Gramos y mililitros redondeados como en una receta: de 5 en 5 hasta 100 y de 10 en 10 a partir de ahí (lo muy poco, tal cual)
+const kitchenQ=q=>q<20?Math.max(1,Math.round(q)):q<100?Math.round(q/5)*5:Math.round(q/10)*10;
+// Unidades con nombre: «1 pastilla de caldo», «2 rebanadas de pan de molde»; el resto, «1 huevo», «1½ huevos»
+const UD_NAME=[[/pastilla/,"pastilla","pastillas"],[/pan de molde/,"rebanada","rebanadas"]];
+const singularName=nm=>nm.replace(/^(\S{3,}?)s\b/,"$1");
 function qtyTxt(pid,q){
   const p=P[pid],nm=cleanName(pid);
-  if(p.unit==="ud"){const n=Math.round(q*10)/10;return `${String(n).replace(".",",")} ${nm}`}
+  if(p.unit==="ud"){const n=Math.max(0.5,Math.round(q*2)/2),u=UD_NAME.find(([re])=>re.test(lowTxt(p.name)));
+    return u?`${halfTxt(n)} ${n>1?u[2]:u[1]} de ${nm}`:`${halfTxt(n)} ${n>1?nm:singularName(nm)}`}
   const pk=(p.name.match(/\((bote|lata|brik|bolsa|sobre|tarro|paquete|pack[^)]*)\)/i)||[])[1],n=q/p.env,near=Math.round(n*2)/2;
   if(/^ajo/.test(nm)&&p.unit==="g"){const d=Math.max(1,Math.round(q/5));return `${d} ${d===1?"diente":"dientes"} de ajo`}
-  const base=`${fmtQty(q,p.unit)} de ${nm}`;
+  const base=`${fmtQty(kitchenQ(q),p.unit)} de ${nm}`;
   if(pk&&near>=0.5&&Math.abs(n-near)<0.08)return `${base} (${String(near).replace(".",",")} ${near===1?pk.toLowerCase():pk.toLowerCase()+(/[aeiou]$/.test(pk)?"s":"es")})`;
   if(p.unit==="ml"&&q>=150)return `${base} (≈ ${vasos(q/200)} de 200 ml)`;
   if(p.unit==="ml"&&q<=45)return `${base} (${Math.max(1,Math.round(q/15))} cucharada${Math.round(q/15)>1?"s":""})`;
@@ -64,7 +78,7 @@ const PARTICIPLE={picado:"pica",picada:"pica",picados:"pica",picadas:"pica",rall
 function clausePreps(cl,r,km){
   const ws=cl.split(/[^a-zñ]+/).filter(Boolean),out=[];
   const pos=[];for(const pid of ingsIn(cl,r,km)){const keys=km[pid].own.length?km[pid].own:km[pid].shared;
-    const i=ws.findIndex(w=>keys.some(k=>k.length<4?w===k||w===k+"s":w.startsWith(k)));if(i>=0)pos.push({pid,i})}
+    const i=ws.findIndex(w=>keys.some(k=>k.length<4?w===k||w===k+"s"||w===k+"es":w.startsWith(k)));if(i>=0)pos.push({pid,i})}
   pos.sort((a,b)=>a.i-b.i);
   const verbAt=i=>{for(const [vb,re] of PREP_VERBS)if(re.test(ws[i]))return vb;return null};
   const formAt=i=>{for(const [f,re] of FORMS)if(re.test(ws[i]))return f;return null};
@@ -141,11 +155,27 @@ function prepHTML(plan,several){
       ${t.verb==="pesa"||t.verb==="mide"?"":`<details><summary>Cómo</summary><p>${esc(prepHow(t.pid,t.verb,t.form))}</p></details>`}</span></label>`).join("")}
     ${plan.hand.length?`<div class="phand"><b>Ten a mano</b><div>${plan.hand.map(x=>`<span>${esc(qtyTxt(x.pid,x.q))}</span>`).join("")}</div></div>`:""}</div>`;
 }
+// Especias, hierbas y aliños que nombran los pasos sin estar en la lista de ingredientes (van «al gusto», sin cantidad ni precio)
+const SPICES=["pimienta","vinagre","azúcar","ajo en polvo","pimentón","comino","orégano","romero","tomillo","laurel","canela","nuez moscada","curry","cúrcuma","jengibre","guindilla","cayena","eneldo","perejil","cilantro","albahaca","hierbabuena","garam masala","sésamo"];
+function spicesOf(r,v){
+  const t=lowTxt((v||r.vars[0]).steps.join(" ")),names=lowTxt(r.ing.map(([p])=>P[p].name).join(" ")),out=[];
+  for(const x of SPICES){const k=lowTxt(x);if(new RegExp("\\b"+k+"\\b").test(t)&&!names.includes(k)&&!out.some(o=>lowTxt(o).includes(k)))out.push(x)}
+  return out;
+}
+// Lo que sale en «Usa:» en cada paso: lo que aparece por primera vez, o lo que se vuelve a añadir.
+// La cantidad entera solo se dice una vez: si ya salió antes, no se repite (riesgo de echar el doble);
+// si en aquel paso se usaba solo una parte («la mitad», «un poco»), ahora sale «el resto de…»
+function stepUses(r,v){
+  const km=ingKeyMap(r),shown={},seen=new Set();
+  return v.steps.map(s=>{const txt=lowTxt(s),adds=/\b(anade|echa|incorpora|vierte|agrega)\b/.test(txt),part=/\b(mitad|parte|un poco)\b/.test(txt),ins=ingsIn(s,r,km);
+    const out=[];for(const p of ins){if(seen.has(p)&&!adds)continue;
+      if(shown[p]==null){shown[p]=part;out.push({pid:p})}else if(shown[p]){shown[p]=false;out.push({pid:p,rest:true})}}
+    ins.forEach(p=>seen.add(p));return out});
+}
 // En cada paso: lo que se usa en ese momento, ya multiplicado por las raciones
 function stepUsesHTML(r,v,i,serv){
-  const km=ingKeyMap(r),before=new Set(v.steps.slice(0,i).flatMap(s=>ingsIn(s,r,km))),txt=lowTxt(v.steps[i]),adds=/\b(anade|echa|incorpora|vierte|agrega)\b/.test(txt);
-  const ps=ingsIn(v.steps[i],r,km).filter(p=>!before.has(p)||adds);if(!ps.length)return "";
-  return `<div class="uses"><span>Usa:</span>${ps.map(pid=>`<b>${esc(qtyTxt(pid,r.ing.find(([p])=>p===pid)[1]*serv))}</b>`).join("")}</div>`;
+  const ps=stepUses(r,v)[i]||[];if(!ps.length)return "";
+  return `<div class="uses"><span>Usa:</span>${ps.map(x=>`<b>${esc(x.rest?"el resto de "+cleanName(x.pid):qtyTxt(x.pid,r.ing.find(([p])=>p===x.pid)[1]*serv))}</b>`).join("")}</div>`;
 }
 // Lo que vas a usar en total y si lo tienes en casa (según la despensa)
 function sessionIngsHTML(plan){
@@ -154,9 +184,39 @@ function sessionIngsHTML(plan){
   return `<details class="sing"><summary><b>Lo que vas a usar</b> <span class="small muted">· ${plan.ings.length} ingredientes${miss.length?` · te faltan ${miss.length}`:" · lo tienes todo"}</span></summary>
     ${plan.ings.map(x=>{const have=st[x.pid]||0,ok=have>=x.q-Math.max(1,P[x.pid].env*.05);return `<div class="fixed"><span>${esc(qtyTxt(x.pid,x.q))}<small>${esc(x.dishes.join(", "))}</small></span><small style="color:${ok?"var(--ok)":"var(--accent)"};font-weight:600">${ok?"✓ en casa":have>0?"tienes "+esc(fmtQty(have,P[x.pid].unit)):"no está en la despensa"}</small></div>`}).join("")}</details>`;
 }
-// Al terminar un plato: se da por cocinado y la despensa lo descuenta ya (también los días que repiten ese plato)
-function markCooked(sl){
-  if(!sl)return;S.cooked=S.cooked||{};const t=todayISO();S.cooked[sl.id]=t;
-  try{for(const c of repChildren(sl))S.cooked[c.id||c.date+"|"+c.meal]=t}catch(e){}
-  save();
+/* ---------- Cocinado ----------
+   S.cooked[id] = {d: día en que se cocinó, rid: la receta que se cocinó, p: raciones que se cocinaron de verdad (con el +/−)}.
+   La despensa descuenta esa receta y esas raciones aunque luego se cambie el plato del día. Los días que repiten
+   el plato van con p:0 y by: el hueco donde se cocinó (sus raciones ya van en las de aquel). Antes solo se guardaba la fecha. */
+function cookedOf(id){
+  const c=(S.cooked||{})[id];if(!c)return null;if(typeof c==="object")return c;
+  // Formato antiguo (solo la fecha): la receta que tiene el hueco y sus raciones del plan; se guarda ya convertido
+  const d=id.slice(0,10),wk=S.plans[weekStartFor(d)],v=wk&&wk.slots[id];if(!v||!RX[v.recipe])return {d:c,rid:null,p:0};
+  let p=0;try{const sl=buildSlots(weekStartFor(d)).find(s=>s.id===id);p=sl?sl.portions:0}catch(e){}
+  return S.cooked[id]={d:c,rid:v.recipe,p};
+}
+// Al terminar un plato: se da por cocinado y la despensa lo descuenta ya (también los días que repiten ese plato).
+// Devuelve cómo estaba antes, para poder deshacerlo
+function markCooked(sl,serv){
+  if(!sl)return null;S.cooked=S.cooked||{};const t=todayISO(),wk=S.plans[weekStartFor(sl.date)],v=wk&&wk.slots[sl.id],rid=(v&&RX[v.recipe])?v.recipe:null,prev={};
+  const set=(id,x)=>{if(!(id in prev))prev[id]=S.cooked[id]??null;S.cooked[id]=x};
+  set(sl.id,{d:t,rid,p:Math.round((Number(serv)>0?Number(serv):cookPortions(sl))*100)/100});
+  try{for(const c of repChildren(sl))set(c.id||c.date+"|"+c.meal,{d:t,rid,p:0,by:sl.id})}catch(e){}
+  save();return prev;
+}
+function unmarkCooked(prev){S.cooked=S.cooked||{};for(const [id,x] of Object.entries(prev||{}))if(x==null)delete S.cooked[id];else S.cooked[id]=x;save()}
+// Lo que se gastó al cocinar (para la despensa), desde el día from: ingredientes de la receta cocinada por sus raciones
+function cookedUses(from){
+  const out=[],memo={};
+  for(const id of Object.keys(S.cooked||{})){const c=cookedOf(id);if(!c||!c.p||!c.d||c.d<from)continue;const r=RX[c.rid];if(!r)continue;
+    const d=id.slice(0,10),meal=id.slice(11),ws=weekStartFor(d);let sl=null;try{sl=(memo[ws]=memo[ws]||buildSlots(ws)).find(s=>s.id===id)}catch(e){}
+    sl=sl||{id,date:d,meal,eaters:[],kids:[],tupper:[]};
+    for(const [pid,q] of slotIng(r,{...sl,portions:c.p}))if(P[pid])out.push({pid,d:c.d,k:1,q,out:true,u:{slot:{id,date:d,meal},r,date:c.d,pid,q}})}
+  return out;
+}
+// Aviso con un botón («Deshacer»): dura algo más y solo el botón recibe el toque (el aviso deja pasar los toques)
+function toastAction(msg,label,fn){
+  const t=document.getElementById("toast");if(!t)return;t.textContent=msg+" ";const b=document.createElement("button");
+  b.textContent=label;b.style.cssText="pointer-events:auto;margin-left:10px;background:none;border:1px solid currentColor;color:inherit;border-radius:10px;padding:4px 10px;font:inherit;cursor:pointer";
+  b.onclick=()=>{t.classList.remove("on");fn()};t.appendChild(b);t.classList.add("on");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("on"),7000);
 }

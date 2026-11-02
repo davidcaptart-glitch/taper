@@ -86,13 +86,13 @@ function mealLine(d,meal,wk){
   const comp=company(sl);
   let h=`<div style="margin-top:6px"><div class="small muted">${label}${st==="solotaper"?" (solo el táper de mañana)":""}${sl.tupper.length&&st!=="solotaper"?" + táper de mañana":""}${comp.length?" · con "+esc(comp.map(personName).join(" y ")):""}${sl.guests?` · <b>+${sl.guests} ${sl.guests===1?"invitado":"invitados"}</b>`:""}</div>`;
   if(r&&v.rep&&!fromBatch(sl))h+=`<div class="batchtag">${ico("repeat")} El mismo plato que el ${DAYS[dow(v.rep.slice(0,10))].toLowerCase()} · ya está hecho, solo calentar</div>`;
-  else if(r&&!fromBatch(sl)&&repChildren(sl).length)h+=`<div class="batchtag">${ico("repeat")} Cocina ${String(cookPortions(sl)).replace(".",",")} raciones: también para ${esc(repChildren(sl).map(c=>DAYS[dow(c.date)].toLowerCase()).join(" y "))}</div>`;
+  else if(r&&!fromBatch(sl)&&repChildren(sl).length)h+=`<div class="batchtag">${ico("repeat")} Cocina ${racTxt(cookPortions(sl))} raciones: también para ${esc(repChildren(sl).map(c=>DAYS[dow(c.date)].toLowerCase()).join(" y "))}</div>`;
   if(r&&fromBatch(sl)){const k=keepPlan(r,sl);h+=`<div class="batchtag">${k.freeze?"❄️":"🥡"} Del táper del ${DAYS[dow(k.cook)].toLowerCase()}${k.freeze?" · pásalo a la nevera la noche antes":" · solo sacarlo y calentar"}</div>`}
   if(r&&(S.cooked||{})[sl.id])h+=`<div class="batchtag done">✓ Cocinado</div>`;
   if(r)h+=`<div class="dishrow">${dishImg(r,"s")}<button class="name" data-open="${r.id}" data-slot="${sl.id}">${esc(r.name)}</button></div>`;
   else if(v&&v.despensa)h+=`<div class="dishrow"><span class="dish s dpdish" aria-hidden="true">🧺</span><button class="name" data-dpslot="${sl.id}">${esc(v.despensa.map(it=>despItemName(it.k)+(it.n!==1?" ×"+String(it.n).replace(".",","):"")).join(", "))}</button></div><div class="meta">De tu despensa · no hay que comprar nada</div><div class="ops"><button class="btn ghost small" data-dpslot="${sl.id}">Cambiar lo de la despensa</button><button class="btn ghost small" data-swap="${sl.id}">Poner una receta</button></div>`;
   else if(sl.fixed)h+=`<b>${esc(sl.fixed.name)}</b>`;
-  h+=`<div class="meta">${r?`${recipeTime(r)} min · ${r.prot||"?"} g proteína · ${String(sl.portions).replace(".",",")} raciones`:sl.fixed?"Plato fijo":""}</div>`;
+  h+=`<div class="meta">${r?`${recipeTime(r)} min · ${r.prot||"?"} g proteína · ${racTxt(sl.portions)} raciones`:sl.fixed?"Plato fijo":""}</div>`;
   if(r){const ps=(st==="solotaper"?[]:sl.eaters).concat(sl.kids);
     const who=ps.find(isMe)||ps[0];if(who)h+=`<div class="nutr">${isMe(who)?"Tu plato":esc(personName(who))}: ${nutrShort(portionNutr(r,factorOf(who)))}</div>`}
   h+=needLine(sl,r);
@@ -261,8 +261,9 @@ function openNotEaten(key,rid){
 function moveToNext(rid,from){
   for(const start of [weekStartFor(from),addDays(weekStartFor(from),7)]){
     const wk=S.plans[start];if(!wk)continue;
-    const slots=buildSlots(start).filter(s=>!s.fixed&&s.meal==="cena"&&s.date>=from);if(!slots.length)continue;
-    let carry=rid;for(const s of slots){const cur=wk.slots[s.id];wk.slots[s.id]={recipe:carry};if(!cur)break;carry=cur.recipe}
+    // Los huecos que no se pueden mover (elegidos a mano, de la despensa, ya cocinados o ya pasados) se saltan y se quedan como están
+    const slots=buildSlots(start).filter(s=>!s.fixed&&s.meal==="cena"&&s.date>=from&&!slotDone(s.id)&&!((v=>v&&(v.locked||v.despensa))(wk.slots[s.id])));if(!slots.length)continue;
+    let carry={recipe:rid};for(const s of slots){const cur=wk.slots[s.id];wk.slots[s.id]=carry;if(!cur)break;carry=JSON.parse(JSON.stringify(cur));delete carry.rep;delete carry.p}
     save();return longDate(slots[0].date);
   }
   return null;
@@ -348,8 +349,11 @@ function openMonthPrep(nx){
     dlg.querySelector("#mpGo").onclick=()=>{
       const pend=custodyKids().find(k=>!st.kidsOk[k.id]);
       if(pend){toast(`Revisa y aprueba los días de ${personName(pend)}`);return}
+      // Presupuesto distinto para ese mes: el apretón que tenía (tscale) se vuelve a calcular
+      if((Number(st.budget)||null)!==(Number(prev.budget)||null)&&S.home.tscale)delete S.home.tscale[nx];
       S.monthPrep=S.monthPrep||{};S.monthPrep[nx]={mood:st.mood,more:st.more,less:st.less,favs:st.favs,budget:Number(st.budget)||null,kidsOk:st.kidsOk,done:todayISO()};
-      for(const a of st.away)for(let d=a.from;d<=a.to;d=addDays(d,1)){S.days[d]=S.days[d]||{};S.days[d].comida="fuera";S.days[d].cena="fuera"}
+      // Días fuera de casa: sin comida ni cena, y tampoco desayunos ni meriendas (away)
+      for(const a of st.away)for(let d=a.from;d<=a.to;d=addDays(d,1)){S.days[d]=S.days[d]||{};S.days[d].comida="fuera";S.days[d].cena="fuera";S.days[d].away=true}
       for(const g of st.guests){S.days[g.d]=S.days[g.d]||{};S.days[g.d].guests={...(S.days[g.d].guests||{}),[g.meal]:g.n}}
       dlg.close();
       preparingScreen(()=>{for(const s of weeksInMonth(nx))if(!(S.plans[s]&&S.plans[s].confirmed))genWeekFromScratch(s);save()},()=>{
@@ -465,7 +469,7 @@ function todayCard(){
     ${ph?"":`<div class="tcart">${dishImg(n.r,"l")}</div>`}
     <div class="tcin"><span class="tclab">${when} · ${n.meal==="comida"?"comida":"cena"}</span>
       <h2>${esc(n.r.name)}</h2>
-      <div class="tcmeta"><span>⏱ ${recipeTime(n.r)} min</span><span>👥 ${String(n.sl.portions).replace(".",",")} rac.</span>${n.r.kcal?`<span>🔥 ${n.r.kcal} kcal</span>`:""}</div>
+      <div class="tcmeta"><span>⏱ ${recipeTime(n.r)} min</span><span>👥 ${racTxt(n.sl.portions)} rac.</span>${n.r.kcal?`<span>🔥 ${n.r.kcal} kcal</span>`:""}</div>
       <div class="tcbtns"><button class="btn" data-open="${n.r.id}" data-slot="${n.sl.id}">Ver receta</button><button class="btn glass" data-cooknow="${n.r.id}|${n.sl.id}">${(S.cooked||{})[n.sl.id]?"✓ Cocinado":"▶ Cocinar"}</button></div></div></div>`;
 }
 // Tira de días de la semana actual: toca uno para ir a él
@@ -519,7 +523,9 @@ function renderMenu(){
     {const cost=weekCost(start),target=weekFoodTarget(start,true);
       h+=cost>target+0.5?`<div class="warnbox">💶 La comida de esta semana sale por unos <b>${eur(cost)}</b> y tu presupuesto deja <b>${eur(target)}</b>. He elegido lo más barato que encaja con vuestros gustos y entrenos, pero no llego. <button class="btn small" data-sacr="${start}">¿Qué sacrificamos?</button></div>`
         :`<div class="small muted" style="margin-bottom:6px">💶 Comida de la semana: ${eur(cost)}${isFinite(target)?` de ${eur(target)} disponibles`:""}</div>`}
-    for(const g of tupperGaps(start))h+=`<div class="warnbox">El ${DAYS[dow(g)].toLowerCase()} ${shortDate(g)} no tienes táper: la cena de la víspera no se cocina. <button class="btn ghost small" data-day="${g}">Arreglarlo</button></div>`;
+    // Variedad: si hay más pasta o arroz de lo normal, se dice por qué (el presupuesto o que no hay más platos que encajen)
+    {const vn=varietyNote(start);if(vn)h+=`<div class="warnbox">🍝 Esta semana hay ${esc(vn)}. ${wk.budget&&wk.budget.relaxed?"Es lo más barato que encaja: con tu presupuesto no llego a más variedad.":"No he encontrado otros platos que encajen con lo que coméis."} <button class="btn ghost small" data-regen="${start}">Rehacer platos</button></div>`}
+    for(const g of tupperGaps(start))h+=`<div class="warnbox">El ${DAYS[dow(g)].toLowerCase()} ${shortDate(g)} no tienes táper: ${S.home.start&&addDays(g,-1)<S.home.start?"el plan empieza ese día y no hay cena la víspera":"la cena de la víspera no se cocina"}. <button class="btn ghost small" data-day="${g}">Arreglarlo</button></div>`;
     if(S.home.cookMode==="lote"){const cds=[...new Set(buildSlots(start).filter(s=>wk.slots[s.id]).map(s=>cookDayFor(s.date)))].sort();
       for(const cd of cds){const n=buildSlots(start).filter(s=>cookDayFor(s.date)===cd&&wk.slots[s.id]&&RX[wk.slots[s.id].recipe]).length;
         h+=`<div class="session"><b>Sesión de cocina: ${esc(longDate(cd))}</b><div class="small muted">${n} platos</div><button class="btn ghost small" data-session="${cd}">Ver la sesión</button></div>`}}
@@ -544,7 +550,7 @@ function renderMenu(){
   main.querySelectorAll("[data-smre]").forEach(b=>b.onclick=()=>{const [d,m]=b.dataset.smre.split("|");rerollSmall(d,m);save();render();toast("Cambiado")});
   main.querySelectorAll("[data-goday]").forEach(b=>b.onclick=()=>{daySel=b.dataset.goday;const y=scrollY;render();scrollTo(0,y)});
   main.querySelectorAll("[data-cooknow]").forEach(b=>b.onclick=()=>{const i=b.dataset.cooknow.indexOf("|"),rid=b.dataset.cooknow.slice(0,i),sid=b.dataset.cooknow.slice(i+1),r=RX[rid],sl=slotFor(sid.slice(0,10),sid.slice(11));openCook(r,variantFor(r)||r.vars[0],sl?cookPortions(sl):2,sid)});
-  main.querySelectorAll("[data-regen]").forEach(b=>b.onclick=()=>{if(confirm("¿Rehacer los platos de esta semana? Se mantienen los que elegiste a mano.")){genWeekFromScratch(b.dataset.regen);save();render();toast("Platos rehechos")}});
+  main.querySelectorAll("[data-regen]").forEach(b=>b.onclick=()=>{if(confirm("¿Rehacer los platos de esta semana? Se mantienen los que elegiste a mano y lo que ya habéis comido o cocinado.")){genWeekFromScratch(b.dataset.regen);save();render();toast("Platos rehechos")}});
   main.querySelectorAll("[data-swap]").forEach(b=>b.onclick=()=>openSwap(b.dataset.swap));
   main.querySelectorAll("[data-dpslot]").forEach(b=>b.onclick=()=>openDespensaPick(b.dataset.dpslot));
   main.querySelectorAll("[data-sacr]").forEach(b=>b.onclick=()=>openSacrifice(b.dataset.sacr));
@@ -581,10 +587,10 @@ function reviewHTML(rv,compact){
   return h;
 }
 function bindReview(root){
-  root.querySelectorAll("[data-rvset]").forEach(b=>b.onclick=()=>{S.home.budget.month=Number(b.dataset.rvset);S.home.budget.week=null;S.reviewed=S.reviewed||{};S.reviewed[prevMonth()]=true;save();render();toast("Presupuesto: "+eur(S.home.budget.month)+" al mes")});
+  root.querySelectorAll("[data-rvset]").forEach(b=>b.onclick=()=>{S.home.budget.month=Number(b.dataset.rvset);S.home.budget.week=null;S.home.tscale={};S.reviewed=S.reviewed||{};S.reviewed[prevMonth()]=true;save();render();toast("Presupuesto: "+eur(S.home.budget.month)+" al mes")});
   root.querySelectorAll("[data-rvfix]").forEach(b=>b.onclick=()=>{const rv=monthReview(b.dataset.rvfix);
     for(const r of rv.reasons){if(!r.fix)continue;if(r.fix.weekMode)S.home.shop.weekMode=r.fix.weekMode;if(r.fix.sacrifice){S.home.sacrifice=S.home.sacrifice||{};S.home.sacrifice[r.fix.sacrifice]=true}}
-    S.reviewed=S.reviewed||{};S.reviewed[b.dataset.rvfix]=true;
+    S.reviewed=S.reviewed||{};S.reviewed[b.dataset.rvfix]=true;S.home.tscale={};
     for(const s of Object.keys(S.plans))if(s>=weekStartFor(todayISO())&&!S.plans[s].confirmed)genWeekFromScratch(s);save();render();toast("Medidas aplicadas al menú")});
   root.querySelectorAll("[data-rvok]").forEach(b=>b.onclick=()=>{S.reviewed=S.reviewed||{};S.reviewed[b.dataset.rvok]=true;save();render()});
 }
@@ -673,7 +679,7 @@ function changeMeal(d,m,v,redraw){
 function openSwap(sid){
   const d=sid.slice(0,10), sl=slotFor(d,sid.slice(11));if(!sl)return;
   const alts=alternatives(sl,8);
-  const sel=R.filter(r=>variantFor(r)&&!r.small&&!unsafeFor(slotPeople(sl),r).length).sort((a,b)=>a.name.localeCompare(b.name));
+  const sel=R.filter(r=>variantFor(r)&&!r.small&&hasPack(r)&&!unsafeFor(slotPeople(sl),r).length).sort((a,b)=>a.name.localeCompare(b.name));
   showDialog(`<div class="mod">${closeBtn}<h2>Cambiar plato</h2><div class="small muted">${esc(longDate(d))}, ${sl.meal}${company(sl).length?" · con "+esc(company(sl).map(personName).join(" y ")):""}</div>
     ${needLine(sl)}
     <button class="alt dpalt" id="swDesp"><b>🧺 Comer algo de tu despensa</b><small>Las pizzas, algo que te sobra o lo que compraste sin receta: no hay que comprar nada</small></button>
@@ -726,7 +732,7 @@ function openRecipe(id,sid){
       ${(()=>{const bad=S.people.filter(p=>!canEat(p,r));return bad.length?`<div class="warnbox" style="margin:6px 0">⛔ <b>No apto para ${bad.map(p=>esc(isMe(p)?"ti":personName(p))).join(" ni ")}</b>: ${bad.map(p=>esc(whyCant(p,r))).filter((x,i,a)=>a.indexOf(x)===i).join(", ")}. No lo pondré en un día en que coma.</div>`:""})()}
       ${recipeAllergens(r).length?`<div class="chips" style="margin:2px 0 4px">${recipeAllergens(r).map(a=>`<span class="pill carga">⚠️ ${esc(ALLERGENS[a].split(" (")[0])}</span>`).join("")}</div>`:`<div class="small muted">Sin alérgenos principales</div>`}${r.sug?`<div class="small muted">💡 ${r.author?"Sugerida por "+esc(r.author):"Sugerida por la comunidad"}</div>`:""}
       <div class="scards">
-        <div><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg><span class="sv"><button data-s="-0.5" aria-label="Menos raciones">−</button><b>${String(serv).replace(".",",")}</b><button data-s="0.5" aria-label="Más raciones">+</button></span><small>Raciones</small></div>
+        <div><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg><span class="sv"><button data-s="-0.5" aria-label="Menos raciones">−</button><b>${racTxt(serv)}</b><button data-s="0.5" aria-label="Más raciones">+</button></span><small>Raciones</small></div>
         <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><b>${v.time} min</b><small>${v.active} min de trabajo</small></div>
         <div><svg viewBox="0 0 24 24"><path d="M12 3c2 4 6 6 6 11a6 6 0 0 1-12 0c0-3 2-4 2-7 2 1 3 3 3 3s1-4 1-7z"/></svg><b>${r.kcal||"–"}</b><small>kcal/ración</small></div>
       </div>
@@ -735,7 +741,7 @@ function openRecipe(id,sid){
       ${sl?`<div class="nutr" style="margin-top:6px">${(sl.eaters.length?sl.eaters:sl.tupper).concat(sl.kids).map(p=>`<div>${isMe(p)?"Tu plato":esc(personName(p))}: ${nutrTxt(portionNutr(r,factorOf(p)))}</div>`).join("")}</div>`:""}
       ${r.vars.length>1?`<div class="vtabs">${r.vars.map((x,i)=>`<button class="chip" data-vi="${i}" aria-pressed="${i===vi}" ${ok.has(x.app)?"":"disabled"}>${APP[x.app]}</button>`).join("")}</div>`:""}
       <div class="segtab" role="tablist"><button role="tab" data-rt="ing" aria-selected="${recTab==="ing"}">Ingredientes</button><button role="tab" data-rt="prep" aria-selected="${recTab==="prep"}">Preparación</button></div>
-      ${recTab==="ing"?`<table class="ingt">${r.ing.map(([p,q])=>`<tr><td>${prodImg(p)}${esc(P[p].name)}</td><td>${fmtQty(q*serv,P[p].unit)}</td></tr>`).join("")}<tr><td><span class="pimg ph">🧂</span>Aceite, sal y especias</td><td>al gusto</td></tr></table>${choiceBox(r)}`
+      ${recTab==="ing"?`<table class="ingt">${r.ing.map(([p,q])=>`<tr><td>${prodImg(p)}${esc(P[p].name)}</td><td>${P[p].unit==="ud"?halfTxt(q*serv)+" ud":fmtQty(kitchenQ(q*serv),P[p].unit)}</td></tr>`).join("")}<tr><td><span class="pimg ph">🧂</span>Aceite, sal y especias${(ex=>ex.length?`<small class="muted"> · ${esc(ex.join(", "))}</small>`:"")(spicesOf(r,v))}</td><td>al gusto</td></tr></table>${choiceBox(r)}`
       :`${v.tools&&v.tools.length?`<div class="needs"><b>Necesitas</b><div class="tools">${v.tools.map(t=>`<span>${toolIco(t)} ${esc(t)}</span>`).join("")}</div></div>`:""}
         <button class="cookrow" data-cook><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg></span><b>Cocinar paso a paso</b><svg class="chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
         <ol class="rsteps">${v.steps.map((s,i)=>{const tg=stepTags((v.info||[])[i]);return `<li>${esc(s)}${tg.length?`<div class="stags">${tg.map(x=>`<span>${esc(x)}</span>`).join("")}</div>`:""}</li>`}).join("")}</ol>`}
@@ -747,7 +753,8 @@ function openRecipe(id,sid){
     dlg.querySelector("#myPh").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{await saveMyPhoto(r.id,f);draw();render();toast("¡Qué buena pinta! Foto guardada")}catch(x){toast("No se ha podido guardar la foto")}};
     dlg.querySelector("#myPhDel")?.addEventListener("click",async()=>{await deleteMyPhoto(r.id);draw();render()});
     dlg.querySelector("#rShare").onclick=()=>shareRecipe(r,r.vars[vi],serv);
-    dlg.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{serv=Math.max(0.5,serv+Number(b.dataset.s));draw()});
+    // +/−: de media en media ración (si venía con decimales del plan, se ajusta a la media más cercana)
+    dlg.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{serv=Math.max(0.5,Math.round((serv+Number(b.dataset.s))*2)/2);draw()});
     dlg.querySelector("[data-cook]")?.addEventListener("click",()=>openCook(r,r.vars[vi],serv,sid));
     dlg.querySelectorAll("[data-choice]").forEach(x=>x.onchange=()=>{const [pid,g]=x.dataset.choice.split("|"),p=S.people.find(y=>y.id===pid);p.choices={...(p.choices||{}),[g]:x.value};save();toast("Apuntado para "+(isMe(p)?"ti":personName(p)))});
     dlg.querySelectorAll("[data-rt]").forEach(b=>b.onclick=()=>{recTab=b.dataset.rt;const y=dlg.scrollTop;draw();dlg.scrollTop=y});
@@ -783,7 +790,7 @@ async function openCook(r,v,serv,sid){
   const draw=()=>{
     if(i===-1){showDialog(`<div class="cook"><div class="top"><span class="n">Antes de empezar · ${esc(r.name)}</span><button class="close" data-x aria-label="Salir">✕</button></div>
       ${v.tools&&v.tools.length?`<div class="needs big"><b>Saca esto</b><div class="tools">${v.tools.map(t=>`<span>${toolIco(t)} ${esc(t)}</span>`).join("")}</div></div>`:""}
-      <div class="txt" style="font-size:1.2rem">Deja esto preparado (para ${String(serv).replace(".",",")} raciones):</div>${prepHTML(plan,false)}
+      <div class="txt" style="font-size:1.2rem">Deja esto preparado (para ${racTxt(serv)} ${serv>1?"raciones":"ración"}):</div>${prepHTML(plan,false)}
       <div class="bot" style="margin-top:14px"><button class="btn wide" data-next>Empezar a cocinar</button></div></div>`,true);
       dlg.querySelector("[data-next]").onclick=()=>{i=0;draw()};return}
     const step=v.steps[i], x=(v.info||[])[i], mm=step.match(/(\d+)(?:\s*[–-]\s*(\d+))?\s*min/), m=x&&x.min?[null,String(x.min)]:mm;
@@ -794,15 +801,33 @@ async function openCook(r,v,serv,sid){
       ${m?`<div class="timer" id="tmr">${m[2]||m[1]}:00</div><button class="btn ghost wide" id="tmrBtn">⏱ Temporizador de ${m[2]||m[1]} min</button>`:""}
       <div class="bot" style="margin-top:14px"><button class="btn ghost" data-prev ${i===0&&!plan.tasks.length?"disabled":""}>Anterior</button><button class="btn" data-next>${i===v.steps.length-1?"¡Terminado!":"Siguiente"}</button></div></div>`,true);
     dlg.querySelector("[data-prev]").onclick=()=>{i--;draw()};
-    dlg.querySelector("[data-next]").onclick=()=>{if(i<v.steps.length-1){i++;draw()}else{const sl=sid?slotFor(sid.slice(0,10),sid.slice(11)):null;markCooked(sl);dlg.close();if(sl)render();toast(sl?"¡Que aproveche! Lo he descontado de la despensa":"¡Que aproveche!")}};
+    // ¡Terminado!: se da por cocinado con las raciones que has cocinado de verdad (las del +/− de la receta), se puede deshacer
+    // y se pregunta qué tal
+    dlg.querySelector("[data-next]").onclick=()=>{if(i<v.steps.length-1){i++;draw()}else{const sl=sid?slotFor(sid.slice(0,10),sid.slice(11)):null;const prev=markCooked(sl,serv);dlg.close();
+      if(!sl){toast("¡Que aproveche!");return}render();openCookedRate(sl,r,prev)}};
     const tb=dlg.querySelector("#tmrBtn");if(tb)tb.onclick=()=>startTimer(Number(m[2]||m[1])*60);
   };
   dlg.addEventListener("close",()=>{clearInterval(cookTimer);try{wakeLock&&wakeLock.release()}catch(e){};wakeLock=null},{once:true});
   draw();
 }
+// Después de cocinar: «¿Qué tal?» con los mismos botones que la tarjeta de valorar, y «Deshacer» por si se tocó sin querer
+function openCookedRate(sl,r,prev){
+  const key=sl.id,undo=()=>{unmarkCooked(prev);render();toast("Deshecho: no lo cuento como cocinado")};
+  const who=()=>sl.eaters.concat(sl.kids).filter(p=>!S.ratings.some(x=>x.slot===key&&x.who===p.id)&&!ratedBefore(p,r.id));
+  if(!who().length){toastAction("¡Que aproveche! Lo he descontado de la despensa","Deshacer",undo);return}
+  const draw=()=>{const ps=who();if(!ps.length){dlg.close();toast("¡Apuntado! Que aproveche");return}
+    showDialog(`<div class="mod">${closeBtn}<div class="rate"><h3>¡Que aproveche! ¿Qué tal ${esc(r.name.toLowerCase())}?</h3><div class="small muted">Lo he descontado de la despensa${(c=>c&&c.p?` (${racTxt(c.p)} ${c.p>1?"raciones":"ración"})`:"")(cookedOf(key))}</div>
+      ${ps.map(p=>`<div class="who"><div class="small"><b>${esc(personName(p))}</b></div><div class="chips">
+        <button class="chip" data-rate="${key}~${r.id}~${p.id}~2">❤️ ${isMe(p)?"Me encantó":"Le encantó"}</button><button class="chip" data-rate="${key}~${r.id}~${p.id}~1">👍 Bien</button>
+        <button class="chip" data-rate="${key}~${r.id}~${p.id}~-1">👎 No ${isMe(p)?"me":"le"} gustó</button></div></div>`).join("")}
+      <div class="actions"><button class="btn ghost small" id="crUndo">Deshacer: no lo he cocinado</button><button class="btn ghost small" data-x>Luego</button></div></div></div>`);
+    dlg.querySelector("#crUndo").onclick=()=>{dlg.close();undo()};
+    bindRate(dlg,()=>{render();if(dlg.open&&!dlg.querySelector("[name=why]"))draw()})};
+  draw();
+}
 // Modo cocina de una sesión: todos los platos en una sola lista de pasos
 async function openBatchCook(cd,items){
-  const plan=batchPlan(items).steps,prep=prepPlan(items.map(o=>({r:o.r,v:o.v,serv:cookPortions(o.sl),label:o.r.name})));let i=prep.tasks.length?-1:0;
+  const plan=batchPlan(items).steps,prep=prepPlan(items.map(o=>({r:o.r,v:o.v,serv:cookPortions(o.sl),label:o.r.name})));let i=prep.tasks.length?-1:0;const marked={};
   try{wakeLock=await navigator.wakeLock?.request("screen")}catch(e){}
   const draw=()=>{
     if(i===-1){showDialog(`<div class="cook"><div class="top"><span class="n">Antes de encender nada · ${items.length} platos</span><button class="close" data-x aria-label="Salir">✕</button></div>
@@ -814,7 +839,7 @@ async function openBatchCook(cd,items){
     let body;
     if(p.tupper){const sp=tupperSplit(p.o.sl),k=keepPlan(r,p.o.sl);
       body=`<div class="txt">${esc(r.name)} está listo. Repártelo en ${sp.length} ${sp.length===1?"táper":"tápers"}${k.freeze?" y llévalo al congelador cuando se enfríe":" y, cuando se enfríe, a la nevera"}:</div>
-        <div class="tsplit">${sp.map(t=>`<div class="tsp"><span>🥡 ${esc(t.when)}</span><span>${String(t.rac).replace(".",",")} rac. · ${esc(t.who.join(", "))}</span></div>`).join("")}</div>`}
+        <div class="tsplit">${sp.map(t=>`<div class="tsp"><span>🥡 ${esc(t.when)}</span><span>${racTxt(t.rac)} rac. · ${esc(t.who.join(", "))}</span></div>`).join("")}</div>`}
     else{const tg=stepTags(p.info);
       body=`<div class="txt">${esc(p.text)}</div>${stepUsesHTML(r,p.o.v,p.i,cookPortions(p.o.sl))}${tg.length?`<div class="stags big">${tg.map(t=>`<span>${esc(t)}</span>`).join("")}</div>`:""}
         ${p.passive?`<div class="okbox small">Esto se hace solo: pon el temporizador y sigue con el siguiente paso.</div>`:""}
@@ -826,10 +851,12 @@ async function openBatchCook(cd,items){
       <div class="bot" style="margin-top:14px"><button class="btn ghost" data-prev ${i===0&&!prep.tasks.length?"disabled":""}>Anterior</button><button class="btn" data-next>${i===plan.length-1?"¡Terminado!":"Siguiente"}</button></div></div>`,true);
     dlg.querySelector("[data-prev]").onclick=()=>{i--;draw()};
     // Al repartir un plato en tápers ya está cocinado: se descuenta de la despensa en ese momento
-    dlg.querySelector("[data-next]").onclick=()=>{if(p.tupper)markCooked(p.o.sl);if(i<plan.length-1){i++;draw()}else{dlg.close();render();toast("¡Sesión terminada! Tápers listos y descontado de la despensa")}};
+    dlg.querySelector("[data-next]").onclick=()=>{if(p.tupper&&!marked[p.o.sl.id])marked[p.o.sl.id]=markCooked(p.o.sl);if(i<plan.length-1){i++;draw()}else{dlg.close();render();
+      toastAction("¡Sesión terminada! Tápers listos y descontado de la despensa","Deshacer",()=>{Object.values(marked).reverse().forEach(unmarkCooked);render();toast("Deshecho: no lo cuento como cocinado")})}};
     const tb=dlg.querySelector("#tmrBtn");if(tb)tb.onclick=()=>startTimer(Number(p.info.min)*60);
   };
-  dlg.addEventListener("close",()=>{try{wakeLock&&wakeLock.release()}catch(e){};wakeLock=null},{once:true});
+  // Al cerrar, también se para el temporizador (si no, sigue sonando con la ventana cerrada)
+  dlg.addEventListener("close",()=>{clearInterval(cookTimer);try{wakeLock&&wakeLock.release()}catch(e){};wakeLock=null},{once:true});
   draw();
 }
 function startTimer(sec){
@@ -855,9 +882,9 @@ function openSession(cd){
     <p class="small muted">Unos ${Math.max(active,longest)} min si vas encadenando. Empieza por el horno y, mientras, ve con la vitro. Pon una etiqueta a cada táper con el día.</p>
     ${(pp=>out.length?sessionIngsHTML(pp)+(pp.tasks.length?`<h3 class="psh">1. Antes de encender nada: preparación</h3><p class="small muted" style="margin:0 0 6px">Lo que piden varios platos se hace todo junto. Toca «Cómo» si no sabes hacerlo.</p>${prepHTML(pp,true)}<h3 class="psh">2. A cocinar</h3>`:""):"")(prepPlan(out.map(o=>({r:o.r,v:o.v,serv:cookPortions(o.sl),label:o.r.name}))))}
     ${out.length?`<button class="cookrow" id="cookAll"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg></span><b>Cocinar todo paso a paso</b><small class="muted" style="margin-left:auto">unos ${batchPlan(out).total} min</small></button>`:""}
-    ${out.map((o,i)=>`<div class="session sesscard">${dishImg(o.r,"s")}<div class="sessin"><b>${i+1}. ${esc(o.r.name)}</b><div class="small muted">${APP[o.v.app]} · ${o.v.time} min (${o.v.active} de trabajo) · ${String(cookPortions(o.sl)).replace(".",",")} raciones</div>
+    ${out.map((o,i)=>`<div class="session sesscard">${dishImg(o.r,"s")}<div class="sessin"><b>${i+1}. ${esc(o.r.name)}</b><div class="small muted">${APP[o.v.app]} · ${o.v.time} min (${o.v.active} de trabajo) · ${racTxt(cookPortions(o.sl))} raciones</div>
       <div class="tsplit"><b>Repártelo en ${tupperSplit(o.sl).length} ${tupperSplit(o.sl).length===1?"táper":"tápers"}${o.k.freeze?" · ❄️ al congelador":""}</b>
-        ${tupperSplit(o.sl).map(t=>`<div class="tsp"><span>🥡 ${esc(t.when)}</span><span>${String(t.rac).replace(".",",")} rac. · ${esc(t.who.join(", "))}</span></div>`).join("")}</div>
+        ${tupperSplit(o.sl).map(t=>`<div class="tsp"><span>🥡 ${esc(t.when)}</span><span>${racTxt(t.rac)} rac. · ${esc(t.who.join(", "))}</span></div>`).join("")}</div>
       <button class="btn ghost small" data-open2="${o.r.id}" data-sl="${o.sl.id}">Ver receta</button></div></div>`).join("")}</div>`);
   document.getElementById("cookAll")?.addEventListener("click",()=>openBatchCook(cd,out));
   dlg.querySelectorAll("[data-open2]").forEach(b=>b.onclick=()=>openRecipe(b.dataset.open2,b.dataset.sl));

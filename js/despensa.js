@@ -12,9 +12,10 @@ const monthsBetween=(a,b)=>{const out=[];for(let m=a;m<=b;m=nextMonthOf(m))out.p
 const prevMonthOf=m=>{const [y,mm]=m.split("-").map(Number);return mm===1?`${y-1}-12`:`${y}-${String(mm-1).padStart(2,"0")}`};
 // ¿Ese plato ya se ha comido (y se cocinó en casa)? Los de días pasados sí, salvo que dijeras que comisteis fuera o no se hizo
 function eatenUse(u){
+  // Lo marcaste como cocinado: ya se gastó (aunque luego cenaras fuera); se mira antes que lo que contestaste
+  if(u.slot&&u.slot.id&&(S.cooked||{})[u.slot.id])return true;
   const today=todayISO(),st=u.slot&&u.slot.id?((S.meals||{})[u.slot.id]||{}).status:null;
   if(st==="fuera"||st==="nada"||st==="otro")return false;
-  if(u.slot&&u.slot.id&&(S.cooked||{})[u.slot.id])return true;   // lo marcaste como cocinado: ya se gastó
   return u.date<today||(u.date===today&&!!st);
 }
 // Lo que entra (compras marcadas, compras hechas, tickets, a mano) y lo que sale (platos cocinados), en orden
@@ -27,8 +28,11 @@ function despensaEvents(){
       const done=(S.shopDone||{})[shopKey(m,l.key)],day=deliveryDate(sh.weeks[l.key==="mes"?mesWeek(sh.weeks):Number(l.key)]||sh.weeks[0]);
       for(const it of l.items){const ck=checkKey(m,l.key,it.pid),at=S.checks[ck]?((S.checkedAt||{})[ck]||day):done||null;
         if(at&&at>=start&&at<=today)ev.push({pid:it.pid,d:at,k:0,q:it.packs*P[it.pid].env,src:"compra"})}}
-    for(const u of monthUses(m))if(u.pid&&P[u.pid]&&u.date>=start&&eatenUse(u))ev.push({pid:u.pid,d:u.date,k:1,q:u.q,out:true,u});
+    // Lo cocinado no sale de aquí (del plan), sino de lo que se cocinó de verdad (cookedUses, abajo)
+    for(const u of monthUses(m))if(u.pid&&P[u.pid]&&u.date>=start&&!(u.slot&&u.slot.id&&(S.cooked||{})[u.slot.id])&&eatenUse(u))ev.push({pid:u.pid,d:u.date,k:1,q:u.q,out:true,u});
   }
+  // Lo cocinado: la receta que se hizo y las raciones que se hicieron (aunque luego se cambiara el plato del día)
+  for(const e of cookedUses(start))if(e.d<=today)ev.push(e);
   for(const t of S.tickets||[])if(t.date>=start)for(const l of t.lines)if(l.food&&l.pid&&P[l.pid]){const q=lineQty(l);ev.push({pid:l.pid,d:t.date,k:0,q,src:"ticket",uc:l.amount>0&&q>0?l.amount/q:null})}
   // Comidas «de la despensa» ya comidas
   for(const x of despSlots())if(x.k.startsWith("p:")&&P[x.k.slice(2)]&&x.date>=start&&slotEaten(x.id))ev.push({pid:x.k.slice(2),d:x.date,k:1,q:despItemQty(x),out:true,u:{slot:{id:x.id,date:x.date,meal:x.meal},r:null,label:"De la despensa"}});
