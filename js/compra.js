@@ -24,7 +24,7 @@ const monthBudgetFull=m=>Number(((S.monthPrep||{})[m]||{}).budget)||Number(S.hom
 const weekBudget=m=>Math.round(monthBudgetFull(m)/Math.max(1,weeksInMonth(m).length)*100)/100;
 // Antes, con los dos puestos, el menú usaba el semanal y la cabecera el mensual. Si el semanal era más alto (se subió al
 // rehacer una semana), el mensual pasa a ser ese semanal × las semanas del mes; y se queda solo el mensual
-if(Number(S.home.budget.month)>0&&Number(S.home.budget.week)>0){const b=S.home.budget,w=Math.ceil(Number(b.week)*weeksInMonth(todayISO().slice(0,7)).length/5)*5;if(w>Number(b.month))b.month=w;b.week=null;try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}
+if(Number(S.home.budget.month)>0&&Number(S.home.budget.week)>0){const b=S.home.budget;b.week=null;try{localStorage.setItem("taper-v2",JSON.stringify(S))}catch(e){}}
 // Semanas del mes que cuentan (las de antes de empezar el plan no)
 // La compra del mes va con la primera semana del plan (no con semanas de antes de empezar)
 const mesWeek=weeks=>Math.max(0,weeks.findIndex(s=>!S.home.start||addDays(s,6)>=S.home.start));
