@@ -384,12 +384,24 @@ function notifAction(tipo,tag){
   if(tag&&tag.startsWith("frz|")){const [,m,key]=tag.split("|");
     if(tipo==="hecho"){S.bags=S.bags||{};for(const b of bagsPending(shopping(m),key))S.bags[b.id]=todayISO();save();render();toast("Bolsas apuntadas como congeladas")}
     else {month=m;tab="compra";listSel=key;render();scrollTo(0,0)}return}
-  if(tag&&tag.startsWith("thaw|")){tab="menu";
-    if(tipo==="hecho"){S.thawChecked=S.thawChecked||{};S.thawChecked[tag.slice(5)]=true;save();toast("Apuntado: descongelado")}render();return}
-  if(!tag||!tag.startsWith("shop|"))return;
-  const [,m,key]=tag.split("|");
-  if(tipo==="hecho"){markShopDone(m,key);render();toast("Compra marcada como hecha")}
-  else {month=m;tab="compra";listSel=key;render();scrollTo(0,0)}
+  if(tag&&(tag.startsWith("thaw|")||tag.startsWith("thawt|"))){tab="menu";
+    if(tipo==="hecho"){S.thawChecked=S.thawChecked||{};S.thawChecked[tag.slice(tag.indexOf("|")+1)]=true;save();toast("Apuntado: descongelado")}render();return}
+  if(!tag)return;
+  const [k,a,b]=tag.split("|");
+  if(k==="shop"){
+    if(tipo==="hecho"){markShopDone(a,b);render();toast("Compra marcada como hecha")}
+    else {month=a;tab="compra";listSel=b;render();scrollTo(0,0)}return}
+  // El resto: cada aviso abre su pantalla (en iPhone, sin botones, es la única forma de llegar)
+  if(tipo!=="abrir")return;
+  try{
+    if(k==="tk"){tab="compra";month=a;render();askTicket(a,b);return}
+    if(k==="plan"){tab="menu";render();openWeekPlanner(/^\d{4}-\d{2}-\d{2}$/.test(a||"")&&S.plans[a]?a:addDays(weekStartFor(todayISO()),weekDone(weekStartFor(todayISO()))?7:0));return}
+    if(k==="mprep"){tab="menu";render();if(a)openMonthPrep(a);return}
+    if(k==="sess"){tab="menu";render();openSession(a||todayISO());return}
+    if(k==="cook"){const sid=tag.slice(5),wk=S.plans[weekStartFor(a)],v=wk&&wk.slots[sid];tab="menu";render();if(v&&RX[v.recipe])openRecipe(v.recipe,sid);return}
+    if(k==="freezer"){tab="congelador";render();scrollTo(0,0);return}
+    if(k==="day"||k==="eat"||k==="pack"){tab="menu";render();scrollTo(0,0);return}
+  }catch(e){console.error(e)}
 }
 
 // Presupuesto que no se alcanza: lo más ajustado posible, por qué y qué hacer
@@ -1300,7 +1312,7 @@ function renderPerfil(){
   h+=acc("avisos","bell","Avisos en el móvil",S.notif&&S.notif.on?"Activados":"Desactivados",avisosCard().replace('<div class="card"><h2>Avisos en el móvil</h2>','<div>'));
   // 6. Tus datos
   h+=acc("datos","lock","Tus datos",`Copia de seguridad y privacidad · versión ${APP_VERSION}`,`<p class="small muted">Todo se guarda solo en este móvil. Descarga una copia de vez en cuando y antes de cambiar de móvil.</p>
-    ${needsTransfer()?`<div class="okbox"><b>¿Vas a instalar Táper?</b> Tus datos pasarán solos a la app. Si no te los reconoce, usa este código de traspaso: <b style="letter-spacing:.15em">${esc(transferCode())}</b></div>`:""}
+    ${needsTransfer()?`<div class="okbox"><b>¿Vas a instalar Táper?</b> Tus datos pasarán a la app con este código de traspaso (te lo pedirá al abrirla): <b style="letter-spacing:.15em">${esc(transferCode())}</b></div>`:""}
     ${isStandalone()&&servidorOn()?`<button class="btn ghost small" id="trBring" style="margin-bottom:8px">Traer mis datos de Safari</button>`:""}
     <div class="actions"><button class="btn" id="exp">Exportar copia</button><button class="btn ghost" id="imp">Importar copia</button></div><input type="file" id="impFile" accept="application/json,.json" hidden>
     <details class="more"><summary>Empezar de cero</summary><p class="small muted">Guardo tus datos en este móvil, la app vuelve a la primera pantalla y, cuando quieras, los recuperas tal cual.</p>
@@ -1485,14 +1497,21 @@ function inboxItems(){
     if(notifBlocked())out.push({ico:"🔕",t:"Tus avisos están bloqueados",s:"Te enseño cómo activarlos en 4 toques",go:()=>openPermHelp()});
     else if(avisosOn()&&!(S.notif&&S.notif.on))out.push({ico:"🔔",t:"Activa los avisos",s:"Para saber qué descongelar, qué cocinar y cuándo planificar",go:()=>{dlg.close();enableAvisos().catch(e=>toast("No se ha podido: "+e.message))}});
     else if(avisosOn()&&S.notif&&S.notif.on&&"Notification" in window&&Notification.permission==="default")out.push({ico:"🔔",t:"Vuelve a activar los avisos",s:"Este móvil aún no te ha dado permiso",go:()=>{dlg.close();enableAvisos().catch(e=>toast("No se ha podido: "+e.message))}});
-    else if(!avisosOn()&&isIOS()&&!isStandalone())out.push({ico:"📲",t:"Instala Táper para recibir avisos",s:"En iPhone solo llegan con la app en la pantalla de inicio",go:()=>{dlg.close();showDialog(`<div class="mod">${closeBtn}<h2>Instala Táper</h2><ol class="steps"><li>Toca <b>Compartir</b> (el cuadrado con la flecha ↑)</li><li>Toca <b>Añadir a pantalla de inicio</b></li><li>Abre Táper desde su icono nuevo</li><li>Tus datos pasarán solos</li></ol></div>`)}});
+    // Activados, pero el último aviso no llegó (el servicio push lo rechazó) o no hay forma de hablar con el servidor
+    else if(avisosOn()&&S.notif&&S.notif.on&&S.notifProblem&&S.notifProblem!=="permiso")out.push({ico:"⚠️",t:"Los avisos no te están llegando",s:S.notifProblem==="servidor"?"No consigo hablar con el servidor de avisos. Toca para reintentarlo":"El último aviso no se pudo entregar. Toca para reactivarlos",
+      go:()=>{dlg.close();subscribeHere().then(()=>{S.notifProblem=null;save();render();toast("Avisos reactivados")}).catch(e=>toast("No se ha podido: "+e.message))}});
+    else if(!avisosOn()&&isIOS()&&!isStandalone())out.push({ico:"📲",t:"Instala Táper para recibir avisos",s:"En iPhone solo llegan con la app en la pantalla de inicio",go:()=>{dlg.close();let c="";try{c=transferCode();save()}catch(e){}
+      showDialog(`<div class="mod">${closeBtn}<h2>Instala Táper</h2><ol class="steps"><li>Toca <b>Compartir</b> (el cuadrado con la flecha ↑)</li><li>Toca <b>Añadir a pantalla de inicio</b></li><li>Abre Táper desde su icono nuevo</li><li>Para traer tus datos te pedirá tu código de traspaso${c?`: <b>${esc(c)}</b> (apúntalo)`:""}</li></ol></div>`)}});
     else if(!avisosOn()&&!isIOS())out.push({ico:"🔕",t:"Este navegador no recibe avisos",s:"Abre Táper con Chrome e instálala para recibirlos",go:()=>{dlg.close();tab="perfil";render()}});
   }catch(e){}
-  try{for(const k of S.people)if(!k.smallSet&&(k.id==="yo"||(k.presence||{}).type!=="manual"))out.push({ico:"🥐",t:isMe(k)?"¿Desayunas, almuerzas y meriendas?":`¿Qué desayuna y merienda ${personName(k)}?`,s:"Te propongo desayunos, almuerzos y meriendas sanos",go:()=>{dlg.close();openWizard("familia");scrollTo(0,0)}})}catch(e){}
-  try{for(const k of others())if(!k.mealsSet&&(k.presence||{}).type!=="manual")out.push({ico:"🍽️",t:`¿Qué comidas hace ${personName(k)} en casa?`,s:"Comida y cena de cada día: así no cocino de más",go:()=>{dlg.close();openWizard("familia");scrollTo(0,0)}})}catch(e){}
+  // Lo que falta saber de la familia (desayunos y meriendas de cada uno, comidas en casa): un solo aviso
+  try{const sm=S.people.filter(k=>!k.smallSet&&(k.id==="yo"||(k.presence||{}).type!=="manual")),ml=others().filter(k=>!k.mealsSet&&(k.presence||{}).type!=="manual");
+    const nm=ps=>{const n=ps.map(p=>isMe(p)?"ti":personName(p));return n.length>1?n.slice(0,-1).join(", ")+" y "+n.slice(-1):n[0]||""};
+    if(sm.length||ml.length)out.push({ico:"🥐",t:sm.length?(sm.length===1&&isMe(sm[0])?"¿Desayunas, almuerzas y meriendas?":"¿Qué se desayuna y merienda en casa?"):`¿Qué comidas hace${ml.length>1?"n":""} ${nm(ml)} en casa?`,
+      s:sm.length?`Lo de ${nm(sm)}: te propongo opciones sanas${ml.length?" (y qué comidas hace"+(ml.length>1?"n ":" ")+nm(ml)+" en casa)":""}`:"Comida y cena de cada día: así no cocino de más",go:()=>{dlg.close();openWizard("familia");scrollTo(0,0)}})}catch(e){}
   try{if(S.onboarded&&!/^\d{5}$/.test(S.home.cp||""))out.push({ico:"📍",t:"Pon tu código postal",s:"Para tus precios, los supermercados que te reparten y tus festivos",go:()=>{dlg.close();openWizard("zona");scrollTo(0,0)}})}catch(e){}
   try{for(const x of ticketDue())if(!laterHidden("tk|"+x.k))out.push({ico:"📸",t:`Sube el ticket de ${x.title}`,s:"+3 coins · y afino los precios para todos",go:()=>{dlg.close();askTicket(x.m,x.key)},
-    btns:[["Subirlo",()=>{dlg.close();askTicket(x.m,x.key)}],["⏰ Mañana",()=>remindTomorrow("tk|"+x.k,"📸 Te queda subir el ticket","Foto, captura o PDF: ganas 3 coins")]]})}catch(e){}
+    btns:[["Subirlo",()=>{dlg.close();askTicket(x.m,x.key)}],["⏰ Mañana",()=>remindTomorrow("tk|"+x.k,"📸 Sube el ticket","Una foto y ganas 3 coins")]]})}catch(e){}
   // Reparte y congela: desde el día de la compra hasta 3 días después, si quedan bolsas sin marcar
   try{for(const m of [today.slice(0,7),nextMonthOf(today.slice(0,7))]){const sh=shopping(m);
     for(const key of Object.keys(sh.bags||{})){const pend=bagsPending(sh,key),ws=sh.weeks[key==="mes"?mesWeek(sh.weeks):Number(key)];if(!pend.length||!ws)continue;
@@ -1503,18 +1522,19 @@ function inboxItems(){
   try{for(const r of shopDueNow())out.push({ico:"🛒",t:r.title.replace("🛒 ",""),s:r.body,go:()=>openShopReminder(r),
     btns:[["✓ Ya está",()=>{markShopDone(r.m,r.key);render();askTicket(r.m,r.key)}],["⏰ Mañana",()=>{S.shopSnooze=S.shopSnooze||{};S.shopSnooze[shopKey(r.m,r.key)]=addDays(todayISO(),1);save();render();toast("Te lo recuerdo mañana")}]]})}catch(e){}
   try{const nx=monthPrepDue();if(nx&&!laterHidden("mprep|"+nx))out.push({ico:"📋",t:`Prepara ${mName(nx)}`,s:"5 preguntas y te dejo el menú y el pedido del mes listos",go:()=>{dlg.close();openMonthPrep(nx)},
-    btns:[["Prepararlo",()=>{dlg.close();openMonthPrep(nx)}],["⏰ Mañana",()=>remindTomorrow("mprep|"+nx,`📋 Prepara ${mName(nx)}`,"5 preguntas rápidas y te dejo el menú y el pedido del mes listos")]]})}catch(e){}
-  try{const n=pendingMeals().length;if(n)out.push({ico:"⭐",t:n===1?"1 comida por valorar":`${n} comidas por valorar`,s:"Así aprendo lo que os gusta",go:go("menu")})}catch(e){}
+    btns:[["Prepararlo",()=>{dlg.close();openMonthPrep(nx)}],["⏰ Mañana",()=>remindTomorrow("mprep|"+nx,`📋 Prepara ${mName(nx)}`,"5 preguntas y te dejo el menú y el pedido del mes")]]})}catch(e){}
+  try{const n=pendingMeals().length;if(n)out.push({ico:"⭐",t:n===1?"1 comida por valorar":`${n} comidas por valorar`,s:`Así aprendo lo que ${S.people.length>1?"os":"te"} gusta`,go:go("menu")})}catch(e){}
   try{for(const {d,i,s} of pendingSports().reverse())out.push({ico:"🏃",t:`¿Hiciste ${(SPORTS[s.type]||s.type).toLowerCase()}${d===today?" hoy":" el "+longDate(d)}?`,s:`A las ${sessTime(s)} · para recalcular lo que te conviene comer`,go:go("menu"),
     btns:[["Sí",()=>withRecalc(()=>setSport(d,i,"si"))],["No",()=>withRecalc(()=>setSport(d,i,"no"))]]})}catch(e){}
   try{const x=thawPending();if(x)out.push({ico:"❄️",t:`¿Pasaste ${x.th.join(" y ")} a la nevera anoche?`,s:`Para ${x.r.name.toLowerCase()} (${x.sl.meal} de hoy)`,go:go("menu"),
     btns:[["Sí",()=>answerThaw(x.sl.id,"si")],["No, se me olvidó",()=>answerThaw(x.sl.id,"no")]]})}catch(e){}
   try{const st=weekStartFor(today),nx=addDays(st,7);
     for(const s of [st,nx]){if(S.home.start&&addDays(s,6)<S.home.start)continue;const wk=S.plans[s];
-      if(!wk||!wk.confirmed){if(s===nx&&daysBetween(today,s)>2)continue;if(laterHidden("plan"))continue;
+      // La semana generada al darse de alta cuenta como planificada (weekDone): no se pide justo después del alta
+      if(!weekDone(s)){if(s===nx&&daysBetween(today,s)>2)continue;if(laterHidden("plan|"+s))continue;
         const open=()=>{dlg.close();tab="menu";render();openWeekPlanner(s)};
         out.push({ico:"🗓️",t:`Planifica la semana del ${shortDate(s)}`,s:"Entrenos, quién está, platos y compra",go:open,
-          btns:[["Planificar",open],["⏰ Mañana",()=>remindTomorrow("plan|"+s,"🗓️ Toca planificar la semana","Entrenos, quién está, platos y compra: 5 minutos.")]]})}}}catch(e){}
+          btns:[["Planificar",open],["⏰ Mañana",()=>remindTomorrow("plan|"+s,`🗓️ Planifica la semana del ${Number(s.slice(8))}`,"5 minutos: quién está, entrenos y platos")]]})}}}catch(e){}
   try{const st=weekStartFor(today);if(budgetSet()&&S.plans[st]&&weekCost(st)>weekFoodTarget(st,true)+0.5)out.push({ico:"💶",t:"Esta semana te pasas del presupuesto",s:`${eur(weekCost(st))} de ${eur(weekFoodTarget(st,true))}`,go:()=>{dlg.close();openSacrifice(st)}})}catch(e){}
   try{const ups=Object.keys(P).filter(rise);if(ups.length)out.push({ico:"📈",t:ups.length===1?"1 producto ha subido de precio":`${ups.length} productos han subido de precio`,s:ups.slice(0,3).map(p=>P[p].name.toLowerCase()).join(", "),go:go("compra")})}catch(e){}
   try{const old=freezerState().filter(e=>e.days>FREEZER_MONTHS*30),s=old.map(e=>P[e.pid].name.toLowerCase()).join(", ");
@@ -1555,7 +1575,7 @@ function installCard(){
   if(installPrompt)how=`<button class="btn" id="doInstall">📲 Instalar Táper</button>`;
   else if(inApp)how=`<p class="small">Estás en un navegador integrado. Toca <b>⋮</b> y elige <b>«Abrir en Chrome»</b>; allí aparecerá el botón para instalarla.</p>`;
   else if(samsung)how=`<p class="small">Toca el menú <b>≡</b> › <b>Añadir página a</b> › <b>Pantalla de inicio</b>.</p>`;
-  else if(ios)how=`<p class="small">Toca <b>Compartir</b> (el cuadrado con la flecha) › <b>Añadir a pantalla de inicio</b>. Tus datos pasarán solos a la app${S.onboarded?` (código de traspaso, por si acaso: <b>${esc(transferCode())}</b>)`:""}.</p>`;
+  else if(ios)how=`<p class="small">Toca <b>Compartir</b> (el cuadrado con la flecha) › <b>Añadir a pantalla de inicio</b>. Tus datos pasarán a la app${S.onboarded?` con tu código de traspaso: <b>${esc(transferCode())}</b> (apúntalo, te lo pedirá)`:""}.</p>`;
   else how=`<p class="small">En Chrome, toca <b>⋮</b> › <b>Instalar aplicación</b> (o <b>Añadir a pantalla de inicio</b> › <b>Instalar</b>).</p>`;
   return `<div class="rate"><h3>📲 Instala Táper en tu móvil</h3><p class="small muted">Tendrás su icono en la pantalla de inicio, funcionará sin conexión y te llegarán los avisos.</p>${how}
     <button class="btn ghost small" id="hideInstall" style="margin-top:6px">Ahora no</button></div>`;

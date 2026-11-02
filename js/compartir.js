@@ -19,7 +19,7 @@ function recipeText(r,v,serv){
     ...r.ing.map(([p,q])=>`• ${P[p].name}: ${fmtQty(q*serv,P[p].unit)}`),"• Aceite, sal y especias al gusto"];
   if(v.tools&&v.tools.length)L.push("","*Necesitas*",v.tools.join(", "));
   L.push("","*Preparación*",...v.steps.map((s,i)=>{const tg=stepTags((v.info||[])[i]);return `${i+1}. ${s}${tg.length?` _(${tg.join(" · ")})_`:""}`}));
-  L.push("",`Receta de Táper 👉 ${appLink("receta="+encodeURIComponent(r.id)+(S.uid?"&ref="+encodeURIComponent(S.uid):""))}`);
+  L.push("",`Receta de Táper 👉 ${appLink("receta="+encodeURIComponent(r.id)+(refParam()?"&"+refParam():""))}`);
   return L.join("\n");
 }
 const shareRecipe=(r,v,serv)=>{shareText(r.name,recipeText(r,v,serv));evento("compartir")};
@@ -39,7 +39,7 @@ function listText(title,groups,isDone,total){
   if(!left)L.push("","Ya está todo cogido ✓");
   else if(left<all)L.push("",`(Faltan ${left} de ${all} productos)`);
   if(total)L.push("",`Unos ${eur(total)}`);
-  L.push("",`Hecha con Táper 👉 ${appLink(S.uid?"ref="+encodeURIComponent(S.uid):"")}`);
+  L.push("",`Hecha con Táper 👉 ${appLink(refParam())}`);
   return L.join("\n");
 }
 function shareList(m,l,title){shareText(title,listText(title,l.groups,it=>!!S.checks[checkKey(m,l.key,it.pid)],l.cost+l.fee));evento("compartir")}
