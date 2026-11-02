@@ -40,11 +40,12 @@ let despCache={k:null,v:null};
 function despensaState(){
   const k=S.updatedAt+"|"+todayISO()+"|"+(PR&&PR.fecha);if(despCache.k===k)return despCache.v;
   // paid: lo que pagaste por unidad en tu último ticket de cada producto (si no hay ticket, el precio del súper)
-  const stock={},meals={},paid={};const uc=pid=>paid[pid]??unitCost(pid);
+  // short: lo que un plato necesitó y no había en la despensa (salió de otro sitio: una bolsa del congelador…)
+  const stock={},meals={},paid={},short={};const uc=pid=>paid[pid]??unitCost(pid);
   for(const e of despensaEvents()){const s=stock[e.pid]||0;if(e.uc)paid[e.pid]=e.uc;
     if(e.set)stock[e.pid]=e.q;
     else if(e.adj)stock[e.pid]=Math.max(0,s+e.q);
-    else if(e.out){stock[e.pid]=Math.max(0,s-e.q);
+    else if(e.out){stock[e.pid]=Math.max(0,s-e.q);if(e.q-s>1)(short[e.pid]=short[e.pid]||[]).push({d:e.d,q:e.q-s});
       // Lo que cuesta cada comida: lo que lleva el plato a precio del súper (se haya comprado o no)
       const key=e.u.slot.id||e.u.slot.date+"|"+e.u.slot.meal,mm=meals[key]=meals[key]||{key,date:e.u.slot.date,meal:e.u.slot.meal,r:e.u.r,cost:0,items:[]};
       mm.cost+=e.q*uc(e.pid);mm.items.push({pid:e.pid,q:e.q})}
@@ -54,7 +55,7 @@ function despensaState(){
   for(const x of despSlots())if(x.k.startsWith("t:")&&slotEaten(x.id)&&x.date>=despensaData().start){const tl=despTicketLine(x.k);if(!tl)continue;
     const mm=meals[x.id]=meals[x.id]||{key:x.id,date:x.date,meal:x.meal,r:null,cost:0,items:[]};mm.cost+=tl.l.amount/Math.max(1,tl.l.qty||1)*x.n}
   for(const mm of Object.values(meals))if(!mm.r)mm.name="🧺 "+[...new Set(despSlots().filter(x=>x.id===mm.key).map(x=>despItemName(x.k)))].join(", ");
-  const v={stock,uc,meals:Object.values(meals).sort((a,b)=>b.date.localeCompare(a.date)||(a.meal<b.meal?1:-1))};
+  const v={stock,uc,short,meals:Object.values(meals).sort((a,b)=>b.date.localeCompare(a.date)||(a.meal<b.meal?1:-1))};
   despCache={k,v};return v;
 }
 // Lo que piden los platos que vienen (sin comer aún), del día from al to (sin incluir)
@@ -134,7 +135,7 @@ function renderDespensa(){
   h+=`<div class="card"><h2>Añadir algo que tienes</h2><div class="row"><select id="dpP" style="flex:2">${all.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join("")}</select>
     <input type="number" id="dpQ" min="0" step="any" placeholder="Cantidad" style="flex:1"><span class="small" id="dpU">${esc(all[0]?.unit||"g")}</span></div>
     <button class="btn small" id="dpAdd" style="margin-top:8px">Añadir</button>
-    <p class="small muted" style="margin-top:10px">${ico("snowflake")} Lo congelado, con los días que lleva dentro: <button class="btn ghost small" id="dpFz">Ver el congelador</button></p></div></section>`;
+    <p class="small muted" style="margin-top:10px">${ico("snowflake")} ${(n=>n?`${n} ${n===1?"bolsa":"bolsas"} en el congelador. `:"")(bolsasState().reduce((t,b)=>t+b.left,0))}Lo congelado y tus bolsas, con los días que llevan dentro: <button class="btn ghost small" id="dpFz">Ver el congelador</button></p></div></section>`;
   main.innerHTML=h;
   document.getElementById("dpTicket").onclick=()=>openTicketScan(false,null,{m:today.slice(0,7),key:"suelta"});
   document.getElementById("dpChecked")?.addEventListener("click",()=>{D.checked=todayISO();save();render();toast("Perfecto. A partir de ahora se va ajustando sola")});
@@ -215,7 +216,7 @@ function redoWithStock(){
 const despSlots=()=>{const out=[];for(const wk of Object.values(S.plans))for(const [id,v] of Object.entries(wk.slots||{}))if(v&&v.despensa)for(const it of v.despensa)out.push({id,date:id.slice(0,10),meal:id.slice(11),k:it.k,n:Number(it.n)||0});return out};
 function slotEaten(id){const st=((S.meals||{})[id]||{}).status;if(st==="fuera"||st==="nada"||st==="otro")return false;const d=id.slice(0,10),t=todayISO();return d<t||(d===t&&!!st)}
 function despTicketLine(k){const [tid,i]=k.slice(2).split("|");const t=(S.tickets||[]).find(x=>x.id===tid);return t&&t.lines[Number(i)]?{t,l:t.lines[Number(i)]}:null}
-function despItemName(k){if(k.startsWith("p:"))return P[k.slice(2)]?P[k.slice(2)].name:"Producto";const x=despTicketLine(k);return x?(x.l.name||x.l.desc.charAt(0)+x.l.desc.slice(1).toLowerCase()):"Algo de un ticket"}
+function despItemName(k){if(k.startsWith("b:")){const b=(S.bolsas||[]).find(x=>x.id===k.slice(2));return b?"Bolsa de "+bolsaName(b).toLowerCase()+(b.peso?" ("+bolsaPeso(b)+")":""):"Bolsa del congelador"}if(k.startsWith("p:"))return P[k.slice(2)]?P[k.slice(2)].name:"Producto";const x=despTicketLine(k);return x?(x.l.name||x.l.desc.charAt(0)+x.l.desc.slice(1).toLowerCase()):"Algo de un ticket"}
 const despItemQty=it=>it.k.startsWith("p:")&&P[it.k.slice(2)]?it.n*P[it.k.slice(2)].env:it.n;
 // Lo del ticket (sin receta): cuántas unidades quedan, cuántas ya se comieron y cuántas están reservadas para un día
 function ticketOtros(){
@@ -231,7 +232,7 @@ function openDespensaPick(sid,preset){
   const d=sid.slice(0,10),meal=sid.slice(11),start=weekStartFor(d),wk=S.plans[start];if(!wk)return;
   const cur=wk.slots[sid]&&wk.slots[sid].despensa?wk.slots[sid].despensa:[],n={};for(const it of cur)n[it.k]=it.n;if(preset)n[preset.k]=(n[preset.k]||0)+preset.n;
   const {stock}=despensaState(),otros=ticketOtros();
-  const rows=[...otros.map(o=>({k:o.k,name:despItemName(o.k),sub:`${o.left} de ${o.total} · del ticket del ${shortDate(o.t.date)}`,max:o.left,step:1,unit:"ud"})),
+  const rows=[...bolsasState().map(b=>({k:"b:"+b.id,name:"❄️ "+bolsaName(b),sub:`${b.left} ${b.left===1?"bolsa":"bolsas"}${b.peso?" de "+bolsaPeso(b):""} en el congelador`,max:b.left,step:1,unit:"bolsa"})),...otros.map(o=>({k:o.k,name:despItemName(o.k),sub:`${o.left} de ${o.total} · del ticket del ${shortDate(o.t.date)}`,max:o.left,step:1,unit:"ud"})),
     ...Object.keys(stock).sort((a,b)=>P[a].name.localeCompare(P[b].name)).map(pid=>({k:"p:"+pid,name:P[pid].name,sub:`tienes ${fmtQty(stock[pid],P[pid].unit)} · envase de ${fmtQty(P[pid].env,P[pid].unit)}`,max:Math.max(1,Math.ceil(stock[pid]/P[pid].env*2)/2),step:.5,unit:"env."}))];
   for(const k of Object.keys(n))if(!rows.some(r=>r.k===k))rows.unshift({k,name:despItemName(k),sub:"ya elegido",max:Math.max(n[k],1),step:k.startsWith("p:")?.5:1,unit:k.startsWith("p:")?"env.":"ud"});
   const draw=()=>{

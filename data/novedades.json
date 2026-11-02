@@ -922,6 +922,16 @@
         "En la campanita de la app también: cada tarea tiene su botón para hacerla ya o dejarla para mañana, y desaparece de la lista hasta entonces.",
         "«Reparte y congela» sale también en la campanita, con «Ya está» para marcar todas las bolsas de una vez."
       ]
+    },
+    {
+      "version": 116,
+      "fecha": "2026-11-02",
+      "titulo": "Bolsas de congelado",
+      "cambios": [
+        "En el Congelador puedes añadir tus bolsas por tipo (carne, pescado, verdura, caldo, plato cocinado…), con lo que son, el peso de cada una, cuántas y cuándo las congelaste.",
+        "Se descuentan al usarlas: con «Usar una», al comerla un día desde la despensa o, si dices de qué producto es, solas cuando cocinas un plato que lo lleva y no lo tenías en la despensa.",
+        "Lo más antiguo se gasta primero y te aviso de lo que lleva más de 3 meses."
+      ]
     }
   ]
 }
