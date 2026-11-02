@@ -912,6 +912,16 @@
         "En la campanita de la app, las preguntas se contestan ahí mismo: ¿entrenaste?, ¿descongelaste?, ¿ya hiciste la compra?",
         "El aviso de descongelar trae «Ya está» para apuntarlo sin abrir nada más."
       ]
+    },
+    {
+      "version": 115,
+      "fecha": "2026-11-02",
+      "titulo": "Déjalo para mañana",
+      "cambios": [
+        "Los avisos de tareas traen «⏰ Mañana»: planificar la semana, preparar el mes, repartir y congelar, subir el ticket y gastar lo congelado. Te lo vuelvo a recordar al día siguiente (si aún no lo has hecho).",
+        "En la campanita de la app también: cada tarea tiene su botón para hacerla ya o dejarla para mañana, y desaparece de la lista hasta entonces.",
+        "«Reparte y congela» sale también en la campanita, con «Ya está» para marcar todas las bolsas de una vez."
+      ]
     }
   ]
 }

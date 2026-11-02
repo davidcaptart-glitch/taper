@@ -95,8 +95,36 @@ function buildSchedule(){
       for(let i=0;i<4;i++){const d=addDays(r.due>today?r.due:today,i);if(d<snooze)continue;
         push(at(d,r.online?"19:30":"09:30"),r.title,r.body+(i?" · ¿Ya está? Márcala como hecha":""),"shop|"+r.m+"|"+r.key)}
     }}catch(e){}}
+  // Lo dejado para mañana: se avisa a esa hora (si sigue pendiente) y el aviso normal no se repite antes
+  for(const [tag,x] of Object.entries(S.later||{})){
+    if(x.t<now-864e5||!laterPending(tag)){delete S.later[tag];continue}
+    if(x.t<=now)continue;
+    for(let i=out.length-1;i>=0;i--)if(out[i].tag===tag&&out[i].t<x.t+36e5)out.splice(i,1);
+    out.push({t:x.t,title:x.title,body:/Perfil › Avisos/.test(x.body||"")?x.body:String(x.body||"").replace(/\.?$/,".")+" Puedes quitarlo en Perfil › Avisos.",tag});
+  }
   return out.sort((a,b)=>a.t-b.t).slice(0,150);
 }
+
+/* ---------- «Mañana»: avisos que son una tarea y se pueden dejar para el día siguiente ----------
+   S.later[tag]={t,title,body}: se vuelve a avisar a esa hora si la tarea sigue pendiente */
+function laterPending(tag){try{const [k,a,b]=tag.split("|");
+  if(k==="plan"){const st=weekStartFor(todayISO());return [st,addDays(st,7)].some(s=>!(S.plans[s]&&S.plans[s].confirmed))}
+  if(k==="mprep")return !((S.monthPrep||{})[a]||{}).done;
+  if(k==="frz")return bagsPending(shopping(a),b).length>0;
+  if(k==="tk")return !(S.ticketSkip||{})[shopKey(a,b)]&&!(S.tickets||[]).some(t=>t.m===a&&t.list===b);
+  if(k==="freezer")return freezerState().some(e=>e.days>FREEZER_MONTHS*30);
+  if(k==="shop")return !(S.shopDone||{})[shopKey(a,b)];
+}catch(e){}return true}
+const laterHour=k=>({plan:S.home.planTime,mprep:S.home.planTime,frz:"20:00",tk:"10:00",freezer:"11:00",shop:"09:30"}[k]||"10:00");
+// Desde la campanita: mañana a la hora habitual de ese aviso
+function remindTomorrow(tag,title,body){
+  S.later=S.later||{};S.later[tag]={t:at(addDays(todayISO(),1),laterHour(tag.split("|")[0])),title,body};save();render();toast("Te lo recuerdo mañana")}
+// ¿Dejado para más tarde? Vale el aviso exacto ("frz|2026-11|0") o todos los de un tipo ("plan")
+const laterHidden=tag=>Object.entries(S.later||{}).some(([k,x])=>(k===tag||k.startsWith(tag+"|"))&&x.t>Date.now());
+// Lo dejado para luego desde la notificación: lo apunta el service worker y la app lo recoge al abrirse
+async function mergeLater(){try{const c=await caches.open("taper-meta"),r=await c.match("/__aplazados");if(!r)return;
+  const l=await r.json();await c.delete("/__aplazados");if(!Object.keys(l).length)return;
+  S.later={...(S.later||{}),...l};save();render()}catch(e){}}
 
 async function postAvisos(path,body){
   const r=await fetch(CFG.avisos.url.replace(/\/$/,"")+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});

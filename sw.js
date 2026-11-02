@@ -1,25 +1,25 @@
 // Service worker de Táper: guarda la app para usarla sin conexión.
 // Al cambiar cualquier archivo de la app, sube VERSION aquí y el ?v= de index.html para que los móviles descarguen la nueva.
-const VERSION = "taper-v114";
+const VERSION = "taper-v115";
 const SHELL = [
   "./",
   "index.html",
-  "css/app.css?v=114", "css/esteticas.css?v=114",
-  "js/base.js?v=114",
-  "js/iconos.js?v=114",
-  "js/datos.js?v=114",
-  "js/fotos.js?v=114",
-  "js/gustos.js?v=114",
-  "js/plan.js?v=114",
-  "js/compra.js?v=114",
-  "js/tickets.js?v=114",
-  "js/congelador.js?v=114",
-  "js/despensa.js?v=114",
-  "js/avisos.js?v=114",
-  "js/compartir.js?v=114",
-  "js/casa.js?v=114",
-  "js/bienvenida.js?v=114",
-  "js/ui.js?v=114",
+  "css/app.css?v=115", "css/esteticas.css?v=115",
+  "js/base.js?v=115",
+  "js/iconos.js?v=115",
+  "js/datos.js?v=115",
+  "js/fotos.js?v=115",
+  "js/gustos.js?v=115",
+  "js/plan.js?v=115",
+  "js/compra.js?v=115",
+  "js/tickets.js?v=115",
+  "js/congelador.js?v=115",
+  "js/despensa.js?v=115",
+  "js/avisos.js?v=115",
+  "js/compartir.js?v=115",
+  "js/casa.js?v=115",
+  "js/bienvenida.js?v=115",
+  "js/ui.js?v=115",
   "manifest.webmanifest",
   "data/festivos.json",
   "data/supermercados.json",
@@ -60,11 +60,15 @@ self.addEventListener("push", e => {
     if (!list.length) list = [{ title: "Táper", body: "Tienes avisos pendientes en Táper.", tag: "taper" }];
     for (const a of list) {
       // Los avisos que son una pregunta llevan sus respuestas como botones
-      const tag = String(a.tag || ""), shop = tag.startsWith("shop|"), sport = tag.startsWith("sport|"), thaw = tag.startsWith("thaw|");
+      const tag = String(a.tag || ""), kind = tag.split("|")[0], shop = kind === "shop", sport = kind === "sport", thaw = kind === "thaw";
+      // Tareas que se pueden dejar para mañana (planificar, preparar el mes, el ticket, gastar lo congelado)
+      const later = ["plan", "mprep", "tk", "freezer"].includes(kind);
       await self.registration.showNotification(a.title, { body: a.body, tag: a.tag || undefined, icon: "icons/icon-192.png", badge: "icons/icon-192.png",
         data: { tag: a.tag, title: a.title, body: a.body }, requireInteraction: shop || sport,
         actions: shop ? [{ action: "hecho", title: "✓ Ya está" }, { action: "luego", title: "⏰ En 3 horas" }]
           : sport ? [{ action: "si", title: "✓ Sí" }, { action: "no", title: "✗ No" }]
+          : kind === "frz" ? [{ action: "hecho", title: "✓ Ya está" }, { action: "manana", title: "⏰ Mañana" }]
+          : later ? [{ action: "manana", title: "⏰ Mañana" }]
           : thaw ? [{ action: "hecho", title: "✓ Ya está" }] : [] });
     }
     // Número en el icono donde el sistema lo permite (en Android sale el puntito de la notificación)
@@ -74,17 +78,26 @@ self.addEventListener("push", e => {
 self.addEventListener("notificationclick", e => {
   e.notification.close();
   const d = e.notification.data || {};
-  // Posponer: el servidor lo vuelve a mandar dentro de 3 horas
-  if (e.action === "luego") {
+  // Posponer (3 horas o mañana a esta hora): el servidor lo vuelve a mandar, y la app lo apunta al abrirse
+  // para no perderlo cuando vuelva a mandar su lista de avisos
+  if (e.action === "luego" || e.action === "manana") {
+    const mins = e.action === "manana" ? 24 * 60 : 180;
     e.waitUntil((async () => { try {
-      const { uid, url } = await (await (await caches.open("taper-meta")).match("/__avisos")).json();
-      await fetch(url.replace(/\/$/, "") + "/posponer", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ uid, mins: 180, aviso: { title: d.title, body: d.body, tag: d.tag } }) });
+      const meta = await caches.open("taper-meta");
+      if (d.tag) {
+        const r = await meta.match("/__aplazados"), l = r ? await r.json() : {};
+        l[d.tag] = { t: Date.now() + mins * 60000, title: d.title, body: d.body };
+        await meta.put("/__aplazados", new Response(JSON.stringify(l)));
+        for (const c of await self.clients.matchAll({ type: "window", includeUncontrolled: true })) c.postMessage({ tipo: "aplazado" });
+      }
+      const { uid, url } = await (await meta.match("/__avisos")).json();
+      await fetch(url.replace(/\/$/, "") + "/posponer", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ uid, mins, aviso: { title: d.title, body: d.body, tag: d.tag } }) });
     } catch (err) {} })());
     return;
   }
   const tipo = ["hecho", "si", "no"].includes(e.action) ? e.action : "abrir";
   // Compra, "¿Qué tal?", entrenos y descongelar: abre la app justo en esa pantalla (y apunta la respuesta)
-  if (d.tag && /^(shop|rate|sport|thaw)\|/.test(String(d.tag))) {
+  if (d.tag && /^(shop|rate|sport|thaw|frz)\|/.test(String(d.tag))) {
     e.waitUntil((async () => {
       const all = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
       if (all.length) { all[0].postMessage({ tipo, tag: d.tag }); if ("focus" in all[0]) return all[0].focus(); }

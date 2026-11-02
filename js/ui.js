@@ -224,7 +224,7 @@ function openRateDialog(force){
   showDialog(`<div class="mod">${closeBtn}${rateCard()}</div>`);
   bindRate(dlg,()=>{render();if(dlg.open&&!dlg.querySelector("[name=why]"))openRateDialog(true)});
 }
-document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")setTimeout(()=>openRateDialog(),600)});
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){mergeLater();setTimeout(()=>openRateDialog(),600)}});
 // Qué pasó si no se comió lo previsto
 function openNotEaten(key,rid){
   const d=key.slice(0,10), meal=key.slice(11), r=RX[rid], cooked=mealState(d,meal)==="cocinar";
@@ -378,6 +378,10 @@ function notifAction(tipo,tag){
   // ¿Entrenaste? Sí / No desde la notificación (si ya estaba contestado, no se cambia)
   if(tag&&tag.startsWith("sport|")){const [,d,i]=tag.split("|");tab="menu";
     if((tipo==="si"||tipo==="no")&&!((((S.sport||{})[d]||{}).res||{})[i]))withRecalc(()=>setSport(d,Number(i),tipo));else render();return}
+  // Reparte y congela: «Ya está» marca todas las bolsas que faltaban
+  if(tag&&tag.startsWith("frz|")){const [,m,key]=tag.split("|");
+    if(tipo==="hecho"){S.bags=S.bags||{};for(const b of bagsPending(shopping(m),key))S.bags[b.id]=todayISO();save();render();toast("Bolsas apuntadas como congeladas")}
+    else {month=m;tab="compra";listSel=key;render();scrollTo(0,0)}return}
   if(tag&&tag.startsWith("thaw|")){tab="menu";
     if(tipo==="hecho"){S.thawChecked=S.thawChecked||{};S.thawChecked[tag.slice(5)]=true;save();toast("Apuntado: descongelado")}render();return}
   if(!tag||!tag.startsWith("shop|"))return;
@@ -1471,10 +1475,19 @@ function inboxItems(){
   try{for(const k of S.people)if(!k.smallSet&&(k.id==="yo"||(k.presence||{}).type!=="manual"))out.push({ico:"🥐",t:isMe(k)?"¿Desayunas, almuerzas y meriendas?":`¿Qué desayuna y merienda ${personName(k)}?`,s:"Te propongo desayunos, almuerzos y meriendas sanos",go:()=>{dlg.close();openWizard("familia");scrollTo(0,0)}})}catch(e){}
   try{for(const k of others())if(!k.mealsSet&&(k.presence||{}).type!=="manual")out.push({ico:"🍽️",t:`¿Qué comidas hace ${personName(k)} en casa?`,s:"Comida y cena de cada día: así no cocino de más",go:()=>{dlg.close();openWizard("familia");scrollTo(0,0)}})}catch(e){}
   try{if(S.onboarded&&!/^\d{5}$/.test(S.home.cp||""))out.push({ico:"📍",t:"Pon tu código postal",s:"Para tus precios, los supermercados que te reparten y tus festivos",go:()=>{dlg.close();openWizard("zona");scrollTo(0,0)}})}catch(e){}
-  try{for(const x of ticketDue())out.push({ico:"📸",t:`Sube el ticket de ${x.title}`,s:"+3 coins · y afino los precios para todos",go:()=>{dlg.close();askTicket(x.m,x.key)}})}catch(e){}
+  try{for(const x of ticketDue())if(!laterHidden("tk|"+x.k))out.push({ico:"📸",t:`Sube el ticket de ${x.title}`,s:"+3 coins · y afino los precios para todos",go:()=>{dlg.close();askTicket(x.m,x.key)},
+    btns:[["Subirlo",()=>{dlg.close();askTicket(x.m,x.key)}],["⏰ Mañana",()=>remindTomorrow("tk|"+x.k,"📸 Te queda subir el ticket","Foto, captura o PDF: ganas 3 coins")]]})}catch(e){}
+  // Reparte y congela: desde el día de la compra hasta 3 días después, si quedan bolsas sin marcar
+  try{for(const m of [today.slice(0,7),nextMonthOf(today.slice(0,7))]){const sh=shopping(m);
+    for(const key of Object.keys(sh.bags||{})){const pend=bagsPending(sh,key),ws=sh.weeks[key==="mes"?mesWeek(sh.weeks):Number(key)];if(!pend.length||!ws)continue;
+      const day=deliveryDate(ws),tag="frz|"+m+"|"+key;if(day>today||addDays(day,3)<today||laterHidden(tag))continue;
+      const t=`Reparte y congela: ${pend.length} ${pend.length===1?"bolsa":"bolsas"}`,s=`Una bolsa por plato con su día (${[...new Set(pend.map(b=>P[b.pid].name.toLowerCase()))].slice(0,3).join(", ")}…)`;
+      out.push({ico:"🧊",t,s,go:()=>{dlg.close();month=m;tab="compra";listSel=key;render();scrollTo(0,0)},
+        btns:[["✓ Ya está",()=>{S.bags=S.bags||{};for(const b of pend)S.bags[b.id]=todayISO();save();render();toast("Bolsas apuntadas como congeladas")}],["⏰ Mañana",()=>remindTomorrow(tag,"🧊 "+t,s)]]})}}}catch(e){}
   try{for(const r of shopDueNow())out.push({ico:"🛒",t:r.title.replace("🛒 ",""),s:r.body,go:()=>openShopReminder(r),
     btns:[["✓ Ya está",()=>{markShopDone(r.m,r.key);render();askTicket(r.m,r.key)}],["⏰ Mañana",()=>{S.shopSnooze=S.shopSnooze||{};S.shopSnooze[shopKey(r.m,r.key)]=addDays(todayISO(),1);save();render();toast("Te lo recuerdo mañana")}]]})}catch(e){}
-  try{const nx=monthPrepDue();if(nx)out.push({ico:"📋",t:`Prepara ${mName(nx)}`,s:"5 preguntas y te dejo el menú y el pedido del mes listos",go:()=>{dlg.close();openMonthPrep(nx)}})}catch(e){}
+  try{const nx=monthPrepDue();if(nx&&!laterHidden("mprep|"+nx))out.push({ico:"📋",t:`Prepara ${mName(nx)}`,s:"5 preguntas y te dejo el menú y el pedido del mes listos",go:()=>{dlg.close();openMonthPrep(nx)},
+    btns:[["Prepararlo",()=>{dlg.close();openMonthPrep(nx)}],["⏰ Mañana",()=>remindTomorrow("mprep|"+nx,`📋 Prepara ${mName(nx)}`,"5 preguntas rápidas y te dejo el menú y el pedido del mes listos")]]})}catch(e){}
   try{const n=pendingMeals().length;if(n)out.push({ico:"⭐",t:n===1?"1 comida por valorar":`${n} comidas por valorar`,s:"Así aprendo lo que os gusta",go:go("menu")})}catch(e){}
   try{for(const {d,i,s} of pendingSports().reverse())out.push({ico:"🏃",t:`¿Hiciste ${(SPORTS[s.type]||s.type).toLowerCase()}${d===today?" hoy":" el "+longDate(d)}?`,s:`A las ${sessTime(s)} · para recalcular lo que te conviene comer`,go:go("menu"),
     btns:[["Sí",()=>withRecalc(()=>setSport(d,i,"si"))],["No",()=>withRecalc(()=>setSport(d,i,"no"))]]})}catch(e){}
@@ -1482,10 +1495,15 @@ function inboxItems(){
     btns:[["Sí",()=>answerThaw(x.sl.id,"si")],["No, se me olvidó",()=>answerThaw(x.sl.id,"no")]]})}catch(e){}
   try{const st=weekStartFor(today),nx=addDays(st,7);
     for(const s of [st,nx]){if(S.home.start&&addDays(s,6)<S.home.start)continue;const wk=S.plans[s];
-      if(!wk||!wk.confirmed){if(s===nx&&daysBetween(today,s)>2)continue;out.push({ico:"🗓️",t:`Planifica la semana del ${shortDate(s)}`,s:"Entrenos, quién está, platos y compra",go:()=>{dlg.close();tab="menu";render();openWeekPlanner(s)}})}}}catch(e){}
+      if(!wk||!wk.confirmed){if(s===nx&&daysBetween(today,s)>2)continue;if(laterHidden("plan"))continue;
+        const open=()=>{dlg.close();tab="menu";render();openWeekPlanner(s)};
+        out.push({ico:"🗓️",t:`Planifica la semana del ${shortDate(s)}`,s:"Entrenos, quién está, platos y compra",go:open,
+          btns:[["Planificar",open],["⏰ Mañana",()=>remindTomorrow("plan|"+s,"🗓️ Toca planificar la semana","Entrenos, quién está, platos y compra: 5 minutos.")]]})}}}catch(e){}
   try{const st=weekStartFor(today);if(S.plans[st]&&weekCost(st)>weekFoodTarget(st)+0.5)out.push({ico:"💶",t:"Esta semana te pasas del presupuesto",s:`${eur(weekCost(st))} de ${eur(weekFoodTarget(st))}`,go:()=>{dlg.close();openSacrifice(st)}})}catch(e){}
   try{const ups=Object.keys(P).filter(rise);if(ups.length)out.push({ico:"📈",t:ups.length===1?"1 producto ha subido de precio":`${ups.length} productos han subido de precio`,s:ups.slice(0,3).map(p=>P[p].name.toLowerCase()).join(", "),go:go("compra")})}catch(e){}
-  try{const old=freezerState().filter(e=>e.days>FREEZER_MONTHS*30);if(old.length)out.push({ico:"🧊",t:"Gasta esto pronto",s:old.map(e=>P[e.pid].name.toLowerCase()).join(", "),go:go("congelador")})}catch(e){}
+  try{const old=freezerState().filter(e=>e.days>FREEZER_MONTHS*30),s=old.map(e=>P[e.pid].name.toLowerCase()).join(", ");
+    if(old.length&&!laterHidden("freezer"))out.push({ico:"🧊",t:"Gasta esto pronto",s,go:go("congelador"),
+      btns:[["Verlo",go("congelador")],["⏰ Mañana",()=>remindTomorrow("freezer|"+today,"🧊 Gasta esto pronto","Lleva más de 3 meses congelado: "+s)]]})}catch(e){}
   try{if(reviewCard())out.push({ico:"📊",t:"Resumen del mes pasado",s:"Cómo fue el presupuesto y qué ajustar",go:go("menu")})}catch(e){}
   try{if(surveyCard())out.push({ico:"📋",t:"Encuesta del mes",s:"Un minuto",go:()=>{dlg.close();openSurvey()}})}catch(e){}
   try{if(S.home.start&&S.home.start>today)out.push({ico:"🥫",t:`Tu plan empieza el ${shortDate(S.home.start)}`,s:"Mientras, ideas para gastar lo que tienes",go:()=>{dlg.close();openUseUp()}})}catch(e){}
@@ -1744,11 +1762,12 @@ async function boot(){
   else if(S.onboarded&&NEWS&&(S.seenVersion||0)<APP_VERSION)openNews(false);
   else if(!S.onboarded){S.seenVersion=APP_VERSION;save()}
   checkUpdate();startCounter();
+  await mergeLater();
   if(avisosOn()&&S.notif&&S.notif.on){shareWithSW().catch(()=>{});queueSyncAvisos()}
   trackOnBoot();checkAvisos();applyAccent();applySkin();if(servidorOn())loadStats().then(()=>{applyAccent();applySkin()}).catch(()=>{});
   {const u=new URLSearchParams(location.search),k=["hecho","si","no","abrir"].find(x=>u.get(x));if(k){notifAction(k,u.get(k));history.replaceState(null,"",location.pathname)}}
   checkSharedTicket().then(t=>{if(!t)casaOnBoot().then(j=>{if(!j&&!shareOnBoot())setTimeout(()=>openRateDialog(),1500)})});
-  navigator.serviceWorker&&navigator.serviceWorker.addEventListener("message",e=>{if(e.data&&e.data.tipo)notifAction(e.data.tipo,e.data.tag)});watchPermission();checkTransferOnBoot();queueTransfer();
+  navigator.serviceWorker&&navigator.serviceWorker.addEventListener("message",e=>{if(!e.data||!e.data.tipo)return;if(e.data.tipo==="aplazado")mergeLater();else notifAction(e.data.tipo,e.data.tag)});watchPermission();checkTransferOnBoot();queueTransfer();
 }
 boot().catch(e=>console.error(e)).finally(hideEntry);
 if("serviceWorker" in navigator&&location.protocol!=="file:")navigator.serviceWorker.register("sw.js").catch(()=>{});
