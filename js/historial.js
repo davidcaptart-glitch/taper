@@ -12,8 +12,8 @@ const KIND_ICO={"Fruta y verdura":"🥦","Carne y pescado":"🥩","Lácteos, hue
 // Carne y pescado congelados: cuentan siempre en «Carne y pescado» (con ❄️), así los meses se pueden comparar;
 // los demás congelados (verdura, pizzas…), en «Congelados»
 const MEATFISH=/\b(MERLUZA|PESCADO|PESCADILLA|BACALAO|SALMON|ATUN|BONITO|GAMBA|LANGOSTINO|CALAMAR|SEPIA|PULPO|MEJILLON|RAPE|LENGUADO|DORADA|LUBINA|EMPERADOR|POLLO|PAVO|TERNERA|CERDO|CARNE|HAMBURGUESA|ALBONDIGA|LOMO|CONEJO|CORDERO|SALCHICHA)/;
-const isFrozen=l=>l.g==="Congelados"||!!(l.pid&&P[l.pid]&&P[l.pid].aisle==="Congelados")||/\bCONG/.test(normTxt(l.desc));
-const frozenMeat=l=>l.food&&isFrozen(l)&&(!!(l.pid&&P[l.pid]&&P[l.pid].aisle==="Carne y pescado")||MEATFISH.test(normTxt((l.name||"")+" "+l.desc)));
+const isFrozenLine=l=>l.g==="Congelados"||!!(l.pid&&P[l.pid]&&P[l.pid].aisle==="Congelados")||/\bCONG/.test(normTxt(l.desc));
+const frozenMeat=l=>l.food&&isFrozenLine(l)&&(!!(l.pid&&P[l.pid]&&P[l.pid].aisle==="Carne y pescado")||MEATFISH.test(normTxt((l.name||"")+" "+l.desc)));
 function lineKind(l){
   // l.g: la sección del catálogo (más precisa que la del producto de Táper)
   if(l.food&&(frozenMeat(l)||l.pid&&P[l.pid]&&P[l.pid].aisle==="Carne y pescado"))return "Carne y pescado";

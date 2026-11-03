@@ -988,6 +988,14 @@
         "Tus avisos van protegidos con una clave propia de tu móvil.",
         "El tema sigue al del móvil (claro u oscuro) si no eliges otro."
       ]
+    },
+    {
+      "version": 121,
+      "fecha": "2026-11-03",
+      "titulo": "Vuelve el historial de tickets",
+      "cambios": [
+        "«Tickets e informe» vuelve a abrirse: en la versión anterior no cargaba."
+      ]
     }
   ]
 }
