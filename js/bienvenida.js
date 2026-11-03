@@ -129,7 +129,7 @@ function finishOnboarding(){
   S.onboarded=true;save();
   if(typeof trackOnBoot==="function")trackOnBoot();
   if(S.home.cp&&S.home.cp!==S.home.cpLooked)lookupCp(S.home.cp).then(()=>save()).catch(()=>{});
-  preparingScreen(()=>{ensureHorizon();if(quick)S.afinar.cost=estimateMonthBudget();save()},()=>{tab="menu";if(S.home.start&&S.home.start>todayISO())month=S.home.start.slice(0,7);render();toast("Menú generado. Puedes cambiar lo que quieras")});
+  preparingScreen(()=>{ensureHorizon();if(quick)S.afinar.cost=estimateMonthBudget();save()},()=>{tab="hoy";if(S.home.start&&S.home.start>todayISO())month=S.home.start.slice(0,7);render();toast("Menú hecho. En «Mes» puedes cambiar lo que quieras")});
 }
 // Pantalla "Preparando tu semana": hace el trabajo y enseña lo que va haciendo
 function preparingScreen(work,done,opts={}){

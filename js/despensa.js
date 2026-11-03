@@ -21,7 +21,7 @@ function despensaData(){
     for(const e of S.freezer||[])if(e.at&&e.at<f)f=e.at;D.fzStart=f<lim?lim:f}
   return D;
 }
-const isFrozen=pid=>!!P[pid]&&(P[pid].keep==="congelar"||P[pid].keep==="congelado");
+const isFrozenPid=pid=>!!P[pid]&&(P[pid].keep==="congelar"||P[pid].keep==="congelado");
 // Lo mínimo que cuenta: 1 g o 1 ml; de lo que va por unidades (pizzas, hamburguesas…), cualquier unidad
 const dpEps=pid=>P[pid]&&P[pid].unit==="ud"?0.05:1;
 const newAdj=(pid,q,lot)=>({id:uid("adj"),pid,q,d:todayISO(),ts:Date.now(),...(lot?{lot}:{})});
@@ -78,14 +78,18 @@ function pastQty(u,D,today){
 // Lo que entra (compras marcadas, compras hechas, tickets, congelador, bolsas, a mano) y lo que sale (platos cocinados), en orden
 function despensaEvents(){
   const D=despensaData(),today=todayISO(),ev=[],tk=S.tickets||[];
-  const first=D.fzStart&&D.fzStart<D.start?D.fzStart:D.start,st=pid=>isFrozen(pid)?first:D.start;
+  const first=D.fzStart&&D.fzStart<D.start?D.fzStart:D.start,st=pid=>isFrozenPid(pid)?first:D.start;
   // Compras marcadas. Si hay ticket de esa lista con ese producto, cuenta el ticket (es lo que compraste de verdad);
   // un ticket suelto con el mismo producto, ±2 días, es la misma compra (subida desde la Despensa)
   const B=syncBought(),inTk={};for(const t of tk)if(t.list&&t.list!=="suelta")for(const l of t.lines||[])if(l.food&&l.pid)inTk[t.m+"|"+t.list+"|"+l.pid]=true;
-  const buys=Object.entries(B).filter(([k,b])=>P[b.pid]&&b.q>0&&!inTk[k]),dup=new Set();
+  // Lo del pedido del mes guardado en bolsas (bolsa con ped:"mes|lista") cuenta solo como bolsas: ni la compra (b.bolsas) ni el ticket de esa lista
+  // (ni uno suelto con el mismo producto ±2 días) suman otra vez
+  const pedBag=(S.bolsas||[]).filter(b=>b&&b.ped&&bolsaPid(b)),inBag=(t,pid)=>pedBag.some(b=>b.pid===pid&&(t.list&&t.list!=="suelta"?b.ped===t.m+"|"+t.list:Math.abs(daysBetween(b.at,t.date))<=2));
+  const buys=Object.entries(B).filter(([k,b])=>P[b.pid]&&b.q>0&&!inTk[k]&&!b.bolsas),dup=new Set();
   for(const t of tk)if(!t.list||t.list==="suelta")for(const l of t.lines||[])if(l.food&&l.pid){const x=buys.find(([k,b])=>!dup.has(k)&&b.pid===l.pid&&Math.abs(daysBetween(b.at,t.date))<=2);if(x)dup.add(x[0])}
   for(const [k,b] of buys)if(!dup.has(k)&&b.at>=st(b.pid)&&b.at<=today)ev.push({pid:b.pid,d:b.at,t:atMs(b.ts,b.at,1),q:b.q,src:"compra",id:"c:"+k});
   for(const t of tk)if(t.date>=first&&t.date<=today)(t.lines||[]).forEach((l,i)=>{if(!l.food||!l.pid||!P[l.pid]||l.dev||!(l.amount>0)||t.date<st(l.pid))return;const q=lineQty(l);
+    if(pedBag.length&&inBag(t,l.pid)){if(q>0)ev.push({pid:l.pid,d:t.date,t:dayMs(t.date)+2,q:0,src:"ticket",id:"t:"+t.id+"|"+i,uc:l.amount/q});return}   // el precio sí vale
     if(q>0)ev.push({pid:l.pid,d:t.date,t:t.at===t.date?atMs(idMs(t.id,"t"),t.date,2):dayMs(t.date)+2,q,src:"ticket",id:"t:"+t.id+"|"+i,uc:l.amount>0?l.amount/q:null})});
   // Lo añadido a mano al congelador
   for(const e of S.freezer||[])if(P[e.pid]&&Number(e.qty)>0&&e.at&&e.at<=today)ev.push({pid:e.pid,d:e.at,t:atMs(e.ts||idMs(e.id,"fz"),e.at,1),q:Number(e.qty),src:"mano",id:e.id,fz:true});
@@ -160,16 +164,20 @@ function needByDay(from,to){const out={};for(const x of upcomingUses(from,to))(o
 // Te falta: lo que necesitan los platos de los próximos 7 días y no tienes en casa
 function despensaMissing(){
   const {stock}=despensaState(),today=todayISO(),{need,first}=upcomingNeed(today,addDays(today,7)),out=[];
+  // Lo que ya está en una lista por comprar cuenta por lo que trae (si no llega, lo que falta de más sigue faltando)
   const pend=pendingShop();
-  for(const [pid,q] of Object.entries(need)){const miss=q-(stock[pid]||0);if(miss>Math.max(dpEps(pid),P[pid].env*.05))out.push({pid,q:miss,packs:packsFor(pid,miss),first:first[pid],inList:pend.has(pid)})}
+  for(const [pid,q] of Object.entries(need)){const miss=q-(stock[pid]||0),eps=Math.max(dpEps(pid),P[pid].env*.05);if(!(miss>eps))continue;
+    const inL=pend.get(pid)||0,rest=miss-inL;
+    if(inL&&rest<=eps)out.push({pid,q:miss,packs:packsFor(pid,miss),first:first[pid],inList:true});
+    else out.push({pid,q:rest,packs:packsFor(pid,rest),first:first[pid],inList:false})}
   return out.sort((a,b)=>a.inList-b.inList||a.first.date.localeCompare(b.first.date));
 }
-// Lo que ya está en una lista de la compra de esta semana, la que viene o la del mes, sin comprar todavía
+// Lo que ya está en una lista de la compra de esta semana, la que viene o la del mes, sin comprar todavía: {pid → cantidad que se pide (sin redondear a envases)}
 function pendingShop(){
-  const today=todayISO(),out=new Set();
+  const today=todayISO(),out=new Map(),seen=new Set();
   for(const ws of [weekStartFor(today),weekStartFor(addDays(today,7))]){const m=monthOfWeek(ws);let sh;try{sh=shopping(m)}catch(e){continue}
-    for(const key of [String(sh.weeks.indexOf(ws)),"mes"]){const l=sh.lists[key];if(!l||shopIsDone(m,l))continue;
-      for(const it of l.items)if(!S.checks[checkKey(m,key,it.pid)])out.add(it.pid)}}
+    for(const key of [String(sh.weeks.indexOf(ws)),"mes"]){const l=sh.lists[key];if(!l||seen.has(m+"|"+key)||shopIsDone(m,l))continue;seen.add(m+"|"+key);
+      for(const it of l.items)if(!S.checks[checkKey(m,key,it.pid)])out.set(it.pid,(out.get(it.pid)||0)+it.q)}}
   return out;
 }
 // Te sobrará: lo que tienes menos todo lo que piden los platos ya planificados
@@ -178,20 +186,28 @@ function despensaSpare(){
   return Object.entries(stock).map(([pid,q])=>({pid,q:q-(need[pid]||0)})).filter(x=>x.q>Math.max(dpEps(x.pid),P[x.pid].env*.15)).sort((a,b)=>b.q*unitCost(b.pid)-a.q*unitCost(a.pid));
 }
 
-/* ---------- Pantalla ---------- */
+/* ---------- Pantalla ----------
+   Las piezas de «En casa» (js/encasa.js): la lista de lo que tienes, lo plegado (lo que falta, lo que sobrará, lo que vale)
+   y sus botones; renderDespensa queda como nombre antiguo de la pantalla */
 const KEEP_GROUP={fresco:"Nevera, fruta y verdura",despensa:"Despensa",congelar:"Congelador",congelado:"Congelador"};
+// Dónde está cada producto en casa: lo fresco en la nevera, lo de congelar o congelado en el congelador y el resto en la despensa
+const CASA_GROUPS=["Nevera","Despensa","Congelador"];
+const casaGroup=pid=>{const k=P[pid]&&P[pid].keep;return k==="fresco"?"Nevera":k==="congelar"||k==="congelado"?"Congelador":"Despensa"};
 let despFilter="todo";
-function renderDespensa(){
-  const D=despensaData(),{stock,bagged,meals,uc}=despensaState(),today=todayISO();
-  const pids=Object.keys(stock).sort((a,b)=>P[a].name.localeCompare(P[b].name));
-  const value=pids.reduce((t,p)=>t+stock[p]*uc(p),0);
-  const cm=today.slice(0,7),monthMeals=meals.filter(x=>x.date.slice(0,7)===cm),spentM=monthMeals.reduce((t,x)=>t+x.cost,0);
-  const {first}=upcomingNeed(today,addDays(today,70)),miss=despensaMissing(),spare=despensaSpare(),spareSet=new Set(spare.map(x=>x.pid));
-  let h=`<section class="view">${viewHead(pids.length+" "+(pids.length===1?"producto":"productos")+" en casa","Tu *despensa*")}
-    <p class="small muted">Se llena con lo que marcas como comprado, tus tickets, el congelador y tus bolsas, y se gasta al cocinar cada plato. Si algo no cuadra, tócalo y pon lo que te queda.</p>
-    <div class="row" style="gap:8px;flex-wrap:nowrap"><button class="btn" id="dpTicket" style="flex:1">${ico("receipt")} Subir un ticket</button><button class="btn ghost" id="dpTickets" style="flex:1">${ico("chart-bar")} Tickets e informe</button></div>
-    <div class="dsum"><div><b>${eur(value)}</b><small>vale lo que tienes</small></div><div><b>${eur(spentM)}</b><small>cocinado en ${esc(monthName(cm).split(" ")[0].toLowerCase())}</small></div><div><b>${monthMeals.length}</b><small>${monthMeals.length===1?"comida hecha":"comidas hechas"}</small></div></div>`;
-  if(!D.checked)h+=`<div class="infobox">🧺 <b>Primera vez:</b> he juntado lo que has comprado este mes y he restado lo que ya habéis cocinado. Como el menú ha ido cambiando, seguro que algo no cuadra: repasa la lista y toca lo que esté mal. <button class="btn small" id="dpChecked" style="margin-top:6px">Ya lo he repasado</button></div>`;
+// Las filas de lo que tienes (g: "todo" o un grupo de CASA_GROUPS); con "todo", cada grupo con su título
+function despRowsHTML(g){
+  const {stock,bagged,uc}=despensaState(),today=todayISO(),{first}=upcomingNeed(today,addDays(today,70)),spareSet=new Set(despensaSpare().map(x=>x.pid));
+  const pids=Object.keys(stock).filter(p=>g==="todo"||casaGroup(p)===g).sort((a,b)=>P[a].name.localeCompare(P[b].name));
+  const row=p=>{const f=first[p];return `<button class="item dpi" data-dpe="${p}">${prodImg(p)}<span class="t">${esc(P[p].name)}<small>${esc(fmtQty(stock[p],P[p].unit))}${bagged[p]?` (${esc(fmtQty(bagged[p],P[p].unit))} en bolsas)`:""} · ${eur(stock[p]*uc(p))}${f?` · para el ${esc(DSHORT[dow(f.date)]+" "+shortDate(f.date))}`:""}${spareSet.has(p)?(f?" · te sobrará algo":" · sin plato previsto"):""}</small></span><span class="p">${ico("chevron-right")}</span></button>`};
+  if(g!=="todo")return pids.map(row).join("");
+  return CASA_GROUPS.map(x=>{const ps=pids.filter(p=>casaGroup(p)===x);return ps.length?`<h3 class="csec">${x}</h3>`+ps.map(row).join(""):""}).join("");
+}
+// Lo plegado: lo que vale, lo que te falta, lo que te sobrará, lo de los tickets sin receta y lo gastado. {html,sum,miss}: sum, el resumen de una línea
+function despMoreHTML(){
+  const D=despensaData(),{stock,meals,uc}=despensaState(),today=todayISO(),pids=Object.keys(stock);
+  const value=pids.reduce((t,p)=>t+stock[p]*uc(p),0),cm=today.slice(0,7),monthMeals=meals.filter(x=>x.date.slice(0,7)===cm),spentM=monthMeals.reduce((t,x)=>t+x.cost,0);
+  const {first}=upcomingNeed(today,addDays(today,70)),miss=despensaMissing(),spare=despensaSpare();
+  let h=`<div class="dsum"><div><b>${eur(value)}</b><small>vale lo que tienes</small></div><div><b>${eur(spentM)}</b><small>cocinado en ${esc(monthName(cm).split(" ")[0].toLowerCase())}</small></div><div><b>${monthMeals.length}</b><small>${monthMeals.length===1?"comida hecha":"comidas hechas"}</small></div></div>`;
   // Te falta
   h+=`<div class="card"><h2>${ico("shopping-cart")} Te falta para los próximos 7 días</h2>`;
   if(!miss.length)h+=`<p class="small okbox">Tienes todo lo que piden los platos de esta semana.</p>`;
@@ -204,40 +220,42 @@ function renderDespensa(){
   if(spare.length)h+=`<div class="card"><h2>${ico("package")} Te sobrará después del menú</h2><p class="small muted">Lo tienes en casa y los platos que ya están en el menú no lo gastan entero (unos ${eur(spare.reduce((t,x)=>t+x.q*uc(x.pid),0))}).</p>
     ${spare.slice(0,12).map(x=>`<div class="fixed"><span>${esc(P[x.pid].name)}<small>sobrarán ${esc(fmtQty(x.q,P[x.pid].unit))}${first[x.pid]?` (lo demás es para el ${esc(DSHORT[dow(first[x.pid].date)]+" "+shortDate(first[x.pid].date))})`:""} · ${eur(x.q*uc(x.pid))}</small></span><button class="btn ghost small" data-dpuse="${x.pid}">Ponerlo en el menú</button></div>`).join("")}
     <div class="actions"><button class="btn small" id="dpRedo">${ico("repeat")} Rehacer los próximos 7 días con lo que tengo</button></div></div>`;
-  // Lo que tienes
-  const groups=[...new Set(pids.map(p=>KEEP_GROUP[P[p].keep]||"Despensa"))];
-  h+=`<h2 style="margin:18px 0 8px">Lo que tienes</h2><div class="chips" style="margin-bottom:8px">${["todo",...groups].map(g=>chip("data-dpf",g,despFilter===g,g==="todo"?"Todo":g)).join("")}</div>`;
-  if(!pids.length)h+=`<div class="empty"><p>Aún no hay nada. Marca lo que compras en la lista o sube el ticket, o añádelo abajo.</p></div>`;
-  for(const p of pids){const g=KEEP_GROUP[P[p].keep]||"Despensa";if(despFilter!=="todo"&&despFilter!==g)continue;const f=first[p];
-    h+=`<button class="item dpi" data-dpe="${p}">${prodImg(p)}<span class="t">${esc(P[p].name)}<small>${esc(fmtQty(stock[p],P[p].unit))}${bagged[p]?` (${esc(fmtQty(bagged[p],P[p].unit))} en bolsas)`:""} · ${eur(stock[p]*uc(p))}${f?` · para el ${esc(DSHORT[dow(f.date)]+" "+shortDate(f.date))}`:""}${spareSet.has(p)?(f?" · te sobrará algo":" · sin plato previsto"):""}</small></span><span class="p">${ico("chevron-right")}</span></button>`}
   // Otras cosas de los tickets (sin receta)
   const otros=ticketOtros();
-  if(otros.length&&(despFilter==="todo"))h+=`<div class="card"><h2>Otras cosas de tus tickets</h2><p class="small muted">Comida que no va en ninguna receta (pizzas, caprichos…). Márcala cuando se acabe.</p>
+  if(otros.length)h+=`<div class="card"><h2>Otras cosas de tus tickets</h2><p class="small muted">Comida que no va en ninguna receta (pizzas, caprichos…). Márcala cuando se acabe.</p>
     ${otros.map(o=>`<div class="fixed"><span>${esc(despItemName(o.k))}<small>${o.l.kg?String(o.l.kg).replace(".",",")+" kg":`quedan ${o.left} de ${o.total}`} · ${eur(o.l.amount)} · ${esc(shortDate(o.t.date))}${o.res.length?` · para el ${esc(o.res.map(x=>despSlotLabel(x.id)).join("; "))}`:""}</small></span><span class="row" style="gap:6px;flex-wrap:nowrap"><button class="btn small" data-dpday="${esc(o.k)}">Comerlo un día</button><button class="btn ghost small" data-dpgone="${esc(o.k.slice(2))}">Se acabó</button></span></div>`).join("")}</div>`;
   // Lo que se ha gastado
   h+=`<div class="card"><h2>${ico("chef-hat")} Lo que vas gastando</h2><p class="small muted">Cada comida cocinada, a precio del súper. Cuenta las de días pasados salvo las que marcaste como comida fuera o no hecha.</p>`;
   h+=meals.length?meals.slice(0,12).map(x=>`<div class="fixed"><span>${esc(x.r?x.r.name:x.name||"Comida")}<small>${esc(DSHORT[dow(x.date)]+" "+shortDate(x.date))} · ${esc(SMALL[x.meal]?SMALL[x.meal][1].toLowerCase():x.meal)}</small></span><b>${eur(x.cost)}</b></div>`).join(""):`<p class="small muted">Aún no hay comidas cocinadas desde el ${esc(shortDate(D.start))}.</p>`;
   h+=`</div>`;
-  // Añadir a mano
-  h+=`<div class="card"><h2>Añadir algo que tienes</h2>${prodPicker("dpP")}<div class="row" style="margin-top:8px"><input type="number" id="dpQ" min="0" step="any" placeholder="Cantidad" style="flex:1"><span class="small" id="dpU">—</span></div>
-    <button class="btn small" id="dpAdd" style="margin-top:8px">Añadir</button>
-    <p class="small muted" style="margin-top:10px">${ico("snowflake")} ${(n=>n?`${n} ${n===1?"bolsa":"bolsas"} en el congelador. `:"")(bolsasState().reduce((t,b)=>t+b.left,0))}Lo congelado y tus bolsas, con los días que llevan dentro: <button class="btn ghost small" id="dpFz">Ver el congelador</button></p></div></section>`;
-  main.innerHTML=h;
-  document.getElementById("dpTickets").onclick=()=>{tab="tickets";render();scrollTo(0,0)};
-  document.getElementById("dpTicket").onclick=()=>openTicketScan(false,null,{m:today.slice(0,7),key:"suelta"});
+  const sum=[miss.length?`te ${miss.length===1?"falta 1 cosa":"faltan "+miss.length+" cosas"} para esta semana`:"tienes lo de esta semana",spare.length?`te sobrarán ${spare.length}`:"",`vale ${eur(value)}`].filter(Boolean).join(" · ");
+  return {html:h,sum:sum.charAt(0).toUpperCase()+sum.slice(1),miss};
+}
+// Los botones de esas piezas (los que estén en pantalla)
+function bindDespensa(miss){
+  const D=despensaData();
   document.getElementById("dpChecked")?.addEventListener("click",()=>{D.checked=todayISO();save();render();toast("Perfecto. A partir de ahora se va ajustando sola")});
-  main.querySelectorAll("[data-dpf]").forEach(b=>b.onclick=()=>{despFilter=b.dataset.dpf;render()});
   main.querySelectorAll("[data-dpe]").forEach(b=>b.onclick=()=>openDespensaItem(b.dataset.dpe));
   main.querySelectorAll("[data-dpgone]").forEach(b=>b.onclick=()=>{D.gone[b.dataset.dpgone]=true;save();render()});
   main.querySelectorAll("[data-dpday]").forEach(b=>b.onclick=()=>openPickDay(b.dataset.dpday,1));
   main.querySelectorAll("[data-dpuse]").forEach(b=>b.onclick=()=>useInMenu(b.dataset.dpuse));
-  document.getElementById("dpBuy")?.addEventListener("click",()=>addMissingToShop(miss.filter(x=>!x.inList)));
+  document.getElementById("dpBuy")?.addEventListener("click",()=>addMissingToShop((miss||despensaMissing()).filter(x=>!x.inList)));
   document.getElementById("dpRedo")?.addEventListener("click",confirmRedoWithStock);
-  document.getElementById("dpFz").onclick=()=>{tab="congelador";render();scrollTo(0,0)};
+}
+// Primera vez: lo juntado de las compras seguro que no cuadra del todo
+const despFirstHTML=()=>despensaData().checked||!Object.keys(despensaState().stock).length?"":`<div class="infobox">🧺 <b>Primera vez:</b> he juntado lo que has comprado este mes y he restado lo que ya habéis cocinado. Como el menú ha ido cambiando, seguro que algo no cuadra: repasa la lista y toca lo que esté mal. <button class="btn small" id="dpChecked" style="margin-top:6px">Ya lo he repasado</button></div>`;
+// «Algo que ya tengo»: buscar un producto y decir cuánto
+function openDespAdd(){
+  showDialog(`<div class="mod">${closeBtn}<h2 class="vh" style="font-size:1.6rem">Algo que <em>ya tengo</em></h2>
+    <p class="small muted">Búscalo y di cuánto tienes. Se suma a lo que hay en casa.</p>${prodPicker("dpP")}
+    <div class="row" style="margin-top:10px;flex-wrap:nowrap"><input type="number" id="dpQ" min="0" step="any" placeholder="Cantidad" style="flex:1"><span class="small" id="dpU">—</span></div>
+    <div class="actions"><button class="btn wide" id="dpAdd">Añadir</button></div></div>`);
   const pick=bindProdPicker("dpP",Object.values(P),p=>{document.getElementById("dpU").textContent=p?p.unit:"—"});
   document.getElementById("dpAdd").onclick=()=>{const p=pick(),q=Number(document.getElementById("dpQ").value);if(!p){toast("Busca y elige el producto");return}if(!(q>0)){toast("Indica la cantidad");return}
-    D.adj.push(newAdj(p.id,q));save();render();toast(p.name+": añadido a la despensa")};
+    despensaData().adj.push(newAdj(p.id,q));save();dlg.close();render();toast(p.name+": apuntado en casa")};
 }
+// Nombre antiguo: la despensa es ahora «En casa»
+function renderDespensa(){renderCasa()}
 // Corregir lo que queda de un producto (recuento): desde hoy cuenta esa cantidad
 function openDespensaItem(pid){
   const p=P[pid],{stock,bagged}=despensaState(),bg=bagged[pid]||0,q=Math.round(((stock[pid]||0)-bg)*100)/100,{first}=upcomingNeed(todayISO(),addDays(todayISO(),28)),f=first[pid];
@@ -285,11 +303,11 @@ function bindProdPicker(id,prods,onPick){
   inp.oninput=()=>{if(sel){sel=null;onPick&&onPick(null)}draw()};draw();
   return ()=>sel;
 }
-// Huecos que se pueden cambiar: de mañana a 7 días, sin elegir a mano ni platos fijos
-function changeableSlots(days){
+// Huecos que se pueden cambiar: de mañana a 7 días (o desde hoy, lo que aún no se ha comido), sin elegir a mano ni platos fijos
+function changeableSlots(days,withToday){
   const today=todayISO(),out=[];
-  for(const s of [...new Set([weekStartFor(addDays(today,1)),weekStartFor(addDays(today,days))])]){const wk=S.plans[s];if(!wk)continue;
-    for(const sl of buildSlots(s)){if(sl.date<=today||sl.date>addDays(today,days)||sl.fixed)continue;const v=wk.slots[sl.id];if(v&&v.locked)continue;out.push(sl)}}
+  for(let s=weekStartFor(addDays(today,withToday?0:1));s<=weekStartFor(addDays(today,days));s=addDays(s,7)){const wk=S.plans[s];if(!wk)continue;
+    for(const sl of buildSlots(s)){if(sl.date<today||(sl.date===today&&(!withToday||slotDone(sl.id)))||sl.date>addDays(today,days)||sl.fixed)continue;const v=wk.slots[sl.id];if(v&&v.locked)continue;out.push(sl)}}
   return out;
 }
 // Cuánto de un plato sale de lo que tienes (por lo que cuesta cada ingrediente)
@@ -327,9 +345,13 @@ function redoWithStock(){
    No lleva receta ni se compra nada; al comerlo se descuenta. Hueco = {despensa:[{k,n}],locked:true}
    k = "p:producto" (n = envases) o "t:ticket|línea" (n = unidades del ticket) */
 const despSlots=()=>{const out=[];for(const wk of Object.values(S.plans))for(const [id,v] of Object.entries(wk.slots||{}))if(v&&v.despensa)for(const it of v.despensa)out.push({id,date:id.slice(0,10),meal:id.slice(11),k:it.k,n:Number(it.n)||0});return out};
-function slotEaten(id){const st=((S.meals||{})[id]||{}).status;if(st==="fuera"||st==="nada"||st==="otro")return false;const d=id.slice(0,10),t=todayISO();return d<t||(d===t&&!!st)}
+// ¿Ya se ha comido? Los días pasados sí; hoy, si lo contestaste o ya pasó la hora de esa comida
+function slotEaten(id){const st=((S.meals||{})[id]||{}).status;if(st==="fuera"||st==="nada"||st==="otro")return false;const d=id.slice(0,10),t=todayISO();if(d<t)return true;if(d>t)return false;if(st)return true;
+  const meal=id.slice(11).split("|")[0],h=((S.home||{}).mealTimes||{})[meal]||(meal==="cena"?"21:00":meal==="comida"?"14:00":"");if(!h)return false;const n=new Date();return n.getHours()*60+n.getMinutes()>=toMin(h)+60}
 function despTicketLine(k){const [tid,i]=k.slice(2).split("|");const t=(S.tickets||[]).find(x=>x.id===tid);return t&&t.lines[Number(i)]?{t,l:t.lines[Number(i)]}:null}
 function despItemName(k){if(k.startsWith("b:")){const b=(S.bolsas||[]).find(x=>x.id===k.slice(2));return b?"Bolsa de "+bolsaName(b).toLowerCase()+(b.peso?" ("+bolsaPeso(b)+")":""):"Bolsa del congelador"}if(k.startsWith("p:"))return P[k.slice(2)]?P[k.slice(2)].name:"Producto";const x=despTicketLine(k);return x?(x.l.name||x.l.desc.charAt(0)+x.l.desc.slice(1).toLowerCase()):"Algo de un ticket"}
+// Lo que se come en un hueco de la despensa (o «Aún no has comprado…» si va antes de la primera compra y no sale ningún plato)
+const despSlotTxt=v=>casaSlot(v)?"Aún no has comprado: usa lo que tengas":v.despensa.map(it=>despItemName(it.k)).join(", ");
 const despItemQty=it=>it.k.startsWith("p:")&&P[it.k.slice(2)]?it.n*P[it.k.slice(2)].env:it.n;
 // Lo del ticket (sin receta): cuántas unidades quedan, cuántas ya se comieron y cuántas están reservadas para un día
 function ticketOtros(){
@@ -386,7 +408,7 @@ function pickDayOpts(raw){
   for(let i=0;i<15;i++){const dd=addDays(today,i),wk=S.plans[weekStartFor(dd)];if(!wk)continue;const sls=buildSlots(weekStartFor(dd));
     for(const meal of ["comida","cena"]){const id=dd+"|"+meal;if(!slotOpen(id))continue;const st=mealState(dd,meal),sl=sls.find(s=>s.id===id);
       if(!sl&&(st!=="libre"||raw))continue;if(raw&&(sl.fixed||(wk.slots[id]||{}).despensa))continue;const v=wk.slots[id];
-      opts.push({sl:sl||{id,date:dd,meal},txt:v&&v.despensa?"🧺 "+v.despensa.map(it=>despItemName(it.k)).join(", "):v&&RX[v.recipe]?RX[v.recipe].name:sl&&sl.fixed?sl.fixed.name:st==="libre"?"libre (sin plan)":"—"})}}
+      opts.push({sl:sl||{id,date:dd,meal},txt:v&&v.despensa?"🧺 "+despSlotTxt(v):v&&RX[v.recipe]?RX[v.recipe].name:sl&&sl.fixed?sl.fixed.name:st==="libre"?"libre (sin plan)":"—"})}}
   return opts;
 }
 // El mejor plato para un hueco que use un producto (para cocinar una bolsa)

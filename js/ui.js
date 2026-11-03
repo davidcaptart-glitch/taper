@@ -3,46 +3,31 @@
 
 const main=document.getElementById("main");
 const dlg=document.getElementById("dlg");
-let tab="menu", month=todayISO().slice(0,7), listSel="mes", recFilter="todas", recSearch="";
+let tab="hoy", month=todayISO().slice(0,7), listSel=null, recFilter="todas", recSearch="";
 
 /* ---------- Cabecera ---------- */
+// De cuándo son los precios (y si han subido): se enseña en Compra
+function priceLine(){
+  let h;
+  if(PR&&PR.fecha){const ups=Object.keys(P).filter(rise).length;
+    h=`Precios del <b>${esc(longDate(PR.fecha).replace(/^\w+, /,""))}</b>${prOffline?" (última copia guardada)":""}${ups?` · <span class="up">▲ ${ups} ${ups===1?"producto ha subido":"productos han subido"}</span>`:""}`}
+  else h="Precios estimados: aún no se han descargado los de Mercadona";
+  if(zoneMissing)h+=` · <span class="up">precios de otra zona (tu código postal aún no está)</span>`;
+  return h;
+}
 function renderHeader(){
   const onb=S.onboarded&&tab!=="wizard";
-  document.querySelector(".top .ticket").hidden=!onb;
-  document.querySelector(".monthnav").style.display=onb&&(tab==="menu"||tab==="compra")?"":"none";
-  document.querySelector(".top .ticket").hidden=!onb||!(tab==="menu"||tab==="compra");
+  // El presupuesto se ve en Hoy (una línea) y la fecha de los precios dentro de Compra («Más opciones»): la cabecera queda limpia
+  document.querySelector(".top .ticket").hidden=true;
+  document.getElementById("priceDate").hidden=true;
+  document.querySelector(".monthnav").style.display=onb&&tab==="menu"?"":"none";
   document.querySelector("nav.tabs").hidden=!onb;
   document.getElementById("monthLabel").textContent=monthName(month);
   // El congelador está dentro de la despensa
-  document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-current",b.dataset.tab===(tab==="congelador"||tab==="tickets"?"despensa":tab)?"page":"false"));
-  const pd=document.getElementById("priceDate");
-  if(PR&&PR.fecha){const ups=Object.keys(P).filter(rise).length;
-    pd.innerHTML=`Precios del <b>${esc(longDate(PR.fecha).replace(/^\w+, /,""))}</b>${prOffline?" (última copia guardada)":""}${ups?` · <span class="up">▲ ${ups} ${ups===1?"producto ha subido":"productos han subido"}</span>`:""}`}
-  else pd.textContent="Precios estimados: aún no se han descargado los de Mercadona";
-  if(zoneMissing)pd.innerHTML+=` · <span class="up">precios de otra zona (tu código postal aún no está)</span>`;
-  if(!onb)return;
-  const sh=shopping(month), budget=monthBudget(month), spent=sh.total;
-  // Lo pagado de verdad (en comida, como el historial): tickets por la fecha de la compra + lo apuntado a mano
-  const paid=paidOf(month),real=paid.total,realTxt=real?`Gastado de verdad en comida: ${eur(real)}${paid.tk&&paid.man?` (tickets ${eur(paid.tk)} + a mano ${eur(paid.man)})`:""}`:"";
-  document.getElementById("spent").textContent=eur(spent);
-  const bar=document.getElementById("bar");let rs=bar.querySelector("b.real");if(!rs){rs=document.createElement("b");rs.className="real";bar.appendChild(rs)}
-  if(!budgetSet()){
-    document.getElementById("budgetOf").textContent="previsto este mes";
-    bar.classList.remove("over");bar.firstElementChild.style.width="0%";rs.style.width="0%";
-    const n0=document.getElementById("budgetNote");n0.classList.remove("over");
-    n0.innerHTML=`<button class="btn small" id="setBudget">${ico("coin-euro")} Indicar presupuesto mensual</button>${real?` <span class="small">· ${realTxt}</span>`:""}`;
-    document.getElementById("setBudget").onclick=()=>openWizard("compra","menu");
-    return;
-  }
-  document.getElementById("budgetOf").textContent="de "+eur(budget);
-  // Dos marcas: lo previsto (la barra) y lo gastado de verdad (la raya de debajo); en rojo si cualquiera pasa del presupuesto
-  const over=spent>budget,realOver=real>budget+0.005;
-  bar.classList.toggle("over",over||realOver);
-  bar.firstElementChild.style.width=Math.min(100,budget?spent/budget*100:0)+"%";
-  rs.style.width=Math.min(100,budget?real/budget*100:0)+"%";rs.title=realTxt;
-  const note=document.getElementById("budgetNote");note.classList.toggle("over",over||realOver);
-  note.textContent=realOver?`Has gastado ${eur(real)} de verdad en comida: te pasas ${eur(real-budget)} del presupuesto${paid.tk&&paid.man?` (tickets ${eur(paid.tk)} + a mano ${eur(paid.man)})`:""}. Previsto: ${eur(spent)}.`
-    :(over?"Te pasas "+eur(spent-budget)+" con lo previsto. Cambia algún plato o revisa el presupuesto.":"Previsto este mes · te sobran "+eur(budget-spent))+(real?` · ${realTxt}`:"");
+  // Pestañas: Hoy · Mes (menu) · Compra · En casa (despensa, con congelador y tickets dentro); recetas va con el Mes y el perfil, en el avatar
+  const navTab={congelador:"despensa",tickets:"despensa",recetas:"menu"}[tab]||tab;
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-current",b.dataset.tab===navTab?"page":"false"));
+  {const av=document.getElementById("avatar");if(av){av.hidden=!onb;av.textContent=((S.people.find(p=>p.id==="yo")||{}).name||"Tú").trim().charAt(0).toUpperCase();av.setAttribute("aria-current",tab==="perfil"?"page":"false");av.onclick=()=>{tab="perfil";render();scrollTo(0,0)}}}
 }
 // Las animaciones de entrada solo al cambiar de pestaña (o de paso del asistente), no en cada toque
 let lastView=null;
@@ -52,15 +37,16 @@ function render(){
   setTimeout(renderBell,0);
   const vk=tab+"|"+(tab==="wizard"?(wiz.single||wiz.i):"")+"|"+month;
   main.classList.toggle("anim",vk!==lastView);lastView=vk;
-  if(tab==="menu"&&S.onboarded)syncMenuWeek();
+  if(tab==="menu"&&S.onboarded&&mesSub==="semana")syncMenuWeek();   // en el calendario del mes manda el mes elegido
   renderHeader();
   document.body.classList.toggle("wizmode",tab==="wizard");
   if(tab==="wizard")return renderWizard();
-  if(tab==="menu")renderMenu();
+  if(tab==="hoy")renderHoy();
+  if(tab==="menu")renderMes();
   if(tab==="compra")renderCompra();
   if(tab==="recetas")renderRecetas();
   if(tab==="congelador")renderCongelador();
-  if(tab==="despensa")renderDespensa();
+  if(tab==="despensa")renderCasa();
   if(tab==="tickets")renderTickets();
   if(tab==="perfil")renderPerfil();
 }
@@ -96,6 +82,7 @@ function mealLine(d,meal,wk){
   if(r&&fromBatch(sl)){const k=keepPlan(r,sl);h+=`<div class="batchtag">${k.freeze?"❄️":"🥡"} Del táper del ${DAYS[dow(k.cook)].toLowerCase()}${k.freeze?" · pásalo a la nevera la noche antes":" · solo sacarlo y calentar"}</div>`}
   if(r&&(S.cooked||{})[sl.id])h+=`<div class="batchtag done">✓ Cocinado</div>`;
   if(r)h+=`<div class="dishrow">${dishImg(r,"s")}<button class="name" data-open="${r.id}" data-slot="${sl.id}">${esc(r.name)}</button></div>`;
+  else if(casaSlot(v)){const f=firstShopDay();h+=`<div class="dishrow"><span class="dish s dpdish" aria-hidden="true">🧺</span><b class="name">Aún no has comprado: usa lo que tengas</b></div><div class="meta">Tu primera compra llega ${f?esc(DAYS[dow(f)].toLowerCase()+" "+shortDate(f)):"más adelante"}: para hoy no hay nada comprado con la app</div><div class="ops"><button class="btn ghost small" data-swap="${sl.id}">🧺 Con lo que tengo</button><button class="btn ghost small" data-dpslot="${sl.id}">Algo de la despensa</button></div>`}
   else if(v&&v.despensa)h+=`<div class="dishrow"><span class="dish s dpdish" aria-hidden="true">🧺</span><button class="name" data-dpslot="${sl.id}">${esc(v.despensa.map(it=>despItemName(it.k)+(it.n!==1?" ×"+String(it.n).replace(".",","):"")).join(", "))}</button></div><div class="meta">De tu despensa · no hay que comprar nada</div><div class="ops"><button class="btn ghost small" data-dpslot="${sl.id}">Cambiar lo de la despensa</button><button class="btn ghost small" data-swap="${sl.id}">Poner una receta</button></div>`;
   else if(sl.fixed)h+=`<b>${esc(sl.fixed.name)}</b>`;
   h+=`<div class="meta">${r?`${recipeTime(r)} min · ${r.prot||"?"} g proteína · ${racTxt(sl.portions)} raciones`:sl.fixed?"Plato fijo":""}</div>`;
@@ -105,7 +92,7 @@ function mealLine(d,meal,wk){
   if(r){
     if(S.home.cookMode==="lote"&&!fromBatch(sl)){const k=keepPlan(r,sl);
       h+=`<div class="thaw">🍳 Se cocina hoy en la sesión${k.freeze?" y parte se congela":""}</div>`}
-    else{const th=r.ing.filter(([p])=>P[p].thaw).map(([p])=>P[p].name.toLowerCase());
+    else{const th=r.ing.filter(([p])=>P[p].thaw).map(([p])=>{const b=typeof thawBagFor==="function"?thawBagFor(p,sl.date):null;return b?`la bolsa de ${bolsaName(b).toLowerCase()}${b.peso?" ("+bolsaPeso(b)+")":""}`:P[p].name.toLowerCase()});   // la bolsa del pedido que es para este plato
       if(th.length)h+=`<div class="thaw">La noche anterior, pasa ${esc(th.join(" y "))} del congelador a la nevera.</div>`}
     h+=`<div class="ops"><button class="btn ghost small" data-swap="${sl.id}">Cambiar plato</button></div>`;
   }
@@ -285,7 +272,7 @@ function monthPrepDue(){
 }
 function monthPrepCard(){
   const nx=monthPrepDue();if(!nx)return "";
-  return `<div class="prepcard"><div><div class="veb">Se acaba ${esc(mName(todayISO().slice(0,7)))}</div><h2>Prepara <em>${esc(mName(nx))}</em></h2><p>5 preguntas rápidas y te dejo el menú y el pedido del mes listos.</p></div><button class="btn" data-mprep="${nx}">Empezar</button></div>`;
+  return `<div class="prepcard"><div><div class="veb">Se acaba ${esc(mName(todayISO().slice(0,7)))}</div><h2>Prepara <em>${esc(mName(nx))}</em></h2><p>10 minutos: miro tu semana normal, tocas lo que cambie, te propongo el menú del mes y te preparo el pedido grande.</p></div><button class="btn" data-mprep="${nx}">Empezar</button></div>`;
 }
 // Previsión de los días con cada hijo con custodia o turnos: se calcula con lo que ya se sabe y se aprueba
 const custodyKids=()=>others().filter(k=>["alternas","findes","dias","manual"].includes((k.presence||{}).type));
@@ -303,73 +290,119 @@ function custodyCal(k,m){
     h+=`<button class="cal-d ${on?"on":""} ${isHoliday(d)?"hol":""} ${ov?"ov":""}" data-mpk="${k.id}|${d}">${i+1}</button>`}
   return h+`</div>`;
 }
+/* Preparar el mes, en 3 pasos a pantalla completa:
+   1) «Así es <mes>»: el calendario relleno con la semana normal y los festivos; se tocan los días distintos (y «Más opciones del mes»)
+   2) «Tu menú del mes»: las cenas de cada semana, si repiten, con quién, la variedad y lo que cuesta frente al presupuesto
+   3) «El pedido grande»: la lista del mes agrupada, lo que no se compra porque ya lo tienes y el día de entrega
+   Se guarda en S.monthPrep[m] = {mood, more, less, favs, budget, kidsOk, done} y el pedido en S.pedido[m] = {entrega, estado, at} */
 function openMonthPrep(nx){
+  nx=nx||monthPrepDue()||nextMonthOf(todayISO().slice(0,7));
   const cur=todayISO().slice(0,7)<nx?todayISO().slice(0,7):iso(new Date(Number(nx.slice(0,4)),Number(nx.slice(5))-2,1)).slice(0,7);
   const prev=(S.monthPrep||{})[nx]||{};
-  const st={mood:prev.mood||null,more:[...(prev.more||[])],less:[...(prev.less||[])],favs:[...(prev.favs||[])],budget:prev.budget||"",away:[],guests:[],kidsOk:{...(prev.kidsOk||{})}};
+  const st={step:0,mood:prev.mood||null,more:[...(prev.more||[])],less:[...(prev.less||[])],favs:[...(prev.favs||[])],budget:prev.budget||"",away:[],guests:[],built:false,
+    entrega:((S.pedido||{})[nx]||{}).entrega||null};
   // Los mejor valorados del mes que acaba (o de siempre si aún no hay)
   const rated=S.ratings.filter(x=>x.who===me().id&&x.v>=1&&RX[x.rid]);
   const thisM=rated.filter(x=>String(x.at||"").startsWith(cur));
   const favIds=[...new Set((thisM.length?thisM:rated).sort((a,b)=>b.v-a.v).map(x=>x.rid))].concat(Object.entries(me().tastes.dish).filter(([,v])=>v>=1.5).map(([k])=>k)).filter((v,i,a)=>RX[v]&&a.indexOf(v)===i).slice(0,10);
   const rv=(()=>{try{return monthReview(cur)}catch(e){return null}})();
+  const nm=mName(nx),buyMes=(S.home.buyMode||"mes")==="mes";
+  // Semanas con algún día del mes (las que ya han empezado no se rehacen)
+  // Semanas del mes que aún cuentan: las ya pasadas o de antes de empezar el plan no salen (preparar un mes ya empezado)
+  const from=[todayISO(),S.home.start||""].sort()[1];
+  const mWeeks=()=>{const out=[];for(let s=weekStartFor(nx+"-01");s.slice(0,7)<=nx;s=addDays(s,7))if(addDays(s,6)>=from)out.push(s);return out};
+  const savePrefs=done=>{if((Number(st.budget)||null)!==(Number(prev.budget)||null)&&S.home.tscale)delete S.home.tscale[nx];
+    S.monthPrep=S.monthPrep||{};const kidsOk=Object.fromEntries(custodyKids().map(k=>[k.id,true]));
+    S.monthPrep[nx]={mood:st.mood,more:st.more,less:st.less,favs:st.favs,budget:Number(st.budget)||null,kidsOk,done:done||((S.monthPrep[nx]||{}).done)||null}};
+  const build=after=>{savePrefs();dlg.close();
+    // Días fuera de casa (sin comida, cena ni desayunos) y visitas
+    for(const a of st.away)for(let d=a.from;d<=a.to;d=addDays(d,1)){S.days[d]=S.days[d]||{};S.days[d].comida="fuera";S.days[d].cena="fuera";S.days[d].away=true}
+    for(const g of st.guests){S.days[g.d]=S.days[g.d]||{};S.days[g.d].guests={...(S.days[g.d].guests||{}),[g.meal]:g.n}}
+    st.away=[];st.guests=[];
+    preparingScreen(()=>{const cw=weekStartFor(todayISO());for(const s of mWeeks())if(s>cw&&!(S.plans[s]&&S.plans[s].confirmed))genWeekFromScratch(s);else if(S.plans[s])ensureWeek(s);
+      try{if(budgetSet(nx))fitMonthBudget(nx)}catch(e){console.error(e)}save()},()=>{st.built=true;render();after()},{title:`Preparando *${nm}*`,sub:"Con tu semana normal y lo que has cambiado.",
+      msgs:["Mirando quién está cada día…","Cenas con niños sin repetir…","Que nada pase de sus días en la nevera…","Preparando el pedido grande…"]});
+  };
+  const top=n=>`<div class="mpbar">${[0,1,2].map(i=>`<i class="${i<=n?"on":""}"></i>`).join("")}</div><div class="veb">Paso ${n+1} de 3</div>`;
   const draw=()=>{
-    showDialog(`<div class="mod mprep">${closeBtn}
-      <div class="veb">Prepara ${esc(mName(nx))}</div><h2 class="vh" style="font-size:1.9rem">¿Qué tal <em>${esc(mName(cur))}</em>?</h2>
-      ${rv&&rv.budget?`<p class="small muted" style="margin:6px 0 10px">Previsto ${eur(rv.spent)} de ${eur(rv.budget)}${rv.ok?" · dentro del presupuesto":" · te pasaste "+eur(rv.spent-rv.budget)}.</p>`:""}
-      <div class="moods">${[["bien","😀","Bien"],["regular","😐","Regular"],["mal","😞","Mal"]].map(([k,e,t])=>`<button class="mood" data-mood="${k}" aria-pressed="${st.mood===k}"><span>${e}</span>${t}</button>`).join("")}</div>
-      <h3 class="mq">En ${esc(mName(nx))} quiero <b>más</b>…</h3><div class="chips">${Object.entries(PREF_OPTS).map(([k,t])=>chip("data-more",k,st.more.includes(k),t)).join("")}</div>
-      <h3 class="mq">…y <b>menos</b></h3><div class="chips">${Object.entries(PREF_OPTS).map(([k,t])=>chip("data-less",k,st.less.includes(k),t)).join("")}</div>
-      ${favIds.length?`<h3 class="mq">¿Qué platos repetimos?</h3><div class="favpick">${favIds.map(id=>{const r=RX[id];return `<button class="fp" data-fav="${id}" aria-pressed="${st.favs.includes(id)}">${dishImg(r,"s")}<span>${esc(r.name)}</span></button>`}).join("")}</div>`:""}
-      ${custodyKids().map(k=>{const ds=daysWith(k,nx),ok=st.kidsOk[k.id];return `<h3 class="mq">📅 ¿Cuándo está ${esc(personName(k))} contigo en ${esc(mName(nx))}?</h3>
-        <p class="small muted" style="margin:0 0 8px">${(k.presence||{}).type==="manual"?`Marca los días que estará contigo.`:`Según sus turnos y los cambios que tienes apuntados, está contigo <b>${ds.length} días</b>: ${esc(rangesText(ds))}. Toca un día si no es así.`}</p>
-        ${custodyCal(k,nx)}
-        <div class="row" style="margin-top:8px">${ok?`<span class="okt" style="color:var(--ok);font-weight:650">✓ Aprobado</span><button class="btn ghost small" data-kok="${k.id}">Volver a revisar</button>`:`<button class="btn small" data-kok="${k.id}">✓ Así está bien</button>`}<button class="btn ghost small" data-mchg="${k.id}">Vacaciones o cambio de turno</button></div>`}).join("")}
-      <h3 class="mq">¿Algo especial en ${esc(mName(nx))}?</h3>
-      <details class="more" ${st.away.length?"open":""}><summary>✈️ Días fuera de casa${st.away.length?` (${st.away.length})`:""}</summary>
-        ${st.away.map((a,i)=>`<div class="fixed"><span>Del ${esc(shortDate(a.from))} al ${esc(shortDate(a.to))}</span><button class="btn ghost small" data-delaway="${i}">Quitar</button></div>`).join("")}
-        <div class="row"><input type="date" id="awF" value="${nx}-01" style="flex:1"><input type="date" id="awT" value="${nx}-07" style="flex:1"></div>
-        <button class="btn ghost small" id="awAdd" style="margin:8px 0">+ Añadir días fuera</button></details>
-      <details class="more" ${st.guests.length?"open":""}><summary>👥 Visitas${st.guests.length?` (${st.guests.length})`:""}</summary>
-        ${st.guests.map((g,i)=>`<div class="fixed"><span>${esc(longDate(g.d))} · ${g.meal} · +${g.n}</span><button class="btn ghost small" data-delg="${i}">Quitar</button></div>`).join("")}
-        <div class="row"><input type="date" id="gD" value="${nx}-01" style="flex:2"><select id="gM" style="flex:1"><option value="comida">comida</option><option value="cena">cena</option></select><input type="number" id="gN" min="1" max="20" value="2" style="flex:.8"></div>
-        <button class="btn ghost small" id="gAdd" style="margin:8px 0">+ Añadir visita</button></details>
-      <details class="more" ${st.budget?"open":""}><summary>💶 Presupuesto distinto${st.budget?` (${eur(Number(st.budget))})`:""}</summary>
-        <div class="field"><label for="mpB">Presupuesto de ${esc(mName(nx))} (€)</label><input type="number" id="mpB" min="0" step="5" value="${esc(st.budget)}" placeholder="${eur(Number(S.home.budget.month)||0)} (el de siempre)"></div></details>
-
-      <div class="actions sticky"><button class="btn wide" id="mpGo">Preparar ${esc(mName(nx))}</button></div></div>`,true);
-    const q=s=>dlg.querySelectorAll(s);
-    q("[data-mood]").forEach(b=>b.onclick=()=>{st.mood=b.dataset.mood;draw()});
+    let b="";const sh=shopping(nx),budget=monthBudget(nx);
+    if(st.step===0){
+      b=`<h2 class="vh mph">Así es <em>${esc(nm)}</em></h2><p class="small muted">Relleno con tu semana normal, los festivos y lo que ya me dijiste. Toca un día solo si es distinto.</p>
+        ${mesStats(nx)}${mesCal(nx,"data-mpday")}${comedorPrepCard(nx)}
+        <details class="more mpmore"><summary>Más opciones del mes</summary>
+          ${rv&&rv.budget?`<p class="small muted" style="margin:6px 0 4px">${esc(mesCap(cur))}: previsto ${eur(rv.spent)} de ${eur(rv.budget)}${rv.ok?" · dentro del presupuesto":" · te pasaste "+eur(rv.spent-rv.budget)}.</p>`:""}
+          <h3 class="mq">¿Qué tal ${esc(mName(cur))}?</h3><div class="moods">${[["bien","😀","Bien"],["regular","😐","Regular"],["mal","😞","Mal"]].map(([k,e,t])=>`<button class="mood" data-mood="${k}" aria-pressed="${st.mood===k}"><span>${e}</span>${t}</button>`).join("")}</div>
+          <h3 class="mq">En ${esc(nm)} quiero <b>más</b>…</h3><div class="chips">${Object.entries(PREF_OPTS).map(([k,t])=>chip("data-more",k,st.more.includes(k),t)).join("")}</div>
+          <h3 class="mq">…y <b>menos</b></h3><div class="chips">${Object.entries(PREF_OPTS).map(([k,t])=>chip("data-less",k,st.less.includes(k),t)).join("")}</div>
+          ${favIds.length?`<h3 class="mq">¿Qué platos repetimos?</h3><div class="favpick">${favIds.map(id=>{const r=RX[id];return `<button class="fp" data-fav="${id}" aria-pressed="${st.favs.includes(id)}">${dishImg(r,"s")}<span>${esc(r.name)}</span></button>`}).join("")}</div>`:""}
+          ${custodyKids().map(k=>`<div class="row" style="margin-top:10px"><span class="small">${esc(personName(k))}: ${daysWith(k,nx).length} días este mes.</span><button class="btn ghost small" data-mchg="${k.id}">Vacaciones o cambio de turno</button></div>`).join("")}
+          <details class="more" ${st.away.length?"open":""}><summary>✈️ Varios días fuera de casa${st.away.length?` (${st.away.length})`:""}</summary>
+            ${st.away.map((a,i)=>`<div class="fixed"><span>Del ${esc(shortDate(a.from))} al ${esc(shortDate(a.to))}</span><button class="btn ghost small" data-delaway="${i}">Quitar</button></div>`).join("")}
+            <div class="row"><input type="date" id="awF" value="${nx}-01" style="flex:1"><input type="date" id="awT" value="${nx}-07" style="flex:1"></div>
+            <button class="btn ghost small" id="awAdd" style="margin:8px 0">+ Añadir días fuera</button></details>
+          <details class="more" ${st.guests.length?"open":""}><summary>👥 Visitas${st.guests.length?` (${st.guests.length})`:""}</summary>
+            ${st.guests.map((g,i)=>`<div class="fixed"><span>${esc(longDate(g.d))} · ${g.meal} · +${g.n}</span><button class="btn ghost small" data-delg="${i}">Quitar</button></div>`).join("")}
+            <div class="row"><input type="date" id="gD" value="${nx}-01" style="flex:2"><select id="gM" style="flex:1"><option value="comida">comida</option><option value="cena">cena</option></select><input type="number" id="gN" min="1" max="20" value="2" style="flex:.8" aria-label="Cuántos vienen"></div>
+            <button class="btn ghost small" id="gAdd" style="margin:8px 0">+ Añadir visita</button></details>
+          <details class="more" ${st.budget?"open":""}><summary>💶 Presupuesto distinto (Navidad, un mes especial…)${st.budget?` (${eur(Number(st.budget))})`:""}</summary>
+            <div class="field"><label for="mpB">Presupuesto de ${esc(nm)} (€)</label><input type="number" id="mpB" min="0" step="5" value="${esc(st.budget)}" placeholder="${eur(Number(S.home.budget.month)||0)} (el de siempre)"></div></details>
+        </details>`;
+    }
+    if(st.step===1){
+      const mes=sh.lists.mes||{cost:0,fee:0},wk=Object.keys(sh.lists).filter(k=>k!=="mes").map(k=>sh.lists[k].cost+sh.lists[k].fee).filter(x=>x>0),fr=wk.length?wk.reduce((a,c)=>a+c,0)/wk.length:0;
+      const has=budgetSet(nx),pct=has&&budget?Math.min(100,Math.round(sh.total/budget*100)):0,over=has&&sh.total>budget+0.5;
+      b=`<h2 class="vh mph">Tu menú <em>del mes</em></h2>
+        <div class="mscard"><div class="row" style="justify-content:space-between"><b>Sale por unos ${eur(sh.total)}</b>${has?`<span class="pill ${over?"carga":"ligera"}">de ${eur(budget)}</span>`:""}</div>
+          ${has?`<div class="bar ${over?"over":""}" style="margin:8px 0 4px"><i style="width:${pct}%"></i></div>`:""}
+          <p class="small muted">${buyMes?`Pedido grande ${eur(mes.cost+mes.fee)}${fr?` + fresco unos ${eur(fr)} por semana`:""}.`:`Compra semanal de unos ${eur(fr)}.`}${over?" Me paso: en la semana en detalle puedes ver qué sacrificar.":""}</p></div>
+        ${mWeeks().map(s=>{const wkp=S.plans[s],ds=weekDates(s),bases={};
+          if(wkp)for(const [id,v] of Object.entries(wkp.slots||{})){if(v.rep||id.slice(0,10)<s||id.slice(0,10)>ds[6])continue;const r=RX[v.recipe],bb=r&&carbBase(r);if(bb)bases[bb]=(bases[bb]||0)+1}
+          const vt=Object.entries(bases).map(([k,n])=>`${n} ${k}`).join(" · ")||"sin pasta ni arroz",canRedo=s>weekStartFor(todayISO());
+          return `<div class="mscard"><div class="row" style="justify-content:space-between"><h3>${Number(s.slice(8))} ${esc(shortDate(s).split(" ")[1]||"")} – ${esc(shortDate(ds[6]))}</h3><span class="small muted">${esc(vt)}</span></div>
+            <div class="mwk">${ds.map(d=>{const x=mesDay(d),v=wkp&&wkp.slots[d+"|cena"],r=v&&RX[v.recipe];
+              return `<div class="mwd ${d.slice(0,7)!==nx?"out":""}"><b>${DLET[dow(d)]} ${Number(d.slice(8))}</b><span>${d<from?`<span class="muted">—</span>`:x.vac?`<span class="muted">Vacaciones</span>`:x.cen==="cocinar"?(r?esc(r.name):`<span class="muted">Sin plato</span>`)+(v&&v.rep?` <i class="mtg t">Repite</i>`:""):`<span class="muted">Cena ${x.cen==="fuera"?"fuera":MEALSTATE[x.cen]?MEALSTATE[x.cen].toLowerCase():"fuera"}</span>`}${x.ks.map(k=>` <i class="mtg k">${esc(personName(k))}</i>`).join("")}</span></div>`}).join("")}</div>
+            ${canRedo?`<button class="btn ghost small" data-mpredo="${s}" style="margin-top:8px">Rehacer esta semana</button>`:""}</div>`}).join("")}`;
+    }
+    if(st.step===2){
+      const l=sh.lists.mes||{items:[],cost:0,fee:0,covered:[]},grp=[["congelar","❄️ Para congelar en bolsas"],["despensa","🥫 Despensa"],["congelado","🧊 Congelados"]];
+      const line=it=>`<div class="mli"><div><b>${esc(P[it.pid].name)}</b><small>${it.packs} × ${esc(qtyTxt(it.pid,P[it.pid].env).replace(/ de .*/,""))}${it.have?` · ya tienes algo`:""}</small></div><span>${eur(it.cost)}</span></div>`;
+      // Días de entrega: alrededor del día 1 (desde mañana y sin domingos)
+      const opts=[-2,-1,0,1,2,3].map(i=>addDays(nx+"-01",i)).filter(d=>d>todayISO()&&dow(d)!==6).slice(0,3);if(!st.entrega||!opts.includes(st.entrega))st.entrega=opts.find(d=>d>=nx+"-01")||opts[0]||addDays(todayISO(),1);
+      b=`<h2 class="vh mph">El pedido <em>grande</em></h2>
+        ${buyMes?`<p class="small muted">Lo que aguanta todo el mes. Ya he restado lo que tienes en casa.</p>
+        <div class="mscard">${grp.map(([k,t])=>{const its=l.items.filter(it=>P[it.pid].keep===k).sort((a,c)=>c.cost-a.cost);return its.length?`<h3 class="msec">${t}</h3>${its.map(line).join("")}`:""}).join("")||`<p class="small muted">No hace falta nada del pedido grande este mes.</p>`}
+          ${(()=>{const rest=l.items.filter(it=>!grp.some(([k])=>P[it.pid].keep===k));return rest.length?`<h3 class="msec">Otros</h3>${rest.map(line).join("")}`:""})()}
+          ${l.covered&&l.covered.length?`<h3 class="msec">No lo compro, ya lo tienes</h3><p class="small muted">${esc(l.covered.map(c=>qtyTxt(c.pid,c.q)).join(" · "))}</p>`:""}</div>
+        <div class="mscard"><b>¿Qué día te lo traen?</b><div class="chips" style="margin-top:8px">${opts.map(d=>chip("data-mpdel",d,st.entrega===d,`${DSHORT[dow(d)]} ${shortDate(d)}`)).join("")}</div></div>`
+        :`<p class="small muted">Compras cada semana: cada lunes tienes la lista de esa semana en «Compra». Si quieres un pedido grande al mes, cámbialo en «Tu semana normal».</p>`}`;
+    }
+    const total=(sh.lists.mes||{cost:0,fee:0});
+    showDialog(`<div class="mod mprep2">${closeBtn}${top(st.step)}${b}
+      <div class="actions sticky mpnav">${st.step>0?`<button class="btn ghost" id="mpBack">Atrás</button>`:""}<button class="btn wide" id="mpNext">${st.step<2?"Siguiente":buyMes?`Hacer el pedido · ${eur(total.cost+total.fee)}`:"Listo"}</button></div></div>`,true);
+    const q=s=>dlg.querySelectorAll(s),keepY=()=>{const y=dlg.scrollTop;draw();dlg.scrollTop=y};
     const tog=(arr,k)=>arr.includes(k)?arr.splice(arr.indexOf(k),1):arr.push(k);
-    q("[data-more]").forEach(b=>b.onclick=()=>{tog(st.more,b.dataset.more);if(st.less.includes(b.dataset.more))tog(st.less,b.dataset.more);draw()});
-    q("[data-less]").forEach(b=>b.onclick=()=>{tog(st.less,b.dataset.less);if(st.more.includes(b.dataset.less))tog(st.more,b.dataset.less);draw()});
-    q("[data-fav]").forEach(b=>b.onclick=()=>{tog(st.favs,b.dataset.fav);draw()});
-    dlg.querySelector("#awAdd").onclick=()=>{const f=dlg.querySelector("#awF").value,t=dlg.querySelector("#awT").value;if(!f||!t||t<f){toast("Revisa las fechas");return}st.away.push({from:f,to:t});draw()};
-    q("[data-delaway]").forEach(b=>b.onclick=()=>{st.away.splice(Number(b.dataset.delaway),1);draw()});
-    dlg.querySelector("#gAdd").onclick=()=>{const d=dlg.querySelector("#gD").value,n=Number(dlg.querySelector("#gN").value);if(!d||!(n>0)){toast("Pon el día y cuántos vienen");return}st.guests.push({d,meal:dlg.querySelector("#gM").value,n});draw()};
-    q("[data-delg]").forEach(b=>b.onclick=()=>{st.guests.splice(Number(b.dataset.delg),1);draw()});
-    dlg.querySelector("#mpB").oninput=e=>{st.budget=e.target.value};
+    q("[data-mpday]").forEach(b=>b.onclick=()=>{const y=dlg.scrollTop;openMesDay(b.dataset.mpday,()=>{draw();dlg.scrollTop=y})});
+    q("[data-mpcm]").forEach(b=>b.onclick=()=>{const y=dlg.scrollTop;openComedor(b.dataset.mpcm,nx,()=>{draw();dlg.scrollTop=y})});
+    q("[data-mood]").forEach(b=>b.onclick=()=>{st.mood=b.dataset.mood;keepY()});
+    q("[data-more]").forEach(b=>b.onclick=()=>{tog(st.more,b.dataset.more);if(st.less.includes(b.dataset.more))tog(st.less,b.dataset.more);keepY()});
+    q("[data-less]").forEach(b=>b.onclick=()=>{tog(st.less,b.dataset.less);if(st.more.includes(b.dataset.less))tog(st.more,b.dataset.less);keepY()});
+    q("[data-fav]").forEach(b=>b.onclick=()=>{tog(st.favs,b.dataset.fav);keepY()});
+    dlg.querySelector("#awAdd")?.addEventListener("click",()=>{const f=dlg.querySelector("#awF").value,t=dlg.querySelector("#awT").value;if(!f||!t||t<f){toast("Revisa las fechas");return}st.away.push({from:f,to:t});keepY()});
+    q("[data-delaway]").forEach(b=>b.onclick=()=>{st.away.splice(Number(b.dataset.delaway),1);keepY()});
+    dlg.querySelector("#gAdd")?.addEventListener("click",()=>{const d=dlg.querySelector("#gD").value,n=Number(dlg.querySelector("#gN").value);if(!d||!(n>0)){toast("Pon el día y cuántos vienen");return}st.guests.push({d,meal:dlg.querySelector("#gM").value,n});keepY()});
+    q("[data-delg]").forEach(b=>b.onclick=()=>{st.guests.splice(Number(b.dataset.delg),1);keepY()});
+    dlg.querySelector("#mpB")?.addEventListener("input",e=>{st.budget=e.target.value});
     q("[data-mchg]").forEach(b=>b.onclick=()=>{const y=dlg.scrollTop;openChange(b.dataset.mchg);dlg.addEventListener("close",()=>{draw();dlg.scrollTop=y},{once:true})});
-    q("[data-mpk]").forEach(b=>b.onclick=()=>{const [kid,d]=b.dataset.mpk.split("|"),k=S.people.find(p=>p.id===kid);S.days[d]=S.days[d]||{};const o=S.days[d].kids=S.days[d].kids||{};
-      const ruleOn=presentByRule(k,d),nowOn=peopleAt(d).includes(k);if(!nowOn===ruleOn)delete o[kid];else o[kid]=!nowOn;delete st.kidsOk[kid];save();const y=dlg.scrollTop;draw();dlg.scrollTop=y});
-    q("[data-kok]").forEach(b=>b.onclick=()=>{const kid=b.dataset.kok;st.kidsOk[kid]=!st.kidsOk[kid];const y=dlg.scrollTop;draw();dlg.scrollTop=y});
-    dlg.querySelector("#mpGo").onclick=()=>{
-      const pend=custodyKids().find(k=>!st.kidsOk[k.id]);
-      if(pend){toast(`Revisa y aprueba los días de ${personName(pend)}`);return}
-      // Presupuesto distinto para ese mes: el apretón que tenía (tscale) se vuelve a calcular
-      if((Number(st.budget)||null)!==(Number(prev.budget)||null)&&S.home.tscale)delete S.home.tscale[nx];
-      S.monthPrep=S.monthPrep||{};S.monthPrep[nx]={mood:st.mood,more:st.more,less:st.less,favs:st.favs,budget:Number(st.budget)||null,kidsOk:st.kidsOk,done:todayISO()};
-      // Días fuera de casa: sin comida ni cena, y tampoco desayunos ni meriendas (away)
-      for(const a of st.away)for(let d=a.from;d<=a.to;d=addDays(d,1)){S.days[d]=S.days[d]||{};S.days[d].comida="fuera";S.days[d].cena="fuera";S.days[d].away=true}
-      for(const g of st.guests){S.days[g.d]=S.days[g.d]||{};S.days[g.d].guests={...(S.days[g.d].guests||{}),[g.meal]:g.n}}
-      dlg.close();
-      preparingScreen(()=>{for(const s of weeksInMonth(nx))if(!(S.plans[s]&&S.plans[s].confirmed))genWeekFromScratch(s);save()},()=>{
-        const l=shopping(nx).lists.mes;month=nx;tab="menu";render();
-        showDialog(`<div class="mod">${closeBtn}<div class="veb">Listo</div><h2 class="vh" style="font-size:1.8rem">${esc(monthName(nx).split(" ")[0])}, <em>preparado</em></h2>
-          <p>He rehecho el menú con lo que me has dicho${st.favs.length?` y he metido ${st.favs.length} ${st.favs.length===1?"plato que te gustó":"platos que te gustaron"}`:""}.</p>
-          <div class="okbox"><b>Pedido del mes:</b> ${l.items.length} productos · ${eur(l.cost+l.fee)}${l.fee?` (con ${eur(l.fee)} de envío)`:""}</div>
-          <div class="actions"><button class="btn wide" id="mpShop">Ver el pedido del mes</button></div></div>`);
-        dlg.querySelector("#mpShop").onclick=()=>{dlg.close();month=nx;tab="compra";listSel="mes";render();scrollTo(0,0)};
-      });
+    q("[data-mpredo]").forEach(b=>b.onclick=()=>{genWeekFromScratch(b.dataset.mpredo);save();keepY();toast("Semana rehecha")});
+    q("[data-mpdel]").forEach(b=>b.onclick=()=>{st.entrega=b.dataset.mpdel;keepY()});
+    dlg.querySelector("#mpBack")?.addEventListener("click",()=>{st.step--;draw();dlg.scrollTop=0});
+    dlg.querySelector("#mpNext").onclick=()=>{
+      if(st.step===0){st.step=1;build(()=>{draw();dlg.scrollTop=0});return}
+      if(st.step===1){st.step=2;draw();dlg.scrollTop=0;return}
+      savePrefs(todayISO());
+      if(buyMes){S.pedido=S.pedido||{};S.pedido[nx]={...(S.pedido[nx]||{}),entrega:st.entrega,estado:"pedido",at:todayISO()}}
+      save();dlg.close();month=nx;tab="compra";listSel="mes";render();scrollTo(0,0);
+      toast(buyMes?`Pedido apuntado: llega el ${longDate(st.entrega)}`:`${mesCap(nx)}, preparado`);
     };
   };
   draw();
@@ -434,6 +467,16 @@ function budgetCard(){
 }
 // Platos quitados por alergias o dieta: se dice cuáles y por qué, hasta que se lee
 function safetyCard(){
+  return homeCard()+safetyCard_();
+}
+// Platos de días ya comprados que hubo que cambiar sin tenerlo todo en casa: lo que falta se ha añadido a la próxima compra
+function homeCard(){
+  if(!homeNotes.length)return "";
+  return `<div class="warnbox" id="homeBox"><b>${ico("alert-triangle")} He cambiado ${homeNotes.length===1?"un plato":homeNotes.length+" platos"} de días ya comprados</b>
+    <ul style="margin:6px 0 4px 18px;padding:0">${homeNotes.map(n=>`<li>${esc(n.name)} · ${esc(DAYS[dow(n.d)].toLowerCase())} ${esc(shortDate(n.d))}, ${esc(n.meal)} · falta ${esc(n.miss.join(", "))}</li>`).join("")}</ul>
+    <small>Lo que falta está en tu próxima compra.</small> <button class="btn ghost small" id="homeOk">Entendido</button></div>`;
+}
+function safetyCard_(){
   if(!safetyNotes.length)return "";
   return `<div class="warnbox" id="safetyBox"><b>${ico("alert-triangle")} He cambiado ${safetyNotes.length===1?"un plato":safetyNotes.length+" platos"} por alergias o dieta</b>
     <ul style="margin:6px 0 4px 18px;padding:0">${safetyNotes.map(n=>`<li>${esc(n.name)} · ${esc(DAYS[dow(n.d)].toLowerCase())} ${esc(shortDate(n.d))}, ${esc(MEAL_ART[n.meal]?MEAL_ART[n.meal].split(" ")[1]:n.meal)} · ${esc(n.who.join("; "))}</li>`).join("")}</ul>
@@ -450,7 +493,7 @@ function smallLine(d){
 function printMenu(m){
   if(!owns("imprimible")){openShop();return}
   const weeks=weeksInMonth(m).filter(s=>S.plans[s]);const sh=shopping(m);
-  const cell=(d,meal)=>{const x=dishOfMeal(d,meal),dv=(S.plans[weekStartFor(d)]||{slots:{}}).slots[d+"|"+meal];if(dv&&dv.despensa)return esc(dv.despensa.map(it=>despItemName(it.k)).join(", "));return x.recipe?esc(x.recipe.name):x.state==="fuera"?"<i>Fuera</i>":x.state==="libre"?"<i>Libre</i>":"–"};
+  const cell=(d,meal)=>{const x=dishOfMeal(d,meal),dv=(S.plans[weekStartFor(d)]||{slots:{}}).slots[d+"|"+meal];if(dv&&dv.despensa)return esc(despSlotTxt(dv));return x.recipe?esc(x.recipe.name):x.state==="fuera"?"<i>Fuera</i>":x.state==="libre"?"<i>Libre</i>":"–"};
   let h=`<div class="pr-head"><b>Táper</b><span>Menú de ${esc(monthName(m))}</span></div>`;
   for(const s of weeks){h+=`<h2>Semana del ${esc(shortDate(s))} al ${esc(shortDate(addDays(s,6)))}</h2><table class="pr-t"><tr><th></th><th>Desayuno</th><th>Comida</th><th>Merienda</th><th>Cena</th></tr>`;
     for(const d of weekDates(s)){const sm=smallOf(d);h+=`<tr><td><b>${esc(DSHORT[dow(d)])}</b> ${Number(d.slice(8))}</td><td>${sm.desayuno&&RX[sm.desayuno.recipe]?esc(RX[sm.desayuno.recipe].name):"–"}</td><td>${cell(d,"comida")}</td><td>${sm.merienda&&RX[sm.merienda.recipe]?esc(RX[sm.merienda.recipe].name):"–"}</td><td>${cell(d,"cena")}</td></tr>`}
@@ -479,17 +522,7 @@ function nextMeal(){
       const sl=slotFor(d,meal),v=sl&&wk.slots[sl.id],r=v&&RX[v.recipe];if(r)return {d,meal,sl,r,i}}}
   return null;
 }
-function todayCard(){
-  const n=nextMeal();if(!n)return "";
-  const ph=dishPhoto(n.r), when=n.i===0?"Hoy":n.i===1?"Mañana":n.i<7?DAYS[dow(n.d)]:DAYS[dow(n.d)]+" "+shortDate(n.d);
-  const k=n.r.kcal?` · ${n.r.kcal} kcal`:"";
-  return `<div class="todaycard ${ph?"":"nophoto"}" ${ph?`style="background-image:linear-gradient(180deg,rgba(0,0,0,0) 25%,rgba(10,10,12,.82) 100%),url('${esc(ph)}')"`:""}>
-    ${ph?"":`<div class="tcart">${dishImg(n.r,"l")}</div>`}
-    <div class="tcin"><span class="tclab">${when} · ${n.meal==="comida"?"comida":"cena"}</span>
-      <h2>${esc(n.r.name)}</h2>
-      <div class="tcmeta"><span>⏱ ${recipeTime(n.r)} min</span><span>👥 ${racTxt(n.sl.portions)} rac.</span>${n.r.kcal?`<span>🔥 ${n.r.kcal} kcal</span>`:""}</div>
-      <div class="tcbtns"><button class="btn" data-open="${n.r.id}" data-slot="${n.sl.id}">Ver receta</button><button class="btn glass" data-cooknow="${n.r.id}|${n.sl.id}">${(S.cooked||{})[n.sl.id]?"✓ Cocinado":"▶ Cocinar"}</button></div></div></div>`;
-}
+// La tarjeta del próximo plato (todayCard) vive en hoy.js: la usan Hoy y el detalle de la semana
 // Tira de días de la semana actual: toca uno para ir a él
 function dayStrip(st){
   if(!st){const n=nextMeal();st=weekStartFor(n?n.d:todayISO())}const ds=weekDates(st);if(!S.plans[st])return "";
@@ -582,6 +615,7 @@ function renderMenu(){
   document.getElementById("bRaise")?.addEventListener("click",()=>{const v=Math.ceil(shopping(month).total/10)*10;S.home.budget.month=v;S.home.budget.week=null;S.home.budgetConfirmed=true;S.home.tscale={};save();redoScreen(()=>toast("Presupuesto: "+eur(v)+" al mes"))});
   bindAfinar(main);
   document.getElementById("safetyOk")?.addEventListener("click",()=>{safetyNotes=[];render()});
+  document.getElementById("homeOk")?.addEventListener("click",()=>{homeNotes=[];render()});
   document.getElementById("shareMenu")?.addEventListener("click",openShareMenu);
   main.querySelectorAll("[data-follow]").forEach(b=>b.onclick=()=>openFollowed(b.dataset.follow));
   main.querySelectorAll("[data-sp]").forEach(b=>b.onclick=()=>{const [d,i,st,type]=b.dataset.sp.split("|");withRecalc(()=>setSport(d,Number(i),st,type))});
@@ -694,22 +728,58 @@ function changeMeal(d,m,v,redraw){
   }
   apply();
 }
+/* Cambiar plato: ideas que se recalculan cuando quieras, con lo que ya tienes (sin comprar nada), con sobras
+   o según lo que te apetezca (pescado, carne, legumbre…). Siempre dentro de lo que puede comer cada uno,
+   sin repetir cena con los niños en la semana y sin lo que comieron en el cole */
+let swapState={sid:null,modo:"ideas",tipo:null,ronda:0};
 function openSwap(sid){
   const d=sid.slice(0,10), sl=slotFor(d,sid.slice(11));if(!sl)return;
-  const alts=alternatives(sl,8);
+  // Si lo de ese día ya está comprado (o aún no hay compra), se empieza por «Con lo que tengo»
+  if(swapState.sid!==sid)swapState={sid,modo:slotNoShop(sid)?"casa":"ideas",tipo:null,ronda:0};
+  const st=swapState,start=weekStartFor(d),wk=S.plans[start],sls=wk?buildSlots(start):[],cur=(wk&&wk.slots[sl.id]||{}).recipe;
+  const inv=slotNoShop(sl.id)?homeInv(sl):inventory(monthOfWeek(start),sl.id),ctx=makeCtx(start,sl.id);ctx.noise=st.ronda?0.9:0.3;
+  const types=r=>typeof recipeTypes==="function"?recipeTypes(r):[];
+  const pool=candidates(sl).filter(r=>r.id!==cur&&!(wk&&kidClash(wk,sls,sl,r.id))).filter(r=>!st.tipo||types(r).includes(st.tipo))
+    .map(r=>({r,s:scoreRecipe(r,sl,ctx)+(st.ronda?Math.random()*6:0),miss:inv?missingFor(r,sl,inv):null}));
+  let list=pool.slice().sort((a,b)=>b.s-a.s),note="";
+  if(st.modo==="casa"){const all=list.filter(x=>x.miss&&!x.miss.length);
+    if(all.length)list=all;else{list=list.filter(x=>x.miss&&x.miss.length<=1);note=list.length?"Con todo lo que tienes no sale ninguna: estas solo necesitan una cosa.":"Con lo que tienes no sale ninguna receta que encaje."}}
+  list=list.slice(0,6);
+  // Sobras que aún están buenas ese día (tápers y lo que sobró de otros días)
+  const left=st.modo==="sobras"&&typeof cookedLeftovers==="function"?cookedLeftovers().filter(x=>x.free>=0.25&&x.expires>=d&&x.key!==sid):[];   // lo que ya tiene comida prevista (el táper de mañana…) no se ofrece
+  const tipoChips=typeof CTIPOS==="object"?Object.entries(CTIPOS).filter(([k])=>!["patata","fritos"].includes(k)).map(([k,[e,t]])=>chip("data-swt",k,st.tipo===k,e+" "+t)).join(""):"";
+  const card=({r,miss})=>`<button class="alt altimg" data-pick="${r.id}">${dishImg(r,"s")}<span><b>${esc(r.name)}</b><small>${recipeTime(r)} min · ${r.prot||"?"} g proteína · ${eur(rationCost(r))}/ración</small>
+      ${miss?(miss.length?`<span class="badge miss">Te falta: ${esc(miss.slice(0,3).map(p=>P[p].name.toLowerCase()).join(", "))}${miss.length>3?"…":""}</span>`:`<span class="badge ok">Tienes todo</span>`):""}</span></button>`;
   const sel=R.filter(r=>variantFor(r)&&!r.small&&hasPack(r)&&!unsafeFor(slotPeople(sl),r).length).sort((a,b)=>a.name.localeCompare(b.name));
+  let body="";
+  if(st.modo==="sobras")body=left.length?left.map(x=>`<button class="alt" data-left="${esc(x.key)}"><b>🥡 Las sobras de ${esc(x.name.toLowerCase())}</b><small>Te quedan ${racTxt(x.free)} ${x.free===1?"ración":"raciones"}${x.free<sl.portions-0.01?` (para ${racTxt(sl.portions)})`:""} · ${x.expires===d?"es el último día que está bueno":"buenas hasta el "+esc(shortDate(x.expires))}</small></button>`).join("")
+      :`<p class="small muted">No te queda nada cocinado que esté bueno ese día.</p>`;
+  else body=(note?`<p class="small muted">${note}</p>`:"")+(list.map(card).join("")||`<p class="small muted">No hay platos que encajen${st.tipo?" con eso":""}. Prueba otro tipo u «Otras ideas».</p>`);
   showDialog(`<div class="mod">${closeBtn}<h2>Cambiar plato</h2><div class="small muted">${esc(longDate(d))}, ${sl.meal}${company(sl).length?" · con "+esc(company(sl).map(personName).join(" y ")):""}</div>
     ${needLine(sl)}
-    <button class="alt dpalt" id="swDesp"><b>🧺 Comer algo de tu despensa</b><small>Las pizzas, algo que te sobra o lo que compraste sin receta: no hay que comprar nada</small></button>
-    <div style="margin-top:10px">${alts.map(({r,miss})=>`<button class="alt altimg" data-pick="${r.id}">${dishImg(r,"s")}<span><b>${esc(r.name)}</b><small>${recipeTime(r)} min · ${r.prot||"?"} g proteína · ${eur(rationCost(r))}/ración · ${r.type==="c"?"⚡ hidratos":"🥗 ligera"}</small>
-      ${miss?(miss.length?`<span class="badge miss">Te falta: ${esc(miss.slice(0,3).map(p=>P[p].name.toLowerCase()).join(", "))}${miss.length>3?"…":""}</span>`:`<span class="badge ok">Tienes todo</span>`):""}</span></button>`).join("")||"<p>No hay alternativas con tus filtros.</p>"}</div>
-    ${(()=>{const cs=candidates(sl,{cap:true}).filter(r=>r.cap);return cs.length?`<details class="more" style="margin-top:10px"><summary>🍔 Mejor un capricho</summary>${cs.map(r=>`<button class="alt altimg" data-pick="${r.id}">${dishImg(r,"s")}<span><b>${esc(r.name)}</b><small>${recipeTime(r)} min · ${eur(rationCost(r))}/ración · no cuenta para tus objetivos</small></span></button>`).join("")}</details>`:""})()}
+    <div class="chips swmodes" style="margin:10px 0 6px">${[["ideas","✨ Ideas"],["casa","🧺 Con lo que tengo"],["sobras","🥡 Con sobras"]].map(([k,t])=>chip("data-swm",k,st.modo===k,t)).join("")}</div>
+    ${st.modo!=="sobras"&&tipoChips?`<div class="small muted" style="margin:4px 0">¿Qué te apetece?</div><div class="chips swtipos">${tipoChips}</div>`:""}
+    <div style="margin-top:10px">${body}</div>
+    ${st.modo!=="sobras"?`<button class="btn ghost wide" id="swMore" style="margin-top:8px">↻ Otras ideas</button>`:""}
+    <button class="alt dpalt" id="swDesp" style="margin-top:10px"><b>🧺 Comer algo de tu despensa o congelador</b><small>Las pizzas, una bolsa de guiso, lo que compraste sin receta: no hay que comprar nada</small></button>
+    ${(()=>{const cs=candidates(sl,{cap:true}).filter(r=>r.cap);return cs.length?`<details class="more" style="margin-top:10px"><summary>🍔 Mejor un capricho</summary>${cs.map(r=>`<button class="alt altimg" data-pick="${r.id}">${dishImg(r,"s")}<span><b>${esc(r.name)}</b><small>${recipeTime(r)} min · ${eur(rationCost(r))}/ración</small></span></button>`).join("")}</details>`:""})()}
     <div class="field"><label for="anyR">O elige cualquier receta</label><select id="anyR"><option value="">…</option>${sel.map(r=>`<option value="${r.id}">${esc(r.name)}</option>`).join("")}</select></div></div>`);
-  const pick=rid=>{setSlotRecipe(sl,rid);dlg.close();render();
-    const inv=inventory(monthOfWeek(weekStartFor(d)),sl.id);const miss=inv?missingFor(RX[rid],sl,inv):[];
-    toast(miss.length?"Cambiado. Añadido a la lista: "+miss.map(p=>P[p].name.toLowerCase()).join(", "):"Cambiado por "+RX[rid].name)};
+  const redraw=()=>{const y=dlg.scrollTop;openSwap(sid);dlg.scrollTop=y};
+  // Un día ya comprado: lo que falta se añade a la próxima compra (setSlotRecipe) y se dice cuál
+  const pick=rid=>{const added=setSlotRecipe(sl,rid)||[];swapState.sid=null;dlg.close();render();
+    const inv2=inventory(monthOfWeek(weekStartFor(d)),sl.id);const miss=added.length?[]:inv2?missingFor(RX[rid],sl,inv2):[];
+    if(added.length){const x=nextOpenList();toast(`Cambiado. Lo de ese día ya estaba comprado: añado ${added.join(", ")} a la compra${x?" del "+shortDate(deliveryDate(x.ws)):""}`);return}
+    // Se puede elegir algo de lo que comió en el cole, pero se avisa
+    const same=(()=>{const av=typeof comedorAvoid==="function"?comedorAvoid(sl):null;return av?recipeTypes(RX[rid]).filter(t=>av.includes(t)):[]})();
+    toast(same.length?`Cambiado. Ojo: ya comió ${tiposTxt(same).replace(" ni "," y ")} en el cole`:miss.length?"Cambiado. Añadido a la lista: "+miss.map(p=>P[p].name.toLowerCase()).join(", "):"Cambiado por "+RX[rid].name)};
   dlg.querySelectorAll("[data-pick]").forEach(b=>b.onclick=()=>pick(b.dataset.pick));
-  dlg.querySelector("#swDesp").onclick=()=>openDespensaPick(sid);
+  dlg.querySelectorAll("[data-swm]").forEach(b=>b.onclick=()=>{st.modo=b.dataset.swm;st.ronda=0;redraw()});
+  dlg.querySelectorAll("[data-swt]").forEach(b=>b.onclick=()=>{st.tipo=st.tipo===b.dataset.swt?null:b.dataset.swt;st.ronda=0;redraw()});
+  dlg.querySelector("#swMore")?.addEventListener("click",()=>{st.ronda++;redraw()});
+  // Sobras: ese hueco come lo mismo que el día que se cocinó (solo calentar); la despensa lo da por comido de allí
+  dlg.querySelectorAll("[data-left]").forEach(b=>b.onclick=()=>{const x=cookedLeftovers().find(y=>y.key===b.dataset.left);if(!x)return;
+    wk.slots[sl.id]={recipe:x.rid,rep:x.key,sobra:true,locked:true,manual:true};save();swapState.sid=null;dlg.close();render();toast(`Sobras de ${x.name.toLowerCase()}: solo calentar`)});
+  dlg.querySelector("#swDesp").onclick=()=>{swapState.sid=null;openDespensaPick(sid)};
   dlg.querySelector("#anyR").onchange=e=>{if(e.target.value)pick(e.target.value)};
 }
 function openDislike(rid,who,sid){
@@ -1007,50 +1077,43 @@ function shopPlanCard(m){
       ${cur&&p.id===cur.id?"":`<button class="btn ${p.id===best.id?"":"ghost"} small" data-splan="${p.id}">Usar</button>`}</div>`).join("")}
     <p class="small muted" style="margin:8px 0 0">Los precios de los productos son los mismos; cambia lo que pagas de envío.${chosenSupers().length>1?" Con varios supermercados se cuenta el envío de cada uno.":""}</p></details>`;
 }
-function renderCompra(){
-  const sh=shopping(month);
-  if(!sh.weeks.length||!sh.weeks.some(s=>S.plans[s])){main.innerHTML=`<section class="view"><div class="empty"><h2>Sin lista todavía</h2><p>Planifica alguna semana de este mes y aquí aparecerá la compra.</p><button class="btn" id="goMenu">Ir al menú</button></div></section>`;document.getElementById("goMenu").onclick=()=>{tab="menu";render()};return}
-  if(listSel!=="mes"&&!sh.lists[listSel])listSel="mes";
-  const l=sh.lists[listSel], wi=listSel==="mes"?null:Number(listSel);
-  let h=`<section class="view">${viewHead(monthName(month),"Tu *compra*")}<div class="seg" role="group" aria-label="Lista"><button aria-pressed="${listSel==="mes"}" data-list="mes">Compra del mes</button>`;
-  sh.weeks.forEach((s,i)=>{if(S.home.start&&addDays(s,6)<S.home.start)return;h+=`<button aria-pressed="${listSel===String(i)}" data-list="${i}">Semana ${shortDate(s)}</button>`});
-  h+=`</div><div class="listtotal"><h2>${listSel==="mes"?"Despensa, congelados y carne":"Fresco de la semana"}</h2><b>${eur(l.cost+l.fee)}</b></div>
-  <div class="modes chips">${Object.entries(SHOP_MODES).map(([m,t])=>chip("data-lm",m,l.mode===m,ico(SHOP_ICO[m])+" "+t)).join("")}</div>
+// Compra en dos bloques fijos: el pedido del mes y el fresco de la semana (quien compra cada semana, solo la semana)
+let pedSel=null, pedOpen=false;   // mes del pedido que se ve (null: el que toca) y si su lista está desplegada
+const buyMonthly=()=>(S.home.buyMode||"mes")!=="semana";
+// El pedido que toca ver: en los días de preparar el mes siguiente, el del siguiente; si no, el del mes que se mira
+function pedidoMonth(){
+  if(pedSel)return pedSel;
+  const cur=todayISO().slice(0,7);
+  return month===cur&&typeof monthPrepDate==="function"&&todayISO()>=monthPrepDate(cur)?nextMonthOf(cur):month;
+}
+// Semana que se ve por defecto: la actual si está en el mes; si no, la primera del plan
+function defaultShopWeek(sh){
+  const i=sh.weeks.indexOf(weekStartFor(todayISO()));if(i>=0)return String(i);
+  const j=sh.weeks.findIndex(s=>!(S.home.start&&addDays(s,6)<S.home.start));return String(Math.max(0,j));
+}
+const listTitle=(sh,key)=>key==="mes"?"Compra del mes":"Compra de la semana del "+shortDate(sh.weeks[Number(key)]);
+// Una lista (la del mes o la de una semana) con su forma de comprar, sus avisos, sus secciones y «Ya lo he comprado»
+function shopListHTML(m,sh,key){
+  const l=sh.lists[key],wi=key==="mes"?null:Number(key),k=m+"|"+key;
+  // Cómo se compra (online, con envío o en tienda) y sus tarifas: plegado, que lo primero es la lista
+  let h=`<div class="shopblk" data-blk="${esc(k)}"><details class="shopcfg"><summary><span class="small">${ico(SHOP_ICO[l.mode]||"shopping-cart")} ${esc(SHOP_MODES[l.mode]||"")} · ${l.fee?"envío "+eur(l.fee):"sin envío"}${wi!=null?` · ${esc(DAYS[dow(deliveryDate(sh.weeks[wi]))].toLowerCase())} ${Number(deliveryDate(sh.weeks[wi]).slice(8))}`:""}</span><span class="small muted">Cambiar</span></summary>
+    <div class="modes chips">${Object.entries(SHOP_MODES).map(([md,t])=>chip("data-lm",md,l.mode===md,ico(SHOP_ICO[md])+" "+t)).join("")}</div>
   ${l.groups.length>1?`<p class="small muted" style="margin:4px 0">Repartido en ${l.groups.length} supermercados, cada producto donde sale más barato.${l.fee?` Envíos: ${eur(l.fee)}.`:""}</p>`
     :`<p class="small muted" style="margin:4px 0">${l.fee?`Envío: ${eur(l.fee)}`:"Sin envío"}${l.min?` · pedido mínimo ${eur(l.min)}`:""} (tarifa de ${esc(superById((l.groups[0]||{}).sup||mainSuper()).nombre||"tu supermercado")})</p>`}`;
   if(wi!=null)h+=`<p class="small muted" style="margin:0">Llega o se compra el ${esc(longDate(deliveryDate(sh.weeks[wi])))}. Lo que se cocina antes sale de lo que ya hay en casa.</p>`;
-  if(l.mode==="online"){
-    if(l.items.some(it=>prodUrl(it)))h+=`<button class="btn wide" id="orderSteps" style="margin:8px 0">${ico("shopping-cart")} Hacer el pedido paso a paso</button>`;
-    h+=`<p class="shophint">Te enseño los productos de uno en uno: lo abres en la web o app del súper, lo añades al carro y vuelves para el siguiente. También puedes tocar 🛒 en cada producto.</p>`;
-  }
+  h+=l.mode==="online"?`<p class="shophint">Te enseño los productos de uno en uno: lo abres en la web o app del súper, lo añades al carro y vuelves para el siguiente. También puedes tocar 🛒 en cada producto.</p>`
+    :`<p class="shophint">Ordenado por secciones, en el orden en que se suele recorrer el súper: coges todo lo de cada sección de una vez y los congelados al final.</p>`;
   if(l.autoStore)h+=`<div class="infobox">🏪 Con esta compra (${eur(l.cost)}) no llegas al mínimo de ${eur(l.autoStore.min)} para pedirla ${l.autoStore.mode==="online"?"online":"a domicilio"}: te faltan ${eur(l.autoStore.short)}. Te la dejo para <b>comprar en tienda</b>${wi!=null?", o júntala con la compra del mes":""}. <button class="btn ghost small" data-lm="${l.autoStore.mode}">Pedirla ${l.autoStore.mode==="online"?"online":"a domicilio"} igualmente</button></div>`;
+  h+=`</details>`;
+  if(l.mode==="online"&&l.items.some(it=>prodUrl(it))&&!shopIsDone(m,l))h+=`<button class="btn wide" data-osteps style="margin:8px 0">${ico("shopping-cart")} Hacer el pedido paso a paso</button>`;
   if(l.belowMin){const bg=l.groups.find(g=>g.belowMin);
-    h+=`<div class="warnbox">${l.groups.length>1?esc(superById(bg.sup).nombre)+": n":"N"}o llegas al pedido mínimo (${eur(bg.min)}): faltan ${eur(bg.min-bg.cost)}.${wi!=null?` <button class="btn small" id="fillMin">Completar con cosas del mes</button>`:" Pásala a compra en tienda o junta compras."}</div>`;
-  }
-  {const bg=sh.bags[listSel]||[];if(bg.length){const done=bg.filter(b=>(S.bags||{})[b.id]).length;
+    h+=`<div class="warnbox">${l.groups.length>1?esc(superById(bg.sup).nombre)+": n":"N"}o llegas al pedido mínimo (${eur(bg.min)}): faltan ${eur(bg.min-bg.cost)}.${wi!=null?` <button class="btn small" data-fillmin>Completar con cosas del mes</button>`:" Pásala a compra en tienda o junta compras."}</div>`}
+  {const bg=sh.bags[key]||[];if(bg.length){const done=bg.filter(b=>(S.bags||{})[b.id]).length;
     h+=`<details class="frzcard"><summary><span class="fzi">${ico("snowflake")}</span><span><b>Al llegar: ${bg.length} ${bg.length===1?"bolsa":"bolsas"} para congelar</b><small>${done===bg.length?"✓ Todas hechas":`${done} de ${bg.length} hechas · una bolsa por plato, con su día`}</small></span></summary>
       ${bg.map(b=>{const r=RX[b.rid],on=!!(S.bags||{})[b.id];return `<label class="bag ${on?"done":""}"><input type="checkbox" data-bag="${esc(b.id)}" ${on?"checked":""}>${r?dishImg(r,"s"):prodImg(b.pid)}<span><b>${esc(P[b.pid].name)} · ${fmtQty(b.q,P[b.pid].unit)}</b><small>Etiqueta: ${esc(DAYS[dow(b.date)])} ${esc(shortDate(b.date))}${r?" · "+esc(r.name):""}</small></span></label>`}).join("")}
       <p class="small muted" style="margin:8px 2px 0">Aplana las bolsas para que se congelen y descongelen antes. La noche antes de cada día te aviso de pasarla a la nevera.</p></details>`}}
-  if(ticketDue().some(x=>x.m===month&&x.key===listSel))h+=`<div class="tkban"><span class="ti">${ico("receipt")}</span><span><b>Sube el ticket de esta compra</b><small>+3 coins y me ayudas a afinar los precios</small></span><button class="btn small" id="tkBanner">Subir</button><button class="tkx" id="tkSkip" aria-label="No tengo ticket">✕</button></div>`;
-  if(l.items.length)h+=`<div class="row" style="margin:4px 0"><button class="btn small" id="sendList">${ico("share")} Enviar la lista</button>${servidorOn()?`<button class="btn ghost small" id="shareMenuC">${ico("users")} ${S.share?"Compartida con alguien de casa":"Compartir con alguien de casa"}</button>`:""}</div>`;
-  // El ticket se puede subir siempre, también días después (o aunque se dijera «No tengo ticket»)
-  {const tks=(S.tickets||[]).filter(t=>t.m===month&&t.list===listSel),banner=ticketDue().some(x=>x.m===month&&x.key===listSel);
-    const tkb=banner?"":`<button class="btn ghost small" id="tkAny">${ico("receipt")} ${tks.length?"Subir otro ticket":"Subir el ticket"}</button>`;
-    const tki=tks.length?`<span class="small muted">🧾 ${tks.length===1?"Ticket subido":tks.length+" tickets subidos"}: ${eur(tks.reduce((t,x)=>t+x.food,0))} en comida</span>`:"";
-    if(l.items.length&&!shopIsDone(month,l))h+=`<div class="row" style="margin:4px 0 8px"><button class="btn ghost small" id="shopDone">✓ Ya he hecho esta compra</button>${tkb}</div>`;
-    else if(l.items.length||tks.length)h+=`<div class="row" style="margin:4px 0 8px;align-items:center"><span class="small okt" style="color:var(--ok);font-weight:600">✓ Compra hecha</span>${tkb}${tki}</div>`;
-    else if(tkb)h+=`<div class="row" style="margin:4px 0 8px">${tkb}</div>`;
-    h+=`<p class="small" style="margin:-2px 0 8px"><button class="linkbtn" id="tkLoose">¿Compra improvisada o de otro súper? Sube su ticket</button></p>`;}
-  if(listSel==="mes")h+=shopPlanCard(month)+recurringHTML(month);
-  if(l.items.length&&l.groups.length===1&&l.groups[0].sup==="mercadona")h+=orderBlock(l,listSel==="mes"?"mes":"semana");
-  if(l.items.length&&chosenSupers().length>1)h+=compareCard(l);
-  // Un bloque por supermercado; dentro, por secciones en el orden en que se recorre la tienda
-  const multi=l.groups.length>1;
-  // La lista y cada sección se pliegan; por defecto, solo la primera sección con cosas por coger va abierta
-  const nDone=l.items.filter(it=>S.checks[checkKey(month,listSel,it.pid)]).length;
-  const lk=month+"|"+listSel;aisleOpen[lk]=aisleOpen[lk]||{};const AO=aisleOpen[lk];let firstOpen=null;
-  h+=`<details class="shoplist" ${AO.__all===false?"":"open"}><summary><b>${ico("shopping-cart")} Lista: ${l.items.length} productos</b><span class="small muted">${nDone?` · ${nDone} cogidos`:""}</span></summary>`;
-  if(l.mode!=="online")h+=`<p class="shophint">Ordenado por secciones, en el orden en que se suele recorrer el súper: coges todo lo de cada sección de una vez y los congelados al final.</p>`;
+  // Por secciones, en el orden en que se recorre la tienda; por defecto solo va abierta la primera sección con cosas por coger
+  const multi=l.groups.length>1,AO=aisleOpen[k]=aisleOpen[k]||{};let firstOpen=null;
   for(const g of l.groups){
     const sp=superById(g.sup);
     if(multi)h+=`<div class="suphead"><h2>${esc(sp.nombre)}</h2><b>${eur(g.cost+g.fee)}</b></div>
@@ -1058,56 +1121,134 @@ function renderCompra(){
     const bySec={};for(const it of g.items)(bySec[P[it.pid].sec]=bySec[P[it.pid].sec]||[]).push(it);
     const secs=[...STORE_ORDER,...Object.keys(bySec).filter(s=>!STORE_ORDER.includes(s))].filter(s=>bySec[s]);
     secs.forEach((sec,si)=>{
-      const ak=g.sup+"|"+sec,got=bySec[sec].filter(it=>S.checks[checkKey(month,listSel,it.pid)]).length,full=got===bySec[sec].length;
+      const ak=g.sup+"|"+sec,got=bySec[sec].filter(it=>S.checks[checkKey(m,key,it.pid)]).length,full=got===bySec[sec].length;
       if(AO[ak]==null&&!full&&!firstOpen)firstOpen=ak;
       const open=AO[ak]!=null?AO[ak]:ak===firstOpen;
       h+=`<details class="aisle ${full?"full":""}" data-aisle="${esc(ak)}" ${open?"open":""}><summary><h3><span class="secico">${secIco(sec)}</span>${l.mode!=="online"?`<span class="secn">${si+1}</span>`:""}${esc(sec)} <span class="muted small">· ${full?"✓ todo":got?got+" de "+bySec[sec].length:bySec[sec].length}</span></h3></summary>`;
       for(const it of bySec[sec].sort((a,b)=>P[a.pid].name.localeCompare(P[b.pid].name))){
-        const key=checkKey(month,listSel,it.pid),done=!!S.checks[key],moved=(S.assign[month]||{})[it.pid]!=null&&listSel!=="mes";
+        const ck=checkKey(m,key,it.pid),done=!!S.checks[ck],moved=(S.assign[m]||{})[it.pid]!=null&&key!=="mes";
         const sx=it.sup!=="mercadona"&&PS&&PS.supers[it.sup]?PS.supers[it.sup].productos[it.pid]:null;
-        h+=`<label class="item ${done?"done":""}"><input type="checkbox" data-ck="${key}" ${done?"checked":""}>${prodImg(it.pid)}<span class="t">${it.packs} × ${esc(P[it.pid].name)}<small>Necesitas ${fmtQty(it.q,P[it.pid].unit)}${it.have&&!done?` (ya tienes ${fmtQty(it.have,P[it.pid].unit)} en casa)`:""}${P[it.pid].keep==="congelar"?", para congelar":""}${recurringFor(month).some(r=>r.pid===it.pid&&(r.freq==="semana")===(listSel!=="mes"))?" · lo compras siempre":""}${(((S.extraBuy||{})[month]||{})[listSel]||{})[it.pid]?" · te faltaba en la despensa":""}${moved?" · adelantado de la compra del mes":""}${sx?` · ${esc(sx.nombre)}`:""}</small></span><span class="p">${eur(it.cost)}${upTag(it.pid)}</span>${l.mode==="online"&&prodUrl(it)?`<a class="mlink" href="${esc(prodUrl(it))}" target="_blank" rel="noopener" aria-label="Abrir ${esc(P[it.pid].name)} en ${esc(superById(it.sup).nombre||"el súper")}">🛒</a>`:""}</label>`}
+        h+=`<label class="item ${done?"done":""}"><input type="checkbox" data-ck="${ck}" ${done?"checked":""}>${prodImg(it.pid)}<span class="t">${it.packs} × ${esc(P[it.pid].name)}<small>Necesitas ${fmtQty(it.q,P[it.pid].unit)}${it.have&&!done?` (ya tienes ${fmtQty(it.have,P[it.pid].unit)} en casa)`:""}${P[it.pid].keep==="congelar"?", para congelar":""}${recurringFor(m).some(r=>r.pid===it.pid&&(r.freq==="semana")===(key!=="mes"))?" · lo compras siempre":""}${(((S.extraBuy||{})[m]||{})[key]||{})[it.pid]?" · te faltaba en la despensa":""}${moved?" · adelantado de la compra del mes":""}${sx?` · ${esc(sx.nombre)}`:""}</small></span><span class="p">${eur(it.cost)}${upTag(it.pid)}</span>${l.mode==="online"&&prodUrl(it)?`<a class="mlink" href="${esc(prodUrl(it))}" target="_blank" rel="noopener" aria-label="Abrir ${esc(P[it.pid].name)} en ${esc(superById(it.sup).nombre||"el súper")}">🛒</a>`:""}</label>`}
       h+=`</details>`});
   }
-  h+=`</details>`;
   if((l.covered||[]).length)h+=`<p class="small muted" style="margin:6px 2px">🧺 No lo compro porque ya lo tienes en casa: ${esc(l.covered.map(x=>P[x.pid].name.toLowerCase()).join(", "))}.</p>`;
-  const sk=month+"|"+listSel;
-  h+=`<details class="card more2"><summary><b>${ico("chart-bar")} Gasto y resumen</b> <span class="small muted">· lo pagado, tickets y presupuesto</span></summary>`;
-  {const tkf=Math.round((S.tickets||[]).filter(t=>t.m===month&&t.list===listSel).reduce((s,t)=>s+(Number(t.food)||0),0)*100)/100;   // lo apuntado a mano se suma a los tickets (no los sustituye)
-  h+=`<div class="card"><h2>Lo que he pagado</h2><div class="spend"><span class="small muted">${tkf?`Con los tickets: ${eur(tkf)} en comida. Apunta aquí solo lo que pagaste sin ticket: se suma.`:`Apunta lo que pagaste sin ticket para comparar con lo previsto (${eur(l.cost+l.fee)}). Si subes el ticket, se suma.`}</span><input type="number" min="0" step="0.01" id="spentIn" value="${S.spent[sk]??""}" placeholder="0,00" aria-label="Pagado sin ticket"></div></div>`;}
-  if(listSel==="mes"){
-    h+=`<p class="small muted">Básicos (aceite, sal, especias): ${eur(Number(S.home.budget.basics))}.${sh.extrasTotal?` Platos fijos sin receta: ${eur(sh.extrasTotal)}.`:""}</p>`;
-
+  if(!l.items.length&&!(l.covered||[]).length)h+=`<p class="small muted" style="margin:6px 2px">Nada que comprar en esta lista.</p>`;
+  // «Ya lo he comprado» y el ticket (que se puede subir siempre, también días después)
+  const tks=(S.tickets||[]).filter(t=>t.m===m&&t.list===key),banner=ticketDue().some(x=>x.m===m&&x.key===key);
+  if(banner)h+=`<div class="tkban"><span class="ti">${ico("receipt")}</span><span><b>Sube el ticket de esta compra</b><small>+3 coins y me ayudas a afinar los precios</small></span><button class="btn small" data-tkup>Subir</button><button class="tkx" data-tkskip aria-label="No tengo ticket">✕</button></div>`;
+  const tkb=banner?"":`<button class="btn ghost small" data-tkup>${ico("receipt")} ${tks.length?"Subir otro ticket":"Subir el ticket"}</button>`;
+  const tki=tks.length?`<span class="small muted">🧾 ${tks.length===1?"Ticket subido":tks.length+" tickets subidos"}: ${eur(tks.reduce((t,x)=>t+x.food,0))} en comida</span>`:"";
+  if(l.items.length&&!shopIsDone(m,l))h+=`<button class="btn wide" data-shopdone style="margin:12px 0 6px">${key==="mes"&&l.mode!=="tienda"?"✓ Ya he hecho el pedido":"✓ Ya lo he comprado"}</button><div class="row" style="margin:0 0 4px">${tkb}<button class="btn ghost small" data-sendlist>${ico("share")} Enviar la lista</button></div>`;
+  else if(l.items.length||tks.length)h+=`<div class="row" style="margin:10px 0 4px;align-items:center"><span class="small okt" style="color:var(--ok);font-weight:600">✓ Compra hecha</span>${tkb}${tki}</div>`;
+  else if(tkb)h+=`<div class="row" style="margin:10px 0 4px">${tkb}</div>`;
+  return h+`</div>`;
+}
+function bindShopList(root,m,sh,key){
+  const l=sh.lists[key],wi=key==="mes"?null:Number(key),k=m+"|"+key,q=s=>root.querySelectorAll(s);
+  q("[data-lm]").forEach(b=>b.onclick=()=>{S.modes[k]=b.dataset.lm;save();render()});
+  q("[data-osteps]").forEach(b=>b.onclick=()=>openOrderSteps(m,l));
+  q("[data-sendlist]").forEach(b=>b.onclick=()=>shareList(m,l,listTitle(sh,key)));
+  q("[data-shopdone]").forEach(b=>b.onclick=()=>{markShopDone(m,key);render();askTicket(m,key)});
+  q("[data-tkup]").forEach(b=>b.onclick=()=>openTicketScan(l.mode!=="tienda",null,{m,key}));
+  q("[data-tkskip]").forEach(b=>b.onclick=()=>{S.ticketSkip=S.ticketSkip||{};S.ticketSkip[shopKey(m,key)]=todayISO();save();render()});
+  q("[data-fillmin]").forEach(b=>b.onclick=()=>{const r=fillToMinimum(m,wi);render();toast(r.moved.length?(r.ok?"Completado con: ":"No llega del todo. Añadido: ")+r.moved.join(", ").toLowerCase():"No hay nada del mes que se pueda adelantar")});
+  q("[data-bag]").forEach(i=>i.onchange=()=>{S.bags=S.bags||{};if(i.checked)S.bags[i.dataset.bag]=todayISO();else delete S.bags[i.dataset.bag];save();render()});
+  const AO=aisleOpen[k]||{};q("details[data-aisle]").forEach(d=>d.addEventListener("toggle",()=>{AO[d.dataset.aisle]=d.open}));
+  q("[data-ck]").forEach(i=>i.onchange=()=>{S.checkedAt=S.checkedAt||{};const ck=i.dataset.ck;
+    if(i.checked){S.checks[ck]=true;S.checkedAt[ck]=todayISO();snapBought(ck,l.items.find(it=>checkKey(m,key,it.pid)===ck))}else{delete S.checks[ck];delete S.checkedAt[ck];if(S.bought)delete S.bought[ck]}
+    i.closest(".item").classList.toggle("done",i.checked);save();if(S.share)markShared(S.share.codigo,ck,i.checked);
+    // Lista completa: se pide el ticket
+    if(i.checked&&l.items.every(it=>S.checks[checkKey(m,key,it.pid)])&&!(S.tickets||[]).some(t=>t.m===m&&t.list===key))setTimeout(()=>{render();askTicket(m,key)},400)});
+}
+// El bloque del pedido del mes, según en qué punto está
+function pedidoHTML(pm,shP){
+  const lm=shP.lists.mes,cur=todayISO().slice(0,7),p=(S.pedido||{})[pm]||null,mn=mName(pm),today=todayISO();
+  const prepared=!!p||!!((S.monthPrep||{})[pm]||{}).done||pm<=cur;
+  const modeTxt=lm?(SHOP_MODES[lm.mode]||"").toLowerCase():"";
+  let h=`<div class="card cblk" id="pedBlk"><div class="cbhead"><h2>Pedido de ${esc(mn)}</h2>${prepared&&modeTxt?`<span class="small muted">${esc(modeTxt)}</span>`:""}</div>`;
+  const tot=lm?eur(lm.cost+lm.fee):"",n=lm?lm.items.length:0,see=`<button class="linkbtn" data-ped="open|${pm}">${pedOpen?"Ocultar la lista":"Ver la lista"}</button>`;
+  if(!prepared)h+=`<p class="small muted">Se prepara con el menú del mes.</p><button class="btn wide" data-ped="prep|${pm}" style="margin-top:10px">Preparar ${esc(mn)}</button>`;
+  else if(!lm||!shP.weeks.some(s=>S.plans[s]))h+=`<p class="small muted">Aún no hay menú de ${esc(mn)}.</p>`;
+  else if(p&&p.estado==="guardado")h+=`<p class="small"><span class="pill okp">Guardado ✓</span> Todo en su sitio · ${tot}</p><p class="small" style="margin-top:6px">${see}</p>`;
+  else if(p&&(p.estado==="llegado"||(p.estado==="pedido"&&p.entrega&&today>=p.entrega)))h+=`<p class="small"><span class="pill warnp">Ha llegado</span> ${tot} · ${n} productos</p><button class="btn wide" data-ped="guardar|${pm}" style="margin-top:10px">Guardarlo</button><p class="small" style="margin-top:6px">${see}</p>`;
+  else if(p&&p.estado==="pedido")h+=`<p class="small"><span class="pill warnp">Llega el ${esc(p.entrega?DAYS[dow(p.entrega)].toLowerCase()+" "+shortDate(p.entrega):"día que elegiste")}</span> ${tot} · ${n} productos</p><button class="btn ghost wide" data-ped="llegado|${pm}" style="margin-top:10px">Ya ha llegado</button><p class="small" style="margin-top:6px">${see}</p>`;
+  else if(!n)h+=`<p class="small muted">Este mes no hace falta pedido: lo que aguanta ya lo tienes en casa.</p>`;
+  else if(shopIsDone(pm,lm))h+=`<p class="small"><span class="pill okp">Pedido hecho ✓</span> ${tot} · ${n} productos</p>${typeof openGuardarPedido==="function"?`<button class="btn ghost wide" data-ped="guardar|${pm}" style="margin-top:10px">Guardarlo en casa</button>`:""}<p class="small" style="margin-top:6px">${see}</p>`;
+  else h+=`<p class="small"><b>${tot}</b> · ${n} productos · lo que aguanta todo el mes</p><button class="btn wide ${pedOpen?"ghost":""}" data-ped="open|${pm}" style="margin-top:10px">${pedOpen?"Ocultar la lista":"Ver y hacer el pedido"}</button>`;
+  if(prepared&&pedOpen&&lm&&shP.weeks.some(s=>S.plans[s]))h+=shopListHTML(pm,shP,"mes");
+  return h+`</div>`;
+}
+// «Otras semanas»: las listas de cada semana del mes y el mes anterior o siguiente, en pequeño
+function otherWeeksHTML(sh,key){
+  const cur=weekStartFor(todayISO()),pm=iso(new Date(Number(month.slice(0,4)),Number(month.slice(5))-2,1)).slice(0,7),nm=nextMonthOf(month);
+  const ws=sh.weeks.map((s,i)=>[s,i]).filter(([s])=>!(S.home.start&&addDays(s,6)<S.home.start)&&S.plans[s]);
+  return `<div class="owk"><span class="small muted">Otras semanas</span><div class="owkc">
+    <button class="chip" data-owm="${pm}" aria-label="${esc(monthName(pm))}">‹ ${esc(mName(pm))}</button>
+    ${ws.map(([s,i])=>{const l=sh.lists[String(i)],done=l&&shopIsDone(month,l);return chip("data-oww",String(i),key===String(i),`${s===cur?"Esta semana":Number(s.slice(8))+"–"+esc(shortDate(addDays(s,6)))}${done?" ✓":""}`)}).join("")}
+    ${buyMonthly()?"":chip("data-oww","mes",key==="mes","Despensa del mes")}
+    <button class="chip" data-owm="${nm}" aria-label="${esc(monthName(nm))}">${esc(mName(nm))} ›</button></div></div>`;
+}
+function renderCompra(){
+  // Llegar con listSel="mes" (avisos, preparar el mes…) quiere decir: el pedido de ese mes, desplegado
+  if(listSel==="mes"&&buyMonthly()){pedSel=month;pedOpen=true;listSel=null}
+  const sh=shopping(month),monthly=buyMonthly();
+  if(listSel==null||(listSel!=="mes"&&!sh.lists[listSel]))listSel=defaultShopWeek(sh);
+  const key=listSel,hasPlan=sh.weeks.some(s=>S.plans[s]);
+  let h=`<section class="view compra">${viewHead(monthName(month),"Tu *compra*")}`;
+  let pm=null,shP=null;
+  if(monthly){pm=pedidoMonth();shP=pm===month?sh:shopping(pm);h+=pedidoHTML(pm,shP)}
+  // La lista de la semana (o la despensa del mes, para quien compra cada semana)
+  const l=sh.lists[key];
+  if(!hasPlan||!l)h+=`<div class="card cblk"><h2>${monthly?"Fresco de la semana":"Compra de la semana"}</h2><p class="small muted" style="margin:6px 0 10px">Aún no hay menú en ${esc(monthName(month))}: planifica alguna semana y aquí aparecerá la compra.</p><button class="btn ghost small" id="goMenu">Ir al mes</button></div>`;
+  else{
+    const ws=key==="mes"?null:sh.weeks[Number(key)],isCur=ws===weekStartFor(todayISO());
+    const title=key==="mes"?"Despensa del mes":monthly?(isCur?"Fresco de esta semana":"Fresco · semana del "+shortDate(ws)):(isCur?"Compra de esta semana":"Compra · semana del "+shortDate(ws));
+    const left=l.items.filter(it=>!S.checks[checkKey(month,key,it.pid)]).length;
+    h+=`<div class="card cblk"><div class="cbhead"><h2>${esc(title)}</h2><span class="small muted">${esc((SHOP_MODES[l.mode]||"").toLowerCase())}</span></div>
+      <p class="small muted" style="margin:2px 0 6px">${!l.items.length?"Nada que comprar":left?`Te quedan ${left} ${left===1?"cosa":"cosas"} · ${eur(l.cost+l.fee)}`:"Todo comprado · "+eur(l.cost+l.fee)}</p>`;
+    // Quien compra cada semana: la semana en que toca, también la despensa del mes
+    if(!monthly&&key!=="mes"&&Number(key)===mesWeek(sh.weeks)){const lm=sh.lists.mes;if(lm&&lm.items.length&&!shopIsDone(month,lm))h+=`<div class="infobox">🥫 Esta semana toca también la despensa del mes: ${lm.items.length} productos · ${eur(lm.cost+lm.fee)} <button class="btn ghost small" data-oww="mes">Verla</button></div>`}
+    h+=shopListHTML(month,sh,key)+`</div>`;
   }
-  if(listSel==="mes")h+=spendingHTML(month)+`<div class="card">${reviewHTML(monthReview(month),false)}</div>`;
+  h+=otherWeeksHTML(sh,key);
+  // Todo lo secundario, plegado
+  const lMore=monthly&&shP?shP.lists.mes:l;
+  h+=`<details class="card cmore"><summary><b>Más opciones</b> <span class="small muted">· comparar, compartir, gasto y precios</span></summary>
+    <p class="small muted" style="margin:10px 0 0">${priceLine()}</p>`;
+  if(lMore&&lMore.items.length&&chosenSupers().length>1)h+=compareCard(lMore);
+  if(servidorOn())h+=`<button class="btn ghost small" id="shareMenuC" style="margin-top:10px">${ico("users")} ${S.share?"Compartida con alguien de casa":"Compartir con alguien de casa"}</button>`;
+  if(monthly&&shP){const lm=shP.lists.mes;if(lm&&lm.items.length&&lm.groups.length===1&&lm.groups[0].sup==="mercadona")h+=orderBlock(lm,"mes")}
+  if(l&&key!=="mes"&&l.items.length&&l.groups.length===1&&l.groups[0].sup==="mercadona")h+=orderBlock(l,"semana");
+  h+=shopPlanCard(pm||month)+recurringHTML(pm||month);
+  h+=`<p class="small" style="margin:12px 0 0"><button class="linkbtn" id="tkLoose">¿Compra improvisada o de otro súper? Sube su ticket</button></p>`;
+  // Gasto y resumen
+  const spentRow=(m,k,lab,lst)=>{const tkf=Math.round((S.tickets||[]).filter(t=>t.m===m&&t.list===k).reduce((s,t)=>s+(Number(t.food)||0),0)*100)/100,sk=m+"|"+k;   // lo apuntado a mano se suma a los tickets (no los sustituye)
+    return `<div class="spend"><span class="small muted"><b>${esc(lab)}</b> · ${tkf?`Con los tickets: ${eur(tkf)} en comida. Apunta solo lo que pagaste sin ticket: se suma.`:`Apunta lo que pagaste sin ticket para comparar con lo previsto (${eur(lst.cost+lst.fee)}).`}</span><input type="number" min="0" step="0.01" data-spent="${esc(sk)}" value="${S.spent[sk]??""}" placeholder="0,00" aria-label="Pagado sin ticket: ${esc(lab)}"></div>`};
+  h+=`<details class="card more2"><summary><b>${ico("chart-bar")} Gasto y resumen</b> <span class="small muted">· lo pagado, tickets y presupuesto</span></summary>
+    <div class="card"><h2>Lo que he pagado</h2>${monthly&&shP&&shP.lists.mes?spentRow(pm,"mes","Pedido de "+mName(pm),shP.lists.mes):""}${l?spentRow(month,key,key==="mes"?"Despensa del mes":"Semana del "+shortDate(sh.weeks[Number(key)]),l):""}</div>
+    <p class="small muted">Básicos (aceite, sal, especias): ${eur(Number(S.home.budget.basics))}.${sh.extrasTotal?` Platos fijos sin receta: ${eur(sh.extrasTotal)}.`:""}</p>
+    ${spendingHTML(month)}<div class="card">${reviewHTML(monthReview(month),false)}</div>`;
   const wb=weekBudget(month);
-  h+=`<div class="card"><h2>${budgetSet()?"Presupuesto por semana":"Gasto previsto por semana"}</h2><table class="wtable">${sh.weeks.map((s,i)=>S.home.start&&addDays(s,6)<S.home.start?"":`<tr><td>Semana del ${shortDate(s)}${i===mesWeek(sh.weeks)?" (con la compra del mes)":""}</td><td class="${budgetSet()&&sh.perWeek[i]>wb?"up":""}">${eur(sh.perWeek[i])}${budgetSet()?" / "+eur(wb):""}</td></tr>`).join("")}</table></div>`;
-  h+=`</details>`;
+  h+=`<div class="card"><h2>${budgetSet()?"Presupuesto por semana":"Gasto previsto por semana"}</h2><table class="wtable">${sh.weeks.map((s,i)=>S.home.start&&addDays(s,6)<S.home.start?"":`<tr><td>Semana del ${shortDate(s)}${i===mesWeek(sh.weeks)?" (con la compra del mes)":""}</td><td class="${budgetSet()&&sh.perWeek[i]>wb?"up":""}">${eur(sh.perWeek[i])}${budgetSet()?" / "+eur(wb):""}</td></tr>`).join("")}</table></div></details></details>`;
   main.innerHTML=h+`</section>`;
-  main.querySelectorAll("[data-list]").forEach(b=>b.onclick=()=>{listSel=b.dataset.list;render()});
-  document.getElementById("orderSteps")?.addEventListener("click",()=>openOrderSteps(month,l));
-  document.getElementById("sendList")?.addEventListener("click",()=>shareList(month,l,listSel==="mes"?"Compra del mes":"Compra de la semana del "+shortDate(sh.weeks[wi])));
+  // Enlaces
+  document.getElementById("goMenu")?.addEventListener("click",()=>{tab="menu";render();scrollTo(0,0)});
+  main.querySelectorAll("[data-ped]").forEach(b=>b.onclick=()=>{const [a,m]=b.dataset.ped.split("|");
+    if(a==="prep"){if(typeof openMonthPrep==="function")openMonthPrep(m)}
+    else if(a==="open"){pedOpen=!pedOpen;pedSel=m;render();if(pedOpen)document.getElementById("pedBlk")?.scrollIntoView({block:"start",behavior:"smooth"})}
+    else if(a==="guardar"||a==="llegado")pedidoLlegado(m)});
+  main.querySelectorAll("[data-oww]").forEach(b=>b.onclick=()=>{listSel=b.dataset.oww;render()});
+  main.querySelectorAll("[data-owm]").forEach(b=>b.onclick=()=>{month=b.dataset.owm;pedSel=month;pedOpen=false;listSel=null;render();scrollTo(0,0)});
+  main.querySelectorAll(".shopblk").forEach(el=>{const v=el.dataset.blk,i=v.indexOf("|"),m=v.slice(0,i),k=v.slice(i+1);bindShopList(el,m,m===month?sh:shP,k)});
   document.getElementById("shareMenuC")?.addEventListener("click",openShareMenu);
-  document.getElementById("shopDone")?.addEventListener("click",()=>{const m=month,k=listSel;markShopDone(m,k);render();askTicket(m,k)});
-  document.getElementById("tkBanner")?.addEventListener("click",()=>openTicketScan(l.mode!=="tienda",null,{m:month,key:listSel}));
-  document.getElementById("tkAny")?.addEventListener("click",()=>openTicketScan(l.mode!=="tienda",null,{m:month,key:listSel}));
   document.getElementById("tkLoose")?.addEventListener("click",()=>openTicketScan(false,null,{m:todayISO().slice(0,7),key:"suelta"}));
-  document.getElementById("tkSkip")?.addEventListener("click",()=>{S.ticketSkip=S.ticketSkip||{};S.ticketSkip[shopKey(month,listSel)]=todayISO();save();render()});
-  main.querySelectorAll("[data-bag]").forEach(i=>i.onchange=()=>{S.bags=S.bags||{};if(i.checked)S.bags[i.dataset.bag]=todayISO();else delete S.bags[i.dataset.bag];save();render()});
-  main.querySelectorAll("[data-splan]").forEach(b=>b.onclick=()=>{const p=SHOP_PLANS.find(x=>x.id===b.dataset.splan);
-    S.home.shop.monthMode=p.month;S.home.shop.weekMode=p.week;for(const k of Object.keys(S.modes))if(k.startsWith(month+"|"))delete S.modes[k];
+  main.querySelectorAll("[data-splan]").forEach(b=>b.onclick=()=>{const p=SHOP_PLANS.find(x=>x.id===b.dataset.splan),pm2=pm||month;
+    S.home.shop.monthMode=p.month;S.home.shop.weekMode=p.week;for(const k of Object.keys(S.modes))if(k.startsWith(pm2+"|"))delete S.modes[k];
     save();render();toast("Hecho: "+p.t.toLowerCase())});
   main.querySelectorAll("[data-strat]").forEach(b=>b.onclick=()=>{S.home.shop.strategy=b.dataset.strat;save();render();toast(b.dataset.strat==="barato"?"Cada producto, donde sale más barato":"Todo en "+superById(mainSuper()).nombre)});
-  main.querySelectorAll("[data-lm]").forEach(b=>b.onclick=()=>{S.modes[month+"|"+listSel]=b.dataset.lm;save();render()});
-  {const AO=aisleOpen[month+"|"+listSel]||{};
-    main.querySelectorAll("details[data-aisle]").forEach(d=>d.addEventListener("toggle",()=>{AO[d.dataset.aisle]=d.open}));
-    main.querySelector("details.shoplist")?.addEventListener("toggle",e=>{AO.__all=e.target.open})}
-  main.querySelectorAll("[data-ck]").forEach(i=>i.onchange=()=>{S.checkedAt=S.checkedAt||{};const ck=i.dataset.ck;if(i.checked){S.checks[ck]=true;S.checkedAt[ck]=todayISO();snapBought(ck,l.items.find(it=>checkKey(month,l.key,it.pid)===ck))}else{delete S.checks[ck];delete S.checkedAt[ck];if(S.bought)delete S.bought[ck]}i.closest(".item").classList.toggle("done",i.checked);save();if(S.share)markShared(S.share.codigo,i.dataset.ck,i.checked);
-    // Lista completa: se pide el ticket
-    if(i.checked&&l.items.every(it=>S.checks[checkKey(month,l.key,it.pid)])&&!(S.tickets||[]).some(t=>t.m===month&&t.list===l.key))setTimeout(()=>askTicket(month,l.key),400)});
-  document.getElementById("spentIn").onchange=e=>{const v=e.target.value;if(v==="")delete S.spent[sk];else S.spent[sk]=Number(v);save();renderHeader()};
-  main.querySelectorAll("[data-saveorder]").forEach(b=>b.onclick=()=>{const items={};for(const it of l.items)items[it.pid]=it.packs;S.orders[b.dataset.saveorder]={items,savedAt:todayISO()};save();render();toast("Pedido guardado")});
+  main.querySelectorAll("[data-spent]").forEach(i=>i.onchange=()=>{const v=i.value,sk=i.dataset.spent;if(v==="")delete S.spent[sk];else S.spent[sk]=Number(v);save()});
+  main.querySelectorAll("[data-saveorder]").forEach(b=>b.onclick=()=>{const kind=b.dataset.saveorder,lst=kind==="mes"?(shP||sh).lists.mes:l;if(!lst)return;const items={};for(const it of lst.items)items[it.pid]=it.packs;S.orders[kind]={items,savedAt:todayISO()};save();render();toast("Pedido guardado")});
   bindReview(main);bindSpending();bindRecurring();
-  const fm=document.getElementById("fillMin");if(fm)fm.onclick=()=>{const r=fillToMinimum(month,wi);render();toast(r.moved.length?(r.ok?"Completado con: ":"No llega del todo. Añadido: ")+r.moved.join(", ").toLowerCase():"No hay nada del mes que se pueda adelantar")};
 }
 
 /* ---------- Recetas ---------- */
@@ -1319,6 +1460,8 @@ function renderPerfil(){
     <div><div class="veb">Tu perfil</div><h1 class="vh">Hola, <em>${esc(me().name||"tú")}</em></h1>
     <p>${S.people.length>1?`${S.people.length} en casa · `:""}${budgetSet()?eur(S.home.budget.month)+" al mes":"sin presupuesto"} · ${esc(chosenSupers().map(s=>superById(s).nombre).join(", "))}</p>
     ${rated||fav?`<p class="small muted" style="margin:2px 0 0">${rated} ${rated===1?"plato valorado":"platos valorados"} · ${fav} ${fav===1?"favorito":"favoritos"}</p>`:""}</div></div>`;
+  // Lo primero: tu semana normal (quién está, entrenos, tápers y si se repiten cenas)
+  h+=`<button class="pnormal" id="pNormal"><span class="ico">🗓️</span><span style="flex:1;min-width:0"><b>Tu semana normal</b><small>${esc(semanaResumen())}</small></span>${ico("chevron-right")||"›"}</button>`;
   // 1. Personas: una tarjeta por persona; al tocarla, su ficha
   h+=acc("personas","users-group","Personas",S.people.map(p=>isMe(p)?"tú":personName(p)).join(", "),
     `<div class="plist">${S.people.map(p=>`<button class="prow" data-person="${esc(p.id)}"><span class="pav">${esc((p.name||"?").trim().charAt(0).toUpperCase())}</span><span class="pt"><b>${esc(isMe(p)?(p.name||"Tú")+" (tú)":personName(p))}</b><small>${esc(personLine(p))}</small>${!isMe(p)&&p.kind==="adulto"&&servidorOn()?`<em class="pinv ${p.joined?"ok":""}">${p.joined?"✓ Rellena lo suyo en su móvil":ico("mail-forward")+" Invítale a rellenar sus preferencias"}</em>`:""}</span>${ico("chevron-right")||"›"}</button>`).join("")}</div>
@@ -1372,6 +1515,7 @@ function renderPerfil(){
   const q=s=>main.querySelectorAll(s);
   q("details.acc").forEach(d=>d.addEventListener("toggle",()=>{if(d.open)accOpen.add(d.dataset.acc);else accOpen.delete(d.dataset.acc)}));
   q("[data-person]").forEach(b=>b.onclick=()=>{personTab="comida";openPerson(b.dataset.person)});
+  document.getElementById("pNormal").onclick=()=>openSemanaNormal();
   bindPersonStuff(main,render);
   bindAfinar(main);
   document.getElementById("fresh")?.addEventListener("click",()=>{
@@ -1411,7 +1555,7 @@ document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>{
   const go=()=>{if(b.dataset.tab==="menu"&&tab!=="menu")daySel=null;tab=b.dataset.tab;render();scrollTo(0,0)};
   if(document.startViewTransition&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.startViewTransition(go);else go();
 });
-function shiftMonth(n){const [y,m]=month.split("-").map(Number);const d=new Date(y,m-1+n,1);month=iso(d).slice(0,7);listSel="mes";render()}
+function shiftMonth(n){const [y,m]=month.split("-").map(Number);const d=new Date(y,m-1+n,1);month=iso(d).slice(0,7);listSel=null;render()}
 document.getElementById("prevM").onclick=()=>shiftMonth(-1);
 document.getElementById("bell").onclick=openInbox;
 document.getElementById("nextM").onclick=()=>shiftMonth(1);
@@ -1480,7 +1624,7 @@ function openOrderSteps(m,l){
         <p>${withLink.length-left.length} de ${withLink.length} productos añadidos al carro.</p>
         ${left.length?`<p class="small">Te faltan: ${esc(left.map(it=>P[it.pid].name).join(", "))}.</p><button class="btn wide" id="osBack">Ir a los que faltan</button>`:""}
         ${noLink.length?`<p class="small muted">Búscalos a mano: ${esc(noLink.map(it=>it.packs+" × "+P[it.pid].name+" ("+(superById(it.sup).nombre||it.sup)+")").join(", "))}.</p>`:""}
-        <p class="small muted">Cuando termines el pedido, márcalo en Compra con «Ya he hecho esta compra».</p>
+        <p class="small muted">Cuando termines el pedido, márcalo en Compra con «Ya he hecho el pedido».</p>
         <div class="actions"><button class="btn ghost wide" data-x>Cerrar</button></div></div>`);
       dlg.querySelector("#osBack")?.addEventListener("click",()=>{i=withLink.indexOf(left[0]);draw()});
       return;
@@ -1555,11 +1699,11 @@ function inboxItems(){
       const t=`Reparte y congela: ${pend.length} ${pend.length===1?"bolsa":"bolsas"}`,s=`Una bolsa por plato con su día (${[...new Set(pend.map(b=>P[b.pid].name.toLowerCase()))].slice(0,3).join(", ")}…)`;
       out.push({ico:"🧊",t,s,go:()=>{dlg.close();month=m;tab="compra";listSel=key;render();scrollTo(0,0)},
         btns:[["✓ Ya está",()=>{S.bags=S.bags||{};for(const b of pend)S.bags[b.id]=todayISO();save();render();toast("Bolsas apuntadas como congeladas")}],["⏰ Mañana",()=>remindTomorrow(tag,"🧊 "+t,s)]]})}}}catch(e){}
-  try{for(const r of shopDueNow())out.push({ico:"🛒",t:r.title.replace("🛒 ",""),s:r.body,go:()=>openShopReminder(r),
+  try{for(const r of shopDueNow())out.push({id:"shop|"+r.m+"|"+r.key,ico:"🛒",t:r.title.replace("🛒 ",""),s:r.body,go:()=>openShopReminder(r),
     btns:[["✓ Ya está",()=>{markShopDone(r.m,r.key);render();askTicket(r.m,r.key)}],["⏰ Mañana",()=>{S.shopSnooze=S.shopSnooze||{};S.shopSnooze[shopKey(r.m,r.key)]=addDays(todayISO(),1);save();render();toast("Te lo recuerdo mañana")}]]})}catch(e){}
-  try{const nx=monthPrepDue();if(nx&&!laterHidden("mprep|"+nx))out.push({ico:"📋",t:`Prepara ${mName(nx)}`,s:"5 preguntas y te dejo el menú y el pedido del mes listos",go:()=>{dlg.close();openMonthPrep(nx)},
+  try{const nx=monthPrepDue();if(nx&&!laterHidden("mprep|"+nx))out.push({id:"mprep",ico:"📋",t:`Prepara ${mName(nx)}`,s:"5 preguntas y te dejo el menú y el pedido del mes listos",go:()=>{dlg.close();openMonthPrep(nx)},
     btns:[["Prepararlo",()=>{dlg.close();openMonthPrep(nx)}],["⏰ Mañana",()=>remindTomorrow("mprep|"+nx,`📋 Prepara ${mName(nx)}`,"5 preguntas y te dejo el menú y el pedido del mes")]]})}catch(e){}
-  try{const n=pendingMeals().length;if(n)out.push({ico:"⭐",t:n===1?"1 comida por valorar":`${n} comidas por valorar`,s:`Así aprendo lo que ${S.people.length>1?"os":"te"} gusta`,go:go("menu")})}catch(e){}
+  try{const n=pendingMeals().length;if(n)out.push({id:"rate",ico:"⭐",t:n===1?"1 comida por valorar":`${n} comidas por valorar`,s:`Así aprendo lo que ${S.people.length>1?"os":"te"} gusta`,go:()=>{dlg.close();openRateDialog(true)}})}catch(e){}
   try{for(const {d,i,s} of pendingSports().reverse())out.push({ico:"🏃",t:`¿Hiciste ${(SPORTS[s.type]||s.type).toLowerCase()}${d===today?" hoy":" el "+longDate(d)}?`,s:`A las ${sessTime(s)} · para recalcular lo que te conviene comer`,go:go("menu"),
     btns:[["Sí",()=>withRecalc(()=>setSport(d,i,"si"))],["No",()=>withRecalc(()=>setSport(d,i,"no"))]]})}catch(e){}
   try{const x=thawPending();if(x)out.push({ico:"❄️",t:`¿Pasaste ${x.th.join(" y ")} a la nevera anoche?`,s:`Para ${x.r.name.toLowerCase()} (${x.sl.meal} de hoy)`,go:go("menu"),
@@ -1569,22 +1713,20 @@ function inboxItems(){
       // La semana generada al darse de alta cuenta como planificada (weekDone): no se pide justo después del alta
       if(!weekDone(s)){if(s===nx&&daysBetween(today,s)>2)continue;if(laterHidden("plan|"+s))continue;
         const open=()=>{dlg.close();tab="menu";render();openWeekPlanner(s)};
-        out.push({ico:"🗓️",t:`Planifica la semana del ${shortDate(s)}`,s:"Entrenos, quién está, platos y compra",go:open,
+        out.push({id:"plan|"+s,ico:"🗓️",t:`Planifica la semana del ${shortDate(s)}`,s:"Entrenos, quién está, platos y compra",go:open,
           btns:[["Planificar",open],["⏰ Mañana",()=>remindTomorrow("plan|"+s,`🗓️ Planifica la semana del ${Number(s.slice(8))}`,"5 minutos: quién está, entrenos y platos")]]})}}}catch(e){}
   try{const st=weekStartFor(today);if(budgetSet()&&S.plans[st]&&weekCost(st)>weekFoodTarget(st,true)+0.5)out.push({ico:"💶",t:"Esta semana te pasas del presupuesto",s:`${eur(weekCost(st))} de ${eur(weekFoodTarget(st,true))}`,go:()=>{dlg.close();openSacrifice(st)}})}catch(e){}
   try{const ups=Object.keys(P).filter(rise);if(ups.length)out.push({ico:"📈",t:ups.length===1?"1 producto ha subido de precio":`${ups.length} productos han subido de precio`,s:ups.slice(0,3).map(p=>P[p].name.toLowerCase()).join(", "),go:go("compra")})}catch(e){}
   try{const old=freezerState().filter(e=>e.days>FREEZER_MONTHS*30),s=old.map(e=>P[e.pid].name.toLowerCase()).join(", ");
     if(old.length&&!laterHidden("freezer"))out.push({ico:"🧊",t:"Gasta esto pronto",s,go:go("congelador"),
       btns:[["Verlo",go("congelador")],["⏰ Mañana",()=>remindTomorrow("freezer|"+today,"🧊 Gasta esto pronto","Lleva más de 3 meses congelado: "+s)]]})}catch(e){}
-  try{if(reviewCard())out.push({ico:"📊",t:"Resumen del mes pasado",s:"Cómo fue el presupuesto y qué ajustar",go:go("menu")})}catch(e){}
+  try{if(reviewCard())out.push({ico:"📊",t:"Resumen del mes pasado",s:"Cómo fue el presupuesto y qué ajustar",go:()=>{showDialog(`<div class="mod">${closeBtn}<div class="rate" id="rvCard">${reviewHTML(monthReview(prevMonth()),true)}</div></div>`);bindReview(dlg);dlg.querySelectorAll("[data-rvset],[data-rvfix],[data-rvok]").forEach(b=>b.addEventListener("click",()=>dlg.close()))}})}catch(e){}
   try{if(surveyCard())out.push({ico:"📋",t:"Encuesta del mes",s:"Un minuto",go:()=>{dlg.close();openSurvey()}})}catch(e){}
   try{if(S.home.start&&S.home.start>today)out.push({ico:"🥫",t:`Tu plan empieza el ${shortDate(S.home.start)}`,s:"Mientras, ideas para gastar lo que tienes",go:()=>{dlg.close();openUseUp()}})}catch(e){}
   return out;
 }
-function renderBell(){
-  const b=document.getElementById("bell");if(!b)return;b.hidden=!S.onboarded||tab==="wizard";
-  const n=S.onboarded?inboxItems().length:0, el=document.getElementById("bellN");el.textContent=n>9?"9+":String(n);el.hidden=!n;
-}
+// La campanita ya no se enseña: lo pendiente sale en Hoy (inboxItems sigue siendo la fuente)
+function renderBell(){const b=document.getElementById("bell");if(b)b.hidden=true}
 function openInbox(){
   const items=inboxItems();
   let next=[];try{if(avisosOn()&&S.notif&&S.notif.on)next=buildSchedule().slice(0,5)}catch(e){}

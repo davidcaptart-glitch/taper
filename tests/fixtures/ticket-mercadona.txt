@@ -1,0 +1,35 @@
+MERCADONA, S.A. A-46103834
+AV. CATALUNYA 2
+08784 PIERA
+TELÉFONO: 963333333
+02/11/2026 19:43  OP: 1234567
+FACTURA SIMPLIFICADA: 2345-012-123456
+Descripción               P. Unit  Importe
+6 LECHE SEMIDESNATADA           0,97  5,82
+1 HUEVOS GRANDES L                    2,35
+1 FILETES PECHUGA POLLO               5,62
+2 YOGUR NATURAL                 1,15  2,30
+1 ARROZ REDONDO                       1,15
+3 TOMATE FRITO                  1,05  3,15
+1 BANANA
+1,234 kg  2,15 €/kg                   2,65
+1 TOMATES PERA                        1,99
+1 ZANAHORIAS                          0,99
+1 CEBOLLAS                            1,49
+1 Q RALLADO MOZZARELLA                1,95
+1 MACARRON                            0,95
+1 BOLSA PLASTICO                      0,15
+1 DETERGENTE MARSELLA                 5,50
+TOTAL (€)                            36,06
+TARJETA BANCARIA                     36,06
+TARJ. BANCARIA: **** **** **** 4321
+N.C: 012345678  AUT: 123456
+AID: A0000000031010  ARC: 00
+Importe:                           36,06 €
+IVA  BASE IMPONIBLE (€)  CUOTA (€)
+4%       18,60        0,74
+10%       10,06        1,01
+21%       4,67        0,98
+TOTAL     33,33        2,73
+SE ADMITEN DEVOLUCIONES CON TICKET
+GRACIAS POR SU VISITA

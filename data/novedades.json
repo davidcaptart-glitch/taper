@@ -996,6 +996,35 @@
       "cambios": [
         "«Tickets e informe» vuelve a abrirse: en la versión anterior no cargaba."
       ]
+    },
+    {
+      "version": 122,
+      "fecha": "2026-11-03",
+      "titulo": "Táper, al mes",
+      "cambios": [
+        "Cuatro pestañas: Hoy, Mes, Compra y En casa. Tu perfil, en tu inicial arriba a la derecha.",
+        "Hoy: lo único que toca ahora, lo que comes, qué descongelar, los tápers que caducan y tu presupuesto en una línea.",
+        "Mes: el calendario con quién está, entrenos, tápers y cenas fuera. Toca un día para cambiarlo.",
+        "Preparar el mes en 3 pasos: así es el mes, el menú y el pedido grande, con el día de entrega.",
+        "Tu semana normal: quién está cada día, entrenos, comida de táper o cocinar, y si repites cena cuando estás solo. Se pone una vez.",
+        "Con tu hijo, las cenas de la semana no se repiten. Solo, una cena puede repetirse sin pasar de 3 raciones.",
+        "Cada plato cocinado tiene sus días en la nevera (con huevo o arroz, 1 día): nunca se planifica comerlo más tarde.",
+        "En casa: nevera, despensa y congelador en una lista, con las sobras y «cómetelo antes del…».",
+        "Al llegar el pedido, te digo dónde va cada cosa y cómo repartir la carne y el pescado en bolsas para cada día.",
+        "Compra: el pedido del mes y el fresco de esta semana, lo demás plegado.",
+        "Cada persona de casa, por comidas: comida y cena, solo la cena o solo la comida, en tu semana normal y en cada día. Y «está siempre» para quien vive contigo.",
+        "Menú del comedor: súbelo una vez al mes (PDF o foto), elige la versión del menú de tu hijo y sus cenas no repetirán lo que comió en el cole.",
+        "Postre: fruta de temporada o yogur después de comer o de cenar, en el menú y en la compra.",
+        "Cambiar plato: ideas que puedes recalcular, «Con lo que tengo» sin comprar nada, «Con sobras» que aún están buenas y «¿Qué te apetece?» (pescado, carne, legumbre…).",
+        "Te aviso de lo fresco que se va a pasar (y de congelar la carne o el pescado a tiempo), con «Ponerlo en el menú».",
+        "Lo que ya compraste no cambia de plato al rehacer el menú ni al tocar el presupuesto; si cambias algo a mano, lo que falte va a la próxima compra.",
+        "Si la cena no se cocinó, al día siguiente no te ofrezco su táper; y nada de descongelar para una cena que ya está hecha.",
+        "40 recetas nuevas, cada una con su foto: equilibradas, con verdura en cada plato y a menos de 1,50 € la ración de media.",
+        "Pescado sin que se dispare la cuenta: merluza a la plancha, al horno con boniato, con pisto, a la naranja, en curry suave, en arroz caldoso, en albóndigas o guisada con patatas.",
+        "Más legumbre de diario: lentejas con calabaza, crema de lentejas, kitchari, albóndigas de lentejas, alubias con calabaza y col y bandeja de garbanzos al horno.",
+        "Cocina de siempre y económica: puchero de gallina, menestra, trinxat, lomo guisado con patatas, arroz de pollo y huerta y rollitos de col.",
+        "La mayoría van bien en táper para llevar."
+      ]
     }
   ]
 }

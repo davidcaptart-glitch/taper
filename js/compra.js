@@ -41,6 +41,8 @@ function monthUses(m,exceptId){
       const v=wk.slots[sl.id], r=v&&RX[v.recipe];
       // De la despensa: ya está comprado (no suma nada a la compra)
       if(!r){if(sl.fixed&&!sl.fixed.recipe&&!(v&&v.despensa))out.push({extra:Number(sl.fixed.cost)||0,wi,slot:sl});continue}
+      // Sobras de algo ya cocinado: no se compra ni se descuenta otra vez (ya se gastó al cocinarlo)
+      if(v.sobra)continue;
       const cook=cookDayFor(v.rep?v.rep.slice(0,10):sl.date);   // si repite el plato de otro día, se compra para aquel día
       // Lo fresco para lo que se cocina antes de que llegue el pedido sale del pedido de la semana anterior
       const freshWi=wi>0&&cook<deliv?wi-1:wi;
@@ -51,6 +53,8 @@ function monthUses(m,exceptId){
       for(const [m,v] of Object.entries(dd)){const r=RX[v.recipe];if(!r)continue;
         const fw=wi>0&&d<deliv?wi-1:wi, n=smallPortions(d,m);
         for(const [pid,q] of r.ing)out.push({pid,q:q*n,wi,freshWi:fw,date:d,slot:{date:d,meal:m},r})}}
+    // Postre: una pieza de fruta o un yogur por persona (js/postre.js)
+    if(typeof postreUses==="function")out.push(...postreUses(start,wi,deliv));
   });
   return out;
 }
@@ -79,9 +83,10 @@ function shopping(m,raw){
     if(r.pid&&P[r.pid])for(const i of idx){const key=r.freq==="semana"?String(i):"mes";lists[key][r.pid]=(lists[key][r.pid]||0)+r.q}
     else{for(const i of idx)recur[i]+=r.amount;recurOff.push(r)}}
   // Lo que te faltaba en la despensa y añadiste a una lista
-  for(const [k,its] of Object.entries((S.extraBuy||{})[m]||{}))if(lists[k])for(const [pid,q] of Object.entries(its))if(P[pid]&&q>0)lists[k][pid]=(lists[k][pid]||0)+q;
+  // (ya es lo que falta descontando lo que hay en casa: no se vuelve a restar)
+  const xb={};for(const [k,its] of Object.entries((S.extraBuy||{})[m]||{}))if(lists[k])for(const [pid,q] of Object.entries(its))if(P[pid]&&q>0){lists[k][pid]=(lists[k][pid]||0)+q;(xb[k]=xb[k]||{})[pid]=(xb[k][pid]||0)+q}
   // Lo que ya tienes en casa no se vuelve a comprar (en las listas que aún están por comprar)
-  const net=raw?{have:{},gone:{}}:netStock(m,weeks,lists,fu);
+  const net=raw?{have:{},gone:{}}:netStock(m,weeks,lists,fu,xb);
   const out={weeks,lists:{},first,freezeGuide,extras,recurOff,bags:Object.fromEntries(Object.entries(bags).map(([k,v])=>[k,Object.values(v).sort((a,b)=>a.date.localeCompare(b.date))]))};
   const B=S.bought||{};
   for(const key of Object.keys(lists)){
@@ -119,7 +124,7 @@ const listToBuy=(m,key,weeks)=>!(S.shopDone||{})[shopKey(m,key)]&&!(S.tickets||[
 // primer plato de esa lista que lo usa. Lo comprado para listas aún a medias es para ellas (no se resta de otras).
 // Lo marcado como comprado no se toca (se queda con lo que compraste).
 let netBusy=false;
-function netStock(m,weeks,lists,fu){
+function netStock(m,weeks,lists,fu,xb){
   const res={have:{},gone:{}},D=S.despensa||{};if(netBusy||typeof despensaState!=="function")return res;
   // Sin nada apuntado (cuenta nueva) no hay despensa que mirar
   if(!Object.keys(S.checks||{}).length&&!Object.keys(S.shopDone||{}).length&&!(S.tickets||[]).length&&!(S.freezer||[]).length&&!(S.bolsas||[]).length&&!(D.adj||[]).length&&!Object.keys(D.set||{}).length)return res;
@@ -131,7 +136,8 @@ function netStock(m,weeks,lists,fu){
     const line=needByDay(today,addDays(nextMonthOf(m)+"-01",7)),before=(pid,x)=>(line[pid]||[]).reduce((t,[d,q])=>d<x?t+q:t,0);
     for(const k of open){const ws=weeks[k==="mes"?mesWeek(weeks):Number(k)],deliv=ws?deliveryDate(ws):today;
       for(const [pid,q] of Object.entries(lists[k])){if(!P[pid]||B[checkKey(m,k,pid)]||!(st[pid]>0))continue;
-        const x=(fu[k]||{})[pid]||(deliv>today?deliv:today),c=Math.min(q,Math.max(0,st[pid]-(own[pid]||0)-before(pid,x)));
+        // Lo añadido desde «Lo que falta» (xb) ya descontaba lo de casa: solo se resta de lo que piden los platos
+        const x=(fu[k]||{})[pid]||(deliv>today?deliv:today),c=Math.min(q-(((xb||{})[k]||{})[pid]||0),Math.max(0,st[pid]-(own[pid]||0)-before(pid,x)));
         if(c<dpEps(pid))continue;
         if(q-c<dpEps(pid)){delete lists[k][pid];(res.gone[k]=res.gone[k]||[]).push({pid,q:c})}
         else{lists[k][pid]=q-c;(res.have[k]=res.have[k]||{})[pid]=c}}}

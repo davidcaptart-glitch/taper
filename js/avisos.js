@@ -98,7 +98,7 @@ function buildSchedule(){
       if(sl.date!==d)continue;const v=wk.slots[sl.id],r=v&&RX[v.recipe];if(!r)continue;
       const mt=S.home.mealTimes[sl.meal]||(sl.meal==="cena"?"21:00":"14:00"),dayName=DAYS[dow(d)].toLowerCase();let warned=false;
       if(sl.meal==="cena"||!lastMeal)lastMeal=mt;
-      if(T.descongelar&&S.home.cookMode!=="lote"&&!(S.thawChecked||{})[sl.id]){const th=r.ing.filter(([p])=>P[p].thaw).map(([p])=>P[p].name.toLowerCase());
+      if(T.descongelar&&S.home.cookMode!=="lote"&&!(S.thawChecked||{})[sl.id]&&!v.rep&&!v.sobra&&!(S.cooked||{})[sl.id]){const th=r.ing.filter(([p])=>P[p].thaw).map(([p])=>P[p].name.toLowerCase());
         if(th.length)push(at(addDays(d,-1),n.thaw),"❄️ Descongela para mañana",`${cap(th.join(" y "))}, a la nevera (${sl.meal} del ${dayName})`,"thaw|"+sl.id)}
       const cooked=!!(S.cooked||{})[sl.id];
       if(v.rep&&!fromBatch(sl)){

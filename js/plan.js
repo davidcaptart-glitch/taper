@@ -56,9 +56,10 @@ function presentByRule(k,d,meal){
   const pr=k.presence||{type:"siempre"}, w=dow(d);
   if(pr.type==="siempre")return true;
   if(pr.type==="manual")return false;
-  if(pr.type==="dias")return (pr.days||[]).includes(w);
-  if(pr.type==="alternas"||pr.type==="findes"){
-    const t=turnInfo(pr), off=((daysBetween(t.anchor,d)%14)+14)%14;
+  // Días fijos de la semana y, si se marca (pr.findes, desde «Tu semana normal»), también fines de semana alternos
+  if(pr.type==="dias"&&((pr.days||[]).includes(w)||!pr.findes))return (pr.days||[]).includes(w);
+  if(pr.type==="alternas"||pr.type==="findes"||pr.type==="dias"){
+    const t=turnInfo(pr.type==="dias"?{...pr,type:"findes"}:pr), off=((daysBetween(t.anchor,d)%14)+14)%14;
     if(off>=t.len)return false;
     if(meal&&off===0&&t.arrive==="cena"&&meal==="comida")return false;
     if(meal&&off===t.len-1&&t.leave==="comida"&&meal==="cena")return false;
@@ -68,9 +69,9 @@ function presentByRule(k,d,meal){
 }
 // Frase que resume el turno, para enseñarla en el asistente y el perfil
 function turnText(k){
-  const pr=k.presence||{};if(pr.type!=="alternas"&&pr.type!=="findes")return "";
+  const pr0=k.presence||{},pr=pr0.type==="dias"&&pr0.findes?{...pr0,type:"findes"}:pr0;if(pr.type!=="alternas"&&pr.type!=="findes")return "";
   const t=turnInfo(pr),last=addDays(t.anchor,t.len-1);
-  return `Está contigo del ${DAYS[dow(t.anchor)].toLowerCase()} (${t.arrive==="cena"?"cena":"comida"}) al ${DAYS[dow(last)].toLowerCase()} (${t.leave==="cena"?"cena":"comida"}), ${pr.type==="findes"?"fines de semana alternos":"semanas alternas"}. Próximo turno: ${shortDate(nextTurn(t))}.`;
+  return `${pr0.type==="dias"&&(pr0.days||[]).length?"Además de "+pr0.days.slice().sort().map(i=>DAYS[i].toLowerCase()).join(", ")+", e":"E"}stá contigo del ${DAYS[dow(t.anchor)].toLowerCase()} (${t.arrive==="cena"?"cena":"comida"}) al ${DAYS[dow(last)].toLowerCase()} (${t.leave==="cena"?"cena":"comida"}), ${pr.type==="findes"?"fines de semana alternos":"semanas alternas"}. Próximo turno: ${shortDate(nextTurn(t))}.`;
 }
 function nextTurn(t){const off=((daysBetween(t.anchor,todayISO())%14)+14)%14;return addDays(todayISO(),off<t.len?-off:14-off)}
 const kidPresentByRule=presentByRule;
@@ -78,8 +79,10 @@ const kidPresentByRule=presentByRule;
 function peopleAt(d,meal){
   const o=(S.days[d]||{}).kids||{};
   // Marcar a mano que alguien está un día no cambia qué comidas hace en casa (salvo un cambio planificado)
-  return S.people.filter(k=>{if(k.id==="yo")return true;if(o[k.id]==null)return presentByRule(k,d,meal);
-    if(!o[k.id])return false;const ch=changeFor(k,d,meal);return ch&&ch.with?true:!eatsAway(k,d,meal)});
+  // El cambio de un día puede ser sí/no o, por comidas, {comida:bool, cena:bool} («ese día solo viene a cenar»)
+  return S.people.filter(k=>{if(k.id==="yo")return true;const ov=o[k.id];if(ov==null)return presentByRule(k,d,meal);
+    if(typeof ov==="object"){if(!meal)return !!(ov.comida||ov.cena);return ov[meal]!=null?!!ov[meal]:presentByRule(k,d,meal)}
+    if(!ov)return false;const ch=changeFor(k,d,meal);return ch&&ch.with?true:!eatsAway(k,d,meal)});
 }
 const kidsAt=(d,meal)=>peopleAt(d,meal).filter(p=>p.kind==="nino");
 const adultsAt=(d,meal)=>peopleAt(d,meal).filter(p=>p.kind==="adulto");
@@ -196,7 +199,7 @@ function buildSlots(start){
       const ks=st==="solotaper"?[]:kidsAt(d,meal);
       const as=st==="solotaper"?[]:adultsAt(d,meal);
       // Táper para el día siguiente: los adultos que estén y se lleven táper
-      const tupper=meal==="cena"&&mealState(addDays(d,1),"comida")==="taper"?adultsAt(addDays(d,1),"comida").filter(a=>a.id==="yo"||a.tupper):[];
+      const tupper=meal==="cena"&&mealState(addDays(d,1),"comida")==="taper"?adultsAt(addDays(d,1),"comida"):[];   // tú y quien come en casa ese mediodía (la abuela que está siempre) comen del táper
       if(st==="solotaper"&&!tupper.length)continue;
       const f=st==="solotaper"?null:fixedFor(d,meal);
       const slot={id:d+"|"+meal,date:d,meal,eaters:as,kids:ks,tupper,fixed:f};
@@ -225,6 +228,33 @@ function tupperGaps(start){
 /* ---------- Lo que ya pasó no se toca ----------
    Días anteriores a hoy, la comida o cena de hoy si ya es su hora, lo que ya se cocinó y lo que ya se ha contestado («¿qué tal?»).
    Rehacer el menú, ajustarlo al presupuesto o aplicar medidas nunca cambia estos huecos. */
+// Hasta qué día está comprado lo fresco: hasta la víspera de la próxima compra semanal que aún no se ha hecho.
+// Lo de esos días no se rehace (ni al cambiar el presupuesto): se compró para esos platos
+let boughtMemo={k:null,v:null};
+function boughtUntil(){
+  const k=S.updatedAt+"|"+todayISO();if(boughtMemo.k===k)return boughtMemo.v;
+  const today=todayISO();let v=addDays(today,-1);
+  boughtMemo={k,v};   // mientras se calcula (la compra mira los platos), nada se da por comprado
+  try{let m=today.slice(0,7);
+    for(let n=0;n<2;n++,m=nextMonthOf(m)){const sh=shopping(m,true),ws=sh.weeks;
+      for(let i=0;i<ws.length;i++){const l=sh.lists[i];if(!l||(ws[i].slice(0,7)!==m&&i>0))continue;
+        // Cada compra cubre hasta la víspera de la siguiente (aunque su semana ya haya pasado: la del lunes es de la semana anterior)
+        const nx=ws[i+1]?deliveryDate(ws[i+1]):deliveryDate(addDays(ws[i],7)),end=addDays(nx,-1);if(end<today)continue;
+        const done=l.items.length&&shopIsDone(m,l);
+        if(!done){boughtMemo={k,v};return v}
+        v=[v,end].sort()[1]}}}catch(e){}
+  boughtMemo={k,v};return v;
+}
+const slotBought=id=>id.slice(0,10)>=todayISO()&&id.slice(0,10)<=boughtUntil();
+// Los días de antes de la primera compra del plan: lo fresco de esos días no lo trae ninguna lista (se come lo que haya en casa)
+let fsMemo={k:null,v:null};
+const firstShopDay=()=>{const k=S.home.start+"|"+((S.home.shop||{}).delivery);if(fsMemo.k!==k)fsMemo={k,v:S.home.start?deliveryDate(weekStartFor(S.home.start)):null};return fsMemo.v};
+const preShop=d=>!!S.home.start&&d>=S.home.start&&d<(firstShopDay()||d);
+// ¿Lo de este hueco ya no lo trae ninguna compra por hacer? (ya está comprado o es antes de la primera compra)
+// Esos huecos no se rehacen; si hay que cambiarlos, el plato sale de lo que hay en casa (pickFromHome)
+const slotNoShop=id=>slotBought(id)||(id.slice(0,10)>=todayISO()&&preShop(id.slice(0,10)));
+// «Aún no has comprado: usa lo que tengas»: un hueco de antes de la primera compra sin ningún plato que salga de lo que hay en casa
+const casaSlot=v=>!!(v&&v.casa&&v.despensa&&!v.despensa.length);
 function slotDone(id){
   const d=id.slice(0,10),t=todayISO(),meal=id.slice(11);if(d<t||(S.cooked||{})[id])return true;if(d>t)return false;
   if((S.meals||{})[id])return true;
@@ -250,20 +280,70 @@ function batchCovers(cd){
    y si solo cuando no están los niños (o solo cuando están). El hueco que repite guarda v.rep = id del primero:
    se cocina una vez (en el primero) con las raciones de todos. */
 const repRule=meal=>((S.home.repeatMeals||{})[meal])||{days:1,who:"todas"};
-const repApplies=sl=>{const r=repRule(sl.meal);if((r.days||1)<2)return false;if(r.who==="con")return sl.kids.length>0;if(r.who==="sin")return sl.kids.length===0;return true};
+const repApplies=sl=>{const r=repRule(sl.meal);if((r.days||1)<2)return false;if(sl.meal==="cena"&&sl.kids.length)return false;if(r.who==="con")return sl.kids.length>0;if(r.who==="sin")return sl.kids.length===0;return true};
+/* ---------- Reglas de las cenas ----------
+   (a) Con niños: la receta de una cena en la que come algún niño no se repite en toda la semana (lunes a domingo),
+       ni seguida ni otro día; las cenas de cuando estás solo sí pueden repetirse (S.home.repeatMeals).
+   (b) Una cena repetida nunca cae el día en que al mediodía se come el táper de ese plato, un plato da como mucho
+       3 raciones (cena, táper y cena repetida) y la repetida tiene que estar dentro de los días que aguanta en la nevera.
+   (c) Seguridad: un plato cocinado nunca se come (táper o repetido) más tarde de los días que aguanta en la nevera (r.fridge). */
+const kidDinner=s=>s.meal==="cena"&&s.kids.length>0;
+// Días en que se come lo cocinado en un hueco: ese día y, si sale táper, el siguiente
+const eatDays=s=>s.tupper.length?[s.date,addDays(s.date,1)]:[s.date];
+// ¿Poner la receta rid en el hueco sl rompe la regla (a)?
+function kidClash(wk,slots,sl,rid){
+  for(const o of slots){if(o.id===sl.id)continue;const v=wk.slots[o.id];if(!v||v.recipe!==rid)continue;
+    if((kidDinner(sl)&&(o.meal==="cena"||o.kids.length))||(kidDinner(o)&&(sl.meal==="cena"||sl.kids.length)))return true}
+  return false;
+}
+// ¿Puede el hueco sl repetir el plato cocinado en hid? (reglas a, b y c)
+function repeatOk(wk,sl,hid,slots){
+  const hv=wk.slots[hid],r=hv&&!hv.rep&&RX[hv.recipe],head=slots.find(s=>s.id===hid);
+  if(!r||r.cap||!head||head.fixed||!repApplies(head)||!repApplies(sl)||hid>=sl.id)return false;
+  const kids=Object.entries(wk.slots).filter(([id,v])=>v.rep===hid&&id!==sl.id).map(([id])=>slots.find(s=>s.id===id)).filter(Boolean);
+  if(1+kids.length>=(repRule(sl.meal).days||1))return false;
+  const uses=[head,...kids];
+  if(uses.some(u=>eatDays(u).includes(sl.date)))return false;                        // nunca dos veces el mismo día
+  if(uses.concat([sl]).reduce((t,u)=>t+eatDays(u).length,0)>3)return false;          // como mucho 3 raciones
+  if(daysBetween(cookDayFor(head.date),eatDays(sl).slice(-1)[0])>r.fridge)return false;   // aguanta en la nevera
+  if(!slotPeople(sl).every(p=>canEat(p,r)))return false;
+  if(sl.kids.length&&!r.kid&&!sl.kids.every(k=>dishPref(k,r.id)>=1))return false;
+  return !kidClash(wk,slots,sl,r.id);
+}
+// Cocinar una vez y repetir: el plato más reciente de los 3 días anteriores de la misma semana que cumpla las reglas
 function repeatFrom(wk,sl,slots){
   if(!repApplies(sl)||sl.fixed||mealState(sl.date,sl.meal)!=="cocinar")return null;
-  const prevId=addDays(sl.date,-1)+"|"+sl.meal,prev=slots.find(s=>s.id===prevId);if(!prev||!repApplies(prev)||prev.fixed)return null;
-  const pv=wk.slots[prevId],r=pv&&RX[pv.recipe];if(!r||r.cap)return null;
-  const head=pv.rep||prevId,n=1+Object.entries(wk.slots).filter(([id,v])=>v.rep===head&&id<sl.id).length;
-  if(n>=(repRule(sl.meal).days||1))return null;
-  if(daysBetween(cookDayFor(head.slice(0,10)),sl.date)>r.fridge&&!r.freeze)return null;
-  if(!slotPeople(sl).every(p=>canEat(p,r)))return null;
-  if(sl.kids.length&&!r.kid&&!sl.kids.every(k=>dishPref(k,r.id)>=1))return null;
-  return {recipe:r.id,rep:head};
+  for(let b=1;b<=3;b++){const d=addDays(sl.date,-b);if(weekStartFor(d)!==weekStartFor(sl.date))break;
+    const hid=d+"|"+sl.meal;if(repeatOk(wk,sl,hid,slots))return {recipe:wk.slots[hid].recipe,rep:hid}}
+  return null;
+}
+// Repasa la semana: fuera lo que ya no cumple las reglas (sin tocar lo pasado, lo cocinado ni lo elegido a mano)
+function rulesSweep(wk,slots){
+  let any=false;const free=sl=>{const v=wk.slots[sl.id];return v&&RX[v.recipe]&&!slotDone(sl.id)&&!sl.past};
+  for(const sl of slots.slice().reverse()){if(!free(sl))continue;const v=wk.slots[sl.id],r=RX[v.recipe];
+    if(v.rep||v.locked||v.despensa||sl.fixed)continue;
+    // Lo ya comprado no se cambia por repetir con los niños (se cambia el otro día, que aún no está comprado); por seguridad, sí
+    const unsafe=S.home.cookMode!=="lote"&&sl.tupper.length&&r.fridge<1;
+    if(unsafe||(kidClash(wk,slots,sl,v.recipe)&&!slotNoShop(sl.id))){delete wk.slots[sl.id];any=true}}
+  for(const sl of slots){if(!free(sl))continue;const v=wk.slots[sl.id];if(!v.rep||v.sobra)continue;
+    const keep=v;delete wk.slots[sl.id];if(repeatOk(wk,sl,keep.rep,slots)&&wk.slots[keep.rep].recipe===keep.recipe)wk.slots[sl.id]=keep;else any=true}
+  return any;
+}
+// Fallos de las reglas en una semana (para comprobarlas)
+function rulesBroken(start){
+  const wk=S.plans[start];if(!wk)return [];const slots=buildSlots(start),out=[];
+  for(const sl of slots){const v=wk.slots[sl.id],r=v&&RX[v.recipe];if(!r)continue;
+    if(kidClash(wk,slots,sl,v.recipe))out.push(["a",sl.id,r.name]);
+    if(v.rep){const h=slots.find(s=>s.id===v.rep);if(h&&eatDays(h).includes(sl.date))out.push(["b-día",sl.id,r.name]);
+      const uses=slots.filter(s=>s.id===v.rep||(wk.slots[s.id]||{}).rep===v.rep);if(uses.reduce((t,u)=>t+eatDays(u).length,0)>3)out.push(["b-raciones",sl.id,r.name])}
+    const head=v.rep?slots.find(s=>s.id===v.rep):sl;
+    if(head&&S.home.cookMode!=="lote"&&daysBetween(cookDayFor(head.date),eatDays(sl).slice(-1)[0])>r.fridge)out.push(["c",sl.id,r.name+" ("+r.fridge+" d)"])}
+  return out;
 }
 // Huecos que repiten el plato de este (se cocinan con él) y raciones totales a cocinar
-const repChildren=sl=>{const wk=S.plans[weekStartFor(sl.date)];return wk?Object.keys(wk.slots).filter(id=>wk.slots[id].rep===sl.id).sort().map(id=>slotFor(id.slice(0,10),id.slice(11))).filter(Boolean):[]};
+// Los días que comen lo mismo que este hueco (en su semana y, por las sobras de un domingo, en la siguiente)
+const repChildren=sl=>{const ws=weekStartFor(sl.date),ids=[];for(const w of [ws,addDays(ws,7)]){const wk=S.plans[w];if(wk)for(const id of Object.keys(wk.slots))if(wk.slots[id].rep===sl.id)ids.push(id)}
+  return ids.sort().map(id=>slotFor(id.slice(0,10),id.slice(11))).filter(Boolean)};
 const cookPortions=sl=>Math.round((sl.portions+repChildren(sl).reduce((t,c)=>t+c.portions,0))*100)/100;
 // En qué tápers se reparte un plato: uno para la comida o cena de ese día (los que comen en casa)
 // y uno por persona para el táper del día siguiente
@@ -330,12 +410,14 @@ function weekRecipes(start,exceptId){
 // candMemo: mientras se rehace el menú, las recetas que encajan en cada tipo de comida no cambian (se piden cientos de veces)
 let candMemo=null;
 const withCandMemo=f=>{const own=!candMemo;if(own)candMemo={};try{return f()}finally{if(own)candMemo=null}};
+// Menú del comedor: si el niño ya comió legumbre (pasta, pescado…) en el cole, su cena no lo repite (si quedan platos; si no, puntúa muy poco)
+const cAvoid=slot=>typeof comedorAvoid==="function"?comedorAvoid(slot):null;
 function candidates(slot,opts={}){
-  let key=null;
+  let key=null;const av=cAvoid(slot);
   if(candMemo&&!opts.only){const ids=a=>a.map(p=>p.id).join(",");
-    key=[ids(slot.eaters),ids(slot.kids),ids(slot.tupper),slot.need&&slot.need.noHeavy?1:0,opts.cap?1:0,S.home.cookMode==="lote"?slot.date+"|"+cookDayFor(slot.date):""].join("|");
+    key=[ids(slot.eaters),ids(slot.kids),ids(slot.tupper),slot.need&&slot.need.noHeavy?1:0,opts.cap?1:0,S.home.cookMode==="lote"?slot.date+"|"+cookDayFor(slot.date):"",av?av.join(","):""].join("|");
     if(candMemo[key])return candMemo[key].slice()}
-  const out=[];
+  let out=[];
   for(const r of R){
     if(r.small||(r.cap&&!opts.cap)||!variantFor(r)||!hasPhoto(r)||!hasPack(r))continue;
     if(!opts.cap&&diffRank(r.diff)>diffRank(maxDiff()))continue;   // no más difícil de lo que quiere cocinar
@@ -349,11 +431,12 @@ function candidates(slot,opts={}){
     }
     if(slot.need.noHeavy&&r.heavy)continue;
     if(S.home.cookMode==="lote"&&!keepPlan(r,slot).ok)continue;
-    // Cocinando cada día: si sale táper para mañana, el plato tiene que aguantar una noche en la nevera (o congelarse)
-    if(S.home.cookMode!=="lote"&&slot.tupper.length&&!(r.fridge>=1||r.freeze))continue;
+    // Cocinando cada día: si sale táper para mañana, el plato tiene que aguantar al menos una noche en la nevera (regla c)
+    if(S.home.cookMode!=="lote"&&slot.tupper.length&&!(r.fridge>=1))continue;
     if(opts.only&&!opts.only(r))continue;
     out.push(r);
   }
+  if(av){const ok=out.filter(r=>!comedorClash(r,av));if(ok.length>=4)out=ok}
   if(key)candMemo[key]=out.slice();
   return out;
 }
@@ -410,6 +493,7 @@ function scoreRecipe(r,slot,ctx){
   const mineR=S.ratings.filter(x=>x.rid===r.id&&x.ease&&slot.eaters.concat(slot.tupper).some(a=>a.id===x.who));
   if(mineR.some(x=>x.ease==="dificil"))s-=2.5;else if(mineR.some(x=>x.ease==="facil"))s+=0.6;
   s+=monthPrefScore(r,slot,ctx);
+  if(slot.meal==="cena"&&slot.kids.length){const av=cAvoid(slot);if(av&&comedorClash(r,av))s-=14}
   // Recetas de un pack que has desbloqueado: salen más, para que se note lo comprado
   if(r.pack&&hasPack(r))s+=2.5;
   return s;
@@ -463,8 +547,12 @@ function pickFor(slot,ctx){
   // Si nada encaja, se relaja casi todo (gustos de los niños, pesado, nevera…) menos la dieta y las alergias, que no se saltan nunca;
   // tampoco salen caprichos, platos más difíciles de lo que quieres cocinar ni picante para los niños
   const all=slot.eaters.concat(slot.kids,slot.tupper),young=slot.kids.some(k=>(Number(k.age)||8)<10);
-  if(!c.length)c=R.filter(r=>!r.small&&!r.cap&&diffRank(r.diff)<=diffRank(maxDiff())&&!(young&&r.tags.includes("picante"))&&variantFor(r)&&hasPhoto(r)&&hasPack(r)&&all.every(p=>canEat(p,r)));
+  if(!c.length)c=R.filter(r=>!r.small&&!r.cap&&diffRank(r.diff)<=diffRank(maxDiff())&&!(young&&r.tags.includes("picante"))&&variantFor(r)&&hasPhoto(r)&&hasPack(r)&&all.every(p=>canEat(p,r))&&(S.home.cookMode==="lote"||!slot.tupper.length||r.fridge>=1));
+  // Con niños en la cena, su plato no se repite en la semana (regla a): tampoco se relaja
+  const start=weekStartFor(slot.date),wk=S.plans[start];
+  if(wk){const sls=ctx.slots||(ctx.slots=buildSlots(start));c=c.filter(r=>!kidClash(wk,sls,slot,r.id))}
   if(!c.length)return null;
+  {const av=cAvoid(slot);if(av){const ok=c.filter(r=>!comedorClash(r,av));if(ok.length)c=ok}}
   // Variedad: primero lo que no repite ni se pasa de pasta o arroz; si no queda nada, lo que haya
   const v=c.filter(r=>!breaksVariety(r,slot,ctx));if(v.length)c=v;
   let best=null,bs=-1e9;for(const r of c){const s=scoreRecipe(r,slot,ctx);if(s>bs){bs=s;best=r}}
@@ -476,12 +564,15 @@ function addToCtx(ctx,r,slot){ctx.used.add(r.id);if(ctx.ingUsed)for(const [p] of
 // Asegura que la semana existe y que todos sus huecos tienen plato (respeta los ya elegidos)
 function ensureWeek(start,regen){
   const wk=S.plans[start]=S.plans[start]||{start,slots:{},training:null,confirmed:false,createdAt:todayISO()};
-  if(regen){for(const [id,v] of Object.entries(wk.slots))if(!v.locked&&!slotDone(id))delete wk.slots[id];wk.confirmed=false}
+  if(regen){for(const [id,v] of Object.entries(wk.slots))if(!v.locked&&!slotDone(id)&&!slotNoShop(id))delete wk.slots[id];wk.confirmed=false}
   const slots=buildSlots(start),today=todayISO(),isNew=!Object.keys(wk.slots).length;
   let changed=safetySweep(start,slots);
   // Un hueco que repetía el plato de otro, si ese otro ha cambiado, se vuelve a elegir (si no ha pasado ya)
-  for(const [id,v] of Object.entries(wk.slots))if(v.rep&&!slotDone(id)&&(!wk.slots[v.rep]||wk.slots[v.rep].recipe!==v.recipe)){delete wk.slots[id];changed=true}
-  const ctx=makeCtx(start);
+  // (las sobras de algo ya cocinado no: su plato es el que se cocinó)
+  for(const [id,v] of Object.entries(wk.slots))if(v.rep&&!v.sobra&&!slotDone(id)&&(!wk.slots[v.rep]||wk.slots[v.rep].recipe!==v.recipe)){delete wk.slots[id];changed=true}
+  // Reglas de las cenas (con niños no se repite, repetir solo cuando toca y nada fuera de sus días de nevera)
+  if(rulesSweep(wk,slots))changed=true;
+  const ctx=makeCtx(start);ctx.slots=slots;
   for(const sl of slots){
     // Días ya pasados: no se rellenan a posteriori (salvo la primera vez que se hace la semana)
     if(sl.date<today&&!isNew)continue;
@@ -495,8 +586,12 @@ function ensureWeek(start,regen){
       }
     }
     const cur=wk.slots[sl.id];
+    // «Usa lo que tengas» (antes de la primera compra): si ya sale un plato de lo que hay en casa (lo que dijiste que tenías), se pone
+    if(casaSlot(cur)&&!cur.locked&&!slotDone(sl.id)){const x=pickFromHome(sl,ctx,wk,slots,true);if(x&&x.recipe){wk.slots[sl.id]=x;addToCtx(ctx,RX[x.recipe],sl);changed=true}continue}
     if(cur&&(RX[cur.recipe]||cur.despensa))continue;   // con receta o con algo de la despensa
     if(slotDone(sl.id)&&cur)continue;
+    // Lo de este día ya no se compra (ya se hizo su compra, o es antes de la primera): un plato con lo que hay en casa
+    if(slotNoShop(sl.id)){const x=pickFromHome(sl,ctx,wk,slots);if(x){wk.slots[sl.id]=x;if(x.recipe)addToCtx(ctx,RX[x.recipe],sl);changed=true}continue}
     // Cocinar una vez para varios días: mismo plato que el día anterior si toca
     const rp=repeatFrom(wk,sl,slots);if(rp){wk.slots[sl.id]=rp;changed=true;continue}
     const r=pickFor(sl,ctx);if(!r)continue;
@@ -505,6 +600,45 @@ function ensureWeek(start,regen){
   ensureSmall(start);
   if(safetySweep(start,slots,true)){ensureSmall(start);changed=true}
   return {wk,slots,changed};
+}
+/* ---------- Días cuya compra ya está hecha (o que van antes de la primera) ----------
+   Su fresco ya está en casa (o no lo trae nadie): si hay que poner un plato, sale de lo que hay (despensa, nevera, congelador).
+   Si no sale ninguno: antes de la primera compra, «Aún no has comprado: usa lo que tengas»; si ya se compró, el que menos falta,
+   y lo que falta va a la próxima compra por hacer (y se dice en el Menú) */
+let homeNotes=[];
+// Lo que hay en casa para un hueco: la despensa menos lo que piden los demás platos que ya no traerá ninguna compra
+// (los de días ya comprados o de antes de la primera compra y, de la despensa y el congelador, los del mes si su pedido ya se hizo).
+// Lo de los demás días lo traen sus compras, que se recalculan con lo que haya en casa (null si no se puede mirar)
+function homeInv(sl){
+  let st;try{st=despensaState().stock}catch(e){return null}
+  const today=todayISO(),f=firstShopDay(),until=[boughtUntil(),f?addDays(f,-1):today].sort()[1],inv={...st},mes={};
+  const mesDone=m=>{if(!(m in mes)){let x=false;try{const sh=shopping(m,true);x=!!sh.lists.mes.items.length&&shopIsDone(m,sh.lists.mes)}catch(e){}mes[m]=x}return mes[m]};
+  try{for(const u of upcomingUses(today,addDays(today,35),sl.id))if(u.date<=until||(P[u.pid].keep!=="fresco"&&mesDone(u.date.slice(0,7))))inv[u.pid]=(inv[u.pid]||0)-u.q}catch(e){return null}
+  return inv;
+}
+function pickFromHome(sl,ctx,wk,slots,onlyFull){
+  const inv=homeInv(sl)||{};
+  const c=candidates(sl).filter(r=>!kidClash(wk,slots,sl,r.id)),best=pool=>{let b=null,bs=-1e9;for(const r of pool){const s=scoreRecipe(r,sl,ctx);if(s>bs){bs=s;b=r}}return b};
+  const full=c.filter(r=>!missingFor(r,sl,inv).length);
+  if(full.length){const v=full.filter(r=>!breaksVariety(r,sl,ctx));return {recipe:best(v.length?v:full).id}}
+  if(onlyFull)return null;
+  if(!slotBought(sl.id))return {despensa:[],casa:true};
+  // Ya comprado y no sale nada entero: lo que menos falta (cada cosa que falta pesa como un plato peor)
+  let b=null;for(const r of c){const s=scoreRecipe(r,sl,ctx)-5*missingFor(r,sl,inv).length;if(!b||s>b.s)b={s,r}}
+  if(!b)return null;
+  const miss=shopForChange(sl,b.r.id,inv);
+  if(miss.length&&!homeNotes.some(n=>n.id===sl.id))homeNotes.push({id:sl.id,d:sl.date,meal:sl.meal,name:b.r.name,miss});
+  return {recipe:b.r.id};
+}
+// Un plato nuevo en un día ya comprado: lo que no hay en casa se añade a la próxima compra por hacer. Devuelve sus nombres
+function shopForChange(sl,rid,inv){
+  const r=RX[rid];if(!r||!slotNoShop(sl.id))return [];inv=inv||homeInv(sl)||{};
+  const need=slotIng(r,sl).map(([pid,q])=>({pid,q:q-Math.max(0,inv[pid]||0)})).filter(x=>x.q>Math.max(dpEps(x.pid),P[x.pid].env*.05));
+  if(!need.length)return [];
+  const x=typeof nextOpenList==="function"?nextOpenList():null;if(!x)return need.map(n=>P[n.pid].name.toLowerCase());
+  S.extraBuy=S.extraBuy||{};const L=(S.extraBuy[x.m]=S.extraBuy[x.m]||{})[x.key]=S.extraBuy[x.m][x.key]||{};
+  for(const n of need)L[n.pid]=(L[n.pid]||0)+n.q;
+  return need.map(n=>P[n.pid].name.toLowerCase());
 }
 /* ---------- Seguridad: alergias, dieta e ingredientes que alguien no puede tomar ----------
    No son gustos: mandan sobre todo, también sobre los platos elegidos a mano y los platos fijos.
@@ -547,7 +681,7 @@ const smallState=(p,m,d)=>((p.smallMeals||{})[m]||[])[dow(d)]||"no";
 // ¿Está ese día para esa comida pequeña? (la mañana va con la comida, la tarde con la cena; aunque coma fuera)
 function presentSmall(p,d,m){
   if(p.id==="yo")return true;
-  const o=((S.days[d]||{}).kids||{})[p.id];if(o!=null)return o;
+  const o=((S.days[d]||{}).kids||{})[p.id],mm=m==="merienda"?"cena":"comida";if(o!=null&&typeof o!=="object")return o;if(o&&o[mm]!=null)return !!o[mm];
   const k={...p,away:null};return presentByRule(k,d,m==="merienda"?"cena":"comida");
 }
 function smallEaters(d,m){
@@ -619,8 +753,8 @@ function genWeekFromScratch(start,nTries=6){
   const tries=[];
   const keep=S.plans[start]?{...S.plans[start]}:null;
   for(let t=0;t<nTries;t++){
-    // Se quedan los elegidos a mano y lo que ya pasó (días anteriores, lo de hoy si ya es la hora, lo cocinado)
-    S.plans[start]=keep?{...keep,slots:JSON.parse(JSON.stringify(Object.fromEntries(Object.entries(keep.slots||{}).filter(([id,v])=>v.locked||slotDone(id)))))}:{start,slots:{},training:null,confirmed:false,createdAt:todayISO()};
+    // Se quedan los elegidos a mano, lo que ya pasó (días anteriores, lo de hoy si ya es la hora, lo cocinado) y lo ya comprado
+    S.plans[start]=keep?{...keep,slots:JSON.parse(JSON.stringify(Object.fromEntries(Object.entries(keep.slots||{}).filter(([id,v])=>v.locked||slotDone(id)||slotNoShop(id)))))}:{start,slots:{},training:null,confirmed:false,createdAt:todayISO()};
     const {wk,slots}=ensureWeek(start);
     // Coste real de la semana (paquetes enteros de lo fresco): así se nota el ahorro de compartir ingredientes
     const cost=weekCost(start), rep=S.home.repeat||"no";
@@ -668,7 +802,7 @@ function fitBudget(start){
     const list=candidates(sl).map(r=>({r,rc:rationCost(r)*sl.portions,sc:scoreRecipe(r,sl,ctx)}));
     return info[sl.id]={ctx,list,by:Object.fromEntries(list.map(x=>[x.r.id,x]))}};
   // Solo se cambia lo que se puede cambiar: ni lo elegido a mano, ni los fijos, ni lo que ya pasó o ya se cocinó
-  const free=x=>{const v=wk.slots[x.id];return v&&!v.locked&&!v.rep&&!x.fixed&&!x.past&&!slotDone(x.id)&&!Object.values(wk.slots).some(y=>y.rep===x.id)};
+  const free=x=>{const v=wk.slots[x.id];return v&&!v.locked&&!v.rep&&!x.fixed&&!x.past&&!slotDone(x.id)&&!slotNoShop(x.id)&&!Object.values(wk.slots).some(y=>y.rep===x.id)};
   // relaxed: el presupuesto ha obligado a saltarse la variedad (se mantiene mientras la semana siga saltándosela)
   const rep=S.home.repeat||"no",sameWeekOk=rep==="semana";let relaxed=!!(wk.budget&&wk.budget.relaxed&&varietyOver(wk)>0);
   // Primero sin saltarse la variedad (pasta/arroz y repetir platos); si así no se llega, se salta y se avisa (relaxed)
@@ -681,7 +815,7 @@ function fitBudget(start){
       {const mp=monthPrefs(sl.date);if(mp&&((mp.favs||[]).includes(cur.id)||(mp.more||[]).some(k=>prefMatch[k]&&prefMatch[k](cur))))continue}
       if(cur.pack&&hasPack(cur))continue;   // lo que has desbloqueado en la tienda tampoco
       const I=getInfo(sl),curS=I.by[cur.id]?I.by[cur.id].sc:scoreRecipe(cur,sl,I.ctx),cc=rationCost(cur)*sl.portions;
-      for(const x of I.list){if(x.r.id===cur.id||(!sameWeekOk&&used.has(x.r.id)))continue;
+      for(const x of I.list){if(x.r.id===cur.id||(!sameWeekOk&&used.has(x.r.id))||kidClash(wk,slots,sl,x.r.id))continue;
         if(strict&&rep==="no"&&I.ctx.hist[x.r.id]===1)continue;   // ni el plato de la semana anterior o la siguiente
         if(strict){const b=carbBase(x.r);if(b&&b!==carbBase(cur)&&((bc.bases[b]||0)>=BASE_MAX||(bc.dayBases[sl.date]||[]).includes(b)))continue}
         // Si se puede repetir en la semana, un plato que ya está ahorra aunque la ración no sea más barata (comparte paquetes)
@@ -695,7 +829,7 @@ function fitBudget(start){
     for(let from=0;from<pre.length&&from<42&&!best;from+=14)for(const c of pre.slice(from,from+14)){
       const curId=wk.slots[c.sl.id].recipe;
       const group=slots.filter(x=>free(x)&&wk.slots[x.id].recipe===curId&&getInfo(x).by[c.rid]);
-      for(const ids of group.length>1?[[c.sl],group]:[[c.sl]]){
+      for(const ids of group.length>1&&!group.some(kidDinner)?[[c.sl],group]:[[c.sl]]){
         const prev=ids.map(x=>wk.slots[x.id]);ids.forEach(x=>wk.slots[x.id]={recipe:c.rid});const ov=strict?varietyOver(wk):0,after=strict&&ov>over?null:weekCost(start,slots);ids.forEach((x,k)=>wk.slots[x.id]=prev[k]);
         if(after==null)continue;
         const save=cost-after;if(save<=0.3)continue;
@@ -733,9 +867,9 @@ function redoFromToday_(){
   // Se rehace desde cero: el apretón anterior (tscale) se vuelve a calcular con el menú nuevo
   if(S.home.tscale)for(const m of budgetMonths())delete S.home.tscale[m];
   for(const s of Object.keys(S.plans).sort()){if(addDays(s,6)<today)continue;const wk=S.plans[s];
-    if(s>cur){genWeekFromScratch(s);continue}
+    if(s>cur&&s>boughtUntil()){genWeekFromScratch(s);continue}
     // Lo de hoy que ya se ha comido o cocinado tampoco se rehace
-    for(const [id,v] of Object.entries(wk.slots))if(id.slice(0,10)>=today&&!v.locked&&!slotDone(id))delete wk.slots[id];
+    for(const [id,v] of Object.entries(wk.slots))if(id.slice(0,10)>=today&&!v.locked&&!slotDone(id)&&!slotNoShop(id))delete wk.slots[id];
     for(const [d,dd] of Object.entries(wk.small||{}))if(d>today)for(const [m,v] of Object.entries(dd))if(!v.locked)delete dd[m];
     ensureWeek(s);wk.budget=fitBudget(s)}
   ensureHorizon();
@@ -805,18 +939,28 @@ function ensureHorizon_(){
 function alternatives(slot,n=6){
   const start=weekStartFor(slot.date);
   const ctx=makeCtx(start,slot.id);ctx.noise=0.3;
-  const inv=inventory(monthOfWeek(start),slot.id);
+  const inv=slotNoShop(slot.id)?homeInv(slot):inventory(monthOfWeek(start),slot.id);   // ya comprado: lo que hay en casa para ese día
   if(inv)ctx.have=r=>{const m=missingFor(r,slot,inv);return 1-m.length/Math.max(1,r.ing.length)};
-  const cur=(S.plans[start]&&S.plans[start].slots[slot.id]||{}).recipe;
-  return candidates(slot).filter(r=>r.id!==cur).map(r=>({r,s:scoreRecipe(r,slot,ctx),miss:inv?missingFor(r,slot,inv):null}))
-    .sort((a,b)=>b.s-a.s).slice(0,n);
+  const cur=(S.plans[start]&&S.plans[start].slots[slot.id]||{}).recipe,wk=S.plans[start],sls=wk?buildSlots(start):[];
+  // Si lo de ese día ya está comprado (o aún no hay compra), primero lo que sale de lo que hay en casa
+  const home=slotNoShop(slot.id),nm=x=>home&&x.miss?x.miss.length:0;
+  return candidates(slot).filter(r=>r.id!==cur&&!(wk&&kidClash(wk,sls,slot,r.id))).map(r=>({r,s:scoreRecipe(r,slot,ctx),miss:inv?missingFor(r,slot,inv):null}))
+    .sort((a,b)=>nm(a)-nm(b)||b.s-a.s).slice(0,n);
 }
 function missingFor(r,slot,inv){return r.ing.filter(([pid,q])=>(inv[pid]||0)<q*slot.portions-1).map(([pid])=>pid)}
 function setSlotRecipe(slot,rid){
   const start=weekStartFor(slot.date);const wk=S.plans[start];
   // Elegido a mano: deja de repetir el plato de otro día (los días que lo repetían se rehacen solos)
   // manual: lo has elegido tú (también manda sobre un plato fijo); p: raciones ya guardadas de un día pasado
-  const old=wk.slots[slot.id];wk.slots[slot.id]={recipe:rid,locked:true,manual:true,...(old&&old.p!=null?{p:old.p}:{})};save();
+  // Si ese día ya está comprado (o va antes de la primera compra), lo que falta para el plato nuevo va a la próxima compra.
+  // Devuelve lo que se ha añadido (para decirlo)
+  const old=wk.slots[slot.id],miss=slotDone(slot.id)?[]:shopForChange(slot,rid);wk.slots[slot.id]={recipe:rid,locked:true,manual:true,...(old&&old.p!=null?{p:old.p}:{})};
+  // Los días que repetían el plato de antes ya no tienen qué repetir: se eligen otra vez ya (no al abrir la app mañana)
+  if(!old||old.recipe!==rid)for(const w of [start,addDays(start,7)]){const wx=S.plans[w];if(!wx)continue;let ch=false;
+    for(const [id,v] of Object.entries(wx.slots))if(v.rep===slot.id&&!v.sobra&&!slotDone(id)){delete wx.slots[id];ch=true}
+    if(ch)ensureWeek(w)}
+  save();
+  return miss;
 }
 // Pasa el plato de un hueco al siguiente, y así sucesivamente (el último se descarta). Se mueve el hueco entero
 // (bloqueo incluido); los que no se pueden mover (fijos, elegidos a mano, de la despensa, ya cocinados o pasados) se saltan
@@ -844,6 +988,8 @@ function dishOfMeal(d,meal){
   if(meal==="comida"&&st==="taper")sid=addDays(d,-1)+"|cena";
   else if(st==="cocinar")sid=d+"|"+meal;
   if(!sid)return {state:st};
+  // Si la cena de la víspera no se cocinó (comiste fuera, no hiciste nada u otra cosa), no hay táper
+  if(meal==="comida"&&st==="taper"&&!(S.cooked||{})[sid]&&["fuera","nada","otro"].includes(((S.meals||{})[sid]||{}).status))return {state:st,sinTaper:true};
   const wk=S.plans[weekStartFor(sid.slice(0,10))];const v=wk&&wk.slots[sid];
   const f=fixedFor(sid.slice(0,10),sid.slice(11));
   return {state:st,recipe:v&&RX[v.recipe],capricho:!!(f&&f.capricho)||!!(v&&RX[v.recipe]&&RX[v.recipe].cap)};

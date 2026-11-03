@@ -12,7 +12,7 @@ function freezerState(){
 }
 function computeFreezer(){
   const {lots}=despensaState(),today=todayISO(),out=[];
-  for(const [pid,ls] of Object.entries(lots)){if(!isFrozen(pid))continue;
+  for(const [pid,ls] of Object.entries(lots)){if(!isFrozenPid(pid))continue;
     for(const l of ls)if(!l.bag&&l.src!=="bolsa"&&l.left>=dpEps(pid))out.push({id:l.id,pid,qty:l.q,left:l.left,at:l.at,src:l.src,days:Math.max(0,daysBetween(l.at,today))})}
   return out.sort((a,b)=>b.days-a.days);
 }
@@ -33,7 +33,9 @@ const fzSince=(at,days)=>days>0?`desde el ${shortDate(at)} (${days} ${days===1?"
 
 /* ---------- Bolsas de congelado ----------
    Lo que metes tú en el congelador, por tipo y peso: «3 bolsas de muslos de pollo de 500 g», «2 de caldo de 1 l»…
-   S.bolsas=[{id,tipo,nombre,pid,peso,unidad,n,usadas,usos:[{id,d,ts,n,slot?}],at}]
+   S.bolsas=[{id,tipo,nombre,pid,peso,unidad,n,usadas,usos:[{id,d,ts,n,slot?}],at,para?,ped?,rid?}]
+   para: los días de los platos para los que es (del pedido del mes, «AAAA-MM-DD»); ped: "mes|lista" del pedido del que sale
+   (entonces lo comprado de ese producto cuenta solo como bolsas); rid: la receta, si es un plato cocinado que sobró (1 bolsa = 1 ración)
    usadas: el contador de antes (se respeta); usos: cada vez que se usa una, con su id (en la casa compartida se juntan, no se pisan).
    Se gastan con «Usar una», comiéndolas un día desde la despensa o, si son de un producto, al cocinar un plato que lo lleva
    cuando ya no había otra cosa de ese producto en casa (y se dice qué plato fue) */
@@ -60,13 +62,24 @@ function useBolsa(id){
   let nx=null;if(bp)try{nx=nextUses(bp,addDays(today,7)).find(u=>u.slot&&u.slot.id)||null}catch(e){}
   b.usos=b.usos||[];b.usos.push({id:uid("bu"),d:today,ts:Date.now(),n:1,...(nx?{slot:nx.slot.id}:{})});save();return {b,nx};
 }
-function bolsasHTML(){
-  const bs=bolsasState(),tot=bs.reduce((t,b)=>t+b.left,0);
-  let h=`<div class="card"><div class="row"><h2 style="margin:0">Bolsas de congelado</h2><span class="spacer"></span><button class="btn small" id="bgAdd">${ico("plus")} Añadir bolsas</button></div>`;
+// «3, 10 y 17 dic» (días de una lista, con el mes al final de cada tramo)
+function daysTxt(ds){
+  const ms=[];for(const d of [...new Set(ds)].sort()){const m=shortDate(d).replace(/^\d+\s*/,""),last=ms[ms.length-1];if(last&&last.m===m)last.n.push(Number(d.slice(8)));else ms.push({m,n:[Number(d.slice(8))]})}
+  const parts=ms.map(x=>(x.n.length>1?x.n.slice(0,-1).join(", ")+" y "+x.n[x.n.length-1]:String(x.n[0]))+" "+x.m);
+  return parts.length>1?parts.slice(0,-1).join(", ")+" y "+parts[parts.length-1]:parts[0]||"";
+}
+// Para qué platos es una bolsa (los que aún no han pasado)
+const bolsaPara=b=>(b.para||[]).filter(d=>d>=todayISO());
+// La bolsa de un producto que es para el plato de ese día (para el aviso de descongelar)
+function thawBagFor(pid,d){try{return bolsasState().find(b=>b.pid===pid&&(b.para||[]).includes(d))||null}catch(e){return null}}
+// o.compact: dentro de «En casa» (sin el botón de añadir, que ya está arriba)
+function bolsasHTML(o){
+  o=o||{};const bs=bolsasState(),tot=bs.reduce((t,b)=>t+b.left,0);
+  let h=`<div class="card"><div class="row"><h2 style="margin:0">${o.compact?"❄️ Bolsas en el congelador":"Bolsas de congelado"}</h2><span class="spacer"></span>${o.compact?"":`<button class="btn small" id="bgAdd">${ico("plus")} Añadir bolsas</button>`}</div>`;
   if(!bs.length)return h+`<p class="small muted" style="margin-top:8px">Apunta lo que congelas tú (carne en raciones, caldo, un guiso que sobra…), con su peso. Así sabes lo que hay y lo puedes comer un día desde la despensa.</p></div>`;
   h+=`<p class="small muted" style="margin:6px 0">${tot} ${tot===1?"bolsa":"bolsas"} · se gasta primero lo más antiguo</p>`;
   for(const [k,[ic,nm]] of Object.entries(BOLSA_TIPOS)){const g=bs.filter(b=>b.tipo===k);if(!g.length)continue;
-    h+=`<h3 class="bgh">${ic} ${esc(nm)}</h3>`+g.map(b=>`<div class="fixed bgrow"><span><b>${esc(bolsaName(b))}</b><small>${b.left} ${b.left===1?"bolsa":"bolsas"}${b.peso?" de "+esc(bolsaPeso(b)):""} · ${esc(fzSince(b.at,b.days))}${b.days>FREEZER_MONTHS*30?" · ⚠️ gastar pronto":""}${bolsaPid(b)?` · se descuenta al cocinar con ${esc(P[b.pid].name.toLowerCase())} si no hay otra cosa`:""}${b.auto?` · ${b.auto} ya gastada${b.auto===1?"":"s"} al cocinar${b.autoBy&&b.autoBy.length?" "+esc(b.autoBy.join(", ")):""}`:""}</small></span>
+    h+=`<h3 class="bgh">${ic} ${esc(nm)}</h3>`+g.map(b=>`<div class="fixed bgrow"><span><b>${esc(bolsaName(b))}</b><small>${b.left} ${b.left===1?"bolsa":"bolsas"}${b.peso?" de "+esc(bolsaPeso(b)):b.rid?" de 1 ración":""}${bolsaPara(b).length?" · para el "+esc(daysTxt(bolsaPara(b))):""} · ${esc(fzSince(b.at,b.days))}${b.days>FREEZER_MONTHS*30?" · ⚠️ gastar pronto":""}${bolsaPid(b)?` · se descuenta al cocinar con ${esc(P[b.pid].name.toLowerCase())} si no hay otra cosa`:""}${b.auto?` · ${b.auto} ya gastada${b.auto===1?"":"s"} al cocinar${b.autoBy&&b.autoBy.length?" "+esc(b.autoBy.join(", ")):""}`:""}</small></span>
       <span class="row" style="gap:6px;flex-wrap:nowrap"><button class="btn ghost small" data-bgday="${b.id}">${RAW_BAG.has(b.tipo)?"Cocinarla un día":"Comerla un día"}</button><button class="btn small" data-bguse="${b.id}">Usar una</button><button class="btn ghost small" data-bged="${b.id}" aria-label="Editar">✎</button></span></div>`).join("")}
   return h+`</div>`;
 }
@@ -116,8 +129,8 @@ function openBolsa(id){
 
 function renderCongelador(){
   const st=freezerState(),nb=bolsasState().reduce((t,b)=>t+b.left,0),nAll=st.length+nb;
-  let h=`<section class="view"><button class="btn ghost small" id="fzBack" style="margin-bottom:8px">‹ Despensa</button>${viewHead(nAll+" "+(nAll===1?"cosa":"cosas")+" dentro","Tu *congelador*")}
-    <p class="small muted">Es parte de tu despensa: se llena con lo que compras para congelar o congelado (marcado, con «Ya he hecho esta compra» o con el ticket) y se vacía al cocinar los platos que lo usan. Si algo no cuadra, corrígelo aquí.</p>${bolsasHTML()}<h2 style="margin:18px 0 8px">De la compra</h2>`;
+  let h=`<section class="view"><button class="btn ghost small" id="fzBack" style="margin-bottom:8px">‹ En casa</button>${viewHead(nAll+" "+(nAll===1?"cosa":"cosas")+" dentro","Tu *congelador*")}
+    <p class="small muted">Es parte de lo que tienes en casa: se llena con lo que compras para congelar o congelado (marcado, con «Ya he hecho esta compra» o con el ticket) y se vacía al cocinar los platos que lo usan. Si algo no cuadra, corrígelo aquí.</p>${bolsasHTML()}<h2 style="margin:18px 0 8px">De la compra</h2>`;
   const old=st.filter(e=>e.days>FREEZER_MONTHS*30);
   if(old.length)h+=`<div class="warnbox">🕒 ${old.length===1?"Esto lleva":"Estas cosas llevan"} más de ${FREEZER_MONTHS} meses congelado: ${old.map(e=>esc(P[e.pid].name.toLowerCase())).join(", ")}. Mejor gastarlo pronto; te lo propondré en los próximos menús.</div>`;
   if(!st.length)h+=`<div class="empty"><p>El congelador está vacío (o aún no has marcado compras de congelar).</p></div>`;
@@ -131,7 +144,7 @@ function renderCongelador(){
     <button class="btn small" id="fzAdd" style="margin-top:8px">Añadir</button></div>
     <div class="guide"><h3>Descongelar bien</h3><p>Lo más seguro es pasarlo del congelador a la nevera la noche anterior. Si se te olvida: en una bolsa cerrada dentro de agua fría (cambiándola cada 30 minutos), 1–2 horas; o en el microondas en modo descongelar, justo antes de cocinarlo. Nunca a temperatura ambiente.</p></div></section>`;
   main.innerHTML=h;
-  document.getElementById("fzBack").onclick=()=>{tab="despensa";render();scrollTo(0,0)};
+  document.getElementById("fzBack").onclick=()=>{tab="despensa";casaFilter="Congelador";render();scrollTo(0,0)};
   bindBolsas();
   const pick=bindProdPicker("fzP",prods,p=>{document.getElementById("fzU").textContent=p?p.unit:"—"});
   document.getElementById("fzAdd").onclick=()=>{const p=pick(),q=Number(document.getElementById("fzQ").value);if(!p){toast("Busca y elige el producto");return}if(!(q>0)){toast("Indica la cantidad");return}

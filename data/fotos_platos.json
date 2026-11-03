@@ -4126,5 +4126,325 @@
   "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
   "fuente": "https://commons.wikimedia.org/wiki/File:Fried_Chicken_(Unsplash).jpg",
   "titulo": "File:Fried Chicken (Unsplash).jpg"
+ },
+ "e_lentcalabaza": {
+  "archivo": "images/platos/e_lentcalabaza.jpg",
+  "autor": "Xufanc",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Catalan_lentil_soup.JPG",
+  "titulo": "File:Catalan lentil soup.JPG"
+ },
+ "e_garbcoliflor": {
+  "archivo": "images/platos/e_garbcoliflor.jpg",
+  "autor": "Jim Reynolds from Cleveland, USA",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Curried_cauliflower_and_chickpea_stew.jpg",
+  "titulo": "File:Curried cauliflower and chickpea stew.jpg"
+ },
+ "e_alubcalabrep": {
+  "archivo": "images/platos/e_alubcalabrep.jpg",
+  "autor": "E4024",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Kuru_fasulye,_Ispir_tipi.jpg",
+  "titulo": "File:Kuru fasulye, Ispir tipi.jpg"
+ },
+ "e_enslentmanz": {
+  "archivo": "images/platos/e_enslentmanz.jpg",
+  "autor": "Joey Doll",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Lentil_salad_(29308018298).jpg",
+  "titulo": "File:Lentil salad (29308018298).jpg"
+ },
+ "e_cremalent": {
+  "archivo": "images/platos/e_cremalent.jpg",
+  "autor": "E4024",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Crema_de_lentejas_rojas_a_la_turca_-_Cream_of_lentil_soup.jpg",
+  "titulo": "File:Crema de lentejas rojas a la turca - Cream of lentil soup.jpg"
+ },
+ "e_alubrojcalab": {
+  "archivo": "images/platos/e_alubrojcalab.jpg",
+  "autor": "Horacio Cambeiro",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Guiso_de_porotos_rojos_con_arroz_blanco_y_queso_rallado.jpg",
+  "titulo": "File:Guiso de porotos rojos con arroz blanco y queso rallado.jpg"
+ },
+ "e_albondlent": {
+  "archivo": "images/platos/e_albondlent.jpg",
+  "autor": "USDAgov",
+  "licencia": "Public domain",
+  "licencia_url": "https://commons.wikimedia.org/wiki/File:MyPlate_gov_Cultural_Food_(20241025-USDA-FNS-UNK-0055).jpg",
+  "fuente": "https://commons.wikimedia.org/wiki/File:MyPlate_gov_Cultural_Food_(20241025-USDA-FNS-UNK-0055).jpg",
+  "titulo": "File:MyPlate gov Cultural Food (20241025-USDA-FNS-UNK-0055).jpg"
+ },
+ "e_bandejagarb": {
+  "archivo": "images/platos/e_bandejagarb.jpg",
+  "autor": "KoyeliC",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Roasted_Cauliflower_in_Indian_style.JPG",
+  "titulo": "File:Roasted Cauliflower in Indian style.JPG"
+ },
+ "e_kitchari": {
+  "archivo": "images/platos/e_kitchari.jpg",
+  "autor": "Rajeeb Dutta",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:%E0%A6%96%E0%A6%BF%E0%A6%9A%E0%A7%81%E0%A6%A1%E0%A6%BC%E0%A6%BF_(Khichuri)-MA18.jpg",
+  "titulo": "File:খিচুড়ি (Khichuri)-MA18.jpg"
+ },
+ "e_enscalablent": {
+  "archivo": "images/platos/e_enscalablent.jpg",
+  "autor": "Ella Olsson from Stockholm, Sweden",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Kabocha_Lentil_Salad_(45603480082).jpg",
+  "titulo": "File:Kabocha Lentil Salad (45603480082).jpg"
+ },
+ "e_merlucoliflor": {
+  "archivo": "images/platos/e_merlucoliflor.jpg",
+  "autor": "El Pantera",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:MerluzaConBechamel-P1090667.JPG",
+  "titulo": "File:MerluzaConBechamel-P1090667.JPG"
+ },
+ "e_calderetamerl": {
+  "archivo": "images/platos/e_calderetamerl.jpg",
+  "autor": "Núria Pueyo",
+  "licencia": "CC BY-SA 2.5",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.5",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Marmitako.JPG",
+  "titulo": "File:Marmitako.JPG"
+ },
+ "e_albondmerl": {
+  "archivo": "images/platos/e_albondmerl.jpg",
+  "autor": "HaJunkiyada",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Moroccan-Style_Fish_Balls_for_Shabbat_in_Tel_Aviv.jpg",
+  "titulo": "File:Liat Portal for Foodie Disorder - Moroccan-Style Fish Balls for Shabbat in Tel Aviv.jpg"
+ },
+ "e_tortcoliflor": {
+  "archivo": "images/platos/e_tortcoliflor.jpg",
+  "autor": "Lablascovegmenu from London",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Vegan_cauliflower_omelette_-_Tortilla_vegana_de_coliflor_(5366746631).jpg",
+  "titulo": "File:Vegan cauliflower omelette - Tortilla vegana de coliflor (5366746631).jpg"
+ },
+ "e_espinacascrema": {
+  "archivo": "images/platos/e_espinacascrema.jpg",
+  "autor": "Anagoria",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:20240812_Ispanakl%C4%B1_Yumurta_Restaurant_LaFemme_Berlin_anagoria.jpg",
+  "titulo": "File:20240812 Ispanaklı Yumurta Restaurant LaFemme Berlin anagoria.jpg"
+ },
+ "e_okonomiyaki": {
+  "archivo": "images/platos/e_okonomiyaki.jpg",
+  "autor": "ume-y",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Okonomiyaki_001.jpg",
+  "titulo": "File:Okonomiyaki 001.jpg"
+ },
+ "e_crepesavena": {
+  "archivo": "images/platos/e_crepesavena.jpg",
+  "autor": "Karen and Brad Emerson",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Spinach_crepes_(3236762733).jpg",
+  "titulo": "File:Spinach crepes (3236762733).jpg"
+ },
+ "e_coligratin": {
+  "archivo": "images/platos/e_coligratin.jpg",
+  "autor": "Juan Emilio Prades Bel",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Coliflor_gratinada_al_horno_con_bechamel.jpg",
+  "titulo": "File:Coliflor gratinada al horno con bechamel.jpg"
+ },
+ "e_trinxat": {
+  "archivo": "images/platos/e_trinxat.jpg",
+  "autor": "daniel.julia",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Trinxat_1.jpg",
+  "titulo": "File:Trinxat 1.jpg"
+ },
+ "e_menestra": {
+  "archivo": "images/platos/e_menestra.jpg",
+  "autor": "Juan Emilio Prades Bel",
+  "licencia": "CC BY 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Menestra_de_verduras_hervidas.jpg",
+  "titulo": "File:Menestra de verduras hervidas.jpg"
+ },
+ "e_puchero": {
+  "archivo": "images/platos/e_puchero.jpg",
+  "autor": "Xemenendura",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Cocido_de_%C3%81vila.jpg",
+  "titulo": "File:Cocido de Ávila.jpg"
+ },
+ "e_muslosguis": {
+  "archivo": "images/platos/e_muslosguis.jpg",
+  "autor": "IssamBarhoumi",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Market_Jelbana.jpg",
+  "titulo": "File:Market Jelbana.jpg"
+ },
+ "e_pollorepollo": {
+  "archivo": "images/platos/e_pollorepollo.jpg",
+  "autor": "pelican from Tokyo, Japan",
+  "licencia": "CC BY-SA 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Stir-fried_cabbage_and_chicken_gizzard_(2206134344).jpg",
+  "titulo": "File:Stir-fried cabbage and chicken gizzard (2206134344).jpg"
+ },
+ "e_albondpollo": {
+  "archivo": "images/platos/e_albondpollo.jpg",
+  "autor": "Carmelfak",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Keto_Chicken_Meatballs.png",
+  "titulo": "File:Keto Chicken Meatballs.png"
+ },
+ "e_lomoguisado": {
+  "archivo": "images/platos/e_lomoguisado.jpg",
+  "autor": "Juan Emilio Prades Bel",
+  "licencia": "CC BY 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Guiso_de_patatas_con_carne,_%22pataca_grossa%22,_gastronom%C3%ADa_valenciana.jpg",
+  "titulo": "File:Guiso de patatas con carne, \"pataca grossa\", gastronomía valenciana.jpg"
+ },
+ "e_pavocalabaza": {
+  "archivo": "images/platos/e_pavocalabaza.jpg",
+  "autor": "HaJunkiyada",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Algerian_Couscous_with_Vegetables.jpg",
+  "titulo": "File:Liat Portal for Foodie Disorder - Algerian Couscous with Vegetables.jpg"
+ },
+ "e_jamoncitoscalab": {
+  "archivo": "images/platos/e_jamoncitoscalab.jpg",
+  "autor": "Samizambak",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:F%C4%B1r%C4%B1nda_Domates_Soslu_Tavuk_Baget.jpg",
+  "titulo": "File:Fırında Domates Soslu Tavuk Baget.jpg"
+ },
+ "e_pastelpollo": {
+  "archivo": "images/platos/e_pastelpollo.jpg",
+  "autor": "Andy Li",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Shepherds_pie_-_The_Kew_Greenhouse_Cafe_2025-05-14.jpg",
+  "titulo": "File:Shepherds pie - The Kew Greenhouse Cafe 2025-05-14.jpg"
+ },
+ "e_arrozhuerta": {
+  "archivo": "images/platos/e_arrozhuerta.jpg",
+  "autor": "Jan Harenburg",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:01_Paella_Valenciana_original.jpg",
+  "titulo": "File:01 Paella Valenciana original.jpg"
+ },
+ "e_rolloscol": {
+  "archivo": "images/platos/e_rolloscol.jpg",
+  "autor": "Silar",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:02022_Hungarian_stuffed_cabbage_rolls_in_pickled_cabbage_leaves_with_veal_and_deer_meat.jpg",
+  "titulo": "File:02022 Hungarian stuffed cabbage rolls in pickled cabbage leaves with veal and deer meat.jpg"
+ },
+ "e_muslosculiflor": {
+  "archivo": "images/platos/e_muslosculiflor.jpg",
+  "autor": "Daderot",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Curry_roasted_cauliflower_and_haricots_verts,_roasted_garlic_celeriac_puree,_beef_bourguignon,_and_chicken_thigh_with_sweet_potato_and_apple_-_Boston,_MA.jpg",
+  "titulo": "File:Curry roasted cauliflower and haricots verts, roasted garlic celeriac puree, beef bourguignon, and chicken thigh with sweet potato and apple - Boston, MA.jpg"
+ },
+ "e_pastabatido": {
+  "archivo": "images/platos/e_pastabatido.jpg",
+  "autor": "Karen and Brad Emerson",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Creamy_spinach_pasta_(4463852122).jpg",
+  "titulo": "File:Creamy spinach pasta (4463852122).jpg"
+ },
+ "e_tofucalabaza": {
+  "archivo": "images/platos/e_tofucalabaza.jpg",
+  "autor": "naotakem",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Chicken_and_veggies_over_brown_rice,_roasted_acorn_squash,_miso_soup_with_tofu_and_scallions_%E9%B6%8F%E8%82%89%E3%81%A8%E9%87%8E%E8%8F%9C%E3%81%AE%E3%81%86%E3%81%BE%E7%85%AE%E7%8E%84%E7%B1%B3%E4%B8%BC%E3%80%81%E3%82%A8%E3%83%BC%E3%82%B3%E3%83%BC%E3%83%B3%E3%82%B9%E3%82%AF%E3%83%AF%E3%83%83%E3%82%B7%E3%83%A5%E3%83%AD%E3%83%BC%E3%82%B9%E3%83%88%E3%80%81%E3%83%8D%E3%82%AE%E3%81%A8%E8%B1%86%E8%85%90%E3%81%AE%E5%91%B3%E5%99%8C%E6%B1%81.jpg",
+  "titulo": "File:Chicken and veggies over brown rice, roasted acorn squash, miso soup with tofu and scallions 鶏肉と野菜のうま煮玄米丼、エーコーンスクワッシュロースト、ネギと豆腐の味噌汁.jpg"
+ },
+ "e_noquiscalab": {
+  "archivo": "images/platos/e_noquiscalab.jpg",
+  "autor": "Geoff Peters from Vancouver, BC, Canada",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Gnocchi,_brightness_adjusted_(3933763742).jpg",
+  "titulo": "File:Gnocchi, brightness adjusted (3933763742).jpg"
+ },
+ "e_merlupisto": {
+  "archivo": "images/platos/e_merlupisto.jpg",
+  "autor": "Benoît Prieur",
+  "licencia": "CC0",
+  "licencia_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Bouillon_Croix-Rousse_(Lyon)_daurade_et_ratatouille_en_juillet_2022.jpg",
+  "titulo": "File:Bouillon Croix-Rousse (Lyon) daurade et ratatouille en juillet 2022.jpg"
+ },
+ "e_merluboniato": {
+  "archivo": "images/platos/e_merluboniato.jpg",
+  "autor": "HaJunkiyada",
+  "licencia": "CC BY-SA 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Moroccan_fish_with_sweet_potatoes_and_peppers.jpg",
+  "titulo": "File:Liat Portal for Foodie Disorder - Moroccan fish with sweet potatoes and peppers.jpg"
+ },
+ "e_merlunaranja": {
+  "archivo": "images/platos/e_merlunaranja.jpg",
+  "autor": "Habib M'henni",
+  "licencia": "CC BY-SA 3.0",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Plat_couscous_au_poisson_(dorade),_Tunisie.JPG",
+  "titulo": "File:Plat couscous au poisson (dorade), Tunisie.JPG"
+ },
+ "e_arrozmerluza": {
+  "archivo": "images/platos/e_arrozmerluza.jpg",
+  "autor": "Juan Emilio Prades Bel",
+  "licencia": "CC BY 4.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/4.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Arroz_caldoso_de_pescado.jpg",
+  "titulo": "File:Arroz caldoso de pescado.jpg"
+ },
+ "e_currymerluza": {
+  "archivo": "images/platos/e_currymerluza.jpg",
+  "autor": "Kalakki at Malayalam Wikipedia",
+  "licencia": "CC BY-SA 2.5",
+  "licencia_url": "https://creativecommons.org/licenses/by-sa/2.5",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Meen_curry_2.JPG",
+  "titulo": "File:Meen curry 2.JPG"
+ },
+ "e_merluplancha": {
+  "archivo": "images/platos/e_merluplancha.jpg",
+  "autor": "F Delventhal from Outside Washington, D.C., US",
+  "licencia": "CC BY 2.0",
+  "licencia_url": "https://creativecommons.org/licenses/by/2.0",
+  "fuente": "https://commons.wikimedia.org/wiki/File:Bl%C3%BA_Restaurant_(50750626687).jpg",
+  "titulo": "File:Blú Restaurant (50750626687).jpg"
  }
 }
