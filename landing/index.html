@@ -147,6 +147,12 @@ em.s{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-
 @keyframes grow{from{transform:scaleX(0)}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
+/* Vídeo de 10 s */
+section.vid{padding-top:8px}
+.vframe{position:relative;border-radius:28px;overflow:hidden;background:var(--surface);box-shadow:var(--sh-3);aspect-ratio:16/9}
+.vframe video{display:block;width:100%;height:100%;object-fit:cover}
+@media (max-width:600px){.vframe{border-radius:18px}}
+
 /* Secciones */
 section.blk{padding:72px 0}
 .shead{max-width:640px;margin-bottom:36px}
@@ -303,6 +309,23 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </div>
 
+<!-- Vídeo -->
+<section class="blk vid" id="video">
+  <div class="wrap">
+    <div class="shead rv">
+      <span class="veb">En 10 segundos</span>
+      <h2>Mira lo que hace <em class="s">Táper.</em></h2>
+    </div>
+    <div class="vframe rv">
+      <video id="promo" muted loop playsinline preload="metadata" poster="../promo/taper-promo-poster.jpg"
+        aria-label="Vídeo de 10 segundos: Táper planifica el menú del mes, hace la lista de la compra con precios y te dice qué cocinar cada día">
+        <source src="../promo/taper-promo.webm" type="video/webm">
+        <source src="../promo/taper-promo.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
 <!-- Qué hace -->
 <section class="blk" id="que-hace">
   <div class="wrap">
@@ -431,6 +454,14 @@ document.body.classList.remove("no-js");
   if (!("IntersectionObserver" in window)) { els.forEach(e => e.classList.add("in")); return; }
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
   els.forEach(e => io.observe(e));
+})();
+
+// Vídeo: se reproduce solo mientras se ve (con «menos movimiento» activado, no arranca solo y lleva controles)
+(function(){
+  const v = document.getElementById("promo");
+  if (!v) return;
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) { v.controls = true; return; }
+  new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) v.play().catch(() => { v.controls = true; }); else v.pause(); }), { threshold: .35 }).observe(v);
 })();
 
 // Pestañas Android / iPhone / Ordenador (empieza por el dispositivo de quien la mira)

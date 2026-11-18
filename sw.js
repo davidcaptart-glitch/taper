@@ -185,6 +185,8 @@ self.addEventListener("fetch", e => {
   const isFont = url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com";
   const isPhoto = url.hostname === "prod-mercadona.imgix.net";   // fotos de los productos: se guardan para verlas sin conexión
   if (url.origin !== location.origin && !isFont && !isPhoto) return;
+  // Vídeos (los de la web de presentación): el navegador los pide por trozos; van directos a la red, sin guardarlos
+  if (/\.(mp4|webm)$/.test(url.pathname) || req.headers.has("range")) return;
 
   const networkFirst = url.origin === location.origin &&
     (req.mode === "navigate" || /\.(json|html|js|css)$/.test(url.pathname) || url.pathname.endsWith("/"));
